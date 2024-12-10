@@ -1,0 +1,152 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5e6fedc2472449cead18ef23b5cb30d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Library:
+  - m_Name: Cyborg_doublejump
+    m_Hash: 329719388
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: Cyborg_doublejump_0
+      m_Hash: 908255060
+      m_Sprite: {fileID: 363784652416304317, guid: be9849f9fd4b110409eba9348eb6b664, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 363784652416304317, guid: be9849f9fd4b110409eba9348eb6b664, type: 3}
+    - m_Name: Cyborg_doublejump_1
+      m_Hash: 19263426
+      m_Sprite: {fileID: 4068168339016699569, guid: be9849f9fd4b110409eba9348eb6b664, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 4068168339016699569, guid: be9849f9fd4b110409eba9348eb6b664, type: 3}
+    - m_Name: Cyborg_doublejump_2
+      m_Hash: 405585528
+      m_Sprite: {fileID: 7114622223235341354, guid: be9849f9fd4b110409eba9348eb6b664, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 7114622223235341354, guid: be9849f9fd4b110409eba9348eb6b664, type: 3}
+    - m_Name: Cyborg_doublejump_3
+      m_Hash: 791383790
+      m_Sprite: {fileID: 3792784760256814544, guid: be9849f9fd4b110409eba9348eb6b664, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 3792784760256814544, guid: be9849f9fd4b110409eba9348eb6b664, type: 3}
+    - m_Name: Cyborg_doublejump_4
+      m_Hash: 827267917
+      m_Sprite: {fileID: 5007631374929226283, guid: be9849f9fd4b110409eba9348eb6b664, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 5007631374929226283, guid: be9849f9fd4b110409eba9348eb6b664, type: 3}
+    - m_Name: Cyborg_doublejump_5
+      m_Hash: 105393115
+      m_Sprite: {fileID: -6805435369498406532, guid: be9849f9fd4b110409eba9348eb6b664, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -6805435369498406532, guid: be9849f9fd4b110409eba9348eb6b664, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 6
+  - m_Name: Cyborg_run
+    m_Hash: 882269984
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: Cyborg_run_0
+      m_Hash: 879984537
+      m_Sprite: {fileID: -2760476029438245614, guid: 3e590d31465bb434ea65e1e2c750fb91, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -2760476029438245614, guid: 3e590d31465bb434ea65e1e2c750fb91, type: 3}
+    - m_Name: Cyborg_run_1
+      m_Hash: 57954063
+      m_Sprite: {fileID: 5798244199525097649, guid: 3e590d31465bb434ea65e1e2c750fb91, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 5798244199525097649, guid: 3e590d31465bb434ea65e1e2c750fb91, type: 3}
+    - m_Name: Cyborg_run_2
+      m_Hash: 444407477
+      m_Sprite: {fileID: -5068142148817044500, guid: 3e590d31465bb434ea65e1e2c750fb91, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -5068142148817044500, guid: 3e590d31465bb434ea65e1e2c750fb91, type: 3}
+    - m_Name: Cyborg_run_3
+      m_Hash: 762981923
+      m_Sprite: {fileID: 7958664899273603240, guid: 3e590d31465bb434ea65e1e2c750fb91, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 7958664899273603240, guid: 3e590d31465bb434ea65e1e2c750fb91, type: 3}
+    - m_Name: Cyborg_run_4
+      m_Hash: 857652096
+      m_Sprite: {fileID: 1971013790562645882, guid: 3e590d31465bb434ea65e1e2c750fb91, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 1971013790562645882, guid: 3e590d31465bb434ea65e1e2c750fb91, type: 3}
+    - m_Name: Cyborg_run_5
+      m_Hash: 68782870
+      m_Sprite: {fileID: 8889248399938843937, guid: 3e590d31465bb434ea65e1e2c750fb91, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 8889248399938843937, guid: 3e590d31465bb434ea65e1e2c750fb91, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 6
+  - m_Name: Cyborg_death
+    m_Hash: 324413878
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: Cyborg_death_0
+      m_Hash: 705585612
+      m_Sprite: {fileID: 3628204691264593538, guid: 4e0b7626946ad1c4c805df6a27191ddd, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 3628204691264593538, guid: 4e0b7626946ad1c4c805df6a27191ddd, type: 3}
+    - m_Name: Cyborg_death_1
+      m_Hash: 487149914
+      m_Sprite: {fileID: -2315445908061371068, guid: 4e0b7626946ad1c4c805df6a27191ddd, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -2315445908061371068, guid: 4e0b7626946ad1c4c805df6a27191ddd, type: 3}
+    - m_Name: Cyborg_death_2
+      m_Hash: 67109088
+      m_Sprite: {fileID: -4600304776752006765, guid: 4e0b7626946ad1c4c805df6a27191ddd, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -4600304776752006765, guid: 4e0b7626946ad1c4c805df6a27191ddd, type: 3}
+    - m_Name: Cyborg_death_3
+      m_Hash: 856109174
+      m_Sprite: {fileID: 5649927140825343273, guid: 4e0b7626946ad1c4c805df6a27191ddd, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 5649927140825343273, guid: 4e0b7626946ad1c4c805df6a27191ddd, type: 3}
+    - m_Name: Cyborg_death_4
+      m_Hash: 761505237
+      m_Sprite: {fileID: 4002782948548970526, guid: 4e0b7626946ad1c4c805df6a27191ddd, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 4002782948548970526, guid: 4e0b7626946ad1c4c805df6a27191ddd, type: 3}
+    - m_Name: Cyborg_death_5
+      m_Hash: 442799427
+      m_Sprite: {fileID: 1743679609081587897, guid: 4e0b7626946ad1c4c805df6a27191ddd, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 1743679609081587897, guid: 4e0b7626946ad1c4c805df6a27191ddd, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 6
+  - m_Name: Cyborg_idle
+    m_Hash: 1007335318
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: Cyborg_idle_0
+      m_Hash: 675091569
+      m_Sprite: {fileID: -8019239915147560276, guid: 5bd936bdb0b0d1b4b8a43cc005042258, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -8019239915147560276, guid: 5bd936bdb0b0d1b4b8a43cc005042258, type: 3}
+    - m_Name: Cyborg_idle_1
+      m_Hash: 523904231
+      m_Sprite: {fileID: -6526221278753614019, guid: 5bd936bdb0b0d1b4b8a43cc005042258, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -6526221278753614019, guid: 5bd936bdb0b0d1b4b8a43cc005042258, type: 3}
+    - m_Name: Cyborg_idle_2
+      m_Hash: 104035677
+      m_Sprite: {fileID: -1626806750166959302, guid: 5bd936bdb0b0d1b4b8a43cc005042258, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -1626806750166959302, guid: 5bd936bdb0b0d1b4b8a43cc005042258, type: 3}
+    - m_Name: Cyborg_idle_3
+      m_Hash: 825509323
+      m_Sprite: {fileID: 7969078075045196988, guid: 5bd936bdb0b0d1b4b8a43cc005042258, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 7969078075045196988, guid: 5bd936bdb0b0d1b4b8a43cc005042258, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 4
+  m_PrimaryLibraryGUID: 5f1096cfc32135c4595d500bab461a30
+  m_ModificationHash: 638694556420026252
+  m_Version: 1

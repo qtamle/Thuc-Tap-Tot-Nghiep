@@ -1,0 +1,152 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5e6fedc2472449cead18ef23b5cb30d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Library:
+  - m_Name: Punk_doublejump
+    m_Hash: 977914790
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: Punk_doublejump_0
+      m_Hash: 784865750
+      m_Sprite: {fileID: 9093636229373011944, guid: 8636ccb1c67cd0246888fd5f673e225f, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 9093636229373011944, guid: 8636ccb1c67cd0246888fd5f673e225f, type: 3}
+    - m_Name: Punk_doublejump_1
+      m_Hash: 433006912
+      m_Sprite: {fileID: 2215911623984667486, guid: 8636ccb1c67cd0246888fd5f673e225f, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 2215911623984667486, guid: 8636ccb1c67cd0246888fd5f673e225f, type: 3}
+    - m_Name: Punk_doublejump_2
+      m_Hash: 13007098
+      m_Sprite: {fileID: -1891990179657235813, guid: 8636ccb1c67cd0246888fd5f673e225f, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -1891990179657235813, guid: 8636ccb1c67cd0246888fd5f673e225f, type: 3}
+    - m_Name: Punk_doublejump_3
+      m_Hash: 935413868
+      m_Sprite: {fileID: -5292855535477663220, guid: 8636ccb1c67cd0246888fd5f673e225f, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -5292855535477663220, guid: 8636ccb1c67cd0246888fd5f673e225f, type: 3}
+    - m_Name: Punk_doublejump_4
+      m_Hash: 698736079
+      m_Sprite: {fileID: -1405010257702150930, guid: 8636ccb1c67cd0246888fd5f673e225f, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -1405010257702150930, guid: 8636ccb1c67cd0246888fd5f673e225f, type: 3}
+    - m_Name: Punk_doublejump_5
+      m_Hash: 513994073
+      m_Sprite: {fileID: 279364191715504329, guid: 8636ccb1c67cd0246888fd5f673e225f, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 279364191715504329, guid: 8636ccb1c67cd0246888fd5f673e225f, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 6
+  - m_Name: Punk_run
+    m_Hash: 772905331
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: Punk_run_0
+      m_Hash: 400690188
+      m_Sprite: {fileID: 3838832790692478765, guid: ddae139bc03b31d4197e22b2dfcd6b68, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 3838832790692478765, guid: ddae139bc03b31d4197e22b2dfcd6b68, type: 3}
+    - m_Name: Punk_run_1
+      m_Hash: 551894170
+      m_Sprite: {fileID: -8873008147394526494, guid: ddae139bc03b31d4197e22b2dfcd6b68, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -8873008147394526494, guid: ddae139bc03b31d4197e22b2dfcd6b68, type: 3}
+    - m_Name: Punk_run_2
+      m_Hash: 971795744
+      m_Sprite: {fileID: -2648082770085516700, guid: ddae139bc03b31d4197e22b2dfcd6b68, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -2648082770085516700, guid: ddae139bc03b31d4197e22b2dfcd6b68, type: 3}
+    - m_Name: Punk_run_3
+      m_Hash: 250305974
+      m_Sprite: {fileID: -8175705092371949694, guid: ddae139bc03b31d4197e22b2dfcd6b68, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -8175705092371949694, guid: ddae139bc03b31d4197e22b2dfcd6b68, type: 3}
+    - m_Name: Punk_run_4
+      m_Hash: 277858325
+      m_Sprite: {fileID: -1207745139347562704, guid: ddae139bc03b31d4197e22b2dfcd6b68, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -1207745139347562704, guid: ddae139bc03b31d4197e22b2dfcd6b68, type: 3}
+    - m_Name: Punk_run_5
+      m_Hash: 663287939
+      m_Sprite: {fileID: -2765409072087481708, guid: ddae139bc03b31d4197e22b2dfcd6b68, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -2765409072087481708, guid: ddae139bc03b31d4197e22b2dfcd6b68, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 6
+  - m_Name: Punk_death
+    m_Hash: 818371107
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: Punk_death_0
+      m_Hash: 791993476
+      m_Sprite: {fileID: 7735468059604905979, guid: 65909d14ed7b9434594f45e14f007a21, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 7735468059604905979, guid: 65909d14ed7b9434594f45e14f007a21, type: 3}
+    - m_Name: Punk_death_1
+      m_Hash: 406055954
+      m_Sprite: {fileID: 5551962010866294114, guid: 65909d14ed7b9434594f45e14f007a21, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 5551962010866294114, guid: 65909d14ed7b9434594f45e14f007a21, type: 3}
+    - m_Name: Punk_death_2
+      m_Hash: 20626856
+      m_Sprite: {fileID: 3121154500629902612, guid: 65909d14ed7b9434594f45e14f007a21, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 3121154500629902612, guid: 65909d14ed7b9434594f45e14f007a21, type: 3}
+    - m_Name: Punk_death_3
+      m_Hash: 910003518
+      m_Sprite: {fileID: -2336493387814506933, guid: 65909d14ed7b9434594f45e14f007a21, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -2336493387814506933, guid: 65909d14ed7b9434594f45e14f007a21, type: 3}
+    - m_Name: Punk_death_4
+      m_Hash: 676927645
+      m_Sprite: {fileID: 7046713141334486520, guid: 65909d14ed7b9434594f45e14f007a21, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 7046713141334486520, guid: 65909d14ed7b9434594f45e14f007a21, type: 3}
+    - m_Name: Punk_death_5
+      m_Hash: 526264331
+      m_Sprite: {fileID: 3918820789606917171, guid: 65909d14ed7b9434594f45e14f007a21, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 3918820789606917171, guid: 65909d14ed7b9434594f45e14f007a21, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 6
+  - m_Name: Punk_idle
+    m_Hash: 242364446
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: Punk_idle_0
+      m_Hash: 683401929
+      m_Sprite: {fileID: 6474817916930609645, guid: 3f55546895ae61f48a443982f4a48011, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 6474817916930609645, guid: 3f55546895ae61f48a443982f4a48011, type: 3}
+    - m_Name: Punk_idle_1
+      m_Hash: 532468319
+      m_Sprite: {fileID: 3800310597756625337, guid: 3f55546895ae61f48a443982f4a48011, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 3800310597756625337, guid: 3f55546895ae61f48a443982f4a48011, type: 3}
+    - m_Name: Punk_idle_2
+      m_Hash: 112559077
+      m_Sprite: {fileID: 5867332370219042989, guid: 3f55546895ae61f48a443982f4a48011, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 5867332370219042989, guid: 3f55546895ae61f48a443982f4a48011, type: 3}
+    - m_Name: Punk_idle_3
+      m_Hash: 833794931
+      m_Sprite: {fileID: 1194793324445235756, guid: 3f55546895ae61f48a443982f4a48011, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 1194793324445235756, guid: 3f55546895ae61f48a443982f4a48011, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 4
+  m_PrimaryLibraryGUID: 
+  m_ModificationHash: 638694556344119817
+  m_Version: 1

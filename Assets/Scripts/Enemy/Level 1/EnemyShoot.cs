@@ -22,10 +22,12 @@ public class EnemyShoot : MonoBehaviour
     private bool isShooting = false;
 
     private Rigidbody2D rb;
+    public Animator anim;
 
 
     private void Start()
     {
+        
         rb = GetComponent<Rigidbody2D>();
         shootTimer = shootCooldown;
     }
@@ -45,24 +47,27 @@ public class EnemyShoot : MonoBehaviour
             if (shootTimer <= 0f)
             {
                 StartCoroutine(ShootAndPause());
+                
             }
         }
     }
 
     IEnumerator ShootAndPause()
     {
-        isShooting = true; 
-
+        isShooting = true;
+        anim.SetTrigger("Shoot");
         Shoot();
 
         yield return new WaitForSeconds(0.75f);
 
         isShooting = false;
         shootTimer = shootCooldown;
+        anim.SetTrigger("Run");
     }
 
     void Shoot()
     {
+        
         GameObject bullet = Instantiate(bulletPrefab, shootPoint.position, Quaternion.identity);
         Bullet bulletScript = bullet.GetComponent<Bullet>();
         bulletScript.SetDirection(movingRight ? Vector2.right : Vector2.left);
@@ -82,6 +87,7 @@ public class EnemyShoot : MonoBehaviour
 
     void Move()
     {
+        
         transform.Translate(Vector2.right * moveSpeed * Time.deltaTime * (movingRight ? 1 : -1));
     }
 
@@ -104,15 +110,15 @@ public class EnemyShoot : MonoBehaviour
         }
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if ((groundLayer.value & (1 << collision.gameObject.layer)) > 0)
-        {
-            isGrounded = false;
+    //private void OnCollisionExit2D(Collision2D collision)
+    //{
+    //    if ((groundLayer.value & (1 << collision.gameObject.layer)) > 0)
+    //    {
+    //        isGrounded = false;
 
-            rb.gravityScale = 1;
-        }
-    }
+    //        rb.gravityScale = 1;
+    //    }
+    //}
 
     private void OnDrawGizmosSelected()
     {
