@@ -14,9 +14,9 @@ TagManager:
   - UI
   - Wall
   - Ground
-  - 
-  - 
-  - 
+  - Block
+  - Enemy
+  - Plat
   - 
   - 
   - 

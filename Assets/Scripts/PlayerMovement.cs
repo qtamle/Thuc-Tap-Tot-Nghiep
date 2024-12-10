@@ -32,10 +32,26 @@ public class PlayerMovement : MonoBehaviour
     public float wallCheckRadius = 0.2f;
     public Transform wallTransform;
 
+    [Header("Block Layer")]
+    public string blockLayerName;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         playerCollider = GetComponent<Collider2D>();
+
+        int playerLayer = gameObject.layer;
+        int blockLayer = LayerMask.NameToLayer(blockLayerName);
+
+        if (blockLayer != -1)
+        {
+            Physics2D.IgnoreLayerCollision(playerLayer, blockLayer, true);
+            Debug.Log($"Đã bỏ qua va chạm giữa layer {LayerMask.LayerToName(playerLayer)} và {blockLayerName}.");
+        }
+        else
+        {
+            Debug.LogWarning($"Layer {blockLayerName} không tồn tại.");
+        }
     }
 
     void Update()
