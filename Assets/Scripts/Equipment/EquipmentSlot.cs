@@ -1,30 +1,42 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class EquipmentSlot : MonoBehaviour
+public class EquipmentSlot : MonoBehaviour, IDropHandler
 {
-    public Image itemImage; // Hình ảnh chiến lợi phẩm
-    public Image placeholder; // Hình nền trống
-    //public GameObject tooltip; // Tooltip hiển thị thông tin
+    //public Image itemImage; // Hình ảnh chiến lợi phẩm
+    //public Image placeholder; // Hình nền trống
+    ////public GameObject tooltip; // Tooltip hiển thị thông tin
 
-    private Equipment equippedItem; // Chiến lợi phẩm được gắn
+    //private Equipment equippedItem; // Chiến lợi phẩm được gắn
 
-    public void SetEquipment(Equipment newItem)
+    public void OnDrop(PointerEventData eventData)
     {
-        equippedItem = newItem;
-
-        if (equippedItem != null)
+        if(transform.childCount == 0)
         {
-            itemImage.sprite = equippedItem.equipmentSprite;
-            itemImage.enabled = true;
-            placeholder.enabled = false;
+            GameObject dropped = eventData.pointerDrag;
+            DraggableEquipment draggableEquipment = dropped.GetComponent<DraggableEquipment>();
+            draggableEquipment.parentAfterDrag = transform;
         }
-        else
-        {
-            itemImage.enabled = false;
-            placeholder.enabled = true;
-        }
+        
     }
+
+    //public void SetEquipment(Equipment newItem)
+    //{
+    //    equippedItem = newItem;
+
+    //    if (equippedItem != null)
+    //    {
+    //        itemImage.sprite = equippedItem.equipmentSprite;
+    //        itemImage.enabled = true;
+    //        placeholder.enabled = false;
+    //    }
+    //    else
+    //    {
+    //        itemImage.enabled = false;
+    //        placeholder.enabled = true;
+    //    }
+    //}
 
     //public void ShowTooltip()
     //{
