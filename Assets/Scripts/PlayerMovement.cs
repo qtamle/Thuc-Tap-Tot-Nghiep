@@ -10,7 +10,6 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 endInputPosition;
     private bool isJumping = false;
 
-
     [Header("Movement")]
     public float moveSpeed = 5f;
     private bool canMove = false;
@@ -64,11 +63,12 @@ public class PlayerMovement : MonoBehaviour
         DetectTouchSwipe(); // Kiểm tra trên thiết bị cảm ứng
 #endif
 
-        // Always move the player if grounded and not jumping
-        if (canMove && isGrounded && !IsTouchingWall())
+        if (!IsTouchingWall())
         {
             MovePlayer();
         }
+
+        FlipPlayer();
     }
 
     void CheckGrounded()
@@ -77,20 +77,15 @@ public class PlayerMovement : MonoBehaviour
         isGrounded = currentGround != null;
         isJumping = !isGrounded;
 
-        Debug.Log("currentGround: " + currentGround);
-
         if (isGrounded)
         {
-            canMove = true; // Enable movement when grounded
-            Debug.Log("Đã chạm đất.");
+            canMove = true;
         }
         else
         {
-            canMove = false; // Disable movement when in the air
-            Debug.Log("Không chạm đất.");
+            canMove = false;
         }
     }
-
     void DetectTouchSwipe()
     {
         if (Input.touchCount > 0) // Kiểm tra có thao tác cảm ứng
@@ -107,25 +102,23 @@ public class PlayerMovement : MonoBehaviour
                 // Lưu vị trí kết thúc chạm
                 endInputPosition = touch.position;
 
-                // Kiểm tra thao tác vuốt
-                if (!isJumping)
+                if (IsSwipeUp(startInputPosition, endInputPosition))
                 {
-                    if (IsSwipeUp(startInputPosition, endInputPosition))
-                    {
-                        Jump();
-                    }
-                    else if (IsSwipeDown(startInputPosition, endInputPosition))
-                    {
-                        FallThrough();
-                    }
-                    else if (IsSwipeLeft(startInputPosition, endInputPosition))
-                    {
-                        MoveLeft();
-                    }
-                    else if (IsSwipeRight(startInputPosition, endInputPosition))
-                    {
-                        MoveRight();
-                    }
+                    Jump();
+                }
+                else if (IsSwipeDown(startInputPosition, endInputPosition))
+                {
+                    FallThrough();
+                }
+                else if (IsSwipeLeft(startInputPosition, endInputPosition))
+                {
+                    MoveLeft();  
+                    FlipPlayer(); 
+                }
+                else if (IsSwipeRight(startInputPosition, endInputPosition))
+                {
+                    MoveRight(); 
+                    FlipPlayer();
                 }
             }
         }
@@ -141,70 +134,60 @@ public class PlayerMovement : MonoBehaviour
         {
             endInputPosition = Input.mousePosition;
 
-            // Kiểm tra thao tác kéo chuột
-            if (!isJumping)
+            if (IsSwipeUp(startInputPosition, endInputPosition))
             {
-                if (IsSwipeUp(startInputPosition, endInputPosition))
-                {
-                    Jump();
-                }
-                else if (IsSwipeDown(startInputPosition, endInputPosition))
-                {
-                    FallThrough();
-                }
-                else if (IsSwipeLeft(startInputPosition, endInputPosition))
-                {
-                    MoveLeft();
-                }
-                else if (IsSwipeRight(startInputPosition, endInputPosition))
-                {
-                    MoveRight();
-                }
+                Jump();
+            }
+            else if (IsSwipeDown(startInputPosition, endInputPosition))
+            {
+                FallThrough();
+            }
+            else if (IsSwipeLeft(startInputPosition, endInputPosition))
+            {
+                MoveLeft(); 
+                FlipPlayer(); 
+            }
+            else if (IsSwipeRight(startInputPosition, endInputPosition))
+            {
+                MoveRight(); 
+                FlipPlayer(); 
             }
         }
     }
 
     bool IsSwipeUp(Vector2 start, Vector2 end)
     {
-        // Tính toán khoảng cách vuốt
         float swipeDistance = end.y - start.y;
-        float swipeThreshold = 50f; // Ngưỡng vuốt tối thiểu để kích hoạt
+        float swipeThreshold = 50f;
 
         bool isSwipeUp = swipeDistance > swipeThreshold && Mathf.Abs(end.x - start.x) < swipeThreshold;
-
         return isSwipeUp;
     }
 
     bool IsSwipeDown(Vector2 start, Vector2 end)
     {
-        // Tính toán khoảng cách vuốt
         float swipeDistance = start.y - end.y;
-        float swipeThreshold = 50f; // Ngưỡng vuốt tối thiểu để kích hoạt
+        float swipeThreshold = 50f;
 
         bool isSwipeDown = swipeDistance > swipeThreshold && Mathf.Abs(end.x - start.x) < swipeThreshold;
-
         return isSwipeDown;
     }
 
     bool IsSwipeLeft(Vector2 start, Vector2 end)
     {
-        // Tính toán khoảng cách vuốt sang trái
         float swipeDistance = start.x - end.x;
         float swipeThreshold = 50f;
 
         bool isSwipeLeft = swipeDistance > swipeThreshold && Mathf.Abs(end.y - start.y) < swipeThreshold;
-
         return isSwipeLeft;
     }
 
     bool IsSwipeRight(Vector2 start, Vector2 end)
     {
-        // Tính toán khoảng cách vuốt sang phải
         float swipeDistance = end.x - start.x;
         float swipeThreshold = 50f;
 
         bool isSwipeRight = swipeDistance > swipeThreshold && Mathf.Abs(end.y - start.y) < swipeThreshold;
-
         return isSwipeRight;
     }
 
@@ -212,15 +195,12 @@ public class PlayerMovement : MonoBehaviour
     {
         isJumping = true;
         rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-        Debug.Log("Nhảy!");
 
-        // Lấy PlatformEffector2D từ currentGround (nếu có)
         PlatformEffector2D platformEffector = currentGround?.GetComponent<PlatformEffector2D>();
 
         if (platformEffector != null)
         {
             platformEffector.surfaceArc = 180;
-            Debug.Log("Khôi phục giá trị PlatformEffector2D surfaceArc = 180");
         }
     }
 
@@ -228,20 +208,16 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isGrounded && currentGround != null && !currentGround.CompareTag(finalFloorTag))
         {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, -jumpForce * 0.3f); 
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, -jumpForce * 0.3f);
 
             rb.gravityScale = 4f;
-            Debug.Log("Đang rơi xuống!");
 
-            // Lấy PlatformEffector2D từ currentGround (nếu có)
             PlatformEffector2D platformEffector = currentGround?.GetComponent<PlatformEffector2D>();
 
             if (platformEffector != null)
             {
-                platformEffector.surfaceArc = 0; // Đặt giá trị để cho phép rơi qua
-                Debug.Log("Đặt giá trị PlatformEffector2D surfaceArc = 0 để cho phép rơi qua");
+                platformEffector.surfaceArc = 0; // Cho phép rơi qua
 
-                // Đợi 0,25 giây rồi khôi phục lại giá trị surfaceArc thành 180
                 StartCoroutine(ResetSurfaceArc(platformEffector));
             }
         }
@@ -255,47 +231,43 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-
     private IEnumerator ResetSurfaceArc(PlatformEffector2D platformEffector)
     {
-        // Đợi 0,25 giây trước khi quay lại giá trị 180
         yield return new WaitForSeconds(0.5f);
         platformEffector.surfaceArc = 180;
-        Debug.Log("Khôi phục giá trị PlatformEffector2D surfaceArc = 180");
     }
 
-    private void MovePlayer()
+    void MovePlayer()
     {
-        // Di chuyển dựa vào giá trị moveDirection được cập nhật khi vuốt
         rb.linearVelocity = new Vector2(moveDirection * moveSpeed, rb.linearVelocity.y);
-
-        if (moveDirection > 0 && transform.rotation != Quaternion.identity)
-            transform.rotation = Quaternion.identity; 
-        else if (moveDirection < 0 && transform.rotation != Quaternion.Euler(0, 180, 0))
-            transform.rotation = Quaternion.Euler(0, 180, 0); 
     }
-
 
     private void MoveLeft()
     {
-        if (isGrounded && !isJumping)
-        {
-            moveDirection = -1f; // Di chuyển sang trái
-        }
+        moveDirection = -1f;
     }
 
     private void MoveRight()
     {
-        if (isGrounded && !isJumping)
-        {
-            moveDirection = 1f; // Di chuyển sang phải
-        }
+        moveDirection = 1f;
     }
 
     private bool IsTouchingWall()
     {
         RaycastHit2D hit = Physics2D.Raycast(wallTransform.position, Vector2.right * Mathf.Sign(moveDirection), wallCheckRadius, wallLayer);
         return hit.collider != null;
+    }
+
+    private void FlipPlayer()
+    {
+        if (moveDirection > 0 && transform.rotation != Quaternion.identity)
+        {
+            transform.rotation = Quaternion.identity;  // Quay về hướng phải
+        }
+        else if (moveDirection < 0 && transform.rotation != Quaternion.Euler(0, 180, 0))
+        {
+            transform.rotation = Quaternion.Euler(0, 180, 0);  // Quay về hướng trái
+        }
     }
 
     private void OnDrawGizmos()

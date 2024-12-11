@@ -5,11 +5,14 @@ TagManager:
   serializedVersion: 3
   tags:
   - FinalFloor
+  - Enemy
+  - Wall
+  - Ground
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
   - Wall
@@ -17,8 +20,8 @@ TagManager:
   - Block
   - Enemy
   - Plat
-  - 
-  - 
+  - CoinLayer
+  - Boss
   - 
   - 
   - 
