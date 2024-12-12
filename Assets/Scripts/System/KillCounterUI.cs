@@ -32,6 +32,10 @@ public class KillCounterUI : MonoBehaviour
 
     private void UpdateKillCounterUI()
     {
+        if (currentKillTarget - currentEnemiesKilled < 0)
+        {
+            currentKillTarget = 0;
+        }
         killCounterText.text = $"{currentKillTarget - currentEnemiesKilled}";
     }
 }

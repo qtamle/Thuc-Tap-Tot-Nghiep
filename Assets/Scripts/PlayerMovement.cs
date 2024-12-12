@@ -33,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Block Layer")]
     public string blockLayerName;
+    public string bossLayerName;
 
     void Start()
     {
@@ -41,10 +42,12 @@ public class PlayerMovement : MonoBehaviour
 
         int playerLayer = gameObject.layer;
         int blockLayer = LayerMask.NameToLayer(blockLayerName);
+        int bossLayer = LayerMask.NameToLayer(bossLayerName);
 
         if (blockLayer != -1)
         {
             Physics2D.IgnoreLayerCollision(playerLayer, blockLayer, true);
+            Physics2D.IgnoreLayerCollision(playerLayer, bossLayer, true);
             Debug.Log($"Đã bỏ qua va chạm giữa layer {LayerMask.LayerToName(playerLayer)} và {blockLayerName}.");
         }
         else

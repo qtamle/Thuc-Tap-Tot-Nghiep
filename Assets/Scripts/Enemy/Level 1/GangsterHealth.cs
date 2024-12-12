@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class GangsterHealth : MonoBehaviour, DamageInterface
@@ -10,6 +10,10 @@ public class GangsterHealth : MonoBehaviour, DamageInterface
     [Header("UI Settings")]
     public Slider healthBarSlider;
 
+    private bool canBeDamaged = false;
+    private float timeWhenStunned = 0f;
+    private bool isStunned = false;
+
     private void Start()
     {
         currentHealth = maxHealth;
@@ -18,13 +22,15 @@ public class GangsterHealth : MonoBehaviour, DamageInterface
 
     public void TakeDamage(int damage)
     {
-        currentHealth -= damage;
-
-        UpdateHealthBar();
-
-        if (currentHealth <= 0)
+        if (canBeDamaged)
         {
-            Die();
+            currentHealth -= damage;
+            UpdateHealthBar();
+
+            if (currentHealth <= 0)
+            {
+                Die();
+            }
         }
     }
 
@@ -40,4 +46,31 @@ public class GangsterHealth : MonoBehaviour, DamageInterface
     {
         Debug.Log("Boss bi tieu diet");
     }
+
+    public void StunForDuration(float stunDuration)
+    {
+        isStunned = true;
+        canBeDamaged = true; 
+        timeWhenStunned = Time.time + stunDuration; 
+    }
+
+    public bool CanBeDamaged()
+    {
+        return canBeDamaged;
+    }
+
+    public void SetCanBeDamaged(bool value)
+    {
+        canBeDamaged = value;
+    }
+
+    private void Update()
+    {
+        if (isStunned && Time.time > timeWhenStunned)
+        {
+            isStunned = false;
+            canBeDamaged = false; 
+        }
+    }
+
 }

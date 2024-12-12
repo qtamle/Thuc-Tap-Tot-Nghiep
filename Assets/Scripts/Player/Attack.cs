@@ -49,18 +49,20 @@ public class Attack : MonoBehaviour
             }
         }
 
-        Collider2D[] boss = Physics2D.OverlapCircleAll(attackPoints.position, radius, bossLayer);
+        Collider2D[] bosses = Physics2D.OverlapCircleAll(attackPoints.position, radius, bossLayer);
 
-        foreach (Collider2D b in boss)
+        foreach (Collider2D boss in bosses)
         {
-            DamageInterface damageInterface = b.GetComponent<DamageInterface>();
-            if (damageInterface != null && !isAttackBoss)
+            GangsterHealth gangsterHealth = boss.GetComponent<GangsterHealth>();
+            if (gangsterHealth != null && gangsterHealth.CanBeDamaged() && !isAttackBoss) 
             {
-                damageInterface.TakeDamage(1);
+                gangsterHealth.TakeDamage(1); 
                 isAttackBoss = true;
+
+                gangsterHealth.SetCanBeDamaged(false);
             }
         }
-
+        isAttackBoss = false;
     }
 
     // Hàm tạo đồng tiền tại vị trí của kẻ địch

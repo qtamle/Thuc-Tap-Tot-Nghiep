@@ -44,6 +44,8 @@ public class EnemyManager : MonoBehaviour
         }
 
         Debug.Log("All remaining enemies have been destroyed.");
+
+
     }
 
     public void DecreaseKillTarget()

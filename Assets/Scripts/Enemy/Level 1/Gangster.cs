@@ -24,6 +24,13 @@ public class Gangster : MonoBehaviour
     private bool isCharging = false;
     private bool isSkillActive = false;
 
+    [Header("Attack Settings")]
+    public LayerMask player;
+    public Transform ChargingAttackTransform;
+    public float radiusCharging;
+
+    private bool isUsingSkill = false;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -34,21 +41,70 @@ public class Gangster : MonoBehaviour
         }
 
         Spawn();
+        StartCoroutine(RandomSkill());
     }
+    IEnumerator RandomSkill()
+    {
+        yield return new WaitForSeconds(3f); 
+
+        int previousSkill = -1; 
+        bool hasUsedJump = false; 
+        bool hasUsedCharge = false; 
+
+        while (true)
+        {
+            if (!isUsingSkill)
+            {
+                int randomSkill;
+
+                if (!hasUsedJump && !hasUsedCharge)
+                {
+                    if (previousSkill == 0)
+                    {
+                        randomSkill = 1; 
+                    }
+                    else
+                    {
+                        randomSkill = 0; 
+                    }
+                }
+                else
+                {
+                    hasUsedJump = false;
+                    hasUsedCharge = false;
+                    randomSkill = previousSkill == 0 ? 1 : 0; 
+                }
+
+                // Cập nhật kỹ năng đã sử dụng
+                previousSkill = randomSkill;
+
+                // Thực hiện kỹ năng tương ứng
+                if (randomSkill == 0)
+                {
+                    UseJumpSkill();
+                    hasUsedJump = true; 
+                }
+                else if (randomSkill == 1)
+                {
+                    UseChargeSkill();
+                    hasUsedCharge = true;
+                }
+
+                float randomDelay = Random.Range(3f, 4f);
+                yield return new WaitForSeconds(randomDelay);
+            }
+            else
+            {
+                yield return null;
+            }
+        }
+    }
+
+
 
     private void Update()
     {
         CheckGround();
-
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            UseJumpSkill();
-        }
-
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            UseChargeSkill();
-        }
     }
 
     public void Spawn()
@@ -76,12 +132,18 @@ public class Gangster : MonoBehaviour
 
     public void UseJumpSkill()
     {
+        if (isUsingSkill) return; 
+        isUsingSkill = true;
+
         if (isGrounded)
         {
             StartCoroutine(ExecuteJumpSkill());
         }
+        else
+        {
+            isUsingSkill = false; 
+        }
     }
-
     private IEnumerator ExecuteJumpSkill()
     {
         isSkillActive = true;
@@ -97,17 +159,20 @@ public class Gangster : MonoBehaviour
         rb.gravityScale = 4f;
         yield return new WaitForSeconds(1f);
 
-        //if (isGrounded)
-        //{
-        //    SpawnRocks();
-        //}
+        isUsingSkill = false; 
     }
-
     public void UseChargeSkill()
     {
+        if (isUsingSkill) return; 
+        isUsingSkill = true;
+
         if (!isCharging)
         {
             StartCoroutine(ExecuteChargeSkill());
+        }
+        else
+        {
+            isUsingSkill = false; 
         }
     }
     private IEnumerator ExecuteChargeSkill()
@@ -122,42 +187,57 @@ public class Gangster : MonoBehaviour
         float additionalHeight = 0.5f;
         targetPosition.y += additionalHeight;
 
-        //// Sử dụng raycast dưới chân để tìm vị trí mặt đất
-        //RaycastHit2D groundHit = Physics2D.Raycast(new Vector2(targetPosition.x, targetPosition.y + 1f), Vector2.down, 2f, groundLayer);
-
-        //if (groundHit.collider != null)
-        //{
-        //    targetPosition.y = groundHit.point.y;
-        //}
-
         transform.position = targetPosition;
         rb.gravityScale = 4f;
+
+        yield return new WaitForSeconds(1f);
 
         float chargeDirectionX = playerTransform.position.x > transform.position.x ? 1f : -1f;
 
         FlipToDirection(chargeDirectionX);
 
-        yield return new WaitForSeconds(2f);
-
         while (!Physics2D.OverlapCircle(WallCheck.position, wallCheckRadius, wallLayer))
         {
             if (isGrounded)
             {
+                FlipToDirection(chargeDirectionX);
+
+                yield return new WaitForSeconds(0.5f);
+
                 rb.linearVelocity = new Vector2(chargeDirectionX * chargeSpeed, rb.linearVelocity.y);
+
+                Collider2D[] boss = Physics2D.OverlapCircleAll(ChargingAttackTransform.position, radiusCharging, player);
+
+                foreach (Collider2D c in boss)
+                {
+                    DamagePlayerInterface damage = c.GetComponent<DamagePlayerInterface>();
+                    if (damage != null)
+                    {
+                        damage.DamagePlayer(2);
+                    }
+                }
+
                 yield return null;
             }
         }
 
         rb.linearVelocity = Vector2.zero;
+        GangsterHealth gangsterHealth = GetComponent<GangsterHealth>();
+        if (gangsterHealth != null)
+        {
+            gangsterHealth.StunForDuration(3f);
+        }
+
         SpawnRocks();
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(3f);
 
         transform.position = new Vector2(resetX, resetY);
         rb.linearVelocity = Vector2.zero;
         rb.gravityScale = 1;
         isCharging = false;
-    }
 
+        isUsingSkill = false; 
+    }
 
     private void FlipToDirection(float directionX)
     {
@@ -217,5 +297,8 @@ public class Gangster : MonoBehaviour
 
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(WallCheck.position, wallCheckRadius);
+
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(ChargingAttackTransform.position, radiusCharging);
     }
 }
