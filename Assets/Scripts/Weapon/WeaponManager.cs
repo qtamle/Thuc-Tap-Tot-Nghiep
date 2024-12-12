@@ -6,6 +6,9 @@ public class WeaponManager : MonoBehaviour
 {
     public WeaponData weaponData;
 
+    public SnapToWeapon snapWeapon;
+
+
     [Header("UI Elements")]
     public Text weaponNameText;
     public Image weaponImage;
