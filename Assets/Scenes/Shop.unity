@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 52076973}
   - component: {fileID: 52076975}
   - component: {fileID: 52076974}
+  - component: {fileID: 52076976}
   m_Layer: 5
   m_Name: WeaponSlot
   m_TagString: Untagged
@@ -195,6 +196,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 52076972}
   m_CullTransparentMesh: 1
+--- !u!114 &52076976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 52076972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54f795bde140a8548bbb2301e583ed35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponName: Dagger
+  basePrice: 100
+  weaponSprite: {fileID: 0}
+  upgradePrices: 00000000000000000000000000000000
+  maxSlots: 0
+  equippedLoot: []
 --- !u!1 &97653874
 GameObject:
   m_ObjectHideFlags: 0
@@ -488,7 +507,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -505,11 +524,13 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 415078846}
   - {fileID: 1996900635}
   - {fileID: 1860749804}
   - {fileID: 1313629530}
   - {fileID: 628447557}
-  - {fileID: 415078846}
+  - {fileID: 635335700}
+  - {fileID: 1675847487}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -552,7 +573,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 350, y: 350}
+  m_SizeDelta: {x: 100, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &154834386
 MonoBehaviour:
@@ -574,7 +595,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -2486521743634864436, guid: bddb254de3f53c74eb98f92f04fedcea, type: 3}
+  m_Sprite: {fileID: -5151153562373494563, guid: 2aac49780cc76db4da9e2c7f83864276, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -592,6 +613,54 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 154834384}
   m_CullTransparentMesh: 1
+--- !u!1 &274977988
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 274977990}
+  - component: {fileID: 274977989}
+  m_Layer: 0
+  m_Name: WeaponManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &274977989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 274977988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44c94547916f388448b997b8b6858724, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponData: {fileID: 52076976}
+  snapWeapon: {fileID: 415078850}
+  weaponNameText: {fileID: 635335701}
+  weaponPriceText: {fileID: 1675847488}
+--- !u!4 &274977990
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 274977988}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 650.14716, y: 1782.2439, z: 16.141422}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &275310149
 GameObject:
   m_ObjectHideFlags: 0
@@ -603,6 +672,7 @@ GameObject:
   - component: {fileID: 275310150}
   - component: {fileID: 275310152}
   - component: {fileID: 275310151}
+  - component: {fileID: 275310153}
   m_Layer: 5
   m_Name: WeaponSlot (4)
   m_TagString: Untagged
@@ -668,6 +738,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 275310149}
   m_CullTransparentMesh: 1
+--- !u!114 &275310153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 275310149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54f795bde140a8548bbb2301e583ed35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponName: Dagger 5
+  basePrice: 500
+  weaponSprite: {fileID: 0}
+  upgradePrices: 00000000000000000000000000000000
+  maxSlots: 0
+  equippedLoot: []
 --- !u!1 &277696981
 GameObject:
   m_ObjectHideFlags: 0
@@ -913,57 +1001,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 303960823}
   m_CullTransparentMesh: 1
---- !u!1 &403437303
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 403437305}
-  - component: {fileID: 403437304}
-  m_Layer: 0
-  m_Name: WeaponManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &403437304
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 403437303}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44c94547916f388448b997b8b6858724, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponData: {fileID: 11400000, guid: 40f43299431fc8249870513ec91ba976, type: 2}
-  snapWeapon: {fileID: 0}
-  weaponNameText: {fileID: 0}
-  weaponImage: {fileID: 0}
-  weaponPriceText: {fileID: 0}
-  equipmentSlotsContainer: {fileID: 628447557}
-  equipmentSlotPrefab: {fileID: 1177262947204477701, guid: a1d13943094dce341a7cfc4d00f19820, type: 3}
---- !u!4 &403437305
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 403437303}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 986.9831, y: 566.038, z: 18.415432}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &415078845
 GameObject:
   m_ObjectHideFlags: 0
@@ -1048,7 +1085,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1107,6 +1144,7 @@ GameObject:
   - component: {fileID: 415579610}
   - component: {fileID: 415579612}
   - component: {fileID: 415579611}
+  - component: {fileID: 415579613}
   m_Layer: 5
   m_Name: WeaponSlot (3)
   m_TagString: Untagged
@@ -1172,6 +1210,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 415579609}
   m_CullTransparentMesh: 1
+--- !u!114 &415579613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 415579609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54f795bde140a8548bbb2301e583ed35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponName: Dagger 4
+  basePrice: 400
+  weaponSprite: {fileID: 0}
+  upgradePrices: 00000000000000000000000000000000
+  maxSlots: 0
+  equippedLoot: []
 --- !u!1 &495913939
 GameObject:
   m_ObjectHideFlags: 0
@@ -1238,7 +1294,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 350, y: 350}
+  m_SizeDelta: {x: 100, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &607849637
 MonoBehaviour:
@@ -1399,6 +1455,85 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!1 &635335699
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 635335700}
+  - component: {fileID: 635335702}
+  - component: {fileID: 635335701}
+  m_Layer: 5
+  m_Name: WeaponName
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &635335700
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 635335699}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 130729577}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.000015259, y: 871}
+  m_SizeDelta: {x: 559.249, y: 104.86}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &635335701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 635335699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 64
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 6
+    m_MaxSize: 64
+    m_Alignment: 1
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: Weapon name
+--- !u!222 &635335702
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 635335699}
+  m_CullTransparentMesh: 1
 --- !u!1 &683054650
 GameObject:
   m_ObjectHideFlags: 0
@@ -1687,6 +1822,7 @@ GameObject:
   - component: {fileID: 941640412}
   - component: {fileID: 941640414}
   - component: {fileID: 941640413}
+  - component: {fileID: 941640415}
   m_Layer: 5
   m_Name: WeaponSlot (1)
   m_TagString: Untagged
@@ -1752,6 +1888,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 941640411}
   m_CullTransparentMesh: 1
+--- !u!114 &941640415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 941640411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54f795bde140a8548bbb2301e583ed35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponName: Dagger2
+  basePrice: 200
+  weaponSprite: {fileID: 0}
+  upgradePrices: 00000000000000000000000000000000
+  maxSlots: 0
+  equippedLoot: []
 --- !u!1 &1073131809
 GameObject:
   m_ObjectHideFlags: 0
@@ -2184,6 +2338,85 @@ MonoBehaviour:
   m_ChildScaleWidth: 1
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!1 &1675847486
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1675847487}
+  - component: {fileID: 1675847489}
+  - component: {fileID: 1675847488}
+  m_Layer: 5
+  m_Name: WeaponPrice
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1675847487
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1675847486}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 130729577}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.000015259, y: 756}
+  m_SizeDelta: {x: 559.249, y: 104.86}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1675847488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1675847486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 64
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 6
+    m_MaxSize: 64
+    m_Alignment: 1
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: Price
+--- !u!222 &1675847489
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1675847486}
+  m_CullTransparentMesh: 1
 --- !u!1 &1679810441
 GameObject:
   m_ObjectHideFlags: 0
@@ -2805,6 +3038,7 @@ GameObject:
   - component: {fileID: 2134579112}
   - component: {fileID: 2134579114}
   - component: {fileID: 2134579113}
+  - component: {fileID: 2134579115}
   m_Layer: 5
   m_Name: WeaponSlot (2)
   m_TagString: Untagged
@@ -2870,6 +3104,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2134579111}
   m_CullTransparentMesh: 1
+--- !u!114 &2134579115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2134579111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54f795bde140a8548bbb2301e583ed35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponName: Dagger3
+  basePrice: 300
+  weaponSprite: {fileID: 0}
+  upgradePrices: 00000000000000000000000000000000
+  maxSlots: 0
+  equippedLoot: []
 --- !u!1001 &8567280128160246089
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3003,6 +3255,6 @@ SceneRoots:
   - {fileID: 105097120}
   - {fileID: 130729577}
   - {fileID: 277696984}
-  - {fileID: 403437305}
   - {fileID: 495913942}
   - {fileID: 288312873}
+  - {fileID: 274977990}
