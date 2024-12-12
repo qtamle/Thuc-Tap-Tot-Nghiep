@@ -5,7 +5,9 @@ public class Attack : MonoBehaviour
     [Header("Settings Attack")]
     public float radius;
     public LayerMask enemyLayer;
+    public LayerMask bossLayer;
     public Transform attackPoints;
+    private bool isAttackBoss = false;
 
     [Header("Coins")]
     public GameObject coinPrefab;
@@ -46,6 +48,19 @@ public class Attack : MonoBehaviour
                 EnemyManager.Instance.OnEnemyKilled();
             }
         }
+
+        Collider2D[] boss = Physics2D.OverlapCircleAll(attackPoints.position, radius, bossLayer);
+
+        foreach (Collider2D b in boss)
+        {
+            DamageInterface damageInterface = b.GetComponent<DamageInterface>();
+            if (damageInterface != null && !isAttackBoss)
+            {
+                damageInterface.TakeDamage(1);
+                isAttackBoss = true;
+            }
+        }
+
     }
 
     // Hàm tạo đồng tiền tại vị trí của kẻ địch
