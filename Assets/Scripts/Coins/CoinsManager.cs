@@ -14,7 +14,6 @@ public class CoinsManager : MonoBehaviour
     {
         if (coinType1Text != null)
         {
-            Debug.Log("Updating Coin Type 1 UI: " + coinType1Count);
             coinType1Text.text = "Coin Type 1: " + coinType1Count.ToString();
         }
         else
@@ -24,7 +23,6 @@ public class CoinsManager : MonoBehaviour
 
         if (coinType2Text != null)
         {
-            Debug.Log("Updating Coin Type 2 UI: " + coinType2Count);
             coinType2Text.text = "Coin Type 2: " + coinType2Count.ToString();
         }
         else

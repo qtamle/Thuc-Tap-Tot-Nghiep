@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
@@ -25,7 +26,6 @@ public class EnemyManager : MonoBehaviour
     public void OnEnemyKilled()
     {
         enemiesKilled++;
-        Debug.Log($"Enemies killed: {enemiesKilled}/{killTarget}");
 
         if (enemiesKilled >= killTarget)
         {
@@ -44,7 +44,6 @@ public class EnemyManager : MonoBehaviour
         }
 
         Debug.Log("All remaining enemies have been destroyed.");
-
 
     }
 

@@ -9,6 +9,7 @@ public class GangsterHealth : MonoBehaviour, DamageInterface
 
     [Header("UI Settings")]
     public Slider healthBarSlider;
+    public Image healthBarFill;
 
     private bool canBeDamaged = false;
     private float timeWhenStunned = 0f;
@@ -18,6 +19,7 @@ public class GangsterHealth : MonoBehaviour, DamageInterface
     {
         currentHealth = maxHealth;
         UpdateHealthBar();
+        UpdateHealthBarColor();
     }
 
     public void TakeDamage(int damage)
@@ -42,6 +44,14 @@ public class GangsterHealth : MonoBehaviour, DamageInterface
         }
     }
 
+    private void UpdateHealthBarColor()
+    {
+        if (healthBarFill != null)
+        {
+            healthBarFill.color = canBeDamaged ? Color.red : Color.cyan;
+        }
+    }
+
     private void Die()
     {
         Debug.Log("Boss bi tieu diet");
@@ -51,7 +61,8 @@ public class GangsterHealth : MonoBehaviour, DamageInterface
     {
         isStunned = true;
         canBeDamaged = true; 
-        timeWhenStunned = Time.time + stunDuration; 
+        timeWhenStunned = Time.time + stunDuration;
+        UpdateHealthBarColor();
     }
 
     public bool CanBeDamaged()
@@ -62,6 +73,7 @@ public class GangsterHealth : MonoBehaviour, DamageInterface
     public void SetCanBeDamaged(bool value)
     {
         canBeDamaged = value;
+        UpdateHealthBarColor();
     }
 
     private void Update()
@@ -69,7 +81,8 @@ public class GangsterHealth : MonoBehaviour, DamageInterface
         if (isStunned && Time.time > timeWhenStunned)
         {
             isStunned = false;
-            canBeDamaged = false; 
+            canBeDamaged = false;
+            UpdateHealthBarColor();
         }
     }
 

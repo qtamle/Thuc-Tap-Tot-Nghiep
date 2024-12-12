@@ -11,8 +11,32 @@ public class EnemySpawner : MonoBehaviour
 
     private bool stopSpawning = false;
 
+    [Header("Boss Spawn")]
+    public GameObject warningBoss;
+    public GameObject bossLevel1;  
+    public GameObject UIHealthBoss;
+
+    [Header("Hide")]
+    public GameObject remain;
+
+    public Gangster gangster;
     private void Start()
     {
+        if (bossLevel1 != null)
+        {
+            bossLevel1.SetActive(false);
+        }
+
+        if (UIHealthBoss != null)
+        {
+            UIHealthBoss.SetActive(false);
+        }
+
+        if (warningBoss != null)
+        {
+            warningBoss.SetActive(false);
+        }
+
         StartCoroutine(SpawnEnemies());
     }
 
@@ -53,6 +77,7 @@ public class EnemySpawner : MonoBehaviour
             if (EnemyManager.Instance != null && EnemyManager.Instance.killTarget <= EnemyManager.Instance.EnemiesKilled)
             {
                 stopSpawning = true;
+                StartCoroutine(HandleBossSpawn());
             }
         }
     }
@@ -66,9 +91,42 @@ public class EnemySpawner : MonoBehaviour
             // Nếu đã tiêu diệt >= 30 quái, giảm spawnInterval
             if (enemiesKilled >= 30 && spawnInterval > 1f)
             {
-                spawnInterval -= 0.2f; 
+                spawnInterval -= 0.2f;
                 Debug.Log($"Spawn interval decreased to: {spawnInterval} seconds.");
             }
+        }
+    }
+
+    private IEnumerator HandleBossSpawn()
+    {
+        if (remain != null)
+        {
+            remain.SetActive(false);
+        }
+
+        if (warningBoss != null)
+        {
+            warningBoss.SetActive(true);
+        }
+
+        yield return new WaitForSeconds(3f);
+
+        if (warningBoss != null)
+        {
+            warningBoss.SetActive(false);
+        }
+
+        if (bossLevel1 != null)
+        {
+            bossLevel1.SetActive(true);
+            gangster.Activate();
+        }
+
+        yield return new WaitForSeconds(0.5f);
+
+        if (UIHealthBoss != null)
+        {
+            UIHealthBoss.SetActive(true);
         }
     }
 }

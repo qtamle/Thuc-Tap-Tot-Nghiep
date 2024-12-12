@@ -2,6 +2,7 @@
 
 public class CoinsScript : MonoBehaviour
 {
+    [Header("Layer")]
     public LayerMask groundLayer;
     public LayerMask wallLayer;
     private Rigidbody2D rb;
@@ -13,6 +14,12 @@ public class CoinsScript : MonoBehaviour
     private CoinsManager coinsManager;
 
     public string playerLayerName = "Player";
+    private bool hasBounced = false;
+
+    [Header("Coin Life")]
+    public float life = 10f;
+    public float timeRemaining;
+    private SpriteRenderer sprite;
 
     private void OnEnable()
     {
@@ -42,33 +49,84 @@ public class CoinsScript : MonoBehaviour
         coinsManager = UnityEngine.Object.FindFirstObjectByType<CoinsManager>();
 
         rb = GetComponent<Rigidbody2D>();
+        sprite = GetComponent<SpriteRenderer>();
 
         if (coinsManager == null)
         {
             Debug.LogError("CoinsManager không tìm thấy!");
         }
+
+        timeRemaining = life;
+    }
+
+    private void Update()
+    {
+        if (timeRemaining > 0) 
+        {
+            timeRemaining -= Time.deltaTime;    
+
+            if (timeRemaining <= 5)
+            {
+                BlinkSprite();
+            }
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void BlinkSprite()
+    {
+        if (sprite != null)
+        {
+            sprite.enabled = !sprite.enabled;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // Kiểm tra va chạm với nền
-        if ((groundLayer.value & (1 << collision.gameObject.layer)) > 0)
+        if (collision.CompareTag("FinalFloor"))
         {
-            rb.gravityScale = 0;
-            rb.bodyType = RigidbodyType2D.Kinematic;
-            rb.linearVelocity = Vector2.zero;
+            StopCoin(); 
+            return;
         }
 
-        // Kiểm tra nếu va chạm với Player
+        if ((groundLayer.value & (1 << collision.gameObject.layer)) > 0)
+        {
+            if (!hasBounced)
+            {
+                BounceOffGround(); 
+                hasBounced = true;
+            }
+            else
+            {
+                StopCoin(); 
+            }
+        }
+
         if (collision.CompareTag("Player"))
         {
-            CollectCoin();
+            CollectCoin(); 
         }
 
         if ((wallLayer.value & (1 << collision.gameObject.layer)) > 0)
         {
-            BounceOffWall();
+            BounceOffWall(); 
         }
+    }
+
+
+    private void BounceOffGround()
+    {
+        rb.AddForce(new Vector2(Random.Range(-1f, 1f), Random.Range(2f, 3f)) * 2f, ForceMode2D.Impulse);
+    }
+
+    private void StopCoin()
+    {
+        rb.gravityScale = 0;
+        rb.bodyType = RigidbodyType2D.Kinematic;
+        rb.linearVelocity = Vector2.zero;
     }
 
     private void BounceOffWall()

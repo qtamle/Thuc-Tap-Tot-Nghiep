@@ -196,7 +196,9 @@ public class PlayerMovement : MonoBehaviour
 
     void Jump()
     {
-        isJumping = true;
+        if (!isGrounded || isJumping) return; 
+
+        isJumping = true;  
         rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
 
         PlatformEffector2D platformEffector = currentGround?.GetComponent<PlatformEffector2D>();

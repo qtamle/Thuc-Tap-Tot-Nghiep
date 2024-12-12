@@ -31,9 +31,11 @@ public class Gangster : MonoBehaviour
 
     private bool isUsingSkill = false;
 
+    private GangsterHealth gangsterHealth;
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        gangsterHealth = GetComponent<GangsterHealth>();
 
         if (rb == null)
         {
@@ -41,53 +43,35 @@ public class Gangster : MonoBehaviour
         }
 
         Spawn();
+    }
+
+    public void Activate()
+    {
+        gameObject.SetActive(true);  
+
+        isGrounded = false;
+        isCharging = false;
+        isSkillActive = false;
+
         StartCoroutine(RandomSkill());
     }
     IEnumerator RandomSkill()
     {
-        yield return new WaitForSeconds(3f); 
-
-        int previousSkill = -1; 
-        bool hasUsedJump = false; 
-        bool hasUsedCharge = false; 
+        yield return new WaitForSeconds(3f);
 
         while (true)
         {
             if (!isUsingSkill)
             {
-                int randomSkill;
+                int randomSkill = Random.Range(0, 2);
 
-                if (!hasUsedJump && !hasUsedCharge)
-                {
-                    if (previousSkill == 0)
-                    {
-                        randomSkill = 1; 
-                    }
-                    else
-                    {
-                        randomSkill = 0; 
-                    }
-                }
-                else
-                {
-                    hasUsedJump = false;
-                    hasUsedCharge = false;
-                    randomSkill = previousSkill == 0 ? 1 : 0; 
-                }
-
-                // Cập nhật kỹ năng đã sử dụng
-                previousSkill = randomSkill;
-
-                // Thực hiện kỹ năng tương ứng
                 if (randomSkill == 0)
                 {
                     UseJumpSkill();
-                    hasUsedJump = true; 
                 }
                 else if (randomSkill == 1)
                 {
                     UseChargeSkill();
-                    hasUsedCharge = true;
                 }
 
                 float randomDelay = Random.Range(3f, 4f);
@@ -95,11 +79,10 @@ public class Gangster : MonoBehaviour
             }
             else
             {
-                yield return null;
+                yield return null; 
             }
         }
     }
-
 
 
     private void Update()
@@ -114,7 +97,7 @@ public class Gangster : MonoBehaviour
         if (rb != null)
         {
             rb.linearVelocity = Vector2.zero;
-            rb.gravityScale = 4f;
+            rb.gravityScale = 2f;
         }
     }
 
@@ -128,6 +111,22 @@ public class Gangster : MonoBehaviour
         {
             Debug.LogWarning("Ground Check Transform is not assigned!");
         }
+
+        if (gangsterHealth != null && gangsterHealth.currentHealth <= 0)
+        {
+            StopAllActions();
+        }
+    }
+
+    private void StopAllActions()
+    {
+        StopAllCoroutines();
+        rb.linearVelocity = Vector2.zero;
+        isUsingSkill = false;
+        isCharging = false; 
+        isSkillActive = false;
+
+        Debug.Log("Boss đã bị tiêu diệt. Dừng mọi hành động.");
     }
 
     public void UseJumpSkill()
@@ -149,7 +148,7 @@ public class Gangster : MonoBehaviour
         isSkillActive = true;
 
         float targetY = 15f;
-        rb.linearVelocity = new Vector2(0, 40f);
+        rb.linearVelocity = new Vector2(0, 30f);
         yield return new WaitForSeconds(1f);
 
         transform.position = new Vector2(0f, targetY);
