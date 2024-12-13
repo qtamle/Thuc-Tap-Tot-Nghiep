@@ -1,18 +1,31 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class DamagePlayer : MonoBehaviour
 {
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            DamagePlayerInterface damage = collision.GetComponent<DamagePlayerInterface>();
+    public Vector2 boxSize = new Vector2(2f, 2f); 
+    public LayerMask playerLayer; 
 
-            if (damage != null)
+    void Update()
+    {
+        Collider2D[] colliders = Physics2D.OverlapBoxAll(transform.position, boxSize, 0f, playerLayer);
+
+        foreach (Collider2D collider in colliders)
+        {
+            if (collider.CompareTag("Player"))
             {
-                damage.DamagePlayer(1);
+                DamagePlayerInterface damage = collider.GetComponent<DamagePlayerInterface>();
+
+                if (damage != null)
+                {
+                    damage.DamagePlayer(1);
+                }
             }
         }
+    }
 
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(transform.position, boxSize);
     }
 }

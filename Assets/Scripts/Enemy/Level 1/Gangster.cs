@@ -182,7 +182,6 @@ public class Gangster : MonoBehaviour
 
         // Xác định vị trí gần player
         Vector2 targetPosition = new Vector2(playerTransform.position.x, playerTransform.position.y);
-
         float additionalHeight = 0.5f;
         targetPosition.y += additionalHeight;
 
@@ -197,37 +196,37 @@ public class Gangster : MonoBehaviour
 
         while (!Physics2D.OverlapCircle(WallCheck.position, wallCheckRadius, wallLayer))
         {
+            FlipToDirection(chargeDirectionX);
+
             if (isGrounded)
             {
                 FlipToDirection(chargeDirectionX);
-
-                yield return new WaitForSeconds(0.5f);
-
                 rb.linearVelocity = new Vector2(chargeDirectionX * chargeSpeed, rb.linearVelocity.y);
 
-                Collider2D[] boss = Physics2D.OverlapCircleAll(ChargingAttackTransform.position, radiusCharging, player);
+                yield return null;  
+            }
 
-                foreach (Collider2D c in boss)
+            Collider2D[] playerCollisions = Physics2D.OverlapCircleAll(ChargingAttackTransform.position, radiusCharging, player);
+
+            foreach (Collider2D playerCollider in playerCollisions)
+            {
+                PlayerHealth playerHealth = playerCollider.GetComponent<PlayerHealth>();
+                if (playerHealth != null)
                 {
-                    DamagePlayerInterface damage = c.GetComponent<DamagePlayerInterface>();
-                    if (damage != null)
-                    {
-                        damage.DamagePlayer(2);
-                    }
+                    playerHealth.DamagePlayer(2);
                 }
-
-                yield return null;
             }
         }
 
         rb.linearVelocity = Vector2.zero;
+
         GangsterHealth gangsterHealth = GetComponent<GangsterHealth>();
         if (gangsterHealth != null)
         {
-            gangsterHealth.StunForDuration(3f);
+            gangsterHealth.StunForDuration(3f);  
         }
 
-        SpawnRocks();
+        SpawnRocks(); 
         yield return new WaitForSeconds(3f);
 
         transform.position = new Vector2(resetX, resetY);
@@ -235,8 +234,9 @@ public class Gangster : MonoBehaviour
         rb.gravityScale = 1;
         isCharging = false;
 
-        isUsingSkill = false; 
+        isUsingSkill = false;
     }
+
 
     private void FlipToDirection(float directionX)
     {
@@ -259,7 +259,7 @@ public class Gangster : MonoBehaviour
 
             do
             {
-                randomX = Random.Range(-4f, 4f);
+                randomX = Random.Range(-3.5f, 3.5f);
             }
             while (Mathf.Abs(randomX - lastRockX) < 2f); 
 

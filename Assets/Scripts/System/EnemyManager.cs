@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
@@ -7,8 +6,6 @@ public class EnemyManager : MonoBehaviour
 
     public int killTarget;
     public int enemiesKilled = 0;
-
-    public int EnemiesKilled => enemiesKilled;
 
     private void Awake()
     {
@@ -25,6 +22,7 @@ public class EnemyManager : MonoBehaviour
     // Gọi hàm này khi quái bị tiêu diệt
     public void OnEnemyKilled()
     {
+        Debug.Log("Enemy killed! Total kills: " + enemiesKilled);
         enemiesKilled++;
 
         if (enemiesKilled >= killTarget)
@@ -44,7 +42,6 @@ public class EnemyManager : MonoBehaviour
         }
 
         Debug.Log("All remaining enemies have been destroyed.");
-
     }
 
     public void DecreaseKillTarget()

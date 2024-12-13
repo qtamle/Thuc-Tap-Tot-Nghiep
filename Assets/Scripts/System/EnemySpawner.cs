@@ -42,6 +42,8 @@ public class EnemySpawner : MonoBehaviour
 
     IEnumerator SpawnEnemies()
     {
+        yield return new WaitForSeconds(2f);
+
         while (!stopSpawning)
         {
             Transform spawnPoint;
@@ -74,7 +76,7 @@ public class EnemySpawner : MonoBehaviour
             yield return new WaitForSeconds(spawnInterval);
 
             // Kiểm tra nếu đạt chỉ tiêu
-            if (EnemyManager.Instance != null && EnemyManager.Instance.killTarget <= EnemyManager.Instance.EnemiesKilled)
+            if (EnemyManager.Instance != null && EnemyManager.Instance.killTarget <= EnemyManager.Instance.enemiesKilled)
             {
                 stopSpawning = true;
                 StartCoroutine(HandleBossSpawn());
@@ -86,7 +88,7 @@ public class EnemySpawner : MonoBehaviour
     {
         if (EnemyManager.Instance != null)
         {
-            int enemiesKilled = EnemyManager.Instance.EnemiesKilled;
+            int enemiesKilled = EnemyManager.Instance.enemiesKilled;
 
             // Nếu đã tiêu diệt >= 30 quái, giảm spawnInterval
             if (enemiesKilled >= 30 && spawnInterval > 1f)

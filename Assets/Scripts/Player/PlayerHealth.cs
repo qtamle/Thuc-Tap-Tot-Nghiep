@@ -1,4 +1,4 @@
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour, DamagePlayerInterface
@@ -7,8 +7,12 @@ public class PlayerHealth : MonoBehaviour, DamagePlayerInterface
     public int maxHealth = 20;
     public int currentHealth;
 
+    [Header("Shield Settings")]
+    public int currentShield = 0;  
+
     [Header("UI Health")]
     public TMP_Text healthText;
+    public TMP_Text shieldText;  
 
     [Header("Damage Settings")]
     public SpriteRenderer playerSprite;
@@ -21,6 +25,7 @@ public class PlayerHealth : MonoBehaviour, DamagePlayerInterface
     {
         currentHealth = maxHealth;
         UpdateHealthUI();
+        UpdateShieldUI();
     }
 
     public void DamagePlayer(int damage)
@@ -28,27 +33,42 @@ public class PlayerHealth : MonoBehaviour, DamagePlayerInterface
         if (isInvincible)
             return;
 
-        currentHealth -= damage;
-
-        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-        UpdateHealthUI();
-
-        if (currentHealth > 0)
+        if (currentShield > 0)
         {
-            StartCoroutine(InvincibilityCoroutine());
+            currentShield -= damage;
+            currentShield = Mathf.Max(currentShield, 0); 
+            UpdateShieldUI();
+
+            StartCoroutine(InvincibilityCoroutine(invincibilityDuration));
         }
         else
         {
-            Die();
+            currentHealth -= damage;
+            currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+            UpdateHealthUI();
+
+            if (currentHealth <= 0)
+            {
+                Die();
+            }
+            else
+            {
+                StartCoroutine(InvincibilityCoroutine(invincibilityDuration));
+            }
         }
     }
 
-    public void Heal(int amount)
+    public void HealHealth(int amount)
     {
         currentHealth += amount;
-
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
         UpdateHealthUI();
+    }
+
+    public void HealShield(int amount)
+    {
+        currentShield += amount;
+        UpdateShieldUI();
     }
 
     private void UpdateHealthUI()
@@ -58,18 +78,26 @@ public class PlayerHealth : MonoBehaviour, DamagePlayerInterface
             healthText.text = currentHealth + " / " + maxHealth;
         }
     }
-    
+
+    private void UpdateShieldUI()
+    {
+        if (shieldText != null)
+        {
+            shieldText.text = currentShield + "";
+        }
+    }
+
     private void Die()
     {
         Debug.Log("Player has died!");
     }
 
-    private System.Collections.IEnumerator InvincibilityCoroutine()
+    private System.Collections.IEnumerator InvincibilityCoroutine(float duration)
     {
         isInvincible = true;
         float elapsed = 0f;
 
-        while (elapsed < invincibilityDuration)
+        while (elapsed < duration)
         {
             playerSprite.enabled = !playerSprite.enabled;
             yield return new WaitForSeconds(flashInterval);

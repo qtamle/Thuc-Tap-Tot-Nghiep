@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using TMPro; 
+﻿using TMPro;
+using UnityEngine;
 
 public class KillCounterUI : MonoBehaviour
 {
@@ -12,7 +12,7 @@ public class KillCounterUI : MonoBehaviour
         if (EnemyManager.Instance != null)
         {
             currentKillTarget = EnemyManager.Instance.killTarget;
-            currentEnemiesKilled = EnemyManager.Instance.EnemiesKilled;
+            currentEnemiesKilled = EnemyManager.Instance.enemiesKilled;
         }
 
         UpdateKillCounterUI();
@@ -22,9 +22,9 @@ public class KillCounterUI : MonoBehaviour
     {
         if (EnemyManager.Instance != null)
         {
-            if (currentEnemiesKilled != EnemyManager.Instance.EnemiesKilled)
+            if (currentEnemiesKilled != EnemyManager.Instance.enemiesKilled)
             {
-                currentEnemiesKilled = EnemyManager.Instance.EnemiesKilled;
+                currentEnemiesKilled = EnemyManager.Instance.enemiesKilled;
                 UpdateKillCounterUI();
             }
         }
@@ -32,10 +32,6 @@ public class KillCounterUI : MonoBehaviour
 
     private void UpdateKillCounterUI()
     {
-        if (currentKillTarget - currentEnemiesKilled < 0)
-        {
-            currentKillTarget = 0;
-        }
         killCounterText.text = $"{currentKillTarget - currentEnemiesKilled}";
     }
 }
