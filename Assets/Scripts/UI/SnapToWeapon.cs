@@ -64,7 +64,7 @@ public class SnapToWeapon : MonoBehaviour
         currentItem = Mathf.Clamp(currentItem, 0, ItemNames.Length - 1);
 
         // Debug tên vũ khí hiện tại
-        Debug.Log($"Snapped to Weapon: {ItemNames[currentItem]}");
+        //Debug.Log($"Snapped to Weapon: {ItemNames[currentItem]}");
 
         // Nếu tốc độ kéo nhỏ và chưa snap
         if (scrollRect.velocity.magnitude < 200 && !isSnapped)

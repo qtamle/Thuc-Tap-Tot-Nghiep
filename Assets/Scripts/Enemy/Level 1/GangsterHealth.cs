@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class GangsterHealth : MonoBehaviour, DamageInterface
@@ -14,6 +15,8 @@ public class GangsterHealth : MonoBehaviour, DamageInterface
     private bool canBeDamaged = false;
     private float timeWhenStunned = 0f;
     private bool isStunned = false;
+
+    public UnityEvent startTimeline;
 
     private void Start()
     {
@@ -31,6 +34,7 @@ public class GangsterHealth : MonoBehaviour, DamageInterface
 
             if (currentHealth <= 0)
             {
+                startTimeline.Invoke();
                 Die();
             }
         }
