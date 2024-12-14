@@ -14,6 +14,7 @@ public class BulletDamage : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+        Destroy(gameObject, 5f);
 
     }
 }

@@ -22,7 +22,6 @@ public class EnemyManager : MonoBehaviour
     // Gọi hàm này khi quái bị tiêu diệt
     public void OnEnemyKilled()
     {
-        Debug.Log("Enemy killed! Total kills: " + enemiesKilled);
         enemiesKilled++;
 
         if (enemiesKilled >= killTarget)
