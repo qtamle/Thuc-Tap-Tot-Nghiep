@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: fd4d634b822c5904dbfb7feaadf225d0
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {fileID: 2800000, guid: 40ab1dfa65cdd6247bb1a3d4ea54901c, type: 3}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176437
+  packageName: Save Manager | CG
+  packageVersion: 2.3.0
+  assetPath: Assets/Carter Games/Save Manager/Code/Editor/Settings Provider/SaveManagerSettingsProvider.cs
+  uploadId: 697570
