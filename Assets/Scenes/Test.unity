@@ -10980,6 +10980,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coinType1Count: 0
   coinType2Count: 0
+  totalCoinType1Count: 0
+  totalCoinType2Count: 0
   coinType1Text: {fileID: 567751093}
   coinType2Text: {fileID: 436628587}
 --- !u!4 &1320712926
@@ -11448,7 +11450,7 @@ Transform:
   m_GameObject: {fileID: 1415338298}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.27, y: 10.16, z: 0}
+  m_LocalPosition: {x: 0.27, y: 11.03, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14721,8 +14723,8 @@ SceneRoots:
   - {fileID: 258206129}
   - {fileID: 477062921}
   - {fileID: 1221081235}
-  - {fileID: 1320712926}
   - {fileID: 1213273222}
+  - {fileID: 1320712926}
   - {fileID: 452983390}
   - {fileID: 1807903789}
   - {fileID: 291446933}
