@@ -8,7 +8,7 @@ public class Gangster : MonoBehaviour
     public Transform groundCheck;
     public float groundCheckRadius = 0.2f;
     public LayerMask groundLayer;
-    public GameObject rockPrefab; // Prefab đá
+    public GameObject rockPrefab; 
     public Transform playerTransform;
 
     [Header("Charging Settings")]
@@ -181,14 +181,15 @@ public class Gangster : MonoBehaviour
         isCharging = true;
 
         // Xác định vị trí gần player
-        Vector2 targetPosition = new Vector2(playerTransform.position.x, playerTransform.position.y);
+        float offsetX = playerTransform.position.x > transform.position.x ? -3f : 3f;
+        Vector2 targetPosition = new Vector2(playerTransform.position.x + offsetX, playerTransform.position.y);
         float additionalHeight = 0.5f;
         targetPosition.y += additionalHeight;
 
         transform.position = targetPosition;
         rb.gravityScale = 4f;
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.7f);
 
         float chargeDirectionX = playerTransform.position.x > transform.position.x ? 1f : -1f;
 
@@ -201,9 +202,10 @@ public class Gangster : MonoBehaviour
             if (isGrounded)
             {
                 FlipToDirection(chargeDirectionX);
+
                 rb.linearVelocity = new Vector2(chargeDirectionX * chargeSpeed, rb.linearVelocity.y);
 
-                yield return null;  
+                yield return null;
             }
 
             Collider2D[] playerCollisions = Physics2D.OverlapCircleAll(ChargingAttackTransform.position, radiusCharging, player);
@@ -223,10 +225,10 @@ public class Gangster : MonoBehaviour
         GangsterHealth gangsterHealth = GetComponent<GangsterHealth>();
         if (gangsterHealth != null)
         {
-            gangsterHealth.StunForDuration(3f);  
+            gangsterHealth.StunForDuration(3f);
         }
 
-        SpawnRocks(); 
+        SpawnRocks();
         yield return new WaitForSeconds(3f);
 
         transform.position = new Vector2(resetX, resetY);
@@ -236,7 +238,6 @@ public class Gangster : MonoBehaviour
 
         isUsingSkill = false;
     }
-
 
     private void FlipToDirection(float directionX)
     {
@@ -259,7 +260,7 @@ public class Gangster : MonoBehaviour
 
             do
             {
-                randomX = Random.Range(-3.5f, 3.5f);
+                randomX = Random.Range(-4.2f, 4.2f);
             }
             while (Mathf.Abs(randomX - lastRockX) < 2f); 
 
