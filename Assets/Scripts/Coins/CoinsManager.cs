@@ -6,14 +6,17 @@ using System.IO;
 [Serializable]
 public class CoinsData
 {
-    public int coinType1Count;
-    public int coinType2Count;
+    public int totalCoinType1Count; // Tổng coin Type 1
+    public int totalCoinType2Count; // Tổng coin Type 2
 }
 
 public class CoinsManager : MonoBehaviour
 {
-    public int coinType1Count = 0;
-    public int coinType2Count = 0;
+    public int coinType1Count = 0; // Coin hiện tại trong Scene
+    public int coinType2Count = 0; // Coin hiện tại trong Scene
+
+    public int totalCoinType1Count = 0; // Tổng coin (đã cộng dồn)
+    public int totalCoinType2Count = 0; // Tổng coin (đã cộng dồn)
 
     public TMP_Text coinType1Text;
     public TMP_Text coinType2Text;
@@ -22,6 +25,11 @@ public class CoinsManager : MonoBehaviour
     {
         // Đọc dữ liệu JSON khi bắt đầu Scene
         LoadCoins();
+
+        // Reset coin hiện tại về 0 khi bắt đầu Scene
+        coinType1Count = 0;
+        coinType2Count = 0;
+
         UpdateCoinUI();
     }
 
@@ -50,16 +58,21 @@ public class CoinsManager : MonoBehaviour
     {
         coinType1Count += type1;
         coinType2Count += type2;
+
         UpdateCoinUI();
     }
 
-    // Lưu dữ liệu dạng JSON vào tệp
+    // Lưu dữ liệu tổng coin dạng JSON vào tệp
     public void SaveCoins()
     {
+        // Cộng dồn coin hiện tại vào tổng coin
+        totalCoinType1Count += coinType1Count;
+        totalCoinType2Count += coinType2Count;
+
         CoinsData coinsData = new CoinsData
         {
-            coinType1Count = coinType1Count,
-            coinType2Count = coinType2Count
+            totalCoinType1Count = totalCoinType1Count,
+            totalCoinType2Count = totalCoinType2Count
         };
 
         string json = JsonUtility.ToJson(coinsData, true);
@@ -68,13 +81,18 @@ public class CoinsManager : MonoBehaviour
         string folderPath = Application.dataPath + "/Data";
         string filePath = folderPath + "/CoinsData.json";
 
+        // Tạo thư mục nếu chưa tồn tại
+        if (!Directory.Exists(folderPath))
+        {
+            Directory.CreateDirectory(folderPath);
+        }
+
         // Lưu dữ liệu vào tệp
         File.WriteAllText(filePath, json);
         Debug.Log("Coins data saved to: " + filePath);
     }
 
-
-    // Tải dữ liệu JSON từ tệp
+    // Tải dữ liệu tổng coin từ JSON
     public void LoadCoins()
     {
         // Đường dẫn thư mục và tệp
@@ -86,14 +104,15 @@ public class CoinsManager : MonoBehaviour
             string json = File.ReadAllText(filePath);
             CoinsData coinsData = JsonUtility.FromJson<CoinsData>(json);
 
-            coinType1Count = coinsData.coinType1Count;
-            coinType2Count = coinsData.coinType2Count;
+            // Gán tổng số coin đã lưu
+            totalCoinType1Count = coinsData.totalCoinType1Count;
+            totalCoinType2Count = coinsData.totalCoinType2Count;
         }
         else
         {
-            // Nếu tệp không tồn tại, khởi tạo số coin bằng 0
-            coinType1Count = 0;
-            coinType2Count = 0;
+            // Nếu tệp không tồn tại, khởi tạo giá trị
+            totalCoinType1Count = 0;
+            totalCoinType2Count = 0;
         }
     }
 

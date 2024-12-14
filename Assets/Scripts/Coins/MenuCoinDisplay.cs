@@ -27,10 +27,10 @@ public class MenuCoinDisplay : MonoBehaviour
 
             // Hiển thị dữ liệu trên UI
             if (coinType1Text != null)
-                coinType1Text.text = "" + coinsData.coinType1Count;
+                coinType1Text.text = "" + coinsData.totalCoinType1Count;
 
             if (coinType2Text != null)
-                coinType2Text.text = "" + coinsData.coinType2Count;
+                coinType2Text.text = "" + coinsData.totalCoinType2Count;
 
             Debug.Log("Coins data loaded from JSON: " + json);
         }
