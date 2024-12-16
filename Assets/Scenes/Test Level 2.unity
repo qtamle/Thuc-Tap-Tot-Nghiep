@@ -7910,7 +7910,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1115378824
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10237,7 +10237,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1249940659
 Transform:
   m_ObjectHideFlags: 0
@@ -10308,6 +10308,11 @@ MonoBehaviour:
   - {fileID: 471659013}
   spawnInterval: 1.3
   spawnHeightOffset: 1
+  warningBoss: {fileID: 1115378823}
+  bossLevel1: {fileID: 186944488}
+  UIHealthBoss: {fileID: 829265577}
+  remain: {fileID: 969923266}
+  Assassin: {fileID: 186944493}
 --- !u!1 &1252773065
 GameObject:
   m_ObjectHideFlags: 0
@@ -13069,8 +13074,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34e55b2839ac748418fd833ce06a8928, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  experienceCount: 0
   experienceText: {fileID: 512577287}
+  levelSystem: {fileID: 0}
+  experienceCount: 0
 --- !u!1 &1811002599
 GameObject:
   m_ObjectHideFlags: 0

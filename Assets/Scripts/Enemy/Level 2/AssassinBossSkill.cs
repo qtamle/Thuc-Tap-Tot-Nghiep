@@ -69,7 +69,6 @@ public class AssassinBossSkill : MonoBehaviour
 
         originalPosition = transform.position;
 
-        StartCoroutine(SkillActive());
     }
 
     public void Active()

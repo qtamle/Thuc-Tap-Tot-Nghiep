@@ -6,38 +6,38 @@ public class EnemySpawnerLevel2 : MonoBehaviour
     public GameObject[] enemies;
     public Transform[] spawnPoints;
     public Transform[] element1SpawnPoints;
-    public Transform[] element2SpawnPoints; // New spawn points for element 2
+    public Transform[] element2SpawnPoints; 
     public float spawnInterval = 2f;
     public float spawnHeightOffset = 1f;
 
     private bool stopSpawning = false;
 
-    //[Header("Boss Spawn")]
-    //public GameObject warningBoss;
-    //public GameObject bossLevel1;
-    //public GameObject UIHealthBoss;
+    [Header("Boss Spawn")]
+    public GameObject warningBoss;
+    public GameObject bossLevel1;
+    public GameObject UIHealthBoss;
 
-    //[Header("Hide")]
-    //public GameObject remain;
+    [Header("Hide")]
+    public GameObject remain;
 
-    //public Gangster gangster;
+    public AssassinBossSkill Assassin;
 
     private void Start()
     {
-        //if (bossLevel1 != null)
-        //{
-        //    bossLevel1.SetActive(false);
-        //}
+        if (bossLevel1 != null)
+        {
+            bossLevel1.SetActive(false);
+        }
 
-        //if (UIHealthBoss != null)
-        //{
-        //    UIHealthBoss.SetActive(false);
-        //}
+        if (UIHealthBoss != null)
+        {
+            UIHealthBoss.SetActive(false);
+        }
 
-        //if (warningBoss != null)
-        //{
-        //    warningBoss.SetActive(false);
-        //}
+        if (warningBoss != null)
+        {
+            warningBoss.SetActive(false);
+        }
 
         StartCoroutine(SpawnEnemies());
     }
@@ -88,7 +88,7 @@ public class EnemySpawnerLevel2 : MonoBehaviour
             if (EnemyManager.Instance != null && EnemyManager.Instance.killTarget <= EnemyManager.Instance.enemiesKilled)
             {
                 stopSpawning = true;
-                //StartCoroutine(HandleBossSpawn());
+                StartCoroutine(HandleBossSpawn());
             }
         }
     }
@@ -107,36 +107,36 @@ public class EnemySpawnerLevel2 : MonoBehaviour
         }
     }
 
-    //private IEnumerator HandleBossSpawn()
-    //{
-    //    if (remain != null)
-    //    {
-    //        remain.SetActive(false);
-    //    }
+    private IEnumerator HandleBossSpawn()
+    {
+        if (remain != null)
+        {
+            remain.SetActive(false);
+        }
 
-    //    if (warningBoss != null)
-    //    {
-    //        warningBoss.SetActive(true);
-    //    }
+        if (warningBoss != null)
+        {
+            warningBoss.SetActive(true);
+        }
 
-    //    yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(3f);
 
-    //    if (warningBoss != null)
-    //    {
-    //        warningBoss.SetActive(false);
-    //    }
+        if (warningBoss != null)
+        {
+            warningBoss.SetActive(false);
+        }
 
-    //    if (bossLevel1 != null)
-    //    {
-    //        bossLevel1.SetActive(true);
-    //        gangster.Activate();
-    //    }
+        if (bossLevel1 != null)
+        {
+            bossLevel1.SetActive(true);
+            Assassin.Active();
+        }
 
-    //    yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.5f);
 
-    //    if (UIHealthBoss != null)
-    //    {
-    //        UIHealthBoss.SetActive(true);
-    //    }
-    //}
+        if (UIHealthBoss != null)
+        {
+            UIHealthBoss.SetActive(true);
+        }
+    }
 }
