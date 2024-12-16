@@ -180,49 +180,68 @@ public class Gangster : MonoBehaviour
 
         isCharging = true;
 
-        // Xác định vị trí gần player
+        if (playerTransform == null)
+        {
+            Debug.LogError("playerTransform is not assigned!");
+            yield break; 
+        }
+
         float offsetX = playerTransform.position.x > transform.position.x ? -3f : 3f;
         Vector2 targetPosition = new Vector2(playerTransform.position.x + offsetX, playerTransform.position.y);
         float additionalHeight = 0.5f;
         targetPosition.y += additionalHeight;
 
         transform.position = targetPosition;
-        rb.gravityScale = 4f;
+
+        if (rb != null)
+        {
+            rb.gravityScale = 4f;
+        }
+        else
+        {
+            Debug.LogError("Rigidbody2D is missing!");
+            yield break;
+        }
 
         yield return new WaitForSeconds(0.7f);
 
-        float chargeDirectionX = playerTransform.position.x > transform.position.x ? 1f : -1f;
+        if (playerTransform == null) yield break;
 
+        float chargeDirectionX = playerTransform.position.x > transform.position.x ? 1f : -1f;
         FlipToDirection(chargeDirectionX);
 
-        while (!Physics2D.OverlapCircle(WallCheck.position, wallCheckRadius, wallLayer))
+        if (WallCheck != null)
         {
-            FlipToDirection(chargeDirectionX);
-
-            if (isGrounded)
+            while (!Physics2D.OverlapCircle(WallCheck.position, wallCheckRadius, wallLayer))
             {
                 FlipToDirection(chargeDirectionX);
 
-                rb.linearVelocity = new Vector2(chargeDirectionX * chargeSpeed, rb.linearVelocity.y);
+                if (isGrounded)
+                {
+                    rb.linearVelocity = new Vector2(chargeDirectionX * chargeSpeed, rb.linearVelocity.y);
+                }
+
+                Collider2D playerCollider = Physics2D.OverlapCircle(ChargingAttackTransform.position, radiusCharging, player);
+                if (playerCollider != null)
+                {
+                    PlayerHealth playerHealth = playerCollider.GetComponent<PlayerHealth>();
+                    if (playerHealth != null)
+                    {
+                        playerHealth.DamagePlayer(2);
+                    }
+                }
 
                 yield return null;
             }
-
-            Collider2D[] playerCollisions = Physics2D.OverlapCircleAll(ChargingAttackTransform.position, radiusCharging, player);
-
-            foreach (Collider2D playerCollider in playerCollisions)
-            {
-                PlayerHealth playerHealth = playerCollider.GetComponent<PlayerHealth>();
-                if (playerHealth != null)
-                {
-                    playerHealth.DamagePlayer(2);
-                }
-            }
+        }
+        else
+        {
+            Debug.LogError("WallCheck Transform is not assigned!");
+            yield break;
         }
 
         rb.linearVelocity = Vector2.zero;
 
-        GangsterHealth gangsterHealth = GetComponent<GangsterHealth>();
         if (gangsterHealth != null)
         {
             gangsterHealth.StunForDuration(3f);
@@ -233,9 +252,8 @@ public class Gangster : MonoBehaviour
 
         transform.position = new Vector2(resetX, resetY);
         rb.linearVelocity = Vector2.zero;
-        rb.gravityScale = 1;
+        rb.gravityScale = 4f;
         isCharging = false;
-
         isUsingSkill = false;
     }
 
