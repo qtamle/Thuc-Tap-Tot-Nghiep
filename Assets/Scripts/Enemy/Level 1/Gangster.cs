@@ -126,7 +126,6 @@ public class Gangster : MonoBehaviour
         isCharging = false; 
         isSkillActive = false;
 
-        Debug.Log("Boss đã bị tiêu diệt. Dừng mọi hành động.");
     }
 
     public void UseJumpSkill()

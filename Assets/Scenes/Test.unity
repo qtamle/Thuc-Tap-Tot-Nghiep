@@ -2145,7 +2145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a92ec147d1df7c44b42766eaecae6cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 5
+  maxHealth: 3
   currentHealth: 0
   healthBarSlider: {fileID: 1806180031}
   healthBarFill: {fileID: 612989577}
@@ -3440,7 +3440,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa0a772ade8b0e441a19313cad4a1780, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  killTarget: 20
+  killTarget: 5
   enemiesKilled: 0
 --- !u!4 &452983390
 Transform:
@@ -4794,53 +4794,6 @@ PlatformEffector2D:
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
---- !u!1 &667016709
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 667016711}
-  - component: {fileID: 667016710}
-  m_Layer: 0
-  m_Name: LevelSystem
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &667016710
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 667016709}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d025d3a0902d6fa4d970f085c045772e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  level: 0
-  experience: 0
-  experienceToNextLevel: 100
---- !u!4 &667016711
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 667016709}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 563.40155, y: 1678.9257, z: 21.279016}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &711616193
 GameObject:
   m_ObjectHideFlags: 0
@@ -13291,8 +13244,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34e55b2839ac748418fd833ce06a8928, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  experienceCount: 0
   experienceText: {fileID: 512577287}
+  levelSystem: {fileID: 0}
+  experienceCount: 0
 --- !u!1 &1811002599
 GameObject:
   m_ObjectHideFlags: 0
@@ -14779,4 +14733,3 @@ SceneRoots:
   - {fileID: 1076463794}
   - {fileID: 1415338301}
   - {fileID: 1691331802}
-  - {fileID: 667016711}

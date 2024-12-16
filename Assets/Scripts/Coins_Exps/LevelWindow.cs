@@ -6,78 +6,50 @@ using System.Collections;
 
 public class LevelWindow : MonoBehaviour
 {
-    public TMP_Text levelText; // Hiển thị cấp độ
-    public TMP_Text experienceText; // Hiển thị kinh nghiệm
-    public Image experienceBarImage; // Thanh kinh nghiệm
+    public TMP_Text levelText;
+    public TMP_Text experienceText;
+    public Image experienceBarImage;
 
-    private int level = 0;
-    private int experience = 0;
-    private int experienceToNextLevel = 100;
+    [SerializeField] private LevelSystem levelSystem;
 
     private void Start()
     {
-        LoadLevelData();
-        UpdateLevelUI();
-    }
-
-    public void LoadLevelData()
-    {
-        // Đường dẫn đến tệp JSON
-        string folderPath = Application.dataPath + "/Data";
-        string filePath = folderPath + "/LevelData.json";
-
-        if (File.Exists(filePath))
+        levelSystem = FindAnyObjectByType<LevelSystem>();
+        if (levelSystem != null)
         {
-            string json = File.ReadAllText(filePath);
-            LevelData data = JsonUtility.FromJson<LevelData>(json);
-
-            level = data.level;
-            experience = data.experience;
-            experienceToNextLevel = data.experienceToNextLevel;
-
-            Debug.Log("Level data loaded successfully.");
-        }
-        else
-        {
-            Debug.LogWarning("LevelData.json not found. Using default values.");
+            Debug.Log("Da tim thay level system");
+            levelSystem.OnLevelDataUpdated += UpdateLevelUI;
+            UpdateLevelUI(levelSystem.level, levelSystem.experience, levelSystem.experienceToNextLevel);
         }
     }
 
-    public void UpdateLevelUI()
+    private void UpdateLevelUI(int level, int experience, int experienceToNextLevel)
     {
-        if (levelText != null)
-        {
-            levelText.text = "Level: " + (level + 1); // Cấp độ +1 để hiển thị theo dạng thân thiện
-        }
-
-        if (experienceText != null)
-        {
-            experienceText.text = "Exp: " + experience + "/" + experienceToNextLevel;
-        }
-
-        if (experienceBarImage != null)
-        {
-            // Chạy hiệu ứng điền thanh kinh nghiệm mượt mà
-            StartCoroutine(UpdateExperienceBar());
-        }
+        levelText.text = $"Level: {level}";
+        experienceText.text = $"Exp: {experience}/{experienceToNextLevel}";
+        StartCoroutine(UpdateExperienceBar((float)experience / experienceToNextLevel));
     }
 
-    private IEnumerator UpdateExperienceBar()
+    private IEnumerator UpdateExperienceBar(float targetFillAmount)
     {
-        float targetFillAmount = (float)experience / experienceToNextLevel;
         float currentFillAmount = experienceBarImage.fillAmount;
-        float fillSpeed = 0.5f; // Tốc độ điền thanh (có thể điều chỉnh)
-
-        // Tạo hiệu ứng điền thanh từ giá trị hiện tại đến giá trị mục tiêu
+        float fillSpeed = 0.5f;
         float elapsedTime = 0f;
+
         while (elapsedTime < fillSpeed)
         {
-            experienceBarImage.fillAmount = Mathf.Lerp(currentFillAmount, targetFillAmount, (elapsedTime / fillSpeed));
+            experienceBarImage.fillAmount = Mathf.Lerp(currentFillAmount, targetFillAmount, elapsedTime / fillSpeed);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-
-        // Đảm bảo thanh kinh nghiệm chính xác khi hoàn thành
         experienceBarImage.fillAmount = targetFillAmount;
     }
+    private void OnDestroy()
+    {
+        if (levelSystem != null)
+        {
+            levelSystem.OnLevelDataUpdated -= UpdateLevelUI; // Unsubscribe khỏi sự kiện
+        }
+    }
 }
+
