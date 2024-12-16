@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Wall
   - Ground
+  - Assassin
   layers:
   - Default
   - TransparentFX

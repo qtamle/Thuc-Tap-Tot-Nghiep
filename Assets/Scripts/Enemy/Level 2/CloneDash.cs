@@ -6,9 +6,16 @@ public class CloneDash : MonoBehaviour
     public float cloneSpeed = 5f;
     private Vector3 originalPosition;
     private string playerTag = "Player";
+    private Rigidbody2D rb;
+
+    [Header("Attack")]
+    public float radius;
+    public Transform attackTransform;
+    public LayerMask playerLayer;
 
     void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
         originalPosition = transform.position;
     }
 
@@ -31,14 +38,20 @@ public class CloneDash : MonoBehaviour
     {
         float dashDuration = 3f;
 
-        // Tính hướng di chuyển của clone dựa trên vị trí Player
         Vector3 directionToPlayer = player.position - transform.position;
-        directionToPlayer.y = 0f; // Đảm bảo chỉ di chuyển trên trục X (tránh di chuyển lên/xuống)
+        directionToPlayer.y = 0f; 
 
-        // Tính toán hướng riêng biệt cho clone
         Vector3 dashDirection = directionToPlayer.x > 0 ? Vector3.right : Vector3.left;
 
-        // Tắt collider trong khi lướt
+        if (dashDirection == Vector3.right)
+        {
+            transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+        }
+        else
+        {
+            transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+        }
+
         Collider2D collider = GetComponent<Collider2D>();
         if (collider != null)
         {
@@ -49,23 +62,52 @@ public class CloneDash : MonoBehaviour
         float timer = 0f;
         while (timer < dashDuration)
         {
-            // Di chuyển clone theo hướng tính toán
             transform.position += dashDirection * cloneSpeed * Time.deltaTime;
+
+            Collider2D[] hitPlayer = Physics2D.OverlapCircleAll(attackTransform.position, radius, playerLayer);
+
+            foreach (Collider2D hitPlayer2 in hitPlayer)
+            {
+                if (hitPlayer2 != null)
+                {
+                    DamagePlayerInterface damage = hitPlayer2.GetComponent<DamagePlayerInterface>();
+                    if (damage != null)
+                    {
+                        damage.DamagePlayer(2);
+                    }
+                }
+            }
+            
             timer += Time.deltaTime;
             yield return null;
         }
 
-        // Đảm bảo clone đi hết quãng đường trong thời gian lướt
         transform.position += dashDirection * cloneSpeed * (dashDuration - timer);
 
-        // Bật lại collider sau khi lướt
         if (collider != null)
         {
             collider.enabled = true;
         }
 
-        // Đợi một thời gian trước khi quay lại vị trí gốc
         yield return new WaitForSeconds(0.5f);
         transform.position = originalPosition;
+
+        if (rb != null)
+        {
+            rb.gravityScale = 4f;
+        }
+        else
+        {
+            yield return null;
+        }
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        if (attackTransform != null)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(attackTransform.position, radius);
+        }
     }
 }

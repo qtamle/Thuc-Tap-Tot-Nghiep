@@ -25,6 +25,7 @@ public class AssassinBossSkill : MonoBehaviour
     private Transform playerTransform;
     public GameObject bombFragmentPrefab;
     public float fragmentSpeed;
+    public Transform[] randomBombTargets;
 
     [Header("Teleport")]
     public Transform playerTransforms;
@@ -44,11 +45,13 @@ public class AssassinBossSkill : MonoBehaviour
     private Vector3 originalPosition;
     public string playerTag = "Player";
 
+    private bool isSkillActive = false;
+    private int[] skillOrder = new int[] { 1, 2, 3, 4 };
+    private AssassinHealth assassinHealth;
     private void Start()
     {
+        assassinHealth = GetComponent<AssassinHealth>();
         rb = GetComponent<Rigidbody2D>();
-
-        ThrowTraps(3);
 
         if (GameObject.FindWithTag("Player") != null)
         {
@@ -63,15 +66,80 @@ public class AssassinBossSkill : MonoBehaviour
         {
             playerTransforms = GameObject.FindWithTag("Player").transform;
         }
+
+        originalPosition = transform.position;
+
+        StartCoroutine(SkillActive());
     }
 
-    private void Update()
+    public void Active()
     {
-        CheckGround();
+        gameObject.SetActive(true);
 
-        if (Input.GetKeyDown(KeyCode.P))
+        StartCoroutine(SkillActive());
+    }
+
+    IEnumerator SkillActive()
+    {
+        yield return new WaitForSeconds(2f); 
+
+        while (true)
         {
-            CloneAndDash();
+            CheckGround(); 
+
+            if (!isGrounded)
+            {
+                Debug.Log("Assassin Boss phải ở ground mới active skill");
+                yield return null; 
+                continue;
+            }
+
+            if (!isSkillActive)
+            {
+                isSkillActive = true;
+
+                foreach (int skill in skillOrder)
+                {
+                    switch (skill)
+                    {
+                        case 1:
+                            yield return new WaitForSeconds(1.5f);
+                            Debug.Log("Throwing traps...");
+                            ThrowTraps(4);
+                            yield return new WaitForSeconds(1f); 
+                            break;
+
+                        case 2:
+                            Debug.Log("Teleporting to player...");
+                            TeleportToPlayer();
+                            yield return new WaitForSeconds(4f); 
+                            break;
+
+                        case 3:
+                            Debug.Log("Throwing bomb at player...");
+                            ThrowBombAtPlayer();
+                            break;
+
+                        case 4:
+                            Debug.Log("Cloning and dashing...");
+                            CloneAndDash();
+                            yield return new WaitForSeconds(8f);
+                            break;
+
+                        default:
+                            Debug.LogWarning("Unknown skill number: " + skill);
+                            break;
+                    }
+
+                    yield return new WaitForSeconds(2f);
+                }
+
+                isSkillActive = false; 
+            }
+            else
+            {
+                yield return null;
+            }
         }
     }
 
@@ -106,6 +174,8 @@ public class AssassinBossSkill : MonoBehaviour
 
     void ThrowTraps(int trapCount)
     {
+        isSkillActive = true;
+
         if (trapPrefab == null || targetPositions.Length == 0)
         {
             Debug.LogError("Trap Prefab or Target Positions is missing!");
@@ -123,6 +193,8 @@ public class AssassinBossSkill : MonoBehaviour
 
             StartCoroutine(MoveTrapToTarget(trap, target.position));
         }
+
+        isSkillActive = false;
     }
 
     int GetUniqueRandomIndex()
@@ -155,16 +227,27 @@ public class AssassinBossSkill : MonoBehaviour
 
     void ThrowBombAtPlayer()
     {
-        if (playerTransform == null || bombPrefab == null)
+        isSkillActive = true;
+
+        if (playerTransform == null || bombPrefab == null || randomBombTargets.Length == 0)
         {
-            Debug.LogError("Player Transform or Bomb Prefab is missing!");
+            Debug.LogError("Player Transform, Bomb Prefab, or Bomb Targets are missing!");
             return;
         }
 
-        Vector3 targetPosition = playerTransform.position;
+        Vector3 playerTargetPosition = playerTransform.position;
+        GameObject bomb1 = Instantiate(bombPrefab, transform.position, Quaternion.identity);
+        StartCoroutine(MoveBombToTarget(bomb1, playerTargetPosition));
 
-        GameObject bomb = Instantiate(bombPrefab, transform.position, Quaternion.identity);
-        StartCoroutine(MoveBombToTarget(bomb, targetPosition));
+        Vector3 randomTargetPosition1 = randomBombTargets[Random.Range(0, randomBombTargets.Length)].position;
+        GameObject bomb2 = Instantiate(bombPrefab, transform.position, Quaternion.identity);
+        StartCoroutine(MoveBombToTarget(bomb2, randomTargetPosition1));
+
+        Vector3 randomTargetPosition2 = randomBombTargets[Random.Range(0, randomBombTargets.Length)].position;
+        GameObject bomb3 = Instantiate(bombPrefab, transform.position, Quaternion.identity);
+        StartCoroutine(MoveBombToTarget(bomb3, randomTargetPosition2));
+
+        isSkillActive = false;
     }
 
     IEnumerator<WaitForSeconds> MoveBombToTarget(GameObject bomb, Vector3 targetPosition)
@@ -188,6 +271,14 @@ public class AssassinBossSkill : MonoBehaviour
     void BombExplosion(GameObject bomb)
     {
         Debug.Log("Bomb exploded!");
+
+        BombDamage Bomb = bomb.GetComponent<BombDamage>();
+
+        if (Bomb != null )
+        {
+            Bomb.BombExplosion();
+        }
+
         CreateBombFragments(bomb.transform.position);
         Destroy(bomb);
     }
@@ -233,6 +324,8 @@ public class AssassinBossSkill : MonoBehaviour
 
     public void TeleportToPlayer()
     {
+        isSkillActive = true;
+
         if (playerTransforms == null)
         {
             Debug.LogError("Player Transform is missing!");
@@ -271,6 +364,8 @@ public class AssassinBossSkill : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         StartCoroutine(ShootBullets());
+
+        isSkillActive = false;
     }
 
     IEnumerator ShootBullets()
@@ -297,27 +392,65 @@ public class AssassinBossSkill : MonoBehaviour
     }
     public void CloneAndDash()
     {
+        isSkillActive = true;
+
         if (clonePrefab == null || dashTargets.Length == 0)
         {
             Debug.LogError("Clone Prefab hoặc Dash Targets là thiếu!");
             return;
         }
 
-        originalPosition = transform.position;
-
-        // Tạo 2 clone
         GameObject clone1 = Instantiate(clonePrefab, transform.position, Quaternion.identity);
         GameObject clone2 = Instantiate(clonePrefab, transform.position, Quaternion.identity);
 
         GameObject[] allCharacters = new GameObject[] { gameObject, clone1, clone2 };
 
-        int randomIndex1 = Random.Range(0, dashTargets.Length);
-        int randomIndex2 = Random.Range(0, dashTargets.Length);
+        StartCoroutine(MoveClonesToSides(clone1, clone2, allCharacters));
+    }
 
-        while (randomIndex1 == randomIndex2)
+    IEnumerator MoveClonesToSides(GameObject clone1, GameObject clone2, GameObject[] allCharacters)
+    {
+        Vector3 leftPosition = transform.position + Vector3.left * 2f; 
+        Vector3 rightPosition = transform.position + Vector3.right * 2f; 
+
+        float moveDuration = 1f;
+        float elapsedTime = 0f;
+
+        Vector3 clone1StartPosition = clone1.transform.position;
+        Vector3 clone2StartPosition = clone2.transform.position;
+
+        while (elapsedTime < moveDuration)
         {
-            randomIndex2 = Random.Range(0, dashTargets.Length);
+            elapsedTime += Time.deltaTime;
+            float t = elapsedTime / moveDuration;
+
+            clone1.transform.position = Vector3.Lerp(clone1StartPosition, leftPosition, t);
+            clone2.transform.position = Vector3.Lerp(clone2StartPosition, rightPosition, t);
+
+            yield return null;
         }
+
+        clone1.transform.position = leftPosition;
+        clone2.transform.position = rightPosition;
+
+        StartCoroutine(DelayBeforeDash(allCharacters));
+    }
+
+    IEnumerator DelayBeforeDash(GameObject[] allCharacters)
+    {
+        yield return new WaitForSeconds(1.5f); 
+
+        List<int> availableIndices = new List<int>();
+        for (int i = 0; i < dashTargets.Length; i++)
+        {
+            availableIndices.Add(i);
+        }
+
+        int randomIndex1 = availableIndices[Random.Range(0, availableIndices.Count)];
+        availableIndices.Remove(randomIndex1);
+
+        int randomIndex2 = availableIndices[Random.Range(0, availableIndices.Count)];
+        availableIndices.Remove(randomIndex2);
 
         Vector3 targetPosition1 = dashTargets[randomIndex1].position;
         Vector3 targetPosition2 = dashTargets[randomIndex2].position;
@@ -326,7 +459,7 @@ public class AssassinBossSkill : MonoBehaviour
         targetPosition1.y += offsetY;
         targetPosition2.y += offsetY;
 
-        Vector3 assassinTargetPosition = dashTargets[Random.Range(0, dashTargets.Length)].position;
+        Vector3 assassinTargetPosition = dashTargets[availableIndices[Random.Range(0, availableIndices.Count)]].position;
         assassinTargetPosition.y += offsetY;
 
         // Tìm player bằng Tag và truyền vào CloneDash
@@ -383,14 +516,30 @@ public class AssassinBossSkill : MonoBehaviour
                 rb.useGravity = true;  
             }
         }
+
+        if (isGrounded)
+        {
+            StartCoroutine(EnableDamageTemporarily());
+        }
+        else
+        {
+            isSkillActive = false;
+        }
+    }
+
+    IEnumerator EnableDamageTemporarily()
+    {
+        assassinHealth.SetCanBeDamaged(true);
+        yield return new WaitForSeconds(4f);
+        assassinHealth.SetCanBeDamaged(false);
+        isSkillActive = false;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if ((groundLayer.value & (1 << collision.gameObject.layer)) > 0)
         {
-            if(isGrounded)
-            { rb.gravityScale = 0; }
+            rb.gravityScale = 0;
         }
     }
 
@@ -402,24 +551,4 @@ public class AssassinBossSkill : MonoBehaviour
             Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
         }
     }
-
-    //private void OnDrawGizmos()
-    //{
-    //    // Kiểm tra và vẽ Gizmo tia Raycast
-    //    if (wallLayer != 0)  // Kiểm tra xem layer có được chỉ định chưa
-    //    {
-    //        // Vị trí xuất phát của tia Raycast (ví dụ, từ vị trí của đối tượng)
-    //        Vector2 rayOrigin = transform.position;
-
-    //        // Chiều dài của tia (ví dụ, 5f)
-    //        float rayLength = 5f;
-
-    //        // Màu sắc của Gizmo (màu đỏ để dễ thấy)
-    //        Gizmos.color = Color.red;
-
-    //        // Vẽ tia Raycast từ transform.position ra hướng Vector2.right (phải)
-    //        Gizmos.DrawLine(rayOrigin, rayOrigin + Vector2.right * rayLength);
-    //    }
-    //}
-
 }

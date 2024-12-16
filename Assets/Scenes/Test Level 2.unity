@@ -256,7 +256,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &77204494
 RectTransform:
   m_ObjectHideFlags: 0
@@ -355,7 +355,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 70
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -1046,9 +1046,10 @@ GameObject:
   - component: {fileID: 186944492}
   - component: {fileID: 186944493}
   - component: {fileID: 186944494}
+  - component: {fileID: 186944495}
   m_Layer: 12
   m_Name: Assassin
-  m_TagString: Untagged
+  m_TagString: Assassin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1117,12 +1118,13 @@ Transform:
   m_GameObject: {fileID: 186944488}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.03, y: 4.423, z: 0}
+  m_LocalPosition: {x: 0.03, y: 17.2, z: 0}
   m_LocalScale: {x: 0.8132447, y: 1.741097, z: 1.3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 495800900}
   - {fileID: 250852681}
+  - {fileID: 1693034731}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &186944491
@@ -1159,7 +1161,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.0040797144, y: -0.000000059604645}
+  m_Offset: {x: -0.00013828278, y: 0.015761241}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1169,7 +1171,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.9102533, y: 0.93140376}
+  m_Size: {x: 1.0199206, y: 0.9629264}
   m_EdgeRadius: 0
 --- !u!50 &186944492
 Rigidbody2D:
@@ -1240,6 +1242,17 @@ MonoBehaviour:
   bombSpeed: 15
   bombFragmentPrefab: {fileID: 6426166099052075716, guid: 6e26a361da0fbf44b9ab99e55998b866, type: 3}
   fragmentSpeed: 12
+  randomBombTargets:
+  - {fileID: 285698968}
+  - {fileID: 1664350463}
+  - {fileID: 192415477}
+  - {fileID: 1765546207}
+  - {fileID: 1241133130}
+  - {fileID: 1767427799}
+  - {fileID: 749283977}
+  - {fileID: 519746086}
+  - {fileID: 1561552736}
+  - {fileID: 385575197}
   playerTransforms: {fileID: 1257452414}
   teleportOffsetX: 3
   additionalHeight: 0.5
@@ -1270,7 +1283,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34fd8e2010e1c6a4cb2050c522b8fbb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cloneSpeed: 8
+  cloneSpeed: 12
+  radius: 0.5
+  attackTransform: {fileID: 1693034731}
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 8
+--- !u!114 &186944495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 186944488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dca9b8113da63b946a3857097dc6e281, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 5
+  currentHealth: 0
+  healthBarSlider: {fileID: 1806180031}
+  healthBarFill: {fileID: 612989577}
+  startTimeline:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &192415476
 GameObject:
   m_ObjectHideFlags: 0
@@ -2416,7 +2453,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Gangster
+  m_text: Assassin
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4638,7 +4675,7 @@ RectTransform:
   m_Father: {fileID: 1792332323}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0.000061035, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -5097,7 +5134,7 @@ BoxCollider2D:
   m_UsedByEffector: 1
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.46768284, y: 2.1196656}
+  m_Offset: {x: -0.46768284, y: 2.0971484}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -5107,7 +5144,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 10.035336, y: 0.78022456}
+  m_Size: {x: 10.035336, y: 0.7351898}
   m_EdgeRadius: 0
 --- !u!251 &722294386
 PlatformEffector2D:
@@ -8205,7 +8242,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 30
+  m_SortingOrder: 200
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -12370,6 +12407,37 @@ PlatformEffector2D:
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
+--- !u!1 &1693034730
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1693034731}
+  m_Layer: 12
+  m_Name: AttackTransform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1693034731
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1693034730}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.65, y: 0.04, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 186944490}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1765546206
 GameObject:
   m_ObjectHideFlags: 0

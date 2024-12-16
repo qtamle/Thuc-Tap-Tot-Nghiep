@@ -85,6 +85,31 @@ public class Attack : MonoBehaviour
             }
         }
         isAttackBoss = false;
+
+
+        Collider2D[] assassin = Physics2D.OverlapCircleAll(attackPoints.position, radius, bossLayer);
+
+        foreach (Collider2D asssass in assassin)
+        {
+            AssassinHealth Assassin = asssass.GetComponent<AssassinHealth>();
+            if (Assassin != null && Assassin.CanBeDamaged() && !isAttackBoss)
+            {
+                Assassin.TakeDamage(1);
+                isAttackBoss = true;
+
+                Assassin.SetCanBeDamaged(false);
+
+                SpawnCoins(coinPrefab, coinSpawnMin * 13, coinSpawnMax * 13, asssass.transform.position);
+
+                if (Random.value <= 0.25f)
+                {
+                    SpawnCoins(secondaryCoinPrefab, secondaryCoinSpawnMin * 5, secondaryCoinSpawnMax * 5, asssass.transform.position);
+                }
+
+                SpawnExperienceOrbs(asssass.transform.position, 25);
+            }
+        }
+        isAttackBoss = false;
     }
 
     void SpawnCoins(GameObject coinType, float minAmount, float maxAmount, Vector3 position)
