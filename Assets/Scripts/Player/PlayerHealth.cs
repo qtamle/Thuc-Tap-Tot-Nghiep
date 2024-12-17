@@ -20,14 +20,47 @@ public class PlayerHealth : MonoBehaviour, DamagePlayerInterface
     public float flashInterval = 0.1f;
 
     private bool isInvincible = false;
+    private LevelSystem levelSystem;
 
     private void Start()
     {
+        levelSystem = FindFirstObjectByType<LevelSystem>();
+        if (levelSystem != null)
+        {
+            Debug.Log("Da dang ky LevelSystem");
+            // Đăng ký sự kiện
+            //levelSystem.OnLevelDataUpdated += OnLevelUpdated;
+        }
+        else
+        {
+            Debug.LogError("Không tìm thấy LevelSystem trong scene.");
+        }
         currentHealth = maxHealth;
         UpdateHealthUI();
         UpdateShieldUI();
     }
+    //private void OnLevelUpdated(int level, int experience, int experienceToNextLevel)
+    //{
+    //    // Tăng maxHealth mỗi khi lên cấp
+    //    maxHealth += 5;
+    //    Debug.Log("Da tang 5 mau");
 
+    //    // Đảm bảo currentHealth không vượt quá maxHealth mới
+    //    if (currentHealth > maxHealth)
+    //    {
+    //        currentHealth = maxHealth;
+    //    }
+
+    //    UpdateHealthUI(); // Cập nhật UI để phản ánh thay đổi
+    //}
+    //private void OnDestroy()
+    //{
+    //    // Gỡ bỏ sự kiện khi PlayerHealth bị hủy để tránh lỗi
+    //    if (levelSystem != null)
+    //    {
+    //        levelSystem.OnLevelDataUpdated -= OnLevelUpdated;
+    //    }
+    //}
     public void DamagePlayer(int damage)
     {
         if (isInvincible)
