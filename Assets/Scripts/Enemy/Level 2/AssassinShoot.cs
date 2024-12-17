@@ -103,6 +103,8 @@ public class AssassinShoot : MonoBehaviour
         ShootBullet();
 
         Invoke(nameof(ResumeMovement), 0.5f);
+
+        SetNextShootTime();
     }
 
     void ShootBullet()

@@ -44,6 +44,8 @@ public class AssassinBossSkill : MonoBehaviour
     public Transform[] dashTargets; 
     private Vector3 originalPosition;
     public string playerTag = "Player";
+    public float blinkDuration = 0.2f;
+    public float blinkInterval = 0.5f;
 
     private bool isSkillActive = false;
     private int[] skillOrder = new int[] { 1, 2, 3, 4 };
@@ -404,6 +406,8 @@ public class AssassinBossSkill : MonoBehaviour
 
         GameObject[] allCharacters = new GameObject[] { gameObject, clone1, clone2 };
 
+        StartCoroutine(BlinkClones(clone1, clone2));
+
         StartCoroutine(MoveClonesToSides(clone1, clone2, allCharacters));
     }
 
@@ -523,6 +527,31 @@ public class AssassinBossSkill : MonoBehaviour
         else
         {
             isSkillActive = false;
+        }
+    }
+
+    private IEnumerator BlinkClones(GameObject clone1, GameObject clone2)
+    {
+        Renderer clone1Renderer = clone1.GetComponent<Renderer>();
+        Renderer clone2Renderer = clone2.GetComponent<Renderer>();
+
+        if (clone1Renderer == null || clone2Renderer == null)
+        {
+            Debug.LogError("Không tìm thấy Renderer trên clone!");
+            yield break;
+        }
+
+        while (isSkillActive) 
+        {
+            clone1Renderer.enabled = false;
+            clone2Renderer.enabled = false;
+
+            yield return new WaitForSeconds(blinkDuration);
+
+            clone1Renderer.enabled = true;
+            clone2Renderer.enabled = true;
+
+            yield return new WaitForSeconds(blinkInterval);
         }
     }
 
