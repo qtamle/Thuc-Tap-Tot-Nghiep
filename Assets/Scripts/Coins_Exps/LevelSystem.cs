@@ -22,7 +22,13 @@ public class LevelSystem : MonoBehaviour
 
     private void Awake()
     {
+        if (FindFirstObjectByType<LevelSystem>() != null && FindFirstObjectByType<LevelSystem>() != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
         DontDestroyOnLoad(gameObject);
+
     }
 
 
