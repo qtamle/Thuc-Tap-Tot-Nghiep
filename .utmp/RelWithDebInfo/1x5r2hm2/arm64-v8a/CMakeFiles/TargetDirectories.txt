@@ -1,0 +1,8 @@
+D:/Project-Unity/Thuc-Tap-Tot-Nghiep/.utmp/RelWithDebInfo/1x5r2hm2/arm64-v8a/CMakeFiles/edit_cache.dir
+D:/Project-Unity/Thuc-Tap-Tot-Nghiep/.utmp/RelWithDebInfo/1x5r2hm2/arm64-v8a/CMakeFiles/rebuild_cache.dir
+D:/Project-Unity/Thuc-Tap-Tot-Nghiep/.utmp/RelWithDebInfo/1x5r2hm2/arm64-v8a/GameActivity/CMakeFiles/game.dir
+D:/Project-Unity/Thuc-Tap-Tot-Nghiep/.utmp/RelWithDebInfo/1x5r2hm2/arm64-v8a/GameActivity/CMakeFiles/edit_cache.dir
+D:/Project-Unity/Thuc-Tap-Tot-Nghiep/.utmp/RelWithDebInfo/1x5r2hm2/arm64-v8a/GameActivity/CMakeFiles/rebuild_cache.dir
+D:/Project-Unity/Thuc-Tap-Tot-Nghiep/.utmp/RelWithDebInfo/1x5r2hm2/arm64-v8a/FramePacing/CMakeFiles/swappywrapper.dir
+D:/Project-Unity/Thuc-Tap-Tot-Nghiep/.utmp/RelWithDebInfo/1x5r2hm2/arm64-v8a/FramePacing/CMakeFiles/edit_cache.dir
+D:/Project-Unity/Thuc-Tap-Tot-Nghiep/.utmp/RelWithDebInfo/1x5r2hm2/arm64-v8a/FramePacing/CMakeFiles/rebuild_cache.dir
