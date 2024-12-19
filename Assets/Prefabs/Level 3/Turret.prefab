@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 6010201175162005301}
   - component: {fileID: 9100491801380465150}
   - component: {fileID: 4174242624216098955}
+  - component: {fileID: 6416185798064973625}
   m_Layer: 0
   m_Name: Turret
   m_TagString: Untagged
@@ -211,3 +212,22 @@ MonoBehaviour:
   laserDuration: 3
   lineLength: 5
   laserOffsetX: 2
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 128
+--- !u!114 &6416185798064973625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8053977146576873126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4508e56722b09c0478492b8251b82102, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boxSize: {x: 1, y: 1}
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 8

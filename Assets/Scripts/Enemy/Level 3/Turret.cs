@@ -8,9 +8,16 @@ public class Turret : MonoBehaviour
     public float laserDuration = 2f;
     public float lineLength = 5f;
     public float laserOffsetX = 1f;
+    public LayerMask groundLayer;
 
     private GameObject laser;
     private bool isLaserActive = false;
+    private Rigidbody2D rb;
+
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
 
     public void InitializeTurret()
     {
@@ -55,4 +62,13 @@ public class Turret : MonoBehaviour
         Destroy(laserObject, 2f);
         return laserObject;
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if ((groundLayer.value & (1 << collision.gameObject.layer)) > 0)
+        {
+            rb.gravityScale = 0;
+        }
+    }
+
 }

@@ -34,29 +34,93 @@ public class Cyborg : MonoBehaviour
     public float throwSpeed = 2f;
     public Transform spawnPosition;
 
+    [Header("Other")]
+    public LayerMask groundLayer;
+    public Transform groundCheck;
+    public Rigidbody2D rb;
+
     private bool isSkillActive = false;
     private Vector3 originalPosition;
+    private Vector3 originalPositionSkillRandom;
+    private bool isStunned = false;
+    private CyborgHealth Cyborghealth;
+
+    private void Start()
+    {
+        Cyborghealth = GetComponent<CyborgHealth>();
+    }
+
+    public void Active()
+    {
+        StartCoroutine(MoveBossToTarget());
+    }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P) && !isSkillActive)
+        if (Cyborghealth != null && Cyborghealth.currentHealth <= 0)
         {
-            StartCoroutine(DiscoBallSkill());
+            StopAllCoroutines();
+        }
+    }
+
+    private IEnumerator MoveBossToTarget()
+    {
+        Vector3 startPosition = new Vector3(0.4f, 15.22f, transform.position.z);
+
+        Vector3 targetPosition = new Vector3(0.4f, 7.18f, transform.position.z);
+
+        float moveDuration = 3.5f;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < moveDuration)
+        {
+            transform.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime / moveDuration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
         }
 
-        if (Input.GetKeyDown(KeyCode.O) && !isSkillActive)
+        transform.position = targetPosition;
+        originalPositionSkillRandom = targetPosition;
+
+        StartCoroutine(AutomaticSkillCycle());
+    }
+
+    private IEnumerator AutomaticSkillCycle()
+    {
+        yield return new WaitForSeconds(3f);
+
+        while (true)
         {
+            yield return StartCoroutine(DiscoBallSkill());
+            yield return new WaitForSeconds(1.5f);
+
             StartCoroutine(TurretSkill());
-        }
-
-        if (Input.GetKeyDown(KeyCode.L) && !isSkillActive)  
-        {
-            StartCoroutine(MoveAndFireLaser());
-        }
-
-        if (Input.GetKeyDown(KeyCode.B) && !isSkillActive)
-        {
+            yield return new WaitForSeconds(1.5f);
             StartCoroutine(BombSkill());
+
+            yield return new WaitForSeconds(4.5f);
+
+            yield return StartCoroutine(BombSkill());
+            yield return new WaitForSeconds(1f);
+
+            yield return StartCoroutine(MoveAndFireLaser());
+
+            rb.bodyType = RigidbodyType2D.Dynamic;
+            yield return new WaitUntil(() => Physics2D.Raycast(groundCheck.position, Vector2.down, 0.1f, groundLayer));
+            isStunned = true;
+            rb.bodyType = RigidbodyType2D.Static;
+
+            if (isStunned)
+            {
+                Cyborghealth.SetCanBeDamaged(true);
+                yield return new WaitForSeconds(4f);
+                Cyborghealth.SetCanBeDamaged(false);
+            }
+            isStunned = false;
+
+            transform.position = originalPositionSkillRandom;
+
+            yield return null; 
         }
     }
 
@@ -65,7 +129,7 @@ public class Cyborg : MonoBehaviour
         isSkillActive = true;
 
         Vector3 startPosition = spawnPoint.position;
-        Vector3 targetPosition = Vector3.zero;
+        Vector3 targetPosition = new Vector3(0, -1.5f, 0);
         orb = Instantiate(orbPrefab, startPosition, Quaternion.identity);
 
         float moveDuration = 2f;
@@ -87,6 +151,8 @@ public class Cyborg : MonoBehaviour
         {
             Destroy(laser);
         }
+
+        yield return new WaitForSeconds(1f);
         GameObject[] xLasers = CreateXLasers(targetPosition);
 
         yield return new WaitForSeconds(2f);
@@ -117,10 +183,10 @@ public class Cyborg : MonoBehaviour
     {
         GameObject[] lasers = new GameObject[2];
 
-        Vector3 positionDownRight = new Vector3(8, 8, 0);
-        Vector3 positionDownLeft = new Vector3(-8, 8, 0);
-        lasers[0] = CreateLaser(positionDownRight, new Vector3(8, 8, 0).normalized, Quaternion.Euler(0, 0, -45));
-        lasers[1] = CreateLaser(positionDownLeft, new Vector3(-8, 8, 0).normalized, Quaternion.Euler(0, 0, 45));
+        Vector3 positionDownRight = new Vector3(7.13f, 8.94f, 0);
+        Vector3 positionDownLeft = new Vector3(-7f, 8.41f, 0);
+        lasers[0] = CreateLaser(positionDownRight, new Vector3(7.13f, 8.94f, 0).normalized, Quaternion.Euler(0, 0, -35));
+        lasers[1] = CreateLaser(positionDownLeft, new Vector3(-7f, 8.41f, 0).normalized, Quaternion.Euler(0, 0, 35));
 
         return lasers;
     }
@@ -145,26 +211,30 @@ public class Cyborg : MonoBehaviour
     {
         isSkillActive = true;
 
-        List<Transform> availablePositions = new List<Transform>(gunPositions);
-        Transform position1 = GetRandomGunPosition(availablePositions);
-        Transform position2 = GetRandomGunPosition(availablePositions);
+        for (int i = 0; i < 2; i++)
+        {
+            List<Transform> availablePositions = new List<Transform>(gunPositions);
+            Transform position1 = GetRandomGunPosition(availablePositions);
+            Transform position2 = GetRandomGunPosition(availablePositions);
 
-        GameObject turret1 = Instantiate(turretPrefab, position1.position, Quaternion.identity);
-        GameObject turret2 = Instantiate(turretPrefab, position2.position, Quaternion.identity);
+            GameObject turret1 = Instantiate(turretPrefab, position1.position, Quaternion.identity);
+            GameObject turret2 = Instantiate(turretPrefab, position2.position, Quaternion.identity);
 
-        Turret turretScript1 = turret1.GetComponent<Turret>();
-        Turret turretScript2 = turret2.GetComponent<Turret>();
+            Turret turretScript1 = turret1.GetComponent<Turret>();
+            Turret turretScript2 = turret2.GetComponent<Turret>();
 
-        turretScript1.InitializeTurret();
-        turretScript2.InitializeTurret();
+            turretScript1.InitializeTurret();
+            turretScript2.InitializeTurret();
 
-        yield return new WaitForSeconds(4.5f);
+            yield return new WaitForSeconds(4.5f);
 
-        Destroy(turret1);
-        Destroy(turret2);
+            Destroy(turret1);
+            Destroy(turret2);
+        }
 
         isSkillActive = false;
     }
+
     private IEnumerator MoveAndFireLaser()
     {
         isSkillActive = true;
@@ -218,7 +288,7 @@ public class Cyborg : MonoBehaviour
 
         List<GameObject> bombs = new List<GameObject>();
 
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 4; i++)
         {
             Transform bombPosition = GetRandomBombPosition();
             GameObject bomb = Instantiate(bombPrefab, spawnPosition.position, Quaternion.identity); 

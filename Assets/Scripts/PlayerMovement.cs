@@ -91,37 +91,44 @@ public class PlayerMovement : MonoBehaviour
     }
     void DetectTouchSwipe()
     {
-        if (Input.touchCount > 0) // Kiểm tra có thao tác cảm ứng
+        if (Input.touchCount > 0) 
         {
             Touch touch = Input.GetTouch(0);
 
             if (touch.phase == TouchPhase.Began)
             {
-                // Lưu vị trí bắt đầu chạm
                 startInputPosition = touch.position;
             }
             else if (touch.phase == TouchPhase.Ended)
             {
-                // Lưu vị trí kết thúc chạm
                 endInputPosition = touch.position;
 
-                if (IsSwipeUp(startInputPosition, endInputPosition))
+                Vector2 swipeDirection = endInputPosition - startInputPosition;
+                float swipeDistance = swipeDirection.magnitude; 
+                float swipeThreshold = 30f; 
+
+                if (swipeDistance > swipeThreshold)
                 {
-                    Jump();
-                }
-                else if (IsSwipeDown(startInputPosition, endInputPosition))
-                {
-                    FallThrough();
-                }
-                else if (IsSwipeLeft(startInputPosition, endInputPosition))
-                {
-                    MoveLeft();  
-                    FlipPlayer(); 
-                }
-                else if (IsSwipeRight(startInputPosition, endInputPosition))
-                {
-                    MoveRight(); 
-                    FlipPlayer();
+                    float swipeAngle = Vector2.Angle(Vector2.right, swipeDirection); 
+
+                    if (swipeAngle < 45f) // Vuốt phải
+                    {
+                        MoveRight();
+                        FlipPlayer();
+                    }
+                    else if (swipeAngle > 135f) // Vuốt trái
+                    {
+                        MoveLeft();
+                        FlipPlayer();
+                    }
+                    else if (swipeDirection.y > 0) // Vuốt lên
+                    {
+                        Jump();
+                    }
+                    else if (swipeDirection.y < 0) // Vuốt xuống
+                    {
+                        FallThrough();
+                    }
                 }
             }
         }
@@ -137,23 +144,32 @@ public class PlayerMovement : MonoBehaviour
         {
             endInputPosition = Input.mousePosition;
 
-            if (IsSwipeUp(startInputPosition, endInputPosition))
+            Vector2 swipeDirection = endInputPosition - startInputPosition;
+            float swipeDistance = swipeDirection.magnitude; 
+            float swipeThreshold = 30f; 
+
+            if (swipeDistance > swipeThreshold)
             {
-                Jump();
-            }
-            else if (IsSwipeDown(startInputPosition, endInputPosition))
-            {
-                FallThrough();
-            }
-            else if (IsSwipeLeft(startInputPosition, endInputPosition))
-            {
-                MoveLeft(); 
-                FlipPlayer(); 
-            }
-            else if (IsSwipeRight(startInputPosition, endInputPosition))
-            {
-                MoveRight(); 
-                FlipPlayer(); 
+                float swipeAngle = Vector2.Angle(Vector2.right, swipeDirection); 
+
+                if (swipeAngle < 45f) // Vuốt phải
+                {
+                    MoveRight();
+                    FlipPlayer();
+                }
+                else if (swipeAngle > 135f) // Vuốt trái
+                {
+                    MoveLeft();
+                    FlipPlayer();
+                }
+                else if (swipeDirection.y > 0) // Vuốt lên
+                {
+                    Jump();
+                }
+                else if (swipeDirection.y < 0) // Vuốt xuống
+                {
+                    FallThrough();
+                }
             }
         }
     }

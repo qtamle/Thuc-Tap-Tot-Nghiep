@@ -110,6 +110,30 @@ public class Attack : MonoBehaviour
             }
         }
         isAttackBoss = false;
+
+        Collider2D[] cyborg = Physics2D.OverlapCircleAll(attackPoints.position, radius, bossLayer);
+
+        foreach (Collider2D cy in cyborg)
+        {
+            CyborgHealth cyborgs = cy.GetComponent<CyborgHealth>();
+            if (cyborgs != null && cyborgs.CanBeDamaged() && !isAttackBoss)
+            {
+                cyborgs.TakeDamage(1);
+                isAttackBoss = true;
+
+                cyborgs.SetCanBeDamaged(false);
+
+                SpawnCoins(coinPrefab, coinSpawnMin * 13, coinSpawnMax * 13, cyborgs.transform.position);
+
+                if (Random.value <= 0.25f)
+                {
+                    SpawnCoins(secondaryCoinPrefab, secondaryCoinSpawnMin * 5, secondaryCoinSpawnMax * 5, cyborgs.transform.position);
+                }
+
+                SpawnExperienceOrbs(cyborgs.transform.position, 25);
+            }
+        }
+        isAttackBoss = false;
     }
 
     void SpawnCoins(GameObject coinType, float minAmount, float maxAmount, Vector3 position)
