@@ -28,10 +28,11 @@ public class ExperienceManager : MonoBehaviour
 
     private void OnDisable()
     {
-        Debug.Log("Da save Level");
+        if (levelSystem != null)
+        {
+            Debug.Log("Da save Level");
             levelSystem.AddExperience(experienceCount);
-            levelSystem.SaveLevelData();
-        
+        }
     }
 }
 

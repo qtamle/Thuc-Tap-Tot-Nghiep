@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 
-public class PlayerHealth : MonoBehaviour, DamagePlayerInterface
+public class PlayerHealthOnline : MonoBehaviour, DamagePlayerInterface
 {
     [Header("Health Settings")]
     public int maxHealth = 20;
