@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemySpawnerOnline : NetworkBehaviour
 {
@@ -12,6 +13,8 @@ public class EnemySpawnerOnline : NetworkBehaviour
 
     private bool stopSpawning = false;
 
+    public Button SpamBTN;
+
     [Header("Boss Spawn")]
     public GameObject warningBoss;
     public GameObject bossLevel1;
@@ -20,9 +23,10 @@ public class EnemySpawnerOnline : NetworkBehaviour
     [Header("Hide")]
     public GameObject remain;
 
-    public Gangster gangster;
+    public GangsterOnline gangster;
     private void Start()
     {
+        
         if (bossLevel1 != null)
         {
             bossLevel1.SetActive(false);
@@ -38,9 +42,15 @@ public class EnemySpawnerOnline : NetworkBehaviour
             warningBoss.SetActive(false);
         }
 
-        StartCoroutine(SpawnEnemies());
     }
 
+    public void StartSpawning()
+    {
+        if (IsServer)
+        {
+            StartCoroutine(SpawnEnemies());
+        }
+    }
     IEnumerator SpawnEnemies()
     {
         yield return new WaitForSeconds(2f);
@@ -66,6 +76,7 @@ public class EnemySpawnerOnline : NetworkBehaviour
             // Spawn quái
             GameObject spawnedEnemy = Instantiate(enemy, spawnPosition, Quaternion.identity);
 
+            spawnedEnemy.GetComponent<NetworkObject>().Spawn();
             // Đặt tag hoặc layer để nhận diện là Enemy (nếu chưa có)
             if (!spawnedEnemy.CompareTag("Enemy"))
             {
@@ -79,10 +90,26 @@ public class EnemySpawnerOnline : NetworkBehaviour
             // Kiểm tra nếu đạt chỉ tiêu
             if (EnemyManager.Instance != null && EnemyManager.Instance.killTarget <= EnemyManager.Instance.enemiesKilled)
             {
+                Debug.Log($"KillTarget: {EnemyManager.Instance.killTarget}, EnemiesKilled: {EnemyManager.Instance.enemiesKilled}");
+
                 stopSpawning = true;
                 StartCoroutine(HandleBossSpawn());
             }
         }
+    }
+
+    [ServerRpc]
+    public void RequestStartSpawningServerRpc()
+    {
+        StartCoroutine(SpawnEnemies()); // Chỉ server bắt đầu spawn
+        NotifyClientsToStartClientRpc(); // Thông báo cho tất cả client
+    }
+
+    [ClientRpc]
+    private void NotifyClientsToStartClientRpc()
+    {
+        // Thực hiện các hiệu ứng hoặc cập nhật UI nếu cần trên client
+        Debug.Log("Spawning started!");
     }
 
     private void AdjustSpawnInterval()
@@ -102,6 +129,25 @@ public class EnemySpawnerOnline : NetworkBehaviour
 
     private IEnumerator HandleBossSpawn()
     {
+        Debug.Log("Handle Boss Spawn");
+        // Đồng bộ ẩn UI "remain" và hiển thị cảnh báo boss
+        NotifyClientsBossSpawnClientRpc();
+
+        yield return new WaitForSeconds(3f);
+
+        // Đồng bộ kích hoạt boss và UI của boss
+        NotifyClientsBossActiveClientRpc();
+
+        // Kích hoạt logic của boss trên server
+        if (IsServer && gangster != null)
+        {
+            Debug.Log("Active boss từ Spam");
+            gangster.Activate();
+        }
+    }
+    [ClientRpc]
+    private void NotifyClientsBossSpawnClientRpc()
+    {
         if (remain != null)
         {
             remain.SetActive(false);
@@ -111,9 +157,11 @@ public class EnemySpawnerOnline : NetworkBehaviour
         {
             warningBoss.SetActive(true);
         }
+    }
 
-        yield return new WaitForSeconds(3f);
-
+    [ClientRpc]
+    private void NotifyClientsBossActiveClientRpc()
+    {
         if (warningBoss != null)
         {
             warningBoss.SetActive(false);
@@ -122,14 +170,12 @@ public class EnemySpawnerOnline : NetworkBehaviour
         if (bossLevel1 != null)
         {
             bossLevel1.SetActive(true);
-            gangster.Activate();
         }
-
-        yield return new WaitForSeconds(0.5f);
 
         if (UIHealthBoss != null)
         {
             UIHealthBoss.SetActive(true);
         }
     }
+
 }
