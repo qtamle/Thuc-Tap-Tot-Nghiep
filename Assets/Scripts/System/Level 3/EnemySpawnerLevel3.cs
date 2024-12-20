@@ -1,27 +1,27 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class EnemySpawnerLevel3 : MonoBehaviour
+public class EnemySpawnerLevel3 : MonoBehaviour, IEnemySpawner
 {
-    public GameObject[] enemies;
-    public Transform[] spawnPoints;
-    public Transform[] element1SpawnPoints;
-    public Transform[] element2SpawnPoints;
-    public Transform[] element3SpawnPoints;
-    public float spawnInterval = 2f;
-    public float spawnHeightOffset = 1f;
+    [Header("Enemy Data")]
+    public EnemySpawnData[] enemySpawnDatas;
 
-    private bool stopSpawning = false;
-
-    [Header("Boss Spawn")]
+    [Header("Show UI")]
     public GameObject warningBoss;
     public GameObject bossLevel1;
     public GameObject UIHealthBoss;
 
-    [Header("Hide")]
+    [Header("Hide UI")]
     public GameObject remain;
 
+    [Header("Boss Level 1 Script")]
     public Cyborg cyborg;
+
+    private bool stopSpawning = false;
+
+    [Header("Max and current enemy in level")]
+    public int currentTotalSpawnCount = 0;
+    public int maxTotalSpawnCount;
 
     private void Start()
     {
@@ -49,71 +49,47 @@ public class EnemySpawnerLevel3 : MonoBehaviour
 
         while (!stopSpawning)
         {
-            Transform spawnPoint;
-            GameObject enemy;
-
-            // Spawn quái theo tỷ lệ phần trăm
-            float randomValue = Random.Range(0f, 100f);
-
-            if (randomValue < 35f)  // 35% cho enemy[0]
+            if (currentTotalSpawnCount < maxTotalSpawnCount)
             {
-                spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
-                enemy = enemies[0];
-            }
-            else if (randomValue < 70f)  // 35% cho enemy[1]
-            {
-                spawnPoint = element1SpawnPoints[Random.Range(0, element1SpawnPoints.Length)];
-                enemy = enemies[1];
-            }
-            else if (randomValue < 85f)  // 15% cho enemy[2]
-            {
-                spawnPoint = element2SpawnPoints[Random.Range(0, element2SpawnPoints.Length)];
-                enemy = enemies[2];
-            }
-            else // 15% cho enemy[3]
-            {
-                spawnPoint = element3SpawnPoints[Random.Range(0, element3SpawnPoints.Length)];
-                enemy = enemies[3];
+                foreach (EnemySpawnData spawnData in enemySpawnDatas)
+                {
+                    yield return StartCoroutine(SpawnEnemy(spawnData));
+                }
             }
 
-            Vector3 spawnPosition = spawnPoint.position + new Vector3(0, spawnHeightOffset, 0);
-            GameObject spawnedEnemy = Instantiate(enemy, spawnPosition, Quaternion.identity);
-
-            // Đặt tag hoặc layer để nhận diện là Enemy
-            if (!spawnedEnemy.CompareTag("Enemy"))
-            {
-                spawnedEnemy.tag = "Enemy";
-            }
-
-            //AdjustSpawnInterval();
-
-            yield return new WaitForSeconds(spawnInterval);
-
-            // Kiểm tra nếu đạt chỉ tiêu
             if (EnemyManager.Instance != null && EnemyManager.Instance.killTarget <= EnemyManager.Instance.enemiesKilled)
             {
                 stopSpawning = true;
                 StartCoroutine(HandleBossSpawn());
             }
+
+            yield return null;
         }
     }
-
-    private void AdjustSpawnInterval()
+    private IEnumerator SpawnEnemy(EnemySpawnData spawnData)
     {
-        if (EnemyManager.Instance != null)
-        {
-            int enemiesKilled = EnemyManager.Instance.enemiesKilled;
+        Transform spawnPoint = spawnData.spawnPoints[Random.Range(0, spawnData.spawnPoints.Length)];
+        Vector3 spawnPosition = spawnPoint.position;
 
-            if (enemiesKilled >= 40)
-            {
-                spawnInterval -= 0.3f;
-                Debug.Log($"Spawn interval decreased to: {spawnInterval} seconds.");
-            }
-        }
-        else
+        float offsetY = 1.5f;
+        spawnPosition.y += offsetY;
+
+        GameObject spawnedEnemy = Instantiate(spawnData.enemyPrefab, spawnPosition, Quaternion.identity);
+
+        if (!spawnedEnemy.CompareTag("Enemy"))
         {
-            Debug.Log("Khong co enemy manager");
+            spawnedEnemy.tag = "Enemy";
         }
+
+        currentTotalSpawnCount++;
+
+        yield return new WaitForSeconds(Random.Range(spawnData.minSpawnTime, spawnData.maxSpawnTime));
+    }
+
+    public void OnEnemyKilled()
+    {
+        currentTotalSpawnCount--;
+
     }
 
     private IEnumerator HandleBossSpawn()

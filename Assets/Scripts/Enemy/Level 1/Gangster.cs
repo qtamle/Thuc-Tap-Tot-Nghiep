@@ -45,7 +45,7 @@ public class Gangster : MonoBehaviour
         Spawn();
     }
 
-    public void Activate()
+    public void Active()
     {
         gameObject.SetActive(true);  
 

@@ -1,26 +1,27 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class EnemySpawnerLevel2 : MonoBehaviour
+public class EnemySpawnerLevel2 : MonoBehaviour, IEnemySpawner
 {
-    public GameObject[] enemies;
-    public Transform[] spawnPoints;
-    public Transform[] element1SpawnPoints;
-    public Transform[] element2SpawnPoints; 
-    public float spawnInterval = 2f;
-    public float spawnHeightOffset = 1f;
+    [Header("Enemy Data")]
+    public EnemySpawnData[] enemySpawnDatas;
 
-    private bool stopSpawning = false;
-
-    [Header("Boss Spawn")]
+    [Header("Show UI")]
     public GameObject warningBoss;
     public GameObject bossLevel1;
     public GameObject UIHealthBoss;
 
-    [Header("Hide")]
+    [Header("Hide UI")]
     public GameObject remain;
 
-    public AssassinBossSkill Assassin;
+    [Header("Boss Level 1 Script")]
+    public AssassinBossSkill assassin;
+
+    private bool stopSpawning = false;
+
+    [Header("Max and current enemy in level")]
+    public int currentTotalSpawnCount = 0;
+    public int maxTotalSpawnCount;
 
     private void Start()
     {
@@ -48,62 +49,50 @@ public class EnemySpawnerLevel2 : MonoBehaviour
 
         while (!stopSpawning)
         {
-            Transform spawnPoint;
-            GameObject enemy;
-
-            // Spawn quái theo tỷ lệ phần trăm
-            float randomValue = Random.Range(0f, 100f);
-
-            if (randomValue < 40f)  // 40% 
+            if (currentTotalSpawnCount < maxTotalSpawnCount)
             {
-                spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
-                enemy = enemies[0];
-            }
-            else if (randomValue < 80f)  // 40%
-            {
-                spawnPoint = element1SpawnPoints[Random.Range(0, element1SpawnPoints.Length)];
-                enemy = enemies[1];
-            }
-            else  // 20%
-            {
-                spawnPoint = element2SpawnPoints[Random.Range(0, element2SpawnPoints.Length)];
-                enemy = enemies[2];
+                foreach (EnemySpawnData spawnData in enemySpawnDatas)
+                {
+                    yield return StartCoroutine(SpawnEnemy(spawnData));
+                }
             }
 
-            Vector3 spawnPosition = spawnPoint.position + new Vector3(0, spawnHeightOffset, 0);
-
-            GameObject spawnedEnemy = Instantiate(enemy, spawnPosition, Quaternion.identity);
-
-            // Đặt tag hoặc layer để nhận diện là Enemy (nếu chưa có)
-            if (!spawnedEnemy.CompareTag("Enemy"))
-            {
-                spawnedEnemy.tag = "Enemy";
-            }
-
-            AdjustSpawnInterval();
-
-            yield return new WaitForSeconds(spawnInterval);
-
-            // Kiểm tra nếu đạt chỉ tiêu
             if (EnemyManager.Instance != null && EnemyManager.Instance.killTarget <= EnemyManager.Instance.enemiesKilled)
             {
                 stopSpawning = true;
                 StartCoroutine(HandleBossSpawn());
             }
+
+            yield return null;
         }
     }
-
-    private void AdjustSpawnInterval()
+    private IEnumerator SpawnEnemy(EnemySpawnData spawnData)
     {
-        if (EnemyManager.Instance != null)
-        {
-            int enemiesKilled = EnemyManager.Instance.enemiesKilled;
+        Transform spawnPoint = spawnData.spawnPoints[Random.Range(0, spawnData.spawnPoints.Length)];
+        Vector3 spawnPosition = spawnPoint.position;
 
-            if (enemiesKilled >= 40)
-            {
-                spawnInterval -= 0.3f;
-                Debug.Log($"Spawn interval decreased to: {spawnInterval} seconds.");
-            }
+        float offsetY = 1.5f;
+        spawnPosition.y += offsetY;
+
+        GameObject spawnedEnemy = Instantiate(spawnData.enemyPrefab, spawnPosition, Quaternion.identity);
+
+        if (!spawnedEnemy.CompareTag("Enemy"))
+        {
+            spawnedEnemy.tag = "Enemy";
+        }
+
+        currentTotalSpawnCount++;
+
+        yield return new WaitForSeconds(Random.Range(spawnData.minSpawnTime, spawnData.maxSpawnTime));
+    }
+
+    public void OnEnemyKilled()
+    {
+        currentTotalSpawnCount--;
+
+        if (stopSpawning)
+        {
+            currentTotalSpawnCount = 0;
         }
     }
 
@@ -129,7 +118,7 @@ public class EnemySpawnerLevel2 : MonoBehaviour
         if (bossLevel1 != null)
         {
             bossLevel1.SetActive(true);
-            Assassin.Active();
+            assassin.Active();
         }
 
         yield return new WaitForSeconds(0.5f);

@@ -3562,7 +3562,7 @@ Transform:
   m_GameObject: {fileID: 471659012}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.46, y: 12.93, z: 0}
+  m_LocalPosition: {x: -9.46, y: 12.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7019,7 +7019,7 @@ Transform:
   m_GameObject: {fileID: 1005018159}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.21, y: 4, z: 0}
+  m_LocalPosition: {x: -9.21, y: 3.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10267,54 +10267,64 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f4189c4ef1bf1b4a87d44eadf527b6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemies:
-  - {fileID: 1065884109041998847, guid: bd18188c9e4d5ef4495621dd255ce039, type: 3}
-  - {fileID: 5641273616069233248, guid: a53510166d762e240bade254218f34fc, type: 3}
-  - {fileID: 4415038470402562754, guid: 962db4ac971d56f488f40afefa00e01a, type: 3}
-  spawnPoints:
-  - {fileID: 385575197}
-  - {fileID: 1827560731}
-  - {fileID: 1664350463}
-  - {fileID: 275166177}
-  - {fileID: 520457582}
-  - {fileID: 285698968}
-  - {fileID: 916838137}
-  - {fileID: 2007400104}
-  - {fileID: 1804140168}
-  - {fileID: 1765546207}
-  - {fileID: 1254879334}
-  - {fileID: 192415477}
-  - {fileID: 1868206866}
-  - {fileID: 819923930}
-  - {fileID: 1767427799}
-  - {fileID: 841416116}
-  - {fileID: 870499690}
-  - {fileID: 1553256272}
-  - {fileID: 749283977}
-  - {fileID: 1591650128}
-  - {fileID: 519746086}
-  - {fileID: 291893346}
-  element1SpawnPoints:
-  - {fileID: 385575197}
-  - {fileID: 520457582}
-  - {fileID: 916838137}
-  - {fileID: 1254879334}
-  - {fileID: 1868206866}
-  - {fileID: 870499690}
-  - {fileID: 291893346}
-  - {fileID: 1591650128}
-  element2SpawnPoints:
-  - {fileID: 1005018160}
-  - {fileID: 1998576079}
-  - {fileID: 2113792326}
-  - {fileID: 471659013}
-  spawnInterval: 1.3
-  spawnHeightOffset: 1
+  enemySpawnDatas:
+  - enemyPrefab: {fileID: 1065884109041998847, guid: bd18188c9e4d5ef4495621dd255ce039, type: 3}
+    spawnPoints:
+    - {fileID: 385575197}
+    - {fileID: 285698968}
+    - {fileID: 275166177}
+    - {fileID: 388843312}
+    - {fileID: 1664350463}
+    - {fileID: 520457582}
+    - {fileID: 916838137}
+    - {fileID: 1765546207}
+    - {fileID: 1254879334}
+    - {fileID: 2127917900}
+    - {fileID: 192415477}
+    - {fileID: 1804140168}
+    - {fileID: 1868206866}
+    - {fileID: 870499690}
+    - {fileID: 711616194}
+    - {fileID: 1278514970}
+    - {fileID: 819923930}
+    - {fileID: 534666603}
+    - {fileID: 1241133130}
+    - {fileID: 1811002600}
+    - {fileID: 519746086}
+    - {fileID: 397683719}
+    - {fileID: 519746086}
+    - {fileID: 1553256272}
+    - {fileID: 965493568}
+    - {fileID: 1561552736}
+    minSpawnTime: 0.5
+    maxSpawnTime: 0.7
+  - enemyPrefab: {fileID: 5641273616069233248, guid: a53510166d762e240bade254218f34fc, type: 3}
+    spawnPoints:
+    - {fileID: 291893346}
+    - {fileID: 1591650128}
+    - {fileID: 1868206866}
+    - {fileID: 870499690}
+    - {fileID: 916838137}
+    - {fileID: 1254879334}
+    - {fileID: 385575197}
+    - {fileID: 520457582}
+    minSpawnTime: 0.7
+    maxSpawnTime: 1
+  - enemyPrefab: {fileID: 4415038470402562754, guid: 962db4ac971d56f488f40afefa00e01a, type: 3}
+    spawnPoints:
+    - {fileID: 1005018160}
+    - {fileID: 1998576079}
+    - {fileID: 2113792326}
+    - {fileID: 471659013}
+    minSpawnTime: 1.5
+    maxSpawnTime: 2
   warningBoss: {fileID: 1115378823}
   bossLevel1: {fileID: 186944488}
   UIHealthBoss: {fileID: 77204493}
   remain: {fileID: 969923266}
-  Assassin: {fileID: 186944493}
+  assassin: {fileID: 186944493}
+  currentTotalSpawnCount: 0
+  maxTotalSpawnCount: 50
 --- !u!1 &1252773065
 GameObject:
   m_ObjectHideFlags: 0
@@ -13788,7 +13798,7 @@ Transform:
   m_GameObject: {fileID: 1998576078}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.19, y: 4, z: 0}
+  m_LocalPosition: {x: 5.19, y: 3.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14313,7 +14323,7 @@ Transform:
   m_GameObject: {fileID: 2113792325}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.3, y: 12.93, z: 0}
+  m_LocalPosition: {x: 5.3, y: 12.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

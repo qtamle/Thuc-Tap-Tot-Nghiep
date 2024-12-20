@@ -2160,7 +2160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a92ec147d1df7c44b42766eaecae6cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 1
+  maxHealth: 4
   currentHealth: 0
   healthBarSlider: {fileID: 1806180031}
   healthBarFill: {fileID: 612989577}
@@ -3455,7 +3455,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa0a772ade8b0e441a19313cad4a1780, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  killTarget: 5
+  killTarget: 50
   enemiesKilled: 0
 --- !u!4 &452983390
 Transform:
@@ -10286,47 +10286,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f4beb5a3e3c86a44844c67fbb975671, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemies:
-  - {fileID: 1065884109041998847, guid: bd18188c9e4d5ef4495621dd255ce039, type: 3}
-  - {fileID: 5641273616069233248, guid: a53510166d762e240bade254218f34fc, type: 3}
-  spawnPoints:
-  - {fileID: 1868206866}
-  - {fileID: 1278514970}
-  - {fileID: 711616194}
-  - {fileID: 841416116}
-  - {fileID: 1241133130}
-  - {fileID: 1241133130}
-  - {fileID: 665365979}
-  - {fileID: 1804140168}
-  - {fileID: 1765546207}
-  - {fileID: 1254879334}
-  - {fileID: 1924320592}
-  - {fileID: 2067391352}
-  - {fileID: 275166177}
-  - {fileID: 285698968}
-  - {fileID: 388843312}
-  - {fileID: 385575197}
-  - {fileID: 1811002600}
-  - {fileID: 519746086}
-  - {fileID: 1553256272}
-  - {fileID: 1553256272}
-  - {fileID: 291893346}
-  element1SpawnPoints:
-  - {fileID: 916838137}
-  - {fileID: 1254879334}
-  - {fileID: 385575197}
-  - {fileID: 520457582}
-  - {fileID: 1868206866}
-  - {fileID: 870499690}
-  - {fileID: 291893346}
-  - {fileID: 1591650128}
-  spawnInterval: 1.2
-  spawnHeightOffset: 1.5
+  enemySpawnDatas:
+  - enemyPrefab: {fileID: 1065884109041998847, guid: bd18188c9e4d5ef4495621dd255ce039, type: 3}
+    spawnPoints:
+    - {fileID: 916838137}
+    - {fileID: 665365979}
+    - {fileID: 2127917900}
+    - {fileID: 1380306164}
+    - {fileID: 1254879334}
+    - {fileID: 1765546207}
+    - {fileID: 285698968}
+    - {fileID: 520457582}
+    - {fileID: 388843312}
+    - {fileID: 2067391352}
+    - {fileID: 1827560731}
+    - {fileID: 285698968}
+    - {fileID: 2008714712}
+    - {fileID: 1241133130}
+    - {fileID: 1767427799}
+    - {fileID: 841416116}
+    - {fileID: 870499690}
+    - {fileID: 291893346}
+    - {fileID: 749283977}
+    - {fileID: 1591650128}
+    - {fileID: 965493568}
+    - {fileID: 1561552736}
+    - {fileID: 1553256272}
+    minSpawnTime: 0.5
+    maxSpawnTime: 0.7
+  - enemyPrefab: {fileID: 5641273616069233248, guid: a53510166d762e240bade254218f34fc, type: 3}
+    spawnPoints:
+    - {fileID: 385575197}
+    - {fileID: 520457582}
+    - {fileID: 916838137}
+    - {fileID: 1254879334}
+    - {fileID: 1868206866}
+    - {fileID: 870499690}
+    - {fileID: 291893346}
+    - {fileID: 1591650128}
+    minSpawnTime: 0.7
+    maxSpawnTime: 1
   warningBoss: {fileID: 1115378823}
   bossLevel1: {fileID: 291446932}
   UIHealthBoss: {fileID: 77204493}
   remain: {fileID: 969923266}
   gangster: {fileID: 291446937}
+  currentTotalSpawnCount: 0
+  maxTotalSpawnCount: 35
 --- !u!4 &1249940659
 Transform:
   m_ObjectHideFlags: 0

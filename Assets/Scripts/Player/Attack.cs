@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 public class Attack : MonoBehaviour
@@ -29,11 +30,13 @@ public class Attack : MonoBehaviour
 
     private CoinsManager coinsManager;
     private Transform player;
+    private IEnemySpawner[] enemySpawners;
 
     private void Start()
     {
         coinsManager = UnityEngine.Object.FindFirstObjectByType<CoinsManager>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        enemySpawners = FindObjectsOfType<MonoBehaviour>().OfType<IEnemySpawner>().ToArray(); 
     }
 
     private void Update()
@@ -44,21 +47,25 @@ public class Attack : MonoBehaviour
         {
             if (enemy != null && enemy.gameObject != null && enemy.gameObject.activeInHierarchy)
             {
-                    if (EnemyManager.Instance != null)
-                    {
-                        EnemyManager.Instance.OnEnemyKilled();
-                    }
+                if (EnemyManager.Instance != null)
+                {
+                    EnemyManager.Instance.OnEnemyKilled();
+                }
 
-                    Destroy(enemy.gameObject);
+                foreach (IEnemySpawner spawner in enemySpawners)
+                {
+                    spawner.OnEnemyKilled();
+                }
 
-                    SpawnCoins(coinPrefab, coinSpawnMin, coinSpawnMax, enemy.transform.position);
+                Destroy(enemy.gameObject);
+                SpawnCoins(coinPrefab, coinSpawnMin, coinSpawnMax, enemy.transform.position);
 
-                    if (Random.value <= 0.30f)
-                    {
-                        SpawnCoins(secondaryCoinPrefab, secondaryCoinSpawnMin, secondaryCoinSpawnMax, enemy.transform.position);
-                    }
+                if (Random.value <= 0.30f)
+                {
+                    SpawnCoins(secondaryCoinPrefab, secondaryCoinSpawnMin, secondaryCoinSpawnMax, enemy.transform.position);
+                }
 
-                    SpawnExperienceOrbs(enemy.transform.position, 5);   
+                SpawnExperienceOrbs(enemy.transform.position, 5);
             }
         }
 
