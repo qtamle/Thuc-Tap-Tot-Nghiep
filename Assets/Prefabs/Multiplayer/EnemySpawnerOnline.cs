@@ -60,6 +60,15 @@ public class EnemySpawnerOnline : NetworkBehaviour
             Transform spawnPoint;
             GameObject enemy;
 
+            // Kiểm tra nếu đạt chỉ tiêu
+            if (EnemyManager.Instance != null && EnemyManager.Instance.killTarget <= EnemyManager.Instance.enemiesKilled)
+            {
+                Debug.Log($"KillTarget: {EnemyManager.Instance.killTarget}, EnemiesKilled: {EnemyManager.Instance.enemiesKilled}");
+
+                stopSpawning = true;
+                StartCoroutine(HandleBossSpawn());
+            }
+
             // Chọn spawn point và quái ngẫu nhiên
             if (Random.Range(0, 2) == 0)
             {
@@ -87,14 +96,7 @@ public class EnemySpawnerOnline : NetworkBehaviour
 
             yield return new WaitForSeconds(spawnInterval);
 
-            // Kiểm tra nếu đạt chỉ tiêu
-            if (EnemyManager.Instance != null && EnemyManager.Instance.killTarget <= EnemyManager.Instance.enemiesKilled)
-            {
-                Debug.Log($"KillTarget: {EnemyManager.Instance.killTarget}, EnemiesKilled: {EnemyManager.Instance.enemiesKilled}");
-
-                stopSpawning = true;
-                StartCoroutine(HandleBossSpawn());
-            }
+            
         }
     }
 

@@ -23,7 +23,7 @@ public class GangsterOnline : NetworkBehaviour
     public Transform WallCheck;
     public float wallCheckRadius;
 
-    public NetworkRigidbody2D rb;
+    public Rigidbody2D rb;
     private bool isGrounded = false;
     private bool isCharging = false;
     private bool isSkillActive = false;
@@ -52,7 +52,7 @@ public class GangsterOnline : NetworkBehaviour
 
     private void OnEnable()
     {
-        rb = GetComponent<NetworkRigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
 
         FindPlayerTrans();
 
@@ -129,8 +129,8 @@ public class GangsterOnline : NetworkBehaviour
 
         if (rb != null)
         {
-            rb.Rigidbody2D.linearVelocity = Vector2.zero;
-            rb.Rigidbody2D.gravityScale = 2f;
+            rb.linearVelocity = Vector2.zero;
+            rb.gravityScale = 2f;
         }
     }
 
@@ -154,7 +154,7 @@ public class GangsterOnline : NetworkBehaviour
     private void StopAllActions()
     {
         StopAllCoroutines();
-        rb.Rigidbody2D.linearVelocity = Vector2.zero;
+        rb.linearVelocity = Vector2.zero;
         isUsingSkill = false;
         isCharging = false; 
         isSkillActive = false;
@@ -180,14 +180,14 @@ public class GangsterOnline : NetworkBehaviour
         isSkillActive = true;
 
         float targetY = 15f;
-        rb.Rigidbody2D.linearVelocity = new Vector2(0, 30f);
+        rb.linearVelocity = new Vector2(0, 30f);
         yield return new WaitForSeconds(1f);
 
         transform.position = new Vector2(0f, targetY);
         yield return new WaitForSeconds(0.5f);
 
-        rb.Rigidbody2D.linearVelocity = Vector2.zero;
-        rb.Rigidbody2D.gravityScale = 4f;
+        rb.linearVelocity = Vector2.zero;
+        rb.gravityScale = 4f;
         yield return new WaitForSeconds(1f);
 
         isUsingSkill = false; 
@@ -227,7 +227,7 @@ public class GangsterOnline : NetworkBehaviour
 
         if (rb != null)
         {
-            rb.Rigidbody2D.gravityScale = 4f;
+            rb.gravityScale = 4f;
         }
         else
         {
@@ -250,7 +250,7 @@ public class GangsterOnline : NetworkBehaviour
 
                 if (isGrounded)
                 {
-                    rb.Rigidbody2D.linearVelocity = new Vector2(chargeDirectionX * chargeSpeed, rb.Rigidbody2D.linearVelocity.y);
+                    rb.linearVelocity = new Vector2(chargeDirectionX * chargeSpeed, rb.linearVelocity.y);
                 }
 
                 Collider2D playerCollider = Physics2D.OverlapCircle(ChargingAttackTransform.position, radiusCharging, player);
@@ -272,7 +272,7 @@ public class GangsterOnline : NetworkBehaviour
             yield break;
         }
 
-        rb.Rigidbody2D.linearVelocity = Vector2.zero;
+        rb.linearVelocity = Vector2.zero;
 
         if (gangsterHealth != null)
         {
@@ -283,8 +283,8 @@ public class GangsterOnline : NetworkBehaviour
         yield return new WaitForSeconds(3f);
 
         transform.position = new Vector2(resetX, resetY);
-        rb.Rigidbody2D.linearVelocity = Vector2.zero;
-        rb.Rigidbody2D.gravityScale = 4f;
+        rb.linearVelocity = Vector2.zero;
+        rb.gravityScale = 4f;
         isCharging = false;
         isUsingSkill = false;
     }
@@ -329,7 +329,7 @@ public class GangsterOnline : NetworkBehaviour
     {
         if ((groundLayer.value & (1 << collision.gameObject.layer)) > 0)
         {
-            rb.Rigidbody2D.gravityScale = 0;
+            rb.gravityScale = 0;
             if (isSkillActive) 
             {
                 SpawnRocks();
