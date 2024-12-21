@@ -67,7 +67,7 @@ public class Cyborg : MonoBehaviour
     {
         Vector3 startPosition = new Vector3(0.4f, 15.22f, transform.position.z);
 
-        Vector3 targetPosition = new Vector3(0.4f, 7.18f, transform.position.z);
+        Vector3 targetPosition = new Vector3(0.4f, 3.5f, transform.position.z);
 
         float moveDuration = 3.5f;
         float elapsedTime = 0f;

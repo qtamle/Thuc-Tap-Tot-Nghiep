@@ -1,21 +1,21 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class EnemySpawnerLevel2 : MonoBehaviour, IEnemySpawner
+public class EnemySpawnerLevel4 : MonoBehaviour, IEnemySpawner
 {
     [Header("Enemy Data")]
     public EnemySpawnData[] enemySpawnDatas;
 
-    [Header("Show UI")]
-    public GameObject warningBoss;
-    public GameObject bossLevel1;
-    public GameObject UIHealthBoss;
+    //[Header("Show UI")]
+    //public GameObject warningBoss;
+    //public GameObject bossLevel1;
+    //public GameObject UIHealthBoss;
 
-    [Header("Hide UI")]
-    public GameObject remain;
+    //[Header("Hide UI")]
+    //public GameObject remain;
 
-    [Header("Boss Level 1 Script")]
-    public AssassinBossSkill assassin;
+    //[Header("Boss Level 1 Script")]
+    //public Gangster gangster;
 
     private bool stopSpawning = false;
 
@@ -29,22 +29,23 @@ public class EnemySpawnerLevel2 : MonoBehaviour, IEnemySpawner
     public float spawnSpeedDecreaseAmount = 0.2f;
     private float minSpawnTimeLimit = 1f;
     private float maxSpawnTimeLimit = 1f;
+
     private void Start()
     {
-        if (bossLevel1 != null)
-        {
-            bossLevel1.SetActive(false);
-        }
+        //if (bossLevel1 != null)
+        //{
+        //    bossLevel1.SetActive(false);
+        //}
 
-        if (UIHealthBoss != null)
-        {
-            UIHealthBoss.SetActive(false);
-        }
+        //if (UIHealthBoss != null)
+        //{
+        //    UIHealthBoss.SetActive(false);
+        //}
 
-        if (warningBoss != null)
-        {
-            warningBoss.SetActive(false);
-        }
+        //if (warningBoss != null)
+        //{
+        //    warningBoss.SetActive(false);
+        //}
 
         StartCoroutine(SpawnEnemies());
     }
@@ -88,11 +89,11 @@ public class EnemySpawnerLevel2 : MonoBehaviour, IEnemySpawner
                     yield return StartCoroutine(SpawnEnemy(spawnData));
                 }
             }
-
+    
             if (EnemyManager.Instance != null && EnemyManager.Instance.killTarget <= EnemyManager.Instance.enemiesKilled)
             {
                 stopSpawning = true;
-                StartCoroutine(HandleBossSpawn());
+                //StartCoroutine(HandleBossSpawn());
                 break;
             }
 
@@ -129,36 +130,36 @@ public class EnemySpawnerLevel2 : MonoBehaviour, IEnemySpawner
         }
     }
 
-    private IEnumerator HandleBossSpawn()
-    {
-        if (remain != null)
-        {
-            remain.SetActive(false);
-        }
+    //private IEnumerator HandleBossSpawn()
+    //{
+    //    if (remain != null)
+    //    {
+    //        remain.SetActive(false);
+    //    }
 
-        if (warningBoss != null)
-        {
-            warningBoss.SetActive(true);
-        }
+    //    if (warningBoss != null)
+    //    {
+    //        warningBoss.SetActive(true);
+    //    }
 
-        yield return new WaitForSeconds(3f);
+    //    yield return new WaitForSeconds(3f);
 
-        if (warningBoss != null)
-        {
-            warningBoss.SetActive(false);
-        }
+    //    if (warningBoss != null)
+    //    {
+    //        warningBoss.SetActive(false);
+    //    }
 
-        if (bossLevel1 != null)
-        {
-            bossLevel1.SetActive(true);
-            assassin.Active();
-        }
+    //    if (bossLevel1 != null)
+    //    {
+    //        bossLevel1.SetActive(true);
+    //        gangster.Active();
+    //    }
 
-        yield return new WaitForSeconds(0.5f);
+    //    yield return new WaitForSeconds(0.5f);
 
-        if (UIHealthBoss != null)
-        {
-            UIHealthBoss.SetActive(true);
-        }
-    }
+    //    if (UIHealthBoss != null)
+    //    {
+    //        UIHealthBoss.SetActive(true);
+    //    }
+    //}
 }

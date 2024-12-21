@@ -23,6 +23,13 @@ public class EnemySpawnerLevel3 : MonoBehaviour, IEnemySpawner
     public int currentTotalSpawnCount = 0;
     public int maxTotalSpawnCount;
 
+    [Header("Time Spawn")]
+    private float timeElapsed = 0f;
+    public float spawnSpeedIncreaseInterval = 70f;
+    public float spawnSpeedDecreaseAmount = 0.2f;
+    private float minSpawnTimeLimit = 1f;
+    private float maxSpawnTimeLimit = 1f;
+
     private void Start()
     {
         if (bossLevel1 != null)
@@ -43,6 +50,32 @@ public class EnemySpawnerLevel3 : MonoBehaviour, IEnemySpawner
         StartCoroutine(SpawnEnemies());
     }
 
+    void Update()
+    {
+        timeElapsed += Time.deltaTime;
+
+        if (timeElapsed >= spawnSpeedIncreaseInterval)
+        {
+            foreach (var spawnData in enemySpawnDatas)
+            {
+                if (spawnData.minSpawnTime > minSpawnTimeLimit)
+                {
+                    spawnData.minSpawnTime -= spawnSpeedDecreaseAmount;
+                }
+
+                if (spawnData.maxSpawnTime > maxSpawnTimeLimit)
+                {
+                    spawnData.maxSpawnTime -= spawnSpeedDecreaseAmount;
+                }
+
+                spawnData.minSpawnTime = Mathf.Max(spawnData.minSpawnTime, minSpawnTimeLimit);
+                spawnData.maxSpawnTime = Mathf.Max(spawnData.maxSpawnTime, maxSpawnTimeLimit);
+            }
+
+            timeElapsed = 0f;
+        }
+    }
+
     IEnumerator SpawnEnemies()
     {
         yield return new WaitForSeconds(2f);
@@ -61,6 +94,7 @@ public class EnemySpawnerLevel3 : MonoBehaviour, IEnemySpawner
             {
                 stopSpawning = true;
                 StartCoroutine(HandleBossSpawn());
+                break;
             }
 
             yield return null;

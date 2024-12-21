@@ -30,6 +30,7 @@ public class Gangster : MonoBehaviour
     public float radiusCharging;
 
     private bool isUsingSkill = false;
+    private int skillUsageCount = 0;
 
     private GangsterHealth gangsterHealth;
     private void Start()
@@ -63,15 +64,15 @@ public class Gangster : MonoBehaviour
         {
             if (!isUsingSkill)
             {
-                int randomSkill = Random.Range(0, 2);
-
-                if (randomSkill == 0)
+                if (skillUsageCount < 3) 
                 {
                     UseJumpSkill();
+                    skillUsageCount++;
                 }
-                else if (randomSkill == 1)
+                else 
                 {
                     UseChargeSkill();
+                    skillUsageCount = 0; 
                 }
 
                 float randomDelay = Random.Range(3f, 4f);
@@ -79,11 +80,10 @@ public class Gangster : MonoBehaviour
             }
             else
             {
-                yield return null; 
+                yield return null;
             }
         }
     }
-
 
     private void Update()
     {
@@ -142,16 +142,14 @@ public class Gangster : MonoBehaviour
             isUsingSkill = false; 
         }
     }
+
     private IEnumerator ExecuteJumpSkill()
     {
         isSkillActive = true;
 
         float targetY = 15f;
-        rb.linearVelocity = new Vector2(0, 30f);
+        rb.linearVelocity = new Vector2(0, 30f + targetY);
         yield return new WaitForSeconds(1f);
-
-        transform.position = new Vector2(0f, targetY);
-        yield return new WaitForSeconds(0.5f);
 
         rb.linearVelocity = Vector2.zero;
         rb.gravityScale = 4f;
