@@ -51,11 +51,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Edge_Laser: 1.15
-    - _Laser_Size: -2.2
+    - _Edge_Laser: 1.1
+    - _Laser_Size: -1.5
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
-    - _Laser_Color: {r: 0.4087777, g: 0.91764706, b: 0.09019604, a: 0}
+    - _Laser_Color: {r: 0.94509804, g: 0.20871934, b: 0.062745094, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

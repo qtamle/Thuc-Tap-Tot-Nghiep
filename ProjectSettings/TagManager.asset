@@ -9,6 +9,11 @@ TagManager:
   - Wall
   - Ground
   - Assassin
+  - Left
+  - Right
+  - Up
+  - Down
+  - Laser
   layers:
   - Default
   - TransparentFX
@@ -23,9 +28,9 @@ TagManager:
   - Plat
   - CoinLayer
   - Boss
-  - 
-  - 
-  - 
+  - Worm
+  - Left
+  - Down
   - 
   - 
   - 
