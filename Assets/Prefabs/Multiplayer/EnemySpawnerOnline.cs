@@ -46,7 +46,7 @@ public class EnemySpawnerOnline : NetworkBehaviour
 
     public void StartSpawning()
     {
-        if (IsServer)
+        if (IsServer && IsHost)
         {
             StartCoroutine(SpawnEnemies());
         }

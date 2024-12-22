@@ -69,6 +69,7 @@ public class AttackOnline : MonoBehaviour
             GangsterHealth gangsterHealth = boss.GetComponent<GangsterHealth>();
             if (gangsterHealth != null && gangsterHealth.CanBeDamaged() && !isAttackBoss)
             {
+                Debug.Log("Player da va cham voi Boss");
                 gangsterHealth.TakeDamage(1);
                 isAttackBoss = true;
 
