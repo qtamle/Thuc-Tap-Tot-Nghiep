@@ -1298,6 +1298,37 @@ PlatformEffector2D:
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
+--- !u!1 &199471535
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 199471536}
+  m_Layer: 0
+  m_Name: SpawnPointBoss
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &199471536
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 199471535}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1218473400}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &206100956
 GameObject:
   m_ObjectHideFlags: 0
@@ -4748,7 +4779,7 @@ GameObject:
   - component: {fileID: 612989577}
   m_Layer: 5
   m_Name: Fill
-  m_TagString: Untagged
+  m_TagString: Fill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10433,7 +10464,7 @@ Transform:
   m_Children:
   - {fileID: 209994807}
   - {fileID: 1267796810}
-  - {fileID: 4606954483071467045}
+  - {fileID: 199471536}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1218473401
@@ -16002,11 +16033,12 @@ MonoBehaviour:
   spawnInterval: 1.2
   spawnHeightOffset: 1.5
   SpamBTN: {fileID: 1283735951}
+  spawnPointsBoss: {fileID: 199471536}
   warningBoss: {fileID: 1115378823}
-  bossLevel1: {fileID: 0}
+  bossLevel1: {fileID: 6133570415495502995, guid: b9541eed1a6b97f42b47e6bf594ee7ae, type: 3}
   UIHealthBoss: {fileID: 77204493}
   remain: {fileID: 969923266}
-  gangster: {fileID: 0}
+  gangster: {fileID: 4382990821350298493, guid: b9541eed1a6b97f42b47e6bf594ee7ae, type: 3}
 --- !u!1 &2936314999042254257
 GameObject:
   m_ObjectHideFlags: 0
@@ -16025,11 +16057,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4606954483071467045 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2189789064214025922, guid: b9541eed1a6b97f42b47e6bf594ee7ae, type: 3}
-  m_PrefabInstance: {fileID: 6597552863154504448}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &5082694352926536512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16070,75 +16097,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &6597552863154504448
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1218473400}
-    m_Modifications:
-    - target: {fileID: 2189789064214025922, guid: b9541eed1a6b97f42b47e6bf594ee7ae, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2189789064214025922, guid: b9541eed1a6b97f42b47e6bf594ee7ae, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2189789064214025922, guid: b9541eed1a6b97f42b47e6bf594ee7ae, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2189789064214025922, guid: b9541eed1a6b97f42b47e6bf594ee7ae, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2189789064214025922, guid: b9541eed1a6b97f42b47e6bf594ee7ae, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2189789064214025922, guid: b9541eed1a6b97f42b47e6bf594ee7ae, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2189789064214025922, guid: b9541eed1a6b97f42b47e6bf594ee7ae, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2189789064214025922, guid: b9541eed1a6b97f42b47e6bf594ee7ae, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2189789064214025922, guid: b9541eed1a6b97f42b47e6bf594ee7ae, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2189789064214025922, guid: b9541eed1a6b97f42b47e6bf594ee7ae, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3319653302926380195, guid: b9541eed1a6b97f42b47e6bf594ee7ae, type: 3}
-      propertyPath: GlobalObjectIdHash
-      value: 3196099470
-      objectReference: {fileID: 0}
-    - target: {fileID: 3488186452882133411, guid: b9541eed1a6b97f42b47e6bf594ee7ae, type: 3}
-      propertyPath: healthBarFill
-      value: 
-      objectReference: {fileID: 612989577}
-    - target: {fileID: 3488186452882133411, guid: b9541eed1a6b97f42b47e6bf594ee7ae, type: 3}
-      propertyPath: healthBarSlider
-      value: 
-      objectReference: {fileID: 1806180031}
-    - target: {fileID: 6133570415495502995, guid: b9541eed1a6b97f42b47e6bf594ee7ae, type: 3}
-      propertyPath: m_Name
-      value: GangsterOnline
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: b9541eed1a6b97f42b47e6bf594ee7ae, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

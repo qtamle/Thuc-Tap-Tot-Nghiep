@@ -16,6 +16,8 @@ public class EnemySpawnerOnline : NetworkBehaviour
     public Button SpamBTN;
 
     [Header("Boss Spawn")]
+    public Transform spawnPointsBoss;
+
     public GameObject warningBoss;
     public GameObject bossLevel1;
     public GameObject UIHealthBoss;
@@ -141,10 +143,34 @@ public class EnemySpawnerOnline : NetworkBehaviour
         NotifyClientsBossActiveClientRpc();
 
         // Kích hoạt logic của boss trên server
-        if (IsServer && gangster != null)
+        //if (IsServer && gangster != null)
+        //{
+        //    Debug.Log("Active boss từ Spam");
+        //    gangster.Activate();
+        //}
+        // Kiểm tra biến gangster và spawnPointsBoss để tránh lỗi null
+        if (gangster != null && spawnPointsBoss != null)
         {
-            Debug.Log("Active boss từ Spam");
-            gangster.Activate();
+            // Tính toán vị trí spawn từ spawnPointsBoss
+            Vector3 spawnPosition = spawnPointsBoss.position;
+
+            // Tạo một GangsterOnline tại vị trí spawn
+            GameObject spawnedBoss = Instantiate(gangster.gameObject, spawnPosition, Quaternion.identity);
+
+            // Nếu dùng Netcode, spawn boss qua mạng
+            if (spawnedBoss.TryGetComponent<NetworkObject>(out NetworkObject networkObject))
+            {
+                networkObject.Spawn();
+                
+            }
+
+            Debug.Log("Boss đã được spawn tại vị trí: " + spawnPosition);
+            //ActiveBoss
+            
+        }
+        else
+        {
+            Debug.LogWarning("gangster hoặc spawnPointsBoss chưa được gán trong Inspector.");
         }
     }
     [ClientRpc]

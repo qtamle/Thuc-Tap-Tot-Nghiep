@@ -23,7 +23,10 @@ public class GangsterHealthOnline : NetworkBehaviour, DamageInterface
 
     private void Start()
     {
-        if(!IsServer) return;
+        healthBarSlider = FindAnyObjectByType<Slider>();
+        GameObject fillBar = GameObject.FindWithTag("Fill");
+        healthBarFill = fillBar.GetComponent<Image>();
+        if (!IsServer) return;
         currentHealth.Value = maxHealth;
         UpdateHealthBar();
         UpdateHealthBarColor();

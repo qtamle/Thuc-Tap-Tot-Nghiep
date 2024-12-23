@@ -38,17 +38,9 @@ public class GangsterOnline : NetworkBehaviour
     private GangsterHealthOnline gangsterHealth;
     private void Start()
     {
-        //rb = GetComponent<Rigidbody2D>();
-        
-        //FindPlayerTrans();
-
-        //if (rb == null)
-        //{
-        //    Debug.LogError("Rigidbody2D is missing!");
-        //}
-
-        //Spawn();
+        Activate();
     }
+    
 
     private void OnEnable()
     {
