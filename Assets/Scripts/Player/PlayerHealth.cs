@@ -22,8 +22,12 @@ public class PlayerHealth : MonoBehaviour, DamagePlayerInterface
     private bool isInvincible = false;
     private LevelSystem levelSystem;
     private GameObject CurrentHealth;
+    private GameObject player;
+
     private void Start()
     {
+        player = gameObject;
+
         GameObject CurrentHealth = GameObject.Find("CurrentHealth");
         GameObject Shield = GameObject.Find("Shield");
         healthText = CurrentHealth.GetComponent<TMP_Text>();
@@ -133,6 +137,7 @@ public class PlayerHealth : MonoBehaviour, DamagePlayerInterface
     {
         isInvincible = true;
         float elapsed = 0f;
+        player.tag = "Untagged";
 
         while (elapsed < duration)
         {
@@ -141,6 +146,7 @@ public class PlayerHealth : MonoBehaviour, DamagePlayerInterface
             elapsed += flashInterval;
         }
 
+        player.tag = "Player";
         playerSprite.enabled = true;
         isInvincible = false;
     }

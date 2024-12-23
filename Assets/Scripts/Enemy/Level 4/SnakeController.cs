@@ -25,57 +25,25 @@ public class SnakeController : MonoBehaviour
     public Transform spawnPointDown;
     public Transform spawnPointNew;
 
-    private Vector2 direction = Vector2.right;
+    private Vector2 direction = Vector2.left;
     private List<(Vector3 position, Quaternion rotation)> previousPositions = new List<(Vector3, Quaternion)>();
     private bool isPaused = false;
     private bool isCollisionHandled = false;
-    private bool spawnCollisionHandled = false;
+    public bool spawnCollisionHandled = false;
     private bool isSkill = false;
     private Transform currentSpawnPoint;
-
+    public bool isMoving = true;
 
     private SnakeSkill skill;
-
+    private SnakeHealth health;
+    private DamagePlayerSnake damage;
     void Start()
     {
         originalSpeed = speed; 
         previousPositions.Add((head.position, head.rotation));
         skill = GetComponent<SnakeSkill>();
-
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            isPaused = !isPaused;
-        }
-
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            ResetCollisionState();
-            SpawnAtPosition(spawnPointLeft, Vector2.left);
-        }
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            ResetCollisionState();
-            SpawnAtPosition(spawnPointRight, Vector2.right);
-        }
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            ResetCollisionState();
-            SpawnAtPosition(spawnPointUp, Vector2.up);
-        }
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            ResetCollisionState();
-            SpawnAtPosition(spawnPointDown, Vector2.down);
-        }
-
-        if (Input.GetKeyDown(KeyCode.L) && !spawnCollisionHandled)
-        {
-            SpawnAndHandleCollision();
-        }
+        health = GetComponent<SnakeHealth>();
+        damage = GetComponentInChildren<DamagePlayerSnake>();
     }
 
     void FixedUpdate()
@@ -86,13 +54,80 @@ public class SnakeController : MonoBehaviour
         MoveBody();
     }
 
-    public void SpawnAndHandleCollision()
+    private void Update()
     {
+        CheckHealth();
+    }
+
+    void CheckHealth()
+    {
+        if (health != null)
+        {
+            if (health.currentHealth <= 0)
+            {
+                GameObject[] lasers = GameObject.FindGameObjectsWithTag("Laser");
+
+                foreach (GameObject laser in lasers)
+                {
+                    Destroy(laser);
+                }
+
+                StopAllCoroutines();
+            }
+        }
+    }
+
+    public void Active()
+    {
+        StartCoroutine(SpawnAndHandleCollision());
+    }
+
+    private IEnumerator AutoMove()
+    {
+        yield return new WaitForSeconds(2f);
+
+        while (spawnCollisionHandled)
+        {
+            yield return new WaitUntil(() => isMoving);
+
+            yield return new WaitForSeconds(3f);
+
+            // Chuyển hướng theo thứ tự: right -> down -> left -> up
+            if (direction == Vector2.right && isMoving)
+            {
+                ResetCollisionState();
+                SpawnAtPosition(spawnPointDown, Vector2.down);
+            }
+            else if (direction == Vector2.down && isMoving)
+            {
+                ResetCollisionState();
+                SpawnAtPosition(spawnPointLeft, Vector2.left);
+            }
+            else if (direction == Vector2.left && isMoving)
+            {
+                ResetCollisionState();
+                SpawnAtPosition(spawnPointUp, Vector2.up);
+            }
+            else if (direction == Vector2.up && isMoving)
+            {
+                ResetCollisionState();
+                SpawnAtPosition(spawnPointRight, Vector2.right);
+            }
+
+            yield return new WaitForSeconds(4f);
+        }
+    }
+
+
+    public IEnumerator SpawnAndHandleCollision()
+    {
+        yield return new WaitForSeconds(1f);
         StartCoroutine(SpawnAndCollisionCoroutine());
     }
 
     private IEnumerator SpawnAndCollisionCoroutine()
     {
+        speed += 4f;
         SpawnAtPosition(spawnPointNew, Vector2.left);
 
         while (!spawnCollisionHandled)
@@ -104,13 +139,15 @@ public class SnakeController : MonoBehaviour
             else if (Physics2D.OverlapCircle(head.position, 3f, LayerMask.GetMask("Down")))
             {
                 direction = Vector2.right;
-                spawnCollisionHandled = true; 
+                spawnCollisionHandled = true;
             }
-
-            yield return null; 
+            yield return null;
         }
-
-        spawnCollisionHandled = true;
+        yield return new WaitForSeconds(4f);
+        speed = originalSpeed;
+        direction = Vector2.up;
+        damage.SetCanDamage(true);
+        StartCoroutine(AutoMove());
     }
 
     void MoveHead()
@@ -168,6 +205,7 @@ public class SnakeController : MonoBehaviour
     private IEnumerator PauseAndChangeDirection(string tag)
     {
         isPaused = true;
+        isMoving = false;
         yield return StartCoroutine(DetachBodyParts());
 
         skill.StartFiring(direction);
@@ -177,15 +215,13 @@ public class SnakeController : MonoBehaviour
 
         yield return StartCoroutine(ReattachBodyParts());
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.1f);
 
         isPaused = false;
         speed = boostedSpeed;
 
-        if (tag == "Left") direction = Vector2.down;
-        else if (tag == "Right") direction = Vector2.up;
-        else if (tag == "Up") direction = Vector2.left;
-        else if (tag == "Down") direction = Vector2.right;
+        yield return new WaitForSeconds(2f);
+        isMoving = true;
     }
 
     private IEnumerator DetachBodyParts()
@@ -213,7 +249,7 @@ public class SnakeController : MonoBehaviour
                     offset = new Vector3(0, -0.5f * (i + 1), 0);
                 }
 
-                targetPositions.Add(bodyParts[i].position + offset);
+            targetPositions.Add(bodyParts[i].position + offset);
             }
 
         bool allReached = false;

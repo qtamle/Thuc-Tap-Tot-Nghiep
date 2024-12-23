@@ -141,6 +141,59 @@ public class Attack : MonoBehaviour
             }
         }
         isAttackBoss = false;
+
+        Collider2D[] Snake = Physics2D.OverlapCircleAll(attackPoints.position, radius, bossLayer);
+
+        foreach (Collider2D sn in Snake)
+        {
+            MachineSnakeHealth partHealth = sn.GetComponent<MachineSnakeHealth>();
+            SnakeHealth snakeHealth = sn.GetComponentInParent<SnakeHealth>();
+
+            if (partHealth != null && !isAttackBoss && snakeHealth.IsStunned())
+            {
+                if ((MachineSnakeHealth.attackedPartID == -1 || MachineSnakeHealth.attackedPartID == partHealth.partID) && !partHealth.isAlreadyHit)
+                {
+                    partHealth.TakeDamage(1);
+                    isAttackBoss = true;
+
+                    snakeHealth.SetCanBeDamaged(false);
+
+                    SpawnCoins(coinPrefab, coinSpawnMin * 13, coinSpawnMax * 13, partHealth.transform.position);
+
+                    if (Random.value <= 0.25f)
+                    {
+                        SpawnCoins(secondaryCoinPrefab, secondaryCoinSpawnMin * 5, secondaryCoinSpawnMax * 5, partHealth.transform.position);
+                    }
+
+                    SpawnExperienceOrbs(partHealth.transform.position, 25);
+                }
+            }
+
+            if (snakeHealth.IsStunned())
+            {
+                if (snakeHealth.bodyPartsAttacked == snakeHealth.totalBodyParts)
+                {
+                    HeadController headController = sn.GetComponentInChildren<HeadController>();
+                    if (headController != null && !headController.isHeadAttacked && !isAttackBoss)
+                    {
+                        headController.TakeDamage(1);
+                        isAttackBoss = true;
+                        headController.isHeadAttacked = true;
+
+                        snakeHealth.SetCanBeDamaged(false);
+                        SpawnCoins(coinPrefab, coinSpawnMin * 13, coinSpawnMax * 13, headController.transform.position);
+
+                        if (Random.value <= 0.25f)
+                        {
+                            SpawnCoins(secondaryCoinPrefab, secondaryCoinSpawnMin * 5, secondaryCoinSpawnMax * 5, headController.transform.position);
+                        }
+
+                        SpawnExperienceOrbs(headController.transform.position, 25);
+                    }
+                }
+            }
+        }
+        isAttackBoss = false;
     }
 
     void SpawnCoins(GameObject coinType, float minAmount, float maxAmount, Vector3 position)
@@ -220,7 +273,7 @@ public class Attack : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
 
-        if (orb != null && player != null) // Kiểm tra nếu đối tượng orb vẫn tồn tại
+        if (orb != null && player != null) 
         {
             Rigidbody2D orbRb = orb.GetComponent<Rigidbody2D>();
             if (orbRb != null)

@@ -20,11 +20,37 @@ public class SnakeSkill : MonoBehaviour
     public GameObject laserPrefab;
 
     public bool isFiring = false;
+    private SnakeHealth snake;
+
+    private void Start()
+    {
+        snake = GetComponent<SnakeHealth>();
+    }
+
+    private void Update()
+    {
+        CheckHealth();
+    }
+
+    void CheckHealth()
+    {
+        if (snake != null)
+        {
+            if (snake.currentHealth <= 0)
+            {
+                StopAllCoroutines();
+            }
+        }
+    }
 
     public void StartFiring(Vector2 direction)
     {
         if (!isFiring)
         {
+            if (snake != null)
+            {
+                snake.StunForDuration(12f);
+            }
             StartCoroutine(FireMultipleVolleys(direction));
         }
     }
@@ -79,7 +105,7 @@ public class SnakeSkill : MonoBehaviour
                 yield return new WaitForSeconds(2.5f);
 
                 FireLaserPairVolleyUp(direction, 2, 3);
-                yield return new WaitForSeconds(2.5f);
+                yield return new WaitForSeconds(3f);
 
                 FireLaserSequentialVolleyUp(direction, 3, firePoints.Length);
                 yield return new WaitForSeconds(1f);
