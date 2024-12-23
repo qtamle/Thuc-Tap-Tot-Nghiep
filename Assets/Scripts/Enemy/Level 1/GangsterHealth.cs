@@ -63,8 +63,10 @@ public class GangsterHealth : MonoBehaviour, DamageInterface
 
     public void StunForDuration(float stunDuration)
     {
+        Debug.Log(canBeDamaged + "Before stun");
         isStunned = true;
-        canBeDamaged = true; 
+        canBeDamaged = true;
+        Debug.Log(canBeDamaged + "After stun");
         timeWhenStunned = Time.time + stunDuration;
         UpdateHealthBarColor();
     }

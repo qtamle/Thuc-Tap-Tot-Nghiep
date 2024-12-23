@@ -35,7 +35,7 @@ public class GangsterOnline : NetworkBehaviour
 
     private bool isUsingSkill = false;
 
-    private GangsterHealth gangsterHealth;
+    private GangsterHealthOnline gangsterHealth;
     private void Start()
     {
         //rb = GetComponent<Rigidbody2D>();
@@ -53,7 +53,7 @@ public class GangsterOnline : NetworkBehaviour
     private void OnEnable()
     {
         rb = GetComponent<Rigidbody2D>();
-
+        gangsterHealth = GetComponent<GangsterHealthOnline>();
         FindPlayerTrans();
 
         if (rb == null)
@@ -95,8 +95,8 @@ public class GangsterOnline : NetworkBehaviour
         {
             if (!isUsingSkill)
             {
-                int randomSkill = UnityEngine.Random.Range(0, 2);
-
+                //int randomSkill = UnityEngine.Random.Range(0, 2);
+                int randomSkill = 1;
                 if (randomSkill == 0)
                 {
                     UseJumpSkill();
@@ -145,10 +145,10 @@ public class GangsterOnline : NetworkBehaviour
             Debug.LogWarning("Ground Check Transform is not assigned!");
         }
 
-        if (gangsterHealth != null && gangsterHealth.currentHealth <= 0)
-        {
-            StopAllActions();
-        }
+        //if (gangsterHealth != null && gangsterHealth.. <= 0)
+        //{
+        //    StopAllActions();
+        //}
     }
 
     private void StopAllActions()
@@ -209,9 +209,9 @@ public class GangsterOnline : NetworkBehaviour
     private IEnumerator ExecuteChargeSkill()
     {
         yield return new WaitForSeconds(1f);
-
+        Debug.Log(isCharging);
         isCharging = true;
-
+        Debug.Log(isCharging);
         if (playerTransform == null)
         {
             Debug.LogError("playerTransform is not assigned!");
@@ -276,7 +276,12 @@ public class GangsterOnline : NetworkBehaviour
 
         if (gangsterHealth != null)
         {
+            Debug.Log("tong vo tuong");
             gangsterHealth.StunForDuration(3f);
+        }
+        else
+        {
+            Debug.Log("gangsterHealth missing");
         }
 
         SpawnRocks();

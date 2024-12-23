@@ -66,11 +66,11 @@ public class AttackOnline : MonoBehaviour
 
         foreach (Collider2D boss in bosses)
         {
-            GangsterHealth gangsterHealth = boss.GetComponent<GangsterHealth>();
+            GangsterHealthOnline gangsterHealth = boss.GetComponent<GangsterHealthOnline>();
             if (gangsterHealth != null && gangsterHealth.CanBeDamaged() && !isAttackBoss)
             {
-                Debug.Log("Player da va cham voi Boss");
-                gangsterHealth.TakeDamage(1);
+                
+                gangsterHealth.TakeDamageServerRpc(1);
                 isAttackBoss = true;
 
                 gangsterHealth.SetCanBeDamaged(false);
@@ -84,31 +84,15 @@ public class AttackOnline : MonoBehaviour
 
                 SpawnExperienceOrbs(boss.transform.position, 20);
             }
-        }
-        isAttackBoss = false;
-
-
-        Collider2D[] assassin = Physics2D.OverlapCircleAll(attackPoints.position, radius, bossLayer);
-
-        foreach (Collider2D asssass in assassin)
-        {
-            AssassinHealth Assassin = asssass.GetComponent<AssassinHealth>();
-            if (Assassin != null && Assassin.CanBeDamaged() && !isAttackBoss)
+            else
             {
-                Assassin.TakeDamage(1);
-                isAttackBoss = true;
-
-                Assassin.SetCanBeDamaged(false);
-
-                SpawnCoins(coinPrefab, coinSpawnMin * 13, coinSpawnMax * 13, asssass.transform.position);
-
-                if (Random.value <= 0.25f)
+                if (!gangsterHealth.CanBeDamaged())
                 {
-                    SpawnCoins(secondaryCoinPrefab, secondaryCoinSpawnMin * 5, secondaryCoinSpawnMax * 5, asssass.transform.position);
+                    Debug.Log("gangsterHealth.CanBeDamaged() returned false.");
                 }
 
-                SpawnExperienceOrbs(asssass.transform.position, 25);
             }
+            
         }
         isAttackBoss = false;
     }

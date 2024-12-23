@@ -7,7 +7,9 @@ public class GangsterHealthOnline : NetworkBehaviour, DamageInterface
 {
     [Header("Health Settings")]
     public int maxHealth = 3;
-    public int currentHealth;
+    //public int currentHealth;
+    // NetworkVariable để đồng bộ máu
+    private NetworkVariable<int> currentHealth = new NetworkVariable<int>();
 
     [Header("UI Settings")]
     public Slider healthBarSlider;
@@ -21,19 +23,38 @@ public class GangsterHealthOnline : NetworkBehaviour, DamageInterface
 
     private void Start()
     {
-        currentHealth = maxHealth;
+        if(!IsServer) return;
+        currentHealth.Value = maxHealth;
         UpdateHealthBar();
         UpdateHealthBarColor();
+
+        // Đăng ký sự kiện để cập nhật UI khi máu thay đổi
+
+        currentHealth.OnValueChanged += OnHealthChanged;
     }
 
     public void TakeDamage(int damage)
     {
         if (canBeDamaged)
         {
-            currentHealth -= damage;
+            currentHealth.Value -= damage;
             UpdateHealthBar();
 
-            if (currentHealth <= 0)
+            if (currentHealth.Value <= 0)
+            {
+                startTimeline.Invoke();
+                Die();
+            }
+        }
+    }
+    [ServerRpc]
+    public void TakeDamageServerRpc(int damage)
+    {
+        if (canBeDamaged)
+        {
+            currentHealth.Value -= damage; // Đồng bộ với NetworkVariable
+
+            if (currentHealth.Value <= 0)
             {
                 startTimeline.Invoke();
                 Die();
@@ -41,11 +62,12 @@ public class GangsterHealthOnline : NetworkBehaviour, DamageInterface
         }
     }
 
+
     private void UpdateHealthBar()
     {
         if (healthBarSlider != null)
         {
-            healthBarSlider.value = (float)currentHealth / maxHealth;
+            healthBarSlider.value = (float)currentHealth.Value / maxHealth;
         }
     }
 
@@ -56,6 +78,12 @@ public class GangsterHealthOnline : NetworkBehaviour, DamageInterface
             healthBarFill.color = canBeDamaged ? Color.red : Color.cyan;
         }
     }
+    private void OnHealthChanged(int oldHealth, int newHealth)
+    {
+        // Cập nhật thanh máu khi có thay đổi
+        UpdateHealthBar();
+    }
+
 
     private void Die()
     {
@@ -64,8 +92,11 @@ public class GangsterHealthOnline : NetworkBehaviour, DamageInterface
 
     public void StunForDuration(float stunDuration)
     {
+        Debug.Log(canBeDamaged + "Before stun");
+
         isStunned = true;
-        canBeDamaged = true; 
+        canBeDamaged = true;
+        Debug.Log(canBeDamaged + "After stun");
         timeWhenStunned = Time.time + stunDuration;
         UpdateHealthBarColor();
     }

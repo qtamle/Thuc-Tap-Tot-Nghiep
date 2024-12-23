@@ -290,4 +290,5 @@ public class PlayerMovementOnline : NetworkBehaviour
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(wallTransform.position, wallCheckRadius);
     }
+
 }
