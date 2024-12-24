@@ -71,6 +71,7 @@ public class SnakeController : MonoBehaviour
                 {
                     Destroy(laser);
                 }
+                damage.SetCanDamage(false);
 
                 StopAllCoroutines();
             }
