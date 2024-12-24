@@ -9,7 +9,7 @@ public class GangsterHealthOnline : NetworkBehaviour, DamageInterface
     public int maxHealth = 3;
     //public int currentHealth;
     // NetworkVariable để đồng bộ máu
-    private NetworkVariable<int> currentHealth = new NetworkVariable<int>();
+    public NetworkVariable<int> currentHealth = new NetworkVariable<int>();
 
     [Header("UI Settings")]
     public Slider healthBarSlider;

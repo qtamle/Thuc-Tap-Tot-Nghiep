@@ -88,7 +88,7 @@ public class GangsterOnline : NetworkBehaviour
             if (!isUsingSkill)
             {
                 //int randomSkill = UnityEngine.Random.Range(0, 2);
-                int randomSkill = 1;
+                int randomSkill = 0;
                 if (randomSkill == 0)
                 {
                     UseJumpSkill();
@@ -137,10 +137,10 @@ public class GangsterOnline : NetworkBehaviour
             Debug.LogWarning("Ground Check Transform is not assigned!");
         }
 
-        //if (gangsterHealth != null && gangsterHealth.. <= 0)
-        //{
-        //    StopAllActions();
-        //}
+        if (gangsterHealth != null && gangsterHealth.currentHealth.Value <= 0)
+        {
+            StopAllActions();
+        }
     }
 
     private void StopAllActions()
