@@ -1,21 +1,21 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 
-public class EnemySpawnerLevel3 : MonoBehaviour, IEnemySpawner
+public class EnemySpawnerLevel6 : MonoBehaviour, IEnemySpawner
 {
     [Header("Enemy Data")]
     public EnemySpawnData[] enemySpawnDatas;
 
-    [Header("Show UI")]
-    public GameObject warningBoss;
-    public GameObject bossLevel1;
-    public GameObject UIHealthBoss;
+    //[Header("Show UI")]
+    //public GameObject warningBoss;
+    //public GameObject bossLevel1;
+    //public GameObject UIHealthBoss;
 
-    [Header("Hide UI")]
-    public GameObject remain;
+    //[Header("Hide UI")]
+    //public GameObject remain;
 
-    [Header("Boss Level 1 Script")]
-    public Cyborg cyborg;
+    //[Header("Boss Level 1 Script")]
+    //public SnakeController snakeBoss;
 
     private bool stopSpawning = false;
 
@@ -33,20 +33,20 @@ public class EnemySpawnerLevel3 : MonoBehaviour, IEnemySpawner
     private bool isBossSpawned = false;
     private void Start()
     {
-        if (bossLevel1 != null)
-        {
-            bossLevel1.SetActive(false);
-        }
+        //if (bossLevel1 != null)
+        //{
+        //    bossLevel1.SetActive(false);
+        //}
 
-        if (UIHealthBoss != null)
-        {
-            UIHealthBoss.SetActive(false);
-        }
+        //if (UIHealthBoss != null)
+        //{
+        //    UIHealthBoss.SetActive(false);
+        //}
 
-        if (warningBoss != null)
-        {
-            warningBoss.SetActive(false);
-        }
+        //if (warningBoss != null)
+        //{
+        //    warningBoss.SetActive(false);
+        //}
 
         foreach (var spawnData in enemySpawnDatas)
         {
@@ -78,11 +78,15 @@ public class EnemySpawnerLevel3 : MonoBehaviour, IEnemySpawner
 
             timeElapsed = 0f;
         }
+
+        Debug.Log("EnemySpawnData count: " + enemySpawnDatas.Length);
+        Debug.Log("Max spawn count: " + maxTotalSpawnCount);
+        Debug.Log("EnemyManager.Instance: " + (EnemyManager.Instance != null));
     }
 
     private IEnumerator SpawnEnemyIndependently(EnemySpawnData spawnData)
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1f); 
 
         while (!stopSpawning)
         {
@@ -90,7 +94,7 @@ public class EnemySpawnerLevel3 : MonoBehaviour, IEnemySpawner
             {
                 Transform spawnPoint = spawnData.spawnPoints[Random.Range(0, spawnData.spawnPoints.Length)];
                 Vector3 spawnPosition = spawnPoint.position;
-                spawnPosition.y += 1.5f;
+                spawnPosition.y += 1.5f; 
 
                 GameObject spawnedEnemy = Instantiate(spawnData.enemyPrefab, spawnPosition, Quaternion.identity);
 
@@ -108,7 +112,7 @@ public class EnemySpawnerLevel3 : MonoBehaviour, IEnemySpawner
             {
                 stopSpawning = true;
                 isBossSpawned = true;
-                StartCoroutine(HandleBossSpawn());
+                //StartCoroutine(HandleBossSpawn());
                 break;
             }
 
@@ -120,38 +124,42 @@ public class EnemySpawnerLevel3 : MonoBehaviour, IEnemySpawner
     {
         currentTotalSpawnCount--;
 
-    }
-
-    private IEnumerator HandleBossSpawn()
-    {
-        if (remain != null)
+        if (stopSpawning)
         {
-            remain.SetActive(false);
-        }
-
-        if (warningBoss != null)
-        {
-            warningBoss.SetActive(true);
-        }
-
-        yield return new WaitForSeconds(3f);
-
-        if (warningBoss != null)
-        {
-            warningBoss.SetActive(false);
-        }
-
-        if (bossLevel1 != null)
-        {
-            bossLevel1.SetActive(true);
-            cyborg.Active();
-        }
-
-        yield return new WaitForSeconds(0.5f);
-
-        if (UIHealthBoss != null)
-        {
-            UIHealthBoss.SetActive(true);
+            currentTotalSpawnCount = 0;
         }
     }
+
+    //private IEnumerator HandleBossSpawn()
+    //{
+    //    if (remain != null)
+    //    {
+    //        remain.SetActive(false);
+    //    }
+
+    //    if (warningBoss != null)
+    //    {
+    //        warningBoss.SetActive(true);
+    //    }
+
+    //    yield return new WaitForSeconds(3f);
+
+    //    if (warningBoss != null)
+    //    {
+    //        warningBoss.SetActive(false);
+    //    }
+
+    //    if (bossLevel1 != null)
+    //    {
+    //        bossLevel1.SetActive(true);
+    //        snakeBoss.Active();
+    //    }
+
+    //    yield return new WaitForSeconds(0.5f);
+
+    //    if (UIHealthBoss != null)
+    //    {
+    //        UIHealthBoss.SetActive(true);
+    //    }
+    //}
 }

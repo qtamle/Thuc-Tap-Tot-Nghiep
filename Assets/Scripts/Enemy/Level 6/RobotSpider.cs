@@ -73,6 +73,13 @@ public class RobotSpider : MonoBehaviour
         CalculateZigZagPath();
     }
 
+    private void FlipCharacter()
+    {
+        Vector3 localScale = transform.localScale;
+        localScale.x *= -1;
+        transform.localScale = localScale;
+    }
+
     private void CalculateZigZagPath()
     {
         Vector3 currentPosition = startingPosition;
@@ -112,6 +119,12 @@ public class RobotSpider : MonoBehaviour
             if (currentTargetIndex < pathPoints.Count)
             {
                 Vector3 targetPosition = pathPoints[currentTargetIndex];
+
+                if ((targetPosition.x > transform.position.x && !isFlipped) ||
+                (targetPosition.x < transform.position.x && isFlipped))
+                {
+                    FlipCharacter();
+                }
 
                 while (Vector3.Distance(transform.position, targetPosition) > 0.01f)
                 {

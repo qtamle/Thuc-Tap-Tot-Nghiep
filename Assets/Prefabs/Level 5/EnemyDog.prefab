@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 5860610490727236530}
   - component: {fileID: 6038618671956832642}
   - component: {fileID: 6177358279754178486}
-  m_Layer: 0
+  - component: {fileID: 6375705095745661514}
+  m_Layer: 9
   m_Name: EnemyDog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -145,6 +146,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &6375705095745661514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 305492566426096860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4508e56722b09c0478492b8251b82102, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boxSize: {x: 1, y: 1}
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!1 &3561349550919834045
 GameObject:
   m_ObjectHideFlags: 0
@@ -154,7 +171,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5222177512994896553}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: AttackTransform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -185,7 +202,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6189001078382662179}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -217,7 +234,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8110800741444077189}
   - component: {fileID: 1142155545469779083}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: DogSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -303,7 +320,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9182853542091954787}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Raycast
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -334,7 +351,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6679639352264340244}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: DashCheckBounce
   m_TagString: Untagged
   m_Icon: {fileID: 0}

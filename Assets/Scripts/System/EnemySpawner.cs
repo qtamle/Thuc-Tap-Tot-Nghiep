@@ -30,6 +30,7 @@ public class EnemySpawner : MonoBehaviour, IEnemySpawner
     private float minSpawnTimeLimit = 1f;
     private float maxSpawnTimeLimit = 1f;
 
+    private bool isBossSpawned = false;
     private void Start()
     {
         if (bossLevel1 != null)
@@ -47,7 +48,10 @@ public class EnemySpawner : MonoBehaviour, IEnemySpawner
             warningBoss.SetActive(false);
         }
 
-        StartCoroutine(SpawnEnemies());
+        foreach (var spawnData in enemySpawnDatas)
+        {
+            StartCoroutine(SpawnEnemyIndependently(spawnData));
+        }
     }
 
     void Update()
@@ -75,49 +79,40 @@ public class EnemySpawner : MonoBehaviour, IEnemySpawner
             timeElapsed = 0f;
         }
     }
-
-    IEnumerator SpawnEnemies()
+    private IEnumerator SpawnEnemyIndependently(EnemySpawnData spawnData)
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
 
         while (!stopSpawning)
         {
             if (currentTotalSpawnCount < maxTotalSpawnCount)
             {
-                foreach (EnemySpawnData spawnData in enemySpawnDatas)
+                Transform spawnPoint = spawnData.spawnPoints[Random.Range(0, spawnData.spawnPoints.Length)];
+                Vector3 spawnPosition = spawnPoint.position;
+                spawnPosition.y += 1.5f;
+
+                GameObject spawnedEnemy = Instantiate(spawnData.enemyPrefab, spawnPosition, Quaternion.identity);
+
+                if (!spawnedEnemy.CompareTag("Enemy"))
                 {
-                    yield return StartCoroutine(SpawnEnemy(spawnData));
+                    spawnedEnemy.tag = "Enemy";
                 }
+
+                currentTotalSpawnCount++;
             }
 
-            if (EnemyManager.Instance != null && EnemyManager.Instance.killTarget <= EnemyManager.Instance.enemiesKilled)
+            yield return new WaitForSeconds(Random.Range(spawnData.minSpawnTime, spawnData.maxSpawnTime));
+
+            if (EnemyManager.Instance != null && EnemyManager.Instance.killTarget <= EnemyManager.Instance.enemiesKilled && !isBossSpawned)
             {
                 stopSpawning = true;
+                isBossSpawned = true;
                 StartCoroutine(HandleBossSpawn());
                 break;
             }
 
             yield return null;
         }
-    }
-    private IEnumerator SpawnEnemy(EnemySpawnData spawnData)
-    {
-        Transform spawnPoint = spawnData.spawnPoints[Random.Range(0, spawnData.spawnPoints.Length)];
-        Vector3 spawnPosition = spawnPoint.position;
-
-        float offsetY = 1.5f;
-        spawnPosition.y += offsetY;
-
-        GameObject spawnedEnemy = Instantiate(spawnData.enemyPrefab, spawnPosition, Quaternion.identity);
-
-        if (!spawnedEnemy.CompareTag("Enemy"))
-        {
-            spawnedEnemy.tag = "Enemy";
-        }
-
-        currentTotalSpawnCount++;
-
-        yield return new WaitForSeconds(Random.Range(spawnData.minSpawnTime, spawnData.maxSpawnTime));
     }
 
     public void OnEnemyKilled()

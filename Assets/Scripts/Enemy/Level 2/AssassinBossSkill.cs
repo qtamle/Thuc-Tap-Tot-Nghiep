@@ -467,15 +467,33 @@ public class AssassinBossSkill : MonoBehaviour
 
         // Tìm player bằng Tag và truyền vào CloneDash
         GameObject player = GameObject.FindGameObjectWithTag(playerTag);
+        if (player == null)
+        {
+            int playerLayer = LayerMask.NameToLayer("Player");
+            player = FindObjectByLayer(playerLayer);
+        }
+
         if (player != null)
         {
-            // Bắt đầu dịch chuyển các nhân vật
             StartCoroutine(MoveToRandomTargets(allCharacters, assassinTargetPosition, targetPosition1, targetPosition2, player.transform));
         }
         else
         {
-            Debug.LogError("Player không tìm thấy!");
+            Debug.LogError("Player không tìm thấy theo cả tag và layer!");
         }
+    }
+
+    GameObject FindObjectByLayer(int layer)
+    {
+        GameObject[] allObjects = GameObject.FindObjectsOfType<GameObject>();
+        foreach (GameObject obj in allObjects)
+        {
+            if (obj.layer == layer)
+            {
+                return obj;
+            }
+        }
+        return null;
     }
 
     IEnumerator MoveToRandomTargets(GameObject[] characters, Vector3 assassinTargetPosition, Vector3 targetPosition1, Vector3 targetPosition2, Transform player)

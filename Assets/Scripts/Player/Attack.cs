@@ -169,9 +169,7 @@ public class Attack : MonoBehaviour
                 }
             }
 
-            if (snakeHealth.IsStunned())
-            {
-                if (snakeHealth.bodyPartsAttacked == snakeHealth.totalBodyParts)
+                if (snakeHealth != null && snakeHealth.bodyPartsAttacked == snakeHealth.totalBodyParts)
                 {
                     HeadController headController = sn.GetComponentInChildren<HeadController>();
                     if (headController != null && !headController.isHeadAttacked && !isAttackBoss)
@@ -191,7 +189,10 @@ public class Attack : MonoBehaviour
                         SpawnExperienceOrbs(headController.transform.position, 25);
                     }
                 }
-            }
+                else
+                {
+                    Debug.LogWarning($"SnakeHealth is null for {sn.gameObject.name}");
+                }
         }
         isAttackBoss = false;
     }

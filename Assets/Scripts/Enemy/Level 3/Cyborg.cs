@@ -45,6 +45,7 @@ public class Cyborg : MonoBehaviour
     private bool isStunned = false;
     private CyborgHealth Cyborghealth;
 
+    private bool isSpawn;
     private void Start()
     {
         Cyborghealth = GetComponent<CyborgHealth>();
@@ -82,6 +83,8 @@ public class Cyborg : MonoBehaviour
         transform.position = targetPosition;
         originalPositionSkillRandom = targetPosition;
 
+        isSpawn = true;
+
         StartCoroutine(AutomaticSkillCycle());
     }
 
@@ -89,7 +92,7 @@ public class Cyborg : MonoBehaviour
     {
         yield return new WaitForSeconds(3f);
 
-        while (true)
+        while (isSpawn)
         {
             yield return StartCoroutine(DiscoBallSkill());
             yield return new WaitForSeconds(1.5f);

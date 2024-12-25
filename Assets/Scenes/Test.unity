@@ -10330,8 +10330,8 @@ MonoBehaviour:
     - {fileID: 965493568}
     - {fileID: 1561552736}
     - {fileID: 1553256272}
-    minSpawnTime: 0.5
-    maxSpawnTime: 0.7
+    minSpawnTime: 1
+    maxSpawnTime: 2.2
   - enemyPrefab: {fileID: 5641273616069233248, guid: a53510166d762e240bade254218f34fc, type: 3}
     spawnPoints:
     - {fileID: 385575197}
@@ -10342,8 +10342,8 @@ MonoBehaviour:
     - {fileID: 870499690}
     - {fileID: 291893346}
     - {fileID: 1591650128}
-    minSpawnTime: 0.7
-    maxSpawnTime: 1
+    minSpawnTime: 2
+    maxSpawnTime: 3
   warningBoss: {fileID: 1115378823}
   bossLevel1: {fileID: 291446932}
   UIHealthBoss: {fileID: 77204493}
@@ -10352,7 +10352,7 @@ MonoBehaviour:
   currentTotalSpawnCount: 0
   maxTotalSpawnCount: 25
   spawnSpeedIncreaseInterval: 50
-  spawnSpeedDecreaseAmount: 0.2
+  spawnSpeedDecreaseAmount: 0.5
 --- !u!4 &1249940659
 Transform:
   m_ObjectHideFlags: 0

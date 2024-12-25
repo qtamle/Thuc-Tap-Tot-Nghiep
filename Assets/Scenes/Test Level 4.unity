@@ -3608,7 +3608,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa0a772ade8b0e441a19313cad4a1780, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  killTarget: 150
+  killTarget: 120
   enemiesKilled: 0
 --- !u!4 &452983390
 Transform:
@@ -11233,8 +11233,8 @@ MonoBehaviour:
     - {fileID: 749283977}
     - {fileID: 1591650128}
     - {fileID: 519746086}
-    minSpawnTime: 0.5
-    maxSpawnTime: 0.7
+    minSpawnTime: 1.5
+    maxSpawnTime: 2
   - enemyPrefab: {fileID: 5641273616069233248, guid: a53510166d762e240bade254218f34fc, type: 3}
     spawnPoints:
     - {fileID: 385575197}
@@ -11245,16 +11245,16 @@ MonoBehaviour:
     - {fileID: 870499690}
     - {fileID: 291893346}
     - {fileID: 1591650128}
-    minSpawnTime: 0.7
-    maxSpawnTime: 1
+    minSpawnTime: 2
+    maxSpawnTime: 3.5
   - enemyPrefab: {fileID: 4415038470402562754, guid: 962db4ac971d56f488f40afefa00e01a, type: 3}
     spawnPoints:
     - {fileID: 1030906428}
     - {fileID: 2079550003}
     - {fileID: 1392050806}
     - {fileID: 1513685780}
-    minSpawnTime: 1.5
-    maxSpawnTime: 1.8
+    minSpawnTime: 7
+    maxSpawnTime: 10
   - enemyPrefab: {fileID: 1562509349317316727, guid: 8dbe99c584c037444ba3dcb3acbd3073, type: 3}
     spawnPoints:
     - {fileID: 1164810698}
@@ -11263,8 +11263,8 @@ MonoBehaviour:
     - {fileID: 1569304278}
     - {fileID: 241377362}
     - {fileID: 1186806508}
-    minSpawnTime: 1.8
-    maxSpawnTime: 2.2
+    minSpawnTime: 11
+    maxSpawnTime: 16
   - enemyPrefab: {fileID: 2227088648653770263, guid: dda43b7ddd7fb9943944da25f7fe9b53, type: 3}
     spawnPoints:
     - {fileID: 385575197}
@@ -11275,17 +11275,17 @@ MonoBehaviour:
     - {fileID: 870499690}
     - {fileID: 291893346}
     - {fileID: 1591650128}
-    minSpawnTime: 2
-    maxSpawnTime: 2.5
+    minSpawnTime: 15
+    maxSpawnTime: 20
   warningBoss: {fileID: 1115378823}
   bossLevel1: {fileID: 1429666906}
   UIHealthBoss: {fileID: 77204493}
   remain: {fileID: 969923266}
   snakeBoss: {fileID: 1429666908}
   currentTotalSpawnCount: 0
-  maxTotalSpawnCount: 30
+  maxTotalSpawnCount: 25
   spawnSpeedIncreaseInterval: 75
-  spawnSpeedDecreaseAmount: 0.2
+  spawnSpeedDecreaseAmount: 0.5
 --- !u!1 &1252773065
 GameObject:
   m_ObjectHideFlags: 0
