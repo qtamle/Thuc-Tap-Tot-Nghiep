@@ -3,6 +3,8 @@
 public class FloorCheck : MonoBehaviour
 {
     public string CurrentFloor { get; private set; }
+    public Transform CurrentLeftFloor { get; private set; }
+    public Transform CurrentRightFloor { get; private set; }
 
     private void OnEnable()
     {
@@ -16,18 +18,24 @@ public class FloorCheck : MonoBehaviour
         Floor.OnPlayerExit -= ClearCurrentFloor;
     }
 
-    private void SetCurrentFloor(string floorName)
+    private void SetCurrentFloor(string floorName, Transform leftTransform, Transform rightTransform)
     {
         CurrentFloor = floorName;
-        //Debug.Log($"Player is on {CurrentFloor}");
+        CurrentLeftFloor = leftTransform;
+        CurrentRightFloor = rightTransform;
+
+        Debug.Log($"Player is on {CurrentFloor} with Left: {CurrentLeftFloor?.name}, Right: {CurrentRightFloor?.name}");
     }
 
-    private void ClearCurrentFloor(string floorName)
+    private void ClearCurrentFloor(string floorName, Transform leftTransform, Transform rightTransform)
     {
         if (CurrentFloor == floorName)
         {
             CurrentFloor = null;
-            //Debug.Log("Player left the floor.");
+            CurrentLeftFloor = null;
+            CurrentRightFloor = null;
+
+            Debug.Log("Player left the floor.");
         }
     }
 }
