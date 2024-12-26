@@ -1,4 +1,7 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
+using System.Net.NetworkInformation;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Boss5 : MonoBehaviour
@@ -8,73 +11,106 @@ public class Boss5 : MonoBehaviour
     [SerializeField] public float groundCheckRadius = 0.2f;
     [SerializeField] public LayerMask wallLayer;
     private Transform BossTrans;
+    private Vector3 defaultPosition;
 
     [Header("Check")]
     [SerializeField] public FloorCheck floorCheck;
     [SerializeField] public SideManager sideManager;
 
-    [Header("Skill Settings")]
+    [Header("Skill 1 Settings")]
     [SerializeField] private GameObject Skill1Left;
     [SerializeField] private GameObject Skill1Right;
-    [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] private float moveDistance = 5f;
+    [SerializeField] public float moveSpeed;
+    private Transform targetTransform; // Thêm biến để lưu transform đích
+    [SerializeField] private float targetOffset = 1f;
 
     private GameObject summonedObject;
     private Vector3 spawnPosition;
     private bool isMovingForward = true;
     private bool isMovingLeft;
 
+    [Header("Skull Projectile Settings")]
+    [SerializeField] private GameObject skullPrefab; // Prefab của skull
+    [SerializeField] private float orbitRadius = 2f; // Bán kính xoay quanh boss
+    [SerializeField] private float orbitSpeed = 180f; // Tốc độ xoay (độ/giây)
+    [SerializeField] private float projectileSpeed = 15f; // Tốc độ bắn
+    [SerializeField] private int numberOfSkulls = 3; // Số lượng skull
+    [SerializeField] private float orbitDuration = 2f; // Thời gian xoay trước khi bắn
+    private List<GameObject> orbitingSkulls = new List<GameObject>();
+    private float orbitTimer = 0f;
+    [SerializeField] private float skullSkillCooldown = 5f;
+    private float skullSkillTimer = 0f;
+    // Có thể thêm biến để kiểm tra trạng thái
+    private bool isSkullSkillActive = false;
+
+
+    [SerializeField] Transform playerTrans;
     void Start()
     {
         BossTrans = transform;
         rb = GetComponent<Rigidbody2D>();
+        GameObject Player = GameObject.FindGameObjectWithTag("Player");
+        playerTrans = Player.transform;
+        defaultPosition = transform.position;
     }
 
     private void Update()
     {
-        //if (Input.GetKey(KeyCode.Space))
-        //{
-        //    CheckPlayer();
-        //}
+        // Xử lý cooldown
+        if (skullSkillTimer > 0)
+        {
+            skullSkillTimer -= Time.deltaTime;
+        }
+
+        if (Input.GetKey(KeyCode.Space))
+        {
+            TeleportDefault();
+        }
         if (Input.GetKeyDown(KeyCode.T))
         {
             Teleport();
         }
         if (Input.GetKeyDown(KeyCode.S))
         {
-            Teleport();
-            StartCoroutine(SummonObject());
+            SummonObject();
+        }
+        if (Input.GetKeyDown(KeyCode.F) && skullSkillTimer <= 0)
+        {
+            SummonSkullProjectile();
+            skullSkillTimer = skullSkillCooldown; // Reset cooldown
+            isSkullSkillActive = true;
         }
 
+        MoveObject();
     }
-    //public void CheckPlayer()
-    //{
-    //    string currentFloor = floorCheck?.CurrentFloor ?? "Unknown";
-    //    Transform leftTransform = floorCheck?.CurrentLeftFloor;
-    //    Transform rightTransform = floorCheck?.CurrentRightFloor;
-    //    Debug.Log($"Player is at {currentFloor}");
+    public void CheckPlayer()
+    {
+        string currentFloor = floorCheck?.CurrentFloor ?? "Unknown";
+        Transform leftTransform = floorCheck?.CurrentLeftFloor;
+        Transform rightTransform = floorCheck?.CurrentRightFloor;
+        Debug.Log($"Player is at {currentFloor}");
 
-    //    if (leftTransform != null && rightTransform != null)
-    //    {
-    //        Debug.Log($"LeftFloor: {leftTransform.position}, RightFloor: {rightTransform.position}");
-    //    }
+        if (leftTransform != null && rightTransform != null)
+        {
+            Debug.Log($"LeftFloor: {leftTransform.position}, RightFloor: {rightTransform.position}");
+        }
 
-    //    bool isOnLeft = sideManager?.IsOnLeft ?? false;
-    //    bool isOnRight = sideManager?.IsOnRight ?? false;
+        bool isOnLeft = sideManager?.IsOnLeft ?? false;
+        bool isOnRight = sideManager?.IsOnRight ?? false;
 
-    //    if (isOnLeft)
-    //    {
-    //        Debug.Log("Player is on the Left side.");
-    //    }
-    //    else if (isOnRight)
-    //    {
-    //        Debug.Log("Player is on the Right side.");
-    //    }
-    //    else
-    //    {
-    //        Debug.Log("Player position unknown.");
-    //    }
-    //}
+        if (isOnLeft)
+        {
+            Debug.Log("Player is on the Left side.");
+        }
+        else if (isOnRight)
+        {
+            Debug.Log("Player is on the Right side.");
+        }
+        else
+        {
+            Debug.Log("Player position unknown.");
+        }
+    }
 
     private void Teleport()
     {
@@ -96,25 +132,33 @@ public class Boss5 : MonoBehaviour
             Debug.Log("Cannot teleport. Player position unknown or target floor is missing.");
         }
     }
-    private IEnumerator SummonObject()
+
+    private void TeleportDefault()
     {
-        yield return new WaitForSeconds(1f);
-        // Lấy reference đến các transform
+        BossTrans.position = defaultPosition;
+    }
+    private void SummonObject()
+    {
         Transform leftTransform = floorCheck?.CurrentLeftFloor;
         Transform rightTransform = floorCheck?.CurrentRightFloor;
 
-        // Hủy object cũ nếu có
         if (summonedObject != null)
         {
             Destroy(summonedObject);
         }
 
-        // Spawn theo logic giống Teleport
+        if (Skill1Left == null || Skill1Right == null)
+        {
+            Debug.LogError("No prefab assigned for summoning!");
+            return;
+        }
+
         if (sideManager?.IsOnLeft ?? false && rightTransform != null)
         {
             Debug.Log("Summoning object on Right Floor...");
             isMovingLeft = false;
             spawnPosition = rightTransform.position;
+            targetTransform = leftTransform; // Set đích là leftTransform
             summonedObject = Instantiate(Skill1Right, spawnPosition, Quaternion.identity);
         }
         else if (sideManager?.IsOnRight ?? false && leftTransform != null)
@@ -122,23 +166,29 @@ public class Boss5 : MonoBehaviour
             Debug.Log("Summoning object on Left Floor...");
             isMovingLeft = true;
             spawnPosition = leftTransform.position;
+            targetTransform = rightTransform; // Set đích là rightTransform
             summonedObject = Instantiate(Skill1Left, spawnPosition, Quaternion.identity);
+        }
+        else
+        {
+            Debug.Log("Cannot summon. Player position unknown or target floor is missing.");
+            return;
         }
 
         isMovingForward = true;
-        StartCoroutine(MoveObject());
     }
 
-    private IEnumerator MoveObject()
+    private void MoveObject()
     {
-        yield return new WaitForSeconds(1f);
-
-        float moveDirection = isMovingLeft ? 1 : -1;
+        if (summonedObject == null || targetTransform == null) return;
 
         if (isMovingForward)
         {
-            // Di chuyển đi
-            if (Mathf.Abs(summonedObject.transform.position.x - spawnPosition.x) < moveDistance)
+            float moveDirection = isMovingLeft ? 1 : -1;
+            Vector3 targetPosition = targetTransform.position;
+            float finalTargetX = targetPosition.x + (moveDirection * targetOffset); // Thêm offset theo hướng di chuyển
+
+            if (Mathf.Abs(summonedObject.transform.position.x - finalTargetX) > 0.1f)
             {
                 summonedObject.transform.Translate(Vector3.right * moveDirection * moveSpeed * Time.deltaTime);
             }
@@ -149,17 +199,87 @@ public class Boss5 : MonoBehaviour
         }
         else
         {
-            // Di chuyển về
-            if (Mathf.Abs(summonedObject.transform.position.x - spawnPosition.x) > 0.1f)
+            float moveDirection = isMovingLeft ? -1 : 1;
+            float finalSpawnX = spawnPosition.x + (moveDirection * targetOffset); // Thêm offset cho vị trí quay về
+
+            if (Mathf.Abs(summonedObject.transform.position.x - finalSpawnX) > 0.1f)
             {
-                summonedObject.transform.Translate(Vector3.right * -moveDirection * moveSpeed * Time.deltaTime);
+                summonedObject.transform.Translate(Vector3.right * moveDirection * moveSpeed * Time.deltaTime);
             }
             else
             {
-                // Khi object đã về gần vị trí ban đầu, destroy nó
                 Destroy(summonedObject);
             }
         }
     }
 
+    private void SummonSkullProjectile()
+    {
+        // Xóa skulls cũ nếu có
+        foreach (var skull in orbitingSkulls)
+        {
+            if (skull != null)
+                Destroy(skull);
+        }
+        orbitingSkulls.Clear();
+
+        // Tạo skulls mới
+        float angleStep = 360f / numberOfSkulls;
+        numberOfSkulls = Random.Range(5, 10);
+        for (int i = 0; i < numberOfSkulls; i++)
+        {
+            float angle = i * angleStep;
+            Vector3 spawnPos = transform.position + Quaternion.Euler(0, 0, angle) * Vector3.right * orbitRadius;
+            GameObject skull = Instantiate(skullPrefab, spawnPos, Quaternion.identity);
+            orbitingSkulls.Add(skull);
+        }
+
+        orbitTimer = 0f;
+        StartCoroutine(SkullOrbitAndShoot());
+    }
+
+    private IEnumerator SkullOrbitAndShoot()
+    {
+        // Xoay quanh boss
+        while (orbitTimer < orbitDuration)
+        {
+            orbitTimer += Time.deltaTime;
+            float currentAngle = orbitSpeed * Time.time;
+
+            for (int i = 0; i < orbitingSkulls.Count; i++)
+            {
+                if (orbitingSkulls[i] == null) continue;
+
+                float angle = currentAngle + (i * (360f / numberOfSkulls));
+                Vector3 offset = Quaternion.Euler(0, 0, angle) * Vector3.right * orbitRadius;
+                orbitingSkulls[i].transform.position = transform.position + offset;
+            }
+            yield return null;
+        }
+
+       
+        if (playerTrans != null)
+        {
+            foreach (var skull in orbitingSkulls)
+            {
+                if (skull == null) continue;
+
+                // Tính hướng đến player
+                Vector2 direction = (playerTrans.position - skull.transform.position).normalized;
+
+                // Thêm component Rigidbody2D nếu chưa có
+                Rigidbody2D rb = skull.GetComponent<Rigidbody2D>();
+                if (rb == null)
+                {
+                    rb = skull.AddComponent<Rigidbody2D>();
+                }
+
+                // Bắn về phía player
+                rb.linearVelocity = direction * projectileSpeed;
+
+                // Tự hủy sau 5 giây
+                Destroy(skull, 5f);
+            }
+        }
+    }
 }

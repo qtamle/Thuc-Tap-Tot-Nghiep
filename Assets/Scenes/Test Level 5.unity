@@ -1419,7 +1419,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.012578547, g: 0.012578547, b: 0.012578547, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4871,7 +4871,7 @@ GameObject:
   - component: {fileID: 612989577}
   m_Layer: 5
   m_Name: Fill
-  m_TagString: Untagged
+  m_TagString: Fill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7382,7 +7382,7 @@ GameObject:
   - component: {fileID: 961226743}
   - component: {fileID: 961226742}
   m_Layer: 12
-  m_Name: BossLevel5
+  m_Name: Skull
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7397,7 +7397,7 @@ Transform:
   m_GameObject: {fileID: 961226738}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.79, y: 2.32, z: 0}
+  m_LocalPosition: {x: 2.8, y: 2.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7417,6 +7417,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2845d497730d9a4695039f95a53078c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 3
+  currentHealth: 0
+  healthBarSlider: {fileID: 0}
+  healthBarFill: {fileID: 0}
 --- !u!114 &961226741
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7437,8 +7441,16 @@ MonoBehaviour:
   sideManager: {fileID: 1346621685}
   Skill1Left: {fileID: 7020009498738820519, guid: fba615d7be9079645b28a1c1c15334c5, type: 3}
   Skill1Right: {fileID: 8422392057226407718, guid: 172dba5a1f13f1c4e9c6a8c44f8ac7c1, type: 3}
-  moveSpeed: 5
-  moveDistance: 5
+  moveSpeed: 15
+  targetOffset: 1
+  skullPrefab: {fileID: 3364455068215418695, guid: 174bb79e76554b34ca4c9f6616baa785, type: 3}
+  orbitRadius: 3
+  orbitSpeed: 180
+  projectileSpeed: 15
+  numberOfSkulls: 5
+  orbitDuration: 2
+  skullSkillCooldown: 5
+  playerTrans: {fileID: 0}
 --- !u!61 &961226742
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7473,7 +7485,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0.38887894}
+  m_Offset: {x: -0.020137668, y: 0.38887882}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -7483,7 +7495,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1.7777579}
+  m_Size: {x: 1.8659188, y: 2.281199}
   m_EdgeRadius: 0
 --- !u!50 &961226743
 Rigidbody2D:
@@ -11931,7 +11943,7 @@ Transform:
   m_GameObject: {fileID: 1257452411}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.45, y: 2.72, z: 0.14113769}
+  m_LocalPosition: {x: 2.86, y: -3.3, z: 0.17697416}
   m_LocalScale: {x: 0.70655495, y: 1.7410969, z: 1.3773}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -16387,6 +16399,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1883497711}
   - component: {fileID: 1883497712}
+  - component: {fileID: 1883497713}
   m_Layer: 12
   m_Name: Sprite
   m_TagString: Untagged
@@ -16404,7 +16417,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.3814, z: 0}
-  m_LocalScale: {x: 1, y: 1.7628, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 961226739}
@@ -16453,8 +16466,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.8396226, g: 0.80131817, b: 0.06732824, a: 1}
+  m_Sprite: {fileID: -2759434670737541878, guid: dfebfc30f287b4640978e17e5b1022b1, type: 3}
+  m_Color: {r: 0.5660378, g: 0.5660378, b: 0.5660378, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -16464,6 +16477,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1883497713
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1883497710}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8c0ced77f9f04e044a0bdeb0584682f7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1924320591
 GameObject:
   m_ObjectHideFlags: 0

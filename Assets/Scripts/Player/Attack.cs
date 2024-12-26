@@ -73,15 +73,16 @@ public class Attack : MonoBehaviour
 
         foreach (Collider2D boss in bosses)
         {
-            GangsterHealth gangsterHealth = boss.GetComponent<GangsterHealth>();
-            if (gangsterHealth != null && gangsterHealth.CanBeDamaged() && !isAttackBoss)
+            DamageInterface damageable = boss.GetComponent<DamageInterface>();
+
+            if (damageable != null && damageable.CanBeDamaged() && !isAttackBoss)
             {
-                gangsterHealth.TakeDamage(1);
+                damageable.TakeDamage(1); // Gọi phương thức chung từ interface
                 isAttackBoss = true;
+                damageable.SetCanBeDamaged(false);
 
-                gangsterHealth.SetCanBeDamaged(false);
 
-                SpawnCoins(coinPrefab, coinSpawnMin * 12, coinSpawnMax * 12, boss.transform.position);
+                SpawnCoins(coinPrefab, coinSpawnMin * 10, coinSpawnMax * 10, boss.transform.position);
 
                 if (Random.value <= 0.25f)
                 {
@@ -91,56 +92,81 @@ public class Attack : MonoBehaviour
                 SpawnExperienceOrbs(boss.transform.position, 20);
             }
         }
+
         isAttackBoss = false;
 
+        //Collider2D[] bosses = Physics2D.OverlapCircleAll(attackPoints.position, radius, bossLayer);
 
-        Collider2D[] assassin = Physics2D.OverlapCircleAll(attackPoints.position, radius, bossLayer);
+        //foreach (Collider2D boss in bosses)
+        //{
+        //    GangsterHealth gangsterHealth = boss.GetComponent<GangsterHealth>();
+        //    if (gangsterHealth != null && gangsterHealth.CanBeDamaged() && !isAttackBoss)
+        //    {
+        //        gangsterHealth.TakeDamage(1);
+        //        isAttackBoss = true;
 
-        foreach (Collider2D asssass in assassin)
-        {
-            AssassinHealth Assassin = asssass.GetComponent<AssassinHealth>();
-            if (Assassin != null && Assassin.CanBeDamaged() && !isAttackBoss)
-            {
-                Assassin.TakeDamage(1);
-                isAttackBoss = true;
+        //        gangsterHealth.SetCanBeDamaged(false);
 
-                Assassin.SetCanBeDamaged(false);
+        //        SpawnCoins(coinPrefab, coinSpawnMin * 12, coinSpawnMax * 12, boss.transform.position);
 
-                SpawnCoins(coinPrefab, coinSpawnMin * 13, coinSpawnMax * 13, asssass.transform.position);
+        //        if (Random.value <= 0.25f)
+        //        {
+        //            SpawnCoins(secondaryCoinPrefab, secondaryCoinSpawnMin * 5, secondaryCoinSpawnMax * 5, boss.transform.position);
+        //        }
 
-                if (Random.value <= 0.25f)
-                {
-                    SpawnCoins(secondaryCoinPrefab, secondaryCoinSpawnMin * 5, secondaryCoinSpawnMax * 5, asssass.transform.position);
-                }
+        //        SpawnExperienceOrbs(boss.transform.position, 20);
+        //    }
+        //}
+        //isAttackBoss = false;
 
-                SpawnExperienceOrbs(asssass.transform.position, 25);
-            }
-        }
-        isAttackBoss = false;
 
-        Collider2D[] cyborg = Physics2D.OverlapCircleAll(attackPoints.position, radius, bossLayer);
+        //Collider2D[] assassin = Physics2D.OverlapCircleAll(attackPoints.position, radius, bossLayer);
 
-        foreach (Collider2D cy in cyborg)
-        {
-            CyborgHealth cyborgs = cy.GetComponent<CyborgHealth>();
-            if (cyborgs != null && cyborgs.CanBeDamaged() && !isAttackBoss)
-            {
-                cyborgs.TakeDamage(1);
-                isAttackBoss = true;
+        //foreach (Collider2D asssass in assassin)
+        //{
+        //    AssassinHealth Assassin = asssass.GetComponent<AssassinHealth>();
+        //    if (Assassin != null && Assassin.CanBeDamaged() && !isAttackBoss)
+        //    {
+        //        Assassin.TakeDamage(1);
+        //        isAttackBoss = true;
 
-                cyborgs.SetCanBeDamaged(false);
+        //        Assassin.SetCanBeDamaged(false);
 
-                SpawnCoins(coinPrefab, coinSpawnMin * 13, coinSpawnMax * 13, cyborgs.transform.position);
+        //        SpawnCoins(coinPrefab, coinSpawnMin * 13, coinSpawnMax * 13, asssass.transform.position);
 
-                if (Random.value <= 0.25f)
-                {
-                    SpawnCoins(secondaryCoinPrefab, secondaryCoinSpawnMin * 5, secondaryCoinSpawnMax * 5, cyborgs.transform.position);
-                }
+        //        if (Random.value <= 0.25f)
+        //        {
+        //            SpawnCoins(secondaryCoinPrefab, secondaryCoinSpawnMin * 5, secondaryCoinSpawnMax * 5, asssass.transform.position);
+        //        }
 
-                SpawnExperienceOrbs(cyborgs.transform.position, 25);
-            }
-        }
-        isAttackBoss = false;
+        //        SpawnExperienceOrbs(asssass.transform.position, 25);
+        //    }
+        //}
+        //isAttackBoss = false;
+
+        //Collider2D[] cyborg = Physics2D.OverlapCircleAll(attackPoints.position, radius, bossLayer);
+
+        //foreach (Collider2D cy in cyborg)
+        //{
+        //    CyborgHealth cyborgs = cy.GetComponent<CyborgHealth>();
+        //    if (cyborgs != null && cyborgs.CanBeDamaged() && !isAttackBoss)
+        //    {
+        //        cyborgs.TakeDamage(1);
+        //        isAttackBoss = true;
+
+        //        cyborgs.SetCanBeDamaged(false);
+
+        //        SpawnCoins(coinPrefab, coinSpawnMin * 13, coinSpawnMax * 13, cyborgs.transform.position);
+
+        //        if (Random.value <= 0.25f)
+        //        {
+        //            SpawnCoins(secondaryCoinPrefab, secondaryCoinSpawnMin * 5, secondaryCoinSpawnMax * 5, cyborgs.transform.position);
+        //        }
+
+        //        SpawnExperienceOrbs(cyborgs.transform.position, 25);
+        //    }
+        //}
+        //isAttackBoss = false;
 
         Collider2D[] Snake = Physics2D.OverlapCircleAll(attackPoints.position, radius, bossLayer);
 
