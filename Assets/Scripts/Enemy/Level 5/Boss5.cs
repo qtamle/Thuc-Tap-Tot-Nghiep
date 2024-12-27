@@ -20,6 +20,7 @@ public class Boss5 : MonoBehaviour
     [Header("Skill 1 Settings")]
     [SerializeField] private GameObject Skill1Left;
     [SerializeField] private GameObject Skill1Right;
+    private bool canMove = false;  // Thêm biến để kiểm soát việc di chuyển
     [SerializeField] public float moveSpeed;
     private Transform targetTransform; // Thêm biến để lưu transform đích
     [SerializeField] private float targetOffset = 1f;
@@ -28,6 +29,14 @@ public class Boss5 : MonoBehaviour
     private Vector3 spawnPosition;
     private bool isMovingForward = true;
     private bool isMovingLeft;
+
+    [Header("Skill 2 Settings")]
+    [SerializeField] public GameObject[] SpamPointsLeft;
+    [SerializeField] public GameObject[] SpamPointsRight;
+    private List<GameObject> spawnedObjects = new List<GameObject>(); // Để track các object đã spawn
+    public float spamDelay = 0.1f; // Delay giữa mỗi lần spawn
+    
+
 
     [Header("Skull Projectile Settings")]
     [SerializeField] private GameObject skullPrefab; // Prefab của skull
@@ -80,8 +89,15 @@ public class Boss5 : MonoBehaviour
             skullSkillTimer = skullSkillCooldown; // Reset cooldown
             isSkullSkillActive = true;
         }
-
-        MoveObject();
+        if (Input.GetKeyDown(KeyCode.D))  // Sử dụng phím D cho skill spam
+        {
+            StartCoroutine(SpawnManyObject());
+        }
+        if (canMove) 
+        {
+            MoveObject();
+        }
+        
     }
     public void CheckPlayer()
     {
@@ -141,6 +157,7 @@ public class Boss5 : MonoBehaviour
     {
         Transform leftTransform = floorCheck?.CurrentLeftFloor;
         Transform rightTransform = floorCheck?.CurrentRightFloor;
+        Vector3 yOffset = new Vector3(0, 0.5f, 0);
 
         if (summonedObject != null)
         {
@@ -157,7 +174,7 @@ public class Boss5 : MonoBehaviour
         {
             Debug.Log("Summoning object on Right Floor...");
             isMovingLeft = false;
-            spawnPosition = rightTransform.position;
+            spawnPosition = rightTransform.position + yOffset;
             targetTransform = leftTransform; // Set đích là leftTransform
             summonedObject = Instantiate(Skill1Right, spawnPosition, Quaternion.identity);
         }
@@ -165,7 +182,7 @@ public class Boss5 : MonoBehaviour
         {
             Debug.Log("Summoning object on Left Floor...");
             isMovingLeft = true;
-            spawnPosition = leftTransform.position;
+            spawnPosition = leftTransform.position + yOffset;
             targetTransform = rightTransform; // Set đích là rightTransform
             summonedObject = Instantiate(Skill1Left, spawnPosition, Quaternion.identity);
         }
@@ -174,10 +191,51 @@ public class Boss5 : MonoBehaviour
             Debug.Log("Cannot summon. Player position unknown or target floor is missing.");
             return;
         }
-
-        isMovingForward = true;
+        canMove = false;
+        StartCoroutine(StartMovementAfterDelay());
     }
+    private IEnumerator SpawnManyObject()
+    {
+        // Xóa tất cả object cũ nếu có
+        foreach (var obj in spawnedObjects)
+        {
+            if (obj != null)
+                Destroy(obj);
+        }
+        spawnedObjects.Clear();
 
+        // Xác định mảng points để spawn dựa vào vị trí người chơi
+        GameObject[] spawnPoints;
+        GameObject prefabToSpawn;
+
+        if (sideManager?.IsOnLeft ?? false)
+        {
+            spawnPoints = SpamPointsRight;
+            prefabToSpawn = Skill1Right;
+        }
+        else
+        {
+            spawnPoints = SpamPointsLeft;
+            prefabToSpawn = Skill1Left;
+        }
+
+        // Spawn tại mỗi điểm với delay
+        foreach (var point in spawnPoints)
+        {
+            if (point != null)
+            {
+                GameObject spawnedObj = Instantiate(prefabToSpawn, point.transform.position, Quaternion.identity);
+                spawnedObjects.Add(spawnedObj);
+                yield return new WaitForSeconds(spamDelay);
+            }
+        }
+    }
+    private IEnumerator StartMovementAfterDelay()
+    {
+        yield return new WaitForSeconds(1f);
+        isMovingForward = true;
+        canMove = true;
+    }
     private void MoveObject()
     {
         if (summonedObject == null || targetTransform == null) return;

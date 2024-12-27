@@ -7436,13 +7436,24 @@ MonoBehaviour:
   groundCheckRadius: 0.2
   wallLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   floorCheck: {fileID: 1708973591}
   sideManager: {fileID: 1346621685}
   Skill1Left: {fileID: 7020009498738820519, guid: fba615d7be9079645b28a1c1c15334c5, type: 3}
   Skill1Right: {fileID: 8422392057226407718, guid: 172dba5a1f13f1c4e9c6a8c44f8ac7c1, type: 3}
   moveSpeed: 15
   targetOffset: 1
+  SpamPointsLeft:
+  - {fileID: 2047957222}
+  - {fileID: 41611682}
+  - {fileID: 1155236336}
+  - {fileID: 997639046}
+  SpamPointsRight:
+  - {fileID: 1658687820}
+  - {fileID: 261974308}
+  - {fileID: 419366678}
+  - {fileID: 1826942258}
+  spamDelay: 0.1
   skullPrefab: {fileID: 3364455068215418695, guid: 174bb79e76554b34ca4c9f6616baa785, type: 3}
   orbitRadius: 3
   orbitSpeed: 180

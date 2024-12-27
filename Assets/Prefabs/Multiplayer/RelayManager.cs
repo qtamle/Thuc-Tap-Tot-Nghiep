@@ -32,7 +32,7 @@ public class RelayManager : MonoBehaviour
     {
         await StartClientWithRelay(joinField.text);
     }
-    private async Task<string> StartHostWithRelay(int maxConnection = 2)
+    private async Task<string> StartHostWithRelay(int maxConnection = 4)
     {
         Allocation allocation = await RelayService.Instance.CreateAllocationAsync(maxConnection);
         NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(new RelayServerData(allocation, "dtls"));

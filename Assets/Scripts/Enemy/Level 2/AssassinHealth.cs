@@ -2,7 +2,7 @@
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class AssassinHealth : MonoBehaviour
+public class AssassinHealth : MonoBehaviour, DamageInterface
 {
     [Header("Health Settings")]
     public int maxHealth = 3;

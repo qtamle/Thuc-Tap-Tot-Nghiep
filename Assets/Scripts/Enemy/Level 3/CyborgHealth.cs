@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class CyborgHealth : MonoBehaviour
+public class CyborgHealth : MonoBehaviour, DamageInterface
 {
     [Header("Health Settings")]
     public int maxHealth = 3;
