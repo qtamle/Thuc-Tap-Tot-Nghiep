@@ -5,10 +5,10 @@ using UnityEngine;
 public class CaptainSkill : MonoBehaviour
 {
     [Header("Knife Blade")]
-    public GameObject bladePrefab;    
-    public float speed = 2f;            
-    public float radius = 3f;          
-    public float height = 5f;           
+    public GameObject bladePrefab;
+    public float speed = 2f;
+    public float radius = 3f;
+    public float height = 5f;
     public float rotationSpeed = 360f;
 
     [Header("Laser")]
@@ -16,6 +16,7 @@ public class CaptainSkill : MonoBehaviour
     public float laserDuration = 1f;
     public float laserDistance = 10f;
     public Transform laserShootTransform;
+    public Transform laserShootTransform2;
 
     [Header("Bomb")]
     public GameObject bombPrefab;
@@ -33,14 +34,32 @@ public class CaptainSkill : MonoBehaviour
     public float throwSpeedBigBomb = 5f;
     private Vector3 playerLastPositionBig;
 
+    [Header("Flash")]
+    public float jumpHeight = 15f;
+    public float moveDuration = 0.5f;
+    public float dashSpeed = 5f;
+    public float offScreenOffset = 2f;
+    private Vector3 originalPosition;
+
+    [Header("Shoot")]
+    public GameObject linePrefab;
+    public float laserDistances = 2f;
+    public Transform[] shootingPoints;
+    public GameObject bulletPrefab;
+    public float fireDelay = 2f;
+    public int totalRounds = 5;
+    public float bulletSpeedLaser;
+    public Transform laserPositionTransform;
+    private GameObject laserObject;
+
     [Header("Ground Check")]
     public Transform groundCheckTransform;
     public float groundCheckRadius = 0.1f;
     public LayerMask groundLayer;
 
-    private GameObject bladeInstance; 
-    private Vector3 origin;            
-    private float t;                    
+    private GameObject bladeInstance;
+    private Vector3 origin;
+    private float t;
     private bool isSkillActive = false;
 
     private GameObject player;
@@ -50,17 +69,20 @@ public class CaptainSkill : MonoBehaviour
     private GameObject ball;
     private Vector3 startPosition;
     private Vector3 targetPosition;
+    private LineRenderer lineRenderer;
 
     private void Start()
     {
+        originalPosition = transform.position;
         playerPositionOriginal = transform.position;
         startPosition = transform.position;
         targetPosition = new Vector3(transform.position.x, transform.position.y + moveDistance, transform.position.z);
+
     }
 
     private void Update()
     {
-        if (!isSkillActive) 
+        if (!isSkillActive)
         { playerLastPositionBig = FindPlayerPosition(); }
 
         if (Input.GetKeyDown(KeyCode.Space) && !isSkillActive)
@@ -87,13 +109,23 @@ public class CaptainSkill : MonoBehaviour
         {
             StartCoroutine(ActivateBombSkill());
         }
+
+        if (Input.GetKeyDown(KeyCode.U) && !isSkillActive)
+        {
+            StartCoroutine(FlashSkill());
+        }
+
+        if (Input.GetKeyDown(KeyCode.Y) && !isSkillActive)
+        {
+            StartCoroutine(FireLaserRounds());
+        }
     }
 
     void BladeSkill()
     {
         isSkillActive = true;
-        origin = transform.position; 
-        t = 0;                      
+        origin = transform.position;
+        t = 0;
 
         bladeInstance = Instantiate(bladePrefab, origin, Quaternion.identity);
     }
@@ -102,7 +134,7 @@ public class CaptainSkill : MonoBehaviour
     {
         t += speed * Time.deltaTime;
 
-        float progress = t % 2f; 
+        float progress = t % 2f;
         float x, y;
 
         if (progress <= 0.5f)
@@ -164,7 +196,7 @@ public class CaptainSkill : MonoBehaviour
 
     IEnumerator FlipAndFireLaser(GameObject player)
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
 
         FlipCharacter(player);
 
@@ -204,7 +236,7 @@ public class CaptainSkill : MonoBehaviour
     }
     IEnumerator FireLaserAndReturn()
     {
-        if (laserShootTransform == null)
+        if (laserShootTransform == null || laserShootTransform2 == null)
         {
             Debug.LogError("Laser Shoot Transform is not assigned.");
             yield break;
@@ -212,37 +244,24 @@ public class CaptainSkill : MonoBehaviour
 
         Debug.Log("Laser Shoot Transform Position: " + laserShootTransform.position);
 
-        float rotationAngle = 0f;
+        float rotationAngle1 = 0f;
+        float rotationAngle2 = 0f;
 
         if (transform.rotation.eulerAngles.y == 0f)
         {
-            rotationAngle = 90f;
+            rotationAngle1 = 90f;  
+            rotationAngle2 = -90f; 
         }
         else if (transform.rotation.eulerAngles.y == 180f)
         {
-            rotationAngle = -90f;
+            rotationAngle1 = -90f; 
+            rotationAngle2 = 90f; 
         }
 
-        GameObject laser = Instantiate(laserPrefab, laserShootTransform.position, Quaternion.Euler(0, 0, rotationAngle));
-
-        LineRenderer laserRenderer = laser.GetComponent<LineRenderer>();
-        if (laserRenderer != null)
-        {
-            laserRenderer.positionCount = 2;
-
-            Vector3 laserStart = laserShootTransform.position;
-            Vector3 laserEnd = laserStart + transform.right * laserDistance;
-
-            laserRenderer.SetPosition(0, laserStart);
-            laserRenderer.SetPosition(1, laserEnd);
-
-            laserRenderer.startWidth = 0.1f;
-            laserRenderer.endWidth = 0.1f;
-            laserRenderer.numCapVertices = 5;
-        }
+        FireLaserFromTransform(laserShootTransform, rotationAngle1);
+        FireLaserFromTransform(laserShootTransform2, rotationAngle2);
 
         yield return new WaitForSeconds(laserDuration);
-        Destroy(laser);
 
         yield return new WaitForSeconds(0.5f);
 
@@ -264,6 +283,29 @@ public class CaptainSkill : MonoBehaviour
         yield return StartCoroutine(MoveToPosition(originalPosition, 1f));
 
         transform.rotation = lastRotation;
+    }
+
+    void FireLaserFromTransform(Transform laserShootTransform, float rotationAngle)
+    {
+        GameObject laser = Instantiate(laserPrefab, laserShootTransform.position, Quaternion.Euler(0, 0, rotationAngle));
+
+        LineRenderer laserRenderer = laser.GetComponent<LineRenderer>();
+        if (laserRenderer != null)
+        {
+            laserRenderer.positionCount = 2;
+
+            Vector3 laserStart = laserShootTransform.position;
+            Vector3 laserEnd = laserStart + transform.right * laserDistance;
+
+            laserRenderer.SetPosition(0, laserStart);
+            laserRenderer.SetPosition(1, laserEnd);
+
+            laserRenderer.startWidth = 0.1f;
+            laserRenderer.endWidth = 0.1f;
+            laserRenderer.numCapVertices = 5;
+        }
+
+        Destroy(laser, laserDuration);
     }
 
     IEnumerator MoveToPosition(Vector3 targetPosition, float duration)
@@ -515,7 +557,7 @@ public class CaptainSkill : MonoBehaviour
 
             if (Vector3.Distance(bomb.transform.position, playerLastPositionBig) < 0.1f)
             {
-                Destroy(bomb,2f);  
+                Destroy(bomb,1f);  
                 break;  
             }
 
@@ -561,4 +603,202 @@ public class CaptainSkill : MonoBehaviour
         }
         return null;
     }
+
+    IEnumerator FlashSkill()
+    {
+        isSkillActive = true;
+
+        // 1. Dịch chuyển đến góc trên trái và đâm xuống dưới phải
+        Vector3 jumpPosition = originalPosition + new Vector3(0, jumpHeight, 0);
+        yield return MovePosition(jumpPosition, moveDuration);
+
+        Vector3 targetPosition = transform.position;
+
+        Vector3 topLeftOffScreen = Camera.main.ViewportToWorldPoint(new Vector3(0, 1, Camera.main.nearClipPlane));
+        topLeftOffScreen.z = transform.position.z;
+        topLeftOffScreen += new Vector3(-offScreenOffset, offScreenOffset, 0);
+
+        transform.position = topLeftOffScreen;
+
+        Vector3 bottomRight = Camera.main.ViewportToWorldPoint(new Vector3(1, 0, Camera.main.nearClipPlane));
+        bottomRight.z = transform.position.z;
+
+        Vector3 dashDirection = (bottomRight - transform.position).normalized;
+
+        yield return new WaitForSeconds(0.5f);
+        RotateTowards(dashDirection, -135f);
+        yield return DashInDirection(dashDirection, 3f);
+
+        // 2. Dịch chuyển đến góc dưới trái và đâm lên góc trên phải
+        Vector3 bottomLeft = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, Camera.main.nearClipPlane));
+        bottomLeft.z = transform.position.z;
+        bottomLeft += new Vector3(-offScreenOffset, -offScreenOffset, 0);
+
+        transform.position = bottomLeft;
+
+        Vector3 topRight = Camera.main.ViewportToWorldPoint(new Vector3(1, 1, Camera.main.nearClipPlane));
+        topRight.z = transform.position.z;
+
+        dashDirection = (topRight - transform.position).normalized;
+
+        yield return new WaitForSeconds(0.2f);
+        RotateTowards(dashDirection, -45f);
+        yield return DashInDirection(dashDirection, 3f);
+
+        // 3. Dịch chuyển đến góc dưới phải và đâm lên góc trên trái
+        transform.position = bottomRight;
+
+        Vector3 topLeft = Camera.main.ViewportToWorldPoint(new Vector3(0, 1, Camera.main.nearClipPlane));
+        topLeft.z = transform.position.z;
+
+        bottomRight += new Vector3(offScreenOffset, -offScreenOffset, 0); 
+        transform.position = bottomRight;
+
+        dashDirection = (topLeft - transform.position).normalized;
+
+        yield return new WaitForSeconds(0.2f);
+        RotateTowards(dashDirection, 45f);
+        yield return DashInDirection(dashDirection, 3f);
+
+        // 4. Dịch chuyển đến góc trên phải và đâm xuống góc dưới trái
+        transform.position = topRight;
+        topRight += new Vector3(offScreenOffset, offScreenOffset, 0);
+        transform.position = topRight;
+
+        dashDirection = (bottomLeft - transform.position).normalized;
+
+        yield return new WaitForSeconds(0.2f);
+        RotateTowards(dashDirection, 135f);
+        yield return DashInDirection(dashDirection, 3f);
+
+        // 5. Dịch chuyển góc trên và đâm thẳng xuống
+        transform.position = targetPosition;
+
+        yield return new WaitForSeconds(0.2f);
+        RotateTowards(Vector3.down, 180f);
+        dashDirection = Vector3.down;
+        yield return DashInDirection(dashDirection, 3f);
+
+        // 6. Dịch chuyển xuống dưới và đâm thẳng lên
+        Vector3 bottomPosition = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0, Camera.main.nearClipPlane)); 
+        bottomPosition.z = transform.position.z;
+        bottomPosition += new Vector3(0, -offScreenOffset, 0);
+
+        transform.position = bottomPosition;
+        yield return new WaitForSeconds(0.2f);
+
+        RotateTowards(Vector3.up, 0f);
+        dashDirection = (targetPosition - transform.position).normalized;
+        yield return DashInDirection(dashDirection, 3f);
+
+        // 7. Dịch chuyển về target position và hạ cánh
+        transform.position = targetPosition;
+        yield return MovePosition(originalPosition, 4f);
+
+        Debug.Log("FlashSkill complete!");
+        isSkillActive = false;
+    }
+
+    void RotateTowards(Vector3 direction, float fixedAngle)
+    {
+        transform.rotation = Quaternion.Euler(0, 0, fixedAngle);
+    }
+
+    IEnumerator MovePosition(Vector3 targetPosition, float duration)
+    {
+        Vector3 startPosition = transform.position;
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            transform.position = Vector3.Lerp(startPosition, targetPosition, elapsed / duration);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.position = targetPosition;
+    }
+
+    IEnumerator DashInDirection(Vector3 direction, float duration)
+    {
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            transform.position += direction * dashSpeed * Time.deltaTime;
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+    }
+
+    private IEnumerator FireLaserRounds()
+    {
+        isSkillActive = true;
+
+        CreateLaser();
+
+        yield return new WaitForSeconds(1.5f);
+
+        for (int round = 0; round < totalRounds; round++)
+        {
+            List<int> availableIndexes = new List<int>(shootingPoints.Length);
+            for (int i = 0; i < shootingPoints.Length; i++)
+            {
+                availableIndexes.Add(i);
+            }
+
+            int index1 = GetRandomIndex(availableIndexes);
+            int index2 = GetRandomIndex(availableIndexes);
+
+            FireBullet(shootingPoints[index1]);
+            FireBullet(shootingPoints[index2]);
+
+            yield return new WaitForSeconds(fireDelay);
+        }
+
+        yield return new WaitForSeconds(1f);
+
+        DestroyLaser();
+
+        yield return new WaitForSeconds(0.5f);
+
+        isSkillActive = false;
+    }
+
+    private int GetRandomIndex(List<int> availableIndexes)
+    {
+        int randomIndex = Random.Range(0, availableIndexes.Count);
+        int selectedIndex = availableIndexes[randomIndex];
+        availableIndexes.RemoveAt(randomIndex);
+        return selectedIndex;
+    }
+
+    private void CreateLaser()
+    {
+        if (laserPositionTransform != null)
+        {
+            Vector3 laserPosition = laserPositionTransform.position - new Vector3(15f, 1.6f, 0);
+            laserObject = Instantiate(linePrefab, laserPosition, Quaternion.identity);
+        }
+    }
+
+    private void DestroyLaser()
+    {
+        if (laserObject != null)
+        {
+            Destroy(laserObject);
+        }
+    }
+
+    private void FireBullet(Transform firePoint)
+    {
+        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+
+        Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
+        if (bulletRb != null)
+        {
+            bulletRb.linearVelocity = Vector2.down * bulletSpeedLaser;
+        }
+    }
+
 }
