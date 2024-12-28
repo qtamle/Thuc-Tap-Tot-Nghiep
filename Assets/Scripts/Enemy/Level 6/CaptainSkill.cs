@@ -61,6 +61,7 @@ public class CaptainSkill : MonoBehaviour
     private Vector3 origin;
     private float t;
     private bool isSkillActive = false;
+    private bool isSpawn = false;
 
     private GameObject player;
     private LineRenderer laserRenderer;
@@ -70,54 +71,112 @@ public class CaptainSkill : MonoBehaviour
     private Vector3 startPosition;
     private Vector3 targetPosition;
     private LineRenderer lineRenderer;
+    private Collider2D collider2d;
 
-    private void Start()
+    private FlashDamagePlayer damagePlayer;
+    private CaptainHealth health;
+    private Coroutine skillSequenceCoroutine;
+
+    private void Awake()
     {
         originalPosition = transform.position;
         playerPositionOriginal = transform.position;
         startPosition = transform.position;
         targetPosition = new Vector3(transform.position.x, transform.position.y + moveDistance, transform.position.z);
+    }
 
+    private void Start()
+    {
+        health = GetComponent<CaptainHealth>();
+
+        collider2d = GetComponent<Collider2D>();
+        if (collider2d != null )
+        {
+            collider2d.enabled = false;
+        }
+        damagePlayer = GetComponent<FlashDamagePlayer>();
     }
 
     private void Update()
     {
+        CheckHealth();
+
         if (!isSkillActive)
         { playerLastPositionBig = FindPlayerPosition(); }
-
-        if (Input.GetKeyDown(KeyCode.Space) && !isSkillActive)
-        {
-            BladeSkill();
-        }
 
         if (isSkillActive && bladeInstance != null)
         {
             MoveBlade();
         }
+    }
 
-        if (Input.GetKeyDown(KeyCode.P) && !isSkillActive)
-        {
-            LaserSkill();
-        }
+    public void Active()
+    {
+        Spawn();
+    }
 
-        if (Input.GetKeyDown(KeyCode.O) && !isSkillActive)
-        {
-            StartCoroutine(BombSkill());
-        }
+    private IEnumerator SkillSequenceLoop()
+    {
+        yield return new WaitForSeconds(3f);
 
-        if (Input.GetKeyDown(KeyCode.I) && !isSkillActive)
+        while (true)
         {
-            StartCoroutine(ActivateBombSkill());
-        }
+            // BladeSkill
+            BladeSkill();
+            yield return new WaitUntil(() => !isSkillActive);
+            yield return new WaitForSeconds(1f);
 
-        if (Input.GetKeyDown(KeyCode.U) && !isSkillActive)
-        {
-            StartCoroutine(FlashSkill());
-        }
-
-        if (Input.GetKeyDown(KeyCode.Y) && !isSkillActive)
-        {
+            // FireLaserRounds
             StartCoroutine(FireLaserRounds());
+            yield return new WaitUntil(() => !isSkillActive);
+            yield return new WaitForSeconds(1f);
+
+            // LaserSkill
+            LaserSkill();
+            yield return new WaitUntil(() => !isSkillActive);
+            yield return new WaitForSeconds(1f);
+
+            // ActivateBombSkill
+            yield return StartCoroutine(ActivateBombSkill());
+            yield return new WaitForSeconds(1f);
+
+            // FlashSkill
+            yield return StartCoroutine(FlashSkill());
+            yield return new WaitForSeconds(1.5f);
+        }
+    }
+
+    void CheckHealth()
+    {
+        if (health != null)
+        {
+            if (health.currentHealth <= 0)
+            {
+                GameObject[] lasers = GameObject.FindGameObjectsWithTag("Laser");
+
+                foreach (GameObject laser in lasers)
+                {
+                    Destroy(laser);
+                }
+
+                StopAllCoroutines();
+            }
+        }
+    }
+
+    void Spawn()
+    {
+        Vector3 spawnPosition = originalPosition + new Vector3(0f, 15f, 0f);
+
+        transform.position = spawnPosition;
+
+        StartCoroutine(MovePosition(originalPosition, 2f));
+
+        isSpawn = true;
+
+        if (isSpawn && !isSkillActive && skillSequenceCoroutine == null)
+        {
+            skillSequenceCoroutine = StartCoroutine(SkillSequenceLoop());
         }
     }
 
@@ -169,6 +228,7 @@ public class CaptainSkill : MonoBehaviour
             isSkillActive = false;
         }
     }
+
     void LaserSkill()
     {
         isSkillActive = true;
@@ -200,7 +260,7 @@ public class CaptainSkill : MonoBehaviour
 
         FlipCharacter(player);
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.2f);
 
         FireLaser();
     }
@@ -276,13 +336,15 @@ public class CaptainSkill : MonoBehaviour
         yield return new WaitForSeconds(laserDuration);
 
         Vector3 rightPosition = originalPosition + Vector3.right * 3f;
-        yield return StartCoroutine(MoveToPosition(rightPosition, 1f)); 
+        yield return StartCoroutine(MoveToPosition(rightPosition, 0.5f)); 
         FireLaserAtAngle(-34f); 
         yield return new WaitForSeconds(laserDuration);
 
         yield return StartCoroutine(MoveToPosition(originalPosition, 1f));
 
         transform.rotation = lastRotation;
+
+        isSkillActive = false;
     }
 
     void FireLaserFromTransform(Transform laserShootTransform, float rotationAngle)
@@ -321,8 +383,6 @@ public class CaptainSkill : MonoBehaviour
         }
 
         transform.position = targetPosition;
-
-        isSkillActive = false;
     }
 
     void FireLaserAtAngle(float angle)
@@ -518,60 +578,68 @@ public class CaptainSkill : MonoBehaviour
             rightRb.AddForce(rightDirection * launchForce + Vector2.up * upwardForce, ForceMode2D.Impulse);  
         }
     }
-    IEnumerator ActivateBombSkill()
+    private IEnumerator ActivateBombSkill()
     {
         isSkillActive = true;
 
-        GameObject bomb = Instantiate(bombPrefab, transform.position, Quaternion.identity);
-
-        Vector3 targetPosition = bomb.transform.position + Vector3.up * moveDistance;
-        float moveSpeed = 2.5f;
-        while (Vector3.Distance(bomb.transform.position, targetPosition) > 0.1f)
+        for (int i = 0; i < 3; i++)
         {
-            bomb.transform.position = Vector3.MoveTowards(bomb.transform.position, targetPosition, moveSpeed * Time.deltaTime);
-            yield return null;
-        }
+            playerLastPositionBig = FindPlayerPosition();
 
-        Vector3 originalScale = bomb.transform.localScale;
-        Vector3 targetScale = originalScale * 2;
-        float scaleDuration = 1f;
-        float elapsedTime = 0f;
+            GameObject bomb = Instantiate(bombPrefab, transform.position, Quaternion.identity);
+            BigBomb bigBomb = bomb.GetComponent<BigBomb>();
 
-        while (elapsedTime < scaleDuration)
-        {
-            bomb.transform.localScale = Vector3.Lerp(originalScale, targetScale, (elapsedTime / scaleDuration));
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-
-        Vector3 directionToPlayer = (playerLastPositionBig - bomb.transform.position).normalized;
-        float distanceToPlayer = Vector3.Distance(bomb.transform.position, playerLastPositionBig);
-        float fixedTravelTime = 5f;  
-        float travelTime = Mathf.Max(fixedTravelTime, distanceToPlayer / throwSpeedBigBomb);
-
-        elapsedTime = 0f;
-        while (elapsedTime < travelTime)
-        {
-            bomb.transform.position = Vector3.Lerp(bomb.transform.position, playerLastPositionBig, (elapsedTime / travelTime));
-            elapsedTime += Time.deltaTime;
-
-            if (Vector3.Distance(bomb.transform.position, playerLastPositionBig) < 0.1f)
+            Vector3 targetPosition = bomb.transform.position + Vector3.up * moveDistance;
+            float moveSpeed = 4f;
+            while (Vector3.Distance(bomb.transform.position, targetPosition) > 0.1f)
             {
-                Destroy(bomb,1f);  
-                break;  
+                bomb.transform.position = Vector3.MoveTowards(bomb.transform.position, targetPosition, moveSpeed * Time.deltaTime);
+                yield return null;
             }
 
-            yield return null;
-        }
+            Vector3 originalScale = bomb.transform.localScale;
+            Vector3 targetScale = originalScale * 2;
+            float scaleDuration = 1f;
+            float elapsedTime = 0f;
 
-        if (bomb != null)
-        {
-            Destroy(bomb,2f);
+            while (elapsedTime < scaleDuration)
+            {
+                bomb.transform.localScale = Vector3.Lerp(originalScale, targetScale, (elapsedTime / scaleDuration));
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+
+            Vector3 directionToPlayer = (playerLastPositionBig - bomb.transform.position).normalized;
+            float distanceToPlayer = Vector3.Distance(bomb.transform.position, playerLastPositionBig);
+            float fixedTravelTime = 5f;
+            float travelTime = Mathf.Max(fixedTravelTime, distanceToPlayer / throwSpeedBigBomb);
+
+            elapsedTime = 0f;
+            while (elapsedTime < travelTime)
+            {
+                bomb.transform.position = Vector3.Lerp(bomb.transform.position, playerLastPositionBig, (elapsedTime / travelTime));
+                elapsedTime += Time.deltaTime;
+
+                if (Vector3.Distance(bomb.transform.position, playerLastPositionBig) < 0.1f)
+                {
+                    bigBomb.Explode();
+                    yield return new WaitForSeconds(0.5f);
+                    break;
+                }
+
+                yield return null;
+            }
+
+            if (bomb != null)
+            {
+                bigBomb.Explode();
+            }
+
+            yield return new WaitForSeconds(0.5f); 
         }
 
         isSkillActive = false;
     }
-
 
     Vector3 FindPlayerPosition()
     {
@@ -607,6 +675,7 @@ public class CaptainSkill : MonoBehaviour
     IEnumerator FlashSkill()
     {
         isSkillActive = true;
+        damagePlayer.SetCanDamage(true);
 
         // 1. Dịch chuyển đến góc trên trái và đâm xuống dưới phải
         Vector3 jumpPosition = originalPosition + new Vector3(0, jumpHeight, 0);
@@ -676,8 +745,36 @@ public class CaptainSkill : MonoBehaviour
 
         yield return new WaitForSeconds(0.2f);
         RotateTowards(Vector3.down, 180f);
+
+        Vector3 leftClonePosition = transform.position + new Vector3(-5f, 0, 0);
+        Vector3 rightClonePosition = transform.position + new Vector3(5f, 0, 0);
+
+        GameObject leftClone = Instantiate(gameObject, leftClonePosition, transform.rotation);
+        GameObject rightClone = Instantiate(gameObject, rightClonePosition, transform.rotation);
+
+        leftClone.GetComponent<CaptainHealth>().enabled = false; 
+        rightClone.GetComponent<CaptainHealth>().enabled = false;
+        leftClone.GetComponent<BoxCollider2D>().enabled = false;
+        rightClone.GetComponent<BoxCollider2D>().enabled = false;
+
+        leftClone.transform.Rotate(0, 0, 180f);  
+        rightClone.transform.Rotate(0, 0, 180f); 
+
         dashDirection = Vector3.down;
-        yield return DashInDirection(dashDirection, 3f);
+
+        StartCoroutine(BlinkEffect(leftClone, 3f, 0.1f));
+        StartCoroutine(BlinkEffect(rightClone, 3f, 0.1f));
+
+        Coroutine mainCharacterDash = StartCoroutine(DashInDirection(dashDirection, 3f));
+        Coroutine leftCloneDash = StartCoroutine(leftClone.GetComponent<CaptainSkill>().DashInDirection(dashDirection, 3f)); 
+        Coroutine rightCloneDash = StartCoroutine(rightClone.GetComponent<CaptainSkill>().DashInDirection(dashDirection, 3f)); 
+
+        yield return mainCharacterDash;
+        yield return leftCloneDash;
+        yield return rightCloneDash;
+
+        Destroy(leftClone);
+        Destroy(rightClone);
 
         // 6. Dịch chuyển xuống dưới và đâm thẳng lên
         Vector3 bottomPosition = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0, Camera.main.nearClipPlane)); 
@@ -688,12 +785,69 @@ public class CaptainSkill : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
 
         RotateTowards(Vector3.up, 0f);
-        dashDirection = (targetPosition - transform.position).normalized;
-        yield return DashInDirection(dashDirection, 3f);
+
+        Vector3 leftClonePositionNew = transform.position + new Vector3(-5f, 0, 0);
+        Vector3 rightClonePositionNew = transform.position + new Vector3(5f, 0, 0);
+
+        GameObject leftCloneNew = Instantiate(gameObject, leftClonePositionNew, transform.rotation);
+        GameObject rightCloneNew = Instantiate(gameObject, rightClonePositionNew, transform.rotation);
+
+        leftCloneNew.GetComponent<CaptainHealth>().enabled = false;
+        rightCloneNew.GetComponent<CaptainHealth>().enabled = false;
+        leftCloneNew.GetComponent<BoxCollider2D>().enabled = false;
+        rightCloneNew.GetComponent<BoxCollider2D>().enabled = false;
+
+        leftCloneNew.transform.Rotate(0, 0, 0f);  
+        rightCloneNew.transform.Rotate(0, 0, 0f); 
+
+        Vector3 dashDirectionUp = Vector3.up;
+
+        StartCoroutine(BlinkEffect(leftCloneNew, 3f, 0.1f));
+        StartCoroutine(BlinkEffect(rightCloneNew, 3f, 0.1f));
+
+        Coroutine mainCharacterDashUp = StartCoroutine(DashInDirection(dashDirectionUp, 3f)); 
+        Coroutine leftCloneDashUp = StartCoroutine(leftCloneNew.GetComponent<CaptainSkill>().DashInDirection(dashDirectionUp, 3f)); 
+        Coroutine rightCloneDashUp = StartCoroutine(rightCloneNew.GetComponent<CaptainSkill>().DashInDirection(dashDirectionUp, 3f)); 
+
+        yield return mainCharacterDashUp;
+        yield return leftCloneDashUp;
+        yield return rightCloneDashUp;
+
+        Destroy(leftCloneNew);
+        Destroy(rightCloneNew);
 
         // 7. Dịch chuyển về target position và hạ cánh
         transform.position = targetPosition;
-        yield return MovePosition(originalPosition, 4f);
+        yield return StartCoroutine(BombSkill());
+        damagePlayer.SetCanDamage(false);
+
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        rb.bodyType = RigidbodyType2D.Dynamic;
+        collider2d.enabled = true;
+
+        bool hasLanded = false;
+        Collider2D collider = GetComponent<Collider2D>();
+        if (collider != null)
+        {
+            while (!hasLanded)
+            {
+                if (collider.IsTouchingLayers(LayerMask.GetMask("Ground")))
+                {
+                    hasLanded = true;
+                }
+                yield return null;
+            }
+        }
+
+        rb.bodyType = RigidbodyType2D.Kinematic;
+        rb.gravityScale = 0f;
+        health.SetCanBeDamaged(true);
+
+        yield return new WaitForSeconds(4f);
+
+        collider2d.enabled = false;
+        health.SetCanBeDamaged(false);
+        yield return MovePosition(originalPosition, 1.5f);
 
         Debug.Log("FlashSkill complete!");
         isSkillActive = false;
@@ -798,6 +952,29 @@ public class CaptainSkill : MonoBehaviour
         if (bulletRb != null)
         {
             bulletRb.linearVelocity = Vector2.down * bulletSpeedLaser;
+        }
+    }
+
+    IEnumerator BlinkEffect(GameObject clone, float blinkDuration, float blinkInterval)
+    {
+        SpriteRenderer spriteRenderer = clone.GetComponentInChildren<SpriteRenderer>();
+
+        if (spriteRenderer != null)
+        {
+            float elapsedTime = 0f;
+            bool isVisible = true;
+
+            while (elapsedTime < blinkDuration)
+            {
+                spriteRenderer.enabled = isVisible;
+
+                isVisible = !isVisible; 
+
+                elapsedTime += blinkInterval; 
+                yield return new WaitForSeconds(blinkInterval);
+            }
+
+            spriteRenderer.enabled = true; 
         }
     }
 

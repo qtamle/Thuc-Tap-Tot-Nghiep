@@ -1130,7 +1130,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 114790057}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SpawnLaser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2494,7 +2494,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Python
+  m_text: Captain
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3608,7 +3608,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa0a772ade8b0e441a19313cad4a1780, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  killTarget: 200
+  killTarget: 5
   enemiesKilled: 0
 --- !u!4 &452983390
 Transform:
@@ -10371,7 +10371,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1214878619}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: CheckGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10773,7 +10773,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1249940659
 Transform:
   m_ObjectHideFlags: 0
@@ -10898,6 +10898,11 @@ MonoBehaviour:
     - {fileID: 1023086602}
     minSpawnTime: 13
     maxSpawnTime: 20
+  warningBoss: {fileID: 1115378823}
+  bossLevel1: {fileID: 1774874064}
+  UIHealthBoss: {fileID: 77204493}
+  remain: {fileID: 969923266}
+  captainBoss: {fileID: 1774874068}
   currentTotalSpawnCount: 0
   maxTotalSpawnCount: 25
   spawnSpeedIncreaseInterval: 80
@@ -11325,7 +11330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2e3a30700c1d4f4cb267ad3ffb533c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 0.85
+  boxSize: {x: 1, y: 1.3}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 512
@@ -11975,7 +11980,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1377364280}
   - component: {fileID: 1377364281}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12360,6 +12365,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1774874066}
   - {fileID: 1257452414}
   - {fileID: 1999572101}
   - {fileID: 955948496}
@@ -13447,7 +13453,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1579408132}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: PositionShoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14081,7 +14087,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1731172946}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: PositionShoot 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14423,7 +14429,9 @@ GameObject:
   - component: {fileID: 1774874065}
   - component: {fileID: 1774874067}
   - component: {fileID: 1774874068}
-  m_Layer: 0
+  - component: {fileID: 1774874069}
+  - component: {fileID: 1774874070}
+  m_Layer: 12
   m_Name: Captain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14460,7 +14468,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -14484,8 +14492,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1774874064}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.01, y: 4.66, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.79, y: 3.1599998, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -14495,7 +14503,7 @@ Transform:
   - {fileID: 1214878619}
   - {fileID: 1982119335}
   - {fileID: 114790057}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1403800919}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &1774874067
 Rigidbody2D:
@@ -14537,7 +14545,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bladePrefab: {fileID: 1510751172999588371, guid: 3df223727ed7f2242aa68419fe300255, type: 3}
-  speed: 0.3
+  speed: 0.4
   radius: 4
   height: 11
   rotationSpeed: 2000
@@ -14580,6 +14588,7 @@ MonoBehaviour:
   moveDuration: 1.5
   dashSpeed: 22
   offScreenOffset: 5
+  clonePrefab: {fileID: 4544280015142993391, guid: f824a953e3e2fcc4e891f78b6edac575, type: 3}
   linePrefab: {fileID: 4529907726479089789, guid: 0f481d8143618594bbad64189115ec7d, type: 3}
   laserDistances: 2
   shootingPoints:
@@ -14590,7 +14599,7 @@ MonoBehaviour:
   - {fileID: 534666603}
   bulletPrefab: {fileID: 1334965047428969330, guid: 7ed7cec49d319444ab248ce38fb32169, type: 3}
   fireDelay: 1.5
-  totalRounds: 5
+  totalRounds: 6
   bulletSpeedLaser: 5
   laserPositionTransform: {fileID: 114790057}
   groundCheckTransform: {fileID: 1214878619}
@@ -14598,6 +14607,43 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 128
+--- !u!114 &1774874069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1774874064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ee8933c4a3938e4ab07efa6719ecd26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackTransform: {fileID: 1982119335}
+  boxSize: {x: 2, y: 2}
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  canDamage: 0
+--- !u!114 &1774874070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1774874064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0da3e4223b7fb8443939b48bd1d89d50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 5
+  currentHealth: 0
+  healthBarSlider: {fileID: 1806180031}
+  healthBarFill: {fileID: 612989577}
+  startTimeline:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1792332322
 GameObject:
   m_ObjectHideFlags: 0
@@ -15704,7 +15750,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1982119335}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: PositionAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15720,7 +15766,7 @@ Transform:
   m_GameObject: {fileID: 1982119334}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.1, z: 0}
+  m_LocalPosition: {x: 0, y: 1.41, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -16655,4 +16701,3 @@ SceneRoots:
   - {fileID: 1691331802}
   - {fileID: 1415900998}
   - {fileID: 1514140350}
-  - {fileID: 1774874066}

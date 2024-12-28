@@ -5,7 +5,7 @@ using UnityEngine;
 public class Attack : MonoBehaviour
 {
     [Header("Settings Attack")]
-    public float radius;
+    public Vector2 boxSize;
     public LayerMask enemyLayer;
     public LayerMask bossLayer;
     public Transform attackPoints;
@@ -41,7 +41,7 @@ public class Attack : MonoBehaviour
 
     private void Update()
     {
-        Collider2D[] enemies = Physics2D.OverlapCircleAll(attackPoints.position, radius, enemyLayer);
+        Collider2D[] enemies = Physics2D.OverlapBoxAll(attackPoints.position, boxSize, 0f, enemyLayer);
 
         foreach (Collider2D enemy in enemies)
         {
@@ -69,7 +69,7 @@ public class Attack : MonoBehaviour
             }
         }
 
-        Collider2D[] bosses = Physics2D.OverlapCircleAll(attackPoints.position, radius, bossLayer);
+        Collider2D[] bosses = Physics2D.OverlapBoxAll(attackPoints.position, boxSize, 0f, bossLayer);
 
         foreach (Collider2D boss in bosses)
         {
@@ -77,7 +77,7 @@ public class Attack : MonoBehaviour
 
             if (damageable != null && damageable.CanBeDamaged() && !isAttackBoss)
             {
-                damageable.TakeDamage(1); // Gọi phương thức chung từ interface
+                damageable.TakeDamage(1); 
                 isAttackBoss = true;
                 damageable.SetCanBeDamaged(false);
 
@@ -168,7 +168,7 @@ public class Attack : MonoBehaviour
         //}
         //isAttackBoss = false;
 
-        Collider2D[] Snake = Physics2D.OverlapCircleAll(attackPoints.position, radius, bossLayer);
+        Collider2D[] Snake = Physics2D.OverlapBoxAll(attackPoints.position, boxSize, 0f, bossLayer);
 
         foreach (Collider2D sn in Snake)
         {
@@ -327,10 +327,11 @@ public class Attack : MonoBehaviour
             yield break;
         }
     }
-
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(attackPoints.position, radius);
+
+        Gizmos.DrawWireCube(attackPoints.position, boxSize);
     }
+
 }

@@ -2160,7 +2160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a92ec147d1df7c44b42766eaecae6cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 4
+  maxHealth: 3
   currentHealth: 0
   healthBarSlider: {fileID: 1806180031}
   healthBarFill: {fileID: 612989577}
@@ -10791,7 +10791,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2e3a30700c1d4f4cb267ad3ffb533c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 0.85
+  boxSize: {x: 1, y: 1.3}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 512

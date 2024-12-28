@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5121872707316420626}
   - component: {fileID: 442768855773433992}
+  - component: {fileID: 7870575781859593209}
   m_Layer: 0
   m_Name: Blade
   m_TagString: Untagged
@@ -27,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.65, y: 2.82, z: 0}
-  m_LocalScale: {x: 0.5, y: 3.2, z: 1}
+  m_LocalScale: {x: 0.5, y: 3.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -87,3 +88,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7870575781859593209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1510751172999588371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4508e56722b09c0478492b8251b82102, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boxSize: {x: 0.5, y: 3.5}
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 8
