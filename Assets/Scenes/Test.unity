@@ -10916,7 +10916,7 @@ MonoBehaviour:
   coinSpawnMax: 4
   secondaryCoinSpawnMin: 1
   secondaryCoinSpawnMax: 2
-  attackCooldown: 0.3
+  attackCooldown: 0.5
   swipeThreshold: 15
   vfxPool: {fileID: 1292003985}
 --- !u!114 &1257452423
@@ -10931,9 +10931,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2d95b0151325d04794aebe626760798, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boxSize: {x: 0, y: 1.77}
-  boxSizeUp: {x: 0, y: 1.4}
-  boxSizeDown: {x: 0, y: 1.4}
+  boxSize: {x: 2, y: 1.77}
+  boxSizeUp: {x: 2, y: 1.4}
+  boxSizeDown: {x: 2, y: 1.4}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 512
@@ -10956,8 +10956,8 @@ MonoBehaviour:
   coinSpawnMax: 4
   secondaryCoinSpawnMin: 1
   secondaryCoinSpawnMax: 2
-  attackCooldown: 0.2
-  swipeThreshold: 15
+  attackCooldown: 0.3
+  swipeThreshold: 13
   vfxPool: {fileID: 1292003985}
 --- !u!114 &1257452424
 MonoBehaviour:

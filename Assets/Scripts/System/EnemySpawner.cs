@@ -128,12 +128,6 @@ public class EnemySpawner : MonoBehaviour, IEnemySpawner
     public void OnEnemyKilled()
     {
         currentTotalSpawnCount--;
-        Debug.Log("Enemy killed! Current spawn count: " + currentTotalSpawnCount);
-
-        if (stopSpawning)
-        {
-            currentTotalSpawnCount = 0;
-        }
     }
 
     private IEnumerator HandleBossSpawn()

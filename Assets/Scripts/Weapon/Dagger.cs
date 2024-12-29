@@ -63,46 +63,28 @@ public class Dagger : MonoBehaviour
     {
         if (Application.isEditor)
         {
-            if (Input.GetMouseButtonDown(0))
+            // Kiểm tra nhấn chuột
+            if (Input.GetMouseButtonDown(0)) 
             {
-                return true; 
-            }
-
-            if (Input.GetMouseButton(0)) 
-            {
-                Vector3 mouseDelta = Input.mousePosition - lastMousePosition;
-                lastMousePosition = Input.mousePosition;
-
-                if (mouseDelta.magnitude > swipeThreshold)
-                {
-                    return true; 
-                }
+                return true;
             }
         }
         else
         {
+            // Kiểm tra chạm trên màn hình cảm ứng
             if (Input.touchCount > 0)
             {
                 Touch touch = Input.GetTouch(0);
 
-                if (touch.phase == TouchPhase.Began)
+                if (touch.phase == TouchPhase.Began) 
                 {
-                    return true; 
-                }
-
-                if (touch.phase == TouchPhase.Moved) 
-                {
-                    if (touch.deltaPosition.magnitude > swipeThreshold)
-                    {
-                        return true; 
-                    }
+                    return true;
                 }
             }
         }
 
         return false;
     }
-
 
     private bool CanAttack()
     {

@@ -63,24 +63,15 @@ public class Gloves : MonoBehaviour
     {
         if (Application.isEditor)
         {
+            // Kiểm tra nhấn chuột
             if (Input.GetMouseButtonDown(0))
             {
                 return true;
             }
-
-            if (Input.GetMouseButton(0))
-            {
-                Vector3 mouseDelta = Input.mousePosition - lastMousePosition;
-                lastMousePosition = Input.mousePosition;
-
-                if (mouseDelta.magnitude > swipeThreshold)
-                {
-                    return true;
-                }
-            }
         }
         else
         {
+            // Kiểm tra chạm trên màn hình cảm ứng
             if (Input.touchCount > 0)
             {
                 Touch touch = Input.GetTouch(0);
@@ -89,20 +80,11 @@ public class Gloves : MonoBehaviour
                 {
                     return true;
                 }
-
-                if (touch.phase == TouchPhase.Moved)
-                {
-                    if (touch.deltaPosition.magnitude > swipeThreshold)
-                    {
-                        return true;
-                    }
-                }
             }
         }
 
         return false;
     }
-
 
     private bool CanAttack()
     {
