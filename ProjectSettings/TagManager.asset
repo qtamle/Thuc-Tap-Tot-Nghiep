@@ -15,6 +15,7 @@ TagManager:
   - Down
   - Laser
   - Fill
+  - Supply
   layers:
   - Default
   - TransparentFX
