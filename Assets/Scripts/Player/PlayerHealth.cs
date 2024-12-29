@@ -76,7 +76,7 @@ public class PlayerHealth : MonoBehaviour, DamagePlayerInterface
 
         if (currentShield > 0)
         {
-            currentShield -= damage;
+            currentShield -= (damage * 2);
             currentShield = Mathf.Max(currentShield, 0); 
             UpdateShieldUI();
 
