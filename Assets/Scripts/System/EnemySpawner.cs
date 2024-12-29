@@ -95,7 +95,7 @@ public class EnemySpawner : MonoBehaviour, IEnemySpawner
 
                 if (!spawnedEnemy.CompareTag("Enemy"))
                 {
-                    spawnedEnemy.tag = "Enemy";
+                    SetTagRecursive(spawnedEnemy, "Enemy");
                 }
 
                 currentTotalSpawnCount++;
@@ -112,6 +112,16 @@ public class EnemySpawner : MonoBehaviour, IEnemySpawner
             }
 
             yield return null;
+        }
+    }
+
+    private void SetTagRecursive(GameObject obj, string tag)
+    {
+        obj.tag = tag;
+
+        foreach (Transform child in obj.transform)
+        {
+            SetTagRecursive(child.gameObject, tag);
         }
     }
 
