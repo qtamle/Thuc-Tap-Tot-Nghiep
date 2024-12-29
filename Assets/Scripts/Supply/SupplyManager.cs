@@ -7,19 +7,22 @@ public class SupplyManager : MonoBehaviour
     public static SupplyManager Instance { get; private set; }
 
     [SerializeField] private List<SupplyData> supplyDataLList;
-    private List<SupplyData> playerInventory = new List<SupplyData>();
+    [SerializeField] private List<SupplyData> playerInventory = new List<SupplyData>();
 
-    public Transform supplySlot1;
-    public Transform supplySlot2;
-    public Transform supplySlot3;
+    [SerializeField] private Transform supplySlot1;
+    [SerializeField] private Transform supplySlot2;
+    [SerializeField] private Transform supplySlot3;
 
     private List<Transform> slots;
 
+
+    
     private void Awake()
     {
         if(Instance == null)
         {
             Instance = this;
+            
             DontDestroyOnLoad(this.gameObject);
         }
         else
@@ -29,6 +32,7 @@ public class SupplyManager : MonoBehaviour
     }
     private void Start()
     {
+        
         InitializeSlots();
     }
 
@@ -37,6 +41,14 @@ public class SupplyManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.D))
         {
             DebugRemainingSupplies();
+        }
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            InitializeSlots();
+        }
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            DebugInventory();
         }
     }
 
@@ -48,15 +60,28 @@ public class SupplyManager : MonoBehaviour
             return;
         }
 
-        Debug.Log("Danh sách các supply còn lại trong supplyDataLList:");
-        foreach (var supply in supplyDataLList)
-        {
-            Debug.Log($"- {supply.supplyName} ({supply.supplyType})");
-        }
+        string remainingSupplies = string.Join(", ", supplyDataLList.ConvertAll(s => $"{s.supplyName} ({s.supplyType})"));
+        Debug.Log($"Danh sách các supply còn lại trong supplyDataLList: {remainingSupplies}");
     }
+
+    public void DebugInventory()
+    {
+        if (playerInventory.Count == 0)
+        {
+            Debug.Log("Inventory đang trống.");
+            return;
+        }
+
+        string inventoryItems = string.Join(", ", playerInventory.ConvertAll(s => $"{s.supplyName} ({s.supplyType})"));
+        Debug.Log($"Danh sách các vật phẩm trong Inventory: {inventoryItems}");
+    }
+
 
     private void InitializeSlots()
     {
+        supplySlot1 = GameObject.FindGameObjectWithTag("Supply").transform;
+        supplySlot2 = GameObject.FindGameObjectWithTag("Supply1").transform;
+        supplySlot3 = GameObject.FindGameObjectWithTag("Supply2").transform;
         slots = new List<Transform>()
         {
             supplySlot1,
@@ -136,8 +161,6 @@ public class SupplyManager : MonoBehaviour
                     Debug.LogWarning($"SupplyPrefab {selectedSupply.supplyPrefab.name} không có script SupplyPickup!");
                 }
 
-                // Xóa supply đã dùng để tránh trùng lặp (nếu cần)
-                availableSupplies.RemoveAt(randomIndex);
 
                 Debug.Log($"Danh sách supply còn lại sau khi spawn cho loại {currentType}: {string.Join(", ", availableSupplies.ConvertAll(s => s.supplyName))}");
             }
@@ -147,6 +170,18 @@ public class SupplyManager : MonoBehaviour
             }
         }
 
+    }
+    public void RemoveSupply(SupplyData supply)
+    {
+        if (supplyDataLList.Contains(supply))
+        {
+            supplyDataLList.Remove(supply);
+            Debug.Log($"Supply {supply.supplyName} đã bị loại khỏi danh sách.");
+        }
+        else
+        {
+            Debug.LogWarning($"Supply {supply.supplyName} không tồn tại trong danh sách supplyDataLList.");
+        }
     }
 
     // Hàm shuffle danh sách
@@ -169,6 +204,4 @@ public class SupplyManager : MonoBehaviour
             Debug.Log($"Đã thêm {supply.supplyName} vào Inventory. Tổng số vật phẩm: {playerInventory.Count}");
         }
     }
-
-
 }
