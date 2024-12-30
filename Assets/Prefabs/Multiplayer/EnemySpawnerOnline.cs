@@ -68,6 +68,7 @@ public class EnemySpawnerOnline : NetworkBehaviour
                 Debug.Log($"KillTarget: {EnemyManager.Instance.killTarget}, EnemiesKilled: {EnemyManager.Instance.enemiesKilled}");
 
                 stopSpawning = true;
+                
                 StartCoroutine(HandleBossSpawn());
             }
 

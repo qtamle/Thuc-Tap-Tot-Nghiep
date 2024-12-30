@@ -11,9 +11,15 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Shop.unity
     guid: 376834b799a34744b833f186fbb00e6e
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Test.unity
     guid: 1be89f37a720bc6438b26a171b3be083
+  - enabled: 1
+    path: Assets/Scenes/SupplyScene.unity
+    guid: b290a419d6ba6d048b7724e0f303324e
+  - enabled: 1
+    path: Assets/Scenes/SupplyScene 1.unity
+    guid: a26265e80ffbc384c93476a6f3aaa8a2
   - enabled: 0
     path: Assets/Scenes/Multiplayer/Test1 Multiplayer.unity
     guid: 8d0ffc4a599b2ae429030006067e8a5c

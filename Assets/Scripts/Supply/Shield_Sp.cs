@@ -16,10 +16,6 @@ public class Shield_Sp : MonoBehaviour, ISupplyActive
         oneTimeActive = true;
     }
 
-    public void CheckCollider()
-    {
-
-    }
 
 
 }

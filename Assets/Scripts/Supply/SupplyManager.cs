@@ -9,6 +9,8 @@ public class SupplyManager : MonoBehaviour
     [SerializeField] private List<SupplyData> supplyDataLList;
     [SerializeField] private List<SupplyData> playerInventory = new List<SupplyData>();
 
+    [SerializeField] private InventorySupply inventorySupply;
+    
     [SerializeField] private Transform supplySlot1;
     [SerializeField] private Transform supplySlot2;
     [SerializeField] private Transform supplySlot3;
@@ -50,6 +52,40 @@ public class SupplyManager : MonoBehaviour
         {
             DebugInventory();
         }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            UseSupply(0);
+        }
+    }
+    public void UseSupply(int index)
+    {
+       
+        // Thêm kiểm tra null và range
+        if (playerInventory == null)
+        {
+            Debug.LogError("playerInventory is null!");
+            return;
+        }
+
+        if (index < 0 || index >= playerInventory.Count)
+        {
+            Debug.LogError($"Invalid index: {index}. Inventory size: {playerInventory.Count}");
+            return;
+        }
+
+        SupplyData supply = playerInventory[index];
+        if (supply == null)
+        {
+            Debug.LogError($"Supply at index {index} is null!");
+            return;
+        }
+
+        if (supply.supplyPrefab == null)
+        {
+            Debug.LogError($"SupplyPrefab for {supply.supplyName} is null!");
+            return;
+        }
+        inventorySupply.ActiveSupplyByIndex(index);
     }
 
     public void DebugRemainingSupplies()
@@ -203,5 +239,10 @@ public class SupplyManager : MonoBehaviour
             playerInventory.Add(supply);
             Debug.Log($"Đã thêm {supply.supplyName} vào Inventory. Tổng số vật phẩm: {playerInventory.Count}");
         }
+    }
+
+    public List<SupplyData> GetPlayerInventory()
+    {
+        return playerInventory;
     }
 }

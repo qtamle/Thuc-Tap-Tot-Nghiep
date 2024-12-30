@@ -17,10 +17,4 @@ public class Gernade_Sp : MonoBehaviour , ISupplyActive
         isActive = true;
     }
 
-    public void CheckCollider()
-    {
-
-    }
-
-
 }

@@ -2,7 +2,7 @@
 using Unity.Netcode;
 using UnityEngine;
 
-public class EnemyShoot : MonoBehaviour
+public class EnemyShootOnline : NetworkBehaviour
 {
     [Header("Move")]
     public float moveSpeed;
@@ -27,15 +27,15 @@ public class EnemyShoot : MonoBehaviour
 
     private void Start()
     {
-        
+
         rb = GetComponent<Rigidbody2D>();
         shootTimer = shootCooldown;
     }
 
     private void Update()
     {
-        
-        if (isGrounded && !isShooting) 
+
+        if (isGrounded && !isShooting)
         {
             Move();
             if (IsHittingWall())
@@ -48,7 +48,7 @@ public class EnemyShoot : MonoBehaviour
             if (shootTimer <= 0f)
             {
                 StartCoroutine(ShootAndPause());
-                
+
             }
         }
     }
@@ -72,13 +72,13 @@ public class EnemyShoot : MonoBehaviour
 
     void Shoot()
     {
-        
+
         GameObject bullet = Instantiate(bulletPrefab, shootPoint.position, Quaternion.identity);
-     
+        bullet.GetComponent<NetworkObject>().Spawn(true);
         Bullet bulletScript = bullet.GetComponent<Bullet>();
         bulletScript.SetDirection(movingRight ? Vector2.right : Vector2.left);
 
-
+        bullet.GetComponent<NetworkObject>().Despawn(true);
         Destroy(bullet, 5f);
     }
 
@@ -94,7 +94,7 @@ public class EnemyShoot : MonoBehaviour
 
     void Move()
     {
-        
+
         transform.Translate(Vector2.right * moveSpeed * Time.deltaTime * (movingRight ? 1 : -1));
     }
 

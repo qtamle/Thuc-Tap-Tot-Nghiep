@@ -87,8 +87,8 @@ public class GangsterOnline : NetworkBehaviour
         {
             if (!isUsingSkill)
             {
-                //int randomSkill = UnityEngine.Random.Range(0, 2);
-                int randomSkill = 0;
+                int randomSkill = UnityEngine.Random.Range(0, 2);
+
                 if (randomSkill == 0)
                 {
                     UseJumpSkill();

@@ -7230,6 +7230,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1567485762}
   - component: {fileID: 1567485761}
+  - component: {fileID: 1567485763}
   m_Layer: 0
   m_Name: SupplyManager
   m_TagString: Untagged
@@ -7255,6 +7256,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4c21bf3130ec0ba468fb0c1b7f514342, type: 2}
   - {fileID: 11400000, guid: ae5578e62dd8d6a44ba948a184a7c558, type: 2}
   playerInventory: []
+  inventorySupply: {fileID: 0}
   supplySlot1: {fileID: 1991073251}
   supplySlot2: {fileID: 975640051}
   supplySlot3: {fileID: 1013919499}
@@ -7273,6 +7275,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1567485763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1567485760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08883c74d3df9f74480386a1eac9adbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1577519510
 GameObject:
   m_ObjectHideFlags: 0
@@ -10979,7 +10993,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4353d2a8200f71d45a10eaca2f4cde5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SceneName: SupplyScene 1
+  sceneName: SupplyScene 1
 --- !u!114 &1913256880
 MonoBehaviour:
   m_ObjectHideFlags: 0

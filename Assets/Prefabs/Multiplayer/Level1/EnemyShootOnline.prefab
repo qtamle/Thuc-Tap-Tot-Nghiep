@@ -69,7 +69,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1132462800
+  GlobalObjectIdHash: 4000707765
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -101,7 +101,7 @@ MonoBehaviour:
   UseUnreliableDeltas: 0
   SyncPositionX: 1
   SyncPositionY: 1
-  SyncPositionZ: 1
+  SyncPositionZ: 0
   SyncRotAngleX: 0
   SyncRotAngleY: 0
   SyncRotAngleZ: 0
@@ -223,7 +223,7 @@ GameObject:
   - component: {fileID: 4386233893452790058}
   - component: {fileID: 7328052337809533328}
   - component: {fileID: 5639575833210420700}
-  - component: {fileID: 6368165318763786539}
+  - component: {fileID: 1588209714144497698}
   - component: {fileID: 1371525972481953412}
   - component: {fileID: 4768172329455581012}
   m_Layer: 9
@@ -379,7 +379,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &6368165318763786539
+--- !u!114 &1588209714144497698
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -388,9 +388,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8401804683276706849}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d8141e331bf82d44b41ee147bd893ac, type: 3}
+  m_Script: {fileID: 11500000, guid: 394468c50acd4344fbc6f3396c93ca37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   moveSpeed: 2.5
   wallCheck: {fileID: 4088708989328397564}
   groundCheck: {fileID: 5720561993753527223}

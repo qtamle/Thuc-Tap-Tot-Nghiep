@@ -18,9 +18,4 @@ public class Medkit_Supply : MonoBehaviour, ISupplyActive
         oneTimeActive = true;
     }
 
-    public void CheckCollider()
-    {
-
-    }
-
 }
