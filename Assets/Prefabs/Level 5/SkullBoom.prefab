@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5162296952416712777}
   - component: {fileID: 65469255458485389}
   - component: {fileID: 314444277243639517}
+  - component: {fileID: 4274596788505350492}
   m_Layer: 0
   m_Name: SkullBoom
   m_TagString: Untagged
@@ -110,3 +111,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4274596788505350492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3364455068215418695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4508e56722b09c0478492b8251b82102, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boxSize: {x: 0.8, y: 0.8}
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 8
