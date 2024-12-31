@@ -1,11 +1,12 @@
-﻿using UnityEngine;
+using UnityEngine;
 
-public class TrapDamage : MonoBehaviour
+public class MoveDamagePlayer : MonoBehaviour
 {
     public Vector2 boxSize = new Vector2(2f, 2f);
     public LayerMask playerLayer;
 
     public bool canDamage = false;
+
     void Update()
     {
         if (canDamage)
@@ -20,13 +21,10 @@ public class TrapDamage : MonoBehaviour
 
                     if (damage != null)
                     {
-                        damage.DamagePlayer(1);
-                        Destroy(gameObject);
+                        damage.DamagePlayer(2);
                     }
                 }
             }
-
-            Destroy(gameObject, 10f);
         }
     }
 
@@ -34,6 +32,7 @@ public class TrapDamage : MonoBehaviour
     {
         canDamage = value;
     }
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;

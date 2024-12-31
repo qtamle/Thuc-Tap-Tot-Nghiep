@@ -50,8 +50,11 @@ public class AssassinBossSkill : MonoBehaviour
     private bool isSkillActive = false;
     private int[] skillOrder = new int[] { 1, 2, 3, 4 };
     private AssassinHealth assassinHealth;
+    private TrapDamage trap;
+
     private void Start()
     {
+        trap = GetComponent<TrapDamage>();
         assassinHealth = GetComponent<AssassinHealth>();
         rb = GetComponent<Rigidbody2D>();
 
@@ -107,7 +110,7 @@ public class AssassinBossSkill : MonoBehaviour
                             yield return new WaitForSeconds(1.5f);
                             Debug.Log("Throwing traps...");
                             ThrowTraps(4);
-                            yield return new WaitForSeconds(1f); 
+                            yield return new WaitForSeconds(0.5f); 
                             break;
 
                         case 2:
@@ -221,6 +224,16 @@ public class AssassinBossSkill : MonoBehaviour
         {
             trap.transform.position = Vector3.MoveTowards(trap.transform.position, targetPosition, trapSpeed * Time.deltaTime);
             yield return null;
+        }
+
+        TrapDamage trapDamage = trap.GetComponent<TrapDamage>();
+        if (trapDamage != null)
+        {
+            trapDamage.SetCanDamage(true);
+        }
+        else
+        {
+            Debug.LogError("TrapDamage component is missing on the trap!");
         }
 
         Debug.Log("Trap reached adjusted target: " + targetPosition);
@@ -362,7 +375,7 @@ public class AssassinBossSkill : MonoBehaviour
 
         FlipToPlayer();
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
 
         StartCoroutine(ShootBullets());
 
@@ -502,7 +515,7 @@ public class AssassinBossSkill : MonoBehaviour
         characters[1].transform.position = targetPosition1;
         characters[2].transform.position = targetPosition2;
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
 
         CloneDash cloneDash1 = characters[1].GetComponent<CloneDash>();
         CloneDash cloneDash2 = characters[2].GetComponent<CloneDash>();

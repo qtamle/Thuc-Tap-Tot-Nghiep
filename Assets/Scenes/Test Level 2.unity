@@ -1117,15 +1117,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 186944488}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.03, y: 17.2, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.79, y: 21.36, z: 0}
   m_LocalScale: {x: 0.8132447, y: 1.741097, z: 1.3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 495800900}
   - {fileID: 250852681}
   - {fileID: 1693034731}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 2007640575}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &186944491
 BoxCollider2D:
@@ -3520,7 +3520,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa0a772ade8b0e441a19313cad4a1780, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  killTarget: 80
+  killTarget: 2
   enemiesKilled: 0
 --- !u!4 &452983390
 Transform:
@@ -10763,7 +10763,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1257452411}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c2e3a30700c1d4f4cb267ad3ffb533c8, type: 3}
   m_Name: 
@@ -14012,6 +14012,7 @@ Transform:
   - {fileID: 1267796810}
   - {fileID: 1257452414}
   - {fileID: 788454943}
+  - {fileID: 186944490}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2007640576
@@ -14568,4 +14569,3 @@ SceneRoots:
   - {fileID: 1320712926}
   - {fileID: 1807903789}
   - {fileID: 1871966798}
-  - {fileID: 186944490}

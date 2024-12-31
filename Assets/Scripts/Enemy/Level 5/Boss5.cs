@@ -67,8 +67,14 @@ public class Boss5 : MonoBehaviour
     public GameObject bombLaserPrefab;
     public float bombSpeed = 10f;
 
+    private bool isSkillSequenceActive = false;
+    private MoveDamagePlayer damage;
+    private Boss5Health health;
+
     void Start()
     {
+        health = GetComponent<Boss5Health>();
+        damage = GetComponentInChildren<MoveDamagePlayer>();
         BossTrans = transform;
         rb = GetComponent<Rigidbody2D>();
         GameObject Player = GameObject.FindGameObjectWithTag("Player");
@@ -83,50 +89,111 @@ public class Boss5 : MonoBehaviour
             skullSkillTimer -= Time.deltaTime;
         }
 
-        if (Input.GetKey(KeyCode.Space))
-        {
-            TeleportDefault();
-        }
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            Teleport();
-        }
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            SummonObject();
-        }
-        if (Input.GetKeyDown(KeyCode.F) && skullSkillTimer <= 0)
-        {
-            SummonSkullProjectile();
-            skullSkillTimer = skullSkillCooldown; 
-            isSkullSkillActive = true;
-        }
-        if (Input.GetKeyDown(KeyCode.D))  
-        {
-            StartCoroutine(SpawnManyObject());
-        }
         if (canMove) 
         {
             MoveObject();
         }
 
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            if (wayPoints.Length > 0)
-            {
-                StartCoroutine(MoveThroughWayPoints());
-            }
-            else
-            {
-                Debug.LogError("Waypoints array is empty!");
-            }
-        }
+        CheckHealth();
+    }
 
-        if (Input.GetKeyDown(KeyCode.B)) 
+    public void Active()
+    {
+        StartCoroutine(SkillSequence());
+    }
+
+    private IEnumerator SkillSequence()
+    {
+        yield return new WaitForSeconds(2f);
+
+        while (true)
         {
-            StartCoroutine(BombSKill());
+            if (!isSkillSequenceActive)
+            {
+                isSkillSequenceActive = true;
+
+                yield return StartCoroutine(SkullSkill());
+                yield return new WaitForSeconds(1.5f);
+
+                yield return StartCoroutine(TeleportSkill());
+                yield return new WaitForSeconds(1.5f);
+
+                yield return StartCoroutine(MoveThroughSkill());
+                yield return new WaitForSeconds(1.5f);
+
+                yield return StartCoroutine(BombSkill());
+                yield return new WaitForSeconds(1.5f);
+
+                isSkillSequenceActive = false;
+            }
+            yield return null; 
         }
     }
+
+    private IEnumerator SkullSkill()
+    {
+        Debug.Log("Executing Skull Skill...");
+        if (skullSkillTimer <= 0)
+        {
+            SummonSkullProjectile();
+            skullSkillTimer = skullSkillCooldown;
+            isSkullSkillActive = true;
+        }
+        while (isSkullSkillActive)
+        {
+            yield return null;
+        }
+        Debug.Log("Skull Skill Completed.");
+    }
+
+    private IEnumerator TeleportSkill()
+    {
+        Debug.Log("Executing Teleport Skill...");
+        yield return StartCoroutine(TeleportMultipleTimes(5, 2f));
+        yield return new WaitForSeconds(0.5f);
+        Debug.Log("Teleport Skill Completed.");
+    }
+
+    private IEnumerator MoveThroughSkill()
+    {
+        TeleportDefault();
+        Debug.Log("Executing MoveThrough Skill...");
+        if (wayPoints.Length > 0)
+        {
+            yield return StartCoroutine(MoveThroughWayPoints());
+        }
+        else
+        {
+            Debug.LogError("Waypoints array is empty!");
+        }
+        Debug.Log("MoveThrough Skill Completed.");
+    }
+
+    private IEnumerator BombSkill()
+    {
+        Debug.Log("Executing Bomb Skill...");
+        yield return StartCoroutine(BombSKill());
+        Debug.Log("Bomb Skill Completed.");
+    }
+
+    private void CheckHealth()
+    {
+        if (health != null)
+        {
+            if (health.currentHealth <= 0)
+            {
+                GameObject[] lasers = GameObject.FindGameObjectsWithTag("Laser");
+
+                foreach (GameObject laser in lasers)
+                {
+                    Destroy(laser);
+                }
+
+                StopAllCoroutines();
+            }
+        }
+    }
+
     public void CheckPlayer()
     {
         string currentFloor = floorCheck?.CurrentFloor ?? "Unknown";
@@ -160,28 +227,39 @@ public class Boss5 : MonoBehaviour
         BossTrans.position = defaultPosition;
     }
 
-    private void Teleport()
+    private IEnumerator TeleportMultipleTimes(int repeatCount, float delayBetweenTeleports)
     {
-        Transform leftTransform = floorCheck?.CurrentLeftFloor;
-        Transform rightTransform = floorCheck?.CurrentRightFloor;
+        for (int i = 0; i < repeatCount; i++)
+        {
+            yield return new WaitForSeconds(0.5f);
 
-        if (sideManager?.IsOnLeft ?? false && rightTransform != null)
-        {
-            Debug.Log("Teleporting Boss to the Right Floor...");
-            BossTrans.position = rightTransform.position;
-            StartCoroutine(SummonAfterDelay(rightTransform, Skill1Right, false)); 
-        }
-        else if (sideManager?.IsOnRight ?? false && leftTransform != null)
-        {
-            Debug.Log("Teleporting Boss to the Left Floor...");
-            BossTrans.position = leftTransform.position;
-            StartCoroutine(SummonAfterDelay(leftTransform, Skill1Left, true)); 
-        }
-        else
-        {
-            Debug.Log("Cannot teleport. Player position unknown or target floor is missing.");
+            Transform leftTransform = floorCheck?.CurrentLeftFloor;
+            Transform rightTransform = floorCheck?.CurrentRightFloor;
+
+            if (sideManager?.IsOnLeft ?? false && rightTransform != null)
+            {
+                Debug.Log($"Teleporting Boss to the Right Floor... Iteration: {i + 1}");
+                BossTrans.position = rightTransform.position;
+                StartCoroutine(SummonAfterDelay(rightTransform, Skill1Right, false));
+            }
+            else if (sideManager?.IsOnRight ?? false && leftTransform != null)
+            {
+                Debug.Log($"Teleporting Boss to the Left Floor... Iteration: {i + 1}");
+                BossTrans.position = leftTransform.position;
+                StartCoroutine(SummonAfterDelay(leftTransform, Skill1Left, true));
+            }
+            else
+            {
+                Debug.Log($"Cannot teleport. Player position unknown or target floor is missing. Iteration: {i + 1}");
+            }
+
+            if (i < repeatCount - 1) 
+            {
+                yield return new WaitForSeconds(delayBetweenTeleports);
+            }
         }
     }
+
     private IEnumerator SummonAfterDelay(Transform targetFloor, GameObject skillPrefab, bool movingLeft)
     {
         yield return new WaitForSeconds(0.5f);
@@ -352,6 +430,8 @@ public class Boss5 : MonoBehaviour
                 yield return new WaitForSeconds(1f);
             }
         }
+
+        isSkullSkillActive = false;
     }
 
     private IEnumerator SpawnManyObject()
@@ -392,6 +472,7 @@ public class Boss5 : MonoBehaviour
 
     private IEnumerator MoveThroughWayPoints()
     {
+        damage.SetCanDamage(true);
         yield return new WaitForSeconds(1f);
 
         while (currentWaypointIndex < wayPoints.Length)
@@ -405,6 +486,7 @@ public class Boss5 : MonoBehaviour
         }
 
         yield return StartCoroutine(MoveRight());
+        damage.SetCanDamage(false);
     }
     private IEnumerator MoveToTarget(Transform target)
     {
@@ -496,6 +578,10 @@ public class Boss5 : MonoBehaviour
                 }
             }
         }
+
+        health.SetCanBeDamaged(true);
+        yield return new WaitForSeconds(4f);
+        health.SetCanBeDamaged(false);
     }
 
     private IEnumerator MoveAndShootBigBomb(Transform target)

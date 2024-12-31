@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class Boss5Health : MonoBehaviour, DamageInterface
@@ -11,17 +12,19 @@ public class Boss5Health : MonoBehaviour, DamageInterface
     public Slider healthBarSlider;
     public Image healthBarFill;
 
-    private bool canBeDamaged = true;
+    private bool canBeDamaged = false;
     private float timeWhenStunned = 0f;
     private bool isStunned = false;
 
+    public UnityEvent startTimeline;
 
-    void Start()
+    private void Start()
     {
-        healthBarSlider = FindAnyObjectByType<Slider>();
-        GameObject fillBar = GameObject.FindWithTag("Fill");
-        healthBarFill = fillBar.GetComponent<Image>();
+        currentHealth = maxHealth;
+        UpdateHealthBar();
+        UpdateHealthBarColor();
     }
+
     public void TakeDamage(int damage)
     {
         if (canBeDamaged)
@@ -31,6 +34,7 @@ public class Boss5Health : MonoBehaviour, DamageInterface
 
             if (currentHealth <= 0)
             {
+                startTimeline.Invoke();
                 Die();
             }
         }
@@ -57,6 +61,14 @@ public class Boss5Health : MonoBehaviour, DamageInterface
         Debug.Log("Boss bi tieu diet");
     }
 
+    public void StunForDuration(float stunDuration)
+    {
+        isStunned = true;
+        canBeDamaged = true;
+        timeWhenStunned = Time.time + stunDuration;
+        UpdateHealthBarColor();
+    }
+
     public bool CanBeDamaged()
     {
         return canBeDamaged;
@@ -68,4 +80,13 @@ public class Boss5Health : MonoBehaviour, DamageInterface
         UpdateHealthBarColor();
     }
 
+    private void Update()
+    {
+        if (isStunned && Time.time > timeWhenStunned)
+        {
+            isStunned = false;
+            canBeDamaged = false;
+            UpdateHealthBarColor();
+        }
+    }
 }
