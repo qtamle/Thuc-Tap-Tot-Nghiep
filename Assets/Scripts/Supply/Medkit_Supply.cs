@@ -24,7 +24,7 @@ public class Medkit_Supply : MonoBehaviour, ISupplyActive
 
     public void CanActive()
     {
-        isActive = true;
+        isActive = false;
     }
 
     public bool IsReady()

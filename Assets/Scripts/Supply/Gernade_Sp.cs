@@ -25,7 +25,7 @@ public class Gernade_Sp : MonoBehaviour, ISupplyActive
         
     public void CanActive()
     {
-        isActive = false;
+        isActive = True;
     }
     public bool IsReady()
     {
