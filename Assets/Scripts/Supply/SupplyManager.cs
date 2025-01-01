@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -23,6 +24,9 @@ public class SupplyManager : MonoBehaviour
     // Khai báo event
     public event InventoryChangeHandler OnInventoryChanged;
 
+    [SerializeField] private bool isUsingSupply;
+    [SerializeField] private float interval = 10f; // Khoảng thời gian giữa các lần gọi (tính bằng giây)
+    private Coroutine useSupplyCoroutine;
 
     private void Awake()
     {
@@ -59,12 +63,32 @@ public class SupplyManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
-            UseSupply();
+            isUsingSupply= true;
+            useSupplyCoroutine = StartCoroutine(CallUseSupplyRepeatedly());
+        }
+        if(!isUsingSupply)
+        {
+            // Dừng Coroutine khi đối tượng bị vô hiệu hóa
+            if (useSupplyCoroutine != null)
+            {
+                StopCoroutine(useSupplyCoroutine);
+            }
         }
     }
+
+    private IEnumerator CallUseSupplyRepeatedly()
+    {
+        while (isUsingSupply) // Lặp vô hạn, nếu muốn dừng thì cần dừng Coroutine
+        {
+            UseSupply(); // Gọi hàm UseSupply
+            yield return new WaitForSeconds(interval); // Đợi trong khoảng thời gian nhất định
+        }
+    }
+
+    
+
     public void UseSupply()
     {
-       
         // Thêm kiểm tra null và range
         if (playerInventory == null)
         {
@@ -244,6 +268,8 @@ public class SupplyManager : MonoBehaviour
     {
         if (!playerInventory.Contains(supply))
         {
+
+
             playerInventory.Add(supply);
 
             OnInventoryChanged?.Invoke(supply);

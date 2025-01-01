@@ -134,8 +134,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad50b5f6fcaa95d48877cfc6c5c3e522, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  supplyData: {fileID: 0}
+  supplyData: {fileID: 11400000, guid: 555b681c19961504ca33dc15d95593c7, type: 2}
   isActive: 1
+  cooldownTime: 4
   damage: 0
 --- !u!61 &7669922599344057294
 BoxCollider2D:
@@ -195,4 +196,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d35edfa5b12bfa648ba417c97d47cd36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  supplyData: {fileID: 0}
+  supplyData: {fileID: 11400000, guid: 555b681c19961504ca33dc15d95593c7, type: 2}

@@ -7260,6 +7260,8 @@ MonoBehaviour:
   supplySlot1: {fileID: 1991073251}
   supplySlot2: {fileID: 975640051}
   supplySlot3: {fileID: 1013919499}
+  isUsingSupply: 0
+  interval: 10
 --- !u!4 &1567485762
 Transform:
   m_ObjectHideFlags: 0

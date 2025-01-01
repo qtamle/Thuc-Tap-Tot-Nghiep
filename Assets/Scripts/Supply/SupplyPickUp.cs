@@ -17,7 +17,7 @@ public class SupplyPickup : MonoBehaviour
             // Thực hiện các hành động liên quan khác (ví dụ: tăng máu, mana,...)
             ApplyEffect();
 
-            // Hủy đối tượng supply
+            //// Hủy đối tượng supply
             Destroy(gameObject);
         }
     }

@@ -23,7 +23,6 @@ public class InventorySupply : MonoBehaviour
 
     private void InitializeInventorySupplies()
     {
-        Debug.Log("Starting InitializeInventorySupplies()");
 
         List<SupplyData> inventory = supplyManager.GetPlayerInventory();
         if (inventory == null)
@@ -42,7 +41,6 @@ public class InventorySupply : MonoBehaviour
                 continue;
             }
 
-            Debug.Log($"Processing supply: {supply.supplyName}");
 
             if (supply.supplyPrefab == null)
             {
@@ -51,16 +49,11 @@ public class InventorySupply : MonoBehaviour
             }
 
             GameObject supplyInstance = Instantiate(supply.supplyPrefab);
-            Debug.Log($"Instantiated prefab for {supply.supplyName}");
-
             supplyInstance.transform.SetParent(transform);
-            Debug.Log($"Set parent for {supply.supplyName}");
 
             activeSupplies[supply] = supplyInstance;
-            Debug.Log($"Added {supply.supplyName} to activeSupplies dictionary");
 
             supplyInstance.SetActive(false);
-            Debug.Log($"Disabled {supply.supplyName} GameObject");
         }
 
         Debug.Log($"Finished initialization. ActiveSupplies count: {activeSupplies.Count}");
@@ -73,15 +66,18 @@ public class InventorySupply : MonoBehaviour
         {
             GameObject supplyInstance = Instantiate(newSupply.supplyPrefab);
             supplyInstance.transform.SetParent(transform);
+            SpriteRenderer supplySprite = supplyInstance.GetComponentInChildren<SpriteRenderer>();
+            if (supplySprite != null)
+            {
+                supplySprite.enabled = false;
+            }
             activeSupplies[newSupply] = supplyInstance;
-            supplyInstance.SetActive(false);
+            supplyInstance.SetActive(true);
             Debug.Log($"Added new supply: {newSupply.supplyName}");
         }
     }
     public void ActiveSupplyByIndex(int index)
     {
-        Debug.Log($"ActiveSupplyByIndex called with index: {index}");
-
         List<SupplyData> inventory = supplyManager.GetPlayerInventory();
         if (inventory == null)
         {
@@ -89,33 +85,23 @@ public class InventorySupply : MonoBehaviour
             return;
         }
 
-        Debug.Log($"Current inventory size: {inventory.Count}");
-
         if (index < 0 || index >= inventory.Count)
         {
-            Debug.LogError($"Invalid index: {index}. Inventory size: {inventory.Count}");
             return;
         }
 
         SupplyData supply = inventory[index];
         if (supply == null)
         {
-            Debug.LogError($"Supply at index {index} is null!");
             return;
         }
-
-        Debug.Log($"Attempting to activate {supply.supplyName}");
         ActiveSupply(supply);
     }
 
     public void ActiveSupply(SupplyData supply)
     {
-        Debug.Log($"ActiveSupply called for: {supply.supplyName}");
-
         if (!activeSupplies.ContainsKey(supply))
         {
-            Debug.LogError($"Supply {supply.supplyName} not found in activeSupplies dictionary!");
-            Debug.Log("Current activeSupplies contents:");
             foreach (var pair in activeSupplies)
             {
                 Debug.Log($"- {pair.Key.supplyName}");
@@ -126,20 +112,25 @@ public class InventorySupply : MonoBehaviour
         GameObject supplyObj = activeSupplies[supply];
         if (supplyObj == null)
         {
-            Debug.LogError($"GameObject for {supply.supplyName} is null in dictionary!");
             return;
         }
 
         ISupplyActive supplyActive = supplyObj.GetComponent<ISupplyActive>();
         if (supplyActive == null)
         {
-            Debug.LogWarning($"{supply.supplyName} doesn't implement ISupplyActive");
             return;
         }
 
-        supplyActive.Active();
-        Debug.Log($"Successfully activated {supply.supplyName}");
+        // Kiểm tra trạng thái sẵn sàng trước khi gọi Active
+        if (!supplyActive.IsReady())
+        {
+            Debug.Log($"{supply.supplyName} is on cooldown!");
+            return;
+        }
+
+        supplyActive.Active(); // Gọi Active từ interface
     }
+
 
     public bool CanActiveSupply(SupplyData supply)
     {
