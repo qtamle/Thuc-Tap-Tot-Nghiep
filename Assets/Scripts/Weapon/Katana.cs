@@ -70,33 +70,50 @@ public class Katana : MonoBehaviour
     {
         direction = SwipeDirection.None;
 
+        const float diagonalTolerance = 0.6f;
+
         if (Application.isEditor)
         {
-            // Nhấn chuột (chưa vuốt)
+            // Xử lý trong editor (dùng chuột)
             if (Input.GetMouseButtonDown(0))
             {
                 lastMousePosition = Input.mousePosition;
                 return false;
             }
 
+            if (Input.GetMouseButtonUp(0)) // Nhấn chuột và nhả -> Normal Attack
+            {
+                direction = SwipeDirection.Normal;
+                return true;
+            }
+
             if (Input.GetMouseButton(0))
             {
                 Vector3 mouseDelta = Input.mousePosition - lastMousePosition;
 
-                if (Mathf.Abs(mouseDelta.y) > swipeThreshold && Mathf.Abs(mouseDelta.x) < Mathf.Abs(mouseDelta.y))
+                // Kiểm tra nếu di chuyển đạt ngưỡng swipeThreshold
+                if (mouseDelta.magnitude > swipeThreshold)
                 {
-                    direction = mouseDelta.y > 0 ? SwipeDirection.Up : SwipeDirection.Down;
+                    float absX = Mathf.Abs(mouseDelta.x);
+                    float absY = Mathf.Abs(mouseDelta.y);
+
+                    if (absY > absX * diagonalTolerance) // Vuốt dọc
+                    {
+                        direction = mouseDelta.y > 0 ? SwipeDirection.Up : SwipeDirection.Down;
+                    }
+                    else // Vuốt ngang hoặc không rõ
+                    {
+                        direction = SwipeDirection.Normal;
+                    }
+
                     lastMousePosition = Input.mousePosition;
                     return true;
                 }
-
-                direction = SwipeDirection.Normal;
-                return true;
             }
         }
         else
         {
-            // Kiểm tra cảm ứng (chạm màn hình)
+            // Xử lý trên thiết bị cảm ứng
             if (Input.touchCount > 0)
             {
                 Touch touch = Input.GetTouch(0);
@@ -107,27 +124,40 @@ public class Katana : MonoBehaviour
                     return false;
                 }
 
+                if (touch.phase == TouchPhase.Ended) // Chạm và nhả -> Normal Attack
+                {
+                    direction = SwipeDirection.Normal;
+                    return true;
+                }
+
                 if (touch.phase == TouchPhase.Moved)
                 {
                     Vector3 touchDelta = (Vector3)touch.position - lastMousePosition;
 
-                    if (Mathf.Abs(touchDelta.y) > swipeThreshold && Mathf.Abs(touchDelta.x) < Mathf.Abs(touchDelta.y))
+                    // Kiểm tra nếu di chuyển đạt ngưỡng swipeThreshold
+                    if (touchDelta.magnitude > swipeThreshold)
                     {
-                        direction = touchDelta.y > 0 ? SwipeDirection.Up : SwipeDirection.Down;
+                        float absX = Mathf.Abs(touchDelta.x);
+                        float absY = Mathf.Abs(touchDelta.y);
+
+                        if (absY > absX * diagonalTolerance) // Vuốt dọc
+                        {
+                            direction = touchDelta.y > 0 ? SwipeDirection.Up : SwipeDirection.Down;
+                        }
+                        else // Vuốt ngang hoặc không rõ
+                        {
+                            direction = SwipeDirection.Normal;
+                        }
+
                         lastMousePosition = touch.position;
                         return true;
                     }
-
-                    direction = SwipeDirection.Normal;
-                    return true;
                 }
             }
         }
 
         return false;
     }
-
-
     private bool CanAttack()
     {
         return Time.time >= lastAttackTime + attackCooldown;
@@ -415,21 +445,32 @@ public class Katana : MonoBehaviour
             _ => Color.blue
         };
 
+        Transform gizmoAttackPoint;
         float attackRadius;
 
         switch (currentSwipeDirection)
         {
             case SwipeDirection.Up:
+                gizmoAttackPoint = attackPointUp;
                 attackRadius = boxSizeUp.x / 2f;
                 break;
             case SwipeDirection.Down:
+                gizmoAttackPoint = attackPointDown;
                 attackRadius = boxSizeDown.x / 2f;
                 break;
             default:
+                gizmoAttackPoint = attackPoints;
                 attackRadius = boxSize.x / 2f;
                 break;
         }
 
-        Gizmos.DrawWireSphere(attackPoints.position, attackRadius);
+        if (gizmoAttackPoint != null)
+        {
+            Gizmos.DrawWireSphere(gizmoAttackPoint.position, attackRadius);
+        }
+        else
+        {
+            Debug.LogWarning("Attack point for the current swipe direction is not assigned!");
+        }
     }
 }
