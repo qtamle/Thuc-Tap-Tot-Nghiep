@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class SupplyManager : MonoBehaviour
 {
@@ -17,8 +18,12 @@ public class SupplyManager : MonoBehaviour
 
     private List<Transform> slots;
 
+    // Khai báo delegate cho event
+    public delegate void InventoryChangeHandler(SupplyData supply);
+    // Khai báo event
+    public event InventoryChangeHandler OnInventoryChanged;
 
-    
+
     private void Awake()
     {
         if(Instance == null)
@@ -54,10 +59,10 @@ public class SupplyManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
-            UseSupply(0);
+            UseSupply();
         }
     }
-    public void UseSupply(int index)
+    public void UseSupply()
     {
        
         // Thêm kiểm tra null và range
@@ -67,25 +72,28 @@ public class SupplyManager : MonoBehaviour
             return;
         }
 
-        if (index < 0 || index >= playerInventory.Count)
+        // Duyệt qua tất cả các phần tử trong playerInventory
+        for (int index = 0; index < playerInventory.Count; index++)
         {
-            Debug.LogError($"Invalid index: {index}. Inventory size: {playerInventory.Count}");
-            return;
-        }
+            SupplyData supply = playerInventory[index];
 
-        SupplyData supply = playerInventory[index];
-        if (supply == null)
-        {
-            Debug.LogError($"Supply at index {index} is null!");
-            return;
-        }
+            // Kiểm tra xem supply có null không
+            if (supply == null)
+            {
+                Debug.LogError($"Supply at index {index} is null!");
+                continue;  // Nếu null thì bỏ qua phần tử này và tiếp tục với phần tử tiếp theo
+            }
 
-        if (supply.supplyPrefab == null)
-        {
-            Debug.LogError($"SupplyPrefab for {supply.supplyName} is null!");
-            return;
+            // Kiểm tra SupplyPrefab có null không
+            if (supply.supplyPrefab == null)
+            {
+                Debug.LogError($"SupplyPrefab for {supply.supplyName} is null!");
+                continue;  // Nếu null thì bỏ qua phần tử này và tiếp tục với phần tử tiếp theo
+            }
+
+            // Gọi phương thức kích hoạt supply nếu hợp lệ
+            inventorySupply.ActiveSupplyByIndex(index);
         }
-        inventorySupply.ActiveSupplyByIndex(index);
     }
 
     public void DebugRemainingSupplies()
@@ -237,6 +245,8 @@ public class SupplyManager : MonoBehaviour
         if (!playerInventory.Contains(supply))
         {
             playerInventory.Add(supply);
+
+            OnInventoryChanged?.Invoke(supply);
             Debug.Log($"Đã thêm {supply.supplyName} vào Inventory. Tổng số vật phẩm: {playerInventory.Count}");
         }
     }

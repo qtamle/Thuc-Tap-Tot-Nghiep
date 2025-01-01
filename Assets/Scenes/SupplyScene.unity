@@ -7256,7 +7256,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4c21bf3130ec0ba468fb0c1b7f514342, type: 2}
   - {fileID: 11400000, guid: ae5578e62dd8d6a44ba948a184a7c558, type: 2}
   playerInventory: []
-  inventorySupply: {fileID: 0}
+  inventorySupply: {fileID: 1567485763}
   supplySlot1: {fileID: 1991073251}
   supplySlot2: {fileID: 975640051}
   supplySlot3: {fileID: 1013919499}
@@ -7555,8 +7555,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -7, y: -833}
-  m_SizeDelta: {x: 500, y: 200}
+  m_AnchoredPosition: {x: -7, y: -196}
+  m_SizeDelta: {x: 174.8126, y: 69.925}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1608703401
 MonoBehaviour:
