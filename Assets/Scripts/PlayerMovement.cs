@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed = 5f;
     private bool canMove = false;
     private float moveDirection = 0f;
+    private float originalSpeed;
 
     [Header("Check Ground")]
     public Transform groundCheck;
@@ -35,8 +36,11 @@ public class PlayerMovement : MonoBehaviour
     public string blockLayerName;
     public string bossLayerName;
 
+    private Shoes boostMoveSpeed;
+
     void Start()
     {
+        originalSpeed = moveSpeed;
         rb = GetComponent<Rigidbody2D>();
         playerCollider = GetComponent<Collider2D>();
 
@@ -53,6 +57,18 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             Debug.LogWarning($"Layer {blockLayerName} không tồn tại.");
+        }
+
+        boostMoveSpeed = FindFirstObjectByType<Shoes>();
+        if (boostMoveSpeed != null)
+        {
+            Debug.Log("Tim thay supply tang toc");
+            moveSpeed += 0.2f;
+        }
+        else
+        {
+            Debug.Log("Khong tim thay supply tang toc");
+            return;
         }
     }
 
@@ -290,7 +306,6 @@ public class PlayerMovement : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, 180, 0);  // Quay về hướng trái
         }
     }
-
     private void OnDrawGizmos()
     {
         if (groundCheck != null)

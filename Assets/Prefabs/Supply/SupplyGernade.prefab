@@ -136,8 +136,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   supplyData: {fileID: 11400000, guid: 555b681c19961504ca33dc15d95593c7, type: 2}
   isActive: 1
-  cooldownTime: 4
-  damage: 0
+  cooldownTime: 30
+  gernadePrefab: {fileID: 6291487072871341371, guid: d5d53f5b6248c7b458f2e86634384108, type: 3}
+  gernadeThrowForce: 15
 --- !u!61 &7669922599344057294
 BoxCollider2D:
   m_ObjectHideFlags: 0

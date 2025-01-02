@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 1755082512002613079}
   - component: {fileID: -9014008612395554318}
   - component: {fileID: -7945092285080064172}
+  - component: {fileID: 4395559178088638091}
   m_Layer: 0
   m_Name: SupplyShoe
   m_TagString: Untagged
@@ -133,7 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d35edfa5b12bfa648ba417c97d47cd36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  supplyData: {fileID: 0}
+  supplyData: {fileID: 11400000, guid: ae5578e62dd8d6a44ba948a184a7c558, type: 2}
 --- !u!61 &-7945092285080064172
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -180,3 +181,18 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &4395559178088638091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7895157130173240544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2855436792acd46428c664fd198e9ee9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  supplyData: {fileID: 11400000, guid: ae5578e62dd8d6a44ba948a184a7c558, type: 2}
+  isActive: 0
+  cooldownTime: 0

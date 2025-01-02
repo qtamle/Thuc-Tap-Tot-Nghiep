@@ -3,11 +3,21 @@ using UnityEngine;
 
 public class Medkit_Supply : MonoBehaviour, ISupplyActive
 {
+    public SupplyData supplyData;
     [SerializeField] private bool isActive = true;
-    [SerializeField] private float cooldownTime = 5f; // Cooldown riêng cho HealthKit
+    [SerializeField] private float cooldownTime = 5f; 
     [SerializeField] private int healAmount;
 
     public float CooldownTime => cooldownTime;
+
+    private PlayerHealth healthPlayer;
+
+    public int healHealthAmount;
+
+    private void Start()
+    {
+        healthPlayer = FindFirstObjectByType<PlayerHealth>();
+    }
 
     public void Active()
     {
@@ -19,6 +29,7 @@ public class Medkit_Supply : MonoBehaviour, ISupplyActive
 
         Debug.Log("Active and Heal Player");
         isActive = false;
+        HealPlayer();
         StartCoroutine(CooldownRoutine());
     }
 
@@ -34,10 +45,15 @@ public class Medkit_Supply : MonoBehaviour, ISupplyActive
 
     private IEnumerator CooldownRoutine()
     {
-        Debug.Log("HealthKit cooldown started...");
         yield return new WaitForSeconds(cooldownTime);
         CanActive();
-        Debug.Log("HealthKit is ready!");
     }
 
+    private void HealPlayer()
+    {
+        if (healthPlayer != null)
+        {
+            healthPlayer.HealHealth(healHealthAmount);
+        }
+    }
 }

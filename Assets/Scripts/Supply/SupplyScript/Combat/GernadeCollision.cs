@@ -2,14 +2,15 @@
 using System.Linq;
 using UnityEngine;
 
-public class Gloves : MonoBehaviour
+public class GernadeCollision : MonoBehaviour
 {
-    [Header("Settings Attack")]
-    public Vector2 boxSize;
-    public LayerMask enemyLayer;
-    public LayerMask bossLayer;
-    public Transform attackPoints;
-    private bool isAttackBoss = false;
+    [Header("Explode")]
+    public float radiusDamage;
+    public LayerMask damageLayer;
+
+    [Header("Check")]
+    public LayerMask checkGroundLayer;
+    public LayerMask wallLayer;
 
     [Header("Coins")]
     public GameObject coinPrefab;
@@ -28,27 +29,22 @@ public class Gloves : MonoBehaviour
     public float secondaryCoinSpawnMin = 2;
     public float secondaryCoinSpawnMax = 4;
 
-    [Header("Attack Cooldown")]
-    public float attackCooldown = 1f;
-    private float lastAttackTime = -Mathf.Infinity;
+    private Rigidbody2D rb;
 
-    [Header("Swipe Android")]
-    private Vector3 lastMousePosition;
-    public float swipeThreshold = 50f;
-
-    [Header("VFX Setting")]
-    public VFXPooling vfxPool;
-
+    private IEnemySpawner[] enemySpawners;
     private CoinsManager coinsManager;
     private Transform player;
-    private IEnemySpawner[] enemySpawners;
 
     private Gold goldIncrease;
     private Magnet magnet;
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
+
     private void Start()
     {
         coinsManager = UnityEngine.Object.FindFirstObjectByType<CoinsManager>();
-        player = GameObject.FindGameObjectWithTag("Player").transform;
         enemySpawners = FindObjectsOfType<MonoBehaviour>().OfType<IEnemySpawner>().ToArray();
 
         goldIncrease = FindFirstObjectByType<Gold>();
@@ -70,51 +66,63 @@ public class Gloves : MonoBehaviour
 
     private void Update()
     {
-        if (IsInputDetected() && CanAttack())
+        if (player == null)
         {
-            PerformAttack();
-            lastAttackTime = Time.time;
-        }
-    }
-    private bool IsInputDetected()
-    {
-        if (Application.isEditor)
-        {
-            // Kiểm tra nhấn chuột
-            if (Input.GetMouseButtonDown(0))
+            GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+            if (playerObject != null)
             {
-                return true;
+                player = playerObject.transform;
+                Debug.Log("Player found with tag.");
             }
-        }
-        else
-        {
-            // Kiểm tra chạm trên màn hình cảm ứng
-            if (Input.touchCount > 0)
+            else
             {
-                Touch touch = Input.GetTouch(0);
+                Debug.LogWarning("Player not found with tag. Trying to find by layer...");
 
-                if (touch.phase == TouchPhase.Began)
+                int playerLayer = LayerMask.NameToLayer("Player");
+                if (playerLayer != -1)
                 {
-                    return true;
+                    GameObject[] objectsInLayer = FindObjectsOfType<GameObject>();
+                    foreach (GameObject obj in objectsInLayer)
+                    {
+                        if (obj.layer == playerLayer)
+                        {
+                            player = obj.transform;
+                            Debug.Log($"Player found using layer: {obj.name}");
+                            break;
+                        }
+                    }
+                }
+
+                if (player == null)
+                {
+                    Debug.LogError("Player not found! Make sure the Player has the correct tag or layer.");
                 }
             }
         }
-
-        return false;
     }
 
-    private bool CanAttack()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        return Time.time >= lastAttackTime + attackCooldown;
+        if (((1 << collision.gameObject.layer) & checkGroundLayer) != 0)
+        {
+            rb.linearVelocity = Vector2.zero;
+            rb.bodyType = RigidbodyType2D.Kinematic;
+            Debug.Log("Grenade landed on the ground!");
+        }
+        else if (((1 << collision.gameObject.layer) & wallLayer) != 0)
+        {
+            Vector2 reflectDir = Vector2.Reflect(rb.linearVelocity.normalized, collision.contacts[0].normal);
+            rb.linearVelocity = reflectDir * rb.linearVelocity.magnitude;
+            Debug.Log("Grenade bounced off the wall!");
+        }
     }
 
-    private void PerformAttack()
+    public IEnumerator Explode()
     {
-        ShowAttackVFX();
+        yield return new WaitForSeconds(1f);
 
-        Collider2D[] enemies = Physics2D.OverlapBoxAll(attackPoints.position, boxSize, 0f, enemyLayer);
-
-        foreach (Collider2D enemy in enemies)
+        Collider2D[] enemyDamage = Physics2D.OverlapCircleAll(transform.position, radiusDamage, damageLayer);
+        foreach (Collider2D enemy in enemyDamage)
         {
             if (enemy != null && enemy.gameObject != null && enemy.gameObject.activeInHierarchy)
             {
@@ -139,116 +147,7 @@ public class Gloves : MonoBehaviour
                 SpawnExperienceOrbs(enemy.transform.position, 5);
             }
         }
-
-        Collider2D[] bosses = Physics2D.OverlapBoxAll(attackPoints.position, boxSize, 0f, bossLayer);
-
-        foreach (Collider2D boss in bosses)
-        {
-            DamageInterface damageable = boss.GetComponent<DamageInterface>();
-
-            if (damageable != null && damageable.CanBeDamaged() && !isAttackBoss)
-            {
-                damageable.TakeDamage(1);
-                isAttackBoss = true;
-                damageable.SetCanBeDamaged(false);
-
-
-                SpawnCoins(coinPrefab, coinSpawnMin * 10, coinSpawnMax * 10, boss.transform.position);
-
-                if (Random.value <= 0.25f)
-                {
-                    SpawnCoins(secondaryCoinPrefab, secondaryCoinSpawnMin * 5, secondaryCoinSpawnMax * 5, boss.transform.position);
-                }
-
-                SpawnExperienceOrbs(boss.transform.position, 20);
-            }
-        }
-
-        isAttackBoss = false;
-
-        Collider2D[] Snake = Physics2D.OverlapBoxAll(attackPoints.position, boxSize, 0f, bossLayer);
-
-        foreach (Collider2D sn in Snake)
-        {
-            MachineSnakeHealth partHealth = sn.GetComponent<MachineSnakeHealth>();
-            SnakeHealth snakeHealth = sn.GetComponentInParent<SnakeHealth>();
-
-            if (partHealth != null && !isAttackBoss && snakeHealth.IsStunned())
-            {
-                if ((MachineSnakeHealth.attackedPartID == -1 || MachineSnakeHealth.attackedPartID == partHealth.partID) && !partHealth.isAlreadyHit)
-                {
-                    partHealth.TakeDamage(1);
-                    isAttackBoss = true;
-
-                    snakeHealth.SetCanBeDamaged(false);
-
-                    SpawnCoins(coinPrefab, coinSpawnMin * 13, coinSpawnMax * 13, partHealth.transform.position);
-
-                    if (Random.value <= 0.25f)
-                    {
-                        SpawnCoins(secondaryCoinPrefab, secondaryCoinSpawnMin * 5, secondaryCoinSpawnMax * 5, partHealth.transform.position);
-                    }
-
-                    SpawnExperienceOrbs(partHealth.transform.position, 25);
-                }
-            }
-
-            if (snakeHealth != null && snakeHealth.bodyPartsAttacked == snakeHealth.totalBodyParts)
-            {
-                HeadController headController = sn.GetComponentInChildren<HeadController>();
-                if (headController != null && !headController.isHeadAttacked && !isAttackBoss)
-                {
-                    headController.TakeDamage(1);
-                    isAttackBoss = true;
-                    headController.isHeadAttacked = true;
-
-                    snakeHealth.SetCanBeDamaged(false);
-                    SpawnCoins(coinPrefab, coinSpawnMin * 13, coinSpawnMax * 13, headController.transform.position);
-
-                    if (Random.value <= 0.25f)
-                    {
-                        SpawnCoins(secondaryCoinPrefab, secondaryCoinSpawnMin * 5, secondaryCoinSpawnMax * 5, headController.transform.position);
-                    }
-
-                    SpawnExperienceOrbs(headController.transform.position, 25);
-                }
-            }
-            else
-            {
-                Debug.LogWarning($"SnakeHealth is null for {sn.gameObject.name}");
-            }
-        }
-        isAttackBoss = false;
     }
-    private void ShowAttackVFX()
-    {
-        if (vfxPool != null)
-        {
-            GameObject vfx = vfxPool.Get();
-
-            vfx.transform.position = attackPoints.position;
-            vfx.transform.rotation = Quaternion.identity;
-
-            VFXFollower follower = vfx.GetComponent<VFXFollower>();
-            if (follower != null)
-            {
-                follower.SetTarget(attackPoints, player);
-            }
-
-            StartCoroutine(ReturnVFXToPool(vfx, 0.5f));
-        }
-    }
-
-
-    private IEnumerator ReturnVFXToPool(GameObject vfx, float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        if (vfxPool != null)
-        {
-            vfxPool.ReturnToPool(vfx);
-        }
-    }
-
 
     void SpawnCoins(GameObject coinType, float minAmount, float maxAmount, Vector3 position)
     {
@@ -353,7 +252,6 @@ public class Gloves : MonoBehaviour
         }
         else
         {
-            // Nếu orb hoặc player bị xóa, dừng Coroutine
             yield break;
         }
     }
@@ -389,11 +287,10 @@ public class Gloves : MonoBehaviour
             yield break;
         }
     }
-
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.blue;
-
-        Gizmos.DrawWireCube(attackPoints.position, boxSize);
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, radiusDamage);
     }
+
 }

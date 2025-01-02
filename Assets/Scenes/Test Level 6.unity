@@ -3608,7 +3608,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa0a772ade8b0e441a19313cad4a1780, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  killTarget: 5
+  killTarget: 200
   enemiesKilled: 0
 --- !u!4 &452983390
 Transform:
@@ -14588,7 +14588,6 @@ MonoBehaviour:
   moveDuration: 1.5
   dashSpeed: 22
   offScreenOffset: 5
-  clonePrefab: {fileID: 4544280015142993391, guid: f824a953e3e2fcc4e891f78b6edac575, type: 3}
   linePrefab: {fileID: 4529907726479089789, guid: 0f481d8143618594bbad64189115ec7d, type: 3}
   laserDistances: 2
   shootingPoints:

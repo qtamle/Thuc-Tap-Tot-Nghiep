@@ -42,13 +42,28 @@ public class Dagger : MonoBehaviour
     private CoinsManager coinsManager;
     private Transform player;
     private IEnemySpawner[] enemySpawners;
-
-
+    private Gold goldIncrease;
+    private Magnet magnet;
     private void Start()
     {
         coinsManager = UnityEngine.Object.FindFirstObjectByType<CoinsManager>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         enemySpawners = FindObjectsOfType<MonoBehaviour>().OfType<IEnemySpawner>().ToArray();
+        goldIncrease = FindFirstObjectByType<Gold>();
+        magnet = FindFirstObjectByType<Magnet>();
+        if (goldIncrease != null)
+        {
+            Debug.Log("Tim thay gold increase");
+        }
+        else if (magnet != null)
+        {
+            Debug.Log("Tim thay magnet");
+        }
+        else
+        {
+            Debug.Log("Khong tim thay gi het");
+            return;
+        }
     }
 
     private void Update()
@@ -258,6 +273,9 @@ public class Dagger : MonoBehaviour
                     coinScript.SetCoinType(true, false);
                 else
                     coinScript.SetCoinType(false, true);
+
+                if (magnet.IsReady())
+                { StartCoroutine(AttractCoinToPlayer(coin, 2f)); }
             }
         }
     }
@@ -337,6 +355,40 @@ public class Dagger : MonoBehaviour
             yield break;
         }
     }
+
+
+    IEnumerator AttractCoinToPlayer(GameObject coin, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        if (coin != null && player != null)
+        {
+            Rigidbody2D coinRb = coin.GetComponent<Rigidbody2D>();
+            if (coinRb != null)
+            {
+                while (coin != null && player != null)
+                {
+                    Vector3 direction = (player.position - coin.transform.position).normalized;
+
+                    coinRb.MovePosition(coin.transform.position + direction * Time.deltaTime * orbMoveToPlayer);
+
+                    if (Vector3.Distance(coin.transform.position, player.position) < 0.5f)
+                    {
+                        Destroy(coin);
+                        yield break;
+                    }
+
+                    yield return null;
+                }
+            }
+        }
+        else
+        {
+            // Nếu coin hoặc player bị xóa, dừng Coroutine
+            yield break;
+        }
+    }
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.blue;

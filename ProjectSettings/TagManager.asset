@@ -19,6 +19,7 @@ TagManager:
   - Supply1
   - Supply2
   - BossManager
+  - Coin
   layers:
   - Default
   - TransparentFX
