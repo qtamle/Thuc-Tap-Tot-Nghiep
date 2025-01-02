@@ -17,7 +17,7 @@ public class GangsterHealth : MonoBehaviour, DamageInterface
     private bool isStunned = false;
 
     public UnityEvent startTimeline;
-
+    [SerializeField] private HandleBoss currentBoss;
     private void Start()
     {
         currentHealth = maxHealth;
@@ -40,6 +40,10 @@ public class GangsterHealth : MonoBehaviour, DamageInterface
         }
     }
 
+    public void OnBossDeath()
+    {
+        BossManager.Instance.HandleBossDefeated(currentBoss);
+    }
     private void UpdateHealthBar()
     {
         if (healthBarSlider != null)
