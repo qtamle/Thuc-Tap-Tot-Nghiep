@@ -1,0 +1,546 @@
+fileFormatVersion: 2
+guid: 2d83e491427a5354cb70d2e77537f50c
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2784582442305798796
+    second: GateTeleport-Sheet_0
+  - first:
+      213: -8382646289147769395
+    second: GateTeleport-Sheet_1
+  - first:
+      213: -6445556177440965738
+    second: GateTeleport-Sheet_2
+  - first:
+      213: 3090794156867103818
+    second: GateTeleport-Sheet_3
+  - first:
+      213: 6912117871830374198
+    second: GateTeleport-Sheet_4
+  - first:
+      213: 5630653806155665622
+    second: GateTeleport-Sheet_5
+  - first:
+      213: -5153093446085037143
+    second: GateTeleport-Sheet_6
+  - first:
+      213: 1897763400369697791
+    second: GateTeleport-Sheet_7
+  - first:
+      213: -7869254896337827256
+    second: GateTeleport-Sheet_8
+  - first:
+      213: -3854674104773983098
+    second: GateTeleport-Sheet_9
+  - first:
+      213: -8685798468501344190
+    second: GateTeleport-Sheet_10
+  - first:
+      213: -3116630485525643085
+    second: GateTeleport-Sheet_11
+  - first:
+      213: 4779928756737381396
+    second: GateTeleport-Sheet_12
+  - first:
+      213: 2388894603990384857
+    second: GateTeleport-Sheet_13
+  - first:
+      213: 6628386971926336699
+    second: GateTeleport-Sheet_14
+  - first:
+      213: -4232836251811052676
+    second: GateTeleport-Sheet_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: GateTeleport-Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 12
+        width: 37
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 47db296a50d2b59d0800000000000000
+      internalID: -2784582442305798796
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GateTeleport-Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 14
+        width: 26
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dcdc999fc9bdaab80800000000000000
+      internalID: -8382646289147769395
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GateTeleport-Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 14
+        width: 26
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 69b7ecf7ec8cc86a0800000000000000
+      internalID: -6445556177440965738
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GateTeleport-Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 14
+        width: 26
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a4caae1f8e4b4ea20800000000000000
+      internalID: 3090794156867103818
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GateTeleport-Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 14
+        width: 26
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 637141c1596ccef50800000000000000
+      internalID: 6912117871830374198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GateTeleport-Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 246
+        y: 14
+        width: 26
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d01c11edc9142e40800000000000000
+      internalID: 5630653806155665622
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GateTeleport-Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 294
+        y: 14
+        width: 28
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a335b320d88c78b0800000000000000
+      internalID: -5153093446085037143
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GateTeleport-Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 14
+        width: 33
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff3f5c202c5365a10800000000000000
+      internalID: 1897763400369697791
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GateTeleport-Sheet_8
+      rect:
+        serializedVersion: 2
+        x: 388
+        y: 12
+        width: 37
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84ac7c86d5acac290800000000000000
+      internalID: -7869254896337827256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GateTeleport-Sheet_9
+      rect:
+        serializedVersion: 2
+        x: 436
+        y: 12
+        width: 37
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 684cc0c1352718ac0800000000000000
+      internalID: -3854674104773983098
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GateTeleport-Sheet_10
+      rect:
+        serializedVersion: 2
+        x: 484
+        y: 12
+        width: 37
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 240785eef48d57780800000000000000
+      internalID: -8685798468501344190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GateTeleport-Sheet_11
+      rect:
+        serializedVersion: 2
+        x: 532
+        y: 12
+        width: 37
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b0471606118fb4d0800000000000000
+      internalID: -3116630485525643085
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GateTeleport-Sheet_12
+      rect:
+        serializedVersion: 2
+        x: 580
+        y: 12
+        width: 37
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 414910d01e7b55240800000000000000
+      internalID: 4779928756737381396
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GateTeleport-Sheet_13
+      rect:
+        serializedVersion: 2
+        x: 628
+        y: 12
+        width: 37
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d0c1b44cfe072120800000000000000
+      internalID: 2388894603990384857
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GateTeleport-Sheet_14
+      rect:
+        serializedVersion: 2
+        x: 674
+        y: 10
+        width: 41
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb41f7f05d2ccfb50800000000000000
+      internalID: 6628386971926336699
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GateTeleport-Sheet_15
+      rect:
+        serializedVersion: 2
+        x: 721
+        y: 8
+        width: 44
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c7308620bd1f145c0800000000000000
+      internalID: -4232836251811052676
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      GateTeleport-Sheet_0: -2784582442305798796
+      GateTeleport-Sheet_1: -8382646289147769395
+      GateTeleport-Sheet_10: -8685798468501344190
+      GateTeleport-Sheet_11: -3116630485525643085
+      GateTeleport-Sheet_12: 4779928756737381396
+      GateTeleport-Sheet_13: 2388894603990384857
+      GateTeleport-Sheet_14: 6628386971926336699
+      GateTeleport-Sheet_15: -4232836251811052676
+      GateTeleport-Sheet_2: -6445556177440965738
+      GateTeleport-Sheet_3: 3090794156867103818
+      GateTeleport-Sheet_4: 6912117871830374198
+      GateTeleport-Sheet_5: 5630653806155665622
+      GateTeleport-Sheet_6: -5153093446085037143
+      GateTeleport-Sheet_7: 1897763400369697791
+      GateTeleport-Sheet_8: -7869254896337827256
+      GateTeleport-Sheet_9: -3854674104773983098
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

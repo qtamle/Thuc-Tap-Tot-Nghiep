@@ -4,6 +4,7 @@ public class EnemyManager : MonoBehaviour
 {
     public static EnemyManager Instance;
 
+
     public int killTarget;
     public int enemiesKilled = 0;
 
