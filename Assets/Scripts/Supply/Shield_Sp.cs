@@ -16,7 +16,7 @@ public class Shield_Sp : MonoBehaviour, ISupplyActive
 
     public  void CanActive()
     {
-        isActive = true;
+        isActive = false;
     }
     public bool IsReady()
     {

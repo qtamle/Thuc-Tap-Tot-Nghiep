@@ -1,16 +1,22 @@
 using UnityEngine;
 
-public class Test_SP : MonoBehaviour
+public class Test_SP : MonoBehaviour , ISupplyActive
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public float CooldownTime => throw new System.NotImplementedException();
+
+    public void Active()
     {
-        
+        throw new System.NotImplementedException();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void CanActive()
     {
-        
+        throw new System.NotImplementedException();
     }
+
+    public bool IsReady()
+    {
+        throw new System.NotImplementedException();
+    }
+
 }
