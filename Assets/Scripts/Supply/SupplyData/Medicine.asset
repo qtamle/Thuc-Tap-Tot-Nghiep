@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Medicine
   m_EditorClassIdentifier: 
   supplyName: Medicine
-  supplyPrefab: {fileID: 0}
+  supplyPrefab: {fileID: 7600217266074923063, guid: 83fef28a483e63145b0d61b1a9d36348, type: 3}
   supplySprite: {fileID: 21300000, guid: b7a893958b53083459b1c9d270ed5791, type: 3}
   supplyType: 0
   spawnWeight: 0

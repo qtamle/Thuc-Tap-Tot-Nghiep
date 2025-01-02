@@ -196,3 +196,4 @@ MonoBehaviour:
   supplyData: {fileID: 11400000, guid: be698bb2faa9a4d46b0d3d3bc5b1db31, type: 2}
   isActive: 1
   cooldownTime: 0
+  orbMoveToPlayerSpeed: 20

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Magnet
   m_EditorClassIdentifier: 
   supplyName: Magnet
-  supplyPrefab: {fileID: 0}
+  supplyPrefab: {fileID: 5845531273689389248, guid: bab4362d6031ff74eb25afc126574937, type: 3}
   supplySprite: {fileID: 21300000, guid: e06539a0ed28c2942ae9d82a477e5b71, type: 3}
   supplyType: 2
   spawnWeight: 0
