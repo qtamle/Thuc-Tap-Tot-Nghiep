@@ -1,13 +1,14 @@
 ﻿using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement; 
 
 public class Medicine : MonoBehaviour, ISupplyActive
 {
     public SupplyData supplyData;
     [SerializeField] private bool isActive = true;
     [SerializeField] private float cooldownTime = 5f;
-    [SerializeField] private int healAmount = 10; 
+    [SerializeField] private int healAmount = 10;
 
     public float CooldownTime => cooldownTime;
 
@@ -16,6 +17,20 @@ public class Medicine : MonoBehaviour, ISupplyActive
     private void Start()
     {
         healthPlayer = FindFirstObjectByType<PlayerHealth>();
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        isActive = true;
+
+        CheckAndHealPlayer();
     }
 
     private void CheckAndHealPlayer()
@@ -24,7 +39,7 @@ public class Medicine : MonoBehaviour, ISupplyActive
 
         GameObject[] allObjects = FindObjectsOfType<GameObject>();
 
-        bool tagFound = false; 
+        bool tagFound = false;
 
         foreach (GameObject obj in allObjects)
         {
@@ -33,7 +48,7 @@ public class Medicine : MonoBehaviour, ISupplyActive
                 if (obj.CompareTag(tag))
                 {
                     HealPlayer(healAmount);
-                    tagFound = true; 
+                    tagFound = true;
                 }
             }
         }
