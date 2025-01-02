@@ -20,6 +20,18 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SupplyScene 1.unity
     guid: a26265e80ffbc384c93476a6f3aaa8a2
+  - enabled: 1
+    path: Assets/Scenes/Test Level 2.unity
+    guid: 9e1ace8a7d56a2f4aa06dc9fdea60581
+  - enabled: 1
+    path: Assets/Scenes/Test Level 3.unity
+    guid: 9c5d0e45ccde21a4b9a217497dbcecd4
+  - enabled: 1
+    path: Assets/Scenes/Test Level 4.unity
+    guid: f9249bbf5ea37a441978760840b946f8
+  - enabled: 1
+    path: Assets/Scenes/Test Level 5.unity
+    guid: 552df2d250f697e4fa0f1b727a1efcd1
   - enabled: 0
     path: Assets/Scenes/Multiplayer/Test1 Multiplayer.unity
     guid: 8d0ffc4a599b2ae429030006067e8a5c

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Boss1
   m_EditorClassIdentifier: 
   bossName: Gangster
-  isDeaftead: 1
+  isDefeated: 0
   nextScene: Test Level 2
-  suppyScene: SupplyScene
+  supplyScene: SupplyScene

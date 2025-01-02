@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Boss2
   m_EditorClassIdentifier: 
   bossName: Assasin
-  isDeaftead: 0
+  isDefeated: 0
   nextScene: Test Level 3
-  suppyScene: SupplyScene
+  supplyScene: SupplyScene

@@ -1,10 +1,11 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "HandleBoss", menuName = "HandleBosses/CreateBoss")]
 public class HandleBoss : ScriptableObject
 {
-    public string bossName;
-    public bool isDeaftead;
-    public string nextScene;
-    public string supplyScene = "SupplyScene";
+    public string bossName; // Tên của boss
+    public bool isDefeated; 
+    public string nextScene; // Cảnh tiếp theo sau boss
+    public string supplyScene = "SupplyScene"; // Cảnh tiếp tế
 }
+

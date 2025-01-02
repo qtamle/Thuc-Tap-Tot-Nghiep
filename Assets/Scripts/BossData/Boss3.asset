@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Boss3
   m_EditorClassIdentifier: 
   bossName: Cyborg
-  isDeaftead: 0
+  isDefeated: 0
   nextScene: Test Level 4
-  suppyScene: SupplyScene
+  supplyScene: SupplyScene

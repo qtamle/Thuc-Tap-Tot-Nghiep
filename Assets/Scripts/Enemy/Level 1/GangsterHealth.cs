@@ -63,6 +63,7 @@ public class GangsterHealth : MonoBehaviour, DamageInterface
     private void Die()
     {
         Debug.Log("Boss bi tieu diet");
+        OnBossDeath();
     }
 
     public void StunForDuration(float stunDuration)
