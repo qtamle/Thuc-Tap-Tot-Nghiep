@@ -55,7 +55,20 @@ public class Katana : MonoBehaviour
     private void Start()
     {
         coinsManager = UnityEngine.Object.FindFirstObjectByType<CoinsManager>();
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+
+        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+
+        if (playerObject == null)
+        {
+            int playerLayer = LayerMask.NameToLayer("Player");
+            if (playerLayer >= 0)
+            {
+                playerObject = FindObjectsOfType<GameObject>().FirstOrDefault(obj => obj.layer == playerLayer);
+            }
+        }
+
+        player = playerObject.transform;
+
         enemySpawners = FindObjectsOfType<MonoBehaviour>().OfType<IEnemySpawner>().ToArray();
 
         goldIncrease = FindFirstObjectByType<Gold>();
@@ -66,7 +79,6 @@ public class Katana : MonoBehaviour
         else
         {
             Debug.Log("Khong tim thay gi het");
-            return;
         }
     }
     private void Update()
@@ -347,7 +359,14 @@ public class Katana : MonoBehaviour
 
     void SpawnCoins(GameObject coinType, float minAmount, float maxAmount, Vector3 position)
     {
+        bool isGoldIncreaseActive = goldIncrease != null && goldIncrease.IsReady();
+
         int coinCount = Random.Range((int)minAmount, (int)maxAmount + 1);
+
+        if (isGoldIncreaseActive)
+        {
+            coinCount += goldIncrease.increaseGoldChange;
+        }
 
         for (int i = 0; i < coinCount; i++)
         {

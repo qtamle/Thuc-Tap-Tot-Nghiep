@@ -1,20 +1,46 @@
 ﻿using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Shield_Sp : MonoBehaviour, ISupplyActive
 {
+    public SupplyData supplyData;
     [SerializeField] private bool isActive = true;
-    [SerializeField] private float cooldownTime = 15f; // Cooldown riêng cho Gernade
+    [SerializeField] private float cooldownTime = 15f; 
 
-    public float CooldownTime => cooldownTime; // Triển khai CooldownTime từ interface
+    public float CooldownTime => cooldownTime;
+
+    private PlayerHealth healPlayer;
+
+    private void Start()
+    {
+        healPlayer = FindFirstObjectByType<PlayerHealth>();
+        if (healPlayer != null)
+        {
+            Debug.Log("Tim thay player shield");
+        }
+    }
 
     public void Active()
     {
-        Debug.Log("Active va hoi lai Shield");
+        if (!IsReady())
+        {
+            Debug.Log($"HealthKit is on cooldown!");
+            return;
+        }
+
+        Debug.Log("Active and Heal Player");
+        HealShieldPlayer();
         isActive = false;
+        StartCoroutine(CooldownRoutine());
     }
 
-    public  void CanActive()
+    private void HealShieldPlayer()
+    {
+        healPlayer.HealShield(30);
+    }
+
+    public void CanActive()
     {
         isActive = false;
     }
@@ -25,11 +51,8 @@ public class Shield_Sp : MonoBehaviour, ISupplyActive
 
     private IEnumerator CooldownRoutine()
     {
-        Debug.Log("Shield cooldown started...");
         yield return new WaitForSeconds(cooldownTime);
         CanActive();
-        Debug.Log("Shield is ready!");
     }
-
 
 }

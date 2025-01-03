@@ -20,6 +20,12 @@ TagManager:
   - Supply2
   - BossManager
   - Coin
+  - Level6
+  - Level1
+  - Level2
+  - Level3
+  - Level4
+  - Level5
   layers:
   - Default
   - TransparentFX

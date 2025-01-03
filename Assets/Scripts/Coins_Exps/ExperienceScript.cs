@@ -24,11 +24,11 @@ public class ExperienceScript : MonoBehaviour
 
     private void CollectExperience()
     {
-        int randomExperience = Random.Range(1, 4);
+        int randomExperience = Random.Range(5, 10);
 
         if (experienceManager != null)
         {
-            experienceManager.AddExperience(randomExperience * 2);  
+            experienceManager.AddExperience(randomExperience);  
             Destroy(gameObject); 
         }
         else

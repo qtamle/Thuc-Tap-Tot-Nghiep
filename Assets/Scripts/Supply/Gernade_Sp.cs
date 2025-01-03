@@ -104,7 +104,6 @@ public class Gernade_Sp : MonoBehaviour, ISupplyActive
         StartCoroutine(MoveGernadeToTarget(gernade, targetEnemy.transform.position));
     }
 
-
     private IEnumerator MoveGernadeToTarget(GameObject gernade, Vector3 targetPosition)
     {
         while (Vector3.Distance(gernade.transform.position, targetPosition) > 0.1f)

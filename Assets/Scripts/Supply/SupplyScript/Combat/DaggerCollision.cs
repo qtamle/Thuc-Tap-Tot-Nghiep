@@ -2,10 +2,10 @@
 using System.Linq;
 using UnityEngine;
 
-public class GernadeCollision : MonoBehaviour
+public class DaggerCollision : MonoBehaviour
 {
     [Header("Explode")]
-    public float radiusDamage;
+    public Vector2 radiusDamage;
     public LayerMask damageLayer;
 
     [Header("Check")]
@@ -61,8 +61,6 @@ public class GernadeCollision : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning("Player not found with tag. Trying to find by layer...");
-
                 int playerLayer = LayerMask.NameToLayer("Player");
                 if (playerLayer != -1)
                 {
@@ -85,28 +83,10 @@ public class GernadeCollision : MonoBehaviour
             }
         }
     }
-
-    private void OnCollisionEnter2D(Collision2D collision)
+    
+    public void DaggerDamage()
     {
-        if (((1 << collision.gameObject.layer) & checkGroundLayer) != 0)
-        {
-            rb.linearVelocity = Vector2.zero;
-            rb.bodyType = RigidbodyType2D.Kinematic;
-            Debug.Log("Grenade landed on the ground!");
-        }
-        else if (((1 << collision.gameObject.layer) & wallLayer) != 0)
-        {
-            Vector2 reflectDir = Vector2.Reflect(rb.linearVelocity.normalized, collision.contacts[0].normal);
-            rb.linearVelocity = reflectDir * rb.linearVelocity.magnitude;
-            Debug.Log("Grenade bounced off the wall!");
-        }
-    }
-
-    public IEnumerator Explode()
-    {
-        yield return new WaitForSeconds(1f);
-
-        Collider2D[] enemyDamage = Physics2D.OverlapCircleAll(transform.position, radiusDamage, damageLayer);
+        Collider2D[] enemyDamage = Physics2D.OverlapBoxAll(transform.position, radiusDamage, 0f, damageLayer);
         foreach (Collider2D enemy in enemyDamage)
         {
             if (enemy != null && enemy.gameObject != null && enemy.gameObject.activeInHierarchy)
@@ -166,7 +146,6 @@ public class GernadeCollision : MonoBehaviour
                     coinScript.SetCoinType(true, false);
                 else
                     coinScript.SetCoinType(false, true);
-
             }
         }
     }
@@ -280,7 +259,6 @@ public class GernadeCollision : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, radiusDamage);
+        Gizmos.DrawWireCube(transform.position, radiusDamage);
     }
-
 }

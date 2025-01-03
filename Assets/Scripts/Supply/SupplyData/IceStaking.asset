@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: df2cf1c330370304486efac3aa4d51a8, type: 3}
-  m_Name: Shied
+  m_Name: IceStaking
   m_EditorClassIdentifier: 
-  supplyName: Shield
-  supplyPrefab: {fileID: 2504397080909394390, guid: d88e01086e6a7034f888134b1afe83a0, type: 3}
-  supplySprite: {fileID: 21300000, guid: bac80be5eb7d16744809880d2156094d, type: 3}
-  supplyType: 0
+  supplyName: Ice Staking
+  supplyPrefab: {fileID: 5845531273689389248, guid: f52489cea0d284d48a30e5dd1cae1207, type: 3}
+  supplySprite: {fileID: -1080248026034109904, guid: 1246be2011c3c4446bf2b81c43b3b9cb, type: 3}
+  supplyType: 2
   spawnWeight: 0
-  description: Items will make you stronger (+30 shield for yourself)
+  description: They will give you in each level + 15 shields but movement will be
+    affected like on ice.

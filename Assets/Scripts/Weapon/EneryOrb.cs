@@ -218,7 +218,14 @@ public class EneryOrb : MonoBehaviour
 
     void SpawnCoins(GameObject coinType, float minAmount, float maxAmount, Vector3 position)
     {
+        bool isGoldIncreaseActive = goldIncrease != null && goldIncrease.IsReady();
+
         int coinCount = Random.Range((int)minAmount, (int)maxAmount + 1);
+
+        if (isGoldIncreaseActive)
+        {
+            coinCount += goldIncrease.increaseGoldChange; 
+        }
 
         for (int i = 0; i < coinCount; i++)
         {

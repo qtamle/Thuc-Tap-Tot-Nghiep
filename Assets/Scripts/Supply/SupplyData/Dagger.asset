@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: df2cf1c330370304486efac3aa4d51a8, type: 3}
-  m_Name: Shield
+  m_Name: Dagger
   m_EditorClassIdentifier: 
-  supplyName: Shield
-  supplyPrefab: {fileID: 2504397080909394390, guid: d88e01086e6a7034f888134b1afe83a0, type: 3}
-  supplySprite: {fileID: 21300000, guid: bac80be5eb7d16744809880d2156094d, type: 3}
-  supplyType: 0
+  supplyName: Dagger
+  supplyPrefab: {fileID: 5845531273689389248, guid: d48e4414ceddb2048836bbb3bc471774, type: 3}
+  supplySprite: {fileID: -2486521743634864436, guid: bddb254de3f53c74eb98f92f04fedcea, type: 3}
+  supplyType: 1
   spawnWeight: 0
-  description: ShieldPlayer
+  description: "\rAfter about 10 seconds, 1 dagger will be thrown at 1 random enemies."

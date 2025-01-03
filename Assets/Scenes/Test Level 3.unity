@@ -11230,6 +11230,10 @@ MonoBehaviour:
   wallTransform: {fileID: 1395952353}
   blockLayerName: Enemy
   bossLayerName: Boss
+  iceMoveSpeedMultiplier: 2
+  dragFactor: 0.002
+  isIceMovementActive: 0
+  isChangingDirection: 0
 --- !u!114 &1257452418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12686,6 +12690,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1646815059
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1646815060}
+  m_Layer: 0
+  m_Name: Level3
+  m_TagString: Level3
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1646815060
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1646815059}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.46526238, y: -3.6416223, z: 0.021985786}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1657005099
 GameObject:
   m_ObjectHideFlags: 0
@@ -15326,3 +15361,4 @@ SceneRoots:
   - {fileID: 1101034598}
   - {fileID: 1877349492}
   - {fileID: 245175108}
+  - {fileID: 1646815060}

@@ -36,20 +36,28 @@ public class Attack : MonoBehaviour
     private void Start()
     {
         coinsManager = UnityEngine.Object.FindFirstObjectByType<CoinsManager>();
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+
+        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+
+        if (playerObject == null)
+        {
+            int playerLayer = LayerMask.NameToLayer("Player");
+            if (playerLayer >= 0)
+            {
+                playerObject = FindObjectsOfType<GameObject>().FirstOrDefault(obj => obj.layer == playerLayer);
+            }
+        }
+
+        player = playerObject.transform;
+
         enemySpawners = FindObjectsOfType<MonoBehaviour>().OfType<IEnemySpawner>().ToArray(); 
 
         goldIncrease = FindFirstObjectByType<Gold>();
+
         if (goldIncrease != null )
         {
             Debug.Log("Tim thay gold increase");
-        }
-        else
-        {
-            Debug.Log("Khong tim thay gi het");
-            return;
-        }
-
+        }  
     }
 
     private void Update()

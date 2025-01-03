@@ -1,9 +1,8 @@
-﻿using System.Collections;
-using Unity.VisualScripting;
+using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement; 
+using UnityEngine.SceneManagement;
 
-public class Medicine : MonoBehaviour, ISupplyActive
+public class IceStaking : MonoBehaviour, ISupplyActive
 {
     public SupplyData supplyData;
     [SerializeField] private bool isActive = true;
@@ -19,6 +18,8 @@ public class Medicine : MonoBehaviour, ISupplyActive
         healthPlayer = FindFirstObjectByType<PlayerHealth>();
 
         SceneManager.sceneLoaded += OnSceneLoaded;
+
+        CheckAndHealPlayer();
     }
 
     private void OnDestroy()
@@ -61,7 +62,7 @@ public class Medicine : MonoBehaviour, ISupplyActive
     {
         if (healthPlayer != null)
         {
-            healthPlayer.HealHealth(amount);
+            healthPlayer.HealShield(amount);
         }
         else
         {

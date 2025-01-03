@@ -8,8 +8,15 @@ public class ExperienceManager : MonoBehaviour
 
     public int experienceCount = 0;
 
+    private Experience experienceIncrease;
     private void Start()
     {
+        experienceIncrease = FindFirstObjectByType<Experience>();
+        if (experienceIncrease != null)
+        {
+            Debug.Log("Tim thay tang kinh nghiem");
+        }
+
         levelSystem = FindAnyObjectByType<LevelSystem>();
         experienceCount = 0;
         UpdateExperienceUI();
@@ -18,6 +25,12 @@ public class ExperienceManager : MonoBehaviour
     public void AddExperience(int amount)
     {
         experienceCount += amount;
+
+        if (experienceIncrease != null)
+        {
+            experienceCount += experienceIncrease.increaseExperience;
+        }
+
         UpdateExperienceUI();
     }
 

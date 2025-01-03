@@ -36,7 +36,15 @@ public class PlayerMovement : MonoBehaviour
     public string blockLayerName;
     public string bossLayerName;
 
+    [Header("Ice Movement Effect")]
+    public float iceMoveSpeedMultiplier = 1.5f; 
+    public float dragFactor = 0.1f;
+    public bool isIceMovementActive = false;
+    public bool isChangingDirection = false;
+    private Vector2 previousVelocity;
+
     private Shoes boostMoveSpeed;
+    private IceStaking iceStaking;
 
     void Start()
     {
@@ -60,16 +68,20 @@ public class PlayerMovement : MonoBehaviour
         }
 
         boostMoveSpeed = FindFirstObjectByType<Shoes>();
+        iceStaking = FindFirstObjectByType<IceStaking>();
+
         if (boostMoveSpeed != null)
         {
             Debug.Log("Tim thay supply tang toc");
             moveSpeed += 0.2f;
         }
-        else
+        
+        if (iceStaking != null)
         {
-            Debug.Log("Khong tim thay supply tang toc");
-            return;
+            Debug.Log("Tim thay ice staking");
+            isIceMovementActive = !isIceMovementActive;
         }
+
     }
 
     void Update()
@@ -276,7 +288,36 @@ public class PlayerMovement : MonoBehaviour
 
     void MovePlayer()
     {
-        rb.linearVelocity = new Vector2(moveDirection * moveSpeed, rb.linearVelocity.y);
+        if (isIceMovementActive)
+        {
+            float adjustedMoveSpeed = moveSpeed + iceMoveSpeedMultiplier;
+            float lungeForce = 4f;
+
+            if (Mathf.Sign(moveDirection) != Mathf.Sign(previousVelocity.x))
+            {
+                isChangingDirection = true;
+                rb.AddForce(new Vector2(-Mathf.Sign(previousVelocity.x) * lungeForce, 0), ForceMode2D.Impulse);
+            }
+
+            if (isChangingDirection)
+            {
+                rb.linearVelocity = new Vector2(Mathf.Lerp(previousVelocity.x, moveDirection * adjustedMoveSpeed, dragFactor), rb.linearVelocity.y);
+                if (Mathf.Abs(rb.linearVelocity.x - moveDirection * adjustedMoveSpeed) < 0.1f)
+                {
+                    isChangingDirection = false; 
+                }
+            }
+            else
+            {
+                rb.linearVelocity = new Vector2(moveDirection * moveSpeed, rb.linearVelocity.y);
+            }
+
+            previousVelocity = rb.linearVelocity;
+        }
+        else
+        {
+            rb.linearVelocity = new Vector2(moveDirection * moveSpeed, rb.linearVelocity.y);
+        }
     }
 
     private void MoveLeft()
