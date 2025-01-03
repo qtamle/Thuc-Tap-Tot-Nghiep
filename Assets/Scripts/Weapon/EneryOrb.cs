@@ -44,8 +44,34 @@ public class EneryOrb : MonoBehaviour
     private void Start()
     {
         coinsManager = UnityEngine.Object.FindFirstObjectByType<CoinsManager>();
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+
+        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+
+        if (playerObject == null)
+        {
+            int playerLayer = LayerMask.NameToLayer("Player");
+            if (playerLayer >= 0)
+            {
+                playerObject = FindObjectsOfType<GameObject>().FirstOrDefault(obj => obj.layer == playerLayer);
+            }
+        }
+
+        player = playerObject.transform;
+
         enemySpawners = FindObjectsOfType<MonoBehaviour>().OfType<IEnemySpawner>().ToArray();
+
+
+        for (int i = 0; i < attackOrbs.Length; i++)
+        {
+            if (attackOrbPrefab == null)
+            {
+                Debug.LogError("Attack Orb Prefab is not assigned!");
+                continue;
+            }
+
+            attackOrbs[i] = Instantiate(attackOrbPrefab, playerSpawn.position, Quaternion.identity);
+            attackOrbs[i].transform.parent = playerSpawn;
+        }
 
         goldIncrease = FindFirstObjectByType<Gold>();
         if (goldIncrease != null)
@@ -55,13 +81,6 @@ public class EneryOrb : MonoBehaviour
         else
         {
             Debug.Log("Khong tim thay gi het");
-            return;
-        }
-
-        for (int i = 0; i < attackOrbs.Length; i++)
-        {
-            attackOrbs[i] = Instantiate(attackOrbPrefab, playerSpawn.position, Quaternion.identity);
-            attackOrbs[i].transform.parent = playerSpawn;
         }
     }
     private void FixedUpdate()
