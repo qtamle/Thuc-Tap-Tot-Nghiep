@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ThrowDagger : MonoBehaviour, ISupplyActive
+public class ThrowDagger : MonoBehaviour
 {
     public SupplyData supplyData;
     [SerializeField] private bool isActive;
@@ -15,8 +15,6 @@ public class ThrowDagger : MonoBehaviour, ISupplyActive
     private Transform playerTransform;
 
     public float CooldownTime => cooldownTime;
-
-    private List<GameObject> thrownEnemies = new List<GameObject>();
     private void Awake()
     {
         GameObject player = GameObject.FindGameObjectWithTag(playerTag);
@@ -49,6 +47,14 @@ public class ThrowDagger : MonoBehaviour, ISupplyActive
         }
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            StartCoroutine(ThrowDaggerAtEnemy());
+        }
+    }
+
     public void Active()
     {
         if (!IsReady())
@@ -57,7 +63,6 @@ public class ThrowDagger : MonoBehaviour, ISupplyActive
         }
 
         isActive = false;
-        ThrowDaggerAtEnemy();
         StartCoroutine(CooldownRoutine());
     }
 
@@ -76,85 +81,89 @@ public class ThrowDagger : MonoBehaviour, ISupplyActive
         yield return new WaitForSeconds(cooldownTime);
         CanActive();
     }
-
-    private void ThrowDaggerAtEnemy()
+    private IEnumerator ThrowDaggerAtEnemy()
     {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag);
+        if (playerTransform == null)
+        {
+            Debug.Log("Không tìm thấy player");
+            yield break;
+        }
+
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
         if (enemies.Length == 0)
         {
-            Debug.Log("No enemies found to throw daggers at.");
-            return;
-        }
-
-        List<GameObject> availableEnemies = new List<GameObject>();
-        foreach (GameObject enemy in enemies)
-        {
-            if (!thrownEnemies.Contains(enemy) && IsWithinRange(enemy))  
-            {
-                availableEnemies.Add(enemy);
-            }
-        }
-
-        if (availableEnemies.Count == 0)
-        {
-            Debug.Log("No available enemies to throw daggers at.");
-            return;
-        }
-
-        GameObject randomEnemy = availableEnemies[Random.Range(0, availableEnemies.Count)];
-        thrownEnemies.Add(randomEnemy);
-        StartCoroutine(ThrowDaggerCoroutine(randomEnemy));
-    }
-
-    private bool IsWithinRange(GameObject enemy)
-    {
-        float maxRange = 50f; 
-        float distance = Vector3.Distance(playerTransform.position, enemy.transform.position);
-        return distance <= maxRange; 
-    }
-
-
-    private IEnumerator ThrowDaggerCoroutine(GameObject enemy)
-    {
-        if (daggerPrefab == null || playerTransform == null)
-        {
-            Debug.LogError("Dagger prefab or player transform is not set.");
+            Debug.Log("Không có enemy");
             yield break;
         }
 
-        GameObject dagger = Instantiate(daggerPrefab, playerTransform.position, Quaternion.identity);
-        Vector3 direction = (enemy.transform.position - playerTransform.position).normalized;
+        GameObject targetEnemy = enemies[Random.Range(0, enemies.Length)];
+        GameObject dagger1 = Instantiate(daggerPrefab, playerTransform.position, Quaternion.identity);
+        DaggerCollision daggerCollision1 = dagger1.GetComponent<DaggerCollision>();
+        if (daggerCollision1 == null)
+        {
+            Debug.LogError("Dagger prefab is missing the DaggerCollision script!");
+            yield break;
+        }
+        StartCoroutine(MoveDaggerToTarget(dagger1, targetEnemy.transform.position));
 
-        Rigidbody2D rb = dagger.GetComponent<Rigidbody2D>();
+        yield return new WaitForSeconds(0.2f);
+
+        enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        if (enemies.Length == 0)
+        {
+            Debug.Log("Không còn enemy để ném dao thứ hai.");
+            yield break;
+        }
+
+        GameObject targetEnemy2 = enemies[Random.Range(0, enemies.Length)];
+        GameObject dagger2 = Instantiate(daggerPrefab, playerTransform.position, Quaternion.identity);
+        DaggerCollision daggerCollision2 = dagger2.GetComponent<DaggerCollision>();
+        if (daggerCollision2 == null)
+        {
+            Debug.LogError("Dagger prefab is missing the DaggerCollision script!");
+            yield break;
+        }
+        StartCoroutine(MoveDaggerToTarget(dagger2, targetEnemy2.transform.position));
+    }
+
+    private IEnumerator MoveDaggerToTarget(GameObject Dagger, Vector3 targetPosition)
+    {
+        Vector3 direction = targetPosition - Dagger.transform.position;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+        Dagger.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90f));
+
+        while (Vector3.Distance(Dagger.transform.position, targetPosition) > 0.1f)
+        {
+            Dagger.transform.position = Vector3.MoveTowards(
+                Dagger.transform.position,
+                targetPosition,
+                moveSpeed * Time.deltaTime
+            );
+
+            yield return null;
+        }
+
+        Dagger.transform.position = targetPosition;
+
+        Rigidbody2D rb = Dagger.GetComponent<Rigidbody2D>();
         if (rb != null)
         {
-            rb.linearVelocity = direction * moveSpeed;
-        }
-        else
-        {
-            Debug.LogError("Dagger prefab does not have a Rigidbody2D component.");
-            yield break;
-        }
-
-        float travelTime = Vector3.Distance(playerTransform.position, enemy.transform.position) / moveSpeed;
-        yield return new WaitForSeconds(travelTime);
-
-        if (enemy != null)
-        {
-            DaggerCollision daggerDamage = dagger.GetComponent<DaggerCollision>();
-            if (daggerDamage != null)
+            rb.bodyType = RigidbodyType2D.Dynamic;
+            DaggerCollision dag = Dagger.GetComponent<DaggerCollision>();
+            if (dag != null)
             {
-                daggerDamage.DaggerDamage();
+                dag.DaggerDamage();
+                SpriteRenderer spriteRenderer = dag.GetComponentInChildren<SpriteRenderer>();
+                if (spriteRenderer != null)
+                {
+                    spriteRenderer.enabled = false;
+                }
+                yield return new WaitForSeconds(5f);
+                Destroy(dag.gameObject);
             }
         }
-
-        SpriteRenderer spriteRenderer = dagger.GetComponentInChildren<SpriteRenderer>();
-        if (spriteRenderer != null)
-        {
-            spriteRenderer.enabled = false;
-        }
-
-        yield return new WaitForSeconds(5f);
-        Destroy(dagger);
     }
 }

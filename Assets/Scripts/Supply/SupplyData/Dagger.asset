@@ -17,4 +17,5 @@ MonoBehaviour:
   supplySprite: {fileID: -2486521743634864436, guid: bddb254de3f53c74eb98f92f04fedcea, type: 3}
   supplyType: 1
   spawnWeight: 0
-  description: "\rAfter about 10 seconds, 1 dagger will be thrown at 1 random enemies."
+  description: "\rAfter about 10 seconds, one to two daggers will be thrown at random
+    enemies (there is still a chance of missing)."

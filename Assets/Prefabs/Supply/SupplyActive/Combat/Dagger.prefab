@@ -197,4 +197,4 @@ MonoBehaviour:
   isActive: 0
   cooldownTime: 10
   daggerPrefab: {fileID: 1621298867600675882, guid: 88247233c0f7dd240afb932148011681, type: 3}
-  moveSpeed: 5
+  moveSpeed: 25
