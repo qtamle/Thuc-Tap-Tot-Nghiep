@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: df2cf1c330370304486efac3aa4d51a8, type: 3}
-  m_Name: Experience
+  m_Name: AngelGuardian
   m_EditorClassIdentifier: 
-  supplyName: Experience
-  supplyPrefab: {fileID: 5845531273689389248, guid: 3fb4f19f72f77b141856e9fe29de2e91, type: 3}
-  supplySprite: {fileID: 21300000, guid: 70141d51621e24facbca9196bbde84b4, type: 3}
-  supplyType: 2
+  supplyName: Angel Guardian
+  supplyPrefab: {fileID: 7600217266074923063, guid: 36c9fff2d1daeb94bbc58b858c516867, type: 3}
+  supplySprite: {fileID: -598910680004703242, guid: 1246be2011c3c4446bf2b81c43b3b9cb, type: 3}
+  supplyType: 0
   spawnWeight: 0
-  description: Items will help increase experience points each time you kill an enemy.
+  description: "\rWhen you are killed, this will give you a 2nd chance (respawn)
+    with full health based on maximum health."

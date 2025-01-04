@@ -10804,7 +10804,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1249940659
 Transform:
   m_ObjectHideFlags: 0
@@ -11452,6 +11452,7 @@ MonoBehaviour:
   playerSprite: {fileID: 1257452413}
   invincibilityDuration: 2
   flashInterval: 0.1
+  hasRevived: 0
 --- !u!1 &1267796809
 GameObject:
   m_ObjectHideFlags: 0

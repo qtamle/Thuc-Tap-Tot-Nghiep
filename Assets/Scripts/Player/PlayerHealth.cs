@@ -20,9 +20,14 @@ public class PlayerHealth : MonoBehaviour, DamagePlayerInterface
     public float flashInterval = 0.1f;
     
     private bool isInvincible = false;
+    public bool hasRevived = false;
+
     private LevelSystem levelSystem;
     private GameObject CurrentHealth;
     private GameObject player;
+
+    private AngelGuardian angel;
+    private Sacrifice Sacrifice;
 
     private void Start()
     {
@@ -32,6 +37,10 @@ public class PlayerHealth : MonoBehaviour, DamagePlayerInterface
         GameObject Shield = GameObject.Find("Shield");
         healthText = CurrentHealth.GetComponent<TMP_Text>();
         shieldText = Shield.GetComponent<TMP_Text>();
+
+        angel = FindFirstObjectByType<AngelGuardian>();
+        Sacrifice = FindFirstObjectByType<Sacrifice>();
+
         //levelSystem = FindFirstObjectByType<LevelSystem>();
         if (levelSystem != null)
         {
@@ -46,6 +55,9 @@ public class PlayerHealth : MonoBehaviour, DamagePlayerInterface
         currentHealth = maxHealth;
         UpdateHealthUI();
         UpdateShieldUI();
+
+        CheckSacrifice();
+
     }
     //private void OnLevelUpdated(int level, int experience, int experienceToNextLevel)
     //{
@@ -69,6 +81,7 @@ public class PlayerHealth : MonoBehaviour, DamagePlayerInterface
     //        levelSystem.OnLevelDataUpdated -= OnLevelUpdated;
     //    }
     //}
+
     public void DamagePlayer(int damage)
     {
         if (isInvincible)
@@ -88,9 +101,20 @@ public class PlayerHealth : MonoBehaviour, DamagePlayerInterface
             currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
             UpdateHealthUI();
 
-            if (currentHealth <= 0)
+            if (currentHealth <= 0 && currentShield <= 0)
             {
-                Die();
+                if (!hasRevived && angel.IsReady())
+                {
+                    Debug.Log("Player is resurrected!");
+                    currentHealth = maxHealth;
+                    angel.CanActive();
+                    hasRevived = true; 
+                    UpdateHealthUI();
+                }
+                else
+                {
+                    Die();
+                }
             }
             else
             {
@@ -149,5 +173,20 @@ public class PlayerHealth : MonoBehaviour, DamagePlayerInterface
         player.tag = "Player";
         playerSprite.enabled = true;
         isInvincible = false;
+    }
+
+    private void CheckSacrifice()
+    {
+        if (Sacrifice != null)
+        {
+            Debug.Log("Sacrifice found! Converting health to shield.");
+            currentShield += currentHealth; 
+            currentShield += 30; 
+            currentHealth = 0; 
+            UpdateHealthUI();
+            UpdateShieldUI();
+            Sacrifice.CanActive();
+            return; 
+        }
     }
 }

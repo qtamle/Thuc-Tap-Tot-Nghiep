@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ThrowDagger : MonoBehaviour
+public class ThrowDagger : MonoBehaviour, ISupplyActive
 {
     public SupplyData supplyData;
     [SerializeField] private bool isActive;
@@ -47,14 +47,6 @@ public class ThrowDagger : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            StartCoroutine(ThrowDaggerAtEnemy());
-        }
-    }
-
     public void Active()
     {
         if (!IsReady())
@@ -63,6 +55,7 @@ public class ThrowDagger : MonoBehaviour
         }
 
         isActive = false;
+        ThrowDaggerAtEnemy();
         StartCoroutine(CooldownRoutine());
     }
 
