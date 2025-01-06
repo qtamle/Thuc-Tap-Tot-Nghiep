@@ -3488,7 +3488,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   killTarget: 50
-  enemiesKilled: 0
+  enemiesKilled: 19
 --- !u!4 &452983390
 Transform:
   m_ObjectHideFlags: 0
@@ -10975,6 +10975,7 @@ MonoBehaviour:
   playerSprite: {fileID: 1257452413}
   invincibilityDuration: 2
   flashInterval: 0.1
+  hasRevived: 0
 --- !u!114 &1257452422
 MonoBehaviour:
   m_ObjectHideFlags: 0
