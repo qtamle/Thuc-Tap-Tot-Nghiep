@@ -44,8 +44,14 @@ public class Gloves : MonoBehaviour
     private IEnemySpawner[] enemySpawners;
 
     private Gold goldIncrease;
+    private CoinPoolManager coinPoolManager;
+    private ExperienceOrbPoolManager orbPoolManager;
+
     private void Start()
     {
+        coinPoolManager = FindFirstObjectByType<CoinPoolManager>();
+        orbPoolManager = FindFirstObjectByType<ExperienceOrbPoolManager>();
+
         coinsManager = UnityEngine.Object.FindFirstObjectByType<CoinsManager>();
 
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
@@ -255,7 +261,6 @@ public class Gloves : MonoBehaviour
         }
     }
 
-
     void SpawnCoins(GameObject coinType, float minAmount, float maxAmount, Vector3 position)
     {
         bool isGoldIncreaseActive = goldIncrease != null && goldIncrease.IsReady();
@@ -270,7 +275,10 @@ public class Gloves : MonoBehaviour
         for (int i = 0; i < coinCount; i++)
         {
             Vector3 spawnPosition = position + Vector3.up * 0.2f;
-            GameObject coin = Instantiate(coinType, spawnPosition, Quaternion.identity);
+
+            GameObject coin = coinPoolManager.GetCoinFromPool(coinType);
+            coin.transform.position = spawnPosition;
+
             Rigidbody2D coinRb = coin.GetComponent<Rigidbody2D>();
 
             if (coinRb != null)
@@ -288,6 +296,7 @@ public class Gloves : MonoBehaviour
                     coinScript.SetCoinType(true, false);
                 else
                     coinScript.SetCoinType(false, true);
+
             }
         }
     }
@@ -321,7 +330,7 @@ public class Gloves : MonoBehaviour
             float orbY = position.y + Mathf.Sin(randomAngle * Mathf.Deg2Rad);
             Vector3 spawnPosition = new Vector3(orbX, orbY, position.z);
 
-            GameObject orb = Instantiate(experienceOrbPrefab, spawnPosition, Quaternion.identity);
+            GameObject orb = orbPoolManager.GetOrbFromPool(spawnPosition);
             Rigidbody2D orbRb = orb.GetComponent<Rigidbody2D>();
 
             if (orbRb != null)
@@ -353,7 +362,7 @@ public class Gloves : MonoBehaviour
 
                     if (Vector3.Distance(orb.transform.position, player.position) < 0.5f)
                     {
-                        Destroy(orb);
+                        orbPoolManager.ReturnOrbToPool(orb);
                         yield break;
                     }
 

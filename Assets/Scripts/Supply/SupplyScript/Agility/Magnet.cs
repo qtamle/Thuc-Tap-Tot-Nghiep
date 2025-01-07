@@ -1,25 +1,53 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement; 
 
 public class Magnet : MonoBehaviour
 {
     public SupplyData supplyData;
     [SerializeField] private bool isActive = true;
     [SerializeField] private float cooldownTime = 5f;
-    [SerializeField] private float orbMoveToPlayerSpeed = 10f; 
+    [SerializeField] private float orbMoveToPlayerSpeed = 10f;
 
     public float CooldownTime => cooldownTime;
     private string playerTag = "Player";
-    private string coinTag = "Coin"; 
+    private string coinTag = "Coin";
 
     private Transform playerTransform;
+
     private void Awake()
+    {
+        FindPlayer();
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void Start()
+    {
+        isActive = true;
+        Active();
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        FindPlayer();
+    }
+
+    private void FindPlayer()
     {
         GameObject player = GameObject.FindGameObjectWithTag(playerTag);
         if (player != null)
         {
             playerTransform = player.transform;
-            Debug.Log("Tim thay player");
+            Debug.Log("Player found in scene: " + player.name);
         }
         else
         {
@@ -46,12 +74,6 @@ public class Magnet : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        isActive = true;
-        Active();
-    }
-
     public void Active()
     {
         if (!IsReady())
@@ -67,7 +89,7 @@ public class Magnet : MonoBehaviour
 
     private IEnumerator HookCoinsContinuously()
     {
-        while (true) 
+        while (true)
         {
             if (isActive)
             {
@@ -78,7 +100,7 @@ public class Magnet : MonoBehaviour
                 }
             }
 
-            yield return new WaitForSeconds(2f);  
+            yield return new WaitForSeconds(2f);
         }
     }
 

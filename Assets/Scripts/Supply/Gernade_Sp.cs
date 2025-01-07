@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class Gernade_Sp : MonoBehaviour, ISupplyActive
 {
@@ -16,10 +17,31 @@ public class Gernade_Sp : MonoBehaviour, ISupplyActive
 
     private void Awake()
     {
+        FindPlayer();
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        FindPlayer();
+    }
+
+    private void FindPlayer()
+    {
         GameObject player = GameObject.FindGameObjectWithTag(playerTag);
         if (player != null)
         {
             playerTransform = player.transform;
+            Debug.Log("Player found!");
         }
         else
         {
@@ -114,11 +136,11 @@ public class Gernade_Sp : MonoBehaviour, ISupplyActive
                 moveSpeed * Time.deltaTime
             );
 
-            yield return null; 
+            yield return null;
         }
 
         gernade.transform.position = targetPosition;
-        
+
         Rigidbody2D rb = gernade.GetComponent<Rigidbody2D>();
         if (rb != null)
         {
@@ -126,7 +148,7 @@ public class Gernade_Sp : MonoBehaviour, ISupplyActive
             GernadeCollision ger = gernade.GetComponent<GernadeCollision>();
             if (ger != null)
             {
-                yield return StartCoroutine(ger.Explode()); 
+                yield return StartCoroutine(ger.Explode());
                 SpriteRenderer spriteRenderer = ger.GetComponent<SpriteRenderer>();
                 if (spriteRenderer != null)
                 {

@@ -36,13 +36,18 @@ public class GernadeCollision : MonoBehaviour
     private Transform player;
 
     private Gold goldIncrease;
+    private CoinPoolManager coinPoolManager;
+    private ExperienceOrbPoolManager orbPoolManager;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
     }
-
     private void Start()
     {
+        coinPoolManager = FindFirstObjectByType<CoinPoolManager>();
+        orbPoolManager = FindFirstObjectByType<ExperienceOrbPoolManager>();
+
         coinsManager = UnityEngine.Object.FindFirstObjectByType<CoinsManager>();
         enemySpawners = FindObjectsOfType<MonoBehaviour>().OfType<IEnemySpawner>().ToArray();
 
@@ -148,7 +153,10 @@ public class GernadeCollision : MonoBehaviour
         for (int i = 0; i < coinCount; i++)
         {
             Vector3 spawnPosition = position + Vector3.up * 0.2f;
-            GameObject coin = Instantiate(coinType, spawnPosition, Quaternion.identity);
+
+            GameObject coin = coinPoolManager.GetCoinFromPool(coinType);
+            coin.transform.position = spawnPosition;
+
             Rigidbody2D coinRb = coin.GetComponent<Rigidbody2D>();
 
             if (coinRb != null)
@@ -189,7 +197,6 @@ public class GernadeCollision : MonoBehaviour
             yield break;
         }
     }
-
     void SpawnExperienceOrbs(Vector3 position, int orbCount)
     {
         for (int i = 0; i < orbCount; i++)
@@ -200,7 +207,7 @@ public class GernadeCollision : MonoBehaviour
             float orbY = position.y + Mathf.Sin(randomAngle * Mathf.Deg2Rad);
             Vector3 spawnPosition = new Vector3(orbX, orbY, position.z);
 
-            GameObject orb = Instantiate(experienceOrbPrefab, spawnPosition, Quaternion.identity);
+            GameObject orb = orbPoolManager.GetOrbFromPool(spawnPosition);
             Rigidbody2D orbRb = orb.GetComponent<Rigidbody2D>();
 
             if (orbRb != null)
@@ -232,7 +239,7 @@ public class GernadeCollision : MonoBehaviour
 
                     if (Vector3.Distance(orb.transform.position, player.position) < 0.5f)
                     {
-                        Destroy(orb);
+                        orbPoolManager.ReturnOrbToPool(orb);
                         yield break;
                     }
 
@@ -242,6 +249,7 @@ public class GernadeCollision : MonoBehaviour
         }
         else
         {
+            // Nếu orb hoặc player bị xóa, dừng Coroutine
             yield break;
         }
     }

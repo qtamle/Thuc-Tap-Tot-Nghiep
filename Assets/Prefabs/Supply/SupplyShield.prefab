@@ -149,7 +149,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   supplyData: {fileID: 11400000, guid: d43a2b8fdb993494798f023c1b361903, type: 2}
   isActive: 1
-  cooldownTime: 2
+  cooldownTime: 0
 --- !u!61 &3761813258420431240
 BoxCollider2D:
   m_ObjectHideFlags: 0

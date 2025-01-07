@@ -33,8 +33,13 @@ public class Attack : MonoBehaviour
     private IEnemySpawner[] enemySpawners;
     private Gold goldIncrease;
 
+    private CoinPoolManager coinPoolManager;
+    private ExperienceOrbPoolManager orbPoolManager;
     private void Start()
     {
+        coinPoolManager = FindFirstObjectByType<CoinPoolManager>();
+        orbPoolManager = FindFirstObjectByType<ExperienceOrbPoolManager>();
+
         coinsManager = UnityEngine.Object.FindFirstObjectByType<CoinsManager>();
 
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
@@ -116,79 +121,6 @@ public class Attack : MonoBehaviour
 
         isAttackBoss = false;
 
-        //Collider2D[] bosses = Physics2D.OverlapCircleAll(attackPoints.position, radius, bossLayer);
-
-        //foreach (Collider2D boss in bosses)
-        //{
-        //    GangsterHealth gangsterHealth = boss.GetComponent<GangsterHealth>();
-        //    if (gangsterHealth != null && gangsterHealth.CanBeDamaged() && !isAttackBoss)
-        //    {
-        //        gangsterHealth.TakeDamage(1);
-        //        isAttackBoss = true;
-
-        //        gangsterHealth.SetCanBeDamaged(false);
-
-        //        SpawnCoins(coinPrefab, coinSpawnMin * 12, coinSpawnMax * 12, boss.transform.position);
-
-        //        if (Random.value <= 0.25f)
-        //        {
-        //            SpawnCoins(secondaryCoinPrefab, secondaryCoinSpawnMin * 5, secondaryCoinSpawnMax * 5, boss.transform.position);
-        //        }
-
-        //        SpawnExperienceOrbs(boss.transform.position, 20);
-        //    }
-        //}
-        //isAttackBoss = false;
-
-
-        //Collider2D[] assassin = Physics2D.OverlapCircleAll(attackPoints.position, radius, bossLayer);
-
-        //foreach (Collider2D asssass in assassin)
-        //{
-        //    AssassinHealth Assassin = asssass.GetComponent<AssassinHealth>();
-        //    if (Assassin != null && Assassin.CanBeDamaged() && !isAttackBoss)
-        //    {
-        //        Assassin.TakeDamage(1);
-        //        isAttackBoss = true;
-
-        //        Assassin.SetCanBeDamaged(false);
-
-        //        SpawnCoins(coinPrefab, coinSpawnMin * 13, coinSpawnMax * 13, asssass.transform.position);
-
-        //        if (Random.value <= 0.25f)
-        //        {
-        //            SpawnCoins(secondaryCoinPrefab, secondaryCoinSpawnMin * 5, secondaryCoinSpawnMax * 5, asssass.transform.position);
-        //        }
-
-        //        SpawnExperienceOrbs(asssass.transform.position, 25);
-        //    }
-        //}
-        //isAttackBoss = false;
-
-        //Collider2D[] cyborg = Physics2D.OverlapCircleAll(attackPoints.position, radius, bossLayer);
-
-        //foreach (Collider2D cy in cyborg)
-        //{
-        //    CyborgHealth cyborgs = cy.GetComponent<CyborgHealth>();
-        //    if (cyborgs != null && cyborgs.CanBeDamaged() && !isAttackBoss)
-        //    {
-        //        cyborgs.TakeDamage(1);
-        //        isAttackBoss = true;
-
-        //        cyborgs.SetCanBeDamaged(false);
-
-        //        SpawnCoins(coinPrefab, coinSpawnMin * 13, coinSpawnMax * 13, cyborgs.transform.position);
-
-        //        if (Random.value <= 0.25f)
-        //        {
-        //            SpawnCoins(secondaryCoinPrefab, secondaryCoinSpawnMin * 5, secondaryCoinSpawnMax * 5, cyborgs.transform.position);
-        //        }
-
-        //        SpawnExperienceOrbs(cyborgs.transform.position, 25);
-        //    }
-        //}
-        //isAttackBoss = false;
-
         Collider2D[] Snake = Physics2D.OverlapBoxAll(attackPoints.position, boxSize, 0f, bossLayer);
 
         foreach (Collider2D sn in Snake)
@@ -258,7 +190,10 @@ public class Attack : MonoBehaviour
         for (int i = 0; i < coinCount; i++)
         {
             Vector3 spawnPosition = position + Vector3.up * 0.2f;
-            GameObject coin = Instantiate(coinType, spawnPosition, Quaternion.identity);
+
+            GameObject coin = coinPoolManager.GetCoinFromPool(coinType);
+            coin.transform.position = spawnPosition;
+
             Rigidbody2D coinRb = coin.GetComponent<Rigidbody2D>();
 
             if (coinRb != null)
@@ -310,7 +245,7 @@ public class Attack : MonoBehaviour
             float orbY = position.y + Mathf.Sin(randomAngle * Mathf.Deg2Rad);
             Vector3 spawnPosition = new Vector3(orbX, orbY, position.z);
 
-            GameObject orb = Instantiate(experienceOrbPrefab, spawnPosition, Quaternion.identity);
+            GameObject orb = orbPoolManager.GetOrbFromPool(spawnPosition);
             Rigidbody2D orbRb = orb.GetComponent<Rigidbody2D>();
 
             if (orbRb != null)
@@ -342,7 +277,7 @@ public class Attack : MonoBehaviour
 
                     if (Vector3.Distance(orb.transform.position, player.position) < 0.5f)
                     {
-                        Destroy(orb);
+                        orbPoolManager.ReturnOrbToPool(orb);
                         yield break;
                     }
 

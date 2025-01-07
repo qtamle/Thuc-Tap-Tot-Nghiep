@@ -21,6 +21,8 @@ public class CoinsScript : MonoBehaviour
     public float timeRemaining;
     private SpriteRenderer sprite;
 
+    private CoinPoolManager coinPoolManager;
+
     private void OnEnable()
     {
         int playerLayer = LayerMask.NameToLayer(playerLayerName);
@@ -46,6 +48,8 @@ public class CoinsScript : MonoBehaviour
 
     private void Start()
     {
+        coinPoolManager = FindFirstObjectByType<CoinPoolManager>();
+
         coinsManager = UnityEngine.Object.FindFirstObjectByType<CoinsManager>();
 
         rb = GetComponent<Rigidbody2D>();
@@ -134,7 +138,6 @@ public class CoinsScript : MonoBehaviour
         rb.AddForce(new Vector2(-rb.linearVelocity.x, rb.linearVelocity.y) * 2f, ForceMode2D.Impulse);
     }
 
-    // Hàm thu thập coin khi Player va chạm với coin
     public void CollectCoin()
     {
         if (coinsManager != null)
@@ -153,7 +156,9 @@ public class CoinsScript : MonoBehaviour
             Debug.LogError("CoinsManager không tồn tại.");
         }
 
-        Destroy(gameObject);
+        coinPoolManager.ReturnCoinToPool(gameObject);
+
+        gameObject.SetActive(false);
     }
 
     public void SetCoinType(bool type1, bool type2)

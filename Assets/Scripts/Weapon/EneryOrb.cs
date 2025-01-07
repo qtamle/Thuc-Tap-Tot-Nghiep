@@ -41,8 +41,14 @@ public class EneryOrb : MonoBehaviour
     private Vector3[] orbitPositions = new Vector3[3]; // Các vị trí quỹ đạo của quả cầu
 
     private Gold goldIncrease;
+    private CoinPoolManager coinPoolManager;
+    private ExperienceOrbPoolManager orbPoolManager;
+
     private void Start()
     {
+        coinPoolManager = FindFirstObjectByType<CoinPoolManager>();
+        orbPoolManager = FindFirstObjectByType<ExperienceOrbPoolManager>();
+
         coinsManager = UnityEngine.Object.FindFirstObjectByType<CoinsManager>();
 
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
@@ -215,7 +221,6 @@ public class EneryOrb : MonoBehaviour
             isAttackBoss = false;
         }
     }
-
     void SpawnCoins(GameObject coinType, float minAmount, float maxAmount, Vector3 position)
     {
         bool isGoldIncreaseActive = goldIncrease != null && goldIncrease.IsReady();
@@ -224,13 +229,16 @@ public class EneryOrb : MonoBehaviour
 
         if (isGoldIncreaseActive)
         {
-            coinCount += goldIncrease.increaseGoldChange; 
+            coinCount += goldIncrease.increaseGoldChange;
         }
 
         for (int i = 0; i < coinCount; i++)
         {
             Vector3 spawnPosition = position + Vector3.up * 0.2f;
-            GameObject coin = Instantiate(coinType, spawnPosition, Quaternion.identity);
+
+            GameObject coin = coinPoolManager.GetCoinFromPool(coinType);
+            coin.transform.position = spawnPosition;
+
             Rigidbody2D coinRb = coin.GetComponent<Rigidbody2D>();
 
             if (coinRb != null)
@@ -248,6 +256,7 @@ public class EneryOrb : MonoBehaviour
                     coinScript.SetCoinType(true, false);
                 else
                     coinScript.SetCoinType(false, true);
+
             }
         }
     }
@@ -282,7 +291,7 @@ public class EneryOrb : MonoBehaviour
             float orbY = position.y + Mathf.Sin(randomAngle * Mathf.Deg2Rad);
             Vector3 spawnPosition = new Vector3(orbX, orbY, position.z);
 
-            GameObject orb = Instantiate(experienceOrbPrefab, spawnPosition, Quaternion.identity);
+            GameObject orb = orbPoolManager.GetOrbFromPool(spawnPosition);
             Rigidbody2D orbRb = orb.GetComponent<Rigidbody2D>();
 
             if (orbRb != null)
@@ -314,7 +323,7 @@ public class EneryOrb : MonoBehaviour
 
                     if (Vector3.Distance(orb.transform.position, player.position) < 0.5f)
                     {
-                        Destroy(orb);
+                        orbPoolManager.ReturnOrbToPool(orb);
                         yield break;
                     }
 
@@ -328,7 +337,6 @@ public class EneryOrb : MonoBehaviour
             yield break;
         }
     }
-
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.blue;
