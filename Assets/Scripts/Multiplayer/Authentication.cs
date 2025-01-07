@@ -20,12 +20,13 @@ public class Authentication : MonoBehaviour
     public void CheckPlayerId()
     {
         errorMessageText.text = AuthenticationService.Instance.PlayerId;
-        Debug.Log($"PlayerId = {AuthenticationService.Instance.PlayerId}");
+        //Debug.Log($"PlayerId = {AuthenticationService.Instance.PlayerId}");
     }
 
     public void OnSignInAnonymouslyClicked()
     {
         _ = SignInAnonymouslyAsync();
+        
     }
 
     public void OnSignUpClicked()
@@ -37,6 +38,7 @@ public class Authentication : MonoBehaviour
         }
 
         _ = SignUpWithUsernamePasswordAsync(username.text, password.text);
+        CheckPlayerId();
     }
 
     public void OnSignInClicked()
@@ -48,6 +50,7 @@ public class Authentication : MonoBehaviour
         }
 
         _ = SignInWithUsernamePasswordAsync(username.text, password.text);
+        CheckPlayerId();
     }
 
     public void OnUpdatePasswordUpdateClicked(string currentPassword, string newPassword)
@@ -61,8 +64,9 @@ public class Authentication : MonoBehaviour
         {
             AuthenticationService.Instance.SignOut(true);
             Debug.Log("Sign out anonymously succeeded!");
+            
 
-            Debug.Log($"PlayerID: {AuthenticationService.Instance.PlayerId}");
+            //Debug.Log($"PlayerID: {AuthenticationService.Instance.PlayerId}");
         }
         catch (AuthenticationException ex)
         {
@@ -75,6 +79,7 @@ public class Authentication : MonoBehaviour
             ShowError($"Request Failed: {ex.Message}");
             Debug.LogException(ex);
         }
+        CheckPlayerId();
     }
 
     async Task SignInAnonymouslyAsync()
@@ -85,8 +90,8 @@ public class Authentication : MonoBehaviour
             Debug.Log("Sign in anonymously succeeded!");
 
             // Shows how to get the playerID
-            Debug.Log($"PlayerID: {AuthenticationService.Instance.PlayerId}");
-
+            //Debug.Log($"PlayerID: {AuthenticationService.Instance.PlayerId}");
+            CheckPlayerId();
         }
         catch (AuthenticationException ex)
         {
@@ -125,6 +130,7 @@ public class Authentication : MonoBehaviour
         try
         {
             await AuthenticationService.Instance.SignInWithUsernamePasswordAsync(username, password);
+            CheckPlayerId();
             Debug.Log("SignIn is successful.");
         }
         catch (AuthenticationException ex)
