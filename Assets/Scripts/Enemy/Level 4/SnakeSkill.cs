@@ -5,7 +5,6 @@ using UnityEngine;
 public class SnakeSkill : MonoBehaviour
 {
     [Header("Bullet")]
-    public GameObject bulletPrefab;
     public float bulletSpeed = 8f;
     public float fireRate = 1f;
 
@@ -21,9 +20,11 @@ public class SnakeSkill : MonoBehaviour
 
     public bool isFiring = false;
     private SnakeHealth snake;
+    private BulletBoss4Pool bulletBoss4Pool;
 
     private void Start()
     {
+        bulletBoss4Pool = FindFirstObjectByType<BulletBoss4Pool>();
         snake = GetComponent<SnakeHealth>();
     }
 
@@ -293,7 +294,9 @@ public class SnakeSkill : MonoBehaviour
 
     private void FireBullet(Transform firePoint, Vector2 fireDirection)
     {
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+        GameObject bullet = bulletBoss4Pool.GetBullet();
+
+        bullet.transform.position = firePoint.position;
 
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         if (rb != null)

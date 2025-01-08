@@ -60,7 +60,6 @@ public class Boss5 : MonoBehaviour
 
     [Header("Fire Bomb")]
     public GameObject bigbombPrefab;
-    public GameObject bombPrefab;
     public Transform[] targetTransformBomb;
     public Transform[] newTarget;
     public GameObject bigBombLaserPrefab;
@@ -71,12 +70,19 @@ public class Boss5 : MonoBehaviour
     private MoveDamagePlayer damage;
     private Boss5Health health;
 
+    private BombBoss5Pool bombBossPool;
+
     void Start()
     {
+        // Object Pooling
+        bombBossPool = FindFirstObjectByType<BombBoss5Pool>();
+        // Get Component
         health = GetComponent<Boss5Health>();
         damage = GetComponentInChildren<MoveDamagePlayer>();
         BossTrans = transform;
         rb = GetComponent<Rigidbody2D>();
+
+        // Transform Player
         GameObject Player = GameObject.FindGameObjectWithTag("Player");
         playerTrans = Player.transform;
         defaultPosition = transform.position;
@@ -352,6 +358,7 @@ public class Boss5 : MonoBehaviour
             if (Mathf.Abs(summonedObject.transform.position.x - finalSpawnX) > 0.01f)
             {
                 summonedObject.transform.Translate(Vector3.right * moveDirection * moveSpeed * Time.deltaTime);
+                Destroy(summonedObject, 1f);
             }
             else
             {
@@ -436,7 +443,6 @@ public class Boss5 : MonoBehaviour
 
     private IEnumerator SpawnManyObject()
     {
-        // Xóa tất cả object cũ nếu có
         foreach (var obj in spawnedObjects)
         {
             if (obj != null)
@@ -580,7 +586,7 @@ public class Boss5 : MonoBehaviour
         }
 
         health.SetCanBeDamaged(true);
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(5.5f);
         health.SetCanBeDamaged(false);
     }
 
@@ -616,16 +622,21 @@ public class Boss5 : MonoBehaviour
 
     private IEnumerator MoveAndShootBomb(Transform target)
     {
-        if (bombPrefab != null)
+        if (bombBossPool != null)
         {
-            GameObject bomb = Instantiate(bombPrefab, transform.position, Quaternion.identity);
+            GameObject bomb = bombBossPool.GetBomb();
+
+            bomb.transform.position = transform.position;
+
             while (Vector3.Distance(bomb.transform.position, target.position) > 0.5f)
             {
                 bomb.transform.position = Vector3.MoveTowards(bomb.transform.position, target.position, bombSpeed * Time.deltaTime);
                 yield return null;
             }
             yield return new WaitForSeconds(0.3f);
-            Destroy(bomb);
+
+            bombBossPool.ReturnBomb(bomb);
+
             if (bombLaserPrefab != null)
             {
                 GameObject bombLaser = Instantiate(bombLaserPrefab, bomb.transform.position, Quaternion.identity);

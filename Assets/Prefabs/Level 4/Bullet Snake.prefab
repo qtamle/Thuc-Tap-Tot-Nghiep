@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7636133087621651387}
   - component: {fileID: 8849077197279813196}
   - component: {fileID: 4323502053733270080}
-  - component: {fileID: -9190269110989646531}
+  - component: {fileID: 8860345827671035172}
   m_Layer: 0
   m_Name: Bullet Snake
   m_TagString: Laser
@@ -153,7 +153,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &-9190269110989646531
+--- !u!114 &8860345827671035172
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -162,6 +162,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 1334965047428969330}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2c7dc71359f3f24ea6a7f668942edfd, type: 3}
+  m_Script: {fileID: 11500000, guid: 72a3a10a2478d3a4eaef74aa42b3183b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
