@@ -8,7 +8,6 @@ public class Gangster : MonoBehaviour
     public Transform groundCheck;
     public float groundCheckRadius = 0.2f;
     public LayerMask groundLayer;
-    public GameObject rockPrefab; 
     public Transform playerTransform;
 
     [Header("Charging Settings")]
@@ -33,8 +32,10 @@ public class Gangster : MonoBehaviour
     private int skillUsageCount = 0;
 
     private GangsterHealth gangsterHealth;
+    private RockPool rockPool;
     private void Start()
     {
+        rockPool = FindFirstObjectByType<RockPool>();
         rb = GetComponent<Rigidbody2D>();
         gangsterHealth = GetComponent<GangsterHealth>();
 
@@ -282,9 +283,9 @@ public class Gangster : MonoBehaviour
             lastRockX = randomX;
 
             Vector2 rockPosition = new Vector2(randomX, 15f);
-            GameObject rock = Instantiate(rockPrefab, rockPosition, Quaternion.identity);
+            GameObject rock = rockPool.GetRock();
 
-            Destroy(rock, 5f);
+            rock.transform.position = rockPosition;
         }
     }
 
