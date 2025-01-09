@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df2cf1c330370304486efac3aa4d51a8, type: 3}
+  m_Name: Immortal
+  m_EditorClassIdentifier: 
+  supplyName: Immortal
+  supplyPrefab: {fileID: 7600217266074923063, guid: 30af6b5fd90eab849a55605614540f87, type: 3}
+  supplySprite: {fileID: -5937313870123219910, guid: 1246be2011c3c4446bf2b81c43b3b9cb, type: 3}
+  supplyType: 0
+  spawnWeight: 0
+  description: Increase invulnerability duration by 1.5x when taking damage.

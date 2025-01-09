@@ -28,6 +28,9 @@ public class PlayerHealth : MonoBehaviour, DamagePlayerInterface
 
     private AngelGuardian angel;
     private Sacrifice Sacrifice;
+    private EnergyShield energyShield;
+    private Immortal immortal;
+    private Brutal brutal;
 
     private void Start()
     {
@@ -40,6 +43,9 @@ public class PlayerHealth : MonoBehaviour, DamagePlayerInterface
 
         angel = FindFirstObjectByType<AngelGuardian>();
         Sacrifice = FindFirstObjectByType<Sacrifice>();
+        energyShield = FindFirstObjectByType<EnergyShield>();
+        immortal = FindFirstObjectByType<Immortal>();
+        brutal = FindFirstObjectByType<Brutal>();
 
         //levelSystem = FindFirstObjectByType<LevelSystem>();
         if (levelSystem != null)
@@ -58,7 +64,13 @@ public class PlayerHealth : MonoBehaviour, DamagePlayerInterface
 
         CheckSacrifice();
 
+        if (immortal != null)
+        {
+            invincibilityDuration += 1.5f;
+        }
+
     }
+
     //private void OnLevelUpdated(int level, int experience, int experienceToNextLevel)
     //{
     //    // Tăng maxHealth mỗi khi lên cấp
@@ -85,7 +97,16 @@ public class PlayerHealth : MonoBehaviour, DamagePlayerInterface
     public void DamagePlayer(int damage)
     {
         if (isInvincible)
-            return;
+        {
+            return; 
+        }
+
+        if (energyShield != null && energyShield.TryBlockDamage())
+        {
+            Debug.Log("Damage blocked by Energy Shield.");
+            StartCoroutine(InvincibilityCoroutine(invincibilityDuration));
+            return; 
+        }
 
         if (currentShield > 0)
         {
@@ -97,6 +118,11 @@ public class PlayerHealth : MonoBehaviour, DamagePlayerInterface
         }
         else
         {
+            if (brutal != null)
+            {
+                damage *= 5;
+            }
+
             currentHealth -= damage;
             currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
             UpdateHealthUI();

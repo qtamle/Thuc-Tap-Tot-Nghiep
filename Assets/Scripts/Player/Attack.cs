@@ -31,8 +31,11 @@ public class Attack : MonoBehaviour
     private CoinsManager coinsManager;
     private Transform player;
     private IEnemySpawner[] enemySpawners;
+
+    private Brutal brutal;
     private Gold goldIncrease;
 
+    private PlayerHealth health;
     private CoinPoolManager coinPoolManager;
     private ExperienceOrbPoolManager orbPoolManager;
     private void Start()
@@ -43,6 +46,7 @@ public class Attack : MonoBehaviour
         coinsManager = UnityEngine.Object.FindFirstObjectByType<CoinsManager>();
 
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+        health = GetComponent<PlayerHealth>();
 
         if (playerObject == null)
         {
@@ -58,6 +62,7 @@ public class Attack : MonoBehaviour
         enemySpawners = FindObjectsOfType<MonoBehaviour>().OfType<IEnemySpawner>().ToArray(); 
 
         goldIncrease = FindFirstObjectByType<Gold>();
+        brutal = FindFirstObjectByType<Brutal>();
 
         if (goldIncrease != null )
         {
@@ -81,6 +86,11 @@ public class Attack : MonoBehaviour
                 foreach (IEnemySpawner spawner in enemySpawners)
                 {
                     spawner.OnEnemyKilled();
+                }
+
+                if (brutal != null)
+                {
+                    health.HealHealth(1);
                 }
 
                 Destroy(enemy.gameObject);
