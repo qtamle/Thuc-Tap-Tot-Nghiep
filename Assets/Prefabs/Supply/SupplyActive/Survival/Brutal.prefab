@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 6652262669793610528}
   - component: {fileID: 1816531107978084422}
   - component: {fileID: 5838088687023532137}
+  - component: {fileID: 6672939735936186093}
   m_Layer: 0
   m_Name: Brutal
   m_TagString: Untagged
@@ -180,3 +181,18 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &6672939735936186093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7600217266074923063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8aa060b6774234149959d734ec341973, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  supplyData: {fileID: 11400000, guid: 0529f0d4f60ed3a46afd0b5957e8f54b, type: 2}
+  isActive: 0
+  cooldownTime: 0
