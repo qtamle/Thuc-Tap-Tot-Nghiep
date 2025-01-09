@@ -44,8 +44,11 @@ public class Gloves : MonoBehaviour
     private IEnemySpawner[] enemySpawners;
 
     private Gold goldIncrease;
+    private Brutal brutal;
+
     private CoinPoolManager coinPoolManager;
     private ExperienceOrbPoolManager orbPoolManager;
+    private PlayerHealth health;
 
     private void Start()
     {
@@ -55,6 +58,7 @@ public class Gloves : MonoBehaviour
         coinsManager = UnityEngine.Object.FindFirstObjectByType<CoinsManager>();
 
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+        health = GetComponent<PlayerHealth>();
 
         if (playerObject == null)
         {
@@ -70,14 +74,8 @@ public class Gloves : MonoBehaviour
         enemySpawners = FindObjectsOfType<MonoBehaviour>().OfType<IEnemySpawner>().ToArray();
 
         goldIncrease = FindFirstObjectByType<Gold>();
-        if (goldIncrease != null)
-        {
-            Debug.Log("Tim thay gold increase");
-        }
-        else
-        {
-            Debug.Log("Khong tim thay gi het");
-        }
+        brutal = FindFirstObjectByType<Brutal>();
+
     }
 
     private void Update()
@@ -138,6 +136,11 @@ public class Gloves : MonoBehaviour
                 foreach (IEnemySpawner spawner in enemySpawners)
                 {
                     spawner.OnEnemyKilled();
+                }
+
+                if (brutal != null)
+                {
+                    health.HealHealth(1);
                 }
 
                 Destroy(enemy.gameObject);

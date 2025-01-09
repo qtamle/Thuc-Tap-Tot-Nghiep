@@ -17,5 +17,5 @@ MonoBehaviour:
   supplySprite: {fileID: -1130546748562234458, guid: 1246be2011c3c4446bf2b81c43b3b9cb, type: 3}
   supplyType: 0
   spawnWeight: 0
-  description: Killing an enemy restores 1 health, but taking damage triples damage
-    dealt.
+  description: Killing an enemy restores 1 health, but taking damage multiplies damage
+    dealt by 5.

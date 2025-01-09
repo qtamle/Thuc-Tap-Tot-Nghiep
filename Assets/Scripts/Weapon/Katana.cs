@@ -51,8 +51,11 @@ public class Katana : MonoBehaviour
     private SwipeDirection currentSwipeDirection = SwipeDirection.Normal;
 
     private Gold goldIncrease;
+    private Brutal brutal;
+
     private CoinPoolManager coinPoolManager;
     private ExperienceOrbPoolManager orbPoolManager;
+    private PlayerHealth health;
 
     private void Start()
     {
@@ -62,6 +65,7 @@ public class Katana : MonoBehaviour
         coinsManager = UnityEngine.Object.FindFirstObjectByType<CoinsManager>();
 
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+        health = GetComponent<PlayerHealth>();
 
         if (playerObject == null)
         {
@@ -77,14 +81,8 @@ public class Katana : MonoBehaviour
         enemySpawners = FindObjectsOfType<MonoBehaviour>().OfType<IEnemySpawner>().ToArray();
 
         goldIncrease = FindFirstObjectByType<Gold>();
-        if (goldIncrease != null)
-        {
-            Debug.Log("Tim thay gold increase");
-        }
-        else
-        {
-            Debug.Log("Khong tim thay gi het");
-        }
+        brutal = FindFirstObjectByType<Brutal>();
+
     }
     private void Update()
     {
@@ -228,6 +226,11 @@ public class Katana : MonoBehaviour
                 if (EnemyManager.Instance != null)
                 {
                     EnemyManager.Instance.OnEnemyKilled();
+                }
+
+                if (brutal != null)
+                {
+                    health.HealHealth(1);
                 }
 
                 foreach (IEnemySpawner spawner in enemySpawners)

@@ -63,11 +63,6 @@ public class Attack : MonoBehaviour
 
         goldIncrease = FindFirstObjectByType<Gold>();
         brutal = FindFirstObjectByType<Brutal>();
-
-        if (goldIncrease != null )
-        {
-            Debug.Log("Tim thay gold increase");
-        }  
     }
 
     private void Update()
