@@ -22,6 +22,11 @@ public class Dagger : MonoBehaviour
     public float orbMoveToPlayer = 15f;
     public float orbMoveDelay = 2f;
 
+    [Header("Health Potions")]
+    public GameObject healthPotionPrefab;
+    public float potionMoveToPlayer = 25f;
+    public float potionMoveDelay = 0.5f;
+
     [Header("Settings Amount")]
     public float coinSpawnMin = 3;
     public float coinSpawnMax = 6;
@@ -49,6 +54,7 @@ public class Dagger : MonoBehaviour
     private CoinPoolManager coinPoolManager;
     private ExperienceOrbPoolManager orbPoolManager;
     private PlayerHealth health;
+    private Lucky lucky;
 
     private void Start()
     {
@@ -75,7 +81,7 @@ public class Dagger : MonoBehaviour
 
         goldIncrease = FindFirstObjectByType<Gold>();
         brutal = FindFirstObjectByType<Brutal>();
-
+        lucky = FindFirstObjectByType<Lucky>();
     }
 
     private void Update()
@@ -151,6 +157,11 @@ public class Dagger : MonoBehaviour
                     SpawnCoins(secondaryCoinPrefab, secondaryCoinSpawnMin, secondaryCoinSpawnMax, enemy.transform.position);
                 }
 
+                if (Random.value <= 0.15f && lucky != null)
+                {
+                    SpawnHealthPotions(enemy.transform.position, 1);
+                }
+
                 SpawnExperienceOrbs(enemy.transform.position, 5);
             }
         }
@@ -173,6 +184,11 @@ public class Dagger : MonoBehaviour
                 if (Random.value <= 0.25f)
                 {
                     SpawnCoins(secondaryCoinPrefab, secondaryCoinSpawnMin * 5, secondaryCoinSpawnMax * 5, boss.transform.position);
+                }
+
+                if (Random.value <= 0.15f && lucky != null)
+                {
+                    SpawnHealthPotions(boss.transform.position, 1);
                 }
 
                 SpawnExperienceOrbs(boss.transform.position, 20);
@@ -204,6 +220,11 @@ public class Dagger : MonoBehaviour
                         SpawnCoins(secondaryCoinPrefab, secondaryCoinSpawnMin * 5, secondaryCoinSpawnMax * 5, partHealth.transform.position);
                     }
 
+                    if (Random.value <= 0.15f && lucky != null)
+                    {
+                        SpawnHealthPotions(partHealth.transform.position, 1);
+                    }
+
                     SpawnExperienceOrbs(partHealth.transform.position, 25);
                 }
             }
@@ -223,6 +244,11 @@ public class Dagger : MonoBehaviour
                     if (Random.value <= 0.25f)
                     {
                         SpawnCoins(secondaryCoinPrefab, secondaryCoinSpawnMin * 5, secondaryCoinSpawnMax * 5, headController.transform.position);
+                    }
+
+                    if (Random.value <= 0.15f && lucky != null)
+                    {
+                        SpawnHealthPotions(headController.transform.position, 1);
                     }
 
                     SpawnExperienceOrbs(headController.transform.position, 25);
@@ -375,6 +401,63 @@ public class Dagger : MonoBehaviour
         else
         {
             // Nếu orb hoặc player bị xóa, dừng Coroutine
+            yield break;
+        }
+    }
+
+
+    void SpawnHealthPotions(Vector3 position, int potionCount)
+    {
+        for (int i = 0; i < potionCount; i++)
+        {
+            float randomAngle = Random.Range(0f, 360f);
+
+            float potionX = position.x + Mathf.Cos(randomAngle * Mathf.Deg2Rad);
+            float potionY = position.y + Mathf.Sin(randomAngle * Mathf.Deg2Rad);
+            Vector3 spawnPosition = new Vector3(potionX, potionY, position.z);
+
+            GameObject potion = Instantiate(healthPotionPrefab, spawnPosition, Quaternion.identity);
+
+            Rigidbody2D potionRb = potion.GetComponent<Rigidbody2D>();
+            if (potionRb != null)
+            {
+                Vector2 randomForce = new Vector2(Random.Range(-2f, 2f), Random.Range(1f, 1f)) * 2.5f;
+                potionRb.AddForce(randomForce, ForceMode2D.Impulse);
+
+                potionRb.bodyType = RigidbodyType2D.Kinematic;
+
+                StartCoroutine(MovePotionToPlayer(potion, potionMoveDelay));
+            }
+        }
+    }
+
+    IEnumerator MovePotionToPlayer(GameObject potion, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        if (potion != null && player != null)
+        {
+            Rigidbody2D potionRb = potion.GetComponent<Rigidbody2D>();
+            if (potionRb != null)
+            {
+                while (potion != null && player != null)
+                {
+                    Vector3 direction = (player.position - potion.transform.position).normalized;
+                    potionRb.MovePosition(potion.transform.position + direction * Time.deltaTime * potionMoveToPlayer);
+
+                    if (Vector3.Distance(potion.transform.position, player.position) < 0.5f)
+                    {
+                        Destroy(potion);
+                        health.HealHealth(3);
+                        yield break;
+                    }
+
+                    yield return null;
+                }
+            }
+        }
+        else
+        {
             yield break;
         }
     }

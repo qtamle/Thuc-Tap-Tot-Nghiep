@@ -27,6 +27,7 @@ TagManager:
   - Level4
   - Level5
   - SecondaryCoin
+  - SpawnPoint
   layers:
   - Default
   - TransparentFX

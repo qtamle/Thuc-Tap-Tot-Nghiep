@@ -71,8 +71,6 @@ public class Gun : MonoBehaviour
             Vector2 shootDirection = (transform.localScale.x > 0) ? Vector2.right : Vector2.left;
             rb.linearVelocity = shootDirection * bulletSpeed;
         }
-
-        Debug.Log("Shot fired!");
     }
 
     bool IsGrounded()

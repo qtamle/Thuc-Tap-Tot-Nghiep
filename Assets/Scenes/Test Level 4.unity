@@ -2634,7 +2634,7 @@ GameObject:
   - component: {fileID: 385575200}
   m_Layer: 7
   m_Name: sheet_1
-  m_TagString: Untagged
+  m_TagString: SpawnPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7057,7 +7057,7 @@ GameObject:
   - component: {fileID: 916838140}
   m_Layer: 7
   m_Name: sheet_1
-  m_TagString: Untagged
+  m_TagString: SpawnPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11903,6 +11903,9 @@ MonoBehaviour:
   orbLaunchForce: 3
   orbMoveToPlayer: 25
   orbMoveDelay: 0.3
+  healthPotionPrefab: {fileID: 2895849976222171966, guid: 71539652dceaf7b4795ff2c75c71f450, type: 3}
+  potionMoveToPlayer: 25
+  potionMoveDelay: 0.3
   coinSpawnMin: 1
   coinSpawnMax: 4
   secondaryCoinSpawnMin: 1
@@ -13229,7 +13232,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30b61101ca2cc0741a6959fd8576ca79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 1334965047428969330, guid: 7ed7cec49d319444ab248ce38fb32169, type: 3}
   bulletSpeed: 5
   fireRate: 1
   firePoints:
@@ -16338,7 +16340,7 @@ GameObject:
   - component: {fileID: 1868206869}
   m_Layer: 7
   m_Name: sheet_1
-  m_TagString: Untagged
+  m_TagString: SpawnPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

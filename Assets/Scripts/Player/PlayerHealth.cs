@@ -31,6 +31,7 @@ public class PlayerHealth : MonoBehaviour, DamagePlayerInterface
     private EnergyShield energyShield;
     private Immortal immortal;
     private Brutal brutal;
+    private Dodge dodge;
 
     private void Start()
     {
@@ -46,6 +47,7 @@ public class PlayerHealth : MonoBehaviour, DamagePlayerInterface
         energyShield = FindFirstObjectByType<EnergyShield>();
         immortal = FindFirstObjectByType<Immortal>();
         brutal = FindFirstObjectByType<Brutal>();
+        dodge = FindFirstObjectByType<Dodge>();
 
         //levelSystem = FindFirstObjectByType<LevelSystem>();
         if (levelSystem != null)
@@ -58,6 +60,7 @@ public class PlayerHealth : MonoBehaviour, DamagePlayerInterface
         {
             Debug.Log("Không tìm thấy LevelSystem trong scene.");
         }
+
         currentHealth = maxHealth;
         UpdateHealthUI();
         UpdateShieldUI();
@@ -68,8 +71,49 @@ public class PlayerHealth : MonoBehaviour, DamagePlayerInterface
         {
             invincibilityDuration += 1.5f;
         }
-
     }
+
+    private void OnEnable()
+    {
+        InitializePlayer();
+    }
+
+    private void InitializePlayer()
+    {
+        player = gameObject;
+
+        GameObject CurrentHealth = GameObject.Find("CurrentHealth");
+        GameObject Shield = GameObject.Find("Shield");
+        healthText = CurrentHealth.GetComponent<TMP_Text>();
+        shieldText = Shield.GetComponent<TMP_Text>();
+
+        angel = FindFirstObjectByType<AngelGuardian>();
+        Sacrifice = FindFirstObjectByType<Sacrifice>();
+        energyShield = FindFirstObjectByType<EnergyShield>();
+        immortal = FindFirstObjectByType<Immortal>();
+        brutal = FindFirstObjectByType<Brutal>();
+        dodge = FindFirstObjectByType<Dodge>();
+
+        //levelSystem = FindFirstObjectByType<LevelSystem>();
+        if (levelSystem != null)
+        {
+            Debug.Log("Da dang ky LevelSystem");
+            // Đăng ký sự kiện
+            //levelSystem.OnLevelDataUpdated += OnLevelUpdated;
+        }
+        else
+        {
+            Debug.Log("Không tìm thấy LevelSystem trong scene.");
+        }
+
+        CheckSacrifice();
+
+        if (immortal != null)
+        {
+            invincibilityDuration += 1.5f;
+        }
+    }
+
 
     //private void OnLevelUpdated(int level, int experience, int experienceToNextLevel)
     //{
@@ -99,6 +143,13 @@ public class PlayerHealth : MonoBehaviour, DamagePlayerInterface
         if (isInvincible)
         {
             return; 
+        }
+
+        if (dodge != null && Random.Range(0f, 1f) <= 0.9f) 
+        {
+            Debug.Log("Player dodged the damage!");
+            StartCoroutine(InvincibilityCoroutine(invincibilityDuration));
+            return;
         }
 
         if (energyShield != null && energyShield.TryBlockDamage())
