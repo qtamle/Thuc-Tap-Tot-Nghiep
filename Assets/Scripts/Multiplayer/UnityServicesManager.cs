@@ -5,6 +5,7 @@ using UnityEngine;
 public class UnityServicesManager : MonoBehaviour
 {
     public static UnityServicesManager Instance { get; private set; }
+
     async void Awake()
     {
         if (Instance != null)
@@ -22,10 +23,9 @@ public class UnityServicesManager : MonoBehaviour
             await UnityServices.InitializeAsync();
             Debug.Log("Unity Services initialized.");
         }
-        catch 
+        catch
         {
             Debug.LogError($"Failed to initialize Unity Services:");
         }
     }
-
 }

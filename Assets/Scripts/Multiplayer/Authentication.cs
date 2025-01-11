@@ -6,10 +6,24 @@ using UnityEngine;
 
 public class Authentication : MonoBehaviour
 {
+    public static Authentication Instance { get; private set; }
     public TMP_InputField username;
     public TMP_InputField password;
 
     public TMP_Text errorMessageText;
+
+    async void Awake()
+    {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+
     void ShowError(string message)
     {
         Debug.LogError(message);
@@ -26,30 +40,49 @@ public class Authentication : MonoBehaviour
     public void OnSignInAnonymouslyClicked()
     {
         _ = SignInAnonymouslyAsync();
-        
     }
 
     public void OnSignUpClicked()
     {
-        if (string.IsNullOrEmpty(username.text) || string.IsNullOrEmpty(password.text))
-        {
-            Debug.LogError("Username or Password is empty!");
-            return;
-        }
+        // if (string.IsNullOrEmpty(username.text) || string.IsNullOrEmpty(password.text))
+        // {
+        //     Debug.LogError("Username or Password is empty!");
+        //     return;
+        // }
 
-        _ = SignUpWithUsernamePasswordAsync(username.text, password.text);
+        string usernameTest = "Abc";
+        string passwordTest = "Abc1234.";
+        //_ = SignUpWithUsernamePasswordAsync(username.text, password.text);
+        _ = SignUpWithUsernamePasswordAsync(usernameTest, passwordTest);
+
         CheckPlayerId();
     }
 
     public void OnSignInClicked()
     {
-        if (string.IsNullOrEmpty(username.text) || string.IsNullOrEmpty(password.text))
-        {
-            ShowError("Username or Password is empty");
-            return;
-        }
+        // if (string.IsNullOrEmpty(username.text) || string.IsNullOrEmpty(password.text))
+        // {
+        //     ShowError("Username or Password is empty");
+        //     return;
+        // }
+        string usernameTest = "Abc";
+        string passwordTest = "Abc1234.";
 
-        _ = SignInWithUsernamePasswordAsync(username.text, password.text);
+        _ = SignInWithUsernamePasswordAsync(usernameTest, passwordTest);
+        CheckPlayerId();
+    }
+
+    public void OnSignIn2Clicked()
+    {
+        // if (string.IsNullOrEmpty(username.text) || string.IsNullOrEmpty(password.text))
+        // {
+        //     ShowError("Username or Password is empty");
+        //     return;
+        // }
+        string usernameTest = "Abcd";
+        string passwordTest = "Abc1234.";
+
+        _ = SignInWithUsernamePasswordAsync(usernameTest, passwordTest);
         CheckPlayerId();
     }
 
@@ -64,7 +97,6 @@ public class Authentication : MonoBehaviour
         {
             AuthenticationService.Instance.SignOut(true);
             Debug.Log("Sign out anonymously succeeded!");
-            
 
             //Debug.Log($"PlayerID: {AuthenticationService.Instance.PlayerId}");
         }
@@ -105,11 +137,15 @@ public class Authentication : MonoBehaviour
             Debug.LogException(ex);
         }
     }
+
     async Task SignUpWithUsernamePasswordAsync(string username, string password)
     {
         try
         {
-            await AuthenticationService.Instance.SignUpWithUsernamePasswordAsync(username, password);
+            await AuthenticationService.Instance.SignUpWithUsernamePasswordAsync(
+                username,
+                password
+            );
             Debug.Log("SignUp is successful.");
         }
         catch (AuthenticationException ex)
@@ -125,11 +161,15 @@ public class Authentication : MonoBehaviour
             Debug.LogException(ex);
         }
     }
+
     async Task SignInWithUsernamePasswordAsync(string username, string password)
     {
         try
         {
-            await AuthenticationService.Instance.SignInWithUsernamePasswordAsync(username, password);
+            await AuthenticationService.Instance.SignInWithUsernamePasswordAsync(
+                username,
+                password
+            );
             CheckPlayerId();
             Debug.Log("SignIn is successful.");
         }
@@ -188,5 +228,4 @@ public class Authentication : MonoBehaviour
             Debug.LogException(ex);
         }
     }
-
 }

@@ -77,3 +77,4 @@ Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Anton SDF.asse
 .vscode/settings.json
 .vscode/launch.json
 .vscode/extensions.json
+.config/dotnet-tools.json
