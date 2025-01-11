@@ -44,24 +44,35 @@ public class BossManager : MonoBehaviour
 
     private void Update()
     {
+        // 1
         if (Input.GetKeyDown(KeyCode.W))
         {
-            Debug.Log("Key E pressed. Attempting to handle boss defeat.");
+            Debug.Log("Key W pressed. Attempting to handle boss defeat.");
             HandleBossDefeated(CurrentBoss);
         }
+
+        // 2
         if (Input.GetKeyDown(KeyCode.R))
         {
             Debug.Log("Key R pressed.");
             NextBossScene(CurrentBoss);
         }
+
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            Debug.Log("Key R pressed.");
+            Debug.Log("Key Q pressed.");
             ProceedToNextBossScene();
         }
-        if (Input.GetKeyDown(KeyCode.L))
+
+        //if (Input.GetKeyDown(KeyCode.L))
+        //{
+        //    SetNextBoss();
+        //}
+
+        // 3
+        if (Input.GetKeyDown(KeyCode.P))
         {
-            SetNextBoss();
+            SpawnWeaponOnSceneLoad();
         }
     }
 
@@ -81,17 +92,17 @@ public class BossManager : MonoBehaviour
 
     public void HandleBossDefeated(HandleBoss boss)
     {
-        if (boss != null && !boss.isDefeated) // Sửa từ isDeaftead thành isDefeated
+        if (boss != null && !boss.isDefeated)
         {
             boss.isDefeated = true;
             ListBossDefeated.Add(boss);
-
-            Debug.Log("Boss defeated: " + boss.bossName + ", Total defeated: " + ListBossDefeated.Count); // Sửa từ boss.name thành boss.bossName
+            Debug.Log("Boss defeated: " + boss.bossName);
 
             if (!string.IsNullOrEmpty(boss.supplyScene))
             {
                 Debug.Log("Loading supply scene: " + boss.supplyScene);
                 LoadSupplyScene(boss);
+                SetNextBoss();
             }
         }
         else
@@ -100,12 +111,10 @@ public class BossManager : MonoBehaviour
         }
     }
 
-
     private void LoadSupplyScene(HandleBoss defeatedBoss)
     {
         if (!string.IsNullOrEmpty(defeatedBoss.supplyScene))
         {
-            Debug.Log("Loading scene: " + defeatedBoss.supplyScene);
             SceneManager.LoadScene(defeatedBoss.supplyScene);
         }
         else
@@ -118,6 +127,7 @@ public class BossManager : MonoBehaviour
     {
         SceneManager.LoadScene(defeatedBoss.nextScene);
     }
+
     public void ProceedToNextBossScene()
     {
         if (CurrentBoss != null && !string.IsNullOrEmpty(CurrentBoss.nextScene))
@@ -129,7 +139,6 @@ public class BossManager : MonoBehaviour
 
             if (nextBoss != null)
             {
-                Debug.Log("Next boss found: " + nextBoss.name);
                 SetCurrentBoss(nextBoss);
                 SceneManager.LoadScene(CurrentBoss.nextScene);
             }
@@ -148,13 +157,13 @@ public class BossManager : MonoBehaviour
     {
         if (CurrentBoss != null)
         {
-            int currentIndex = ListBoss.IndexOf(CurrentBoss); // Lấy vị trí hiện tại
-            int nextIndex = currentIndex + 1; // Tăng index lên 1
+            int currentIndex = ListBoss.IndexOf(CurrentBoss);
+            int nextIndex = currentIndex + 1;
 
             if (nextIndex < ListBoss.Count)
             {
                 HandleBoss nextBoss = ListBoss[nextIndex];
-                SetCurrentBoss(nextBoss); // Cập nhật boss hiện tại
+                SetCurrentBoss(nextBoss);
             }
             else
             {
@@ -167,11 +176,22 @@ public class BossManager : MonoBehaviour
         }
     }
 
-
     public bool IsCurrentBossDefeated()
     {
-        Debug.Log("Is current boss defeated: " + (CurrentBoss != null && CurrentBoss.isDefeated));
         return CurrentBoss != null && CurrentBoss.isDefeated;
+    }
+
+    public void SpawnWeaponOnSceneLoad()
+    {
+        if (TestScene.weaponDataStore != null)
+        {
+            GameObject spawnPoint = GameObject.FindGameObjectWithTag("PlayerSpawn");
+            if (spawnPoint != null)
+            {
+                GameObject weaponPrefab = TestScene.weaponDataStore.weapon;
+                Instantiate(weaponPrefab, spawnPoint.transform.position, spawnPoint.transform.rotation);
+            }
+        }
     }
 
     public int GetDefeatedBossCount()

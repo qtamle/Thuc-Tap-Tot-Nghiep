@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01ecb4244bfac36438dea7575ffcb5cb, type: 3}
+  m_Name: Chainsaw
+  m_EditorClassIdentifier: 
+  weapon: {fileID: 7346428832547731079, guid: 96d7c611e0a559440bf0ffbca0047d5c, type: 3}
+  weaponSprite: {fileID: -5151153562373494563, guid: 2aac49780cc76db4da9e2c7f83864276, type: 3}
+  weaponName: Chainsaw
+  description: 

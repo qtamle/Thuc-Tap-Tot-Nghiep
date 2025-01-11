@@ -45,6 +45,37 @@ public class Gangster : MonoBehaviour
         }
 
         Spawn();
+        FindPlayerTransform();
+    }
+
+    private void FindPlayerTransform()
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+
+        if (player != null)
+        {
+            playerTransform = player.transform;
+        }
+        else
+        {
+            int playerLayer = LayerMask.NameToLayer("Player");
+
+            GameObject[] allObjects = GameObject.FindObjectsOfType<GameObject>();
+
+            foreach (var obj in allObjects)
+            {
+                if (obj.layer == playerLayer)
+                {
+                    playerTransform = obj.transform;
+                    break;
+                }
+            }
+
+            if (playerTransform == null)
+            {
+                Debug.LogError("Không tìm thấy Player theo tag hoặc layer!");
+            }
+        }
     }
 
     public void Active()
@@ -178,11 +209,7 @@ public class Gangster : MonoBehaviour
 
         isCharging = true;
 
-        if (playerTransform == null)
-        {
-            Debug.LogError("playerTransform is not assigned!");
-            yield break; 
-        }
+        FindPlayerTransform();
 
         float offsetX = playerTransform.position.x > transform.position.x ? -3f : 3f;
         Vector2 targetPosition = new Vector2(playerTransform.position.x + offsetX, playerTransform.position.y);

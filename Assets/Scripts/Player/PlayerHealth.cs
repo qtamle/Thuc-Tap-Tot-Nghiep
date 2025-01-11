@@ -33,45 +33,45 @@ public class PlayerHealth : MonoBehaviour, DamagePlayerInterface
     private Brutal brutal;
     private Dodge dodge;
 
-    private void Start()
-    {
-        player = gameObject;
+    //private void Start()
+    //{
+    //    player = gameObject;
 
-        GameObject CurrentHealth = GameObject.Find("CurrentHealth");
-        GameObject Shield = GameObject.Find("Shield");
-        healthText = CurrentHealth.GetComponent<TMP_Text>();
-        shieldText = Shield.GetComponent<TMP_Text>();
+    //    GameObject CurrentHealth = GameObject.Find("CurrentHealth");
+    //    GameObject Shield = GameObject.Find("Shield");
+    //    healthText = CurrentHealth.GetComponent<TMP_Text>();
+    //    shieldText = Shield.GetComponent<TMP_Text>();
 
-        angel = FindFirstObjectByType<AngelGuardian>();
-        Sacrifice = FindFirstObjectByType<Sacrifice>();
-        energyShield = FindFirstObjectByType<EnergyShield>();
-        immortal = FindFirstObjectByType<Immortal>();
-        brutal = FindFirstObjectByType<Brutal>();
-        dodge = FindFirstObjectByType<Dodge>();
+    //    angel = FindFirstObjectByType<AngelGuardian>();
+    //    Sacrifice = FindFirstObjectByType<Sacrifice>();
+    //    energyShield = FindFirstObjectByType<EnergyShield>();
+    //    immortal = FindFirstObjectByType<Immortal>();
+    //    brutal = FindFirstObjectByType<Brutal>();
+    //    dodge = FindFirstObjectByType<Dodge>();
 
-        //levelSystem = FindFirstObjectByType<LevelSystem>();
-        if (levelSystem != null)
-        {
-            Debug.Log("Da dang ky LevelSystem");
-            // Đăng ký sự kiện
-            //levelSystem.OnLevelDataUpdated += OnLevelUpdated;
-        }
-        else
-        {
-            Debug.Log("Không tìm thấy LevelSystem trong scene.");
-        }
+    //    //levelSystem = FindFirstObjectByType<LevelSystem>();
+    //    if (levelSystem != null)
+    //    {
+    //        Debug.Log("Da dang ky LevelSystem");
+    //        // Đăng ký sự kiện
+    //        //levelSystem.OnLevelDataUpdated += OnLevelUpdated;
+    //    }
+    //    else
+    //    {
+    //        Debug.Log("Không tìm thấy LevelSystem trong scene.");
+    //    }
 
-        currentHealth = maxHealth;
-        UpdateHealthUI();
-        UpdateShieldUI();
+    //    currentHealth = maxHealth;
+    //    UpdateHealthUI();
+    //    UpdateShieldUI();
 
-        CheckSacrifice();
+    //    CheckSacrifice();
 
-        if (immortal != null)
-        {
-            invincibilityDuration += 1.5f;
-        }
-    }
+    //    if (immortal != null)
+    //    {
+    //        invincibilityDuration += 1.5f;
+    //    }
+    //}
 
     private void OnEnable()
     {

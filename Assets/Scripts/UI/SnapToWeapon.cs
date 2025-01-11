@@ -10,10 +10,10 @@ public class SnapToWeapon : MonoBehaviour
     public RectTransform sampleListItem;
     public HorizontalLayoutGroup HLG;
 
-    public Button nextButton; // Nút Next
-    public Button previousButton; // Nút Previous
+    public Button nextButton;
+    public Button previousButton; 
 
-    public event Action<WeaponData> OnSnapChanged; // Sự kiện thông báo vũ khí đã snap
+    public event Action<WeaponData> OnSnapChanged; 
 
     [HideInInspector]
     public string[] ItemNames;
@@ -22,13 +22,13 @@ public class SnapToWeapon : MonoBehaviour
     public float snapForce;
     float snapSpeed;
 
-    private int currentItem = 0; // Chỉ số vũ khí hiện tại
-    private float snapDuration = 0.5f; // Thời gian di chuyển cho LeanTween
+    private int currentItem = 0; 
+    private float snapDuration = 0.5f;
 
+    public WeaponData currentSnapWeapon;
     void Start()
     {
         isSnapped = false;
-        // Tự động lấy thông tin từ các GameObject vũ khí
         InitializeWeaponNames();
 
         // Đăng ký sự kiện cho các nút
@@ -47,7 +47,7 @@ public class SnapToWeapon : MonoBehaviour
             WeaponData weaponData = child.GetComponent<WeaponData>();
             if (weaponData != null)
             {
-                weaponNames.Add(weaponData.weaponName); // Lấy tên vũ khí
+                weaponNames.Add(weaponData.weaponName);
             }
         }
         ItemNames = weaponNames.ToArray();
@@ -82,8 +82,8 @@ public class SnapToWeapon : MonoBehaviour
             // Kiểm tra vị trí đã đạt mục tiêu (dùng epsilon thay vì so sánh trực tiếp)
             if (Mathf.Abs(contentWeaponPanel.localPosition.x - targetPositionX) < 0.1f)
             {
-                isSnapped = true; // Đánh dấu đã snap
-                snapSpeed = 0; // Reset tốc độ snap
+                isSnapped = true;
+                snapSpeed = 0; 
 
                 // Gọi sự kiện thông báo vũ khí đã snap
                 WeaponData snappedWeaponData = GetWeaponData(currentItem);
@@ -91,20 +91,18 @@ public class SnapToWeapon : MonoBehaviour
             }
         }
 
-        // Nếu người dùng kéo mạnh, hủy trạng thái snap
         if (scrollRect.velocity.magnitude > 200)
         {
             isSnapped = false;
-            snapSpeed = 0; // Reset tốc độ snap khi hủy snap
+            snapSpeed = 0; 
         }
 
-        // Cập nhật trạng thái của nút Next và Previous
         UpdateButtonStates();
     }
 
     private void NotifySnapChanged(WeaponData weaponData)
     {
-        // Kiểm tra nếu sự kiện OnSnapChanged có listeners thì gọi
+        currentSnapWeapon = weaponData;
         OnSnapChanged?.Invoke(weaponData);
     }
 
@@ -143,18 +141,14 @@ public class SnapToWeapon : MonoBehaviour
         // Sử dụng LeanTween để di chuyển mượt mà
         LeanTween.moveLocalX(contentWeaponPanel.gameObject, targetPositionX, snapDuration).setEase(LeanTweenType.easeInOutQuad);
 
-        // Gọi sự kiện thông báo vũ khí đã snap
         WeaponData snappedWeaponData = GetWeaponData(currentItem);
         NotifySnapChanged(snappedWeaponData);
     }
 
-    // Cập nhật trạng thái của các nút
     private void UpdateButtonStates()
     {
-        // Ẩn/hiện nút Next nếu đang ở cuối danh sách
         nextButton.gameObject.SetActive(currentItem < ItemNames.Length - 1);
 
-        // Ẩn/hiện nút Previous nếu đang ở đầu danh sách
         previousButton.gameObject.SetActive(currentItem > 0);
     }
 }

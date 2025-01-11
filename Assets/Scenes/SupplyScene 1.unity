@@ -4669,6 +4669,7 @@ Transform:
   - {fileID: 1991073251}
   - {fileID: 975640051}
   - {fileID: 1013919499}
+  - {fileID: 1018085573}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1013919498
@@ -4697,6 +4698,37 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1, y: 9.02, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 990647696}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1018085572
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1018085573}
+  m_Layer: 0
+  m_Name: PlayerSpawn
+  m_TagString: PlayerSpawn
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1018085573
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1018085572}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.93, y: 13.68, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5398,6 +5430,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: SupplyScene
+  snapToWeapon: {fileID: 0}
 --- !u!114 &1260397261
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10018,6 +10051,7 @@ MonoBehaviour:
   playerSprite: {fileID: 1765298853}
   invincibilityDuration: 2
   flashInterval: 0.1
+  hasRevived: 0
 --- !u!61 &1765298849
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -10093,6 +10127,9 @@ MonoBehaviour:
   orbLaunchForce: 3
   orbMoveToPlayer: 25
   orbMoveDelay: 0.3
+  healthPotionPrefab: {fileID: 0}
+  potionMoveToPlayer: 15
+  potionMoveDelay: 2
   coinSpawnMin: 1
   coinSpawnMax: 4
   secondaryCoinSpawnMin: 1
@@ -10124,6 +10161,10 @@ MonoBehaviour:
   wallTransform: {fileID: 1199073722}
   blockLayerName: Enemy
   bossLayerName: Boss
+  iceMoveSpeedMultiplier: 1.5
+  dragFactor: 0.1
+  isIceMovementActive: 0
+  isChangingDirection: 0
 --- !u!50 &1765298852
 Rigidbody2D:
   serializedVersion: 5

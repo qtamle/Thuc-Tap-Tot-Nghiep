@@ -58,24 +58,34 @@ public class EneryOrb : MonoBehaviour
         coinPoolManager = FindFirstObjectByType<CoinPoolManager>();
         orbPoolManager = FindFirstObjectByType<ExperienceOrbPoolManager>();
 
+        if (coinPoolManager == null || orbPoolManager == null)
+        {
+            Debug.LogError("PoolManager components are missing!");
+            return;
+        }
+
         coinsManager = UnityEngine.Object.FindFirstObjectByType<CoinsManager>();
 
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
-        health = GetComponent<PlayerHealth>();
-
         if (playerObject == null)
         {
-            int playerLayer = LayerMask.NameToLayer("Player");
-            if (playerLayer >= 0)
-            {
-                playerObject = FindObjectsOfType<GameObject>().FirstOrDefault(obj => obj.layer == playerLayer);
-            }
+            Debug.LogError("Player GameObject is not found!");
+            return;
+        }
+
+        health = playerObject.GetComponent<PlayerHealth>();
+        if (health == null)
+        {
+            Debug.LogError("PlayerHealth component is missing on Player!");
+            return;
         }
 
         player = playerObject.transform;
-
-        enemySpawners = FindObjectsOfType<MonoBehaviour>().OfType<IEnemySpawner>().ToArray();
-
+        if (playerSpawn == null)
+        {
+            Debug.LogError("PlayerSpawn transform is not assigned in the Inspector!");
+            return;
+        }
 
         for (int i = 0; i < attackOrbs.Length; i++)
         {
@@ -89,10 +99,13 @@ public class EneryOrb : MonoBehaviour
             attackOrbs[i].transform.parent = playerSpawn;
         }
 
+        enemySpawners = FindObjectsOfType<MonoBehaviour>().OfType<IEnemySpawner>().ToArray();
+
         goldIncrease = FindFirstObjectByType<Gold>();
         brutal = FindFirstObjectByType<Brutal>();
         lucky = FindFirstObjectByType<Lucky>();
     }
+
     private void FixedUpdate()
     {
         for (int i = 0; i < attackOrbs.Length; i++)
@@ -117,6 +130,8 @@ public class EneryOrb : MonoBehaviour
     {
         foreach (GameObject orb in attackOrbs)
         {
+            if (orb == null) continue;
+
             Collider2D[] enemies = Physics2D.OverlapCircleAll(orb.transform.position, attackRadius, enemyLayer);
 
             foreach (Collider2D enemy in enemies)

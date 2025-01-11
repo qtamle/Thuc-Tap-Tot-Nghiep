@@ -3,19 +3,29 @@ using UnityEngine;
 using UnityEngine.UI;
 public class WeaponData : MonoBehaviour
 {
+    [Header("Equip Weapon Data")]
+    public WeaponSO weaponData;
+
     [Header("Weapon Details")]
     public string weaponName;
     public int basePrice;
-    public Image weaponSprite;
+    public Sprite weaponSprite;
 
     [Header("Upgrade Levels")]
     public int[] upgradePrices = new int[4];
 
     [Header("Equipment Slots")]
     public int maxSlots;
-    public List<Equipment> equippedLoot = new List<Equipment>(); // Chiến lợi phẩm hiện được gắn
+    public List<Equipment> equippedLoot = new List<Equipment>();
 
-    
+    private void Update()
+    {
+        if (weaponData != null)
+        {
+            weaponSprite = weaponData.weaponSprite;
+        }
+    }
+
     public void UpgradeWeapon(int level)
     {
         if (level < 0 || level >= upgradePrices.Length)
@@ -25,6 +35,5 @@ public class WeaponData : MonoBehaviour
         }
 
         Debug.Log($"Upgrade to level {level} costs {upgradePrices[level]}.");
-        // Thực hiện logic nâng cấp vũ khí tại đây
     }
 }

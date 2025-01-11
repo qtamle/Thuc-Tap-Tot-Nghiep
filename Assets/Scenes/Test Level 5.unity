@@ -7195,7 +7195,7 @@ MonoBehaviour:
   - {fileID: 419366678}
   - {fileID: 1826942258}
   spamDelay: 0.1
-  skullPrefab: {fileID: 0}
+  skullPrefab: {fileID: 3364455068215418695, guid: 174bb79e76554b34ca4c9f6616baa785, type: 3}
   orbitRadius: 2.5
   orbitSpeed: 220
   projectileSpeed: 13
@@ -10873,6 +10873,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1426225336}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1212184929
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1212184930}
+  m_Layer: 0
+  m_Name: PlayerSpawn
+  m_TagString: PlayerSpawn
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1212184930
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1212184929}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.8299999, y: 8.02, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1403800919}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1213273221
 GameObject:
   m_ObjectHideFlags: 0
@@ -11688,7 +11719,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1257452413
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -12866,6 +12897,7 @@ Transform:
   - {fileID: 1708973590}
   - {fileID: 1346621684}
   - {fileID: 961226739}
+  - {fileID: 1212184930}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1403800920
@@ -14505,6 +14537,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: Shop
+  snapToWeapon: {fileID: 0}
 --- !u!4 &1691331802
 Transform:
   m_ObjectHideFlags: 0

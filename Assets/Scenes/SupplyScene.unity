@@ -4673,6 +4673,7 @@ Transform:
   - {fileID: 1991073251}
   - {fileID: 975640051}
   - {fileID: 1013919499}
+  - {fileID: 1769678215}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1013919498
@@ -7251,10 +7252,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   supplyDataLList:
+  - {fileID: 11400000, guid: e24ee20d7b2d0004b9231932c26b39aa, type: 2}
+  - {fileID: 11400000, guid: 0529f0d4f60ed3a46afd0b5957e8f54b, type: 2}
+  - {fileID: 11400000, guid: abded838d688e4a4593a552c62adbd93, type: 2}
+  - {fileID: 11400000, guid: 03b5c3c00a18cbd4f966d11222349330, type: 2}
+  - {fileID: 11400000, guid: b716dc4b4c3a2f64095f839e2fdaec7c, type: 2}
+  - {fileID: 11400000, guid: d2c2232e64aeabb4a988a5796444c83f, type: 2}
   - {fileID: 11400000, guid: 555b681c19961504ca33dc15d95593c7, type: 2}
+  - {fileID: 11400000, guid: 9054f54d88b52b44eb68d5c6a21a6d10, type: 2}
+  - {fileID: 11400000, guid: 3d11da1065025b44cbf8aed918a6323f, type: 2}
+  - {fileID: 11400000, guid: 6e670005a2890a741b8767b0cfad6814, type: 2}
+  - {fileID: 11400000, guid: 819e80edb6068af4eb2c65181157921a, type: 2}
+  - {fileID: 11400000, guid: be698bb2faa9a4d46b0d3d3bc5b1db31, type: 2}
+  - {fileID: 11400000, guid: 27c4dd0b27ff2f54ba2b4279c01e9a6b, type: 2}
   - {fileID: 11400000, guid: f9ae182a1b6507945b1faf49c306626d, type: 2}
-  - {fileID: 11400000, guid: 4c21bf3130ec0ba468fb0c1b7f514342, type: 2}
+  - {fileID: 11400000, guid: 2d19f8f7fc2e3e64d87edbd65ea9035e, type: 2}
+  - {fileID: 11400000, guid: d43a2b8fdb993494798f023c1b361903, type: 2}
   - {fileID: 11400000, guid: ae5578e62dd8d6a44ba948a184a7c558, type: 2}
+  - {fileID: 11400000, guid: d1f701d07f75c544cb1f2b084a0834e8, type: 2}
+  - {fileID: 11400000, guid: f0212d4d5e2dcea438e35b2e17484025, type: 2}
   playerInventory: []
   inventorySupply: {fileID: 1567485763}
   supplySlot1: {fileID: 1991073251}
@@ -10089,7 +10105,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1765298847
 Transform:
   m_ObjectHideFlags: 0
@@ -10128,6 +10144,7 @@ MonoBehaviour:
   playerSprite: {fileID: 1765298853}
   invincibilityDuration: 2
   flashInterval: 0.1
+  hasRevived: 0
 --- !u!61 &1765298849
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -10203,6 +10220,9 @@ MonoBehaviour:
   orbLaunchForce: 3
   orbMoveToPlayer: 25
   orbMoveDelay: 0.3
+  healthPotionPrefab: {fileID: 0}
+  potionMoveToPlayer: 15
+  potionMoveDelay: 2
   coinSpawnMin: 1
   coinSpawnMax: 4
   secondaryCoinSpawnMin: 1
@@ -10234,6 +10254,10 @@ MonoBehaviour:
   wallTransform: {fileID: 1199073722}
   blockLayerName: Enemy
   bossLayerName: Boss
+  iceMoveSpeedMultiplier: 1.5
+  dragFactor: 0.1
+  isIceMovementActive: 0
+  isChangingDirection: 0
 --- !u!50 &1765298852
 Rigidbody2D:
   serializedVersion: 5
@@ -10316,6 +10340,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1769678214
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1769678215}
+  m_Layer: 0
+  m_Name: PlayerSpawn
+  m_TagString: PlayerSpawn
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1769678215
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1769678214}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.93, y: 13.68, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 990647696}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1808055690
 GameObject:
   m_ObjectHideFlags: 0
@@ -10996,6 +11051,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: SupplyScene 1
+  snapToWeapon: {fileID: 0}
 --- !u!114 &1913256880
 MonoBehaviour:
   m_ObjectHideFlags: 0
