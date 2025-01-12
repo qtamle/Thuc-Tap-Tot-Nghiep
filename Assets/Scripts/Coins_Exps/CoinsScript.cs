@@ -156,9 +156,7 @@ public class CoinsScript : MonoBehaviour
             Debug.LogError("CoinsManager không tồn tại.");
         }
 
-        coinPoolManager.ReturnCoinToPool(gameObject);
-
-        gameObject.SetActive(false);
+        Destroy(gameObject);
     }
 
     public void SetCoinType(bool type1, bool type2)

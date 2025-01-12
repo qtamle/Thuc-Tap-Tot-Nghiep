@@ -29,6 +29,7 @@ TagManager:
   - SecondaryCoin
   - SpawnPoint
   - PlayerSpawn
+  - CoinPool
   layers:
   - Default
   - TransparentFX

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Attack : MonoBehaviour
 {
@@ -45,14 +46,40 @@ public class Attack : MonoBehaviour
     private ExperienceOrbPoolManager orbPoolManager;
     private Lucky lucky;
 
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
     private void Start()
     {
-        coinPoolManager = FindFirstObjectByType<CoinPoolManager>();
-        orbPoolManager = FindFirstObjectByType<ExperienceOrbPoolManager>();
+        OnSceneLoaded(SceneManager.GetActiveScene(), LoadSceneMode.Single);
+    }
 
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        Debug.Log($"Scene '{scene.name}' loaded.");
+
+        coinsManager = FindFirstObjectByType<CoinsManager>();
+        orbPoolManager = FindFirstObjectByType<ExperienceOrbPoolManager>();
         coinsManager = UnityEngine.Object.FindFirstObjectByType<CoinsManager>();
 
+        if (coinsManager != null)
+        {
+            Debug.Log("CoinsManager found.");
+        }
+        else
+        {
+            Debug.LogError("CoinsManager not found.");
+        }
+
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+
         health = GetComponent<PlayerHealth>();
 
         if (playerObject == null)
@@ -62,15 +89,34 @@ public class Attack : MonoBehaviour
             {
                 playerObject = FindObjectsOfType<GameObject>().FirstOrDefault(obj => obj.layer == playerLayer);
             }
+            Debug.Log(playerObject != null ? "Player object found by layer." : "Player object not found by layer!");
         }
 
-        player = playerObject.transform;
+        if (playerObject != null)
+        {
+            player = playerObject.transform;
+            Debug.Log("Player transform assigned.");
+        }
+        else
+        {
+            Debug.LogError("Player object not found in the scene!");
+        }
 
-        enemySpawners = FindObjectsOfType<MonoBehaviour>().OfType<IEnemySpawner>().ToArray(); 
+        enemySpawners = FindObjectsOfType<MonoBehaviour>().OfType<IEnemySpawner>().ToArray();
+        Debug.Log($"Found {enemySpawners.Length} enemy spawners.");
 
         goldIncrease = FindFirstObjectByType<Gold>();
         brutal = FindFirstObjectByType<Brutal>();
         lucky = FindFirstObjectByType<Lucky>();
+
+        Debug.Log(goldIncrease != null ? "Gold found." : "Gold not found.");
+        Debug.Log(brutal != null ? "Brutal found." : "Brutal not found.");
+        Debug.Log(lucky != null ? "Lucky found." : "Lucky not found.");
+    }
+
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     private void Update()
@@ -211,21 +257,25 @@ public class Attack : MonoBehaviour
 
     void SpawnCoins(GameObject coinType, float minAmount, float maxAmount, Vector3 position)
     {
-        bool isGoldIncreaseActive = goldIncrease != null && goldIncrease.IsReady();
+        if (coinType == null)
+        {
+            Debug.LogError("coinType is null!");
+            return;
+        }
 
+        bool isGoldIncreaseActive = goldIncrease != null && goldIncrease.IsReady();
         int coinCount = Random.Range((int)minAmount, (int)maxAmount + 1);
 
         if (isGoldIncreaseActive)
         {
-            coinCount += goldIncrease.increaseGoldChange; 
+            coinCount += goldIncrease.increaseGoldChange;
         }
 
         for (int i = 0; i < coinCount; i++)
         {
             Vector3 spawnPosition = position + Vector3.up * 0.2f;
 
-            GameObject coin = coinPoolManager.GetCoinFromPool(coinType);
-            coin.transform.position = spawnPosition;
+            GameObject coin = Instantiate(coinType, spawnPosition, Quaternion.identity);
 
             Rigidbody2D coinRb = coin.GetComponent<Rigidbody2D>();
 
@@ -233,7 +283,6 @@ public class Attack : MonoBehaviour
             {
                 Vector2 forceDirection = new Vector2(Random.Range(-1.5f, 1.5f), Random.Range(1f, 1f)) * 2.5f;
                 coinRb.AddForce(forceDirection, ForceMode2D.Impulse);
-
                 StartCoroutine(CheckIfCoinIsStuck(coinRb));
             }
 
@@ -244,7 +293,10 @@ public class Attack : MonoBehaviour
                     coinScript.SetCoinType(true, false);
                 else
                     coinScript.SetCoinType(false, true);
-
+            }
+            else
+            {
+                Debug.LogError("CoinsScript is missing on the coin.");
             }
         }
     }

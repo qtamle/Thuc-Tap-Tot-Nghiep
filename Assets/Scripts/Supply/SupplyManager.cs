@@ -85,8 +85,6 @@ public class SupplyManager : MonoBehaviour
         }
     }
 
-    
-
     public void UseSupply()
     {
         // Thêm kiểm tra null và range

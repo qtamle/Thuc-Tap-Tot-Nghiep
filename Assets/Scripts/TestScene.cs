@@ -31,6 +31,7 @@ public class TestScene : MonoBehaviour
             }
 
             currentWeaponInstance = Instantiate(weaponPrefab);
+            DontDestroyOnLoad(currentWeaponInstance); 
 
             SceneManager.sceneLoaded += OnSceneLoaded;
 
@@ -44,15 +45,15 @@ public class TestScene : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        SceneManager.sceneLoaded -= OnSceneLoaded; 
+        SceneManager.sceneLoaded -= OnSceneLoaded;
 
         if (weaponDataStore != null)
         {
             GameObject spawnPoint = GameObject.FindGameObjectWithTag("PlayerSpawn");
             if (spawnPoint != null)
             {
-                GameObject weaponPrefab = weaponDataStore.weapon;
-                currentWeaponInstance = Instantiate(weaponPrefab, spawnPoint.transform.position, spawnPoint.transform.rotation);
+                currentWeaponInstance.transform.position = spawnPoint.transform.position;
+                currentWeaponInstance.transform.rotation = spawnPoint.transform.rotation;
             }
             else
             {
