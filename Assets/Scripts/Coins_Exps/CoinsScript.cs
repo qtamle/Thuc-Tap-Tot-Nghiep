@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;  
 
 public class CoinsScript : MonoBehaviour
 {
@@ -25,8 +26,10 @@ public class CoinsScript : MonoBehaviour
 
     private void OnEnable()
     {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+
         int playerLayer = LayerMask.NameToLayer(playerLayerName);
-        int coinLayer = gameObject.layer; 
+        int coinLayer = gameObject.layer;
 
         if (playerLayer >= 0 && coinLayer >= 0)
         {
@@ -36,7 +39,8 @@ public class CoinsScript : MonoBehaviour
 
     private void OnDisable()
     {
-        // Khôi phục lại va chạm nếu cần
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+
         int playerLayer = LayerMask.NameToLayer(playerLayerName);
         int coinLayer = gameObject.layer;
 
@@ -44,6 +48,11 @@ public class CoinsScript : MonoBehaviour
         {
             Physics2D.IgnoreLayerCollision(coinLayer, playerLayer, false);
         }
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        Start();
     }
 
     private void Start()
@@ -65,9 +74,9 @@ public class CoinsScript : MonoBehaviour
 
     private void Update()
     {
-        if (timeRemaining > 0) 
+        if (timeRemaining > 0)
         {
-            timeRemaining -= Time.deltaTime;    
+            timeRemaining -= Time.deltaTime;
 
             if (timeRemaining <= 5)
             {
@@ -92,7 +101,7 @@ public class CoinsScript : MonoBehaviour
     {
         if (collision.CompareTag("FinalFloor"))
         {
-            StopCoin(); 
+            StopCoin();
             return;
         }
 
@@ -100,26 +109,25 @@ public class CoinsScript : MonoBehaviour
         {
             if (!hasBounced)
             {
-                BounceOffGround(); 
+                BounceOffGround();
                 hasBounced = true;
             }
             else
             {
-                StopCoin(); 
+                StopCoin();
             }
         }
 
         if (collision.CompareTag("Player"))
         {
-            CollectCoin(); 
+            CollectCoin();
         }
 
         if ((wallLayer.value & (1 << collision.gameObject.layer)) > 0)
         {
-            BounceOffWall(); 
+            BounceOffWall();
         }
     }
-
 
     private void BounceOffGround()
     {
@@ -156,7 +164,8 @@ public class CoinsScript : MonoBehaviour
             Debug.LogError("CoinsManager không tồn tại.");
         }
 
-        Destroy(gameObject);
+        coinPoolManager.ReturnCoinToPool(gameObject);
+        gameObject.SetActive(false);
     }
 
     public void SetCoinType(bool type1, bool type2)

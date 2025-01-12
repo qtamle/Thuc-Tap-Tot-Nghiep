@@ -1,5 +1,6 @@
 ﻿using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour, DamagePlayerInterface
 {
@@ -21,6 +22,8 @@ public class PlayerHealth : MonoBehaviour, DamagePlayerInterface
     
     private bool isInvincible = false;
     public bool hasRevived = false;
+    private bool isImmortalActive = false;
+    private bool hasCheckedSacrifice = false;
 
     private LevelSystem levelSystem;
     private GameObject CurrentHealth;
@@ -33,47 +36,27 @@ public class PlayerHealth : MonoBehaviour, DamagePlayerInterface
     private Brutal brutal;
     private Dodge dodge;
 
-    //private void Start()
-    //{
-    //    player = gameObject;
+    private void Awake()
+    {
+        currentHealth = maxHealth;
+    }
 
-    //    GameObject CurrentHealth = GameObject.Find("CurrentHealth");
-    //    GameObject Shield = GameObject.Find("Shield");
-    //    healthText = CurrentHealth.GetComponent<TMP_Text>();
-    //    shieldText = Shield.GetComponent<TMP_Text>();
-
-    //    angel = FindFirstObjectByType<AngelGuardian>();
-    //    Sacrifice = FindFirstObjectByType<Sacrifice>();
-    //    energyShield = FindFirstObjectByType<EnergyShield>();
-    //    immortal = FindFirstObjectByType<Immortal>();
-    //    brutal = FindFirstObjectByType<Brutal>();
-    //    dodge = FindFirstObjectByType<Dodge>();
-
-    //    //levelSystem = FindFirstObjectByType<LevelSystem>();
-    //    if (levelSystem != null)
-    //    {
-    //        Debug.Log("Da dang ky LevelSystem");
-    //        // Đăng ký sự kiện
-    //        //levelSystem.OnLevelDataUpdated += OnLevelUpdated;
-    //    }
-    //    else
-    //    {
-    //        Debug.Log("Không tìm thấy LevelSystem trong scene.");
-    //    }
-
-    //    currentHealth = maxHealth;
-    //    UpdateHealthUI();
-    //    UpdateShieldUI();
-
-    //    CheckSacrifice();
-
-    //    if (immortal != null)
-    //    {
-    //        invincibilityDuration += 1.5f;
-    //    }
-    //}
+    private void Start()
+    {
+        InitializePlayer();
+    }
 
     private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         InitializePlayer();
     }
@@ -84,8 +67,29 @@ public class PlayerHealth : MonoBehaviour, DamagePlayerInterface
 
         GameObject CurrentHealth = GameObject.Find("CurrentHealth");
         GameObject Shield = GameObject.Find("Shield");
-        healthText = CurrentHealth.GetComponent<TMP_Text>();
-        shieldText = Shield.GetComponent<TMP_Text>();
+
+        GameObject currentHealthObject = GameObject.FindGameObjectWithTag("Health");
+        GameObject shieldObject = GameObject.FindGameObjectWithTag("Shield");
+
+        if (currentHealthObject != null)
+        {
+            healthText = currentHealthObject?.GetComponent<TMP_Text>();
+            healthText.text = currentHealth.ToString();
+        }
+        else
+        {
+            Debug.LogError("Không tìm thấy đối tượng Health với tag 'Health'!");
+        }
+
+        if (shieldObject != null)
+        {
+            shieldText = shieldObject?.GetComponent<TMP_Text>();
+            shieldText.text = currentShield.ToString();
+        }
+        else
+        {
+            Debug.LogError("Không tìm thấy đối tượng Shield với tag 'Shield'!");
+        }
 
         angel = FindFirstObjectByType<AngelGuardian>();
         Sacrifice = FindFirstObjectByType<Sacrifice>();
@@ -108,12 +112,12 @@ public class PlayerHealth : MonoBehaviour, DamagePlayerInterface
 
         CheckSacrifice();
 
-        if (immortal != null)
+        if (immortal != null && !isImmortalActive)
         {
-            invincibilityDuration += 1.5f;
+            invincibilityDuration += 1.5f;  
+            isImmortalActive = true; 
         }
     }
-
 
     //private void OnLevelUpdated(int level, int experience, int experienceToNextLevel)
     //{
@@ -254,6 +258,8 @@ public class PlayerHealth : MonoBehaviour, DamagePlayerInterface
 
     private void CheckSacrifice()
     {
+        if (hasCheckedSacrifice) return;
+
         if (Sacrifice != null)
         {
             Debug.Log("Sacrifice found! Converting health to shield.");
@@ -263,7 +269,7 @@ public class PlayerHealth : MonoBehaviour, DamagePlayerInterface
             UpdateHealthUI();
             UpdateShieldUI();
             Sacrifice.CanActive();
-            return; 
+            hasCheckedSacrifice = true;
         }
     }
 }

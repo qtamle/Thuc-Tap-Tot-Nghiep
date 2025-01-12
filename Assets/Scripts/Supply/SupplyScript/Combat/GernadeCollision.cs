@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GernadeCollision : MonoBehaviour
 {
@@ -43,7 +44,24 @@ public class GernadeCollision : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
     }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }   
+
     private void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        OnSceneLoaded(SceneManager.GetActiveScene(), LoadSceneMode.Single);
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         coinPoolManager = FindFirstObjectByType<CoinPoolManager>();
         orbPoolManager = FindFirstObjectByType<ExperienceOrbPoolManager>();
@@ -52,6 +70,11 @@ public class GernadeCollision : MonoBehaviour
         enemySpawners = FindObjectsOfType<MonoBehaviour>().OfType<IEnemySpawner>().ToArray();
 
         goldIncrease = FindFirstObjectByType<Gold>();
+    }
+
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     private void Update()

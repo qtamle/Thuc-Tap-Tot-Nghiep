@@ -30,6 +30,8 @@ TagManager:
   - SpawnPoint
   - PlayerSpawn
   - CoinPool
+  - Health
+  - Shield
   layers:
   - Default
   - TransparentFX

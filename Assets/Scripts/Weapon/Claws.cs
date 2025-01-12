@@ -2,6 +2,7 @@
 using System.IO.Pipes;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Claws : MonoBehaviour
 {
@@ -64,7 +65,22 @@ public class Claws : MonoBehaviour
     private PlayerHealth health;
     private Lucky lucky;
 
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
     private void Start()
+    {
+        OnSceneLoaded(SceneManager.GetActiveScene(), LoadSceneMode.Single);
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         coinPoolManager = FindFirstObjectByType<CoinPoolManager>();
         orbPoolManager = FindFirstObjectByType<ExperienceOrbPoolManager>();
@@ -91,6 +107,12 @@ public class Claws : MonoBehaviour
         brutal = FindFirstObjectByType<Brutal>();
         lucky = FindFirstObjectByType<Lucky>();
     }
+
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
     private void Update()
     {
         if (IsInputDetected(out SwipeDirection direction) && CanAttack())
@@ -101,6 +123,7 @@ public class Claws : MonoBehaviour
             Debug.Log($"Attack Direction: {direction}");
         }
     }
+
     private bool IsInputDetected(out SwipeDirection direction)
     {
         direction = SwipeDirection.None;

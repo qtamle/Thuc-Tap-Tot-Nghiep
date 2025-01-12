@@ -69,15 +69,6 @@ public class Attack : MonoBehaviour
         orbPoolManager = FindFirstObjectByType<ExperienceOrbPoolManager>();
         coinsManager = UnityEngine.Object.FindFirstObjectByType<CoinsManager>();
 
-        if (coinsManager != null)
-        {
-            Debug.Log("CoinsManager found.");
-        }
-        else
-        {
-            Debug.LogError("CoinsManager not found.");
-        }
-
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
 
         health = GetComponent<PlayerHealth>();
@@ -95,7 +86,6 @@ public class Attack : MonoBehaviour
         if (playerObject != null)
         {
             player = playerObject.transform;
-            Debug.Log("Player transform assigned.");
         }
         else
         {
@@ -103,15 +93,10 @@ public class Attack : MonoBehaviour
         }
 
         enemySpawners = FindObjectsOfType<MonoBehaviour>().OfType<IEnemySpawner>().ToArray();
-        Debug.Log($"Found {enemySpawners.Length} enemy spawners.");
 
         goldIncrease = FindFirstObjectByType<Gold>();
         brutal = FindFirstObjectByType<Brutal>();
         lucky = FindFirstObjectByType<Lucky>();
-
-        Debug.Log(goldIncrease != null ? "Gold found." : "Gold not found.");
-        Debug.Log(brutal != null ? "Brutal found." : "Brutal not found.");
-        Debug.Log(lucky != null ? "Lucky found." : "Lucky not found.");
     }
 
     private void OnDestroy()
@@ -275,7 +260,8 @@ public class Attack : MonoBehaviour
         {
             Vector3 spawnPosition = position + Vector3.up * 0.2f;
 
-            GameObject coin = Instantiate(coinType, spawnPosition, Quaternion.identity);
+            GameObject coin = coinPoolManager.GetCoinFromPool(coinPrefab);
+            coin.transform.position = spawnPosition;
 
             Rigidbody2D coinRb = coin.GetComponent<Rigidbody2D>();
 

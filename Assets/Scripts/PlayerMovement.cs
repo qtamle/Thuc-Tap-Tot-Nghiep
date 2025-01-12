@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -46,7 +47,26 @@ public class PlayerMovement : MonoBehaviour
     private Shoes boostMoveSpeed;
     private IceStaking iceStaking;
 
-    void Start()
+    private bool isUpSpeed = false;
+    private bool isIceStaking = false;
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        playerCollider = GetComponent<Collider2D>();
+        OnSceneLoaded(SceneManager.GetActiveScene(), LoadSceneMode.Single);
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         originalSpeed = moveSpeed;
         rb = GetComponent<Rigidbody2D>();
@@ -70,18 +90,23 @@ public class PlayerMovement : MonoBehaviour
         boostMoveSpeed = FindFirstObjectByType<Shoes>();
         iceStaking = FindFirstObjectByType<IceStaking>();
 
-        if (boostMoveSpeed != null)
+        if (boostMoveSpeed != null && !isUpSpeed)
         {
             Debug.Log("Tim thay supply tang toc");
             moveSpeed += 0.2f;
+            isUpSpeed = true;
         }
-        
-        if (iceStaking != null)
+
+        if (iceStaking != null && !isIceStaking)
         {
             Debug.Log("Tim thay ice staking");
             isIceMovementActive = !isIceMovementActive;
+            isIceStaking = true;
         }
-
+    }
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     void Update()
