@@ -40,23 +40,6 @@ public class BossManager : MonoBehaviour
         {
             Debug.LogError("ListBoss is null or empty.");
         }
-
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    private void OnDisable()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
-
-    private void OnEnable()
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        SpawnWeaponOnSceneLoad();
     }
 
     private void Update()

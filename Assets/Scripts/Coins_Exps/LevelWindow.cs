@@ -23,12 +23,13 @@ public class LevelWindow : MonoBehaviour
         }
     }
 
-    private void UpdateLevelUI(int level, int experience, int experienceToNextLevel)
+    public void UpdateLevelUI(int level, int experience, int experienceToNextLevel)
     {
         levelText.text = $"Level: {level}";
         experienceText.text = $"Exp: {experience}/{experienceToNextLevel}";
         StartCoroutine(UpdateExperienceBar((float)experience / experienceToNextLevel));
     }
+
 
     private IEnumerator UpdateExperienceBar(float targetFillAmount)
     {

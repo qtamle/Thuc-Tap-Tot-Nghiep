@@ -76,19 +76,11 @@ public class PlayerHealth : MonoBehaviour, DamagePlayerInterface
             healthText = currentHealthObject?.GetComponent<TMP_Text>();
             healthText.text = currentHealth.ToString();
         }
-        else
-        {
-            Debug.LogError("Không tìm thấy đối tượng Health với tag 'Health'!");
-        }
 
         if (shieldObject != null)
         {
             shieldText = shieldObject?.GetComponent<TMP_Text>();
             shieldText.text = currentShield.ToString();
-        }
-        else
-        {
-            Debug.LogError("Không tìm thấy đối tượng Shield với tag 'Shield'!");
         }
 
         angel = FindFirstObjectByType<AngelGuardian>();
@@ -149,7 +141,7 @@ public class PlayerHealth : MonoBehaviour, DamagePlayerInterface
             return; 
         }
 
-        if (dodge != null && Random.Range(0f, 1f) <= 0.9f) 
+        if (dodge != null && Random.Range(0f, 1f) <= 0.15f) 
         {
             Debug.Log("Player dodged the damage!");
             StartCoroutine(InvincibilityCoroutine(invincibilityDuration));

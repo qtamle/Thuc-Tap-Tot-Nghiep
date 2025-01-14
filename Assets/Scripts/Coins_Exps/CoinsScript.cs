@@ -52,10 +52,15 @@ public class CoinsScript : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        Start();
+        UpdateCoinInScene();
     }
 
     private void Start()
+    {
+        UpdateCoinInScene();
+    }
+
+    private void UpdateCoinInScene()
     {
         coinPoolManager = FindFirstObjectByType<CoinPoolManager>();
 
@@ -85,7 +90,7 @@ public class CoinsScript : MonoBehaviour
         }
         else
         {
-            Destroy(gameObject);
+            coinPoolManager.ReturnCoinToPool(gameObject);
         }
     }
 

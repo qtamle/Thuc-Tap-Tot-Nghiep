@@ -31,7 +31,6 @@ public class LevelSystem : MonoBehaviour
 
     }
 
-
     private void Start()
     {
         filePath = Path.Combine(Application.persistentDataPath, "Data/LevelData.json");
@@ -44,6 +43,7 @@ public class LevelSystem : MonoBehaviour
         CalculateLevel();
         SaveLevelData();
 
+        Debug.Log($"Triggering OnLevelDataUpdated: Level {level}, Exp {experience}/{experienceToNextLevel}");
         OnLevelDataUpdated?.Invoke(level, experience, experienceToNextLevel);
     }
 
@@ -53,7 +53,7 @@ public class LevelSystem : MonoBehaviour
         {
             level++;
             experience -= experienceToNextLevel;
-            experienceToNextLevel += 50;
+            experienceToNextLevel = LevelFormula.CalculateExperienceToNextLevel(level);
         }
     }
 
@@ -83,7 +83,6 @@ public class LevelSystem : MonoBehaviour
         Debug.Log("Level " + level);
         Debug.Log("experience " + experience);
         Debug.Log("experienceToNextLevel " + experienceToNextLevel);
-
     }
 }
 

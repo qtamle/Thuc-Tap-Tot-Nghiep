@@ -63,9 +63,7 @@ public class Attack : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        Debug.Log($"Scene '{scene.name}' loaded.");
-
-        coinsManager = FindFirstObjectByType<CoinsManager>();
+        coinPoolManager = FindFirstObjectByType<CoinPoolManager>();
         orbPoolManager = FindFirstObjectByType<ExperienceOrbPoolManager>();
         coinsManager = UnityEngine.Object.FindFirstObjectByType<CoinsManager>();
 
@@ -242,12 +240,6 @@ public class Attack : MonoBehaviour
 
     void SpawnCoins(GameObject coinType, float minAmount, float maxAmount, Vector3 position)
     {
-        if (coinType == null)
-        {
-            Debug.LogError("coinType is null!");
-            return;
-        }
-
         bool isGoldIncreaseActive = goldIncrease != null && goldIncrease.IsReady();
         int coinCount = Random.Range((int)minAmount, (int)maxAmount + 1);
 
@@ -260,7 +252,7 @@ public class Attack : MonoBehaviour
         {
             Vector3 spawnPosition = position + Vector3.up * 0.2f;
 
-            GameObject coin = coinPoolManager.GetCoinFromPool(coinPrefab);
+            GameObject coin = coinPoolManager.GetCoinFromPool(coinType);
             coin.transform.position = spawnPosition;
 
             Rigidbody2D coinRb = coin.GetComponent<Rigidbody2D>();
