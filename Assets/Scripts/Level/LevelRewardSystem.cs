@@ -75,6 +75,23 @@ public class LevelRewardSystem : MonoBehaviour
         Debug.Log("Coin type 1: " + reward.coinType1);
         Debug.Log("Coin type 2: " + reward.coinType2);
         Debug.Log("Health: " + reward.health);
+
+        CoinsManager coinsManager = FindFirstObjectByType<CoinsManager>();
+        if (coinsManager != null)
+        {
+            coinsManager.AddCoins(reward.coinType1, reward.coinType2);
+            coinsManager.SaveCoins(); 
+            Debug.Log($"Coins added to file: Type1={reward.coinType1}, Type2={reward.coinType2}");
+        }
+        else
+        {
+            Debug.LogError("CoinsManager not found! Reward coins not added.");
+        }
+
+        if (levelSystem != null)
+        {
+            levelSystem.AddHealth(reward.health);
+        }
     }
 }
 

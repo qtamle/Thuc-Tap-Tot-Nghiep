@@ -8,6 +8,7 @@ public class LevelData
     public int level; // Cấp độ hiện tại
     public int experience; // Kinh nghiệm hiện tại
     public int experienceToNextLevel; // Kinh nghiệm cần để lên cấp
+    public int health;
 }
 
 public class LevelSystem : MonoBehaviour
@@ -15,6 +16,7 @@ public class LevelSystem : MonoBehaviour
     public int level = 0;
     public int experience = 0;
     public int experienceToNextLevel = 100;
+    public int health;
 
     public event Action<int, int, int> OnLevelDataUpdated;
 
@@ -47,6 +49,13 @@ public class LevelSystem : MonoBehaviour
         OnLevelDataUpdated?.Invoke(level, experience, experienceToNextLevel);
     }
 
+    public void AddHealth(int amount)
+    {
+        health += amount;
+        SaveLevelData();
+        Debug.Log($"Health added. Current health: {health}");
+    }
+
     private void CalculateLevel()
     {
         while (experience >= experienceToNextLevel)
@@ -56,14 +65,14 @@ public class LevelSystem : MonoBehaviour
             experienceToNextLevel = LevelFormula.CalculateExperienceToNextLevel(level);
         }
     }
-
     public void SaveLevelData()
     {
         LevelData data = new LevelData
         {
             level = level,
             experience = experience,
-            experienceToNextLevel = experienceToNextLevel
+            experienceToNextLevel = experienceToNextLevel,
+            health = health
         };
         Directory.CreateDirectory(Path.GetDirectoryName(filePath));
         File.WriteAllText(filePath, JsonUtility.ToJson(data, true));
@@ -72,17 +81,16 @@ public class LevelSystem : MonoBehaviour
 
     public void LoadLevelData()
     {
-        Debug.Log("Da load file level");
+        Debug.Log("Loading level data...");
         if (File.Exists(filePath))
         {
             LevelData data = JsonUtility.FromJson<LevelData>(File.ReadAllText(filePath));
             level = data.level;
             experience = data.experience;
             experienceToNextLevel = data.experienceToNextLevel;
+            health = data.health;
         }
-        Debug.Log("Level " + level);
-        Debug.Log("experience " + experience);
-        Debug.Log("experienceToNextLevel " + experienceToNextLevel);
+        Debug.Log($"Level {level}, Experience {experience}/{experienceToNextLevel}, Health {health}");
     }
 }
 

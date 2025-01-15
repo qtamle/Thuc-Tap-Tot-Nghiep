@@ -19,16 +19,19 @@ public class PlayerHealth : MonoBehaviour, DamagePlayerInterface
     public SpriteRenderer playerSprite;
     public float invincibilityDuration = 2f;
     public float flashInterval = 0.1f;
-    
+
+    [Header("Check Add")]
     private bool isInvincible = false;
     public bool hasRevived = false;
     private bool isImmortalActive = false;
     private bool hasCheckedSacrifice = false;
+    private bool hasAddedSavedHealth = false;
 
     private LevelSystem levelSystem;
     private GameObject CurrentHealth;
     private GameObject player;
 
+    [Header("Supply")]
     private AngelGuardian angel;
     private Sacrifice Sacrifice;
     private EnergyShield energyShield;
@@ -90,16 +93,25 @@ public class PlayerHealth : MonoBehaviour, DamagePlayerInterface
         brutal = FindFirstObjectByType<Brutal>();
         dodge = FindFirstObjectByType<Dodge>();
 
-        //levelSystem = FindFirstObjectByType<LevelSystem>();
-        if (levelSystem != null)
+        levelSystem = FindFirstObjectByType<LevelSystem>();
+        if (levelSystem != null && !hasAddedSavedHealth)
         {
-            Debug.Log("Da dang ky LevelSystem");
-            // Đăng ký sự kiện
             //levelSystem.OnLevelDataUpdated += OnLevelUpdated;
+            int savedHealth = levelSystem.health; 
+            maxHealth += savedHealth;
+            currentHealth = maxHealth; 
+            hasAddedSavedHealth = true; 
+            UpdateHealthUI();
+
+            Debug.Log($"Health from save file added: {levelSystem.health}. New MaxHealth: {maxHealth}");
+        }
+        else if (hasAddedSavedHealth)
+        {
+            Debug.Log("Saved health already added. Skipping.");
         }
         else
         {
-            Debug.Log("Không tìm thấy LevelSystem trong scene.");
+            Debug.Log("LevelSystem not found!");
         }
 
         CheckSacrifice();
