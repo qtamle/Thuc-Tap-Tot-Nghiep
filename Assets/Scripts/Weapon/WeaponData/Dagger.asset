@@ -16,3 +16,6 @@ MonoBehaviour:
   weaponSprite: {fileID: -5151153562373494563, guid: 2aac49780cc76db4da9e2c7f83864276, type: 3}
   weaponName: Dagger
   description: 
+  currentLevel: 1
+  maxLevel: 4
+  upgradeCosts: 64000000c80000002c01000090010000

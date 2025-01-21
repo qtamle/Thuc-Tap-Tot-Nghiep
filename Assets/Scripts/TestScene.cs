@@ -31,7 +31,11 @@ public class TestScene : MonoBehaviour
             }
 
             currentWeaponInstance = Instantiate(weaponPrefab);
-            DontDestroyOnLoad(currentWeaponInstance); 
+            DontDestroyOnLoad(currentWeaponInstance);
+
+            WeaponInfo weaponInfo = currentWeaponInstance.AddComponent<WeaponInfo>();
+            weaponInfo.weaponName = weaponData.weaponName;
+            weaponInfo.weaponLevel = weaponData.currentLevel;
 
             SceneManager.sceneLoaded += OnSceneLoaded;
 

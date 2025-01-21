@@ -57,6 +57,7 @@ public class Dagger : MonoBehaviour
     private PlayerHealth health;
     private Lucky lucky;
 
+    private WeaponInfo weaponInfo;
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -69,6 +70,7 @@ public class Dagger : MonoBehaviour
 
     private void Start()
     {
+        weaponInfo = FindFirstObjectByType<WeaponInfo>();
         OnSceneLoaded(SceneManager.GetActiveScene(), LoadSceneMode.Single);
     }
 
@@ -98,6 +100,16 @@ public class Dagger : MonoBehaviour
         goldIncrease = FindFirstObjectByType<Gold>();
         brutal = FindFirstObjectByType<Brutal>();
         lucky = FindFirstObjectByType<Lucky>();
+
+        weaponInfo = FindFirstObjectByType<WeaponInfo>();
+        if (weaponInfo != null)
+        {
+            Debug.Log("WeaponInfo found and the weapon is Dagger. Skills can be used.");
+        }
+        else
+        {
+            Debug.Log("WeaponInfo not found or the weapon is not Dagger.");
+        }
     }
     private void OnDestroy()
     {

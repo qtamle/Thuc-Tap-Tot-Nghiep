@@ -11,7 +11,8 @@ public class SnapToWeapon : MonoBehaviour
     public HorizontalLayoutGroup HLG;
 
     public Button nextButton;
-    public Button previousButton; 
+    public Button previousButton;
+    public Button upgradeButton;
 
     public event Action<WeaponData> OnSnapChanged; 
 
@@ -34,6 +35,7 @@ public class SnapToWeapon : MonoBehaviour
         // Đăng ký sự kiện cho các nút
         nextButton.onClick.AddListener(NextWeapon);
         previousButton.onClick.AddListener(PreviousWeapon);
+        upgradeButton.onClick.AddListener(UpgradeWeapon);
 
         // Cập nhật trạng thái nút khi bắt đầu
         UpdateButtonStates();
@@ -111,6 +113,14 @@ public class SnapToWeapon : MonoBehaviour
         // Tìm WeaponData từ danh sách các GameObject con
         Transform weaponTransform = contentWeaponPanel.GetChild(index);
         return weaponTransform.GetComponent<WeaponData>();
+    }
+
+    private void UpgradeWeapon()
+    {
+        if (currentSnapWeapon != null)
+        {
+            currentSnapWeapon.UpgradeWeapon();  // Gọi hàm nâng cấp vũ khí hiện tại
+        }
     }
 
     // Hàm để di chuyển đến vũ khí kế tiếp

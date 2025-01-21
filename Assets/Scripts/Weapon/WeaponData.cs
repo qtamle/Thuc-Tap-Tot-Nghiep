@@ -18,6 +18,10 @@ public class WeaponData : MonoBehaviour
     public int maxSlots;
     public List<Equipment> equippedLoot = new List<Equipment>();
 
+    [Header("Upgrade Levels")]
+    public int currentLevel = 1;
+    public int maxLevel = 4;
+
     private void Update()
     {
         if (weaponData != null)
@@ -25,15 +29,18 @@ public class WeaponData : MonoBehaviour
             weaponSprite = weaponData.weaponSprite;
         }
     }
-
-    public void UpgradeWeapon(int level)
+    public void UpgradeWeapon()
     {
-        if (level < 0 || level >= upgradePrices.Length)
+        if (currentLevel < maxLevel)
         {
-            Debug.LogError("Level không hợp lệ!");
-            return;
+            int upgradeCost = weaponData.upgradeCosts[currentLevel - 1]; // Lấy giá nâng cấp từ WeaponSO
+            currentLevel++;
+            weaponData.currentLevel = currentLevel;
+            Debug.Log($"Weapon {weaponName} upgraded to level {currentLevel} with cost {upgradeCost}.");
         }
-
-        Debug.Log($"Upgrade to level {level} costs {upgradePrices[level]}.");
+        else
+        {
+            Debug.Log("Max level reached for " + weaponName);
+        }
     }
 }
