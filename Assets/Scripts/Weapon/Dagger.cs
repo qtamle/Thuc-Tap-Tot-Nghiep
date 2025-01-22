@@ -45,6 +45,15 @@ public class Dagger : MonoBehaviour
     [Header("VFX Setting")]
     public VFXPooling vfxPool;
 
+    [Header("Upgrade Level 2")]
+    public int increaseCoin;
+
+    [Header("Upgrade Level 3")]
+    public int increaseExperience;
+
+    [Header("Upgrade Level 4")]
+    public float increaseRatePotion;
+
     private CoinsManager coinsManager;
     private Transform player;
     private IEnemySpawner[] enemySpawners;
@@ -70,17 +79,17 @@ public class Dagger : MonoBehaviour
 
     private void Start()
     {
-        weaponInfo = FindFirstObjectByType<WeaponInfo>();
         OnSceneLoaded(SceneManager.GetActiveScene(), LoadSceneMode.Single);
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        // coin and pool manager
         coinPoolManager = FindFirstObjectByType<CoinPoolManager>();
         orbPoolManager = FindFirstObjectByType<ExperienceOrbPoolManager>();
-
         coinsManager = UnityEngine.Object.FindFirstObjectByType<CoinsManager>();
 
+        // find player
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
         health = GetComponent<PlayerHealth>();
 
@@ -95,21 +104,16 @@ public class Dagger : MonoBehaviour
 
         player = playerObject.transform;
 
+        // enemy spawn manager
         enemySpawners = FindObjectsOfType<MonoBehaviour>().OfType<IEnemySpawner>().ToArray();
 
+        // supply manager
         goldIncrease = FindFirstObjectByType<Gold>();
         brutal = FindFirstObjectByType<Brutal>();
         lucky = FindFirstObjectByType<Lucky>();
 
+        // weapon and upgrade manager
         weaponInfo = FindFirstObjectByType<WeaponInfo>();
-        if (weaponInfo != null)
-        {
-            Debug.Log("WeaponInfo found and the weapon is Dagger. Skills can be used.");
-        }
-        else
-        {
-            Debug.Log("WeaponInfo not found or the weapon is not Dagger.");
-        }
     }
     private void OnDestroy()
     {
@@ -189,7 +193,7 @@ public class Dagger : MonoBehaviour
                     SpawnCoins(secondaryCoinPrefab, secondaryCoinSpawnMin, secondaryCoinSpawnMax, enemy.transform.position);
                 }
 
-                if (Random.value <= 0.15f && lucky != null)
+                if (ShouldSpawnPotion())
                 {
                     SpawnHealthPotions(enemy.transform.position, 1);
                 }
@@ -218,7 +222,7 @@ public class Dagger : MonoBehaviour
                     SpawnCoins(secondaryCoinPrefab, secondaryCoinSpawnMin * 5, secondaryCoinSpawnMax * 5, boss.transform.position);
                 }
 
-                if (Random.value <= 0.15f && lucky != null)
+                if (ShouldSpawnPotion())
                 {
                     SpawnHealthPotions(boss.transform.position, 1);
                 }
@@ -252,7 +256,7 @@ public class Dagger : MonoBehaviour
                         SpawnCoins(secondaryCoinPrefab, secondaryCoinSpawnMin * 5, secondaryCoinSpawnMax * 5, partHealth.transform.position);
                     }
 
-                    if (Random.value <= 0.15f && lucky != null)
+                    if (ShouldSpawnPotion())
                     {
                         SpawnHealthPotions(partHealth.transform.position, 1);
                     }
@@ -278,7 +282,7 @@ public class Dagger : MonoBehaviour
                         SpawnCoins(secondaryCoinPrefab, secondaryCoinSpawnMin * 5, secondaryCoinSpawnMax * 5, headController.transform.position);
                     }
 
-                    if (Random.value <= 0.15f && lucky != null)
+                    if (ShouldSpawnPotion())
                     {
                         SpawnHealthPotions(headController.transform.position, 1);
                     }
@@ -325,11 +329,18 @@ public class Dagger : MonoBehaviour
     {
         bool isGoldIncreaseActive = goldIncrease != null && goldIncrease.IsReady();
 
-        int coinCount = Random.Range((int)minAmount, (int)maxAmount + 1);
+        int initialCoinCount = Random.Range((int)minAmount, (int)maxAmount + 1);
+
+        int coinCount = initialCoinCount;
 
         if (isGoldIncreaseActive)
         {
             coinCount += goldIncrease.increaseGoldChange;
+        }
+
+        if (weaponInfo != null && weaponInfo.weaponLevel > 1)
+        {
+            coinCount += increaseCoin;
         }
 
         for (int i = 0; i < coinCount; i++)
@@ -382,6 +393,18 @@ public class Dagger : MonoBehaviour
 
     void SpawnExperienceOrbs(Vector3 position, int orbCount)
     {
+        Debug.Log($"Initial orb count: {orbCount}");
+
+        if (weaponInfo != null && weaponInfo.weaponLevel > 2)
+        {
+            orbCount += increaseExperience;
+            Debug.Log($"Orb count after adding increaseExperience: {orbCount}");
+        }
+        else
+        {
+            Debug.Log("Weapon level is not high enough to increase orb count.");
+        }
+
         for (int i = 0; i < orbCount; i++)
         {
             float randomAngle = Random.Range(0f, 360f);
@@ -493,6 +516,25 @@ public class Dagger : MonoBehaviour
             yield break;
         }
     }
+
+    private bool ShouldSpawnPotion()
+    {
+        float baseRate = 0f;  // Ban đầu tỉ lệ spawn là 0%
+
+        if (weaponInfo != null && weaponInfo.weaponLevel > 3)
+        {
+            baseRate += 0.10f;  // Tăng thêm 10% nếu weaponLevel > 3
+        }
+
+        if (lucky != null)
+        {
+            baseRate += 0.15f;  // Tăng thêm 15% nếu có lucky
+        }
+
+        // trả về % từ 2 giá trị trên (nếu không có là 0%, weapon level > 3 thì 10%, có supply lucky thì 15%, cả 2 thì dồn 25%)
+        return Random.value <= baseRate; 
+    }
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.blue;

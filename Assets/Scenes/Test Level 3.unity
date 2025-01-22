@@ -5664,7 +5664,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 2378999455891136806, guid: 7f9121f4ef7af7a469478e8d27f61512, type: 3}
   secondaryCoinPrefab: {fileID: 2378999455891136806, guid: 570e85d03a1681f4b8e83153a845ac34, type: 3}
-  initialPoolSize: 15
+  initialPoolSize: 25
 --- !u!4 &756865499
 Transform:
   m_ObjectHideFlags: 0
@@ -12228,7 +12228,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   experienceOrbPrefab: {fileID: 2895849976222171966, guid: cd6804d89834c0b4cb23a1ece1ff33fc, type: 3}
-  poolSize: 15
+  poolSize: 20
 --- !u!4 &1511089787
 Transform:
   m_ObjectHideFlags: 0

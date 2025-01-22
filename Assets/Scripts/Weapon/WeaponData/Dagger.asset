@@ -17,5 +17,4 @@ MonoBehaviour:
   weaponName: Dagger
   description: 
   currentLevel: 1
-  maxLevel: 4
   upgradeCosts: 64000000c80000002c01000090010000

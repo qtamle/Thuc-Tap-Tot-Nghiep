@@ -354,6 +354,8 @@ MonoBehaviour:
   attackCooldown: 0.5
   swipeThreshold: 15
   vfxPool: {fileID: 0}
+  increaseCoin: 8
+  increaseExperience: 5
 --- !u!1 &7643981206726635537
 GameObject:
   m_ObjectHideFlags: 0

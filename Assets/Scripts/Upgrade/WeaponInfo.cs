@@ -3,5 +3,5 @@ using UnityEngine;
 public class WeaponInfo : MonoBehaviour
 {
     public string weaponName;
-    public int weaponLevel;
+    public int weaponLevel = 1;
 }
