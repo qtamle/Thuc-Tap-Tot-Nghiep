@@ -26,6 +26,7 @@ public class PlayerHealth : MonoBehaviour, DamagePlayerInterface
     private bool isImmortalActive = false;
     private bool hasCheckedSacrifice = false;
     private bool hasAddedSavedHealth = false;
+    public bool hasAddShieldGloves = false;
 
     private LevelSystem levelSystem;
     private GameObject CurrentHealth;
@@ -38,6 +39,9 @@ public class PlayerHealth : MonoBehaviour, DamagePlayerInterface
     private Immortal immortal;
     private Brutal brutal;
     private Dodge dodge;
+
+    private Gloves gloves;
+    private WeaponInfo weaponInfo;
 
     private void Awake()
     {
@@ -66,8 +70,10 @@ public class PlayerHealth : MonoBehaviour, DamagePlayerInterface
 
     private void InitializePlayer()
     {
+        // Player is Gameobject
         player = gameObject;
 
+        // Find Text shield and health in scene
         GameObject CurrentHealth = GameObject.Find("CurrentHealth");
         GameObject Shield = GameObject.Find("Shield");
 
@@ -86,6 +92,7 @@ public class PlayerHealth : MonoBehaviour, DamagePlayerInterface
             shieldText.text = currentShield.ToString();
         }
 
+        // Find supply in scene
         angel = FindFirstObjectByType<AngelGuardian>();
         Sacrifice = FindFirstObjectByType<Sacrifice>();
         energyShield = FindFirstObjectByType<EnergyShield>();
@@ -93,6 +100,7 @@ public class PlayerHealth : MonoBehaviour, DamagePlayerInterface
         brutal = FindFirstObjectByType<Brutal>();
         dodge = FindFirstObjectByType<Dodge>();
 
+        // Check level to upgrade shield
         levelSystem = FindFirstObjectByType<LevelSystem>();
         if (levelSystem != null && !hasAddedSavedHealth)
         {
@@ -114,12 +122,27 @@ public class PlayerHealth : MonoBehaviour, DamagePlayerInterface
             Debug.Log("LevelSystem not found!");
         }
 
+        // Check supply Sacrifice, convert health to shield
         CheckSacrifice();
 
         if (immortal != null && !isImmortalActive)
         {
             invincibilityDuration += 1.5f;  
             isImmortalActive = true; 
+        }
+
+        // Find Weapon Info (level weapon) and Gloves to upgrade shield for level 3
+        weaponInfo = GetComponent<WeaponInfo>();
+        gloves = GetComponent<Gloves>();
+        if (weaponInfo != null && gloves != null && !hasAddShieldGloves && weaponInfo.weaponLevel > 2)
+        {
+            currentShield += 10;
+            UpdateShieldUI();
+            hasAddShieldGloves = true;
+        }
+        else
+        {
+            Debug.Log("Khong đạt đủ điều kiện!");
         }
     }
 

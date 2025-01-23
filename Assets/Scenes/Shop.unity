@@ -154,9 +154,9 @@ RectTransform:
   - {fileID: 1512560988}
   m_Father: {fileID: 1582510091}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 525, y: -416.5}
   m_SizeDelta: {x: 450, y: 450}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &52076974
@@ -212,7 +212,7 @@ MonoBehaviour:
   weaponData: {fileID: 11400000, guid: 2f88d731e1cfb3444b2fc388af443f70, type: 2}
   weaponName: Dagger
   basePrice: 100
-  weaponSprite: {fileID: -2486521743634864436, guid: bddb254de3f53c74eb98f92f04fedcea, type: 3}
+  weaponSprite: {fileID: -5151153562373494563, guid: 2aac49780cc76db4da9e2c7f83864276, type: 3}
   upgradePrices: 00000000000000000000000000000000
   maxSlots: 0
   equippedLoot: []
@@ -969,9 +969,9 @@ RectTransform:
   - {fileID: 1335880593}
   m_Father: {fileID: 1582510091}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 3525, y: -416.5}
   m_SizeDelta: {x: 450, y: 450}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &275310151
@@ -1025,7 +1025,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponData: {fileID: 11400000, guid: 6cfe697591087884592624b80e6d5504, type: 2}
-  weaponName: Energy Orb
+  weaponName: EnergyOrb
   basePrice: 500
   weaponSprite: {fileID: -5151153562373494563, guid: 2aac49780cc76db4da9e2c7f83864276, type: 3}
   upgradePrices: 00000000000000000000000000000000
@@ -1373,9 +1373,9 @@ RectTransform:
   - {fileID: 1394911851}
   m_Father: {fileID: 1582510091}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 2775, y: -416.5}
   m_SizeDelta: {x: 450, y: 450}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &415579611
@@ -2395,9 +2395,9 @@ RectTransform:
   - {fileID: 1088974457}
   m_Father: {fileID: 1582510091}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 4275, y: -416.5}
   m_SizeDelta: {x: 450, y: 450}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &842590713
@@ -2730,9 +2730,9 @@ RectTransform:
   - {fileID: 154834385}
   m_Father: {fileID: 1582510091}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 1275, y: -416.5}
   m_SizeDelta: {x: 450, y: 450}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &941640413
@@ -2788,7 +2788,7 @@ MonoBehaviour:
   weaponData: {fileID: 11400000, guid: a292212d955a35f408adf0973364b0c9, type: 2}
   weaponName: Gloves
   basePrice: 200
-  weaponSprite: {fileID: -2486521743634864436, guid: bddb254de3f53c74eb98f92f04fedcea, type: 3}
+  weaponSprite: {fileID: -5151153562373494563, guid: 2aac49780cc76db4da9e2c7f83864276, type: 3}
   upgradePrices: 00000000000000000000000000000000
   maxSlots: 0
   equippedLoot: []
@@ -5418,9 +5418,9 @@ RectTransform:
   - {fileID: 683054651}
   m_Father: {fileID: 1582510091}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 2025, y: -416.5}
   m_SizeDelta: {x: 450, y: 450}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2134579113
@@ -5476,7 +5476,7 @@ MonoBehaviour:
   weaponData: {fileID: 11400000, guid: 6fa7abe1010b82446b9e8d2704e2659b, type: 2}
   weaponName: Chainsaw
   basePrice: 300
-  weaponSprite: {fileID: -2486521743634864436, guid: bddb254de3f53c74eb98f92f04fedcea, type: 3}
+  weaponSprite: {fileID: -5151153562373494563, guid: 2aac49780cc76db4da9e2c7f83864276, type: 3}
   upgradePrices: 00000000000000000000000000000000
   maxSlots: 0
   equippedLoot: []

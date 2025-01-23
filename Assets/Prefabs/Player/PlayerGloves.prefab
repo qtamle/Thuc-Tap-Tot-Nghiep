@@ -416,3 +416,4 @@ MonoBehaviour:
   attackCooldown: 0.5
   swipeThreshold: 15
   vfxPool: {fileID: 0}
+  increaseCoin: 8

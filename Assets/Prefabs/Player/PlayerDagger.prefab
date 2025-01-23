@@ -356,6 +356,7 @@ MonoBehaviour:
   vfxPool: {fileID: 0}
   increaseCoin: 8
   increaseExperience: 5
+  increaseRatePotion: 0
 --- !u!1 &7643981206726635537
 GameObject:
   m_ObjectHideFlags: 0

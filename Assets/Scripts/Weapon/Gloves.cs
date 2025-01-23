@@ -45,6 +45,9 @@ public class Gloves : MonoBehaviour
     [Header("VFX Setting")]
     public VFXPooling vfxPool;
 
+    [Header("Upgrade Level 2")]
+    public int increaseCoin;
+
     private CoinsManager coinsManager;
     private Transform player;
     private IEnemySpawner[] enemySpawners;
@@ -56,6 +59,8 @@ public class Gloves : MonoBehaviour
     private ExperienceOrbPoolManager orbPoolManager;
     private PlayerHealth health;
     private Lucky lucky;
+
+    private WeaponInfo weaponInfo;
 
     private void OnEnable()
     {
@@ -97,6 +102,8 @@ public class Gloves : MonoBehaviour
         goldIncrease = FindFirstObjectByType<Gold>();
         brutal = FindFirstObjectByType<Brutal>();
         lucky = FindFirstObjectByType<Lucky>();
+
+        weaponInfo = GetComponent<WeaponInfo>();
     }
 
     private void OnDestroy()
@@ -314,11 +321,19 @@ public class Gloves : MonoBehaviour
     {
         bool isGoldIncreaseActive = goldIncrease != null && goldIncrease.IsReady();
 
-        int coinCount = Random.Range((int)minAmount, (int)maxAmount + 1);
+        int initialCoinCount = Random.Range((int)minAmount, (int)maxAmount + 1);
+
+        int coinCount = initialCoinCount;
 
         if (isGoldIncreaseActive)
         {
             coinCount += goldIncrease.increaseGoldChange;
+        }
+
+        if (weaponInfo != null && weaponInfo.weaponLevel > 1)
+        {
+            coinCount += increaseCoin;
+            Debug.Log("Da tăng thêm vàng từ gloves level 2");
         }
 
         for (int i = 0; i < coinCount; i++)
