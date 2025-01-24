@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: be0b7488e7fc09f40a96c106df4d461a
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 59471
+  packageName: Lightning Bolt Effect for Unity
+  packageVersion: 1.0.1
+  assetPath: Assets/LightningBolt/LightningBoltMaterialAlphaBlend.mat
+  uploadId: 500399

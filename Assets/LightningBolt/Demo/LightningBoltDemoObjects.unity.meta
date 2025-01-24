@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: fe76537ed2a85ed47b77960fd41abc5f
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 59471
+  packageName: Lightning Bolt Effect for Unity
+  packageVersion: 1.0.1
+  assetPath: Assets/LightningBolt/Demo/LightningBoltDemoObjects.unity
+  uploadId: 500399

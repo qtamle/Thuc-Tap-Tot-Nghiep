@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: db99378546970474d8e54ba6db10a9c4
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 59471
+  packageName: Lightning Bolt Effect for Unity
+  packageVersion: 1.0.1
+  assetPath: Assets/LightningBolt/LightningBoltMaterialAnimatedAdditive.mat
+  uploadId: 500399

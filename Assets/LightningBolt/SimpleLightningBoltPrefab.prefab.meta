@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: a9892f6a83fd8d4468ce0c8a3d09d3cd
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 59471
+  packageName: Lightning Bolt Effect for Unity
+  packageVersion: 1.0.1
+  assetPath: Assets/LightningBolt/SimpleLightningBoltPrefab.prefab
+  uploadId: 500399
