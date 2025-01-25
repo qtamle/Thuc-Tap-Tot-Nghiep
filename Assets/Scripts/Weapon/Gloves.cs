@@ -61,6 +61,7 @@ public class Gloves : MonoBehaviour
     private Lucky lucky;
 
     private WeaponInfo weaponInfo;
+    private LightningChain lightningChain;
 
     private void OnEnable()
     {
@@ -104,6 +105,7 @@ public class Gloves : MonoBehaviour
         lucky = FindFirstObjectByType<Lucky>();
 
         weaponInfo = GetComponent<WeaponInfo>();
+        lightningChain = GetComponent<LightningChain>();
     }
 
     private void OnDestroy()
@@ -187,6 +189,11 @@ public class Gloves : MonoBehaviour
                 if (Random.value <= 0.15f && lucky != null)
                 {
                     SpawnHealthPotions(enemy.transform.position, 1);
+                }
+
+                if (Random.value <= 0.35f && weaponInfo.weaponLevel > 3)
+                {
+                    lightningChain.TriggerLightning();
                 }
 
                 SpawnExperienceOrbs(enemy.transform.position, 5);
@@ -333,7 +340,6 @@ public class Gloves : MonoBehaviour
         if (weaponInfo != null && weaponInfo.weaponLevel > 1)
         {
             coinCount += increaseCoin;
-            Debug.Log("Da tăng thêm vàng từ gloves level 2");
         }
 
         for (int i = 0; i < coinCount; i++)

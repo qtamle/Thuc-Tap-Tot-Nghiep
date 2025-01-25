@@ -10553,6 +10553,7 @@ MonoBehaviour:
   invincibilityDuration: 2
   flashInterval: 0.1
   hasRevived: 0
+  hasAddShieldGloves: 0
 --- !u!61 &1229863092
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Turret
   m_EditorClassIdentifier: 
   supplyName: Turret
-  supplyPrefab: {fileID: 2664186944450200208, guid: 3f5cc71f6980ff34d88765476677623b, type: 3}
+  supplyPrefab: {fileID: 5845531273689389248, guid: 34557ac9f0aaec946a5af0e8a7742414, type: 3}
   supplySprite: {fileID: 21300000, guid: 5f7fa9a7940a64e79b5a42d9f661d42c, type: 3}
   supplyType: 1
   spawnWeight: 0
