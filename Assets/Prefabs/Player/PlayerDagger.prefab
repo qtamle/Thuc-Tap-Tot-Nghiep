@@ -315,6 +315,7 @@ MonoBehaviour:
   invincibilityDuration: 2
   flashInterval: 0.1
   hasRevived: 0
+  hasAddShieldGloves: 0
 --- !u!114 &4045210816057616919
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -354,7 +355,7 @@ MonoBehaviour:
   attackCooldown: 0.5
   swipeThreshold: 15
   vfxPool: {fileID: 0}
-  increaseCoin: 8
+  increaseCoin: 5
   increaseExperience: 5
   increaseRatePotion: 0
 --- !u!1 &7643981206726635537

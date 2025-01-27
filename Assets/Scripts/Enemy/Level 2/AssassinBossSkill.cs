@@ -58,22 +58,44 @@ public class AssassinBossSkill : MonoBehaviour
         assassinHealth = GetComponent<AssassinHealth>();
         rb = GetComponent<Rigidbody2D>();
 
-        if (GameObject.FindWithTag("Player") != null)
+        GameObject playerObject = GameObject.FindWithTag("Player");
+
+        if (playerObject != null)
         {
-            playerTransform = GameObject.FindWithTag("Player").transform;
+            playerTransform = playerObject.transform;
+            playerTransforms = playerObject.transform;
         }
         else
         {
-            Debug.LogError("Player not found in the scene! Add a GameObject with the tag 'Player'.");
-        }
+            Debug.LogWarning("Player not found using tag 'Player'. Searching by layer...");
 
-        if (GameObject.FindWithTag("Player") != null)
-        {
-            playerTransforms = GameObject.FindWithTag("Player").transform;
+            int playerLayer = LayerMask.NameToLayer("Player");
+            if (playerLayer != -1)
+            {
+                GameObject[] objectsInLayer = FindObjectsOfType<GameObject>();
+                foreach (GameObject obj in objectsInLayer)
+                {
+                    if (obj.layer == playerLayer)
+                    {
+                        playerTransform = obj.transform;
+                        playerTransforms = obj.transform;
+                        Debug.Log("Player found using layer 'Player'.");
+                        break;
+                    }
+                }
+
+                if (playerTransform == null)
+                {
+                    Debug.LogError("Player not found using layer 'Player'. Make sure to assign the correct layer.");
+                }
+            }
+            else
+            {
+                Debug.LogError("Layer 'Player' does not exist in the project. Add a layer named 'Player'.");
+            }
         }
 
         originalPosition = transform.position;
-
     }
 
     public void Active()

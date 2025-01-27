@@ -28,6 +28,9 @@ public class Attack : MonoBehaviour
     public float potionMoveToPlayer = 15f;
     public float potionMoveDelay = 2f;
 
+    [Header("Upgrade Level 2")]
+    public int increaseCoins;
+
     [Header("Settings Amount")]
     public float coinSpawnMin = 3;
     public float coinSpawnMax = 6;
@@ -45,6 +48,9 @@ public class Attack : MonoBehaviour
     private CoinPoolManager coinPoolManager;
     private ExperienceOrbPoolManager orbPoolManager;
     private Lucky lucky;
+
+    private WeaponInfo weaponInfo;
+    private BouncingSawLauncher bouncingSaw;
 
     private void OnEnable()
     {
@@ -95,6 +101,9 @@ public class Attack : MonoBehaviour
         goldIncrease = FindFirstObjectByType<Gold>();
         brutal = FindFirstObjectByType<Brutal>();
         lucky = FindFirstObjectByType<Lucky>();
+
+        weaponInfo = GetComponent<WeaponInfo>();
+        bouncingSaw = GetComponent<BouncingSawLauncher>();
     }
 
     private void OnDestroy()
@@ -136,6 +145,11 @@ public class Attack : MonoBehaviour
                 if (Random.value <= 0.15f && lucky != null)
                 {
                     SpawnHealthPotions(enemy.transform.position, 1);
+                }
+
+                if (Random.value <= 0.35f && bouncingSaw != null && weaponInfo.weaponLevel > 3)
+                {
+                    bouncingSaw.LaunchBouncingSaw();
                 }
 
                 SpawnExperienceOrbs(enemy.transform.position, 5);
@@ -241,11 +255,19 @@ public class Attack : MonoBehaviour
     void SpawnCoins(GameObject coinType, float minAmount, float maxAmount, Vector3 position)
     {
         bool isGoldIncreaseActive = goldIncrease != null && goldIncrease.IsReady();
-        int coinCount = Random.Range((int)minAmount, (int)maxAmount + 1);
+
+        int initialCoinCount = Random.Range((int)minAmount, (int)maxAmount + 1);
+
+        int coinCount = initialCoinCount;
 
         if (isGoldIncreaseActive)
         {
             coinCount += goldIncrease.increaseGoldChange;
+        }
+
+        if (weaponInfo != null && weaponInfo.weaponLevel > 1)
+        {
+            coinCount += increaseCoins;
         }
 
         for (int i = 0; i < coinCount; i++)

@@ -253,6 +253,8 @@ MonoBehaviour:
   invincibilityDuration: 2
   flashInterval: 0.1
   hasRevived: 0
+  hasAddShieldGloves: 0
+  hasAddShieldClaws: 0
 --- !u!114 &867456001245008669
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -293,6 +295,8 @@ MonoBehaviour:
   coinSpawnMax: 4
   secondaryCoinSpawnMin: 1
   secondaryCoinSpawnMax: 2
+  increaseExperience: 5
+  plane: {fileID: 2848055315872984937, guid: 94be09f38542bfc429ff0af9111e770c, type: 3}
   attackCooldown: 0.3
   swipeThreshold: 13
   vfxPool: {fileID: 0}

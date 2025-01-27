@@ -16,6 +16,7 @@ public class EneryOrb : MonoBehaviour
     public float orbitRadius = 3f;
     public float orbitSpeed = 90f; // Tốc độ quay của quỹ đạo
     public float attackRadius = 5f;
+    private float orbitSpeedOrignal;
 
     [Header("Coins")]
     public GameObject coinPrefab;
@@ -32,6 +33,14 @@ public class EneryOrb : MonoBehaviour
     public GameObject healthPotionPrefab;
     public float potionMoveToPlayer = 25f;
     public float potionMoveDelay = 0.5f;
+
+    [Header("Upgrade Level 2")]
+    public int increaseExperience;
+
+    [Header("Time-based Modifications - Upgrade Level 3")]
+    public float timeInterval = 10f; 
+    private float timeElapsed = 0f; 
+    private bool isBoosted = false;
 
     [Header("Settings Amount")]
     public float coinSpawnMin = 3;
@@ -54,6 +63,11 @@ public class EneryOrb : MonoBehaviour
     private PlayerHealth health;
     private Lucky lucky;
 
+    private WeaponInfo weaponInfo;
+    private EnergyOrbShooter energyOrbShooter;
+
+    private bool canShootOrbs = true;
+
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -71,6 +85,8 @@ public class EneryOrb : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        orbitSpeedOrignal = orbitSpeed;
+
         coinPoolManager = FindFirstObjectByType<CoinPoolManager>();
         orbPoolManager = FindFirstObjectByType<ExperienceOrbPoolManager>();
 
@@ -120,6 +136,11 @@ public class EneryOrb : MonoBehaviour
         goldIncrease = FindFirstObjectByType<Gold>();
         brutal = FindFirstObjectByType<Brutal>();
         lucky = FindFirstObjectByType<Lucky>();
+
+        weaponInfo = GetComponent<WeaponInfo>();
+        energyOrbShooter = GetComponent<EnergyOrbShooter>();
+
+        StartCoroutine(OrbSpeedBoostRoutine());
     }
 
     private void OnDestroy()
@@ -145,6 +166,71 @@ public class EneryOrb : MonoBehaviour
     private void Update()
     {
         AttackWithOrbs();
+
+        if (!isBoosted && weaponInfo.weaponLevel > 2)
+        {
+            timeElapsed += Time.deltaTime;
+
+            if (timeElapsed >= timeInterval)
+            {
+                timeElapsed = 0f;
+                StartCoroutine(HandleSpeedBoostAfterTime());
+            }
+        }
+
+        if (canShootOrbs && weaponInfo.weaponLevel > 3)
+        {
+            canShootOrbs = false;  
+            StartCoroutine(ShootOrbsRoutine());
+        }
+    }
+
+    private IEnumerator ShootOrbsRoutine()
+    {
+        yield return new WaitForSeconds(5f);
+
+        if (energyOrbShooter != null)
+        {
+            energyOrbShooter.ShootEnergyOrbs();
+        }
+
+        canShootOrbs = true;
+    }
+    private IEnumerator HandleSpeedBoostAfterTime()
+    {
+        if (weaponInfo.weaponLevel > 2)
+        {
+            orbitSpeed = 420f; 
+            isBoosted = true;
+            Debug.Log("Speed Boost Activated!");
+
+            yield return new WaitForSeconds(7f);
+
+            orbitSpeed = orbitSpeedOrignal; 
+            isBoosted = false;
+            Debug.Log("Speed Boost Ended.");
+        }
+    }
+
+    private IEnumerator OrbSpeedBoostRoutine()
+    {
+        if (weaponInfo.weaponLevel > 2)
+        {
+            while (true)
+            {
+                if (!isBoosted) 
+                {
+                    yield return new WaitForSeconds(timeInterval);
+
+                    StartCoroutine(HandleSpeedBoostAfterTime());
+                }
+                yield return null;
+            }
+        }
+        else
+        {
+            yield break;
+        }
     }
 
     private void AttackWithOrbs()
@@ -348,6 +434,18 @@ public class EneryOrb : MonoBehaviour
 
     void SpawnExperienceOrbs(Vector3 position, int orbCount)
     {
+        Debug.Log($"Initial orb count: {orbCount}");
+
+        if (weaponInfo != null && weaponInfo.weaponLevel > 1)
+        {
+            orbCount += increaseExperience;
+            Debug.Log($"Orb count after adding increaseExperience: {orbCount}");
+        }
+        else
+        {
+            Debug.Log("Weapon level is not high enough to increase orb count.");
+        }
+
         for (int i = 0; i < orbCount; i++)
         {
             float randomAngle = Random.Range(0f, 360f);

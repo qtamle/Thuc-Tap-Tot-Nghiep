@@ -108,6 +108,7 @@ GameObject:
   - component: {fileID: 6479169796021809618}
   - component: {fileID: 3925822047768403138}
   - component: {fileID: 5535838897586628364}
+  - component: {fileID: -4108238928164603105}
   m_Layer: 3
   m_Name: PlayerEnergyOrb
   m_TagString: Player
@@ -315,6 +316,9 @@ MonoBehaviour:
   invincibilityDuration: 2
   flashInterval: 0.1
   hasRevived: 0
+  hasAddShieldGloves: 0
+  hasAddShieldClaws: 0
+  hasAddShieldChainsaw: 0
 --- !u!114 &5535838897586628364
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -350,10 +354,25 @@ MonoBehaviour:
   healthPotionPrefab: {fileID: 2895849976222171966, guid: 71539652dceaf7b4795ff2c75c71f450, type: 3}
   potionMoveToPlayer: 25
   potionMoveDelay: 0.5
+  increaseExperience: 5
+  timeInterval: 30
   coinSpawnMin: 1
   coinSpawnMax: 4
   secondaryCoinSpawnMin: 1
   secondaryCoinSpawnMax: 2
+--- !u!114 &-4108238928164603105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5500264472938616846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c93fd6e6f68cf7f4da1667fc9851b7d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  orbSpeed: 3
 --- !u!1 &6067580836641251966
 GameObject:
   m_ObjectHideFlags: 0

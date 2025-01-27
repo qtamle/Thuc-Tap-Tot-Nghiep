@@ -64,6 +64,8 @@ public class Katana : MonoBehaviour
     private PlayerHealth health;
     private Lucky lucky;
 
+    private WeaponInfo weaponInfo;
+    private KatanaLevel4 katanaLevel4;
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -104,6 +106,9 @@ public class Katana : MonoBehaviour
         goldIncrease = FindFirstObjectByType<Gold>();
         brutal = FindFirstObjectByType<Brutal>();
         lucky = FindFirstObjectByType<Lucky>();
+
+        weaponInfo = GetComponent<WeaponInfo>();
+        katanaLevel4 = GetComponent<KatanaLevel4>();
     }
     private void OnDestroy()
     {
@@ -274,6 +279,21 @@ public class Katana : MonoBehaviour
                 if (Random.value <= 0.15f && lucky != null)
                 {
                     SpawnHealthPotions(enemy.transform.position, 1);
+                }
+
+                if (Random.value <= 0.20f && weaponInfo.weaponLevel > 1)
+                {
+                    SpawnHealthPotions(enemy.transform.position, 1);
+                }
+
+                if (Random.value <= 0.20f && weaponInfo.weaponLevel > 2)
+                {
+                    health.HealHealth(2);
+                }
+
+                if (Random.value <= 0.35f && weaponInfo.weaponLevel > 3)
+                {
+                    katanaLevel4.SpawnBlades();
                 }
 
                 SpawnExperienceOrbs(enemy.transform.position, 5);

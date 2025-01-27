@@ -3655,7 +3655,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa0a772ade8b0e441a19313cad4a1780, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  killTarget: 2
+  killTarget: 150
   enemiesKilled: 0
 --- !u!4 &452983390
 Transform:
@@ -6687,6 +6687,7 @@ Transform:
   - {fileID: 42533701}
   - {fileID: 613065060}
   - {fileID: 885651477}
+  - {fileID: 1473217038}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &866592059
@@ -11906,6 +11907,7 @@ MonoBehaviour:
   healthPotionPrefab: {fileID: 2895849976222171966, guid: 71539652dceaf7b4795ff2c75c71f450, type: 3}
   potionMoveToPlayer: 25
   potionMoveDelay: 0.3
+  increaseCoins: 0
   coinSpawnMin: 1
   coinSpawnMax: 4
   secondaryCoinSpawnMin: 1
@@ -11977,6 +11979,9 @@ MonoBehaviour:
   invincibilityDuration: 2
   flashInterval: 0.1
   hasRevived: 0
+  hasAddShieldGloves: 0
+  hasAddShieldClaws: 0
+  hasAddShieldChainsaw: 0
 --- !u!1 &1267796809
 GameObject:
   m_ObjectHideFlags: 0
@@ -13591,6 +13596,52 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   canDamage: 0
+--- !u!1 &1473217037
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1473217038}
+  - component: {fileID: 1473217039}
+  m_Layer: 0
+  m_Name: EnergyOrbShootPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1473217038
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1473217037}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 861803711}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1473217039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1473217037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce66811526efaf24f9ecaf56ed5f98df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  orbPrefab: {fileID: 7025214134439915722, guid: 2b8c4603cb460bb4fa521c7dbbaf42ac, type: 3}
+  poolSize: 10
 --- !u!1 &1499136973
 GameObject:
   m_ObjectHideFlags: 0

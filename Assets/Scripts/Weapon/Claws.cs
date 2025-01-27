@@ -39,6 +39,12 @@ public class Claws : MonoBehaviour
     public float secondaryCoinSpawnMin = 2;
     public float secondaryCoinSpawnMax = 4;
 
+    [Header("Upgrade Level 2")]
+    public int increaseExperience;
+
+    [Header("Upgrade Level 4")]
+    public GameObject plane;
+
     [Header("Attack Cooldown")]
     public float attackCooldown = 1f;
     private float lastAttackTime = -Mathf.Infinity;
@@ -64,6 +70,9 @@ public class Claws : MonoBehaviour
     private ExperienceOrbPoolManager orbPoolManager;
     private PlayerHealth health;
     private Lucky lucky;
+
+    private WeaponInfo weaponInfo;
+    private ClawsLevel4 clawsLevel4;
 
     private void OnEnable()
     {
@@ -106,6 +115,26 @@ public class Claws : MonoBehaviour
         goldIncrease = FindFirstObjectByType<Gold>();
         brutal = FindFirstObjectByType<Brutal>();
         lucky = FindFirstObjectByType<Lucky>();
+
+        weaponInfo = GetComponent<WeaponInfo>();
+        
+        if (weaponInfo != null && weaponInfo.weaponLevel > 3)
+        {
+            GameObject planePrefab = Instantiate(plane);
+
+            if (planePrefab != null)
+            {
+                ClawsLevel4 clawsLevel4 = planePrefab.GetComponent<ClawsLevel4>();
+                if (clawsLevel4 != null)
+                {
+                    clawsLevel4.Activate();
+                }
+            }
+        }
+        else
+        {
+            Debug.Log("Chua dat du level cua claws !!!!!!!");
+        }
     }
 
     private void OnDestroy()
@@ -120,7 +149,7 @@ public class Claws : MonoBehaviour
             currentSwipeDirection = direction;
             PerformAttack(direction);
             lastAttackTime = Time.time;
-            Debug.Log($"Attack Direction: {direction}");
+            //Debug.Log($"Attack Direction: {direction}");
         }
     }
 
@@ -474,6 +503,18 @@ public class Claws : MonoBehaviour
     }
     void SpawnExperienceOrbs(Vector3 position, int orbCount)
     {
+        Debug.Log($"Initial orb count: {orbCount}");
+
+        if (weaponInfo != null && weaponInfo.weaponLevel > 1)
+        {
+            orbCount += increaseExperience;
+            Debug.Log($"Orb count after adding increaseExperience: {orbCount}");
+        }
+        else
+        {
+            Debug.Log("Weapon level is not high enough to increase orb count.");
+        }
+
         for (int i = 0; i < orbCount; i++)
         {
             float randomAngle = Random.Range(0f, 360f);

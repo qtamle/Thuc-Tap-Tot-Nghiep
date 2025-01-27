@@ -27,6 +27,8 @@ public class PlayerHealth : MonoBehaviour, DamagePlayerInterface
     private bool hasCheckedSacrifice = false;
     private bool hasAddedSavedHealth = false;
     public bool hasAddShieldGloves = false;
+    public bool hasAddShieldClaws = false;
+    public bool hasAddShieldChainsaw = false;
 
     private LevelSystem levelSystem;
     private GameObject CurrentHealth;
@@ -40,7 +42,11 @@ public class PlayerHealth : MonoBehaviour, DamagePlayerInterface
     private Brutal brutal;
     private Dodge dodge;
 
+    [Header("Weapon")]
     private Gloves gloves;
+    private Claws claws;
+    private Attack attack; // Chainsaw
+
     private WeaponInfo weaponInfo;
 
     private void Awake()
@@ -133,6 +139,7 @@ public class PlayerHealth : MonoBehaviour, DamagePlayerInterface
 
         // Find Weapon Info (level weapon) and Gloves to upgrade shield for level 3
         weaponInfo = GetComponent<WeaponInfo>();
+
         gloves = GetComponent<Gloves>();
         if (weaponInfo != null && gloves != null && !hasAddShieldGloves && weaponInfo.weaponLevel > 2)
         {
@@ -143,6 +150,23 @@ public class PlayerHealth : MonoBehaviour, DamagePlayerInterface
         else
         {
             Debug.Log("Khong đạt đủ điều kiện!");
+        }
+
+        claws = GetComponent<Claws>();
+        if (weaponInfo != null && claws != null && !hasAddShieldClaws && weaponInfo.weaponLevel > 2)
+        {
+            maxHealth += 10;
+            currentHealth = maxHealth;
+            UpdateHealthUI();
+            hasAddShieldClaws = true;
+        }
+
+        attack = GetComponent<Attack>();
+        if (weaponInfo != null && attack != null && !hasAddShieldChainsaw && weaponInfo.weaponLevel > 2)
+        {
+            currentShield += 10;
+            UpdateShieldUI();
+            hasAddShieldChainsaw = true;
         }
     }
 

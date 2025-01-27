@@ -16,3 +16,5 @@ MonoBehaviour:
   weaponSprite: {fileID: -5151153562373494563, guid: 2aac49780cc76db4da9e2c7f83864276, type: 3}
   weaponName: Claws
   description: 
+  currentLevel: 1
+  upgradeCosts: 00000000000000000000000000000000

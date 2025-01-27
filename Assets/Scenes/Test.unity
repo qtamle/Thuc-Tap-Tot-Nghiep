@@ -10443,6 +10443,8 @@ MonoBehaviour:
   healthPotionPrefab: {fileID: 2895849976222171966, guid: 71539652dceaf7b4795ff2c75c71f450, type: 3}
   potionMoveToPlayer: 25
   potionMoveDelay: 0.5
+  increaseExperience: 0
+  timeInterval: 10
   coinSpawnMin: 1
   coinSpawnMax: 4
   secondaryCoinSpawnMin: 1
@@ -10487,6 +10489,8 @@ MonoBehaviour:
   coinSpawnMax: 4
   secondaryCoinSpawnMin: 1
   secondaryCoinSpawnMax: 2
+  increaseExperience: 0
+  plane: {fileID: 0}
   attackCooldown: 0.3
   swipeThreshold: 13
   vfxPool: {fileID: 1292003985}
@@ -10554,6 +10558,8 @@ MonoBehaviour:
   flashInterval: 0.1
   hasRevived: 0
   hasAddShieldGloves: 0
+  hasAddShieldClaws: 0
+  hasAddShieldChainsaw: 0
 --- !u!61 &1229863092
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -10632,6 +10638,7 @@ MonoBehaviour:
   healthPotionPrefab: {fileID: 2895849976222171966, guid: 71539652dceaf7b4795ff2c75c71f450, type: 3}
   potionMoveToPlayer: 25
   potionMoveDelay: 0.5
+  increaseCoins: 0
   coinSpawnMin: 1
   coinSpawnMax: 4
   secondaryCoinSpawnMin: 1
@@ -13288,6 +13295,7 @@ Transform:
   - {fileID: 311697336}
   - {fileID: 1452913419}
   - {fileID: 770204747}
+  - {fileID: 1852440698}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1691331800
@@ -14278,6 +14286,52 @@ PlatformEffector2D:
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
+--- !u!1 &1852440697
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1852440698}
+  - component: {fileID: 1852440699}
+  m_Layer: 0
+  m_Name: EnergyOrbShootPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1852440698
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1852440697}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1666825016}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1852440699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1852440697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce66811526efaf24f9ecaf56ed5f98df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  orbPrefab: {fileID: 7025214134439915722, guid: 2b8c4603cb460bb4fa521c7dbbaf42ac, type: 3}
+  poolSize: 10
 --- !u!1 &1859929394
 GameObject:
   m_ObjectHideFlags: 0

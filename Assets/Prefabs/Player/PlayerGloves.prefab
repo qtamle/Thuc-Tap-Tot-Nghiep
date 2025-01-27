@@ -419,7 +419,7 @@ MonoBehaviour:
   attackCooldown: 0.5
   swipeThreshold: 15
   vfxPool: {fileID: 0}
-  increaseCoin: 8
+  increaseCoin: 5
 --- !u!120 &2900008153659702432
 LineRenderer:
   serializedVersion: 2

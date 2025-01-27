@@ -139,6 +139,7 @@ GameObject:
   - component: {fileID: 445921663435587308}
   - component: {fileID: 4802947046339175721}
   - component: {fileID: 4279029774091857590}
+  - component: {fileID: -6699450147265448326}
   m_Layer: 3
   m_Name: PlayerChainsaw
   m_TagString: Player
@@ -311,6 +312,7 @@ MonoBehaviour:
   healthPotionPrefab: {fileID: 2895849976222171966, guid: 71539652dceaf7b4795ff2c75c71f450, type: 3}
   potionMoveToPlayer: 25
   potionMoveDelay: 0.5
+  increaseCoins: 5
   coinSpawnMin: 1
   coinSpawnMax: 4
   secondaryCoinSpawnMin: 1
@@ -382,6 +384,27 @@ MonoBehaviour:
   invincibilityDuration: 2
   flashInterval: 0.1
   hasRevived: 0
+  hasAddShieldGloves: 0
+  hasAddShieldClaws: 0
+  hasAddShieldChainsaw: 0
+--- !u!114 &-6699450147265448326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7346428832547731079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b06179a1498a98e4bbdbd3545a5d8247, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bouncingSawPrefab: {fileID: 8223095997635945948, guid: 2d255ae7a68ec9d4e84bb49b91b61460, type: 3}
+  throwSpeed: 5
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  searchRadius: 10
 --- !u!1 &9059466250284250557
 GameObject:
   m_ObjectHideFlags: 0

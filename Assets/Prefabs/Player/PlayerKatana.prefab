@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6447889336037118987}
   - component: {fileID: 6479983197009616177}
   - component: {fileID: 2717212126458255225}
+  - component: {fileID: -8091513382304598024}
   m_Layer: 3
   m_Name: PlayerKatana
   m_TagString: Player
@@ -222,6 +223,9 @@ MonoBehaviour:
   invincibilityDuration: 2
   flashInterval: 0.1
   hasRevived: 0
+  hasAddShieldGloves: 0
+  hasAddShieldClaws: 0
+  hasAddShieldChainsaw: 0
 --- !u!114 &2717212126458255225
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -265,6 +269,21 @@ MonoBehaviour:
   attackCooldown: 0.3
   swipeThreshold: 13
   vfxPool: {fileID: 0}
+--- !u!114 &-8091513382304598024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3094505062376793977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d878ec01162bc84ab75f79fef103a37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bladePrefab: {fileID: 4225929617293816271, guid: c99208ecf74a5ef4a8d186a2983b72d8, type: 3}
+  bladeSpeed: 4
+  bladeLifetime: 3
 --- !u!1 &4354235830588291893
 GameObject:
   m_ObjectHideFlags: 0
