@@ -7,8 +7,13 @@ public class MenuCoinDisplay : MonoBehaviour
     public TMP_Text coinType1Text;
     public TMP_Text coinType2Text;
 
+    private CoinsManager coinsManager;
     private void Start()
     {
+        coinsManager = FindFirstObjectByType<CoinsManager>();
+
+        coinsManager.OnCoinsUpdated += UpdateCoinUI;
+
         LoadAndDisplayCoins();
     }
 
@@ -44,6 +49,23 @@ public class MenuCoinDisplay : MonoBehaviour
                 coinType2Text.text = "0";
 
             Debug.LogWarning("CoinsData.json not found. Displaying default values.");
+        }
+    }
+
+    private void UpdateCoinUI(int totalCoinType1, int totalCoinType2)
+    {
+        if (coinType1Text != null)
+            coinType1Text.text = totalCoinType1.ToString();
+
+        if (coinType2Text != null)
+            coinType2Text.text = totalCoinType2.ToString();
+    }
+
+    private void OnDestroy()
+    {
+        if (coinsManager != null)
+        {
+            coinsManager.OnCoinsUpdated -= UpdateCoinUI;
         }
     }
 }

@@ -1,20 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class SnapToWeapon : MonoBehaviour
 {
+    // UI
     public ScrollRect scrollRect;
     public RectTransform contentWeaponPanel;
     public RectTransform sampleListItem;
     public HorizontalLayoutGroup HLG;
 
+    // Button
     public Button nextButton;
     public Button previousButton;
     public Button upgradeButton;
+    public Button buyButton;
 
-    public event Action<WeaponData> OnSnapChanged; 
+    // Text
+    public Text buyButtonText;
+    
+    // Action
+    public event Action<WeaponData> OnSnapChanged;
+    public event Action OnWeaponSelected;
 
     [HideInInspector]
     public string[] ItemNames;
@@ -26,9 +35,15 @@ public class SnapToWeapon : MonoBehaviour
     private int currentItem = 0; 
     private float snapDuration = 0.5f;
 
+    // Current Weapon
     public WeaponData currentSnapWeapon;
+
+    // Active Level to Buy
+    [SerializeField] private LevelSystem levelSystem;
+
     void Start()
     {
+        levelSystem = FindAnyObjectByType<LevelSystem>();
         isSnapped = false;
         InitializeWeaponNames();
 
@@ -36,6 +51,7 @@ public class SnapToWeapon : MonoBehaviour
         nextButton.onClick.AddListener(NextWeapon);
         previousButton.onClick.AddListener(PreviousWeapon);
         upgradeButton.onClick.AddListener(UpgradeWeapon);
+        buyButton.onClick.AddListener(TryBuyWeapon);
 
         // Cập nhật trạng thái nút khi bắt đầu
         UpdateButtonStates();
@@ -160,5 +176,48 @@ public class SnapToWeapon : MonoBehaviour
         nextButton.gameObject.SetActive(currentItem < ItemNames.Length - 1);
 
         previousButton.gameObject.SetActive(currentItem > 0);
+
+        if (currentSnapWeapon != null)
+        {
+            WeaponSO weaponData = currentSnapWeapon.weaponData;
+            bool isOwned = weaponData.isOwned;
+            bool canBuy = levelSystem.level >= weaponData.requiredLevel;
+
+            upgradeButton.gameObject.SetActive(isOwned);
+            buyButton.gameObject.SetActive(!isOwned);
+
+            if (!isOwned)
+            {
+                buyButton.interactable = canBuy;
+                buyButtonText.text = canBuy ? "Buy" : $"Require Level {weaponData.requiredLevel}";
+            }
+        }
+    }
+
+    private void TryBuyWeapon()
+    {
+        if (currentSnapWeapon != null)
+        {
+            WeaponSO weaponData = currentSnapWeapon.weaponData;
+
+            if (levelSystem.level >= weaponData.requiredLevel)
+            {
+                currentSnapWeapon.BuyWeapon();
+                UpdateButtonStates(); // Cập nhật giao diện sau khi mua
+            }
+            else
+            {
+                Debug.LogWarning($"Cannot buy {weaponData.weaponName}. Level {weaponData.requiredLevel} required.");
+            }
+        }
+    }
+
+    public void SelectWeapon(WeaponData weapon)
+    {
+        currentSnapWeapon = weapon;
+
+        OnWeaponSelected?.Invoke();
+
+        Debug.Log($"Weapon selected: {weapon.weaponName}");
     }
 }

@@ -17,4 +17,6 @@ MonoBehaviour:
   weaponName: Katana
   description: 
   currentLevel: 1
+  isOwned: 0
+  requiredLevel: 25
   upgradeCosts: 00000000000000000000000000000000

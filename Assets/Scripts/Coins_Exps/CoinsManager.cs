@@ -12,6 +12,8 @@ public class CoinsData
 
 public class CoinsManager : MonoBehaviour
 {
+    public event Action<int, int> OnCoinsUpdated;
+
     public int coinType1Count = 0; // Coin hiện tại trong Scene
     public int coinType2Count = 0; // Coin hiện tại trong Scene
 
@@ -60,6 +62,25 @@ public class CoinsManager : MonoBehaviour
         coinType2Count += type2;
 
         UpdateCoinUI();
+    }
+
+    public bool TryPurchase(int basePrice)
+    {
+        if (totalCoinType1Count >= basePrice)
+        {
+            totalCoinType1Count -= basePrice;
+            SaveCoins();
+
+            OnCoinsUpdated?.Invoke(totalCoinType1Count, totalCoinType2Count);
+
+            Debug.Log($"Purchase successful. Spent {basePrice} coins. Remaining: {totalCoinType1Count}");
+            return true;
+        }
+        else
+        {
+            Debug.LogWarning($"Not enough coins to purchase. Required: {basePrice}, Available: {totalCoinType1Count}");
+            return false;
+        }
     }
 
     // Lưu dữ liệu tổng coin dạng JSON vào tệp

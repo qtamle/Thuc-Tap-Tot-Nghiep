@@ -17,4 +17,6 @@ MonoBehaviour:
   weaponName: Chainsaw
   description: 
   currentLevel: 1
+  isOwned: 0
+  requiredLevel: 10
   upgradeCosts: 00000000000000000000000000000000

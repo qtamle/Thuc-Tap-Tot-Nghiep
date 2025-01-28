@@ -23,7 +23,8 @@ public class WeaponData : MonoBehaviour
     public int currentLevel; 
     public int maxLevel = 4;
 
-    private int originalLevel; 
+    private int originalLevel;
+    private CoinsManager coinsManager;
 
     private void OnEnable()
     {
@@ -38,6 +39,7 @@ public class WeaponData : MonoBehaviour
     private void Start()
     {
         currentLevel = originalLevel;
+        coinsManager = FindFirstObjectByType<CoinsManager>();
         OnSceneLoaded(SceneManager.GetActiveScene(), LoadSceneMode.Single);
     }
 
@@ -48,6 +50,8 @@ public class WeaponData : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        coinsManager = FindFirstObjectByType<CoinsManager>();
+
         if (weaponData != null)
         {
             originalLevel = weaponData.currentLevel; 
@@ -70,18 +74,53 @@ public class WeaponData : MonoBehaviour
         }
     }
 
+    public void BuyWeapon()
+    {
+        if (weaponData != null && !weaponData.isOwned)
+        {
+            if (coinsManager != null)
+            {
+                // Kiểm tra đủ tiền không
+                if (coinsManager.TryPurchase(basePrice))
+                {
+                    weaponData.isOwned = true;
+                    Debug.Log($"{weaponName} has been purchased for {basePrice} coins!");
+                }
+                else
+                {
+                    Debug.LogWarning($"Not enough coins to buy {weaponName}. Price: {basePrice}");
+                }
+            }
+            else
+            {
+                Debug.LogError("CoinsManager is not set up properly!");
+            }
+        }
+        else if (weaponData.isOwned)
+        {
+            Debug.LogWarning($"{weaponName} is already owned.");
+        }
+    }
+
     public void UpgradeWeapon()
     {
-        if (currentLevel < maxLevel)
+        if (weaponData.isOwned) 
         {
-            int upgradeCost = weaponData.upgradeCosts[currentLevel - 1];
-            currentLevel++;
-            weaponData.currentLevel = currentLevel; 
-            Debug.Log($"Weapon {weaponName} upgraded to level {currentLevel} with cost {upgradeCost}.");
+            if (currentLevel < maxLevel)
+            {
+                int upgradeCost = weaponData.upgradeCosts[currentLevel - 1];
+                currentLevel++;
+                weaponData.currentLevel = currentLevel;
+                Debug.Log($"Weapon {weaponName} upgraded to level {currentLevel} with cost {upgradeCost}.");
+            }
+            else
+            {
+                Debug.Log("Max level reached for " + weaponName);
+            }
         }
         else
         {
-            Debug.Log("Max level reached for " + weaponName);
+            Debug.LogWarning($"Cannot upgrade {weaponName}. Weapon is not owned.");
         }
     }
 }

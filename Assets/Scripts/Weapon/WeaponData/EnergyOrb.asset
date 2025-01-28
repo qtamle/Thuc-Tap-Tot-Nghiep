@@ -17,4 +17,6 @@ MonoBehaviour:
   weaponName: EnergyOrb
   description: 
   currentLevel: 1
+  isOwned: 0
+  requiredLevel: 20
   upgradeCosts: 00000000000000000000000000000000

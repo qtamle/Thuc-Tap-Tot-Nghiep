@@ -1,12 +1,15 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class TestScene : MonoBehaviour
 {
     public string sceneName;
+
     public SnapToWeapon snapToWeapon;
 
     private GameObject currentWeaponInstance;
+    public Button loadSceneButton;
 
     public static WeaponSO weaponDataStore;
 
@@ -15,6 +18,13 @@ public class TestScene : MonoBehaviour
         if (snapToWeapon != null && snapToWeapon.currentSnapWeapon != null && snapToWeapon.currentSnapWeapon.weaponData != null)
         {
             WeaponSO weaponData = snapToWeapon.currentSnapWeapon.weaponData;
+
+            if (!weaponData.isOwned)
+            {
+                Debug.LogError($"Weapon {weaponData.weaponName} chưa được mua!");
+                return;
+            }
+
             GameObject weaponPrefab = weaponData.weapon;
 
             if (weaponPrefab == null)
@@ -67,6 +77,43 @@ public class TestScene : MonoBehaviour
         else
         {
             Debug.LogError("Không có vũ khí được lưu trữ!");
+        }
+    }
+
+    private void UpdateButtonState()
+    {
+        if (loadSceneButton != null)
+        {
+            if (snapToWeapon != null && snapToWeapon.currentSnapWeapon != null && snapToWeapon.currentSnapWeapon.weaponData != null)
+            {
+                WeaponSO weaponData = snapToWeapon.currentSnapWeapon.weaponData;
+
+                loadSceneButton.interactable = weaponData.isOwned;
+            }
+            else
+            {
+                loadSceneButton.interactable = false; 
+            }
+        }
+        else
+        {
+            Debug.LogError("Load Scene Button is not assigned in the Inspector!");
+        }
+    }
+
+    private void OnEnable()
+    {
+        if (snapToWeapon != null)
+        {
+            snapToWeapon.OnWeaponSelected += UpdateButtonState; 
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (snapToWeapon != null)
+        {
+            snapToWeapon.OnWeaponSelected -= UpdateButtonState; 
         }
     }
 }
