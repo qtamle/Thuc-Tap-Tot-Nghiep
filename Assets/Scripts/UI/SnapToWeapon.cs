@@ -20,7 +20,7 @@ public class SnapToWeapon : MonoBehaviour
 
     // Text
     public Text buyButtonText;
-    
+
     // Action
     public event Action<WeaponData> OnSnapChanged;
     public event Action OnWeaponSelected;
@@ -32,19 +32,21 @@ public class SnapToWeapon : MonoBehaviour
     public float snapForce;
     float snapSpeed;
 
-    private int currentItem = 0; 
+    private int currentItem = 0;
     private float snapDuration = 0.5f;
 
     // Current Weapon
     public WeaponData currentSnapWeapon;
 
     // Active Level to Buy
-    [SerializeField] private LevelSystem levelSystem;
+    [SerializeField]
+    private LevelSystem levelSystem;
 
     void Start()
     {
         levelSystem = FindAnyObjectByType<LevelSystem>();
         isSnapped = false;
+
         InitializeWeaponNames();
 
         // Đăng ký sự kiện cho các nút
@@ -101,7 +103,7 @@ public class SnapToWeapon : MonoBehaviour
             if (Mathf.Abs(contentWeaponPanel.localPosition.x - targetPositionX) < 0.1f)
             {
                 isSnapped = true;
-                snapSpeed = 0; 
+                snapSpeed = 0;
 
                 // Gọi sự kiện thông báo vũ khí đã snap
                 WeaponData snappedWeaponData = GetWeaponData(currentItem);
@@ -112,7 +114,7 @@ public class SnapToWeapon : MonoBehaviour
         if (scrollRect.velocity.magnitude > 200)
         {
             isSnapped = false;
-            snapSpeed = 0; 
+            snapSpeed = 0;
         }
 
         UpdateButtonStates();
@@ -120,7 +122,20 @@ public class SnapToWeapon : MonoBehaviour
 
     private void NotifySnapChanged(WeaponData weaponData)
     {
+        if (weaponData == null)
+        {
+            Debug.LogError("❌ NotifySnapChanged: weaponData is NULL!");
+            return;
+        }
+
         currentSnapWeapon = weaponData;
+        ;
+        if (currentSnapWeapon.weaponData == null)
+        {
+            Debug.LogError("⚠️ weaponData của vũ khí hiện tại bị NULL sau khi snap!");
+        }
+
+        Debug.Log($"✅ NotifySnapChanged: Current weapon set to {weaponData.weaponName}");
         OnSnapChanged?.Invoke(weaponData);
     }
 
@@ -135,7 +150,7 @@ public class SnapToWeapon : MonoBehaviour
     {
         if (currentSnapWeapon != null)
         {
-            currentSnapWeapon.UpgradeWeapon();  // Gọi hàm nâng cấp vũ khí hiện tại
+            currentSnapWeapon.UpgradeWeapon(); // Gọi hàm nâng cấp vũ khí hiện tại
         }
     }
 
@@ -165,7 +180,9 @@ public class SnapToWeapon : MonoBehaviour
         float targetPositionX = 0 - (currentItem * (sampleListItem.rect.width + HLG.spacing));
 
         // Sử dụng LeanTween để di chuyển mượt mà
-        LeanTween.moveLocalX(contentWeaponPanel.gameObject, targetPositionX, snapDuration).setEase(LeanTweenType.easeInOutQuad);
+        LeanTween
+            .moveLocalX(contentWeaponPanel.gameObject, targetPositionX, snapDuration)
+            .setEase(LeanTweenType.easeInOutQuad);
 
         WeaponData snappedWeaponData = GetWeaponData(currentItem);
         NotifySnapChanged(snappedWeaponData);
@@ -202,12 +219,14 @@ public class SnapToWeapon : MonoBehaviour
 
             if (levelSystem.level >= weaponData.requiredLevel)
             {
-                currentSnapWeapon.BuyWeapon();
+                _ = currentSnapWeapon.BuyWeapon();
                 UpdateButtonStates(); // Cập nhật giao diện sau khi mua
             }
             else
             {
-                Debug.LogWarning($"Cannot buy {weaponData.weaponName}. Level {weaponData.requiredLevel} required.");
+                Debug.LogWarning(
+                    $"Cannot buy {weaponData.weaponName}. Level {weaponData.requiredLevel} required."
+                );
             }
         }
     }
@@ -215,9 +234,47 @@ public class SnapToWeapon : MonoBehaviour
     public void SelectWeapon(WeaponData weapon)
     {
         currentSnapWeapon = weapon;
-
+        OnWeaponSnapped(weapon);
         OnWeaponSelected?.Invoke();
 
         Debug.Log($"Weapon selected: {weapon.weaponName}");
+    }
+
+    public async void LoadWeaponData(string weaponID)
+    {
+        var characterWeaponData = await SaveService.GetWeaponID(weaponID);
+
+        if (characterWeaponData != null)
+        {
+            Debug.Log($"✅ SnapToWeapon: Loaded weapon data for ID {weaponID}.");
+
+            if (currentSnapWeapon != null)
+            {
+                currentSnapWeapon.InitWeapon(characterWeaponData);
+            }
+            else
+            {
+                Debug.LogError("❌ SnapToWeapon: currentSnapWeapon is NULL!");
+            }
+        }
+        else
+        {
+            Debug.Log($"❌ SnapToWeapon: Failed to load weapon data for ID {weaponID}.");
+        }
+    }
+
+    private void OnWeaponSnapped(WeaponData snappedWeapon)
+    {
+        if (snappedWeapon == null)
+        {
+            Debug.LogError("❌ OnWeaponSnapped: snappedWeapon is NULL!");
+            return;
+        }
+
+        string weaponID = snappedWeapon.weaponData.WeaponID;
+
+        Debug.Log($"🔄 OnWeaponSnapped: Snapped to weapon ID {weaponID} ");
+
+        LoadWeaponData(weaponID);
     }
 }

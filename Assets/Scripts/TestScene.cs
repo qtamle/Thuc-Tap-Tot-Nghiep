@@ -57,6 +57,9 @@ public class TestScene : MonoBehaviour
         }
     }
 
+    public void LoadSceneONly(string sceneName){
+         SceneManager.LoadScene(sceneName);
+    }
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;

@@ -4,6 +4,7 @@
 public class WeaponSO : ScriptableObject
 {
     [Header("Info Weapon")]
+    public string WeaponID;
     public GameObject weapon;
     public Sprite weaponSprite;
     public string weaponName;
@@ -21,3 +22,4 @@ public class WeaponSO : ScriptableObject
     [Header("Upgrade Price")]
     public int[] upgradeCosts = new int[4];
 }
+
