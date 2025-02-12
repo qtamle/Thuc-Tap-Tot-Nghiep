@@ -135,7 +135,7 @@ public class SnapToWeapon : MonoBehaviour
             Debug.LogError("⚠️ weaponData của vũ khí hiện tại bị NULL sau khi snap!");
         }
 
-        Debug.Log($"✅ NotifySnapChanged: Current weapon set to {weaponData.weaponName}");
+        // Debug.Log($"✅ NotifySnapChanged: Current weapon set to {weaponData.weaponName}");
         OnSnapChanged?.Invoke(weaponData);
     }
 
@@ -273,7 +273,7 @@ public class SnapToWeapon : MonoBehaviour
 
         string weaponID = snappedWeapon.weaponData.WeaponID;
 
-        Debug.Log($"🔄 OnWeaponSnapped: Snapped to weapon ID {weaponID} ");
+        // Debug.Log($"🔄 OnWeaponSnapped: Snapped to weapon ID {weaponID} ");
 
         LoadWeaponData(weaponID);
     }

@@ -18,6 +18,6 @@ MonoBehaviour:
   weaponName: Dagger
   description: 
   currentLevel: 1
-  isOwned: 0
+  isOwned: 1
   requiredLevel: 0
   upgradeCosts: 64000000c80000002c01000090010000

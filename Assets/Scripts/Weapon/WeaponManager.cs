@@ -38,5 +38,7 @@ public class WeaponManager : MonoBehaviour
         weaponNameText.text = newWeaponData.weaponName;
         //weaponSprite. = newWeaponData.weaponSprite;
         weaponPriceText.text = $"Price: {newWeaponData.basePrice}";
+
+        weaponData = newWeaponData;
     }
 }

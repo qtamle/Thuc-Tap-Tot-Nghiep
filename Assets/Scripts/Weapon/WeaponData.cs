@@ -33,18 +33,19 @@ public class WeaponData : MonoBehaviour
         OnSlotSelected?.Invoke(this);
     }
 
-    private void OnEnable()
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
+    // private void OnEnable()
+    // {
+    //     SceneManager.sceneLoaded += OnSceneLoaded;
+    // }
 
-    private void OnDisable()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
+    // private void OnDisable()
+    // {
+    //     SceneManager.sceneLoaded -= OnSceneLoaded;
+    // }
 
     private async void Start()
     {
+        ResourcesService.ResetWeapons();
         coinsManager = FindFirstObjectByType<CoinsManager>();
 
         // Kiểm tra xem dữ liệu đã tồn tại chưa
@@ -52,34 +53,36 @@ public class WeaponData : MonoBehaviour
 
         if (!dataExists)
         {
+            Debug.Log("Create weaponData");
             CreateWeaponData(); // Chỉ tạo nếu chưa có dữ liệu
         }
 
-        OnSceneLoaded(SceneManager.GetActiveScene(), LoadSceneMode.Single);
+        // OnSceneLoaded(SceneManager.GetActiveScene(), LoadSceneMode.Single);
     }
 
     private void OnDestroy()
     {
         ResourcesService.ResetWeapons();
-        SceneManager.sceneLoaded -= OnSceneLoaded;
+        // SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        coinsManager = FindFirstObjectByType<CoinsManager>();
+    // private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    // {
+    //     coinsManager = FindFirstObjectByType<CoinsManager>();
 
-        if (weaponData != null)
-        {
-            originalLevel = weaponData.currentLevel;
-            weaponName = weaponData.weaponName;
-            weaponSprite = weaponData.weaponSprite;
-            // Debug.Log($"Weapon data updated: {weaponName} - Level {currentLevel}");
-        }
-        else
-        {
-            // Debug.LogWarning("Weapon data is null. Please assign a WeaponSO asset.");
-        }
-    }
+    //     if (weaponData != null)
+    //     {
+    //         originalLevel = weaponData.currentLevel;
+    //         weaponName = weaponData.weaponName;
+    //         weaponSprite = weaponData.weaponSprite;
+    //         isOwned = weaponData.isOwned;
+    //         // Debug.Log($"Weapon data updated: {weaponName} - Level {currentLevel}");
+    //     }
+    //     else
+    //     {
+    //         // Debug.LogWarning("Weapon data is null. Please assign a WeaponSO asset.");
+    //     }
+    // }
 
     private void OnValidate()
     {
@@ -202,30 +205,31 @@ public class WeaponData : MonoBehaviour
         );
     }
 
-    // public void InitWeapon(CharacterWeaponData data)
-    // {
-    //     if (data == null)
-    //     {
-    //         // Debug.LogError($"❌ CharacterWeaponData bị null! Không thể khởi tạo vũ khí.");
-    //         return;
-    //     }
+    public void InitWeapon(CharacterWeaponData data)
+    {
+        if (data == null)
+        {
+            // Debug.LogError($"❌ CharacterWeaponData bị null! Không thể khởi tạo vũ khí.");
+            return;
+        }
 
-    //     weaponData = ResourcesService.GetWeaponById(data.WeaponID);
+        // weaponData = ResourcesService.GetWeaponById(data.WeaponID);
 
-    //     if (weaponData == null)
-    //     {
-    //         // Debug.LogError($"❌ Không tìm thấy WeaponSO với ID {data.WeaponID}!");
-    //         return;
-    //     }
+        if (weaponData == null)
+        {
+            // Debug.LogError($"❌ Không tìm thấy WeaponSO với ID {data.WeaponID}!");
+            return;
+        }
 
-    //     weaponName = data.weaponName;
-    //     weaponSprite = weaponData.weaponSprite;
-    //     currentLevel = data.currentLevel;
-    //     isOwned = data.isOwned;
-    //     originalLevel = currentLevel; // Giữ lại cấp ban đầu để tránh lỗi
+        weaponName = data.weaponName;
+        weaponSprite = weaponData.weaponSprite;
+        currentLevel = data.currentLevel;
+        weaponData.isOwned = data.isOwned;
 
-    //     // Debug.Log($"✅ Vũ khí {weaponName} được khởi tạo với cấp {currentLevel}");
-    // }
+        originalLevel = currentLevel; // Giữ lại cấp ban đầu để tránh lỗi
+
+        // Debug.Log($"✅ Vũ khí {weaponName} được khởi tạo với cấp {currentLevel}");
+    }
 
     public async void CreateWeaponData()
     {
@@ -249,10 +253,11 @@ public class WeaponData : MonoBehaviour
             weaponName = weaponData.weaponName,
             currentLevel = currentLevel,
             WeaponID = weaponData.WeaponID,
-            isOwned = weaponData.isOwned,
+            isOwned = false,
         };
 
         await SaveService.SaveWeaponData(data);
+        updateData(data);
         // Debug.Log($"✅ Dữ liệu vũ khí {weaponName} đã được tạo. Level: {currentLevel}");
     }
 
@@ -268,7 +273,7 @@ public class WeaponData : MonoBehaviour
         if (savedData != null)
         {
             // 🔹 Lấy lại WeaponSO từ ResourcesService để đảm bảo dữ liệu chuẩn
-            weaponData = ResourcesService.GetWeaponById(savedData.WeaponID);
+            // weaponData = ResourcesService.GetWeaponById(savedData.WeaponID);
 
             if (weaponData == null)
             {
@@ -281,9 +286,6 @@ public class WeaponData : MonoBehaviour
             weaponSprite = weaponData.weaponSprite;
             currentLevel = savedData.currentLevel;
             originalLevel = currentLevel;
-            isOwned = savedData.isOwned;
-
-            // ✅ Reset lại WeaponSO theo dữ liệu cloud (Quan trọng)
             weaponData.isOwned = savedData.isOwned;
 
             // Debug.Log(
@@ -293,5 +295,13 @@ public class WeaponData : MonoBehaviour
         }
 
         return false; // Không tìm thấy dữ liệu
+    }
+
+    public void updateData(CharacterWeaponData savedData)
+    {
+        weaponName = savedData.weaponName;
+        weaponSprite = weaponData.weaponSprite;
+        currentLevel = savedData.currentLevel;
+        weaponData.isOwned = savedData.isOwned;
     }
 }
