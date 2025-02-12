@@ -17,7 +17,7 @@ public class WeaponData : MonoBehaviour
     [Header("Upgrade Levels")]
     public int[] upgradePrices = new int[4];
 
-    [Header("Upgrade Levels")]
+    [Header("Upgrade Status")]
     public int currentLevel;
     public int maxLevel = 4;
 
@@ -73,11 +73,11 @@ public class WeaponData : MonoBehaviour
             originalLevel = weaponData.currentLevel;
             weaponName = weaponData.weaponName;
             weaponSprite = weaponData.weaponSprite;
-            Debug.Log($"Weapon data updated: {weaponName} - Level {currentLevel}");
+            // Debug.Log($"Weapon data updated: {weaponName} - Level {currentLevel}");
         }
         else
         {
-            Debug.LogWarning("Weapon data is null. Please assign a WeaponSO asset.");
+            // Debug.LogWarning("Weapon data is null. Please assign a WeaponSO asset.");
         }
     }
 
@@ -94,17 +94,19 @@ public class WeaponData : MonoBehaviour
     {
         if (weaponData == null || weaponData.isOwned)
         {
-            Debug.LogWarning($"{weaponName} is already owned or weaponData is null.");
+            // Debug.LogWarning($"{weaponName} is already owned or weaponData is null.");
             return;
         }
 
         if (coinsManager == null)
         {
-            Debug.LogError("CoinsManager is not set up properly!");
+            // Debug.LogError("CoinsManager is not set up properly!");
             return;
         }
 
-        if (!coinsManager.TryPurchase(basePrice))
+        // 🔹 Mua vũ khí bằng TryPurchase mới
+        bool purchaseSuccess = await coinsManager.TryPurchase(basePrice);
+        if (!purchaseSuccess)
         {
             Debug.LogWarning($"Not enough coins to buy {weaponName}. Price: {basePrice}");
             return;
@@ -129,11 +131,9 @@ public class WeaponData : MonoBehaviour
 
         // 🔹 Lưu lại dữ liệu đã cập nhật
         await SaveService.SaveWeaponData(data);
-
         weaponData.isOwned = true;
         isOwned = true;
-
-        Debug.Log($"✅ {weaponName} has been purchased for {basePrice} coins!");
+        // Debug.Log($"✅ {weaponName} has been purchased for {basePrice} coins!");
     }
 
     public async void UpgradeWeapon()
@@ -150,17 +150,34 @@ public class WeaponData : MonoBehaviour
             return;
         }
 
-        if (weaponData.upgradeCosts == null || weaponData.upgradeCosts.Length < maxLevel)
+        if (upgradePrices == null || upgradePrices.Length < maxLevel)
         {
-            Debug.Log($"❌ Upgrade costs array is not properly set up for {weaponName}.");
+            Debug.Log($"❌ Upgrade prices array is not properly set up for {weaponName}.");
             return;
         }
 
-        int upgradeCost = weaponData.upgradeCosts[currentLevel];
-
-        if (coinsManager == null || !coinsManager.TryPurchase(upgradeCost))
+        // ✅ Sử dụng giá của level trước đó
+        int upgradeCost = upgradePrices[currentLevel - 1];
+        Debug.Log("upgradeCost = " + upgradeCost);
+        if (upgradeCost == 0)
         {
-            Debug.Log($"❌ Not enough coins to upgrade {weaponName}. Required: {upgradeCost}");
+            Debug.LogWarning(
+                $"❌ Upgrade cost for {weaponName} at level {currentLevel} is invalid."
+            );
+            return;
+        }
+
+        // ✅ Kiểm tra coinsManager không bị null
+        if (coinsManager == null)
+        {
+            Debug.LogError("❌ CoinsManager is null! Cannot upgrade weapon.");
+            return;
+        }
+
+        bool UpgradeSuccess = await coinsManager.TryUpgrade(upgradeCost);
+        if (!UpgradeSuccess)
+        {
+            Debug.LogWarning($"Not enough coins to upgrade {weaponName}. Price: {upgradeCost}");
             return;
         }
 
@@ -180,39 +197,41 @@ public class WeaponData : MonoBehaviour
         // 🔹 Lưu lại dữ liệu đã cập nhật
         await SaveService.SaveWeaponData(data);
 
-        Debug.Log($"✅ {weaponName} đã nâng cấp lên cấp {currentLevel} và lưu vào cloud!");
+        Debug.Log(
+            $"✅ {weaponName} đã nâng cấp lên cấp {currentLevel} với giá {upgradeCost} coins!"
+        );
     }
 
-    public void InitWeapon(CharacterWeaponData data)
-    {
-        if (data == null)
-        {
-            Debug.LogError($"❌ CharacterWeaponData bị null! Không thể khởi tạo vũ khí.");
-            return;
-        }
+    // public void InitWeapon(CharacterWeaponData data)
+    // {
+    //     if (data == null)
+    //     {
+    //         // Debug.LogError($"❌ CharacterWeaponData bị null! Không thể khởi tạo vũ khí.");
+    //         return;
+    //     }
 
-        weaponData = ResourcesService.GetWeaponById(data.WeaponID);
+    //     weaponData = ResourcesService.GetWeaponById(data.WeaponID);
 
-        if (weaponData == null)
-        {
-            Debug.LogError($"❌ Không tìm thấy WeaponSO với ID {data.WeaponID}!");
-            return;
-        }
+    //     if (weaponData == null)
+    //     {
+    //         // Debug.LogError($"❌ Không tìm thấy WeaponSO với ID {data.WeaponID}!");
+    //         return;
+    //     }
 
-        weaponName = data.weaponName;
-        weaponSprite = weaponData.weaponSprite;
-        currentLevel = data.currentLevel;
-        isOwned = data.isOwned;
-        originalLevel = currentLevel; // Giữ lại cấp ban đầu để tránh lỗi
+    //     weaponName = data.weaponName;
+    //     weaponSprite = weaponData.weaponSprite;
+    //     currentLevel = data.currentLevel;
+    //     isOwned = data.isOwned;
+    //     originalLevel = currentLevel; // Giữ lại cấp ban đầu để tránh lỗi
 
-        Debug.Log($"✅ Vũ khí {weaponName} được khởi tạo với cấp {currentLevel}");
-    }
+    //     // Debug.Log($"✅ Vũ khí {weaponName} được khởi tạo với cấp {currentLevel}");
+    // }
 
     public async void CreateWeaponData()
     {
         if (weaponData == null)
         {
-            Debug.LogError("❌ WeaponSO is not assigned. Cannot create WeaponData.");
+            // Debug.LogError("❌ WeaponSO is not assigned. Cannot create WeaponData.");
             return;
         }
 
@@ -220,7 +239,7 @@ public class WeaponData : MonoBehaviour
         bool dataExists = await LoadWeaponData();
         if (dataExists)
         {
-            Debug.Log($"⚠ Dữ liệu vũ khí {weaponName} đã tồn tại. Không cần tạo mới.");
+            // Debug.Log($"⚠ Dữ liệu vũ khí {weaponName} đã tồn tại. Không cần tạo mới.");
             return;
         }
 
@@ -234,14 +253,14 @@ public class WeaponData : MonoBehaviour
         };
 
         await SaveService.SaveWeaponData(data);
-        Debug.Log($"✅ Dữ liệu vũ khí {weaponName} đã được tạo. Level: {currentLevel}");
+        // Debug.Log($"✅ Dữ liệu vũ khí {weaponName} đã được tạo. Level: {currentLevel}");
     }
 
     public async Task<bool> LoadWeaponData()
     {
         if (weaponData == null)
         {
-            Debug.LogError("❌ WeaponSO is not assigned. Cannot load WeaponData.");
+            // Debug.LogError("❌ WeaponSO is not assigned. Cannot load WeaponData.");
             return false;
         }
 
@@ -253,7 +272,7 @@ public class WeaponData : MonoBehaviour
 
             if (weaponData == null)
             {
-                Debug.LogError($"❌ Không tìm thấy WeaponSO với ID {savedData.WeaponID}!");
+                // Debug.LogError($"❌ Không tìm thấy WeaponSO với ID {savedData.WeaponID}!");
                 return false;
             }
 
@@ -267,9 +286,9 @@ public class WeaponData : MonoBehaviour
             // ✅ Reset lại WeaponSO theo dữ liệu cloud (Quan trọng)
             weaponData.isOwned = savedData.isOwned;
 
-            Debug.Log(
-                $"✅ Dữ liệu vũ khí {weaponName} đã tải từ cloud. Level: {currentLevel}, isOwned: {isOwned}"
-            );
+            // Debug.Log(
+            //     $"✅ Dữ liệu vũ khí {weaponName} đã tải từ cloud. Level: {currentLevel}, isOwned: {isOwned}"
+            // );
             return true;
         }
 

@@ -153,9 +153,9 @@ RectTransform:
   - {fileID: 607849636}
   m_Father: {fileID: 1582510091}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 525, y: -416.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 450, y: 450}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &52076974
@@ -215,6 +215,7 @@ MonoBehaviour:
   upgradePrices: 00000000000000000000000000000000
   currentLevel: 1
   maxLevel: 4
+  isOwned: 0
 --- !u!1 &62347563
 GameObject:
   m_ObjectHideFlags: 0
@@ -1089,9 +1090,9 @@ RectTransform:
   - {fileID: 1335880593}
   m_Father: {fileID: 1582510091}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 3525, y: -416.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 450, y: 450}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &275310151
@@ -1151,6 +1152,7 @@ MonoBehaviour:
   upgradePrices: 00000000000000000000000000000000
   currentLevel: 1
   maxLevel: 4
+  isOwned: 0
 --- !u!1 &277696981
 GameObject:
   m_ObjectHideFlags: 0
@@ -1539,7 +1541,6 @@ MonoBehaviour:
   snapForce: 100
   currentSnapWeapon: {fileID: 0}
   levelSystem: {fileID: 0}
-  _persistentData: {fileID: 11400000, guid: db75ca1344bd0bd49bd7ad4a38545409, type: 2}
 --- !u!1 &415579609
 GameObject:
   m_ObjectHideFlags: 0
@@ -1574,9 +1575,9 @@ RectTransform:
   - {fileID: 1394911851}
   m_Father: {fileID: 1582510091}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 2775, y: -416.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 450, y: 450}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &415579611
@@ -1636,6 +1637,7 @@ MonoBehaviour:
   upgradePrices: 00000000000000000000000000000000
   currentLevel: 1
   maxLevel: 4
+  isOwned: 0
 --- !u!1 &458799750
 GameObject:
   m_ObjectHideFlags: 0
@@ -2595,9 +2597,9 @@ RectTransform:
   - {fileID: 1088974457}
   m_Father: {fileID: 1582510091}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 4275, y: -416.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 450, y: 450}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &842590713
@@ -2619,6 +2621,7 @@ MonoBehaviour:
   upgradePrices: 00000000000000000000000000000000
   currentLevel: 1
   maxLevel: 4
+  isOwned: 0
 --- !u!114 &842590714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2928,9 +2931,9 @@ RectTransform:
   - {fileID: 154834385}
   m_Father: {fileID: 1582510091}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1275, y: -416.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 450, y: 450}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &941640413
@@ -2990,6 +2993,7 @@ MonoBehaviour:
   upgradePrices: 00000000000000000000000000000000
   currentLevel: 1
   maxLevel: 4
+  isOwned: 0
 --- !u!1 &986888528
 GameObject:
   m_ObjectHideFlags: 0
@@ -3422,7 +3426,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1191410007}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 458799751}
+        m_TargetAssemblyTypeName: TestScene, Assembly-CSharp
+        m_MethodName: LoadSceneONly
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Login
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1191410007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6217,9 +6233,9 @@ RectTransform:
   - {fileID: 683054651}
   m_Father: {fileID: 1582510091}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 2025, y: -416.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 450, y: 450}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2134579113
@@ -6279,6 +6295,7 @@ MonoBehaviour:
   upgradePrices: 00000000000000000000000000000000
   currentLevel: 1
   maxLevel: 4
+  isOwned: 0
 --- !u!1001 &8567280128160246089
 PrefabInstance:
   m_ObjectHideFlags: 0

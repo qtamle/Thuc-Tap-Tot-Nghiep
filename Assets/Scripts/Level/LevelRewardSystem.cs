@@ -80,7 +80,7 @@ public class LevelRewardSystem : MonoBehaviour
         if (coinsManager != null)
         {
             coinsManager.AddCoins(reward.coinType1, reward.coinType2);
-            coinsManager.SaveCoins(); 
+            coinsManager.SaveCoinsToCloud(); 
             Debug.Log($"Coins added to file: Type1={reward.coinType1}, Type2={reward.coinType2}");
         }
         else

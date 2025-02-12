@@ -250,8 +250,8 @@ public class SnapToWeapon : MonoBehaviour
 
             if (currentSnapWeapon != null)
             {
-                currentSnapWeapon.InitWeapon(characterWeaponData);
-            }
+                // currentSnapWeapon.InitWeapon(characterWeaponData);
+            }   
             else
             {
                 Debug.LogError("❌ SnapToWeapon: currentSnapWeapon is NULL!");

@@ -1,6 +1,6 @@
-﻿using TMPro;
+﻿using System.Threading.Tasks;
+using TMPro;
 using UnityEngine;
-using System.IO;
 
 public class MenuCoinDisplay : MonoBehaviour
 {
@@ -8,47 +8,45 @@ public class MenuCoinDisplay : MonoBehaviour
     public TMP_Text coinType2Text;
 
     private CoinsManager coinsManager;
-    private void Start()
+
+    private async void Start()
     {
         coinsManager = FindFirstObjectByType<CoinsManager>();
 
-        coinsManager.OnCoinsUpdated += UpdateCoinUI;
+        if (coinsManager != null)
+        {
+            coinsManager.OnCoinsUpdated += UpdateCoinUI;
+        }
 
-        LoadAndDisplayCoins();
+        await LoadAndDisplayCoins();
     }
 
-    private void LoadAndDisplayCoins()
+    private async Task LoadAndDisplayCoins()
     {
-        // Đường dẫn tệp JSON
-        string folderPath = Application.dataPath + "/Data";
-        string filePath = folderPath + "/CoinsData.json";
+        CoinsData coinsData = await SaveService.LoadCoinData();
 
-
-        if (File.Exists(filePath))
+        if (coinsData != null)
         {
-            // Đọc dữ liệu từ tệp JSON
-            string json = File.ReadAllText(filePath);
-            CoinsData coinsData = JsonUtility.FromJson<CoinsData>(json);
-
-            // Hiển thị dữ liệu trên UI
             if (coinType1Text != null)
-                coinType1Text.text = "" + coinsData.totalCoinType1Count;
+                coinType1Text.text = coinsData.totalCoinType1Count.ToString();
 
             if (coinType2Text != null)
-                coinType2Text.text = "" + coinsData.totalCoinType2Count;
+                coinType2Text.text = coinsData.totalCoinType2Count.ToString();
 
-            Debug.Log("Coins data loaded from JSON: " + json);
+            Debug.Log(
+                $"✅ Loaded CloudSave: Coin1 = {coinsData.totalCoinType1Count}, Coin2 = {coinsData.totalCoinType2Count}"
+            );
         }
         else
         {
-            // Nếu không tìm thấy tệp JSON, hiển thị mặc định
+            // Nếu không có dữ liệu, hiển thị mặc định là 0
             if (coinType1Text != null)
                 coinType1Text.text = "0";
 
             if (coinType2Text != null)
                 coinType2Text.text = "0";
 
-            Debug.LogWarning("CoinsData.json not found. Displaying default values.");
+            Debug.LogWarning("⚠ No coin data found in CloudSave. Displaying default values.");
         }
     }
 

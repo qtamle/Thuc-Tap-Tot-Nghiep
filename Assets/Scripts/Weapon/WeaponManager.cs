@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+
 public class WeaponManager : MonoBehaviour
 {
     public WeaponData weaponData;
@@ -7,6 +8,7 @@ public class WeaponManager : MonoBehaviour
 
     [Header("UI Elements")]
     public Text weaponNameText;
+
     //public Image weaponSprite;
     public Text weaponPriceText;
 
@@ -29,7 +31,8 @@ public class WeaponManager : MonoBehaviour
 
     public void UpdateWeaponInfo(WeaponData newWeaponData)
     {
-        if (newWeaponData == null) return;
+        if (newWeaponData == null)
+            return;
 
         // Cập nhật UI với dữ liệu vũ khí mới
         weaponNameText.text = newWeaponData.weaponName;

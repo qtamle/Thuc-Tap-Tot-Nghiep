@@ -1,14 +1,8 @@
-﻿using TMPro;
+﻿using System;
+using System.Threading.Tasks;
+using TMPro;
 using UnityEngine;
-using System;
-using System.IO;
-
-[Serializable]
-public class CoinsData
-{
-    public int totalCoinType1Count; // Tổng coin Type 1
-    public int totalCoinType2Count; // Tổng coin Type 2
-}
+using UnityEngine.SceneManagement;
 
 public class CoinsManager : MonoBehaviour
 {
@@ -17,43 +11,55 @@ public class CoinsManager : MonoBehaviour
     public int coinType1Count = 0; // Coin hiện tại trong Scene
     public int coinType2Count = 0; // Coin hiện tại trong Scene
 
-    public int totalCoinType1Count = 0; // Tổng coin (đã cộng dồn)
-    public int totalCoinType2Count = 0; // Tổng coin (đã cộng dồn)
+    public int totalCoinType1Count = 0; // Tổng coin lưu vào CloudSave
+    public int totalCoinType2Count = 0; // Tổng coin lưu vào CloudSave
 
     public TMP_Text coinType1Text;
     public TMP_Text coinType2Text;
 
-    private void Start()
+    private static CoinsManager instance; // Giữ CoinsManager tồn tại giữa các Scene
+
+    public CoinsData coinsData;
+
+    private void Awake()
     {
-        // Đọc dữ liệu JSON khi bắt đầu Scene
-        LoadCoins();
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
-        // Reset coin hiện tại về 0 khi bắt đầu Scene
-        coinType1Count = 0;
-        coinType2Count = 0;
+    private async void Start()
+    {
+        if (instance == this) // Chỉ load 1 lần
+        {
+            await LoadCoinsFromCloud();
+        }
 
-        UpdateCoinUI();
+        UpdateCoinUIMenu();
     }
 
     public void UpdateCoinUI()
     {
         if (coinType1Text != null)
-        {
             coinType1Text.text = "Coin Type 1: " + coinType1Count.ToString();
-        }
-        else
-        {
-            Debug.LogWarning("coinType1Text is not assigned in the Inspector!");
-        }
 
         if (coinType2Text != null)
-        {
             coinType2Text.text = "Coin Type 2: " + coinType2Count.ToString();
-        }
-        else
-        {
-            Debug.LogWarning("coinType2Text is not assigned in the Inspector!");
-        }
+    }
+
+    public void UpdateCoinUIMenu()
+    {
+        if (coinType1Text != null)
+            coinType1Text.text = "Coin Type 1: " + totalCoinType1Count.ToString();
+
+        if (coinType2Text != null)
+            coinType2Text.text = "Coin Type 2: " + totalCoinType2Count.ToString();
     }
 
     public void AddCoins(int type1, int type2)
@@ -64,82 +70,114 @@ public class CoinsManager : MonoBehaviour
         UpdateCoinUI();
     }
 
-    public bool TryPurchase(int basePrice)
+    public void AddCoinsTotal(CoinsData coinsData)
     {
-        if (totalCoinType1Count >= basePrice)
+        // Cộng dồn số tiền kiếm được từ Scene 2 vào tổng tiền của Scene 1
+        coinsData.totalCoinType1Count += coinType1Count;
+        coinsData.totalCoinType2Count += coinType2Count;
+
+        // Reset tiền kiếm được trong Scene 2 về 0
+        coinType1Count = 0;
+        coinType2Count = 0;
+    }
+
+    public async Task<bool> TryPurchase(int basePrice)
+    {
+        // 🔹 Kiểm tra đủ tiền không
+        if (totalCoinType1Count < basePrice)
         {
-            totalCoinType1Count -= basePrice;
-            SaveCoins();
+            Debug.LogWarning(
+                $"Not enough coins to purchase. Required: {basePrice}, Available: {totalCoinType1Count}"
+            );
+            return false;
+        }
+        if (coinsData == null)
+        {
+            Debug.LogError("⚠ Failed to load CoinsData. Purchase aborted.");
+            return false;
+        }
+
+        // 🔹 Trừ tiền trong dữ liệu CoinsData
+        coinsData.totalCoinType1Count = Mathf.Max(coinsData.totalCoinType1Count - basePrice, 0);
+
+        // 🔹 Cập nhật vào CoinsManager
+        totalCoinType1Count = coinsData.totalCoinType1Count;
+
+        // 🔹 Lưu dữ liệu mới lên CloudSave
+        await SaveService.SaveCoinData(coinsData);
+
+        // 🔹 Gọi sự kiện cập nhật UI nếu có
+        OnCoinsUpdated?.Invoke(totalCoinType1Count, totalCoinType2Count);
+
+        Debug.Log(
+            $"✅ Purchase successful! Spent {basePrice} coins. Remaining: {totalCoinType1Count}"
+        );
+
+        return true;
+    }
+
+    public async Task<bool> TryUpgrade(int upgradeCost)
+    {
+        if (totalCoinType2Count >= upgradeCost)
+        {
+            coinsData.totalCoinType2Count = Mathf.Max(
+                coinsData.totalCoinType2Count - upgradeCost,
+                0
+            );
+            // 🔹 Cập nhật vào CoinsManager
+            totalCoinType2Count = coinsData.totalCoinType2Count;
 
             OnCoinsUpdated?.Invoke(totalCoinType1Count, totalCoinType2Count);
 
-            Debug.Log($"Purchase successful. Spent {basePrice} coins. Remaining: {totalCoinType1Count}");
+            Debug.Log(
+                $"🔹 Upgrade successful! Spent {upgradeCost} coins. Remaining: {totalCoinType2Count}"
+            );
+
+            // 🔹 Lưu số coin còn lại lên CloudSave
+            await SaveService.SaveCoinData(coinsData);
+
             return true;
         }
         else
         {
-            Debug.LogWarning($"Not enough coins to purchase. Required: {basePrice}, Available: {totalCoinType1Count}");
+            Debug.LogWarning(
+                $"❌ Not enough coins to upgrade. Required: {upgradeCost}, Available: {totalCoinType2Count}"
+            );
             return false;
         }
     }
 
-    // Lưu dữ liệu tổng coin dạng JSON vào tệp
-    public void SaveCoins()
+    public async void SaveCoinsToCloud()
     {
-        // Cộng dồn coin hiện tại vào tổng coin
-        totalCoinType1Count += coinType1Count;
-        totalCoinType2Count += coinType2Count;
+        AddCoinsTotal(coinsData);
 
-        CoinsData coinsData = new CoinsData
-        {
-            totalCoinType1Count = totalCoinType1Count,
-            totalCoinType2Count = totalCoinType2Count
-        };
+        // Reset coin hiện tại (Scene 2 & 3)
+        coinType1Count = 0;
+        coinType2Count = 0;
 
-        string json = JsonUtility.ToJson(coinsData, true);
+        // Lưu dữ liệu cập nhật lên CloudSave
+        await SaveService.SaveCoinData(coinsData);
 
-        // Đường dẫn thư mục và tệp
-        string folderPath = Application.dataPath + "/Data";
-        string filePath = folderPath + "/CoinsData.json";
+        // Cập nhật UI
+        totalCoinType1Count = coinsData.totalCoinType1Count;
+        totalCoinType2Count = coinsData.totalCoinType2Count;
+        UpdateCoinUIMenu();
 
-        // Tạo thư mục nếu chưa tồn tại
-        if (!Directory.Exists(folderPath))
-        {
-            Directory.CreateDirectory(folderPath);
-        }
-
-        // Lưu dữ liệu vào tệp
-        File.WriteAllText(filePath, json);
-        Debug.Log("Coins data saved to: " + filePath);
+        Debug.Log(
+            $"✅ Updated CloudSave: TotalCoin1 = {totalCoinType1Count}, TotalCoin2 = {totalCoinType2Count}"
+        );
     }
 
-    // Tải dữ liệu tổng coin từ JSON
-    public void LoadCoins()
+    public async Task LoadCoinsFromCloud()
     {
-        // Đường dẫn thư mục và tệp
-        string folderPath = Application.dataPath + "/Data";
-        string filePath = folderPath + "/CoinsData.json";
+        coinsData = await SaveService.LoadCoinData();
 
-        if (File.Exists(filePath))
-        {
-            string json = File.ReadAllText(filePath);
-            CoinsData coinsData = JsonUtility.FromJson<CoinsData>(json);
+        totalCoinType1Count = coinsData.totalCoinType1Count;
+        totalCoinType2Count = coinsData.totalCoinType2Count;
 
-            // Gán tổng số coin đã lưu
-            totalCoinType1Count = coinsData.totalCoinType1Count;
-            totalCoinType2Count = coinsData.totalCoinType2Count;
-        }
-        else
-        {
-            // Nếu tệp không tồn tại, khởi tạo giá trị
-            totalCoinType1Count = 0;
-            totalCoinType2Count = 0;
-        }
-    }
-
-    private void OnDisable()
-    {
-        // Lưu dữ liệu khi thoát Scene
-        SaveCoins();
+        UpdateCoinUIMenu();
+        Debug.Log(
+            $"✅ Loaded CloudSave: TotalCoin1 = {totalCoinType1Count}, TotalCoin2 = {totalCoinType2Count}"
+        );
     }
 }

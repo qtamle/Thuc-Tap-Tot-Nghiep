@@ -15,7 +15,11 @@ public class TestScene : MonoBehaviour
 
     public void LoadTest1()
     {
-        if (snapToWeapon != null && snapToWeapon.currentSnapWeapon != null && snapToWeapon.currentSnapWeapon.weaponData != null)
+        if (
+            snapToWeapon != null
+            && snapToWeapon.currentSnapWeapon != null
+            && snapToWeapon.currentSnapWeapon.weaponData != null
+        )
         {
             WeaponSO weaponData = snapToWeapon.currentSnapWeapon.weaponData;
 
@@ -57,9 +61,16 @@ public class TestScene : MonoBehaviour
         }
     }
 
-    public void LoadSceneONly(string sceneName){
-         SceneManager.LoadScene(sceneName);
+    public void Summary()
+    {
+        SceneManager.LoadScene("Shop_Online");
     }
+
+    public void LoadSceneONly(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
+    }
+
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
@@ -87,7 +98,11 @@ public class TestScene : MonoBehaviour
     {
         if (loadSceneButton != null)
         {
-            if (snapToWeapon != null && snapToWeapon.currentSnapWeapon != null && snapToWeapon.currentSnapWeapon.weaponData != null)
+            if (
+                snapToWeapon != null
+                && snapToWeapon.currentSnapWeapon != null
+                && snapToWeapon.currentSnapWeapon.weaponData != null
+            )
             {
                 WeaponSO weaponData = snapToWeapon.currentSnapWeapon.weaponData;
 
@@ -95,7 +110,7 @@ public class TestScene : MonoBehaviour
             }
             else
             {
-                loadSceneButton.interactable = false; 
+                loadSceneButton.interactable = false;
             }
         }
         else
@@ -108,7 +123,7 @@ public class TestScene : MonoBehaviour
     {
         if (snapToWeapon != null)
         {
-            snapToWeapon.OnWeaponSelected += UpdateButtonState; 
+            snapToWeapon.OnWeaponSelected += UpdateButtonState;
         }
     }
 
@@ -116,7 +131,7 @@ public class TestScene : MonoBehaviour
     {
         if (snapToWeapon != null)
         {
-            snapToWeapon.OnWeaponSelected -= UpdateButtonState; 
+            snapToWeapon.OnWeaponSelected -= UpdateButtonState;
         }
     }
 }
