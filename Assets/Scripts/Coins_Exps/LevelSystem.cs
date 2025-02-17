@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
+using Unity.Android.Gradle.Manifest;
 using UnityEngine;
 
 [Serializable]
@@ -24,6 +25,7 @@ public class LevelSystem : MonoBehaviour
     public int health;
 
     public event Action<int, int, int> OnLevelDataUpdated;
+    public event Action<int, int, int> OnLevelLoading;
 
     public LevelData data;
 
@@ -40,10 +42,10 @@ public class LevelSystem : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    private void Start()
+    private async void Start()
     {
         // filePath = Path.Combine(Application.persistentDataPath, "Data/LevelData.json");
-        LoadLevelDataFromCloud();
+        await LoadLevelDataFromCloud();
     }
 
     public async Task AddExperience(int amount)
@@ -78,8 +80,6 @@ public class LevelSystem : MonoBehaviour
             data.experience = experience;
             data.experienceToNextLevel = experienceToNextLevel;
         }
-        // 🔹 Cập nhật UI ngay khi lên cấp
-        OnLevelDataUpdated?.Invoke(level, experience, experienceToNextLevel);
     }
 
     public async Task UpdateLastRewardedLevel(int newLevel)
@@ -109,5 +109,6 @@ public class LevelSystem : MonoBehaviour
         Debug.Log(
             $"Level {level}, Experience {experience}/{experienceToNextLevel}, Health {health}"
         );
+        OnLevelLoading?.Invoke(level, experience, experienceToNextLevel);
     }
 }

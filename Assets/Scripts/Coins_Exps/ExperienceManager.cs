@@ -65,11 +65,7 @@ public class ExperienceManager : MonoBehaviour
         {
             Debug.Log("Đã lưu Level!");
             await levelSystem.AddExperience(experienceCount);
-            // experienceCount = 0;
-        }
-        else
-        {
-            Debug.LogWarning("⚠ Không tìm thấy LevelSystem!");
+            experienceCount = 0;
         }
     }
 }

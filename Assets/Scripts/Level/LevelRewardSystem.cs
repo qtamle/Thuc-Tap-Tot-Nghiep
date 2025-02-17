@@ -23,18 +23,30 @@ public class LevelRewardSystem : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        levelSystem.OnLevelDataUpdated -= OnLevelUp;
+    }
+
     private async void OnLevelUp(int newLevel, int experience, int experienceToNextLevel)
     {
-        if (newLevel > lastRewardedLevel)
+        lastRewardedLevel = LevelSystem.Instance.data.lastRewardedLevel;
+        if (newLevel > lastRewardedLevel) // Đảm bảo chỉ cấp phát khi có level mới
         {
             for (int level = lastRewardedLevel + 1; level <= newLevel; level++)
             {
-                if (level - 1 < levelRewards.Length && level > 0)
+                Debug.Log("Lsrw" + level);
+                // Kiểm tra nếu cấp độ này chưa được nhận phần thưởng
+                if (level <= levelRewards.Length && level > 0) // Thay đổi điều kiện check
                 {
+                    Debug.Log("Lsrw" + level);
+                    // Chỉ cấp phát phần thưởng cho cấp độ hiện tại
                     LevelReward reward = levelRewards[level - 1];
-                    await ApplyReward(reward); // 🟢 Chờ từng phần thưởng hoàn tất
+
+                    await ApplyReward(reward);
                 }
             }
+            // Cập nhật cấp độ thưởng cuối cùng sau khi đã cấp phát xong tất cả các phần thưởng
             await levelSystem.UpdateLastRewardedLevel(newLevel);
         }
     }
@@ -70,19 +82,19 @@ public class LevelFormula
 {
     public static int CalculateExperienceToNextLevel(int level)
     {
-        int baseValue = 1000;
+        int baseValue = 100;
 
         if (level >= 10 && level <= 19)
         {
-            baseValue += 500;
+            baseValue += 50;
         }
         else if (level >= 20 && level <= 25)
         {
-            baseValue += 1000;
+            baseValue += 100;
         }
         else if (level >= 26 && level <= 30)
         {
-            baseValue += 1500;
+            baseValue += 150;
         }
 
         return (100 * level) + (50 * level) + baseValue;

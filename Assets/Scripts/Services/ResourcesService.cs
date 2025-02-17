@@ -21,6 +21,6 @@ public static class ResourcesService
     {
         Weapons.Clear();
         Weapons.AddRange(Resources.LoadAll<WeaponSO>("WeaponData"));
-        Debug.Log("🔄 Reset toàn bộ Weapons khi đổi tài khoản.");
+        // Debug.Log("🔄 Reset toàn bộ Weapons khi đổi tài khoản.");
     }
 }

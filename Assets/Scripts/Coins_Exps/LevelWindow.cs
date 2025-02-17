@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.IO;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,12 +22,14 @@ public class LevelWindow : MonoBehaviour
         {
             levelSystem.OnLevelDataUpdated -= UpdateLevelUI; // Đảm bảo không bị trùng
             levelSystem.OnLevelDataUpdated += UpdateLevelUI;
+            levelSystem.OnLevelLoading -= UpdateLevelUI;
+            levelSystem.OnLevelLoading += UpdateLevelUI;
         }
     }
 
     private void Start()
     {
-        levelSystem = FindAnyObjectByType<LevelSystem>();
+        levelSystem = LevelSystem.Instance ?? FindAnyObjectByType<LevelSystem>();
         if (levelSystem != null)
         {
             Debug.Log("Da tim thay level system");
@@ -35,6 +38,15 @@ public class LevelWindow : MonoBehaviour
                 levelSystem.experience,
                 levelSystem.experienceToNextLevel
             );
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (levelSystem != null)
+        {
+            levelSystem.OnLevelDataUpdated -= UpdateLevelUI;
+            levelSystem.OnLevelLoading -= UpdateLevelUI;
         }
     }
 

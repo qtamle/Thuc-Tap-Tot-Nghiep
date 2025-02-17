@@ -61,10 +61,10 @@ public class TestScene : MonoBehaviour
         }
     }
 
-    public void Summary()
+    public async void Summary()
     {
-        ExperienceManager.Instance.SubmitExperience();
         SceneManager.LoadScene("Shop_Online");
+        await ExperienceManager.Instance.SubmitExperience();
     }
 
     public void LoadSceneONly(string sceneName)

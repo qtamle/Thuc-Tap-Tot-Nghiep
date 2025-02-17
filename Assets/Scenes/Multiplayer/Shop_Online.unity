@@ -212,7 +212,7 @@ MonoBehaviour:
   weaponName: Dagger
   basePrice: 100
   weaponSprite: {fileID: -5151153562373494563, guid: 2aac49780cc76db4da9e2c7f83864276, type: 3}
-  upgradePrices: 00000000000000000000000000000000
+  upgradePrices: 64000000c80000002c01000090010000
   currentLevel: 1
   maxLevel: 4
   isOwned: 0
@@ -1149,7 +1149,7 @@ MonoBehaviour:
   weaponName: EnergyOrb
   basePrice: 500
   weaponSprite: {fileID: -5151153562373494563, guid: 2aac49780cc76db4da9e2c7f83864276, type: 3}
-  upgradePrices: 00000000000000000000000000000000
+  upgradePrices: c8000000900100005802000020030000
   currentLevel: 1
   maxLevel: 4
   isOwned: 0
@@ -1634,7 +1634,7 @@ MonoBehaviour:
   weaponName: Claws
   basePrice: 400
   weaponSprite: {fileID: -5151153562373494563, guid: 2aac49780cc76db4da9e2c7f83864276, type: 3}
-  upgradePrices: 00000000000000000000000000000000
+  upgradePrices: 960000002c010000c201000058020000
   currentLevel: 1
   maxLevel: 4
   isOwned: 0
@@ -2619,7 +2619,7 @@ MonoBehaviour:
   weaponName: Katana
   basePrice: 500
   weaponSprite: {fileID: -5151153562373494563, guid: 2aac49780cc76db4da9e2c7f83864276, type: 3}
-  upgradePrices: 00000000000000000000000000000000
+  upgradePrices: 5e010000f40100008a02000020030000
   currentLevel: 1
   maxLevel: 4
   isOwned: 0
@@ -2991,7 +2991,7 @@ MonoBehaviour:
   weaponName: Gloves
   basePrice: 500
   weaponSprite: {fileID: -5151153562373494563, guid: 2aac49780cc76db4da9e2c7f83864276, type: 3}
-  upgradePrices: 00000000000000000000000000000000
+  upgradePrices: 960000002c010000c201000058020000
   currentLevel: 1
   maxLevel: 4
   isOwned: 0
@@ -3233,7 +3233,7 @@ GameObject:
   - component: {fileID: 1149689894}
   - component: {fileID: 1149689893}
   m_Layer: 0
-  m_Name: ExpManager
+  m_Name: ExpDisplay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3908,6 +3908,7 @@ MonoBehaviour:
     experience: 0
     experienceToNextLevel: 0
     health: 0
+    lastRewardedLevel: 0
 --- !u!4 &1350603079
 Transform:
   m_ObjectHideFlags: 0
@@ -6166,7 +6167,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2115116145}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1149689893}
+        m_TargetAssemblyTypeName: LevelWindow, Assembly-CSharp
+        m_MethodName: UpdateCloudDataUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2115116145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6298,7 +6311,7 @@ MonoBehaviour:
   weaponName: Chainsaw
   basePrice: 300
   weaponSprite: {fileID: -5151153562373494563, guid: 2aac49780cc76db4da9e2c7f83864276, type: 3}
-  upgradePrices: 00000000000000000000000000000000
+  upgradePrices: 2c010000c2010000f4010000e8030000
   currentLevel: 1
   maxLevel: 4
   isOwned: 0

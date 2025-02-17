@@ -189,9 +189,9 @@ public static class SaveService
                 {
                     level = 0,
                     experience = 0,
-                    experienceToNextLevel = 1000,
+                    experienceToNextLevel = 100,
                     health = 0,
-                    lastRewardedLevel = 0
+                    lastRewardedLevel = 0,
                 };
 
                 // 🟢 **Tự động lưu dữ liệu mặc định lên CloudSave**
