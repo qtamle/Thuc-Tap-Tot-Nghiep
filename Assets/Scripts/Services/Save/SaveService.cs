@@ -102,16 +102,16 @@ public static class SaveService
             CoinsData data = await Client.Load<CoinsData>("CoinsData");
             if (data != null)
             {
-                Debug.Log(
-                    $"✅ LoadCoinData: Loaded TotalCoin1 = {data.totalCoinType1Count}, TotalCoin2 = {data.totalCoinType2Count}"
-                );
+                // Debug.Log(
+                //     $"✅ LoadCoinData: Loaded TotalCoin1 = {data.totalCoinType1Count}, TotalCoin2 = {data.totalCoinType2Count}"
+                // );
                 return data;
             }
             else
             {
-                Debug.LogWarning(
-                    "⚠ LoadCoinData: No coin data found, initializing default values..."
-                );
+                // Debug.LogWarning(
+                //     "⚠ LoadCoinData: No coin data found, initializing default values..."
+                // );
 
                 CoinsData defaultData = new CoinsData
                 {
@@ -121,24 +121,101 @@ public static class SaveService
 
                 // 🟢 **Tự động lưu dữ liệu mặc định lên CloudSave**
                 await SaveCoinData(defaultData);
-                Debug.Log("✅ Default coin data saved to CloudSave.");
+                // Debug.Log("✅ Default coin data saved to CloudSave.");
 
                 return defaultData;
             }
         }
         catch (Exception ex)
         {
-            Debug.LogError($"❌ LoadCoinData: Failed to load coins - Error: {ex.Message}");
+            // Debug.LogError($"❌ LoadCoinData: Failed to load coins - Error: {ex.Message}");
 
             CoinsData defaultData = new CoinsData
             {
-                totalCoinType1Count = 500,
-                totalCoinType2Count = 500,
+                totalCoinType1Count = 5000,
+                totalCoinType2Count = 5000,
             };
 
             // 🟢 **Tự động lưu dữ liệu mặc định ngay cả khi gặp lỗi**
             await SaveCoinData(defaultData);
-            Debug.Log("✅ Default coin data saved due to error.");
+            // Debug.Log("✅ Default coin data saved due to error.");
+
+            return defaultData;
+        }
+    }
+
+    public static async Task SaveLevelData(LevelData data)
+    {
+        if (data == null)
+        {
+            Debug.LogError("❌SaveServices:  LevelData: Data is NULL!");
+            return;
+        }
+
+        try
+        {
+            await Client.Save("LevelData", data);
+            Debug.Log(
+                $"✅SaveServices:  LevelData: Successfully saved Level = {data.level}, Experience = {data.experience}, ExperienceToNextLevel = {data.experienceToNextLevel}, Health = {data.health}"
+            );
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError(
+                $"❌SaveServices:  SaveLevelnData: Failed to save Level - Error: {ex.Message}"
+            );
+        }
+    }
+
+    public static async Task<LevelData> LoadLevelData()
+    {
+        try
+        {
+            LevelData data = await Client.Load<LevelData>("LevelData");
+            if (data != null)
+            {
+                Debug.Log(
+                    $"✅ LoadLevelData: Loaded Level = {data.level}, Experience = {data.experience}"
+                );
+                return data;
+            }
+            else
+            {
+                Debug.LogWarning(
+                    "⚠ LevelData: No level data found, initializing default values..."
+                );
+
+                LevelData defaultData = new LevelData
+                {
+                    level = 0,
+                    experience = 0,
+                    experienceToNextLevel = 1000,
+                    health = 0,
+                    lastRewardedLevel = 0
+                };
+
+                // 🟢 **Tự động lưu dữ liệu mặc định lên CloudSave**
+                await SaveLevelData(defaultData);
+                Debug.Log("✅ Default level data saved to CloudSave.");
+
+                return defaultData;
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"❌ LoadLevelData: Failed to load level - Error: {ex.Message}");
+
+            LevelData defaultData = new LevelData
+            {
+                level = 0,
+                experience = 0,
+                experienceToNextLevel = 1000,
+                health = 0,
+            };
+
+            // 🟢 **Tự động lưu dữ liệu mặc định lên CloudSave**
+            await SaveLevelData(defaultData);
+            Debug.Log("✅ Default level data saved to CloudSave.");
 
             return defaultData;
         }

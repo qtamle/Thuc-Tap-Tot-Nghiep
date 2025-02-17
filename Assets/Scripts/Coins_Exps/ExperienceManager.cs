@@ -1,24 +1,39 @@
-﻿using TMPro;
-using Unity.VisualScripting;
+﻿using System.Threading.Tasks;
+using TMPro;
 using UnityEngine;
 
 public class ExperienceManager : MonoBehaviour
 {
+    public static ExperienceManager Instance { get; private set; }
+
     public TMP_Text experienceText;
-    [SerializeField] public LevelSystem levelSystem;
-
     public int experienceCount = 0;
-
     private Experience experienceIncrease;
+    private LevelSystem levelSystem;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject); // Giữ object tồn tại giữa các Scene
+        }
+        else
+        {
+            Destroy(gameObject); // Hủy object trùng lặp nếu đã có instance
+        }
+    }
+
     private void Start()
     {
         experienceIncrease = FindFirstObjectByType<Experience>();
+        levelSystem = FindFirstObjectByType<LevelSystem>();
+
         if (experienceIncrease != null)
         {
-            Debug.Log("Tim thay tang kinh nghiem");
+            Debug.Log("Tìm thấy tăng kinh nghiệm");
         }
 
-        levelSystem = FindAnyObjectByType<LevelSystem>();
         experienceCount = 0;
         UpdateExperienceUI();
     }
@@ -37,16 +52,24 @@ public class ExperienceManager : MonoBehaviour
 
     private void UpdateExperienceUI()
     {
-        experienceText.text = $"Exp in Scene: {experienceCount}";
+        if (experienceText != null)
+        {
+            experienceText.text = $"Exp in Scene: {experienceCount}";
+        }
     }
 
-    private void OnDisable()
+    // 🟢 **Singleton - Gọi từ bất kỳ đâu**
+    public async Task SubmitExperience()
     {
         if (levelSystem != null)
         {
-            Debug.Log("Da save Level");
-            levelSystem.AddExperience(experienceCount);
+            Debug.Log("Đã lưu Level!");
+            await levelSystem.AddExperience(experienceCount);
+            // experienceCount = 0;
+        }
+        else
+        {
+            Debug.LogWarning("⚠ Không tìm thấy LevelSystem!");
         }
     }
 }
-

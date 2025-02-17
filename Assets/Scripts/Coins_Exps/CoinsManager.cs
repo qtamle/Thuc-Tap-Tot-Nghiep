@@ -18,6 +18,7 @@ public class CoinsManager : MonoBehaviour
     public TMP_Text coinType2Text;
 
     private static CoinsManager instance; // Giữ CoinsManager tồn tại giữa các Scene
+    public static CoinsManager Instance => instance;
 
     public CoinsData coinsData;
 

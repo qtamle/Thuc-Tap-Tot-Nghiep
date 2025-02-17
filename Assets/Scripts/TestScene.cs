@@ -63,6 +63,7 @@ public class TestScene : MonoBehaviour
 
     public void Summary()
     {
+        ExperienceManager.Instance.SubmitExperience();
         SceneManager.LoadScene("Shop_Online");
     }
 

@@ -20,4 +20,4 @@ MonoBehaviour:
   currentLevel: 1
   isOwned: 0
   requiredLevel: 0
-  upgradeCosts: 00000000000000000000000000000000
+  upgradeCosts: 2c010000c2010000f4010000e8030000

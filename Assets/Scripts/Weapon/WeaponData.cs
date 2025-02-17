@@ -90,6 +90,7 @@ public class WeaponData : MonoBehaviour
         {
             weaponName = weaponData.weaponName;
             weaponSprite = weaponData.weaponSprite;
+            upgradePrices = weaponData.upgradeCosts;
         }
     }
 

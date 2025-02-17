@@ -1,86 +1,57 @@
-﻿using UnityEngine;
+﻿using System.Threading.Tasks;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelRewardSystem : MonoBehaviour
 {
     public LevelReward[] levelRewards;
 
     private LevelSystem levelSystem;
-    private int lastRewardedLevel = 0; 
+    private int lastRewardedLevel = 0;
+
+    public CoinsManager coinsManager;
 
     private void Awake()
     {
-        FindAndSubscribeLevelSystem();
-    }
-
-    private void OnEnable()
-    {
-        FindAndSubscribeLevelSystem();
-    }
-
-    private void OnDestroy()
-    {
-        if (levelSystem != null)
-        {
-            levelSystem.OnLevelDataUpdated -= OnLevelUp;
-        }
-    }
-
-    private void FindAndSubscribeLevelSystem()
-    {
-        levelSystem = FindObjectOfType<LevelSystem>();
+        coinsManager = CoinsManager.Instance; // Dùng Singleton
+        levelSystem = LevelSystem.Instance; // Dùng Singleton
 
         if (levelSystem != null)
         {
-            Debug.Log("LevelSystem found and subscribed.");
+            levelSystem.OnLevelDataUpdated -= OnLevelUp; // Đảm bảo không bị trùng
             levelSystem.OnLevelDataUpdated += OnLevelUp;
         }
-        else
-        {   
-            Debug.LogError("LevelSystem not found!");
-        }
     }
 
-    private void OnLevelUp(int newLevel, int experience, int experienceToNextLevel)
+    private async void OnLevelUp(int newLevel, int experience, int experienceToNextLevel)
     {
-        Debug.Log($"OnLevelUp triggered: Current Level: {newLevel}, Experience: {experience}/{experienceToNextLevel}");
-        Debug.Log($"Last rewarded level: {lastRewardedLevel}");
-
-        if (newLevel > lastRewardedLevel) 
+        if (newLevel > lastRewardedLevel)
         {
             for (int level = lastRewardedLevel + 1; level <= newLevel; level++)
             {
-                Debug.Log($"Processing Level: {level}");
                 if (level - 1 < levelRewards.Length && level > 0)
                 {
                     LevelReward reward = levelRewards[level - 1];
-                    ApplyReward(reward);
-                    Debug.Log($"Reward applied for Level {level}");
-                }
-                else
-                {
-                    Debug.LogWarning($"No reward defined for this level: {level}");
+                    await ApplyReward(reward); // 🟢 Chờ từng phần thưởng hoàn tất
                 }
             }
-            lastRewardedLevel = newLevel;
-        }
-        else
-        {
-            Debug.Log($"No reward applied. Current Level: {newLevel}, Last Rewarded Level: {lastRewardedLevel}");
+            await levelSystem.UpdateLastRewardedLevel(newLevel);
         }
     }
 
-    private void ApplyReward(LevelReward reward)
+    private async Task ApplyReward(LevelReward reward)
     {
         Debug.Log("Reward: ");
         Debug.Log("Coin type 1: " + reward.coinType1);
         Debug.Log("Coin type 2: " + reward.coinType2);
         Debug.Log("Health: " + reward.health);
 
-        CoinsManager coinsManager = FindFirstObjectByType<CoinsManager>();
+        // coinsManager = FindFirstObjectByType<CoinsManager>();
         if (coinsManager != null)
         {
             coinsManager.AddCoins(reward.coinType1, reward.coinType2);
-            coinsManager.SaveCoinsToCloud(); 
+
+            coinsManager.SaveCoinsToCloud();
             Debug.Log($"Coins added to file: Type1={reward.coinType1}, Type2={reward.coinType2}");
         }
         else
@@ -90,7 +61,7 @@ public class LevelRewardSystem : MonoBehaviour
 
         if (levelSystem != null)
         {
-            levelSystem.AddHealth(reward.health);
+            await levelSystem.AddHealth(reward.health);
         }
     }
 }

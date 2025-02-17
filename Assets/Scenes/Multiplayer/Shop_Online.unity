@@ -1776,6 +1776,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2eb098c9ebb0d504aa28d84b5961cf3e, type: 2}
   - {fileID: 11400000, guid: 7727f4beecf2c084dacb66464d0df649, type: 2}
   - {fileID: 11400000, guid: 4eca42cbfd2f1b14591638be1bf87479, type: 2}
+  coinsManager: {fileID: 1442496385}
 --- !u!4 &522960822
 Transform:
   m_ObjectHideFlags: 0
@@ -3902,6 +3903,11 @@ MonoBehaviour:
   experience: 0
   experienceToNextLevel: 100
   health: 0
+  data:
+    level: 0
+    experience: 0
+    experienceToNextLevel: 0
+    health: 0
 --- !u!4 &1350603079
 Transform:
   m_ObjectHideFlags: 0
