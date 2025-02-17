@@ -179,6 +179,11 @@ public class AssassinBossSkill : MonoBehaviour
         {
             Debug.LogWarning("Ground Check Transform is not assigned!");
         }
+
+        if (assassinHealth != null && assassinHealth.currentHealth <= 0)
+        {
+            StopAllCoroutines();
+        }
     }
 
     private void FlipToPlayer()

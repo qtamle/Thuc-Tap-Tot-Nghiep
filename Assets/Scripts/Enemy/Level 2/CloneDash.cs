@@ -18,14 +18,21 @@ public class CloneDash : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         originalPosition = transform.position;
     }
-
     public void DashTowardsPlayer()
     {
         GameObject player = GameObject.FindGameObjectWithTag(playerTag);
 
+        if (player == null)
+        {
+            Collider2D playerCollider = Physics2D.OverlapCircle(transform.position, 300f, playerLayer);
+            if (playerCollider != null)
+            {
+                player = playerCollider.gameObject;
+            }
+        }
+
         if (player != null)
         {
-            // Tính hướng lướt từ clone tới Player
             StartCoroutine(Dash(player.transform));
         }
         else

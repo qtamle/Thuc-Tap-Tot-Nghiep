@@ -1303,13 +1303,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dca9b8113da63b946a3857097dc6e281, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 5
+  maxHealth: 1
   currentHealth: 0
   healthBarSlider: {fileID: 1806180031}
   healthBarFill: {fileID: 612989577}
   startTimeline:
     m_PersistentCalls:
       m_Calls: []
+  currentBoss: {fileID: 11400000, guid: 87ec260bab5578a458eb7437ee3acd4e, type: 2}
 --- !u!1 &192415476
 GameObject:
   m_ObjectHideFlags: 0
@@ -3566,7 +3567,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa0a772ade8b0e441a19313cad4a1780, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  killTarget: 80
+  killTarget: 2
   enemiesKilled: 0
 --- !u!4 &452983390
 Transform:
@@ -13354,7 +13355,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   experienceText: {fileID: 512577287}
-  levelSystem: {fileID: 0}
   experienceCount: 0
 --- !u!1 &1811002599
 GameObject:

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -17,6 +18,7 @@ public class CyborgHealth : MonoBehaviour, DamageInterface
     private bool isStunned = false;
 
     public UnityEvent startTimeline;
+    [SerializeField] private HandleBoss currentBoss;
 
     private void Start()
     {
@@ -58,7 +60,15 @@ public class CyborgHealth : MonoBehaviour, DamageInterface
 
     private void Die()
     {
+        StartCoroutine(OnBossDeath());
         Debug.Log("Boss bi tieu diet");
+    }
+
+    public IEnumerator OnBossDeath()
+    {
+        yield return new WaitForSeconds(1f);
+
+        BossManager.Instance.HandleBossDefeated(currentBoss);
     }
 
     public void StunForDuration(float stunDuration)

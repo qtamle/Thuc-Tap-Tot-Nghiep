@@ -3655,7 +3655,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa0a772ade8b0e441a19313cad4a1780, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  killTarget: 150
+  killTarget: 2
   enemiesKilled: 0
 --- !u!4 &452983390
 Transform:
@@ -13273,6 +13273,7 @@ MonoBehaviour:
   startTimeline:
     m_PersistentCalls:
       m_Calls: []
+  currentBoss: {fileID: 11400000, guid: ee5c66224f26a4f47a65184f57d2a90c, type: 2}
 --- !u!1 &1429882921
 GameObject:
   m_ObjectHideFlags: 0
@@ -15003,6 +15004,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneName: Shop
   snapToWeapon: {fileID: 0}
+  loadSceneButton: {fileID: 0}
 --- !u!4 &1691331802
 Transform:
   m_ObjectHideFlags: 0
@@ -16032,7 +16034,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   experienceText: {fileID: 512577287}
-  levelSystem: {fileID: 0}
   experienceCount: 0
 --- !u!1 &1811002599
 GameObject:

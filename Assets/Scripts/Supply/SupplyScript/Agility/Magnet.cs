@@ -39,6 +39,7 @@ public class Magnet : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         FindPlayer();
+        Active();
     }
 
     private void FindPlayer()

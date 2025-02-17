@@ -5252,6 +5252,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1194837305
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1194837306}
+  m_Layer: 0
+  m_Name: CheckSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1194837306
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1194837305}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.2217197, y: 1.7575955, z: 28.266626}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1199073721
 GameObject:
   m_ObjectHideFlags: 0
@@ -7278,6 +7309,7 @@ MonoBehaviour:
   supplySlot3: {fileID: 1013919499}
   isUsingSupply: 0
   interval: 2
+  isSpawn: 0
 --- !u!4 &1567485762
 Transform:
   m_ObjectHideFlags: 0
@@ -10145,6 +10177,9 @@ MonoBehaviour:
   invincibilityDuration: 2
   flashInterval: 0.1
   hasRevived: 0
+  hasAddShieldGloves: 0
+  hasAddShieldClaws: 0
+  hasAddShieldChainsaw: 0
 --- !u!61 &1765298849
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -10223,6 +10258,7 @@ MonoBehaviour:
   healthPotionPrefab: {fileID: 0}
   potionMoveToPlayer: 15
   potionMoveDelay: 2
+  increaseCoins: 0
   coinSpawnMin: 1
   coinSpawnMax: 4
   secondaryCoinSpawnMin: 1
@@ -11052,6 +11088,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneName: SupplyScene 1
   snapToWeapon: {fileID: 0}
+  loadSceneButton: {fileID: 0}
 --- !u!114 &1913256880
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12089,3 +12126,4 @@ SceneRoots:
   - {fileID: 1913256883}
   - {fileID: 1877585783}
   - {fileID: 1567485762}
+  - {fileID: 1194837306}

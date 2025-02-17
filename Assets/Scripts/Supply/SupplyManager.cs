@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class SupplyManager : MonoBehaviour
 {
@@ -28,6 +29,8 @@ public class SupplyManager : MonoBehaviour
     [SerializeField] private float interval = 10f; // Khoảng thời gian giữa các lần gọi (tính bằng giây)
     private Coroutine useSupplyCoroutine;
 
+    public bool hasInitialized = false;
+
     private void Awake()
     {
         if(Instance == null)
@@ -41,10 +44,35 @@ public class SupplyManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    private void Start()
+
+    private void OnEnable()
     {
-        
-        InitializeSlots();
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        Debug.Log("Scene loaded: " + scene.name);
+        if (!hasInitialized)
+        {
+            InitializeSlots();
+            hasInitialized = true;
+            Debug.Log("Slots initialized.");
+        }
+        else
+        {
+            ResetInitialization();
+        }
+    }
+
+    public void ResetInitialization()
+    {
+        hasInitialized = false;
     }
 
     private void Update()

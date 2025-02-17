@@ -2129,7 +2129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a92ec147d1df7c44b42766eaecae6cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 3
+  maxHealth: 1
   currentHealth: 0
   healthBarSlider: {fileID: 1806180031}
   healthBarFill: {fileID: 612989577}
@@ -3533,7 +3533,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa0a772ade8b0e441a19313cad4a1780, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  killTarget: 50
+  killTarget: 3
   enemiesKilled: 0
 --- !u!4 &452983390
 Transform:
@@ -13329,6 +13329,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneName: SupplyScene
   snapToWeapon: {fileID: 0}
+  loadSceneButton: {fileID: 0}
 --- !u!4 &1691331802
 Transform:
   m_ObjectHideFlags: 0
@@ -13976,7 +13977,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   experienceText: {fileID: 512577287}
-  levelSystem: {fileID: 0}
   experienceCount: 0
 --- !u!1 &1811002599
 GameObject:

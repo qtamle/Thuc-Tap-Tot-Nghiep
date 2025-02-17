@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
@@ -40,10 +41,13 @@ public class GangsterHealth : MonoBehaviour, DamageInterface
         }
     }
 
-    public void OnBossDeath()
+    public IEnumerator OnBossDeath()
     {
+        yield return new WaitForSeconds(1f);
+
         BossManager.Instance.HandleBossDefeated(currentBoss);
     }
+
     private void UpdateHealthBar()
     {
         if (healthBarSlider != null)
@@ -63,7 +67,7 @@ public class GangsterHealth : MonoBehaviour, DamageInterface
     private void Die()
     {
         Debug.Log("Boss bi tieu diet");
-        OnBossDeath();
+        StartCoroutine(OnBossDeath());
     }
 
     public void StunForDuration(float stunDuration)

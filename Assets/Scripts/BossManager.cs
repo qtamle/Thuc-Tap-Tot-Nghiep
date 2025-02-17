@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,6 +14,7 @@ public class BossManager : MonoBehaviour
     public event BossChangeHandler OnBossChanged;
 
     public HandleBoss CurrentBoss { get; private set; }
+    private int currentBossIndex = 0;
 
     private void Awake()
     {
@@ -33,8 +35,8 @@ public class BossManager : MonoBehaviour
     {
         if (ListBoss != null && ListBoss.Count > 0)
         {
-            Debug.Log("ListBoss initialized with count: " + ListBoss.Count);
-            SetCurrentBoss(ListBoss[0]);
+            currentBossIndex = 0;
+            SetCurrentBoss(ListBoss[currentBossIndex]);
         }
         else
         {
@@ -45,24 +47,24 @@ public class BossManager : MonoBehaviour
     private void Update()
     {
         // 1
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            Debug.Log("Key W pressed. Attempting to handle boss defeat.");
-            HandleBossDefeated(CurrentBoss);
-        }
+        //if (Input.GetKeyDown(KeyCode.W))
+        //{
+        //    Debug.Log("Key W pressed. Attempting to handle boss defeat.");
+        //    HandleBossDefeated(CurrentBoss);
+        //}
 
-        // 2
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            Debug.Log("Key R pressed.");
-            NextBossScene(CurrentBoss);
-        }
+        //// 2
+        //if (Input.GetKeyDown(KeyCode.R))
+        //{
+        //    Debug.Log("Key R pressed.");
+        //    NextBossScene(CurrentBoss);
+        //}
 
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            Debug.Log("Key Q pressed.");
-            ProceedToNextBossScene();
-        }
+        //if (Input.GetKeyDown(KeyCode.Q))
+        //{
+        //    Debug.Log("Key Q pressed.");
+        //    ProceedToNextBossScene();
+        //}
 
         //if (Input.GetKeyDown(KeyCode.L))
         //{
@@ -102,7 +104,6 @@ public class BossManager : MonoBehaviour
             {
                 Debug.Log("Loading supply scene: " + boss.supplyScene);
                 LoadSupplyScene(boss);
-                SetNextBoss();
             }
         }
         else
@@ -125,7 +126,22 @@ public class BossManager : MonoBehaviour
 
     public void NextBossScene(HandleBoss defeatedBoss)
     {
-        SceneManager.LoadScene(defeatedBoss.nextScene);
+        if (defeatedBoss != null && defeatedBoss.isDefeated)
+        {
+            if (!string.IsNullOrEmpty(defeatedBoss.nextScene))
+            {
+                Debug.Log("Chuyển đến màn tiếp theo: " + defeatedBoss.nextScene);
+                SceneManager.LoadScene(defeatedBoss.nextScene);
+            }
+            else
+            {
+                Debug.LogError("nextScene chưa được chỉ định cho boss: " + defeatedBoss.name);
+            }
+        }
+        else
+        {
+            Debug.LogWarning("Boss chưa bị đánh bại hoặc không hợp lệ.");
+        }
     }
 
     public void ProceedToNextBossScene()
@@ -153,8 +169,15 @@ public class BossManager : MonoBehaviour
         }
     }
 
-    public void SetNextBoss()
+    public void SetNextBossAfterSceneLoad()
     {
+        StartCoroutine(SetNextBoss());
+    }
+
+    public IEnumerator SetNextBoss()
+    {
+        yield return new WaitForSeconds(1f);
+
         if (CurrentBoss != null)
         {
             int currentIndex = ListBoss.IndexOf(CurrentBoss);
@@ -163,18 +186,25 @@ public class BossManager : MonoBehaviour
             if (nextIndex < ListBoss.Count)
             {
                 HandleBoss nextBoss = ListBoss[nextIndex];
-                SetCurrentBoss(nextBoss);
+
+                if (!nextBoss.isDefeated) 
+                {
+                    CurrentBoss = nextBoss;
+                    OnBossChanged?.Invoke(CurrentBoss);
+                    Debug.Log("Đã chuyển sang Boss tiếp theo: " + nextBoss.bossName);
+                }
             }
             else
             {
-                Debug.LogWarning("No more bosses left to set as CurrentBoss.");
+                Debug.LogWarning("Không còn boss nào để chuyển tới.");
             }
         }
         else
         {
-            Debug.LogError("CurrentBoss is null. Cannot proceed to next boss.");
+            Debug.LogError("CurrentBoss đang null, không thể chuyển boss.");
         }
     }
+
 
     public bool IsCurrentBossDefeated()
     {
