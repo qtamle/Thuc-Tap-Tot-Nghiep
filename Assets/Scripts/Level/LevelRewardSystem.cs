@@ -23,10 +23,14 @@ public class LevelRewardSystem : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        levelSystem.OnLevelDataUpdated -= OnLevelUp;
+        // Kiểm tra nếu đang chuyển sang Scene Login, hủy LevelSystem
+        if (scene.name == "Login")
+        {
+        }
     }
+
 
     private async void OnLevelUp(int newLevel, int experience, int experienceToNextLevel)
     {

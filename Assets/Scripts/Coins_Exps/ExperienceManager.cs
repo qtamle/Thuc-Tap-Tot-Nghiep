@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ExperienceManager : MonoBehaviour
 {
@@ -22,6 +23,22 @@ public class ExperienceManager : MonoBehaviour
         {
             Destroy(gameObject); // Hủy object trùng lặp nếu đã có instance
         }
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Kiểm tra nếu đang chuyển sang Scene Login, hủy LevelSystem
+        if (scene.name == "Login")
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        // Hủy đăng ký sự kiện khi đối tượng bị hủy
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     private void Start()

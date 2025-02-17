@@ -33,6 +33,23 @@ public class CoinsManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        // Đăng ký sự kiện khi scene thay đổi
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Kiểm tra nếu đang chuyển sang Scene Login, hủy LevelSystem
+        if (scene.name == "Login")
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        // Hủy đăng ký sự kiện khi đối tượng bị hủy
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     private async void Start()
