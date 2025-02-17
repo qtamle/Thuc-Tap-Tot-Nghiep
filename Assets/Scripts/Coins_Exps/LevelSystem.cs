@@ -3,6 +3,7 @@ using System.IO;
 using System.Threading.Tasks;
 using Unity.Android.Gradle.Manifest;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [Serializable]
 public class LevelData
@@ -40,6 +41,24 @@ public class LevelSystem : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
+
+        // Đăng ký sự kiện khi scene thay đổi
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Kiểm tra nếu đang chuyển sang Scene Login, hủy LevelSystem
+        if (scene.name == "Login")
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        // Hủy đăng ký sự kiện khi đối tượng bị hủy
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     private async void Start()
