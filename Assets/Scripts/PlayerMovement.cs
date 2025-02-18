@@ -4,6 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public static PlayerMovement Instance { get; private set; }
+
     [Header("Jump")]
     public float jumpForce = 5f;
     private Rigidbody2D rb;
@@ -49,6 +51,8 @@ public class PlayerMovement : MonoBehaviour
 
     private bool isUpSpeed = false;
     private bool isIceStaking = false;
+
+    public bool isMovementLocked = true;
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -313,6 +317,8 @@ public class PlayerMovement : MonoBehaviour
 
     void MovePlayer()
     {
+        if (isMovementLocked) return;
+
         if (isIceMovementActive)
         {
             float adjustedMoveSpeed = moveSpeed + iceMoveSpeedMultiplier;
@@ -347,11 +353,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void MoveLeft()
     {
+        if (isMovementLocked) isMovementLocked = false;
         moveDirection = -1f;
     }
 
     private void MoveRight()
     {
+        if (isMovementLocked) isMovementLocked = false;
         moveDirection = 1f;
     }
 

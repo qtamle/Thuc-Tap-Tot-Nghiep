@@ -16,6 +16,8 @@ public class BossManager : MonoBehaviour
     public HandleBoss CurrentBoss { get; private set; }
     private int currentBossIndex = 0;
 
+    private PlayerHealth health;
+    private PlayerMovement playerMovement;
     private void Awake()
     {
         if (Instance == null)
@@ -33,6 +35,8 @@ public class BossManager : MonoBehaviour
 
     private void Start()
     {
+        health = FindFirstObjectByType<PlayerHealth>();
+
         if (ListBoss != null && ListBoss.Count > 0)
         {
             currentBossIndex = 0;
@@ -176,7 +180,14 @@ public class BossManager : MonoBehaviour
 
     public IEnumerator SetNextBoss()
     {
-        yield return new WaitForSeconds(1f);
+        health = FindFirstObjectByType<PlayerHealth>();
+        if (health != null)
+        {
+            health.isInvincible = false;
+            playerMovement.enabled = false;
+        }
+
+        yield return new WaitForSeconds(3f);
 
         if (CurrentBoss != null)
         {

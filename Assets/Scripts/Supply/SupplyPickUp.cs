@@ -5,33 +5,43 @@ public class SupplyPickup : MonoBehaviour
 {
     public SupplyData supplyData;
     private bool isTransitioning = false;
+    private bool canTrigger = true;
+    private SupplyInfoDisplay infoDisplay;
+
+    private void Start()
+    {
+        infoDisplay = FindFirstObjectByType<SupplyInfoDisplay>();
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player")) // Kiểm tra nếu người chơi chạm vào supply
+        if (collision.CompareTag("Player") && canTrigger)
         {
-            Debug.Log($"Player đã nhặt {supplyData.supplyName}.");
-
-            // Loại bỏ supply khỏi danh sách trong SupplyManager
-            SupplyManager.Instance.RemoveSupply(supplyData);
-
-            SupplyManager.Instance.AddToInventory(supplyData);
-            // Thực hiện các hành động liên quan khác (ví dụ: tăng máu, mana,...)
-            ApplyEffect();
-
-            if (BossManager.Instance != null)
-            {
-                ProceedToNextBossScene();
+            if (infoDisplay != null)
+            {         
+                infoDisplay.DisplaySupplyInfo(this);
             }
-
-            //// Hủy đối tượng supply
-            Destroy(gameObject);
         }
     }
+
+    public void PickupSupply()
+    {
+        Debug.Log($"Player đã nhặt {supplyData.supplyName}.");
+        SupplyManager.Instance.RemoveSupply(supplyData);
+        SupplyManager.Instance.AddToInventory(supplyData);
+        ApplyEffect();
+
+        if (BossManager.Instance != null)
+        {
+            ProceedToNextBossScene();
+        }
+
+        Destroy(gameObject);
+    }
+
     private void ProceedToNextBossScene()
     {
-        if (isTransitioning)
-            return;  
+        if (isTransitioning) return;
 
         isTransitioning = true;
         StartCoroutine(WaitForBossDefeatAndProceed());
@@ -51,7 +61,18 @@ public class SupplyPickup : MonoBehaviour
 
     private void ApplyEffect()
     {
-        // Thêm hiệu ứng khi nhặt Supply, nếu có (ví dụ tăng máu, mana,...)
         Debug.Log($"Đã áp dụng hiệu ứng của {supplyData.supplyName}.");
+    }
+
+    public void StartDisableTriggerTimer()
+    {
+        StartCoroutine(DisableTriggerTemporarily());
+    }
+
+    private IEnumerator DisableTriggerTemporarily()
+    {
+        canTrigger = false;
+        yield return new WaitForSeconds(2f);
+        canTrigger = true;
     }
 }

@@ -21,7 +21,7 @@ public class PlayerHealth : MonoBehaviour, DamagePlayerInterface
     public float flashInterval = 0.1f;
 
     [Header("Check Add")]
-    private bool isInvincible = false;
+    public bool isInvincible = false;
     public bool hasRevived = false;
     private bool isImmortalActive = false;
     private bool hasCheckedSacrifice = false;
