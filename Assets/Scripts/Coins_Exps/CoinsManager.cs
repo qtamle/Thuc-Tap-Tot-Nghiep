@@ -44,6 +44,10 @@ public class CoinsManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        if (scene.name == "Shop_Online")
+        {
+            OnCoinsUpdated?.Invoke(totalCoinType1Count, totalCoinType2Count);
+        }
     }
 
     private void OnDestroy()
@@ -78,6 +82,7 @@ public class CoinsManager : MonoBehaviour
 
         if (coinType2Text != null)
             coinType2Text.text = "Coin Type 2: " + totalCoinType2Count.ToString();
+        OnCoinsUpdated?.Invoke(totalCoinType1Count, totalCoinType2Count);
     }
 
     public void AddCoins(int type1, int type2)

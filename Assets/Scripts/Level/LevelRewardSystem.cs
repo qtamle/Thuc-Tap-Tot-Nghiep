@@ -26,11 +26,8 @@ public class LevelRewardSystem : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         // Kiểm tra nếu đang chuyển sang Scene Login, hủy LevelSystem
-        if (scene.name == "Login")
-        {
-        }
+        if (scene.name == "Login") { }
     }
-
 
     private async void OnLevelUp(int newLevel, int experience, int experienceToNextLevel)
     {
