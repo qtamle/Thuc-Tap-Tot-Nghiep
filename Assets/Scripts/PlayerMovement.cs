@@ -317,7 +317,7 @@ public class PlayerMovement : MonoBehaviour
 
     void MovePlayer()
     {
-        if (isMovementLocked) return;
+        if (isMovementLocked || !canMove) return;
 
         if (isIceMovementActive)
         {
