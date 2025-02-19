@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01ecb4244bfac36438dea7575ffcb5cb, type: 3}
   m_Name: Claws
   m_EditorClassIdentifier: 
-  WeaponID: 2
+  WeaponID: 4
   weapon: {fileID: 1648484676377326022, guid: 63ecc9239699e4c40925b04b1e1171c4, type: 3}
   weaponSprite: {fileID: -5151153562373494563, guid: 2aac49780cc76db4da9e2c7f83864276, type: 3}
   weaponName: Claws

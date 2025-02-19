@@ -280,6 +280,7 @@ MonoBehaviour:
   dragFactor: 0.002
   isIceMovementActive: 0
   isChangingDirection: 0
+  isMovementLocked: 1
 --- !u!114 &445921663435587308
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -383,6 +384,7 @@ MonoBehaviour:
   playerSprite: {fileID: 6897417961180581289}
   invincibilityDuration: 2
   flashInterval: 0.1
+  isInvincible: 0
   hasRevived: 0
   hasAddShieldGloves: 0
   hasAddShieldClaws: 0

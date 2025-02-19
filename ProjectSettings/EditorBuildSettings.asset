@@ -27,6 +27,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Multiplayer/Test_Online.unity
     guid: ef1ab3e24c02ad4489a290d6f1423237
   - enabled: 1
+    path: Assets/Scenes/Multiplayer/MainMenu.unity
+    guid: a63dc654ac3c5a547b466016ebb741e1
+  - enabled: 1
     path: Assets/Scenes/Multiplayer/Lobby.unity
     guid: 988db011cf6ba7f488bff87ef280b379
   - enabled: 1

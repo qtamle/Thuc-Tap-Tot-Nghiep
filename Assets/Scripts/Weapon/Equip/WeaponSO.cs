@@ -4,9 +4,12 @@
 public class WeaponSO : ScriptableObject
 {
     [Header("Info Weapon")]
+    [SerializeField]
     public string WeaponID;
     public GameObject weapon;
     public Sprite weaponSprite;
+
+    [SerializeField]
     public string weaponName;
     public string description;
 
@@ -22,4 +25,3 @@ public class WeaponSO : ScriptableObject
     [Header("Upgrade Price")]
     public int[] upgradeCosts = new int[4];
 }
-

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01ecb4244bfac36438dea7575ffcb5cb, type: 3}
   m_Name: EnergyOrb
   m_EditorClassIdentifier: 
-  WeaponID: 4
+  WeaponID: 5
   weapon: {fileID: 5500264472938616846, guid: 4f1a15215ec56144e95312abefdf5cd8, type: 3}
   weaponSprite: {fileID: -5151153562373494563, guid: 2aac49780cc76db4da9e2c7f83864276, type: 3}
   weaponName: EnergyOrb

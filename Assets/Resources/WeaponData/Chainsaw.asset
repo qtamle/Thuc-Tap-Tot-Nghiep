@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01ecb4244bfac36438dea7575ffcb5cb, type: 3}
   m_Name: Chainsaw
   m_EditorClassIdentifier: 
-  WeaponID: 1
+  WeaponID: 3
   weapon: {fileID: 7346428832547731079, guid: 96d7c611e0a559440bf0ffbca0047d5c, type: 3}
   weaponSprite: {fileID: -5151153562373494563, guid: 2aac49780cc76db4da9e2c7f83864276, type: 3}
   weaponName: Chainsaw

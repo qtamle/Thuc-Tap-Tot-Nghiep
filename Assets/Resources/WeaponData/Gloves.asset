@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01ecb4244bfac36438dea7575ffcb5cb, type: 3}
   m_Name: Gloves
   m_EditorClassIdentifier: 
-  WeaponID: 5
+  WeaponID: 2
   weapon: {fileID: 7400214680749074021, guid: 6cb3c023c7f917449b428c064f11286f, type: 3}
   weaponSprite: {fileID: -5151153562373494563, guid: 2aac49780cc76db4da9e2c7f83864276, type: 3}
   weaponName: Gloves
