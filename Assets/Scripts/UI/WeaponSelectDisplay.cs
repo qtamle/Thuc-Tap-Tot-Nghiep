@@ -8,6 +8,8 @@ using UnityEngine.UI;
 
 public class WeaponSelectDisplay : NetworkBehaviour
 {
+    public static WeaponSelectDisplay Instance { get; private set; }
+
     //Network
     private NetworkList<WeaponSelectState> players;
 
@@ -103,12 +105,20 @@ public class WeaponSelectDisplay : NetworkBehaviour
     {
         for (int i = 0; i < playerSlots.Length; i++)
         {
-            Debug.Log("HandlePlayerStateChanged: Slots:  " + playerSlots.Length);
             if (players.Count > i)
             {
                 Debug.Log("HandlePlayerStateChanged: player " + players[i].ClientId);
                 Debug.Log("HandlePlayerStateChanged: WeaponID " + players[i].WeaponID);
+                Debug.Log("HandlePlayerStateChanged: Ready " + players[i].IsReady);
+
                 playerSlots[i].UpdatePlayerSlotDisplay(players[i]);
+
+                // Cập nhật GameManager
+                GameManager.Instance.SetPlayerReadyStatus(
+                    players[i].ClientId,
+                    players[i].IsReady,
+                    currentSnapWeapon.weaponData
+                );
             }
             else
             {
@@ -226,8 +236,8 @@ public class WeaponSelectDisplay : NetworkBehaviour
     {
         if (weaponData != null && weaponData.weaponData != null)
         {
-            GameManager.Instance.SetPlayerReadyStatus(clientId, true, weaponData.weaponData);
             SetPlayerReadyServerRpc(clientId, true, weaponData.weaponData.WeaponID);
+            GameManager.Instance.SetPlayerReadyStatus(clientId, true, weaponData.weaponData);
         }
         else
         {
@@ -247,15 +257,22 @@ public class WeaponSelectDisplay : NetworkBehaviour
         {
             if (players[i].ClientId == clientId)
             {
-                players[i] = new WeaponSelectState(players[i].ClientId, weaponId, isReady);
+                var updatedPlayerState = new WeaponSelectState(
+                    players[i].ClientId,
+                    weaponId,
+                    isReady
+                );
+                players[i] = updatedPlayerState;
+                Debug.Log($"Player {clientId} ready status updated to {isReady}");
+                break; // Thêm break để thoát khỏi vòng lặp sau khi cập nhật
             }
         }
     }
 
     private void Unready(ulong clientId, WeaponData weaponData)
     {
-        GameManager.Instance.SetPlayerReadyStatus(clientId, false, null);
         SetPlayerReadyServerRpc(clientId, false, new FixedString64Bytes("0"));
+        GameManager.Instance.SetPlayerReadyStatus(clientId, false, null);
     }
 
     // Hàm thực hiện việc "snap" tới vị trí của vũ khí hiện tại
