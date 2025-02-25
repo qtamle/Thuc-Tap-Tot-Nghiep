@@ -1,12 +1,12 @@
-﻿using UnityEngine;
+﻿using Unity.Netcode;
+using UnityEngine;
 
-public class EnemyManager : MonoBehaviour
+public class EnemyManager : NetworkBehaviour
 {
     public static EnemyManager Instance;
 
-
-    public int killTarget;
-    public int enemiesKilled = 0;
+    public NetworkVariable<int> killTarget = new NetworkVariable<int>();
+    public NetworkVariable<int> enemiesKilled = new NetworkVariable<int>();
 
     private void Awake()
     {
@@ -20,12 +20,23 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
+    public override void OnNetworkSpawn()
+    {
+        if (!IsServer)
+            return; // Chỉ Server quản lý việc tiêu diệt quái
+
+        enemiesKilled.Value = 0;
+    }
+
     // Gọi hàm này khi quái bị tiêu diệt
     public void OnEnemyKilled()
     {
-        enemiesKilled++;
+        if (!IsServer)
+            return; // Chỉ Server mới cập nhật biến
 
-        if (enemiesKilled >= killTarget)
+        enemiesKilled.Value++;
+
+        if (enemiesKilled.Value >= killTarget.Value)
         {
             DestroyRemainingEnemies();
         }
@@ -38,7 +49,15 @@ public class EnemyManager : MonoBehaviour
 
         foreach (GameObject enemy in remainingEnemies)
         {
-            Destroy(enemy);
+            NetworkObject netObj = enemy.GetComponent<NetworkObject>();
+            if (netObj != null)
+            {
+                netObj.Despawn(); // Hủy trên tất cả client
+            }
+            else
+            {
+                Destroy(enemy);
+            }
         }
 
         Debug.Log("All remaining enemies have been destroyed.");
@@ -46,9 +65,12 @@ public class EnemyManager : MonoBehaviour
 
     public void DecreaseKillTarget()
     {
-        if (killTarget > 0)
+        if (!IsServer)
+            return; // Chỉ Server có quyền thay đổi killTarget
+
+        if (killTarget.Value > 0)
         {
-            killTarget--;
+            killTarget.Value--;
         }
     }
 }

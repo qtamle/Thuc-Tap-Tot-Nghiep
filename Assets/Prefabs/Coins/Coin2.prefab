@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1207031750503484446}
   - component: {fileID: 6944772888871139977}
   - component: {fileID: -4485765661144446037}
+  - component: {fileID: -2333134803016369592}
   m_Layer: 11
   m_Name: Coin2
   m_TagString: SecondaryCoin
@@ -176,3 +177,28 @@ MonoBehaviour:
   playerLayerName: Player
   life: 10
   timeRemaining: 0
+--- !u!114 &-2333134803016369592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2378999455891136806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 0
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0

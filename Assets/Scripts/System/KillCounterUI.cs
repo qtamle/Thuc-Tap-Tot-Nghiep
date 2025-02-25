@@ -11,8 +11,8 @@ public class KillCounterUI : MonoBehaviour
     {
         if (EnemyManager.Instance != null)
         {
-            currentKillTarget = EnemyManager.Instance.killTarget;
-            currentEnemiesKilled = EnemyManager.Instance.enemiesKilled;
+            currentKillTarget = EnemyManager.Instance.killTarget.Value;
+            currentEnemiesKilled = EnemyManager.Instance.enemiesKilled.Value;
         }
 
         UpdateKillCounterUI();
@@ -22,9 +22,9 @@ public class KillCounterUI : MonoBehaviour
     {
         if (EnemyManager.Instance != null)
         {
-            if (currentEnemiesKilled != EnemyManager.Instance.enemiesKilled)
+            if (currentEnemiesKilled != EnemyManager.Instance.enemiesKilled.Value)
             {
-                currentEnemiesKilled = EnemyManager.Instance.enemiesKilled;
+                currentEnemiesKilled = EnemyManager.Instance.enemiesKilled.Value;
                 UpdateKillCounterUI();
             }
         }

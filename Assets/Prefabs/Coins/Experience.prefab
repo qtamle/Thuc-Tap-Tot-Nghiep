@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3539707017471733829}
   - component: {fileID: 2561066875683482310}
   - component: {fileID: -2618224420983487042}
+  - component: {fileID: -5053306774378294047}
   m_Layer: 0
   m_Name: Experience
   m_TagString: Untagged
@@ -180,3 +181,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a16fe58c5d4cb540a70aa0eabfff0c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-5053306774378294047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2895849976222171966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 0
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0

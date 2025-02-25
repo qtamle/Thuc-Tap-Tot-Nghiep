@@ -120,8 +120,11 @@ public class PlayerMovement : NetworkBehaviour
 
     void Update()
     {
-        if (IsOwner)
+        if (!IsOwner)
+        {
             return;
+        }
+
         CheckGrounded();
 
 #if UNITY_EDITOR || UNITY_STANDALONE

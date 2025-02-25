@@ -26,12 +26,8 @@ MonoBehaviour:
     m_path: Assets/Scenes/Shop.unity
   - m_enabled: 1
     m_path: Assets/Scenes/Test.unity
-  - m_enabled: 0
-    m_path: Assets/Scenes/Multiplayer/Test1 Multiplayer.unity
   - m_enabled: 1
     m_path: Assets/Scenes/SupplyScene.unity
-  - m_enabled: 1
-    m_path: Assets/Scenes/SupplyScene 1.unity
   m_ScriptingDefines:
   - 
   m_PlayerSettingsYaml:

@@ -126,6 +126,8 @@ public class Dagger : NetworkBehaviour
 
     private void Update()
     {
+        if (!IsOwner)
+            return;
         if (IsInputDetected() && CanAttack())
         {
             PerformAttack();
@@ -196,6 +198,7 @@ public class Dagger : NetworkBehaviour
                 }
 
                 Destroy(enemy.gameObject);
+                enemy.GetComponent<NetworkObject>().Despawn();
                 SpawnCoins(coinPrefab, coinSpawnMin, coinSpawnMax, enemy.transform.position);
 
                 if (Random.value <= 0.30f)
@@ -404,7 +407,12 @@ public class Dagger : NetworkBehaviour
 
             GameObject coin = coinPoolManager.GetCoinFromPool(coinType);
             coin.transform.position = spawnPosition;
-
+            // Thêm NetworkObject vào coin nếu chưa có
+            if (coin.GetComponent<NetworkObject>() == null)
+            {
+                coin.AddComponent<NetworkObject>();
+            }
+            coin.GetComponent<NetworkObject>().Spawn(true);
             Rigidbody2D coinRb = coin.GetComponent<Rigidbody2D>();
 
             if (coinRb != null)
@@ -474,6 +482,12 @@ public class Dagger : NetworkBehaviour
             Vector3 spawnPosition = new Vector3(orbX, orbY, position.z);
 
             GameObject orb = orbPoolManager.GetOrbFromPool(spawnPosition);
+            // Thêm NetworkObject vào orb nếu chưa có
+            if (orb.GetComponent<NetworkObject>() == null)
+            {
+                orb.AddComponent<NetworkObject>();
+            }
+            orb.GetComponent<NetworkObject>().Spawn(true);
             Rigidbody2D orbRb = orb.GetComponent<Rigidbody2D>();
 
             if (orbRb != null)
@@ -533,7 +547,11 @@ public class Dagger : NetworkBehaviour
             Vector3 spawnPosition = new Vector3(potionX, potionY, position.z);
 
             GameObject potion = Instantiate(healthPotionPrefab, spawnPosition, Quaternion.identity);
-
+            if (potion.GetComponent<NetworkObject>() == null)
+            {
+                potion.AddComponent<NetworkObject>();
+            }
+            potion.GetComponent<NetworkObject>().Spawn(true);
             Rigidbody2D potionRb = potion.GetComponent<Rigidbody2D>();
             if (potionRb != null)
             {
@@ -567,6 +585,7 @@ public class Dagger : NetworkBehaviour
                     if (Vector3.Distance(potion.transform.position, player.position) < 0.5f)
                     {
                         Destroy(potion);
+                        potion.GetComponent<NetworkObject>().Despawn();
                         health.HealHealth(3);
                         yield break;
                     }

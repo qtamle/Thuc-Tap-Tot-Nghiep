@@ -141,6 +141,7 @@ GameObject:
   - component: {fileID: 4802947046339175721}
   - component: {fileID: 4279029774091857590}
   - component: {fileID: -6699450147265448326}
+  - component: {fileID: -596502417142962758}
   m_Layer: 3
   m_Name: PlayerChainsaw
   m_TagString: Player
@@ -287,6 +288,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 694cff2442a8b5e4a9d16790dc330f64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   jumpForce: 17
   moveSpeed: 4
   groundCheck: {fileID: 2038561514778920132}
@@ -360,7 +362,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -402,6 +404,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c52f8c7e850f2d94e81bbaea09b164d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   maxHealth: 20
   currentHealth: 0
   currentShield: 5
@@ -433,6 +436,42 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   searchRadius: 10
+--- !u!114 &-596502417142962758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7346428832547731079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef9c7bafcb3b142418fc187e24257261, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  NetworkTransformExpanded: 0
+  AuthorityMode: 0
+  TickSyncChildren: 0
+  UseUnreliableDeltas: 0
+  SyncPositionX: 1
+  SyncPositionY: 1
+  SyncPositionZ: 1
+  SyncRotAngleX: 0
+  SyncRotAngleY: 0
+  SyncRotAngleZ: 0
+  SyncScaleX: 0
+  SyncScaleY: 0
+  SyncScaleZ: 0
+  PositionThreshold: 0.001
+  RotAngleThreshold: 0.01
+  ScaleThreshold: 0.01
+  UseQuaternionSynchronization: 0
+  UseQuaternionCompression: 0
+  UseHalfFloatPrecision: 0
+  InLocalSpace: 0
+  SwitchTransformSpaceWhenParented: 0
+  Interpolate: 1
+  SlerpPosition: 0
 --- !u!1 &9059466250284250557
 GameObject:
   m_ObjectHideFlags: 0

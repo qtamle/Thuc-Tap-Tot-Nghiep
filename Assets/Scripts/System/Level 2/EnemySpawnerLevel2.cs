@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Unity.Netcode;
 using UnityEngine;
 
 public class EnemySpawnerLevel2 : MonoBehaviour, IEnemySpawner
@@ -17,10 +18,10 @@ public class EnemySpawnerLevel2 : MonoBehaviour, IEnemySpawner
     [Header("Boss Level 1 Script")]
     public AssassinBossSkill assassin;
 
-    private bool stopSpawning = false;
+    private NetworkVariable<bool> stopSpawning = new NetworkVariable<bool>(false);
 
     [Header("Max and current enemy in level")]
-    public int currentTotalSpawnCount = 0;
+    private NetworkVariable<int> currentTotalSpawnCount = new NetworkVariable<int>(0);
     public int maxTotalSpawnCount;
 
     [Header("Time Spawn")]
@@ -30,7 +31,8 @@ public class EnemySpawnerLevel2 : MonoBehaviour, IEnemySpawner
     private float minSpawnTimeLimit = 1f;
     private float maxSpawnTimeLimit = 1f;
 
-    private bool isBossSpawned = false;
+    private NetworkVariable<bool> isBossSpawned = new NetworkVariable<bool>(false);
+
     private void Start()
     {
         if (bossLevel1 != null)
@@ -79,34 +81,47 @@ public class EnemySpawnerLevel2 : MonoBehaviour, IEnemySpawner
             timeElapsed = 0f;
         }
     }
+
     private IEnumerator SpawnEnemyIndependently(EnemySpawnData spawnData)
     {
         yield return new WaitForSeconds(1f);
 
-        while (!stopSpawning)
+        while (stopSpawning.Value == false)
         {
-            if (currentTotalSpawnCount < maxTotalSpawnCount)
+            if (currentTotalSpawnCount.Value < maxTotalSpawnCount)
             {
-                Transform spawnPoint = spawnData.spawnPoints[Random.Range(0, spawnData.spawnPoints.Length)];
+                Transform spawnPoint = spawnData.spawnPoints[
+                    Random.Range(0, spawnData.spawnPoints.Length)
+                ];
                 Vector3 spawnPosition = spawnPoint.position;
                 spawnPosition.y += 1.5f;
 
-                GameObject spawnedEnemy = Instantiate(spawnData.enemyPrefab, spawnPosition, Quaternion.identity);
+                GameObject spawnedEnemy = Instantiate(
+                    spawnData.enemyPrefab,
+                    spawnPosition,
+                    Quaternion.identity
+                );
 
                 if (!spawnedEnemy.CompareTag("Enemy"))
                 {
                     spawnedEnemy.tag = "Enemy";
                 }
 
-                currentTotalSpawnCount++;
+                currentTotalSpawnCount.Value++;
             }
 
-            yield return new WaitForSeconds(Random.Range(spawnData.minSpawnTime, spawnData.maxSpawnTime));
+            yield return new WaitForSeconds(
+                Random.Range(spawnData.minSpawnTime, spawnData.maxSpawnTime)
+            );
 
-            if (EnemyManager.Instance != null && EnemyManager.Instance.killTarget <= EnemyManager.Instance.enemiesKilled && !isBossSpawned)
+            if (
+                EnemyManager.Instance != null
+                && EnemyManager.Instance.killTarget.Value <= EnemyManager.Instance.enemiesKilled.Value
+                && isBossSpawned.Value == false
+            )
             {
-                stopSpawning = true;
-                isBossSpawned = true;
+                stopSpawning.Value = true;
+                isBossSpawned.Value = true;
                 StartCoroutine(HandleBossSpawn());
                 break;
             }
@@ -117,11 +132,11 @@ public class EnemySpawnerLevel2 : MonoBehaviour, IEnemySpawner
 
     public void OnEnemyKilled()
     {
-        currentTotalSpawnCount--;
+        currentTotalSpawnCount.Value--;
 
-        if (stopSpawning)
+        if (stopSpawning.Value == true)
         {
-            currentTotalSpawnCount = 0;
+            currentTotalSpawnCount.Value = 0;
         }
     }
 

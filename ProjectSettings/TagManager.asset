@@ -29,6 +29,7 @@ TagManager:
   - SecondaryCoin
   - SpawnPoint
   - PlayerSpawn
+  - Player2Spawn
   - CoinPool
   - Health
   - Shield
