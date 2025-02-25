@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 1015283716914262730}
   - component: {fileID: 6835236609048707687}
   - component: {fileID: 45108317111897338}
+  - component: {fileID: 2137263705513964908}
   - component: {fileID: 188420842145732303}
   - component: {fileID: 8524355268958633179}
   - component: {fileID: 7550548954948572605}
@@ -155,6 +156,31 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &2137263705513964908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1648484676377326022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 3853590049
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
 --- !u!114 &188420842145732303
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167,6 +193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 694cff2442a8b5e4a9d16790dc330f64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   jumpForce: 17
   moveSpeed: 4
   groundCheck: {fileID: 3412927958616009896}
@@ -245,6 +272,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c52f8c7e850f2d94e81bbaea09b164d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   maxHealth: 20
   currentHealth: 0
   currentShield: 5

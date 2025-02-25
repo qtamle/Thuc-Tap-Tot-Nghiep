@@ -1,19 +1,23 @@
 ﻿using TMPro;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PlayerHealth : MonoBehaviour, DamagePlayerInterface
+public class PlayerHealth : NetworkBehaviour, DamagePlayerInterface
 {
     [Header("Health Settings")]
     public int maxHealth = 20;
     public int currentHealth;
 
     [Header("Shield Settings")]
-    public int currentShield = 0;  
+    public int currentShield = 0;
 
     [Header("UI Health")]
-    [SerializeField]public TMP_Text healthText;
-    [SerializeField]public TMP_Text shieldText;  
+    [SerializeField]
+    public TMP_Text healthText;
+
+    [SerializeField]
+    public TMP_Text shieldText;
 
     [Header("Damage Settings")]
     public SpriteRenderer playerSprite;
@@ -111,13 +115,15 @@ public class PlayerHealth : MonoBehaviour, DamagePlayerInterface
         if (levelSystem != null && !hasAddedSavedHealth)
         {
             //levelSystem.OnLevelDataUpdated += OnLevelUpdated;
-            int savedHealth = levelSystem.health; 
+            int savedHealth = levelSystem.health;
             maxHealth += savedHealth;
-            currentHealth = maxHealth; 
-            hasAddedSavedHealth = true; 
+            currentHealth = maxHealth;
+            hasAddedSavedHealth = true;
             UpdateHealthUI();
 
-            Debug.Log($"Health from save file added: {levelSystem.health}. New MaxHealth: {maxHealth}");
+            Debug.Log(
+                $"Health from save file added: {levelSystem.health}. New MaxHealth: {maxHealth}"
+            );
         }
         else if (hasAddedSavedHealth)
         {
@@ -133,15 +139,20 @@ public class PlayerHealth : MonoBehaviour, DamagePlayerInterface
 
         if (immortal != null && !isImmortalActive)
         {
-            invincibilityDuration += 1.5f;  
-            isImmortalActive = true; 
+            invincibilityDuration += 1.5f;
+            isImmortalActive = true;
         }
 
         // Find Weapon Info (level weapon) and Gloves to upgrade shield for level 3
         weaponInfo = GetComponent<WeaponInfo>();
 
         gloves = GetComponent<Gloves>();
-        if (weaponInfo != null && gloves != null && !hasAddShieldGloves && weaponInfo.weaponLevel > 2)
+        if (
+            weaponInfo != null
+            && gloves != null
+            && !hasAddShieldGloves
+            && weaponInfo.weaponLevel > 2
+        )
         {
             currentShield += 10;
             UpdateShieldUI();
@@ -162,7 +173,12 @@ public class PlayerHealth : MonoBehaviour, DamagePlayerInterface
         }
 
         attack = GetComponent<Attack>();
-        if (weaponInfo != null && attack != null && !hasAddShieldChainsaw && weaponInfo.weaponLevel > 2)
+        if (
+            weaponInfo != null
+            && attack != null
+            && !hasAddShieldChainsaw
+            && weaponInfo.weaponLevel > 2
+        )
         {
             currentShield += 10;
             UpdateShieldUI();
@@ -197,10 +213,10 @@ public class PlayerHealth : MonoBehaviour, DamagePlayerInterface
     {
         if (isInvincible)
         {
-            return; 
+            return;
         }
 
-        if (dodge != null && Random.Range(0f, 1f) <= 0.15f) 
+        if (dodge != null && Random.Range(0f, 1f) <= 0.15f)
         {
             Debug.Log("Player dodged the damage!");
             StartCoroutine(InvincibilityCoroutine(invincibilityDuration));
@@ -211,13 +227,13 @@ public class PlayerHealth : MonoBehaviour, DamagePlayerInterface
         {
             Debug.Log("Damage blocked by Energy Shield.");
             StartCoroutine(InvincibilityCoroutine(invincibilityDuration));
-            return; 
+            return;
         }
 
         if (currentShield > 0)
         {
             currentShield -= (damage * 2);
-            currentShield = Mathf.Max(currentShield, 0); 
+            currentShield = Mathf.Max(currentShield, 0);
             UpdateShieldUI();
 
             StartCoroutine(InvincibilityCoroutine(invincibilityDuration));
@@ -240,7 +256,7 @@ public class PlayerHealth : MonoBehaviour, DamagePlayerInterface
                     Debug.Log("Player is resurrected!");
                     currentHealth = maxHealth;
                     angel.CanActive();
-                    hasRevived = true; 
+                    hasRevived = true;
                     UpdateHealthUI();
                 }
                 else
@@ -309,14 +325,15 @@ public class PlayerHealth : MonoBehaviour, DamagePlayerInterface
 
     private void CheckSacrifice()
     {
-        if (hasCheckedSacrifice) return;
+        if (hasCheckedSacrifice)
+            return;
 
         if (Sacrifice != null)
         {
             Debug.Log("Sacrifice found! Converting health to shield.");
-            currentShield += currentHealth; 
-            currentShield += 30; 
-            currentHealth = 0; 
+            currentShield += currentHealth;
+            currentShield += 30;
+            currentHealth = 0;
             UpdateHealthUI();
             UpdateShieldUI();
             Sacrifice.CanActive();

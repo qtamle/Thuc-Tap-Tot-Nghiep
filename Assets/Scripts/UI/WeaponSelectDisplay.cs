@@ -117,7 +117,7 @@ public class WeaponSelectDisplay : NetworkBehaviour
                 GameManager.Instance.SetPlayerReadyStatus(
                     players[i].ClientId,
                     players[i].IsReady,
-                    currentSnapWeapon.weaponData
+                    players[i].WeaponID.ToString()
                 );
             }
             else
@@ -237,7 +237,7 @@ public class WeaponSelectDisplay : NetworkBehaviour
         if (weaponData != null && weaponData.weaponData != null)
         {
             SetPlayerReadyServerRpc(clientId, true, weaponData.weaponData.WeaponID);
-            GameManager.Instance.SetPlayerReadyStatus(clientId, true, weaponData.weaponData);
+            // GameManager.Instance.SetPlayerReadyStatus(clientId, true, weaponData.weaponData);
         }
         else
         {
@@ -272,7 +272,7 @@ public class WeaponSelectDisplay : NetworkBehaviour
     private void Unready(ulong clientId, WeaponData weaponData)
     {
         SetPlayerReadyServerRpc(clientId, false, new FixedString64Bytes("0"));
-        GameManager.Instance.SetPlayerReadyStatus(clientId, false, null);
+        // GameManager.Instance.SetPlayerReadyStatus(clientId, false, null);
     }
 
     // Hàm thực hiện việc "snap" tới vị trí của vũ khí hiện tại

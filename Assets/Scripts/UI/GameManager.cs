@@ -11,7 +11,9 @@ public class GameManager : MonoBehaviour
     private Dictionary<ulong, bool> playerReadyStatus = new Dictionary<ulong, bool>();
 
     // Lưu trữ vũ khí đã chọn của từng người chơi
-    private Dictionary<ulong, WeaponSO> playerWeaponData = new Dictionary<ulong, WeaponSO>();
+    // private Dictionary<ulong, WeaponSO> playerWeaponData = new Dictionary<ulong, WeaponSO>();
+
+    private Dictionary<ulong, string> playerWeaponIDs = new Dictionary<ulong, string>();
 
     private void Awake()
     {
@@ -26,31 +28,20 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void SetPlayerReadyStatus(ulong clientId, bool isReady, WeaponSO weaponData)
+    public void SetPlayerReadyStatus(ulong clientId, bool isReady, string weaponID)
     {
-        Debug.Log(
-            $"Setting player {clientId} ready status to {isReady} with weapon {weaponData?.weaponName}"
-        );
+        Debug.Log($"Setting player {clientId} ready status to {isReady} with weaponID {weaponID}");
 
-        // Cập nhật trạng thái Ready và vũ khí đã chọn
         playerReadyStatus[clientId] = isReady;
         if (isReady)
         {
-            if (weaponData != null)
-            {
-                playerWeaponData[clientId] = weaponData;
-            }
-            else
-            {
-                Debug.LogError($"Weapon data is null for client {clientId}");
-            }
+            playerWeaponIDs[clientId] = weaponID; // Chỉ lưu WeaponID
         }
         else
         {
-            playerWeaponData.Remove(clientId);
+            playerWeaponIDs.Remove(clientId);
         }
 
-        // Gọi phương thức kiểm tra trạng thái Ready của tất cả người chơi
         CheckAllPlayersReady();
     }
 
@@ -108,13 +99,17 @@ public class GameManager : MonoBehaviour
     }
 
     // Phương thức để lấy dữ liệu vũ khí của người chơi
-    public WeaponSO GetPlayerWeaponData(ulong clientId)
+    public string GetPlayerWeaponID(ulong clientId)
     {
-        if (playerWeaponData.TryGetValue(clientId, out WeaponSO weaponData))
+        if (playerWeaponIDs.TryGetValue(clientId, out string weaponID))
         {
-            Debug.Log("Game Manager: " + weaponData.weaponName + " " + weaponData.WeaponID);
-            return weaponData;
+            return weaponID;
         }
         return null;
+    }
+
+    public Dictionary<ulong, string> GetAllPlayerWeaponIDs()
+    {
+        return new Dictionary<ulong, string>(playerWeaponIDs);
     }
 }

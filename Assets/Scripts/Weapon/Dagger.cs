@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Linq;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Dagger : MonoBehaviour
+public class Dagger : NetworkBehaviour
 {
     [Header("Settings Attack")]
     public Vector2 boxSize;
@@ -67,6 +68,7 @@ public class Dagger : MonoBehaviour
     private Lucky lucky;
 
     private WeaponInfo weaponInfo;
+
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -98,7 +100,8 @@ public class Dagger : MonoBehaviour
             int playerLayer = LayerMask.NameToLayer("Player");
             if (playerLayer >= 0)
             {
-                playerObject = FindObjectsOfType<GameObject>().FirstOrDefault(obj => obj.layer == playerLayer);
+                playerObject = FindObjectsOfType<GameObject>()
+                    .FirstOrDefault(obj => obj.layer == playerLayer);
             }
         }
 
@@ -115,6 +118,7 @@ public class Dagger : MonoBehaviour
         // weapon and upgrade manager
         weaponInfo = FindFirstObjectByType<WeaponInfo>();
     }
+
     private void OnDestroy()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
@@ -122,18 +126,19 @@ public class Dagger : MonoBehaviour
 
     private void Update()
     {
-       if (IsInputDetected() && CanAttack())
+        if (IsInputDetected() && CanAttack())
         {
             PerformAttack();
             lastAttackTime = Time.time;
         }
     }
+
     private bool IsInputDetected()
     {
         if (Application.isEditor)
         {
             // Kiểm tra nhấn chuột
-            if (Input.GetMouseButtonDown(0)) 
+            if (Input.GetMouseButtonDown(0))
             {
                 return true;
             }
@@ -145,7 +150,7 @@ public class Dagger : MonoBehaviour
             {
                 Touch touch = Input.GetTouch(0);
 
-                if (touch.phase == TouchPhase.Began) 
+                if (touch.phase == TouchPhase.Began)
                 {
                     return true;
                 }
@@ -164,7 +169,12 @@ public class Dagger : MonoBehaviour
     {
         ShowAttackVFX();
 
-        Collider2D[] enemies = Physics2D.OverlapBoxAll(attackPoints.position, boxSize, 0f, enemyLayer);
+        Collider2D[] enemies = Physics2D.OverlapBoxAll(
+            attackPoints.position,
+            boxSize,
+            0f,
+            enemyLayer
+        );
 
         foreach (Collider2D enemy in enemies)
         {
@@ -190,7 +200,12 @@ public class Dagger : MonoBehaviour
 
                 if (Random.value <= 0.30f)
                 {
-                    SpawnCoins(secondaryCoinPrefab, secondaryCoinSpawnMin, secondaryCoinSpawnMax, enemy.transform.position);
+                    SpawnCoins(
+                        secondaryCoinPrefab,
+                        secondaryCoinSpawnMin,
+                        secondaryCoinSpawnMax,
+                        enemy.transform.position
+                    );
                 }
 
                 if (ShouldSpawnPotion())
@@ -202,7 +217,12 @@ public class Dagger : MonoBehaviour
             }
         }
 
-        Collider2D[] bosses = Physics2D.OverlapBoxAll(attackPoints.position, boxSize, 0f, bossLayer);
+        Collider2D[] bosses = Physics2D.OverlapBoxAll(
+            attackPoints.position,
+            boxSize,
+            0f,
+            bossLayer
+        );
 
         foreach (Collider2D boss in bosses)
         {
@@ -214,12 +234,21 @@ public class Dagger : MonoBehaviour
                 isAttackBoss = true;
                 damageable.SetCanBeDamaged(false);
 
-
-                SpawnCoins(coinPrefab, coinSpawnMin * 10, coinSpawnMax * 10, boss.transform.position);
+                SpawnCoins(
+                    coinPrefab,
+                    coinSpawnMin * 10,
+                    coinSpawnMax * 10,
+                    boss.transform.position
+                );
 
                 if (Random.value <= 0.25f)
                 {
-                    SpawnCoins(secondaryCoinPrefab, secondaryCoinSpawnMin * 5, secondaryCoinSpawnMax * 5, boss.transform.position);
+                    SpawnCoins(
+                        secondaryCoinPrefab,
+                        secondaryCoinSpawnMin * 5,
+                        secondaryCoinSpawnMax * 5,
+                        boss.transform.position
+                    );
                 }
 
                 if (ShouldSpawnPotion())
@@ -242,18 +271,33 @@ public class Dagger : MonoBehaviour
 
             if (partHealth != null && !isAttackBoss && snakeHealth.IsStunned())
             {
-                if ((MachineSnakeHealth.attackedPartID == -1 || MachineSnakeHealth.attackedPartID == partHealth.partID) && !partHealth.isAlreadyHit)
+                if (
+                    (
+                        MachineSnakeHealth.attackedPartID == -1
+                        || MachineSnakeHealth.attackedPartID == partHealth.partID
+                    ) && !partHealth.isAlreadyHit
+                )
                 {
                     partHealth.TakeDamage(1);
                     isAttackBoss = true;
 
                     snakeHealth.SetCanBeDamaged(false);
 
-                    SpawnCoins(coinPrefab, coinSpawnMin * 13, coinSpawnMax * 13, partHealth.transform.position);
+                    SpawnCoins(
+                        coinPrefab,
+                        coinSpawnMin * 13,
+                        coinSpawnMax * 13,
+                        partHealth.transform.position
+                    );
 
                     if (Random.value <= 0.25f)
                     {
-                        SpawnCoins(secondaryCoinPrefab, secondaryCoinSpawnMin * 5, secondaryCoinSpawnMax * 5, partHealth.transform.position);
+                        SpawnCoins(
+                            secondaryCoinPrefab,
+                            secondaryCoinSpawnMin * 5,
+                            secondaryCoinSpawnMax * 5,
+                            partHealth.transform.position
+                        );
                     }
 
                     if (ShouldSpawnPotion())
@@ -275,11 +319,21 @@ public class Dagger : MonoBehaviour
                     headController.isHeadAttacked = true;
 
                     snakeHealth.SetCanBeDamaged(false);
-                    SpawnCoins(coinPrefab, coinSpawnMin * 13, coinSpawnMax * 13, headController.transform.position);
+                    SpawnCoins(
+                        coinPrefab,
+                        coinSpawnMin * 13,
+                        coinSpawnMax * 13,
+                        headController.transform.position
+                    );
 
                     if (Random.value <= 0.25f)
                     {
-                        SpawnCoins(secondaryCoinPrefab, secondaryCoinSpawnMin * 5, secondaryCoinSpawnMax * 5, headController.transform.position);
+                        SpawnCoins(
+                            secondaryCoinPrefab,
+                            secondaryCoinSpawnMin * 5,
+                            secondaryCoinSpawnMax * 5,
+                            headController.transform.position
+                        );
                     }
 
                     if (ShouldSpawnPotion())
@@ -297,6 +351,7 @@ public class Dagger : MonoBehaviour
         }
         isAttackBoss = false;
     }
+
     private void ShowAttackVFX()
     {
         if (vfxPool != null)
@@ -312,10 +367,9 @@ public class Dagger : MonoBehaviour
                 follower.SetTarget(attackPoints, player);
             }
 
-            StartCoroutine(ReturnVFXToPool(vfx, 0.5f)); 
+            StartCoroutine(ReturnVFXToPool(vfx, 0.5f));
         }
     }
-
 
     private IEnumerator ReturnVFXToPool(GameObject vfx, float delay)
     {
@@ -325,6 +379,7 @@ public class Dagger : MonoBehaviour
             vfxPool.ReturnToPool(vfx);
         }
     }
+
     void SpawnCoins(GameObject coinType, float minAmount, float maxAmount, Vector3 position)
     {
         bool isGoldIncreaseActive = goldIncrease != null && goldIncrease.IsReady();
@@ -354,7 +409,8 @@ public class Dagger : MonoBehaviour
 
             if (coinRb != null)
             {
-                Vector2 forceDirection = new Vector2(Random.Range(-1.5f, 1.5f), Random.Range(1f, 1f)) * 2.5f;
+                Vector2 forceDirection =
+                    new Vector2(Random.Range(-1.5f, 1.5f), Random.Range(1f, 1f)) * 2.5f;
                 coinRb.AddForce(forceDirection, ForceMode2D.Impulse);
 
                 StartCoroutine(CheckIfCoinIsStuck(coinRb));
@@ -367,7 +423,6 @@ public class Dagger : MonoBehaviour
                     coinScript.SetCoinType(true, false);
                 else
                     coinScript.SetCoinType(false, true);
-
             }
         }
     }
@@ -378,7 +433,12 @@ public class Dagger : MonoBehaviour
 
         if (coinRb != null)
         {
-            RaycastHit2D hit = Physics2D.Raycast(coinRb.transform.position, Vector2.down, 0.5f, groundLayer);
+            RaycastHit2D hit = Physics2D.Raycast(
+                coinRb.transform.position,
+                Vector2.down,
+                0.5f,
+                groundLayer
+            );
             if (hit.collider != null)
             {
                 coinRb.transform.position += Vector3.up * 0.3f;
@@ -441,7 +501,9 @@ public class Dagger : MonoBehaviour
                 {
                     Vector3 direction = (player.position - orb.transform.position).normalized;
 
-                    orbRb.MovePosition(orb.transform.position + direction * Time.deltaTime * orbMoveToPlayer);
+                    orbRb.MovePosition(
+                        orb.transform.position + direction * Time.deltaTime * orbMoveToPlayer
+                    );
 
                     if (Vector3.Distance(orb.transform.position, player.position) < 0.5f)
                     {
@@ -460,7 +522,6 @@ public class Dagger : MonoBehaviour
         }
     }
 
-
     void SpawnHealthPotions(Vector3 position, int potionCount)
     {
         for (int i = 0; i < potionCount; i++)
@@ -476,7 +537,8 @@ public class Dagger : MonoBehaviour
             Rigidbody2D potionRb = potion.GetComponent<Rigidbody2D>();
             if (potionRb != null)
             {
-                Vector2 randomForce = new Vector2(Random.Range(-2f, 2f), Random.Range(1f, 1f)) * 2.5f;
+                Vector2 randomForce =
+                    new Vector2(Random.Range(-2f, 2f), Random.Range(1f, 1f)) * 2.5f;
                 potionRb.AddForce(randomForce, ForceMode2D.Impulse);
 
                 potionRb.bodyType = RigidbodyType2D.Kinematic;
@@ -498,7 +560,9 @@ public class Dagger : MonoBehaviour
                 while (potion != null && player != null)
                 {
                     Vector3 direction = (player.position - potion.transform.position).normalized;
-                    potionRb.MovePosition(potion.transform.position + direction * Time.deltaTime * potionMoveToPlayer);
+                    potionRb.MovePosition(
+                        potion.transform.position + direction * Time.deltaTime * potionMoveToPlayer
+                    );
 
                     if (Vector3.Distance(potion.transform.position, player.position) < 0.5f)
                     {
@@ -519,20 +583,20 @@ public class Dagger : MonoBehaviour
 
     private bool ShouldSpawnPotion()
     {
-        float baseRate = 0f;  // Ban đầu tỉ lệ spawn là 0%
+        float baseRate = 0f; // Ban đầu tỉ lệ spawn là 0%
 
         if (weaponInfo != null && weaponInfo.weaponLevel > 3)
         {
-            baseRate += 0.10f;  // Tăng thêm 10% nếu weaponLevel > 3
+            baseRate += 0.10f; // Tăng thêm 10% nếu weaponLevel > 3
         }
 
         if (lucky != null)
         {
-            baseRate += 0.15f;  // Tăng thêm 15% nếu có lucky
+            baseRate += 0.15f; // Tăng thêm 15% nếu có lucky
         }
 
         // trả về % từ 2 giá trị trên (nếu không có là 0%, weapon level > 3 thì 10%, có supply lucky thì 15%, cả 2 thì dồn 25%)
-        return Random.value <= baseRate; 
+        return Random.value <= baseRate;
     }
 
     private void OnDrawGizmosSelected()

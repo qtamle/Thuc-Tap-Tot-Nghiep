@@ -1,8 +1,9 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using Unity.Netcode;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : NetworkBehaviour
 {
     public static PlayerMovement Instance { get; private set; }
 
@@ -40,7 +41,7 @@ public class PlayerMovement : MonoBehaviour
     public string bossLayerName;
 
     [Header("Ice Movement Effect")]
-    public float iceMoveSpeedMultiplier = 1.5f; 
+    public float iceMoveSpeedMultiplier = 1.5f;
     public float dragFactor = 0.1f;
     public bool isIceMovementActive = false;
     public bool isChangingDirection = false;
@@ -53,6 +54,7 @@ public class PlayerMovement : MonoBehaviour
     private bool isIceStaking = false;
 
     public bool isMovementLocked = true;
+
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -84,7 +86,9 @@ public class PlayerMovement : MonoBehaviour
         {
             Physics2D.IgnoreLayerCollision(playerLayer, blockLayer, true);
             Physics2D.IgnoreLayerCollision(playerLayer, bossLayer, true);
-            Debug.Log($"Đã bỏ qua va chạm giữa layer {LayerMask.LayerToName(playerLayer)} và {blockLayerName}.");
+            Debug.Log(
+                $"Đã bỏ qua va chạm giữa layer {LayerMask.LayerToName(playerLayer)} và {blockLayerName}."
+            );
         }
         else
         {
@@ -108,6 +112,7 @@ public class PlayerMovement : MonoBehaviour
             isIceStaking = true;
         }
     }
+
     private void OnDestroy()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
@@ -115,6 +120,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (IsOwner)
+            return;
         CheckGrounded();
 
 #if UNITY_EDITOR || UNITY_STANDALONE
@@ -133,7 +140,11 @@ public class PlayerMovement : MonoBehaviour
 
     void CheckGrounded()
     {
-        currentGround = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+        currentGround = Physics2D.OverlapCircle(
+            groundCheck.position,
+            groundCheckRadius,
+            groundLayer
+        );
         isGrounded = currentGround != null;
         isJumping = !isGrounded;
 
@@ -146,9 +157,10 @@ public class PlayerMovement : MonoBehaviour
             canMove = false;
         }
     }
+
     void DetectTouchSwipe()
     {
-        if (Input.touchCount > 0) 
+        if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
 
@@ -161,12 +173,12 @@ public class PlayerMovement : MonoBehaviour
                 endInputPosition = touch.position;
 
                 Vector2 swipeDirection = endInputPosition - startInputPosition;
-                float swipeDistance = swipeDirection.magnitude; 
-                float swipeThreshold = 30f; 
+                float swipeDistance = swipeDirection.magnitude;
+                float swipeThreshold = 30f;
 
                 if (swipeDistance > swipeThreshold)
                 {
-                    float swipeAngle = Vector2.Angle(Vector2.right, swipeDirection); 
+                    float swipeAngle = Vector2.Angle(Vector2.right, swipeDirection);
 
                     if (swipeAngle < 45f) // Vuốt phải
                     {
@@ -202,12 +214,12 @@ public class PlayerMovement : MonoBehaviour
             endInputPosition = Input.mousePosition;
 
             Vector2 swipeDirection = endInputPosition - startInputPosition;
-            float swipeDistance = swipeDirection.magnitude; 
-            float swipeThreshold = 30f; 
+            float swipeDistance = swipeDirection.magnitude;
+            float swipeThreshold = 30f;
 
             if (swipeDistance > swipeThreshold)
             {
-                float swipeAngle = Vector2.Angle(Vector2.right, swipeDirection); 
+                float swipeAngle = Vector2.Angle(Vector2.right, swipeDirection);
 
                 if (swipeAngle < 45f) // Vuốt phải
                 {
@@ -236,7 +248,8 @@ public class PlayerMovement : MonoBehaviour
         float swipeDistance = end.y - start.y;
         float swipeThreshold = 50f;
 
-        bool isSwipeUp = swipeDistance > swipeThreshold && Mathf.Abs(end.x - start.x) < swipeThreshold;
+        bool isSwipeUp =
+            swipeDistance > swipeThreshold && Mathf.Abs(end.x - start.x) < swipeThreshold;
         return isSwipeUp;
     }
 
@@ -245,7 +258,8 @@ public class PlayerMovement : MonoBehaviour
         float swipeDistance = start.y - end.y;
         float swipeThreshold = 50f;
 
-        bool isSwipeDown = swipeDistance > swipeThreshold && Mathf.Abs(end.x - start.x) < swipeThreshold;
+        bool isSwipeDown =
+            swipeDistance > swipeThreshold && Mathf.Abs(end.x - start.x) < swipeThreshold;
         return isSwipeDown;
     }
 
@@ -254,7 +268,8 @@ public class PlayerMovement : MonoBehaviour
         float swipeDistance = start.x - end.x;
         float swipeThreshold = 50f;
 
-        bool isSwipeLeft = swipeDistance > swipeThreshold && Mathf.Abs(end.y - start.y) < swipeThreshold;
+        bool isSwipeLeft =
+            swipeDistance > swipeThreshold && Mathf.Abs(end.y - start.y) < swipeThreshold;
         return isSwipeLeft;
     }
 
@@ -263,15 +278,17 @@ public class PlayerMovement : MonoBehaviour
         float swipeDistance = end.x - start.x;
         float swipeThreshold = 50f;
 
-        bool isSwipeRight = swipeDistance > swipeThreshold && Mathf.Abs(end.y - start.y) < swipeThreshold;
+        bool isSwipeRight =
+            swipeDistance > swipeThreshold && Mathf.Abs(end.y - start.y) < swipeThreshold;
         return isSwipeRight;
     }
 
     void Jump()
     {
-        if (!isGrounded || isJumping) return; 
+        if (!isGrounded || isJumping)
+            return;
 
-        isJumping = true;  
+        isJumping = true;
         rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
 
         PlatformEffector2D platformEffector = currentGround?.GetComponent<PlatformEffector2D>();
@@ -317,7 +334,8 @@ public class PlayerMovement : MonoBehaviour
 
     void MovePlayer()
     {
-        if (isMovementLocked || !canMove) return;
+        if (isMovementLocked || !canMove)
+            return;
 
         if (isIceMovementActive)
         {
@@ -327,15 +345,21 @@ public class PlayerMovement : MonoBehaviour
             if (Mathf.Sign(moveDirection) != Mathf.Sign(previousVelocity.x))
             {
                 isChangingDirection = true;
-                rb.AddForce(new Vector2(-Mathf.Sign(previousVelocity.x) * lungeForce, 0), ForceMode2D.Impulse);
+                rb.AddForce(
+                    new Vector2(-Mathf.Sign(previousVelocity.x) * lungeForce, 0),
+                    ForceMode2D.Impulse
+                );
             }
 
             if (isChangingDirection)
             {
-                rb.linearVelocity = new Vector2(Mathf.Lerp(previousVelocity.x, moveDirection * adjustedMoveSpeed, dragFactor), rb.linearVelocity.y);
+                rb.linearVelocity = new Vector2(
+                    Mathf.Lerp(previousVelocity.x, moveDirection * adjustedMoveSpeed, dragFactor),
+                    rb.linearVelocity.y
+                );
                 if (Mathf.Abs(rb.linearVelocity.x - moveDirection * adjustedMoveSpeed) < 0.1f)
                 {
-                    isChangingDirection = false; 
+                    isChangingDirection = false;
                 }
             }
             else
@@ -353,19 +377,26 @@ public class PlayerMovement : MonoBehaviour
 
     private void MoveLeft()
     {
-        if (isMovementLocked) isMovementLocked = false;
+        if (isMovementLocked)
+            isMovementLocked = false;
         moveDirection = -1f;
     }
 
     private void MoveRight()
     {
-        if (isMovementLocked) isMovementLocked = false;
+        if (isMovementLocked)
+            isMovementLocked = false;
         moveDirection = 1f;
     }
 
     private bool IsTouchingWall()
     {
-        RaycastHit2D hit = Physics2D.Raycast(wallTransform.position, Vector2.right * Mathf.Sign(moveDirection), wallCheckRadius, wallLayer);
+        RaycastHit2D hit = Physics2D.Raycast(
+            wallTransform.position,
+            Vector2.right * Mathf.Sign(moveDirection),
+            wallCheckRadius,
+            wallLayer
+        );
         return hit.collider != null;
     }
 
@@ -373,13 +404,14 @@ public class PlayerMovement : MonoBehaviour
     {
         if (moveDirection > 0 && transform.rotation != Quaternion.identity)
         {
-            transform.rotation = Quaternion.identity;  // Quay về hướng phải
+            transform.rotation = Quaternion.identity; // Quay về hướng phải
         }
         else if (moveDirection < 0 && transform.rotation != Quaternion.Euler(0, 180, 0))
         {
-            transform.rotation = Quaternion.Euler(0, 180, 0);  // Quay về hướng trái
+            transform.rotation = Quaternion.Euler(0, 180, 0); // Quay về hướng trái
         }
     }
+
     private void OnDrawGizmos()
     {
         if (groundCheck != null)

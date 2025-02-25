@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 6479983197009616177}
   - component: {fileID: 2717212126458255225}
   - component: {fileID: -8091513382304598024}
+  - component: {fileID: 2016127686944779720}
   m_Layer: 3
   m_Name: PlayerKatana
   m_TagString: Player
@@ -137,6 +138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 694cff2442a8b5e4a9d16790dc330f64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   jumpForce: 17
   moveSpeed: 4
   groundCheck: {fileID: 6050202393026797661}
@@ -215,6 +217,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c52f8c7e850f2d94e81bbaea09b164d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   maxHealth: 20
   currentHealth: 0
   currentShield: 5
@@ -286,6 +289,31 @@ MonoBehaviour:
   bladePrefab: {fileID: 4225929617293816271, guid: c99208ecf74a5ef4a8d186a2983b72d8, type: 3}
   bladeSpeed: 4
   bladeLifetime: 3
+--- !u!114 &2016127686944779720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3094505062376793977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 0
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
 --- !u!1 &4354235830588291893
 GameObject:
   m_ObjectHideFlags: 0
