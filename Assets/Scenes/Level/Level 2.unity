@@ -3548,6 +3548,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 452983390}
+  - component: {fileID: 452983391}
   - component: {fileID: 452983389}
   m_Layer: 0
   m_Name: GameManager
@@ -3568,8 +3569,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa0a772ade8b0e441a19313cad4a1780, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  killTarget: 2
-  enemiesKilled: 0
+  ShowTopMostFoldoutHeaderGroup: 1
+  killTarget:
+    m_InternalValue: 0
+  enemiesKilled:
+    m_InternalValue: 0
 --- !u!4 &452983390
 Transform:
   m_ObjectHideFlags: 0
@@ -3585,6 +3589,31 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &452983391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452983388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 3339356876
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
 --- !u!1 &471659012
 GameObject:
   m_ObjectHideFlags: 0
@@ -10595,7 +10624,6 @@ MonoBehaviour:
   UIHealthBoss: {fileID: 77204493}
   remain: {fileID: 969923266}
   assassin: {fileID: 186944493}
-  currentTotalSpawnCount: 0
   maxTotalSpawnCount: 25
   spawnSpeedIncreaseInterval: 60
   spawnSpeedDecreaseAmount: 0.2

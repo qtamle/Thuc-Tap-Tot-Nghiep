@@ -11,8 +11,9 @@ public class GameManager : NetworkBehaviour
     private Dictionary<ulong, bool> playerReadyStatus = new Dictionary<ulong, bool>();
 
     private Dictionary<ulong, string> playerWeaponIDs = new Dictionary<ulong, string>();
+    private Dictionary<ulong, int> playersClientId = new Dictionary<ulong, int>();
 
-    public NetworkVariable<int> currentBoss = new NetworkVariable<int>(0);
+    public NetworkVariable<int> currentBoss;
 
     public NetworkVariable<bool> isSupplyScene = new NetworkVariable<bool>(false);
 
@@ -21,13 +22,21 @@ public class GameManager : NetworkBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+
+            currentBoss = new NetworkVariable<int>(0);
         }
         else
         {
             Destroy(gameObject);
         }
     }
+
+    void Start()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
+    public override void OnNetworkSpawn() { }
 
     public void SetPlayerReadyStatus(ulong clientId, bool isReady, string weaponID)
     {
@@ -141,6 +150,11 @@ public class GameManager : NetworkBehaviour
             return weaponID;
         }
         return null;
+    }
+
+    public Dictionary<ulong, int> getPlayersID()
+    {
+        return new Dictionary<ulong, int>(playersClientId);
     }
 
     public Dictionary<ulong, string> GetAllPlayerWeaponIDs()

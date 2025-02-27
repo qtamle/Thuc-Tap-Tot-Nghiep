@@ -5,9 +5,15 @@ using UnityEngine.SceneManagement;
 public class IceStaking : MonoBehaviour, ISupplyActive
 {
     public SupplyData supplyData;
-    [SerializeField] private bool isActive = true;
-    [SerializeField] private float cooldownTime = 5f;
-    [SerializeField] private int healAmount = 10;
+
+    [SerializeField]
+    private bool isActive = false;
+
+    [SerializeField]
+    private float cooldownTime = 5f;
+
+    [SerializeField]
+    private int healAmount = 10;
 
     public float CooldownTime => cooldownTime;
 

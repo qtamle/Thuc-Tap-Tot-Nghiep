@@ -109,7 +109,7 @@ public class PlayerMovement : NetworkBehaviour
         {
             Debug.Log("Tim thay ice staking");
             isIceMovementActive = !isIceMovementActive;
-            isIceStaking = true;
+            isIceStaking = false;
         }
     }
 

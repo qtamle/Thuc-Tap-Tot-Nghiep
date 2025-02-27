@@ -1,9 +1,10 @@
 ﻿using System.Collections;
+using TMPro;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
-public class SupplyInfoDisplay : MonoBehaviour
+public class SupplyInfoDisplay : NetworkBehaviour
 {
     public GameObject infoCanvas;
     public TMP_Text supplyNameText;
@@ -14,6 +15,7 @@ public class SupplyInfoDisplay : MonoBehaviour
     private SupplyPickup currentSupply;
 
     private PlayerMovement playerMovement;
+
     private void Start()
     {
         infoCanvas.SetActive(false);
@@ -21,17 +23,20 @@ public class SupplyInfoDisplay : MonoBehaviour
 
     public void DisplaySupplyInfo(SupplyPickup supplyPickup)
     {
-        playerMovement = FindFirstObjectByType<PlayerMovement>();
+        // Lấy PlayerMovement từ chính Player đang nhặt supply
+        GameObject player = supplyPickup.gameObject;
+        playerMovement = player.GetComponent<PlayerMovement>();
+
         if (playerMovement != null)
         {
-            playerMovement.isMovementLocked = true;
-            playerMovement.enabled = false;
+            playerMovement.isMovementLocked = true; // Chỉ khoá di chuyển, không vô hiệu hoá script
         }
+
         currentSupply = supplyPickup;
         infoCanvas.SetActive(true);
 
         supplyNameText.text = supplyPickup.supplyData.supplyName;
-        supplyTypeText.text = "Type of Supply: " + supplyPickup.supplyData.supplyType.ToString();
+        supplyTypeText.text = $"Type of Supply: {supplyPickup.supplyData.supplyType}";
         descriptionText.text = supplyPickup.supplyData.description;
         supplySpriteImage.sprite = supplyPickup.supplyData.supplySprite;
     }

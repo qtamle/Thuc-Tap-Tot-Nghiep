@@ -99,6 +99,7 @@ GameObject:
   - component: {fileID: 815803044975994841}
   - component: {fileID: 1816531107978084422}
   - component: {fileID: 5838088687023532137}
+  - component: {fileID: -6379124176182839793}
   m_Layer: 0
   m_Name: SupplyMedkit
   m_TagString: Untagged
@@ -137,7 +138,6 @@ MonoBehaviour:
   supplyData: {fileID: 11400000, guid: f9ae182a1b6507945b1faf49c306626d, type: 2}
   isActive: 1
   cooldownTime: 0
-  healAmount: 0
   healHealthAmount: 20
 --- !u!114 &1816531107978084422
 MonoBehaviour:
@@ -198,3 +198,28 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &-6379124176182839793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7600217266074923063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 0
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0

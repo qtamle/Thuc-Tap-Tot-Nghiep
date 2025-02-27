@@ -1,43 +1,49 @@
-﻿using NUnit.Framework;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using NUnit.Framework;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
-public class SupplyManager : MonoBehaviour
+public class SupplyManager : NetworkBehaviour
 {
-    public static SupplyManager Instance { get; private set; }
+    public static SupplyManager Instance;
 
-    [SerializeField] private List<SupplyData> supplyDataLList;
-    [SerializeField] private List<SupplyData> playerInventory = new List<SupplyData>();
+    [SerializeField]
+    private List<SupplyData> supplyDataLList;
 
-    [SerializeField] private InventorySupply inventorySupply;
-    
-    [SerializeField] private Transform supplySlot1;
-    [SerializeField] private Transform supplySlot2;
-    [SerializeField] private Transform supplySlot3;
+    [SerializeField]
+    private Transform supplySlot1;
+
+    [SerializeField]
+    private Transform supplySlot2;
+
+    [SerializeField]
+    private Transform supplySlot3;
 
     private List<Transform> slots;
 
     // Khai báo delegate cho event
     public delegate void InventoryChangeHandler(SupplyData supply);
+
     // Khai báo event
     public event InventoryChangeHandler OnInventoryChanged;
 
-    [SerializeField] private bool isUsingSupply;
-    [SerializeField] private float interval = 10f; // Khoảng thời gian giữa các lần gọi (tính bằng giây)
+    [SerializeField]
+    private bool isUsingSupply;
+
+    [SerializeField]
+    private float interval = 10f; // Khoảng thời gian giữa các lần gọi (tính bằng giây)
     private Coroutine useSupplyCoroutine;
 
     public bool hasInitialized = false;
 
     private void Awake()
     {
-        if(Instance == null)
+        if (Instance == null)
         {
             Instance = this;
-            
-            DontDestroyOnLoad(this.gameObject);
         }
         else
         {
@@ -58,7 +64,7 @@ public class SupplyManager : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         Debug.Log("Scene loaded: " + scene.name);
-        if (!hasInitialized)
+        if (!hasInitialized && IsServer)
         {
             InitializeSlots();
             hasInitialized = true;
@@ -75,76 +81,82 @@ public class SupplyManager : MonoBehaviour
         hasInitialized = false;
     }
 
-    private void Update()
+    void Start()
     {
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            DebugRemainingSupplies();
-        }
-        if (Input.GetKeyDown(KeyCode.T))
+        DontDestroyOnLoad(gameObject);
+    }
+
+    public override void OnNetworkSpawn()
+    {
+        if (IsServer)
         {
             InitializeSlots();
         }
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            DebugInventory();
-        }
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            isUsingSupply= true;
-            useSupplyCoroutine = StartCoroutine(CallUseSupplyRepeatedly());
-        }
-        if(!isUsingSupply)
-        {
-            // Dừng Coroutine khi đối tượng bị vô hiệu hóa
-            if (useSupplyCoroutine != null)
-            {
-                StopCoroutine(useSupplyCoroutine);
-            }
-        }
     }
 
-    private IEnumerator CallUseSupplyRepeatedly()
-    {
-        while (isUsingSupply) // Lặp vô hạn, nếu muốn dừng thì cần dừng Coroutine
-        {
-            UseSupply(); // Gọi hàm UseSupply
-            yield return new WaitForSeconds(interval); // Đợi trong khoảng thời gian nhất định
-        }
-    }
+    // private void Update()
+    // {
+    //     if (Input.GetKeyDown(KeyCode.D))
+    //     {
+    //         DebugRemainingSupplies();
+    //     }
+    //     if (Input.GetKeyDown(KeyCode.T))
+    //     {
+    //         InitializeSlots();
+    //     }
+    //     if (Input.GetKeyDown(KeyCode.I))
+    //     {
+    //         DebugInventory();
+    //     }
+    //     if (Input.GetKeyDown(KeyCode.E))
+    //     {
+    //         isUsingSupply = true;
+    //         useSupplyCoroutine = StartCoroutine(CallUseSupplyRepeatedly());
+    //     }
+    //     if (!isUsingSupply)
+    //     {
+    //         // Dừng Coroutine khi đối tượng bị vô hiệu hóa
+    //         if (useSupplyCoroutine != null)
+    //         {
+    //             StopCoroutine(useSupplyCoroutine);
+    //         }
+    //     }
+    // }
 
-    public void UseSupply()
-    {
-        // Thêm kiểm tra null và range
-        if (playerInventory == null)
-        {
-            Debug.LogError("playerInventory is null!");
-            return;
-        }
+    // private IEnumerator CallUseSupplyRepeatedly()
+    // {
+    //     while (isUsingSupply) // Lặp vô hạn, nếu muốn dừng thì cần dừng Coroutine
+    //     {
+    //         UseSupply(); // Gọi hàm UseSupply
+    //         yield return new WaitForSeconds(interval); // Đợi trong khoảng thời gian nhất định
+    //     }
+    // }
 
-        // Duyệt qua tất cả các phần tử trong playerInventory
-        for (int index = 0; index < playerInventory.Count; index++)
-        {
-            SupplyData supply = playerInventory[index];
+    // public void UseSupply()
+    // {
+    //     // Duyệt qua tất cả các phần tử trong playerInventory
+    //     for (int index = 0; index < PlayerInventorySupply.Instance.playerInventorys.Count; index++)
+    //     {
+    //         SupplyData supply = PlayerInventorySupply.Instance.playerInventorys[index];
 
-            // Kiểm tra xem supply có null không
-            if (supply == null)
-            {
-                Debug.LogError($"Supply at index {index} is null!");
-                continue;  // Nếu null thì bỏ qua phần tử này và tiếp tục với phần tử tiếp theo
-            }
+    //         // Kiểm tra xem supply có null không
+    //         if (supply == null)
+    //         {
+    //             Debug.LogError($"Supply at index {index} is null!");
+    //             continue; // Nếu null thì bỏ qua phần tử này và tiếp tục với phần tử tiếp theo
+    //         }
 
-            // Kiểm tra SupplyPrefab có null không
-            if (supply.supplyPrefab == null)
-            {
-                Debug.LogError($"SupplyPrefab for {supply.supplyName} is null!");
-                continue;  // Nếu null thì bỏ qua phần tử này và tiếp tục với phần tử tiếp theo
-            }
+    //         // Kiểm tra SupplyPrefab có null không
+    //         if (supply.supplyPrefab == null)
+    //         {
+    //             Debug.LogError($"SupplyPrefab for {supply.supplyName} is null!");
+    //             continue; // Nếu null thì bỏ qua phần tử này và tiếp tục với phần tử tiếp theo
+    //         }
 
-            // Gọi phương thức kích hoạt supply nếu hợp lệ
-            inventorySupply.ActiveSupplyByIndex(index);
-        }
-    }
+    //         // Gọi phương thức kích hoạt supply nếu hợp lệ
+    //         inventorySupply.ActiveSupplyByIndex(index);
+    //     }
+    // }
 
     public void DebugRemainingSupplies()
     {
@@ -154,42 +166,42 @@ public class SupplyManager : MonoBehaviour
             return;
         }
 
-        string remainingSupplies = string.Join(", ", supplyDataLList.ConvertAll(s => $"{s.supplyName} ({s.supplyType})"));
+        string remainingSupplies = string.Join(
+            ", ",
+            supplyDataLList.ConvertAll(s => $"{s.supplyName} ({s.supplyType})")
+        );
         Debug.Log($"Danh sách các supply còn lại trong supplyDataLList: {remainingSupplies}");
     }
 
-    public void DebugInventory()
-    {
-        if (playerInventory.Count == 0)
-        {
-            Debug.Log("Inventory đang trống.");
-            return;
-        }
+    // public void DebugInventory()
+    // {
+    //     if (playerInventory.Count == 0)
+    //     {
+    //         Debug.Log("Inventory đang trống.");
+    //         return;
+    //     }
 
-        string inventoryItems = string.Join(", ", playerInventory.ConvertAll(s => $"{s.supplyName} ({s.supplyType})"));
-        Debug.Log($"Danh sách các vật phẩm trong Inventory: {inventoryItems}");
-    }
-
+    //     string inventoryItems = string.Join(
+    //         ", ",
+    //         playerInventory.ConvertAll(s => $"{s.supplyName} ({s.supplyType})")
+    //     );
+    //     Debug.Log($"Danh sách các vật phẩm trong Inventory: {inventoryItems}");
+    // }
 
     private void InitializeSlots()
     {
         supplySlot1 = GameObject.FindGameObjectWithTag("Supply").transform;
         supplySlot2 = GameObject.FindGameObjectWithTag("Supply1").transform;
         supplySlot3 = GameObject.FindGameObjectWithTag("Supply2").transform;
-        slots = new List<Transform>()
-        {
-            supplySlot1,
-            supplySlot2,
-            supplySlot3
-        };
+        slots = new List<Transform>() { supplySlot1, supplySlot2, supplySlot3 };
         SpawnRandomSupply();
     }
-
 
     public void SpawnRandomSupply()
     {
         // Phân loại supply theo SupplyType
-        Dictionary<SupplyType, List<SupplyData>> suppliesByType = new Dictionary<SupplyType, List<SupplyData>>();
+        Dictionary<SupplyType, List<SupplyData>> suppliesByType =
+            new Dictionary<SupplyType, List<SupplyData>>();
         foreach (SupplyData supply in supplyDataLList)
         {
             if (!suppliesByType.ContainsKey(supply.supplyType))
@@ -203,14 +215,18 @@ public class SupplyManager : MonoBehaviour
         Debug.Log("Danh sách phân loại supplies theo SupplyType:");
         foreach (var pair in suppliesByType)
         {
-            Debug.Log($"SupplyType: {pair.Key}, Supplies: {string.Join(", ", pair.Value.ConvertAll(s => s.supplyName))}");
+            Debug.Log(
+                $"SupplyType: {pair.Key}, Supplies: {string.Join(", ", pair.Value.ConvertAll(s => s.supplyName))}"
+            );
         }
 
         // Lấy danh sách các loại SupplyType
         List<SupplyType> supplyTypes = new List<SupplyType>(suppliesByType.Keys);
 
         // Debug danh sách các loại SupplyType
-        Debug.Log($"Danh sách các loại SupplyType trước khi shuffle: {string.Join(", ", supplyTypes)}");
+        Debug.Log(
+            $"Danh sách các loại SupplyType trước khi shuffle: {string.Join(", ", supplyTypes)}"
+        );
 
         if (supplyTypes.Count < slots.Count)
         {
@@ -222,7 +238,9 @@ public class SupplyManager : MonoBehaviour
         Shuffle(supplyTypes);
 
         // Debug danh sách các loại SupplyType sau khi shuffle
-        Debug.Log($"Danh sách các loại SupplyType sau khi shuffle: {string.Join(", ", supplyTypes)}");
+        Debug.Log(
+            $"Danh sách các loại SupplyType sau khi shuffle: {string.Join(", ", supplyTypes)}"
+        );
 
         for (int i = 0; i < slots.Count; i++)
         {
@@ -234,7 +252,9 @@ public class SupplyManager : MonoBehaviour
             {
                 // Chọn ngẫu nhiên một supply từ loại tương ứng
                 List<SupplyData> availableSupplies = suppliesByType[currentType];
-                Debug.Log($"Danh sách supply khả dụng cho loại {currentType}: {string.Join(", ", availableSupplies.ConvertAll(s => s.supplyName))}");
+                Debug.Log(
+                    $"Danh sách supply khả dụng cho loại {currentType}: {string.Join(", ", availableSupplies.ConvertAll(s => s.supplyName))}"
+                );
 
                 int randomIndex = Random.Range(0, availableSupplies.Count);
                 SupplyData selectedSupply = availableSupplies[randomIndex];
@@ -242,7 +262,15 @@ public class SupplyManager : MonoBehaviour
                 Debug.Log($"Vật phẩm được chọn: {selectedSupply.supplyName}");
 
                 // Spawn supply tại vị trí slot
-                GameObject spawnedSupply = Instantiate(selectedSupply.supplyPrefab, slots[i].position, Quaternion.identity);
+                GameObject spawnedSupply = Instantiate(
+                    selectedSupply.supplyPrefab,
+                    slots[i].position,
+                    Quaternion.identity
+                );
+                if (IsServer)
+                {
+                    spawnedSupply.GetComponent<NetworkObject>().Spawn();
+                }
 
                 // Gắn script SupplyPickup vào supply vừa spawn
                 SupplyPickup pickup = spawnedSupply.GetComponent<SupplyPickup>();
@@ -252,19 +280,24 @@ public class SupplyManager : MonoBehaviour
                 }
                 else
                 {
-                    Debug.LogWarning($"SupplyPrefab {selectedSupply.supplyPrefab.name} không có script SupplyPickup!");
+                    Debug.LogWarning(
+                        $"SupplyPrefab {selectedSupply.supplyPrefab.name} không có script SupplyPickup!"
+                    );
                 }
 
-
-                Debug.Log($"Danh sách supply còn lại sau khi spawn cho loại {currentType}: {string.Join(", ", availableSupplies.ConvertAll(s => s.supplyName))}");
+                Debug.Log(
+                    $"Danh sách supply còn lại sau khi spawn cho loại {currentType}: {string.Join(", ", availableSupplies.ConvertAll(s => s.supplyName))}"
+                );
             }
             else
             {
-                Debug.LogWarning($"Không tìm thấy supply nào thuộc loại {currentType} cho slot {i + 1}.");
+                Debug.LogWarning(
+                    $"Không tìm thấy supply nào thuộc loại {currentType} cho slot {i + 1}."
+                );
             }
         }
-
     }
+
     public void RemoveSupply(SupplyData supply)
     {
         if (supplyDataLList.Contains(supply))
@@ -274,7 +307,9 @@ public class SupplyManager : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning($"Supply {supply.supplyName} không tồn tại trong danh sách supplyDataLList.");
+            Debug.LogWarning(
+                $"Supply {supply.supplyName} không tồn tại trong danh sách supplyDataLList."
+            );
         }
     }
 
@@ -292,19 +327,16 @@ public class SupplyManager : MonoBehaviour
 
     public void AddToInventory(SupplyData supply)
     {
-        if (!playerInventory.Contains(supply))
-        {
+        PlayerInventorySupply.Instance.playerInventorys.Add(supply);
 
-
-            playerInventory.Add(supply);
-
-            OnInventoryChanged?.Invoke(supply);
-            Debug.Log($"Đã thêm {supply.supplyName} vào Inventory. Tổng số vật phẩm: {playerInventory.Count}");
-        }
+        OnInventoryChanged?.Invoke(supply);
+        Debug.Log(
+            $"Đã thêm {supply.supplyName} vào Inventory. Tổng số vật phẩm: {PlayerInventorySupply.Instance.playerInventorys.Count}"
+        );
     }
 
     public List<SupplyData> GetPlayerInventory()
     {
-        return playerInventory;
+        return PlayerInventorySupply.Instance.playerInventorys;
     }
 }
