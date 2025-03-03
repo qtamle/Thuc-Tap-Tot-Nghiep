@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df2cf1c330370304486efac3aa4d51a8, type: 3}
   m_Name: Dodge
   m_EditorClassIdentifier: 
+  supplyID: 4
   supplyName: Dodge
   supplyPrefab: {fileID: 5845531273689389248, guid: 472a75d9efc525041be42141e6e2f82c, type: 3}
   supplySprite: {fileID: 7444393773231589483, guid: 1246be2011c3c4446bf2b81c43b3b9cb, type: 3}

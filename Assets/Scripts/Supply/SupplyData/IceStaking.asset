@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df2cf1c330370304486efac3aa4d51a8, type: 3}
   m_Name: IceStaking
   m_EditorClassIdentifier: 
+  supplyID: 9
   supplyName: Ice Staking
   supplyPrefab: {fileID: 5845531273689389248, guid: f52489cea0d284d48a30e5dd1cae1207, type: 3}
   supplySprite: {fileID: -1080248026034109904, guid: 1246be2011c3c4446bf2b81c43b3b9cb, type: 3}

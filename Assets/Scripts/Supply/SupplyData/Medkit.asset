@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df2cf1c330370304486efac3aa4d51a8, type: 3}
   m_Name: Medkit
   m_EditorClassIdentifier: 
+  supplyID: 14
   supplyName: Medkit
   supplyPrefab: {fileID: 7600217266074923063, guid: db98393f487db1a4186138de0f4ef6ec, type: 3}
   supplySprite: {fileID: -7303263551872947108, guid: ee4d72f248a4dff4d80490870b60ade5, type: 3}

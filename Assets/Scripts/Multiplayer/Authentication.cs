@@ -44,21 +44,30 @@ public class Authentication : MonoBehaviour
 
     public void OnSignUpClicked()
     {
-        // if (string.IsNullOrEmpty(username.text) || string.IsNullOrEmpty(password.text))
-        // {
-        //     Debug.LogError("Username or Password is empty!");
-        //     return;
-        // }
+        if (string.IsNullOrEmpty(username.text) || string.IsNullOrEmpty(password.text))
+        {
+            Debug.LogError("Username or Password is empty!");
+            return;
+        }
 
-        string usernameTest = "Abc";
-        string passwordTest = "Abc1234.";
-        //_ = SignUpWithUsernamePasswordAsync(username.text, password.text);
-        _ = SignUpWithUsernamePasswordAsync(usernameTest, passwordTest);
+        _ = SignUpWithUsernamePasswordAsync(username.text, password.text);
 
         CheckPlayerId();
     }
 
     public void OnSignInClicked()
+    {
+        if (string.IsNullOrEmpty(username.text) || string.IsNullOrEmpty(password.text))
+        {
+            ShowError("Username or Password is empty");
+            return;
+        }
+
+        _ = SignInWithUsernamePasswordAsync(username.text, password.text);
+        CheckPlayerId();
+    }
+
+    public void OnSignIn1Clicked()
     {
         // if (string.IsNullOrEmpty(username.text) || string.IsNullOrEmpty(password.text))
         // {

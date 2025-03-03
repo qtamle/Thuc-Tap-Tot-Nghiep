@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df2cf1c330370304486efac3aa4d51a8, type: 3}
   m_Name: Gernade
   m_EditorClassIdentifier: 
+  supplyID: 7
   supplyName: Gernade
   supplyPrefab: {fileID: 8405356469771511491, guid: f93fc3b3806ef4f458d1b9eed3bf14ad, type: 3}
   supplySprite: {fileID: 21300000, guid: 0ea21be4dbfc29e4e8c9e8b00097b841, type: 3}

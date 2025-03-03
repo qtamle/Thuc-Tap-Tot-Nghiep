@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
+using Unity.Collections;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Events;
@@ -11,7 +13,9 @@ public class SupplyManager : NetworkBehaviour
     public static SupplyManager Instance;
 
     [SerializeField]
-    private List<SupplyData> supplyDataLList;
+    private List<SupplyData> supplyDataList;
+
+    public NetworkList<SupplyDataNetwork> networkSupplyList; // Danh sách đồng bộ
 
     [SerializeField]
     private Transform supplySlot1;
@@ -23,6 +27,8 @@ public class SupplyManager : NetworkBehaviour
     private Transform supplySlot3;
 
     private List<Transform> slots;
+
+    private List<GameObject> spawnedSupplies = new List<GameObject>();
 
     // Khai báo delegate cho event
     public delegate void InventoryChangeHandler(SupplyData supply);
@@ -49,6 +55,13 @@ public class SupplyManager : NetworkBehaviour
         {
             Destroy(gameObject);
         }
+        // Khởi tạo NetworkList
+        networkSupplyList = new NetworkList<SupplyDataNetwork>();
+    }
+
+    void Start()
+    {
+        DontDestroyOnLoad(gameObject);
     }
 
     private void OnEnable()
@@ -64,7 +77,7 @@ public class SupplyManager : NetworkBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         Debug.Log("Scene loaded: " + scene.name);
-        if (!hasInitialized && IsServer)
+        if (!hasInitialized && IsServer && scene.name == "SupplyScene")
         {
             InitializeSlots();
             hasInitialized = true;
@@ -81,17 +94,47 @@ public class SupplyManager : NetworkBehaviour
         hasInitialized = false;
     }
 
-    void Start()
-    {
-        DontDestroyOnLoad(gameObject);
-    }
+    // void Start()
+    // {
+    //     DontDestroyOnLoad(gameObject);
+    // }
 
     public override void OnNetworkSpawn()
     {
         if (IsServer)
         {
             InitializeSlots();
+            Debug.Log("Server của Supply Manager được khởi động.");
+            InitializeNetworkSupplyList();
         }
+    }
+
+    private void InitializeNetworkSupplyList()
+    {
+        // Duyệt qua supplyDataList và thêm từng phần tử vào networkSupplyList
+        foreach (var supplyData in supplyDataList)
+        {
+            networkSupplyList.Add(new SupplyDataNetwork(supplyData));
+        }
+
+        Debug.Log("Đã thêm " + supplyDataList.Count + " vật phẩm vào networkSupplyList.");
+    }
+
+    public List<SupplyData> GetAvailableSupplies()
+    {
+        // Lấy danh sách các SupplyData từ networkSupplyList
+        List<SupplyData> availableSupplies = new List<SupplyData>();
+        foreach (var supplyNetwork in networkSupplyList)
+        {
+            var supplyData = supplyDataList.Find(supply =>
+                supply.supplyID == supplyNetwork.supplyID
+            );
+            if (supplyData != null)
+            {
+                availableSupplies.Add(supplyData);
+            }
+        }
+        return availableSupplies;
     }
 
     // private void Update()
@@ -158,20 +201,20 @@ public class SupplyManager : NetworkBehaviour
     //     }
     // }
 
-    public void DebugRemainingSupplies()
-    {
-        if (supplyDataLList.Count == 0)
-        {
-            Debug.Log("Không còn supply nào trong danh sách supplyDataLList.");
-            return;
-        }
+    // public void DebugRemainingSupplies()
+    // {
+    //     if (supplyDataLList.Count == 0)
+    //     {
+    //         Debug.Log("Không còn supply nào trong danh sách supplyDataLList.");
+    //         return;
+    //     }
 
-        string remainingSupplies = string.Join(
-            ", ",
-            supplyDataLList.ConvertAll(s => $"{s.supplyName} ({s.supplyType})")
-        );
-        Debug.Log($"Danh sách các supply còn lại trong supplyDataLList: {remainingSupplies}");
-    }
+    //     string remainingSupplies = string.Join(
+    //         ", ",
+    //         supplyDataLList.ConvertAll(s => $"{s.supplyName} ({s.supplyType})")
+    //     );
+    //     Debug.Log($"Danh sách các supply còn lại trong supplyDataLList: {remainingSupplies}");
+    // }
 
     // public void DebugInventory()
     // {
@@ -188,6 +231,11 @@ public class SupplyManager : NetworkBehaviour
     //     Debug.Log($"Danh sách các vật phẩm trong Inventory: {inventoryItems}");
     // }
 
+    public SupplyData GetSupplyByID(string id)
+    {
+        return supplyDataList.FirstOrDefault(s => s.supplyID == id);
+    }
+
     private void InitializeSlots()
     {
         supplySlot1 = GameObject.FindGameObjectWithTag("Supply").transform;
@@ -199,10 +247,11 @@ public class SupplyManager : NetworkBehaviour
 
     public void SpawnRandomSupply()
     {
+        DestroySpawnedSupplies();
         // Phân loại supply theo SupplyType
         Dictionary<SupplyType, List<SupplyData>> suppliesByType =
             new Dictionary<SupplyType, List<SupplyData>>();
-        foreach (SupplyData supply in supplyDataLList)
+        foreach (SupplyData supply in supplyDataList)
         {
             if (!suppliesByType.ContainsKey(supply.supplyType))
             {
@@ -238,23 +287,17 @@ public class SupplyManager : NetworkBehaviour
         Shuffle(supplyTypes);
 
         // Debug danh sách các loại SupplyType sau khi shuffle
-        Debug.Log(
-            $"Danh sách các loại SupplyType sau khi shuffle: {string.Join(", ", supplyTypes)}"
-        );
+
 
         for (int i = 0; i < slots.Count; i++)
         {
             // Lấy loại SupplyType cho slot hiện tại
             SupplyType currentType = supplyTypes[i];
-            Debug.Log($"Slot {i + 1} sẽ spawn loại SupplyType: {currentType}");
 
             if (suppliesByType[currentType].Count > 0)
             {
                 // Chọn ngẫu nhiên một supply từ loại tương ứng
                 List<SupplyData> availableSupplies = suppliesByType[currentType];
-                Debug.Log(
-                    $"Danh sách supply khả dụng cho loại {currentType}: {string.Join(", ", availableSupplies.ConvertAll(s => s.supplyName))}"
-                );
 
                 int randomIndex = Random.Range(0, availableSupplies.Count);
                 SupplyData selectedSupply = availableSupplies[randomIndex];
@@ -267,6 +310,8 @@ public class SupplyManager : NetworkBehaviour
                     slots[i].position,
                     Quaternion.identity
                 );
+                spawnedSupplies.Add(spawnedSupply); // Lưu vào danh sách
+
                 if (IsServer)
                 {
                     spawnedSupply.GetComponent<NetworkObject>().Spawn();
@@ -298,19 +343,64 @@ public class SupplyManager : NetworkBehaviour
         }
     }
 
-    public void RemoveSupply(SupplyData supply)
+    public void DestroySpawnedSupplies()
     {
-        if (supplyDataLList.Contains(supply))
+        foreach (GameObject supply in spawnedSupplies)
         {
-            supplyDataLList.Remove(supply);
-            Debug.Log($"Supply {supply.supplyName} đã bị loại khỏi danh sách.");
+            if (supply != null)
+            {
+                if (IsServer)
+                {
+                    supply.GetComponent<NetworkObject>().Despawn(); // Hủy đối tượng trên server (nếu có Netcode)
+                }
+                Destroy(supply); // Xóa GameObject khỏi scene
+            }
         }
-        else
+        spawnedSupplies.Clear(); // Xóa danh sách sau khi hủy
+        Debug.Log("Tất cả các supply đã được hủy.");
+    }
+
+    public void RemoveSupply(FixedString32Bytes supplyId)
+    {
+        if (IsServer)
         {
-            Debug.LogWarning(
-                $"Supply {supply.supplyName} không tồn tại trong danh sách supplyDataLList."
-            );
+            // Xóa từ networkSupplyList
+            var supplyToRemove = FindSupplyById(supplyId);
+            if (!supplyToRemove.Equals(default(SupplyDataNetwork)))
+            {
+                networkSupplyList.Remove(supplyToRemove);
+                Debug.Log($"Đã xóa vật phẩm với ID {supplyId} khỏi networkSupplyList.");
+            }
+
+            // Xóa từ supplyDataList
+            RemoveSupplyFromDataList(supplyId);
         }
+    }
+
+    public void RemoveSupplyFromDataList(FixedString32Bytes supplyId)
+    {
+        // Tìm phần tử cần xóa trong supplyDataList
+        var supplyToRemove = supplyDataList.Find(supply =>
+            new FixedString32Bytes(supply.supplyID) == supplyId
+        );
+
+        if (supplyToRemove != null)
+        {
+            supplyDataList.Remove(supplyToRemove);
+            Debug.Log($"Đã xóa vật phẩm với ID {supplyId} khỏi supplyDataList.");
+        }
+    }
+
+    public SupplyDataNetwork FindSupplyById(FixedString32Bytes supplyId)
+    {
+        foreach (var supply in networkSupplyList)
+        {
+            if (supply.supplyID == supplyId)
+            {
+                return supply;
+            }
+        }
+        return default; // Trả về giá trị mặc định nếu không tìm thấy
     }
 
     // Hàm shuffle danh sách

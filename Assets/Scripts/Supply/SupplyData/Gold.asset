@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df2cf1c330370304486efac3aa4d51a8, type: 3}
   m_Name: Gold
   m_EditorClassIdentifier: 
+  supplyID: 8
   supplyName: Gold Increase
   supplyPrefab: {fileID: 5845531273689389248, guid: 2fda9868b7af9354d9616170b143ee6c, type: 3}
   supplySprite: {fileID: -741704495110865535, guid: 79a0d268f75592c43b10378a98faa940, type: 3}

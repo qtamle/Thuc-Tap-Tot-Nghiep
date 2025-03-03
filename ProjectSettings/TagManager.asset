@@ -18,6 +18,7 @@ TagManager:
   - Supply
   - Supply1
   - Supply2
+  - NetworkManager
   - BossManager
   - Coin
   - Level6

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df2cf1c330370304486efac3aa4d51a8, type: 3}
   m_Name: Shoe
   m_EditorClassIdentifier: 
+  supplyID: 17
   supplyName: Shoe
   supplyPrefab: {fileID: 7895157130173240544, guid: 665ad51ef06f86541ad247f8f25d4abb, type: 3}
   supplySprite: {fileID: 21300000, guid: 68ae7e0b66c9b9644ba65601b67d2dd1, type: 3}

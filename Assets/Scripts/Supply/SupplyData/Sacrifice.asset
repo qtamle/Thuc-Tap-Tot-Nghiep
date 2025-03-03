@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df2cf1c330370304486efac3aa4d51a8, type: 3}
   m_Name: Sacrifice
   m_EditorClassIdentifier: 
+  supplyID: 15
   supplyName: Sacrifice
   supplyPrefab: {fileID: 5845531273689389248, guid: 000c4cf42221f2b4bbc061bec3e01ca9, type: 3}
   supplySprite: {fileID: -2331631197644114973, guid: 1246be2011c3c4446bf2b81c43b3b9cb, type: 3}

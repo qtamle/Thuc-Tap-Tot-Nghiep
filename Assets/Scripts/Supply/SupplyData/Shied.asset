@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df2cf1c330370304486efac3aa4d51a8, type: 3}
   m_Name: Shied
   m_EditorClassIdentifier: 
+  supplyID: 16
   supplyName: Shield
   supplyPrefab: {fileID: 2504397080909394390, guid: d88e01086e6a7034f888134b1afe83a0, type: 3}
   supplySprite: {fileID: 21300000, guid: bac80be5eb7d16744809880d2156094d, type: 3}

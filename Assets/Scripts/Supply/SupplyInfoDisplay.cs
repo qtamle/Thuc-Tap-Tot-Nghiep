@@ -4,7 +4,7 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SupplyInfoDisplay : NetworkBehaviour
+public class SupplyInfoDisplay : MonoBehaviour
 {
     public GameObject infoCanvas;
     public TMP_Text supplyNameText;
@@ -13,7 +13,6 @@ public class SupplyInfoDisplay : NetworkBehaviour
     public Image supplySpriteImage;
 
     private SupplyPickup currentSupply;
-
     private PlayerMovement playerMovement;
 
     private void Start()
@@ -24,7 +23,7 @@ public class SupplyInfoDisplay : NetworkBehaviour
     public void DisplaySupplyInfo(SupplyPickup supplyPickup)
     {
         // Lấy PlayerMovement từ chính Player đang nhặt supply
-        GameObject player = supplyPickup.gameObject;
+        GameObject player = GameObject.FindGameObjectWithTag("Player"); // Tìm player hiện tại
         playerMovement = player.GetComponent<PlayerMovement>();
 
         if (playerMovement != null)
@@ -35,7 +34,7 @@ public class SupplyInfoDisplay : NetworkBehaviour
         currentSupply = supplyPickup;
         infoCanvas.SetActive(true);
 
-        supplyNameText.text = supplyPickup.supplyData.supplyName;
+        supplyNameText.text = supplyPickup.supplyData.supplyName.ToString();
         supplyTypeText.text = $"Type of Supply: {supplyPickup.supplyData.supplyType}";
         descriptionText.text = supplyPickup.supplyData.description;
         supplySpriteImage.sprite = supplyPickup.supplyData.supplySprite;
@@ -47,10 +46,9 @@ public class SupplyInfoDisplay : NetworkBehaviour
         {
             currentSupply.PickupSupply();
             infoCanvas.SetActive(false);
-            playerMovement = FindFirstObjectByType<PlayerMovement>();
             if (playerMovement != null)
             {
-                playerMovement.enabled = true;
+                playerMovement.isMovementLocked = false;
             }
         }
     }
@@ -60,10 +58,9 @@ public class SupplyInfoDisplay : NetworkBehaviour
         infoCanvas.SetActive(false);
         if (currentSupply != null)
         {
-            playerMovement = FindFirstObjectByType<PlayerMovement>();
             if (playerMovement != null)
             {
-                playerMovement.enabled = true;
+                playerMovement.isMovementLocked = false;
             }
             currentSupply.StartDisableTriggerTimer();
         }

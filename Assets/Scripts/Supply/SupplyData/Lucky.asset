@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df2cf1c330370304486efac3aa4d51a8, type: 3}
   m_Name: Lucky
   m_EditorClassIdentifier: 
+  supplyID: 11
   supplyName: Lucky
   supplyPrefab: {fileID: 5845531273689389248, guid: aa21a085849ed9f4ba31fbb0c4d8c446, type: 3}
   supplySprite: {fileID: -3997913907858488725, guid: b06e5d3cd00678e49928cb865cd1f328, type: 3}

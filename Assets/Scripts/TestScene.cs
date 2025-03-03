@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Unity.Netcode;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -12,6 +13,25 @@ public class TestScene : MonoBehaviour
     public Button loadSceneButton;
 
     public static WeaponSO weaponDataStore;
+
+    public void BackToShop()
+    {
+        sceneName = "Shop_Online";
+
+        if (GameManager.Instance != null)
+        {
+            Destroy(GameManager.Instance);
+        }
+
+        // Tìm và hủy NetworkManager
+        GameObject networkManager = GameObject.FindWithTag("NetworkManager");
+        if (networkManager != null)
+        {
+            Destroy(networkManager);
+        }
+
+        SceneManager.LoadScene(sceneName);
+    }
 
     public void LoadTest1()
     {

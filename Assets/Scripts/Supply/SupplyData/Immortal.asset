@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df2cf1c330370304486efac3aa4d51a8, type: 3}
   m_Name: Immortal
   m_EditorClassIdentifier: 
+  supplyID: 10
   supplyName: Immortal
   supplyPrefab: {fileID: 7600217266074923063, guid: 30af6b5fd90eab849a55605614540f87, type: 3}
   supplySprite: {fileID: -5937313870123219910, guid: 1246be2011c3c4446bf2b81c43b3b9cb, type: 3}

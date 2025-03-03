@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df2cf1c330370304486efac3aa4d51a8, type: 3}
   m_Name: Vaccine
   m_EditorClassIdentifier: 
+  supplyID: 19
   supplyName: Vaccine
   supplyPrefab: {fileID: 5845531273689389248, guid: a0d02d890cb11a14e91ab86271813899, type: 3}
   supplySprite: {fileID: 21300000, guid: 98f2b0b9cfb21014191c18973772a965, type: 3}

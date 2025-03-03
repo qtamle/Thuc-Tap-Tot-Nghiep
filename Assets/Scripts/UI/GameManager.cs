@@ -109,7 +109,7 @@ public class GameManager : NetworkBehaviour
             NetworkObject playerObject = client.PlayerObject;
             if (playerObject != null)
             {
-                playerObject.Despawn(true);
+                playerObject.Despawn(false);
             }
         }
 

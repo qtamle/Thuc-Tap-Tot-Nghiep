@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 672101594
+  GlobalObjectIdHash: 3397405505
   InScenePlacedSourceGlobalObjectIdHash: 2813119075
   DeferredDespawnTick: 0
   Ownership: 1
@@ -53,8 +53,8 @@ MonoBehaviour:
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
   SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
+  SpawnWithObservers: 0
+  DontDestroyWithOwner: 1
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
   AllowOwnerToParent: 0

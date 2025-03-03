@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df2cf1c330370304486efac3aa4d51a8, type: 3}
   m_Name: Dagger
   m_EditorClassIdentifier: 
+  supplyID: 3
   supplyName: Dagger
   supplyPrefab: {fileID: 5845531273689389248, guid: d48e4414ceddb2048836bbb3bc471774, type: 3}
   supplySprite: {fileID: -2486521743634864436, guid: bddb254de3f53c74eb98f92f04fedcea, type: 3}
