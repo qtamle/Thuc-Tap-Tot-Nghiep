@@ -4,6 +4,7 @@ using System.Linq;
 using NUnit.Framework;
 using Unity.Collections;
 using Unity.Netcode;
+using Unity.Services.Matchmaker.Models;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -64,16 +65,6 @@ public class SupplyManager : NetworkBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    private void OnEnable()
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    private void OnDisable()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
-
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         Debug.Log("Scene loaded: " + scene.name);
@@ -92,6 +83,7 @@ public class SupplyManager : NetworkBehaviour
     public void ResetInitialization()
     {
         hasInitialized = false;
+        
     }
 
     // void Start()
@@ -103,10 +95,16 @@ public class SupplyManager : NetworkBehaviour
     {
         if (IsServer)
         {
+            
+
             InitializeSlots();
             Debug.Log("Server của Supply Manager được khởi động.");
             InitializeNetworkSupplyList();
         }
+    }
+
+    public override void OnNetworkDespawn()
+    {
     }
 
     private void InitializeNetworkSupplyList()

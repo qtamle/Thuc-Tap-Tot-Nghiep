@@ -116,7 +116,12 @@ public class GameManager : NetworkBehaviour
         if (isSupplyScene.Value == false) // Nếu đang ở màn Supply thì chuyển sang Boss tiếp theo
         {
             isSupplyScene.Value = true;
+
             currentBoss.Value++;
+            if (SupplyManager.Instance != null)
+            {
+                SupplyManager.Instance.DestroySpawnedSupplies();
+            }
             if (currentBoss.Value == 6)
             {
                 isSupplyScene.Value = false;
