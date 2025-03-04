@@ -13,6 +13,7 @@ public class PlayerInventorySupply : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
