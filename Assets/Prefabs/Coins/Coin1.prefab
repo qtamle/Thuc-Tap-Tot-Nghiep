@@ -191,7 +191,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd3c5cf36fa3aac4db8a28019ce7a86c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
   groundLayer:
     serializedVersion: 2
     m_Bits: 128

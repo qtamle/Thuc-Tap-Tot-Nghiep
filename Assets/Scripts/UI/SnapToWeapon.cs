@@ -21,6 +21,11 @@ public class SnapToWeapon : MonoBehaviour
     // Text
     public Text buyButtonText;
 
+    // Max Level
+    public Text upgradeButtonText;
+    public Sprite normalUpgradeSprite;
+    public Sprite maxLevelSprite;
+
     // Action
     public event Action<WeaponData> OnSnapChanged;
     public event Action OnWeaponSelected;
@@ -188,10 +193,9 @@ public class SnapToWeapon : MonoBehaviour
         NotifySnapChanged(snappedWeaponData);
     }
 
-    private void UpdateButtonStates()
+    public void UpdateButtonStates()
     {
         nextButton.gameObject.SetActive(currentItem < ItemNames.Length - 1);
-
         previousButton.gameObject.SetActive(currentItem > 0);
 
         if (currentSnapWeapon != null)
@@ -200,7 +204,26 @@ public class SnapToWeapon : MonoBehaviour
             bool isOwned = weaponData.isOwned;
             bool canBuy = levelSystem.level >= weaponData.requiredLevel;
 
+            bool isMaxLevel = currentSnapWeapon.currentLevel >= currentSnapWeapon.maxLevel;
+
             upgradeButton.gameObject.SetActive(isOwned);
+
+            if (isOwned)
+            {
+                if (isMaxLevel)
+                {
+                    upgradeButton.interactable = false;
+                    upgradeButtonText.text = "Max Level";
+                    upgradeButton.image.sprite = maxLevelSprite;
+                }
+                else
+                {
+                    upgradeButton.interactable = true;
+                    upgradeButtonText.text = "Upgrade";
+                    upgradeButton.image.sprite = normalUpgradeSprite;
+                }
+            }
+
             buyButton.gameObject.SetActive(!isOwned);
 
             if (!isOwned)

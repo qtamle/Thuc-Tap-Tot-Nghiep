@@ -99,6 +99,7 @@ GameObject:
   - component: {fileID: 7669922599344057294}
   - component: {fileID: 1054258282773093057}
   - component: {fileID: 1027780606776762280}
+  - component: {fileID: -2932408303232885103}
   m_Layer: 0
   m_Name: SupplyGernade
   m_TagString: Fill
@@ -207,3 +208,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   supplyData: {fileID: 11400000, guid: 555b681c19961504ca33dc15d95593c7, type: 2}
+--- !u!114 &-2932408303232885103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8405356469771511491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad50b5f6fcaa95d48877cfc6c5c3e522, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  supplyData: {fileID: 11400000, guid: 555b681c19961504ca33dc15d95593c7, type: 2}
+  isActive: 0
+  cooldownTime: 20
+  gernadePrefab: {fileID: 163419635232156481, guid: a585ad28a22522e46acc93ca4d35a88b, type: 3}
+  moveSpeed: 5

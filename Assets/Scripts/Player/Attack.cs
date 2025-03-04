@@ -43,11 +43,11 @@ public class Attack : MonoBehaviour
 
     private Brutal brutal;
     private Gold goldIncrease;
+    private Lucky lucky;
 
     private PlayerHealth health;
     private CoinPoolManager coinPoolManager;
     private ExperienceOrbPoolManager orbPoolManager;
-    private Lucky lucky;
 
     private WeaponInfo weaponInfo;
     private BouncingSawLauncher bouncingSaw;

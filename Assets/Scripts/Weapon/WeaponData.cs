@@ -204,6 +204,8 @@ public class WeaponData : MonoBehaviour
         Debug.Log(
             $"✅ {weaponName} đã nâng cấp lên cấp {currentLevel} với giá {upgradeCost} coins!"
         );
+
+        FindAnyObjectByType<SnapToWeapon>()?.UpdateButtonStates();
     }
 
     public void InitWeapon(CharacterWeaponData data)
