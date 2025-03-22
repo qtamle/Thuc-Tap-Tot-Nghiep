@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Linq;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using static UnityEngine.GraphicsBuffer;
@@ -7,10 +8,10 @@ using static UnityEngine.GraphicsBuffer;
 public class LightningChain : MonoBehaviour
 {
     [Header("Radius Check")]
-    public float searchRadius = 10f; 
+    public float searchRadius = 10f;
 
     [Header("Enemy Max")]
-    public int maxEnemies = 4; 
+    public int maxEnemies = 4;
     public LineRenderer lineRenderer;
 
     [Header("Setting Lightning Chain")]
@@ -75,7 +76,8 @@ public class LightningChain : MonoBehaviour
             int playerLayer = LayerMask.NameToLayer("Player");
             if (playerLayer >= 0)
             {
-                playerObject = FindObjectsOfType<GameObject>().FirstOrDefault(obj => obj.layer == playerLayer);
+                playerObject = FindObjectsOfType<GameObject>()
+                    .FirstOrDefault(obj => obj.layer == playerLayer);
             }
         }
 
@@ -98,9 +100,14 @@ public class LightningChain : MonoBehaviour
 
     public void TriggerLightning()
     {
-        if (isLightningActive) return;
+        if (isLightningActive)
+            return;
 
-        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, searchRadius, enemyLayer);
+        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(
+            transform.position,
+            searchRadius,
+            enemyLayer
+        );
         int enemyCount = 0;
 
         targets = new Transform[maxEnemies];
@@ -126,6 +133,7 @@ public class LightningChain : MonoBehaviour
         isLightningActive = true;
         StartCoroutine(LightningEffect(enemyCount));
     }
+
     private IEnumerator LightningEffect(int enemyCount)
     {
         if (lineRenderer == null)
@@ -145,7 +153,7 @@ public class LightningChain : MonoBehaviour
 
         if (enemyCount == 1)
         {
-            totalPoints = 2; 
+            totalPoints = 2;
             lineRenderer.positionCount = totalPoints;
         }
         else
@@ -158,7 +166,7 @@ public class LightningChain : MonoBehaviour
         {
             if (enemyCount == 1)
             {
-                lineRenderer.SetPosition(0, transform.position); 
+                lineRenderer.SetPosition(0, transform.position);
 
                 if (targets[0] != null)
                 {
@@ -167,12 +175,12 @@ public class LightningChain : MonoBehaviour
             }
             else
             {
-                lineRenderer.SetPosition(0, transform.position); 
+                lineRenderer.SetPosition(0, transform.position);
 
                 int pointsToDraw = Mathf.FloorToInt(elapsedTime / duration * totalPoints);
                 pointsToDraw = Mathf.Min(pointsToDraw, totalPoints);
 
-                int pointIndex = 1; 
+                int pointIndex = 1;
                 for (int i = 0; i < enemyCount - 1; i++)
                 {
                     Vector3 start = targets[i] != null ? targets[i].position : Vector3.zero;
@@ -182,7 +190,11 @@ public class LightningChain : MonoBehaviour
                     {
                         float t = (float)j / pointsBetweenTargets;
                         Vector3 pointPos = Vector3.Lerp(start, end, t);
-                        pointPos += new Vector3(Random.Range(-jitterAmount, jitterAmount), Random.Range(-jitterAmount, jitterAmount), 0);
+                        pointPos += new Vector3(
+                            Random.Range(-jitterAmount, jitterAmount),
+                            Random.Range(-jitterAmount, jitterAmount),
+                            0
+                        );
 
                         if (pointIndex < lineRenderer.positionCount)
                         {
@@ -194,7 +206,10 @@ public class LightningChain : MonoBehaviour
 
                 if (lineRenderer.positionCount > 1 && targets[enemyCount - 1] != null)
                 {
-                    lineRenderer.SetPosition(lineRenderer.positionCount - 1, targets[enemyCount - 1].position);
+                    lineRenderer.SetPosition(
+                        lineRenderer.positionCount - 1,
+                        targets[enemyCount - 1].position
+                    );
                 }
             }
 
@@ -218,7 +233,6 @@ public class LightningChain : MonoBehaviour
     {
         if (enemy != null && enemy.gameObject.activeInHierarchy)
         {
-
             Vector3 position = enemy.transform.position;
 
             if (EnemyManager.Instance != null)
@@ -238,7 +252,12 @@ public class LightningChain : MonoBehaviour
 
             if (Random.value <= 0.30f)
             {
-                SpawnCoins(secondaryCoinPrefab, secondaryCoinSpawnMin, secondaryCoinSpawnMax, position);
+                SpawnCoins(
+                    secondaryCoinPrefab,
+                    secondaryCoinSpawnMin,
+                    secondaryCoinSpawnMax,
+                    position
+                );
             }
 
             SpawnExperienceOrbs(position, 5);
@@ -253,14 +272,18 @@ public class LightningChain : MonoBehaviour
         {
             Vector3 spawnPosition = position + Vector3.up * 0.2f;
 
-            GameObject coin = coinPoolManager.GetCoinFromPool(coinType);
+            NetworkObject coin = CoinPoolManager.Instance.GetCoinFromPool(
+                spawnPosition,
+                coinType == secondaryCoinPrefab
+            );
             coin.transform.position = spawnPosition;
 
             Rigidbody2D coinRb = coin.GetComponent<Rigidbody2D>();
 
             if (coinRb != null)
             {
-                Vector2 forceDirection = new Vector2(Random.Range(-1.5f, 1.5f), Random.Range(1f, 1f)) * 2.5f;
+                Vector2 forceDirection =
+                    new Vector2(Random.Range(-1.5f, 1.5f), Random.Range(1f, 1f)) * 2.5f;
                 coinRb.AddForce(forceDirection, ForceMode2D.Impulse);
 
                 StartCoroutine(CheckIfCoinIsStuck(coinRb));
@@ -273,7 +296,6 @@ public class LightningChain : MonoBehaviour
                     coinScript.SetCoinType(true, false);
                 else
                     coinScript.SetCoinType(false, true);
-
             }
         }
     }
@@ -284,7 +306,12 @@ public class LightningChain : MonoBehaviour
 
         if (coinRb != null)
         {
-            RaycastHit2D hit = Physics2D.Raycast(coinRb.transform.position, Vector2.down, 0.5f, groundLayer);
+            RaycastHit2D hit = Physics2D.Raycast(
+                coinRb.transform.position,
+                Vector2.down,
+                0.5f,
+                groundLayer
+            );
             if (hit.collider != null)
             {
                 coinRb.transform.position += Vector3.up * 0.3f;
@@ -296,6 +323,7 @@ public class LightningChain : MonoBehaviour
             yield break;
         }
     }
+
     void SpawnExperienceOrbs(Vector3 position, int orbCount)
     {
         for (int i = 0; i < orbCount; i++)
@@ -334,7 +362,9 @@ public class LightningChain : MonoBehaviour
                 {
                     Vector3 direction = (player.position - orb.transform.position).normalized;
 
-                    orbRb.MovePosition(orb.transform.position + direction * Time.deltaTime * orbMoveToPlayer);
+                    orbRb.MovePosition(
+                        orb.transform.position + direction * Time.deltaTime * orbMoveToPlayer
+                    );
 
                     if (Vector3.Distance(orb.transform.position, player.position) < 0.5f)
                     {

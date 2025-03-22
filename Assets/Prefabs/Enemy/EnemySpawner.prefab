@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3415929998
-  InScenePlacedSourceGlobalObjectIdHash: 0
+  GlobalObjectIdHash: 1043429798
+  InScenePlacedSourceGlobalObjectIdHash: 384443556
   DeferredDespawnTick: 0
   Ownership: 1
   AlwaysReplicateAsRoot: 0
@@ -112,10 +112,10 @@ MonoBehaviour:
     minSpawnTime: 3.5
     maxSpawnTime: 6
   warningBoss: {fileID: 0}
-  bossLevel1: {fileID: 0}
+  bossLevel1: {fileID: 2971549148569300707, guid: 2833781d7761d9e4caddfd4cc8d1aa53, type: 3}
   UIHealthBoss: {fileID: 0}
+  BossSpawnPostion: {fileID: 0}
   remain: {fileID: 0}
-  gangster: {fileID: 0}
   maxTotalSpawnCount: 20
   spawnSpeedIncreaseInterval: 50
   spawnSpeedDecreaseAmount: 0.5

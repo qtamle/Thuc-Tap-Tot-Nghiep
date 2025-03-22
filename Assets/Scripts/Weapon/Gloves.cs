@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Linq;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -77,6 +78,7 @@ public class Gloves : MonoBehaviour
     {
         OnSceneLoaded(SceneManager.GetActiveScene(), LoadSceneMode.Single);
     }
+
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         coinPoolManager = FindFirstObjectByType<CoinPoolManager>();
@@ -92,7 +94,8 @@ public class Gloves : MonoBehaviour
             int playerLayer = LayerMask.NameToLayer("Player");
             if (playerLayer >= 0)
             {
-                playerObject = FindObjectsOfType<GameObject>().FirstOrDefault(obj => obj.layer == playerLayer);
+                playerObject = FindObjectsOfType<GameObject>()
+                    .FirstOrDefault(obj => obj.layer == playerLayer);
             }
         }
 
@@ -121,6 +124,7 @@ public class Gloves : MonoBehaviour
             lastAttackTime = Time.time;
         }
     }
+
     private bool IsInputDetected()
     {
         if (Application.isEditor)
@@ -157,7 +161,12 @@ public class Gloves : MonoBehaviour
     {
         ShowAttackVFX();
 
-        Collider2D[] enemies = Physics2D.OverlapBoxAll(attackPoints.position, boxSize, 0f, enemyLayer);
+        Collider2D[] enemies = Physics2D.OverlapBoxAll(
+            attackPoints.position,
+            boxSize,
+            0f,
+            enemyLayer
+        );
 
         foreach (Collider2D enemy in enemies)
         {
@@ -183,7 +192,12 @@ public class Gloves : MonoBehaviour
 
                 if (Random.value <= 0.30f)
                 {
-                    SpawnCoins(secondaryCoinPrefab, secondaryCoinSpawnMin, secondaryCoinSpawnMax, enemy.transform.position);
+                    SpawnCoins(
+                        secondaryCoinPrefab,
+                        secondaryCoinSpawnMin,
+                        secondaryCoinSpawnMax,
+                        enemy.transform.position
+                    );
                 }
 
                 if (Random.value <= 0.15f && lucky != null)
@@ -200,7 +214,12 @@ public class Gloves : MonoBehaviour
             }
         }
 
-        Collider2D[] bosses = Physics2D.OverlapBoxAll(attackPoints.position, boxSize, 0f, bossLayer);
+        Collider2D[] bosses = Physics2D.OverlapBoxAll(
+            attackPoints.position,
+            boxSize,
+            0f,
+            bossLayer
+        );
 
         foreach (Collider2D boss in bosses)
         {
@@ -212,12 +231,21 @@ public class Gloves : MonoBehaviour
                 isAttackBoss = true;
                 damageable.SetCanBeDamaged(false);
 
-
-                SpawnCoins(coinPrefab, coinSpawnMin * 10, coinSpawnMax * 10, boss.transform.position);
+                SpawnCoins(
+                    coinPrefab,
+                    coinSpawnMin * 10,
+                    coinSpawnMax * 10,
+                    boss.transform.position
+                );
 
                 if (Random.value <= 0.25f)
                 {
-                    SpawnCoins(secondaryCoinPrefab, secondaryCoinSpawnMin * 5, secondaryCoinSpawnMax * 5, boss.transform.position);
+                    SpawnCoins(
+                        secondaryCoinPrefab,
+                        secondaryCoinSpawnMin * 5,
+                        secondaryCoinSpawnMax * 5,
+                        boss.transform.position
+                    );
                 }
 
                 if (Random.value <= 0.15f && lucky != null)
@@ -240,18 +268,33 @@ public class Gloves : MonoBehaviour
 
             if (partHealth != null && !isAttackBoss && snakeHealth.IsStunned())
             {
-                if ((MachineSnakeHealth.attackedPartID == -1 || MachineSnakeHealth.attackedPartID == partHealth.partID) && !partHealth.isAlreadyHit)
+                if (
+                    (
+                        MachineSnakeHealth.attackedPartID == -1
+                        || MachineSnakeHealth.attackedPartID == partHealth.partID
+                    ) && !partHealth.isAlreadyHit
+                )
                 {
                     partHealth.TakeDamage(1);
                     isAttackBoss = true;
 
                     snakeHealth.SetCanBeDamaged(false);
 
-                    SpawnCoins(coinPrefab, coinSpawnMin * 13, coinSpawnMax * 13, partHealth.transform.position);
+                    SpawnCoins(
+                        coinPrefab,
+                        coinSpawnMin * 13,
+                        coinSpawnMax * 13,
+                        partHealth.transform.position
+                    );
 
                     if (Random.value <= 0.25f)
                     {
-                        SpawnCoins(secondaryCoinPrefab, secondaryCoinSpawnMin * 5, secondaryCoinSpawnMax * 5, partHealth.transform.position);
+                        SpawnCoins(
+                            secondaryCoinPrefab,
+                            secondaryCoinSpawnMin * 5,
+                            secondaryCoinSpawnMax * 5,
+                            partHealth.transform.position
+                        );
                     }
 
                     if (Random.value <= 0.15f && lucky != null)
@@ -273,11 +316,21 @@ public class Gloves : MonoBehaviour
                     headController.isHeadAttacked = true;
 
                     snakeHealth.SetCanBeDamaged(false);
-                    SpawnCoins(coinPrefab, coinSpawnMin * 13, coinSpawnMax * 13, headController.transform.position);
+                    SpawnCoins(
+                        coinPrefab,
+                        coinSpawnMin * 13,
+                        coinSpawnMax * 13,
+                        headController.transform.position
+                    );
 
                     if (Random.value <= 0.25f)
                     {
-                        SpawnCoins(secondaryCoinPrefab, secondaryCoinSpawnMin * 5, secondaryCoinSpawnMax * 5, headController.transform.position);
+                        SpawnCoins(
+                            secondaryCoinPrefab,
+                            secondaryCoinSpawnMin * 5,
+                            secondaryCoinSpawnMax * 5,
+                            headController.transform.position
+                        );
                     }
 
                     if (Random.value <= 0.15f && lucky != null)
@@ -295,6 +348,7 @@ public class Gloves : MonoBehaviour
         }
         isAttackBoss = false;
     }
+
     private void ShowAttackVFX()
     {
         if (vfxPool != null)
@@ -313,7 +367,6 @@ public class Gloves : MonoBehaviour
             StartCoroutine(ReturnVFXToPool(vfx, 0.5f));
         }
     }
-
 
     private IEnumerator ReturnVFXToPool(GameObject vfx, float delay)
     {
@@ -346,14 +399,18 @@ public class Gloves : MonoBehaviour
         {
             Vector3 spawnPosition = position + Vector3.up * 0.2f;
 
-            GameObject coin = coinPoolManager.GetCoinFromPool(coinType);
+            NetworkObject coin = CoinPoolManager.Instance.GetCoinFromPool(
+                spawnPosition,
+                coinType == secondaryCoinPrefab
+            );
             coin.transform.position = spawnPosition;
 
             Rigidbody2D coinRb = coin.GetComponent<Rigidbody2D>();
 
             if (coinRb != null)
             {
-                Vector2 forceDirection = new Vector2(Random.Range(-1.5f, 1.5f), Random.Range(1f, 1f)) * 2.5f;
+                Vector2 forceDirection =
+                    new Vector2(Random.Range(-1.5f, 1.5f), Random.Range(1f, 1f)) * 2.5f;
                 coinRb.AddForce(forceDirection, ForceMode2D.Impulse);
 
                 StartCoroutine(CheckIfCoinIsStuck(coinRb));
@@ -366,7 +423,6 @@ public class Gloves : MonoBehaviour
                     coinScript.SetCoinType(true, false);
                 else
                     coinScript.SetCoinType(false, true);
-
             }
         }
     }
@@ -377,7 +433,12 @@ public class Gloves : MonoBehaviour
 
         if (coinRb != null)
         {
-            RaycastHit2D hit = Physics2D.Raycast(coinRb.transform.position, Vector2.down, 0.5f, groundLayer);
+            RaycastHit2D hit = Physics2D.Raycast(
+                coinRb.transform.position,
+                Vector2.down,
+                0.5f,
+                groundLayer
+            );
             if (hit.collider != null)
             {
                 coinRb.transform.position += Vector3.up * 0.3f;
@@ -428,7 +489,9 @@ public class Gloves : MonoBehaviour
                 {
                     Vector3 direction = (player.position - orb.transform.position).normalized;
 
-                    orbRb.MovePosition(orb.transform.position + direction * Time.deltaTime * orbMoveToPlayer);
+                    orbRb.MovePosition(
+                        orb.transform.position + direction * Time.deltaTime * orbMoveToPlayer
+                    );
 
                     if (Vector3.Distance(orb.transform.position, player.position) < 0.5f)
                     {
@@ -462,7 +525,8 @@ public class Gloves : MonoBehaviour
             Rigidbody2D potionRb = potion.GetComponent<Rigidbody2D>();
             if (potionRb != null)
             {
-                Vector2 randomForce = new Vector2(Random.Range(-2f, 2f), Random.Range(1f, 1f)) * 2.5f;
+                Vector2 randomForce =
+                    new Vector2(Random.Range(-2f, 2f), Random.Range(1f, 1f)) * 2.5f;
                 potionRb.AddForce(randomForce, ForceMode2D.Impulse);
 
                 potionRb.bodyType = RigidbodyType2D.Kinematic;
@@ -484,7 +548,9 @@ public class Gloves : MonoBehaviour
                 while (potion != null && player != null)
                 {
                     Vector3 direction = (player.position - potion.transform.position).normalized;
-                    potionRb.MovePosition(potion.transform.position + direction * Time.deltaTime * potionMoveToPlayer);
+                    potionRb.MovePosition(
+                        potion.transform.position + direction * Time.deltaTime * potionMoveToPlayer
+                    );
 
                     if (Vector3.Distance(potion.transform.position, player.position) < 0.5f)
                     {
@@ -502,6 +568,7 @@ public class Gloves : MonoBehaviour
             yield break;
         }
     }
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.blue;

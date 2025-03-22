@@ -34,6 +34,9 @@ TagManager:
   - CoinPool
   - Health
   - Shield
+  - BossSlider
+  - BossFill
+  - BossSpawner
   layers:
   - Default
   - TransparentFX

@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class SnakeHealth : MonoBehaviour
 {
+    public static SnakeHealth Instance;
+
     [Header("Health Settings")]
     public int maxHealth = 3;
     public int currentHealth;
@@ -21,7 +23,9 @@ public class SnakeHealth : MonoBehaviour
     public int bodyPartsAttacked = 0;
 
     public UnityEvent startTimeline;
-    [SerializeField] private HandleBoss currentBoss;
+
+    [SerializeField]
+    private HandleBoss currentBoss;
 
     private void Start()
     {
@@ -68,6 +72,7 @@ public class SnakeHealth : MonoBehaviour
         StartCoroutine(OnBossDeath());
         Debug.Log("Boss bi tieu diet");
     }
+
     public IEnumerator OnBossDeath()
     {
         yield return new WaitForSeconds(1f);
@@ -108,7 +113,7 @@ public class SnakeHealth : MonoBehaviour
 
     public bool IsStunned()
     {
-        return isStunned; 
+        return isStunned;
     }
 
     private void ResetPartsHitStatus()
@@ -116,7 +121,7 @@ public class SnakeHealth : MonoBehaviour
         MachineSnakeHealth[] parts = GetComponentsInChildren<MachineSnakeHealth>();
         foreach (MachineSnakeHealth part in parts)
         {
-            part.ResetHitStatus(); 
+            part.ResetHitStatus();
         }
         MachineSnakeHealth.attackedPartID = -1;
     }

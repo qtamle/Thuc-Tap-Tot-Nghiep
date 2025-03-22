@@ -2,8 +2,10 @@
 using Unity.Netcode;
 using UnityEngine;
 
-public class EnemySpawnerLevel2 : MonoBehaviour, IEnemySpawner
+public class EnemySpawnerLevel2 : NetworkBehaviour, IEnemySpawner
 {
+    public static EnemySpawnerLevel2 Instance;
+
     [Header("Enemy Data")]
     public EnemySpawnData[] enemySpawnDatas;
 
@@ -12,6 +14,8 @@ public class EnemySpawnerLevel2 : MonoBehaviour, IEnemySpawner
     public GameObject bossLevel1;
     public GameObject UIHealthBoss;
 
+    public GameObject BossSpawnPosition;
+
     [Header("Hide UI")]
     public GameObject remain;
 
@@ -19,8 +23,6 @@ public class EnemySpawnerLevel2 : MonoBehaviour, IEnemySpawner
     public AssassinBossSkill assassin;
 
     private NetworkVariable<bool> stopSpawning = new NetworkVariable<bool>(false);
-
-    [Header("Max and current enemy in level")]
     private NetworkVariable<int> currentTotalSpawnCount = new NetworkVariable<int>(0);
     public int maxTotalSpawnCount;
 
@@ -33,49 +35,55 @@ public class EnemySpawnerLevel2 : MonoBehaviour, IEnemySpawner
 
     private NetworkVariable<bool> isBossSpawned = new NetworkVariable<bool>(false);
 
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     private void Start()
     {
-        if (bossLevel1 != null)
-        {
-            bossLevel1.SetActive(false);
-        }
+        if (!IsServer)
+            return;
+
+        BossSpawnPosition = GameObject.FindWithTag("BossSpawner");
 
         if (UIHealthBoss != null)
-        {
             UIHealthBoss.SetActive(false);
-        }
-
         if (warningBoss != null)
-        {
             warningBoss.SetActive(false);
-        }
 
         foreach (var spawnData in enemySpawnDatas)
         {
-            StartCoroutine(SpawnEnemyIndependently(spawnData));
+            // StartCoroutine(SpawnEnemyIndependently(spawnData));
         }
     }
 
     void Update()
     {
+        if (!IsServer)
+            return;
+
         timeElapsed += Time.deltaTime;
 
         if (timeElapsed >= spawnSpeedIncreaseInterval)
         {
             foreach (var spawnData in enemySpawnDatas)
             {
-                if (spawnData.minSpawnTime > minSpawnTimeLimit)
-                {
-                    spawnData.minSpawnTime -= spawnSpeedDecreaseAmount;
-                }
-
-                if (spawnData.maxSpawnTime > maxSpawnTimeLimit)
-                {
-                    spawnData.maxSpawnTime -= spawnSpeedDecreaseAmount;
-                }
-
-                spawnData.minSpawnTime = Mathf.Max(spawnData.minSpawnTime, minSpawnTimeLimit);
-                spawnData.maxSpawnTime = Mathf.Max(spawnData.maxSpawnTime, maxSpawnTimeLimit);
+                spawnData.minSpawnTime = Mathf.Max(
+                    spawnData.minSpawnTime - spawnSpeedDecreaseAmount,
+                    minSpawnTimeLimit
+                );
+                spawnData.maxSpawnTime = Mathf.Max(
+                    spawnData.maxSpawnTime - spawnSpeedDecreaseAmount,
+                    maxSpawnTimeLimit
+                );
             }
 
             timeElapsed = 0f;
@@ -86,7 +94,7 @@ public class EnemySpawnerLevel2 : MonoBehaviour, IEnemySpawner
     {
         yield return new WaitForSeconds(1f);
 
-        while (stopSpawning.Value == false)
+        while (!stopSpawning.Value)
         {
             if (currentTotalSpawnCount.Value < maxTotalSpawnCount)
             {
@@ -101,10 +109,11 @@ public class EnemySpawnerLevel2 : MonoBehaviour, IEnemySpawner
                     spawnPosition,
                     Quaternion.identity
                 );
+                spawnedEnemy.GetComponent<NetworkObject>().Spawn(true);
 
                 if (!spawnedEnemy.CompareTag("Enemy"))
                 {
-                    spawnedEnemy.tag = "Enemy";
+                    SetTagRecursive(spawnedEnemy, "Enemy");
                 }
 
                 currentTotalSpawnCount.Value++;
@@ -116,8 +125,9 @@ public class EnemySpawnerLevel2 : MonoBehaviour, IEnemySpawner
 
             if (
                 EnemyManager.Instance != null
-                && EnemyManager.Instance.killTarget.Value <= EnemyManager.Instance.enemiesKilled.Value
-                && isBossSpawned.Value == false
+                && EnemyManager.Instance.killTarget.Value
+                    <= EnemyManager.Instance.enemiesKilled.Value
+                && !isBossSpawned.Value
             )
             {
                 stopSpawning.Value = true;
@@ -125,51 +135,78 @@ public class EnemySpawnerLevel2 : MonoBehaviour, IEnemySpawner
                 StartCoroutine(HandleBossSpawn());
                 break;
             }
+        }
+    }
 
-            yield return null;
+    private void SetTagRecursive(GameObject obj, string tag)
+    {
+        obj.tag = tag;
+        foreach (Transform child in obj.transform)
+        {
+            SetTagRecursive(child.gameObject, tag);
         }
     }
 
     public void OnEnemyKilled()
     {
         currentTotalSpawnCount.Value--;
-
-        if (stopSpawning.Value == true)
-        {
-            currentTotalSpawnCount.Value = 0;
-        }
     }
 
     private IEnumerator HandleBossSpawn()
     {
         if (remain != null)
-        {
             remain.SetActive(false);
-        }
-
         if (warningBoss != null)
-        {
             warningBoss.SetActive(true);
-        }
 
         yield return new WaitForSeconds(3f);
 
         if (warningBoss != null)
-        {
             warningBoss.SetActive(false);
-        }
 
         if (bossLevel1 != null)
         {
-            bossLevel1.SetActive(true);
-            assassin.Active();
+            GameObject bossSpawned = Instantiate(
+                bossLevel1,
+                BossSpawnPosition.transform.position,
+                Quaternion.identity
+            );
+            bossSpawned.GetComponent<NetworkObject>().Spawn(true);
+
+            AssassinBossSkill.Instance.Active();
         }
 
         yield return new WaitForSeconds(0.5f);
 
         if (UIHealthBoss != null)
-        {
             UIHealthBoss.SetActive(true);
+    }
+
+    public void TestHandleBossSpawn()
+    {
+        if (!IsServer)
+        {
+            return;
         }
+        remain.SetActive(false);
+
+        warningBoss.SetActive(true);
+
+        warningBoss.SetActive(false);
+
+        if (bossLevel1 != null)
+        {
+            GameObject bossSpawned = Instantiate(
+                bossLevel1,
+                BossSpawnPosition.transform.position,
+                Quaternion.identity
+            );
+            bossSpawned.GetComponent<NetworkObject>().Spawn(true);
+
+            AssassinBossSkill.Instance.Active();
+        }
+
+        if (UIHealthBoss != null)
+            UIHealthBoss.SetActive(true);
     }
 }

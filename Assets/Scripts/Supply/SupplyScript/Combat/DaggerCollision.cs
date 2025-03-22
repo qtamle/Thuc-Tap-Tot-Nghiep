@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Linq;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -73,6 +74,7 @@ public class DaggerCollision : MonoBehaviour
 
         goldIncrease = FindFirstObjectByType<Gold>();
     }
+
     private void OnDestroy()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
@@ -107,15 +109,22 @@ public class DaggerCollision : MonoBehaviour
 
                 if (player == null)
                 {
-                    Debug.LogError("Player not found! Make sure the Player has the correct tag or layer.");
+                    Debug.LogError(
+                        "Player not found! Make sure the Player has the correct tag or layer."
+                    );
                 }
             }
         }
     }
-    
+
     public void DaggerDamage()
     {
-        Collider2D[] enemyDamage = Physics2D.OverlapBoxAll(transform.position, radiusDamage, 0f, damageLayer);
+        Collider2D[] enemyDamage = Physics2D.OverlapBoxAll(
+            transform.position,
+            radiusDamage,
+            0f,
+            damageLayer
+        );
         foreach (Collider2D enemy in enemyDamage)
         {
             if (enemy != null && enemy.gameObject != null && enemy.gameObject.activeInHierarchy)
@@ -135,14 +144,18 @@ public class DaggerCollision : MonoBehaviour
 
                 if (Random.value <= 0.30f)
                 {
-                    SpawnCoins(secondaryCoinPrefab, secondaryCoinSpawnMin, secondaryCoinSpawnMax, enemy.transform.position);
+                    SpawnCoins(
+                        secondaryCoinPrefab,
+                        secondaryCoinSpawnMin,
+                        secondaryCoinSpawnMax,
+                        enemy.transform.position
+                    );
                 }
 
                 SpawnExperienceOrbs(enemy.transform.position, 5);
             }
         }
     }
-
 
     void SpawnCoins(GameObject coinType, float minAmount, float maxAmount, Vector3 position)
     {
@@ -159,14 +172,18 @@ public class DaggerCollision : MonoBehaviour
         {
             Vector3 spawnPosition = position + Vector3.up * 0.2f;
 
-            GameObject coin = coinPoolManager.GetCoinFromPool(coinType);
+            NetworkObject coin = CoinPoolManager.Instance.GetCoinFromPool(
+                spawnPosition,
+                coinType == secondaryCoinPrefab
+            );
             coin.transform.position = spawnPosition;
 
             Rigidbody2D coinRb = coin.GetComponent<Rigidbody2D>();
 
             if (coinRb != null)
             {
-                Vector2 forceDirection = new Vector2(Random.Range(-1.5f, 1.5f), Random.Range(1f, 1f)) * 2.5f;
+                Vector2 forceDirection =
+                    new Vector2(Random.Range(-1.5f, 1.5f), Random.Range(1f, 1f)) * 2.5f;
                 coinRb.AddForce(forceDirection, ForceMode2D.Impulse);
 
                 StartCoroutine(CheckIfCoinIsStuck(coinRb));
@@ -179,7 +196,6 @@ public class DaggerCollision : MonoBehaviour
                     coinScript.SetCoinType(true, false);
                 else
                     coinScript.SetCoinType(false, true);
-
             }
         }
     }
@@ -190,7 +206,12 @@ public class DaggerCollision : MonoBehaviour
 
         if (coinRb != null)
         {
-            RaycastHit2D hit = Physics2D.Raycast(coinRb.transform.position, Vector2.down, 0.5f, groundLayer);
+            RaycastHit2D hit = Physics2D.Raycast(
+                coinRb.transform.position,
+                Vector2.down,
+                0.5f,
+                groundLayer
+            );
             if (hit.collider != null)
             {
                 coinRb.transform.position += Vector3.up * 0.3f;
@@ -202,6 +223,7 @@ public class DaggerCollision : MonoBehaviour
             yield break;
         }
     }
+
     void SpawnExperienceOrbs(Vector3 position, int orbCount)
     {
         for (int i = 0; i < orbCount; i++)
@@ -240,7 +262,9 @@ public class DaggerCollision : MonoBehaviour
                 {
                     Vector3 direction = (player.position - orb.transform.position).normalized;
 
-                    orbRb.MovePosition(orb.transform.position + direction * Time.deltaTime * orbMoveToPlayer);
+                    orbRb.MovePosition(
+                        orb.transform.position + direction * Time.deltaTime * orbMoveToPlayer
+                    );
 
                     if (Vector3.Distance(orb.transform.position, player.position) < 0.5f)
                     {
@@ -272,7 +296,9 @@ public class DaggerCollision : MonoBehaviour
                 {
                     Vector3 direction = (player.position - coin.transform.position).normalized;
 
-                    coinRb.MovePosition(coin.transform.position + direction * Time.deltaTime * orbMoveToPlayer);
+                    coinRb.MovePosition(
+                        coin.transform.position + direction * Time.deltaTime * orbMoveToPlayer
+                    );
 
                     if (Vector3.Distance(coin.transform.position, player.position) < 0.5f)
                     {
@@ -290,6 +316,7 @@ public class DaggerCollision : MonoBehaviour
             yield break;
         }
     }
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;

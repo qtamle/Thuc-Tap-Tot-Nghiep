@@ -1,11 +1,11 @@
-﻿using NUnit.Framework;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
+using Unity.Netcode;
 using UnityEngine;
 
-public class AssassinBossSkill : MonoBehaviour
+public class AssassinBossSkill : NetworkBehaviour
 {
+    public static AssassinBossSkill Instance;
     private Rigidbody2D rb;
     private bool isGrounded = false;
     public Transform groundCheck;
@@ -41,7 +41,7 @@ public class AssassinBossSkill : MonoBehaviour
     [Header("Clone Skill")]
     public GameObject clonePrefab;
     public float cloneSpeed;
-    public Transform[] dashTargets; 
+    public Transform[] dashTargets;
     private Vector3 originalPosition;
     public string playerTag = "Player";
     public float blinkDuration = 0.2f;
@@ -52,12 +52,25 @@ public class AssassinBossSkill : MonoBehaviour
     private AssassinHealth assassinHealth;
     private TrapDamage trap;
 
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     private void Start()
     {
         trap = GetComponent<TrapDamage>();
         assassinHealth = GetComponent<AssassinHealth>();
         rb = GetComponent<Rigidbody2D>();
-
+        dashTargets = DashTarget.Instance.dashTargets;
+        // randomBombTargets = 
         GameObject playerObject = GameObject.FindWithTag("Player");
 
         if (playerObject != null)
@@ -86,12 +99,16 @@ public class AssassinBossSkill : MonoBehaviour
 
                 if (playerTransform == null)
                 {
-                    Debug.LogError("Player not found using layer 'Player'. Make sure to assign the correct layer.");
+                    Debug.LogError(
+                        "Player not found using layer 'Player'. Make sure to assign the correct layer."
+                    );
                 }
             }
             else
             {
-                Debug.LogError("Layer 'Player' does not exist in the project. Add a layer named 'Player'.");
+                Debug.LogError(
+                    "Layer 'Player' does not exist in the project. Add a layer named 'Player'."
+                );
             }
         }
 
@@ -107,16 +124,16 @@ public class AssassinBossSkill : MonoBehaviour
 
     IEnumerator SkillActive()
     {
-        yield return new WaitForSeconds(2f); 
+        yield return new WaitForSeconds(2f);
 
         while (true)
         {
-            CheckGround(); 
+            CheckGround();
 
             if (!isGrounded)
             {
                 Debug.Log("Assassin Boss phải ở ground mới active skill");
-                yield return null; 
+                yield return null;
                 continue;
             }
 
@@ -132,13 +149,13 @@ public class AssassinBossSkill : MonoBehaviour
                             yield return new WaitForSeconds(1.5f);
                             Debug.Log("Throwing traps...");
                             ThrowTraps(4);
-                            yield return new WaitForSeconds(0.5f); 
+                            yield return new WaitForSeconds(0.5f);
                             break;
 
                         case 2:
                             Debug.Log("Teleporting to player...");
                             TeleportToPlayer();
-                            yield return new WaitForSeconds(4f); 
+                            yield return new WaitForSeconds(4f);
                             break;
 
                         case 3:
@@ -160,7 +177,7 @@ public class AssassinBossSkill : MonoBehaviour
                     yield return new WaitForSeconds(2f);
                 }
 
-                isSkillActive = false; 
+                isSkillActive = false;
             }
             else
             {
@@ -173,7 +190,11 @@ public class AssassinBossSkill : MonoBehaviour
     {
         if (groundCheck != null)
         {
-            isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+            isGrounded = Physics2D.OverlapCircle(
+                groundCheck.position,
+                groundCheckRadius,
+                groundLayer
+            );
         }
         else
         {
@@ -188,7 +209,8 @@ public class AssassinBossSkill : MonoBehaviour
 
     private void FlipToPlayer()
     {
-        if (playerTransforms == null) return;
+        if (playerTransforms == null)
+            return;
 
         float directionX = playerTransforms.position.x - transform.position.x;
 
@@ -201,7 +223,6 @@ public class AssassinBossSkill : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, 180, 0); // Quay về hướng trái
         }
     }
-
 
     void ThrowTraps(int trapCount)
     {
@@ -249,7 +270,11 @@ public class AssassinBossSkill : MonoBehaviour
 
         while (trap != null && Vector3.Distance(trap.transform.position, targetPosition) > 0.1f)
         {
-            trap.transform.position = Vector3.MoveTowards(trap.transform.position, targetPosition, trapSpeed * Time.deltaTime);
+            trap.transform.position = Vector3.MoveTowards(
+                trap.transform.position,
+                targetPosition,
+                trapSpeed * Time.deltaTime
+            );
             yield return null;
         }
 
@@ -280,11 +305,15 @@ public class AssassinBossSkill : MonoBehaviour
         GameObject bomb1 = Instantiate(bombPrefab, transform.position, Quaternion.identity);
         StartCoroutine(MoveBombToTarget(bomb1, playerTargetPosition));
 
-        Vector3 randomTargetPosition1 = randomBombTargets[Random.Range(0, randomBombTargets.Length)].position;
+        Vector3 randomTargetPosition1 = randomBombTargets[
+            Random.Range(0, randomBombTargets.Length)
+        ].position;
         GameObject bomb2 = Instantiate(bombPrefab, transform.position, Quaternion.identity);
         StartCoroutine(MoveBombToTarget(bomb2, randomTargetPosition1));
 
-        Vector3 randomTargetPosition2 = randomBombTargets[Random.Range(0, randomBombTargets.Length)].position;
+        Vector3 randomTargetPosition2 = randomBombTargets[
+            Random.Range(0, randomBombTargets.Length)
+        ].position;
         GameObject bomb3 = Instantiate(bombPrefab, transform.position, Quaternion.identity);
         StartCoroutine(MoveBombToTarget(bomb3, randomTargetPosition2));
 
@@ -298,7 +327,11 @@ public class AssassinBossSkill : MonoBehaviour
 
         while (bomb != null && Vector3.Distance(bomb.transform.position, targetPosition) > 0.1f)
         {
-            bomb.transform.position = Vector3.MoveTowards(bomb.transform.position, targetPosition, bombSpeed * Time.deltaTime);
+            bomb.transform.position = Vector3.MoveTowards(
+                bomb.transform.position,
+                targetPosition,
+                bombSpeed * Time.deltaTime
+            );
             yield return null;
         }
 
@@ -315,7 +348,7 @@ public class AssassinBossSkill : MonoBehaviour
 
         BombDamage Bomb = bomb.GetComponent<BombDamage>();
 
-        if (Bomb != null )
+        if (Bomb != null)
         {
             Bomb.BombExplosion();
         }
@@ -334,15 +367,19 @@ public class AssassinBossSkill : MonoBehaviour
 
         Vector3[] fragmentDirections = new Vector3[]
         {
-            new Vector3(1f, 1, 0),   // Đi chéo lên phải
-            new Vector3(-1f, 1, 0),  // Đi chéo lên trái
-            new Vector3(1f, -1, 0),  // Đi chéo xuống phải
-            new Vector3(-1f, -1, 0)  // Đi chéo xuống trái
+            new Vector3(1f, 1, 0), // Đi chéo lên phải
+            new Vector3(-1f, 1, 0), // Đi chéo lên trái
+            new Vector3(1f, -1, 0), // Đi chéo xuống phải
+            new Vector3(-1f, -1, 0), // Đi chéo xuống trái
         };
 
         foreach (Vector3 direction in fragmentDirections)
         {
-            GameObject fragment = Instantiate(bombFragmentPrefab, explosionPosition, Quaternion.identity);
+            GameObject fragment = Instantiate(
+                bombFragmentPrefab,
+                explosionPosition,
+                Quaternion.identity
+            );
 
             StartCoroutine(MoveFragment(fragment, direction.normalized));
         }
@@ -378,7 +415,8 @@ public class AssassinBossSkill : MonoBehaviour
 
     private IEnumerator ExecuteTeleport()
     {
-        if (isTeleporting) yield break;
+        if (isTeleporting)
+            yield break;
 
         isTeleporting = true;
 
@@ -387,8 +425,12 @@ public class AssassinBossSkill : MonoBehaviour
         FlipToPlayer();
 
         // Xác định vị trí gần Player
-        float offsetX = playerTransforms.position.x > transform.position.x ? -teleportOffsetX : teleportOffsetX;
-        Vector2 targetPosition = new Vector2(playerTransforms.position.x + offsetX, playerTransforms.position.y);
+        float offsetX =
+            playerTransforms.position.x > transform.position.x ? -teleportOffsetX : teleportOffsetX;
+        Vector2 targetPosition = new Vector2(
+            playerTransforms.position.x + offsetX,
+            playerTransforms.position.y
+        );
         targetPosition.y += additionalHeight;
 
         transform.position = targetPosition;
@@ -416,11 +458,16 @@ public class AssassinBossSkill : MonoBehaviour
             yield break;
         }
 
-        Vector3 direction = transform.rotation == Quaternion.identity ? Vector3.right : Vector3.left;
+        Vector3 direction =
+            transform.rotation == Quaternion.identity ? Vector3.right : Vector3.left;
 
         for (int i = 0; i < 3; i++)
         {
-            GameObject bullet = Instantiate(bulletPrefab, shootingPoint.position, Quaternion.identity);
+            GameObject bullet = Instantiate(
+                bulletPrefab,
+                shootingPoint.position,
+                Quaternion.identity
+            );
             Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
 
             if (bulletRb != null)
@@ -431,11 +478,12 @@ public class AssassinBossSkill : MonoBehaviour
             yield return new WaitForSeconds(1.2f);
         }
     }
+
     public void CloneAndDash()
     {
         isSkillActive = true;
 
-        if (clonePrefab == null || dashTargets.Length == 0)
+        if (clonePrefab == null || DashTarget.Instance.dashTargets.Length == 0)
         {
             Debug.LogError("Clone Prefab hoặc Dash Targets là thiếu!");
             return;
@@ -453,8 +501,8 @@ public class AssassinBossSkill : MonoBehaviour
 
     IEnumerator MoveClonesToSides(GameObject clone1, GameObject clone2, GameObject[] allCharacters)
     {
-        Vector3 leftPosition = transform.position + Vector3.left * 2f; 
-        Vector3 rightPosition = transform.position + Vector3.right * 2f; 
+        Vector3 leftPosition = transform.position + Vector3.left * 2f;
+        Vector3 rightPosition = transform.position + Vector3.right * 2f;
 
         float moveDuration = 1f;
         float elapsedTime = 0f;
@@ -481,10 +529,10 @@ public class AssassinBossSkill : MonoBehaviour
 
     IEnumerator DelayBeforeDash(GameObject[] allCharacters)
     {
-        yield return new WaitForSeconds(1.5f); 
+        yield return new WaitForSeconds(1.5f);
 
         List<int> availableIndices = new List<int>();
-        for (int i = 0; i < dashTargets.Length; i++)
+        for (int i = 0; i < DashTarget.Instance.dashTargets.Length; i++)
         {
             availableIndices.Add(i);
         }
@@ -495,14 +543,17 @@ public class AssassinBossSkill : MonoBehaviour
         int randomIndex2 = availableIndices[Random.Range(0, availableIndices.Count)];
         availableIndices.Remove(randomIndex2);
 
-        Vector3 targetPosition1 = dashTargets[randomIndex1].position;
-        Vector3 targetPosition2 = dashTargets[randomIndex2].position;
+        Vector3 targetPosition1 = DashTarget.Instance.dashTargets[randomIndex1].position;
+        Vector3 targetPosition2 = DashTarget.Instance.dashTargets[randomIndex2].position;
 
         float offsetY = 1.2f;
         targetPosition1.y += offsetY;
         targetPosition2.y += offsetY;
 
-        Vector3 assassinTargetPosition = dashTargets[availableIndices[Random.Range(0, availableIndices.Count)]].position;
+        Vector3 assassinTargetPosition = DashTarget
+            .Instance
+            .dashTargets[availableIndices[Random.Range(0, availableIndices.Count)]]
+            .position;
         assassinTargetPosition.y += offsetY;
 
         // Tìm player bằng Tag và truyền vào CloneDash
@@ -515,7 +566,15 @@ public class AssassinBossSkill : MonoBehaviour
 
         if (player != null)
         {
-            StartCoroutine(MoveToRandomTargets(allCharacters, assassinTargetPosition, targetPosition1, targetPosition2, player.transform));
+            StartCoroutine(
+                MoveToRandomTargets(
+                    allCharacters,
+                    assassinTargetPosition,
+                    targetPosition1,
+                    targetPosition2,
+                    player.transform
+                )
+            );
         }
         else
         {
@@ -536,7 +595,13 @@ public class AssassinBossSkill : MonoBehaviour
         return null;
     }
 
-    IEnumerator MoveToRandomTargets(GameObject[] characters, Vector3 assassinTargetPosition, Vector3 targetPosition1, Vector3 targetPosition2, Transform player)
+    IEnumerator MoveToRandomTargets(
+        GameObject[] characters,
+        Vector3 assassinTargetPosition,
+        Vector3 targetPosition1,
+        Vector3 targetPosition2,
+        Transform player
+    )
     {
         characters[0].transform.position = assassinTargetPosition;
         characters[1].transform.position = targetPosition1;
@@ -551,13 +616,13 @@ public class AssassinBossSkill : MonoBehaviour
             cloneDash1.DashTowardsPlayer();
 
         if (cloneDash2 != null)
-            cloneDash2.DashTowardsPlayer();  
+            cloneDash2.DashTowardsPlayer();
 
         CloneDash playerCloneDash = characters[0].GetComponent<CloneDash>();
         if (playerCloneDash != null)
-            playerCloneDash.DashTowardsPlayer(); 
+            playerCloneDash.DashTowardsPlayer();
 
-        yield return new WaitForSeconds(3f); 
+        yield return new WaitForSeconds(3f);
 
         Destroy(characters[1]);
         Destroy(characters[2]);
@@ -574,7 +639,7 @@ public class AssassinBossSkill : MonoBehaviour
             Rigidbody rb = characters[0].GetComponent<Rigidbody>();
             if (rb != null)
             {
-                rb.useGravity = true;  
+                rb.useGravity = true;
             }
         }
 
@@ -599,7 +664,7 @@ public class AssassinBossSkill : MonoBehaviour
             yield break;
         }
 
-        while (isSkillActive) 
+        while (isSkillActive)
         {
             clone1Renderer.enabled = false;
             clone2Renderer.enabled = false;

@@ -1,10 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
-public class Cyborg : MonoBehaviour
+public class Cyborg : NetworkBehaviour
 {
+    public static Cyborg Instance;
+
     [Header("Disco Ball")]
     public GameObject orbPrefab;
     public GameObject linePrefab;
@@ -19,15 +22,16 @@ public class Cyborg : MonoBehaviour
     public Transform[] gunPositions;
 
     [Header("Shoot Laser Skill")]
-    public GameObject laserPrefab;  
-    public Transform laserSpawnPoint; 
-    public float moveDistance = 5f;  
-    public float moveDuration = 1f; 
+    public GameObject laserPrefab;
+    public Transform laserSpawnPoint;
+    public float moveDistance = 5f;
+    public float moveDuration = 1f;
     public float laserDuration = 0.5f;
 
     [Header("Bomb Skill")]
     public GameObject bombPrefab;
-    public Transform[] bombPositions;
+
+    // public Transform[] bombPositions;
     public float bombDuration = 3f;
     public float laserLength = 10f;
     public GameObject laserBomb;
@@ -46,6 +50,19 @@ public class Cyborg : MonoBehaviour
     private CyborgHealth Cyborghealth;
 
     private bool isSpawn;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     private void Start()
     {
         Cyborghealth = GetComponent<CyborgHealth>();
@@ -75,7 +92,11 @@ public class Cyborg : MonoBehaviour
 
         while (elapsedTime < moveDuration)
         {
-            transform.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime / moveDuration);
+            transform.position = Vector3.Lerp(
+                startPosition,
+                targetPosition,
+                elapsedTime / moveDuration
+            );
             elapsedTime += Time.deltaTime;
             yield return null;
         }
@@ -109,7 +130,9 @@ public class Cyborg : MonoBehaviour
             yield return StartCoroutine(MoveAndFireLaser());
 
             rb.bodyType = RigidbodyType2D.Dynamic;
-            yield return new WaitUntil(() => Physics2D.Raycast(groundCheck.position, Vector2.down, 0.1f, groundLayer));
+            yield return new WaitUntil(
+                () => Physics2D.Raycast(groundCheck.position, Vector2.down, 0.1f, groundLayer)
+            );
             isStunned = true;
             rb.bodyType = RigidbodyType2D.Static;
 
@@ -123,7 +146,7 @@ public class Cyborg : MonoBehaviour
 
             transform.position = originalPositionSkillRandom;
 
-            yield return null; 
+            yield return null;
         }
     }
 
@@ -140,7 +163,11 @@ public class Cyborg : MonoBehaviour
 
         while (elapsedTime < moveDuration)
         {
-            orb.transform.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime / moveDuration);
+            orb.transform.position = Vector3.Lerp(
+                startPosition,
+                targetPosition,
+                elapsedTime / moveDuration
+            );
             elapsedTime += Time.deltaTime;
             yield return null;
         }
@@ -174,10 +201,26 @@ public class Cyborg : MonoBehaviour
     {
         GameObject[] lasers = new GameObject[4];
 
-        lasers[0] = CreateLaser(centerPosition, new Vector3(0, 0, 0).normalized, Quaternion.Euler(0, 0, 180));
-        lasers[1] = CreateLaser(centerPosition, new Vector3(0, 0, 0).normalized, Quaternion.Euler(0, 0, 0));
-        lasers[2] = CreateLaser(centerPosition, new Vector3(0, 0, 0).normalized, Quaternion.Euler(0, 0, -90));
-        lasers[3] = CreateLaser(centerPosition, new Vector3(0, 0, 0).normalized, Quaternion.Euler(0, 0, 90));
+        lasers[0] = CreateLaser(
+            centerPosition,
+            new Vector3(0, 0, 0).normalized,
+            Quaternion.Euler(0, 0, 180)
+        );
+        lasers[1] = CreateLaser(
+            centerPosition,
+            new Vector3(0, 0, 0).normalized,
+            Quaternion.Euler(0, 0, 0)
+        );
+        lasers[2] = CreateLaser(
+            centerPosition,
+            new Vector3(0, 0, 0).normalized,
+            Quaternion.Euler(0, 0, -90)
+        );
+        lasers[3] = CreateLaser(
+            centerPosition,
+            new Vector3(0, 0, 0).normalized,
+            Quaternion.Euler(0, 0, 90)
+        );
 
         return lasers;
     }
@@ -188,8 +231,16 @@ public class Cyborg : MonoBehaviour
 
         Vector3 positionDownRight = new Vector3(7.13f, 8.94f, 0);
         Vector3 positionDownLeft = new Vector3(-7f, 8.41f, 0);
-        lasers[0] = CreateLaser(positionDownRight, new Vector3(7.13f, 8.94f, 0).normalized, Quaternion.Euler(0, 0, -35));
-        lasers[1] = CreateLaser(positionDownLeft, new Vector3(-7f, 8.41f, 0).normalized, Quaternion.Euler(0, 0, 35));
+        lasers[0] = CreateLaser(
+            positionDownRight,
+            new Vector3(7.13f, 8.94f, 0).normalized,
+            Quaternion.Euler(0, 0, -35)
+        );
+        lasers[1] = CreateLaser(
+            positionDownLeft,
+            new Vector3(-7f, 8.41f, 0).normalized,
+            Quaternion.Euler(0, 0, 35)
+        );
 
         return lasers;
     }
@@ -260,12 +311,16 @@ public class Cyborg : MonoBehaviour
 
         while (elapsedTime < moveDuration)
         {
-            transform.position = Vector3.Lerp(transform.position, targetPosition, elapsedTime / moveDuration);
+            transform.position = Vector3.Lerp(
+                transform.position,
+                targetPosition,
+                elapsedTime / moveDuration
+            );
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
-        transform.position = targetPosition; 
+        transform.position = targetPosition;
 
         FireLaser();
 
@@ -274,15 +329,19 @@ public class Cyborg : MonoBehaviour
 
     private void FireLaser()
     {
-        GameObject laser = Instantiate(laserPrefab, laserSpawnPoint.position, Quaternion.Euler(0, 0, 0));
+        GameObject laser = Instantiate(
+            laserPrefab,
+            laserSpawnPoint.position,
+            Quaternion.Euler(0, 0, 0)
+        );
         LineRenderer lineRenderer = laser.GetComponent<LineRenderer>();
         if (lineRenderer != null)
         {
             lineRenderer.SetPosition(0, laserSpawnPoint.position);
-            lineRenderer.SetPosition(1, laserSpawnPoint.position + transform.right * 5f);  
+            lineRenderer.SetPosition(1, laserSpawnPoint.position + transform.right * 5f);
         }
 
-        Destroy(laser, laserDuration); 
+        Destroy(laser, laserDuration);
     }
 
     private IEnumerator BombSkill()
@@ -294,7 +353,7 @@ public class Cyborg : MonoBehaviour
         for (int i = 0; i < 4; i++)
         {
             Transform bombPosition = GetRandomBombPosition();
-            GameObject bomb = Instantiate(bombPrefab, spawnPosition.position, Quaternion.identity); 
+            GameObject bomb = Instantiate(bombPrefab, spawnPosition.position, Quaternion.identity);
 
             bombs.Add(bomb);
 
@@ -324,7 +383,11 @@ public class Cyborg : MonoBehaviour
 
         while (elapsedTime < moveDuration)
         {
-            bomb.transform.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime / moveDuration);
+            bomb.transform.position = Vector3.Lerp(
+                startPosition,
+                targetPosition,
+                elapsedTime / moveDuration
+            );
             elapsedTime += Time.deltaTime;
             yield return null;
         }
@@ -334,7 +397,7 @@ public class Cyborg : MonoBehaviour
 
     private GameObject CreateLaserAtPosition(Vector3 position)
     {
-        position.y = 10f; 
+        position.y = 10f;
 
         GameObject laser = Instantiate(laserBomb, position, Quaternion.Euler(0, 0, 0));
 
@@ -350,8 +413,8 @@ public class Cyborg : MonoBehaviour
 
     private Transform GetRandomBombPosition()
     {
-        int randomIndex = Random.Range(0, bombPositions.Length);
-        return bombPositions[randomIndex];
+        int randomIndex = Random.Range(0, BoomPostion.Instance.bombPositions.Length);
+        return BoomPostion.Instance.bombPositions[randomIndex];
     }
 
     private Transform GetRandomGunPosition(List<Transform> positions)

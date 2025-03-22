@@ -1,37 +1,71 @@
 ﻿using TMPro;
+using Unity.Netcode;
 using UnityEngine;
 
-public class KillCounterUI : MonoBehaviour
+public class KillCounterUI : NetworkBehaviour
 {
+    public static KillCounterUI Instance;
     public TMP_Text killCounterText;
-    private int currentKillTarget;
-    private int currentEnemiesKilled;
+    private NetworkVariable<int> currentKillTarget = new NetworkVariable<int>();
+    private NetworkVariable<int> currentEnemiesKilled = new NetworkVariable<int>();
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+    }
 
     private void Start()
     {
         if (EnemyManager.Instance != null)
         {
-            currentKillTarget = EnemyManager.Instance.killTarget.Value;
-            currentEnemiesKilled = EnemyManager.Instance.enemiesKilled.Value;
+            // Đọc giá trị ban đầu
+            // Lắng nghe thay đổi từ NetworkVariable
+            EnemyManager.Instance.killTarget.OnValueChanged += (oldValue, newValue) =>
+                UpdateKillCounterUI(EnemyManager.Instance.enemiesKilled.Value, newValue);
+            EnemyManager.Instance.enemiesKilled.OnValueChanged += (oldValue, newValue) =>
+                UpdateKillCounterUI(newValue, EnemyManager.Instance.killTarget.Value);
         }
 
-        UpdateKillCounterUI();
+        UpdateKillCounterUIClientRpc();
     }
 
-    private void Update()
+    public void UpdateKillCounterUI(int currentKills, int targetKills)
     {
-        if (EnemyManager.Instance != null)
-        {
-            if (currentEnemiesKilled != EnemyManager.Instance.enemiesKilled.Value)
-            {
-                currentEnemiesKilled = EnemyManager.Instance.enemiesKilled.Value;
-                UpdateKillCounterUI();
-            }
-        }
+        killCounterText.text = $"{targetKills - currentKills}";
     }
+
+    public void CounterUI()
+    {
+        currentKillTarget.Value = EnemyManager.Instance.killTarget.Value;
+        currentEnemiesKilled.Value = EnemyManager.Instance.enemiesKilled.Value;
+        UpdateKillCounterUIClientRpc();
+    }
+
+    // private void Update()
+    // {
+    //     if (!IsServer)
+    //         return;
+    //     if (EnemyManager.Instance != null)
+    //     {
+    //         if (currentEnemiesKilled.Value != EnemyManager.Instance.enemiesKilled.Value)
+    //         {
+    //             currentEnemiesKilled.Value = EnemyManager.Instance.enemiesKilled.Value;
+    //             UpdateKillCounterUIClientRpc();
+    //         }
+    //     }
+    // }
 
     private void UpdateKillCounterUI()
     {
-        killCounterText.text = $"{currentKillTarget - currentEnemiesKilled}";
+        killCounterText.text = $"{currentKillTarget.Value - currentEnemiesKilled.Value}";
+    }
+
+    [ClientRpc]
+    private void UpdateKillCounterUIClientRpc()
+    {
+        killCounterText.text = $"{currentKillTarget.Value - currentEnemiesKilled.Value}";
     }
 }

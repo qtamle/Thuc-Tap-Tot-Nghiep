@@ -1,8 +1,12 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using Unity.Netcode;
+using Unity.Netcode.Components;
+using UnityEngine;
 
-public class Gangster : MonoBehaviour
+public class Gangster : NetworkBehaviour
 {
+    public static Gangster Instance;
+
     [Header("Spawn Settings")]
     public Vector2 spawnPosition = new Vector2(0f, 8f);
     public Transform groundCheck;
@@ -18,7 +22,7 @@ public class Gangster : MonoBehaviour
     public Transform WallCheck;
     public float wallCheckRadius;
 
-    private Rigidbody2D rb;
+    private NetworkRigidbody2D rb;
     private bool isGrounded = false;
     private bool isCharging = false;
     private bool isSkillActive = false;
@@ -33,10 +37,13 @@ public class Gangster : MonoBehaviour
 
     private GangsterHealth gangsterHealth;
     private RockPool rockPool;
+
+
     private void Start()
     {
+        Debug.Log("Boss.Start()");
         rockPool = FindFirstObjectByType<RockPool>();
-        rb = GetComponent<Rigidbody2D>();
+        rb = GetComponent<NetworkRigidbody2D>();
         gangsterHealth = GetComponent<GangsterHealth>();
 
         if (rb == null)
@@ -50,6 +57,7 @@ public class Gangster : MonoBehaviour
 
     private void FindPlayerTransform()
     {
+        Debug.Log("Boss.FindPlayerTransform()");
         GameObject player = GameObject.FindGameObjectWithTag("Player");
 
         if (player != null)
@@ -80,7 +88,8 @@ public class Gangster : MonoBehaviour
 
     public void Active()
     {
-        gameObject.SetActive(true);  
+        Debug.Log("Boss.Active()");
+        gameObject.SetActive(true);
 
         isGrounded = false;
         isCharging = false;
@@ -88,6 +97,7 @@ public class Gangster : MonoBehaviour
 
         StartCoroutine(RandomSkill());
     }
+
     IEnumerator RandomSkill()
     {
         yield return new WaitForSeconds(3f);
@@ -96,15 +106,15 @@ public class Gangster : MonoBehaviour
         {
             if (!isUsingSkill)
             {
-                if (skillUsageCount < 3) 
+                if (skillUsageCount < 3)
                 {
                     UseJumpSkill();
                     skillUsageCount++;
                 }
-                else 
+                else
                 {
                     UseChargeSkill();
-                    skillUsageCount = 0; 
+                    skillUsageCount = 0;
                 }
 
                 float randomDelay = Random.Range(3f, 4f);
@@ -124,12 +134,13 @@ public class Gangster : MonoBehaviour
 
     public void Spawn()
     {
+        Debug.Log("Boss.spawn()");
         transform.position = spawnPosition;
-
+        // NetworkObject.Spawn(true);
         if (rb != null)
         {
-            rb.linearVelocity = Vector2.zero;
-            rb.gravityScale = 2f;
+            rb.Rigidbody2D.linearVelocity = Vector2.zero;
+            rb.Rigidbody2D.gravityScale = 2f;
         }
     }
 
@@ -137,14 +148,18 @@ public class Gangster : MonoBehaviour
     {
         if (groundCheck != null)
         {
-            isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+            isGrounded = Physics2D.OverlapCircle(
+                groundCheck.position,
+                groundCheckRadius,
+                groundLayer
+            );
         }
         else
         {
             Debug.LogWarning("Ground Check Transform is not assigned!");
         }
 
-        if (gangsterHealth != null && gangsterHealth.currentHealth <= 0)
+        if (gangsterHealth != null && gangsterHealth.currentHealth.Value <= 0)
         {
             StopAllActions();
         }
@@ -153,16 +168,16 @@ public class Gangster : MonoBehaviour
     private void StopAllActions()
     {
         StopAllCoroutines();
-        rb.linearVelocity = Vector2.zero;
+        rb.Rigidbody2D.linearVelocity = Vector2.zero;
         isUsingSkill = false;
-        isCharging = false; 
+        isCharging = false;
         isSkillActive = false;
-
     }
 
     public void UseJumpSkill()
     {
-        if (isUsingSkill) return; 
+        if (isUsingSkill)
+            return;
         isUsingSkill = true;
 
         if (isGrounded)
@@ -171,7 +186,7 @@ public class Gangster : MonoBehaviour
         }
         else
         {
-            isUsingSkill = false; 
+            isUsingSkill = false;
         }
     }
 
@@ -180,18 +195,20 @@ public class Gangster : MonoBehaviour
         isSkillActive = true;
 
         float targetY = 15f;
-        rb.linearVelocity = new Vector2(0, 30f + targetY);
+        rb.Rigidbody2D.linearVelocity = new Vector2(0, 30f + targetY);
         yield return new WaitForSeconds(1f);
 
-        rb.linearVelocity = Vector2.zero;
-        rb.gravityScale = 4f;
+        rb.Rigidbody2D.linearVelocity = Vector2.zero;
+        rb.Rigidbody2D.gravityScale = 4f;
         yield return new WaitForSeconds(1f);
 
-        isUsingSkill = false; 
+        isUsingSkill = false;
     }
+
     public void UseChargeSkill()
     {
-        if (isUsingSkill) return; 
+        if (isUsingSkill)
+            return;
         isUsingSkill = true;
 
         if (!isCharging)
@@ -200,9 +217,10 @@ public class Gangster : MonoBehaviour
         }
         else
         {
-            isUsingSkill = false; 
+            isUsingSkill = false;
         }
     }
+
     private IEnumerator ExecuteChargeSkill()
     {
         yield return new WaitForSeconds(1f);
@@ -212,7 +230,10 @@ public class Gangster : MonoBehaviour
         FindPlayerTransform();
 
         float offsetX = playerTransform.position.x > transform.position.x ? -3f : 3f;
-        Vector2 targetPosition = new Vector2(playerTransform.position.x + offsetX, playerTransform.position.y);
+        Vector2 targetPosition = new Vector2(
+            playerTransform.position.x + offsetX,
+            playerTransform.position.y
+        );
         float additionalHeight = 0.5f;
         targetPosition.y += additionalHeight;
 
@@ -220,7 +241,7 @@ public class Gangster : MonoBehaviour
 
         if (rb != null)
         {
-            rb.gravityScale = 4f;
+            rb.Rigidbody2D.gravityScale = 4f;
         }
         else
         {
@@ -230,7 +251,8 @@ public class Gangster : MonoBehaviour
 
         yield return new WaitForSeconds(0.7f);
 
-        if (playerTransform == null) yield break;
+        if (playerTransform == null)
+            yield break;
 
         float chargeDirectionX = playerTransform.position.x > transform.position.x ? 1f : -1f;
         FlipToDirection(chargeDirectionX);
@@ -243,10 +265,17 @@ public class Gangster : MonoBehaviour
 
                 if (isGrounded)
                 {
-                    rb.linearVelocity = new Vector2(chargeDirectionX * chargeSpeed, rb.linearVelocity.y);
+                    rb.Rigidbody2D.linearVelocity = new Vector2(
+                        chargeDirectionX * chargeSpeed,
+                        rb.Rigidbody2D.linearVelocity.y
+                    );
                 }
 
-                Collider2D playerCollider = Physics2D.OverlapCircle(ChargingAttackTransform.position, radiusCharging, player);
+                Collider2D playerCollider = Physics2D.OverlapCircle(
+                    ChargingAttackTransform.position,
+                    radiusCharging,
+                    player
+                );
                 if (playerCollider != null)
                 {
                     PlayerHealth playerHealth = playerCollider.GetComponent<PlayerHealth>();
@@ -265,7 +294,7 @@ public class Gangster : MonoBehaviour
             yield break;
         }
 
-        rb.linearVelocity = Vector2.zero;
+        rb.Rigidbody2D.linearVelocity = Vector2.zero;
 
         if (gangsterHealth != null)
         {
@@ -276,8 +305,8 @@ public class Gangster : MonoBehaviour
         yield return new WaitForSeconds(3f);
 
         transform.position = new Vector2(resetX, resetY);
-        rb.linearVelocity = Vector2.zero;
-        rb.gravityScale = 4f;
+        rb.Rigidbody2D.linearVelocity = Vector2.zero;
+        rb.Rigidbody2D.gravityScale = 4f;
         isCharging = false;
         isUsingSkill = false;
     }
@@ -293,6 +322,7 @@ public class Gangster : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, 180, 0); // Quay về hướng trái
         }
     }
+
     void SpawnRocks()
     {
         float lastRockX = Mathf.NegativeInfinity;
@@ -304,8 +334,7 @@ public class Gangster : MonoBehaviour
             do
             {
                 randomX = Random.Range(-4.2f, 4.2f);
-            }
-            while (Mathf.Abs(randomX - lastRockX) < 2f); 
+            } while (Mathf.Abs(randomX - lastRockX) < 2f);
 
             lastRockX = randomX;
 
@@ -316,13 +345,12 @@ public class Gangster : MonoBehaviour
         }
     }
 
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if ((groundLayer.value & (1 << collision.gameObject.layer)) > 0)
         {
-            rb.gravityScale = 0;
-            if (isSkillActive) 
+            rb.Rigidbody2D.gravityScale = 0;
+            if (isSkillActive)
             {
                 SpawnRocks();
                 isSkillActive = false;

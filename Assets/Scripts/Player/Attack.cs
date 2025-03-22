@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Linq;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Attack : MonoBehaviour
+public class Attack : NetworkBehaviour
 {
     [Header("Settings Attack")]
     public Vector2 boxSize;
@@ -82,9 +83,14 @@ public class Attack : MonoBehaviour
             int playerLayer = LayerMask.NameToLayer("Player");
             if (playerLayer >= 0)
             {
-                playerObject = FindObjectsOfType<GameObject>().FirstOrDefault(obj => obj.layer == playerLayer);
+                playerObject = FindObjectsOfType<GameObject>()
+                    .FirstOrDefault(obj => obj.layer == playerLayer);
             }
-            Debug.Log(playerObject != null ? "Player object found by layer." : "Player object not found by layer!");
+            Debug.Log(
+                playerObject != null
+                    ? "Player object found by layer."
+                    : "Player object not found by layer!"
+            );
         }
 
         if (playerObject != null)
@@ -113,7 +119,12 @@ public class Attack : MonoBehaviour
 
     private void Update()
     {
-        Collider2D[] enemies = Physics2D.OverlapBoxAll(attackPoints.position, boxSize, 0f, enemyLayer);
+        Collider2D[] enemies = Physics2D.OverlapBoxAll(
+            attackPoints.position,
+            boxSize,
+            0f,
+            enemyLayer
+        );
 
         foreach (Collider2D enemy in enemies)
         {
@@ -139,7 +150,12 @@ public class Attack : MonoBehaviour
 
                 if (Random.value <= 0.30f)
                 {
-                    SpawnCoins(secondaryCoinPrefab, secondaryCoinSpawnMin, secondaryCoinSpawnMax, enemy.transform.position);
+                    SpawnCoins(
+                        secondaryCoinPrefab,
+                        secondaryCoinSpawnMin,
+                        secondaryCoinSpawnMax,
+                        enemy.transform.position
+                    );
                 }
 
                 if (Random.value <= 0.15f && lucky != null)
@@ -156,7 +172,12 @@ public class Attack : MonoBehaviour
             }
         }
 
-        Collider2D[] bosses = Physics2D.OverlapBoxAll(attackPoints.position, boxSize, 0f, bossLayer);
+        Collider2D[] bosses = Physics2D.OverlapBoxAll(
+            attackPoints.position,
+            boxSize,
+            0f,
+            bossLayer
+        );
 
         foreach (Collider2D boss in bosses)
         {
@@ -164,16 +185,25 @@ public class Attack : MonoBehaviour
 
             if (damageable != null && damageable.CanBeDamaged() && !isAttackBoss)
             {
-                damageable.TakeDamage(1); 
+                AttackBossServerRpc();
                 isAttackBoss = true;
                 damageable.SetCanBeDamaged(false);
 
-
-                SpawnCoins(coinPrefab, coinSpawnMin * 10, coinSpawnMax * 10, boss.transform.position);
+                SpawnCoins(
+                    coinPrefab,
+                    coinSpawnMin * 10,
+                    coinSpawnMax * 10,
+                    boss.transform.position
+                );
 
                 if (Random.value <= 0.25f)
                 {
-                    SpawnCoins(secondaryCoinPrefab, secondaryCoinSpawnMin * 5, secondaryCoinSpawnMax * 5, boss.transform.position);
+                    SpawnCoins(
+                        secondaryCoinPrefab,
+                        secondaryCoinSpawnMin * 5,
+                        secondaryCoinSpawnMax * 5,
+                        boss.transform.position
+                    );
                 }
 
                 if (Random.value <= 0.15f && lucky != null)
@@ -196,18 +226,33 @@ public class Attack : MonoBehaviour
 
             if (partHealth != null && !isAttackBoss && snakeHealth.IsStunned())
             {
-                if ((MachineSnakeHealth.attackedPartID == -1 || MachineSnakeHealth.attackedPartID == partHealth.partID) && !partHealth.isAlreadyHit)
+                if (
+                    (
+                        MachineSnakeHealth.attackedPartID == -1
+                        || MachineSnakeHealth.attackedPartID == partHealth.partID
+                    ) && !partHealth.isAlreadyHit
+                )
                 {
                     partHealth.TakeDamage(1);
                     isAttackBoss = true;
 
                     snakeHealth.SetCanBeDamaged(false);
 
-                    SpawnCoins(coinPrefab, coinSpawnMin * 13, coinSpawnMax * 13, partHealth.transform.position);
+                    SpawnCoins(
+                        coinPrefab,
+                        coinSpawnMin * 13,
+                        coinSpawnMax * 13,
+                        partHealth.transform.position
+                    );
 
                     if (Random.value <= 0.25f)
                     {
-                        SpawnCoins(secondaryCoinPrefab, secondaryCoinSpawnMin * 5, secondaryCoinSpawnMax * 5, partHealth.transform.position);
+                        SpawnCoins(
+                            secondaryCoinPrefab,
+                            secondaryCoinSpawnMin * 5,
+                            secondaryCoinSpawnMax * 5,
+                            partHealth.transform.position
+                        );
                     }
 
                     if (Random.value <= 0.15f && lucky != null)
@@ -219,41 +264,76 @@ public class Attack : MonoBehaviour
                 }
             }
 
-                if (snakeHealth != null && snakeHealth.bodyPartsAttacked == snakeHealth.totalBodyParts)
+            if (snakeHealth != null && snakeHealth.bodyPartsAttacked == snakeHealth.totalBodyParts)
+            {
+                HeadController headController = sn.GetComponentInChildren<HeadController>();
+                if (headController != null && !headController.isHeadAttacked && !isAttackBoss)
                 {
-                    HeadController headController = sn.GetComponentInChildren<HeadController>();
-                    if (headController != null && !headController.isHeadAttacked && !isAttackBoss)
+                    headController.TakeDamage(1);
+                    isAttackBoss = true;
+                    headController.isHeadAttacked = true;
+
+                    snakeHealth.SetCanBeDamaged(false);
+                    SpawnCoins(
+                        coinPrefab,
+                        coinSpawnMin * 13,
+                        coinSpawnMax * 13,
+                        headController.transform.position
+                    );
+
+                    if (Random.value <= 0.25f)
                     {
-                        headController.TakeDamage(1);
-                        isAttackBoss = true;
-                        headController.isHeadAttacked = true;
+                        SpawnCoins(
+                            secondaryCoinPrefab,
+                            secondaryCoinSpawnMin * 5,
+                            secondaryCoinSpawnMax * 5,
+                            headController.transform.position
+                        );
+                    }
 
-                        snakeHealth.SetCanBeDamaged(false);
-                        SpawnCoins(coinPrefab, coinSpawnMin * 13, coinSpawnMax * 13, headController.transform.position);
-
-                        if (Random.value <= 0.25f)
-                        {
-                            SpawnCoins(secondaryCoinPrefab, secondaryCoinSpawnMin * 5, secondaryCoinSpawnMax * 5, headController.transform.position);
-                        }
-
-                        if (Random.value <= 0.15f && lucky != null)
-                        {
-                            SpawnHealthPotions(headController.transform.position, 1);
-                        }
+                    if (Random.value <= 0.15f && lucky != null)
+                    {
+                        SpawnHealthPotions(headController.transform.position, 1);
+                    }
 
                     SpawnExperienceOrbs(headController.transform.position, 25);
-                    }
                 }
-                else
-                {
-                    Debug.LogWarning($"SnakeHealth is null for {sn.gameObject.name}");
-                }
+            }
         }
         isAttackBoss = false;
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Coin"))
+        {
+            CoinsScript coinScript = collision.GetComponent<CoinsScript>();
+            if (coinScript != null)
+            {
+                coinScript.CollectCoin();
+            }
+            else
+            {
+                Debug.LogWarning("CoinsScript not found on collided object.");
+            }
+        }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void AttackBossServerRpc()
+    {
+        DamageInterface damageable = GetComponent<DamageInterface>();
+        if (damageable != null && damageable.CanBeDamaged())
+        {
+            damageable.TakeDamage(1);
+            damageable.SetCanBeDamaged(false);
+        }
+    }
+
     void SpawnCoins(GameObject coinType, float minAmount, float maxAmount, Vector3 position)
     {
+        bool isSecondary = (coinType == secondaryCoinPrefab);
+
         bool isGoldIncreaseActive = goldIncrease != null && goldIncrease.IsReady();
 
         int initialCoinCount = Random.Range((int)minAmount, (int)maxAmount + 1);
@@ -274,14 +354,18 @@ public class Attack : MonoBehaviour
         {
             Vector3 spawnPosition = position + Vector3.up * 0.2f;
 
-            GameObject coin = coinPoolManager.GetCoinFromPool(coinType);
-            coin.transform.position = spawnPosition;
+            // Mới: Cần sửa thành
+            NetworkObject coin = CoinPoolManager.Instance.GetCoinFromPool(
+                spawnPosition,
+                coinType == secondaryCoinPrefab
+            );
 
             Rigidbody2D coinRb = coin.GetComponent<Rigidbody2D>();
 
             if (coinRb != null)
             {
-                Vector2 forceDirection = new Vector2(Random.Range(-1.5f, 1.5f), Random.Range(1f, 1f)) * 2.5f;
+                Vector2 forceDirection =
+                    new Vector2(Random.Range(-1.5f, 1.5f), Random.Range(1f, 1f)) * 2.5f;
                 coinRb.AddForce(forceDirection, ForceMode2D.Impulse);
                 StartCoroutine(CheckIfCoinIsStuck(coinRb));
             }
@@ -305,9 +389,14 @@ public class Attack : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f);
 
-        if (coinRb != null) 
+        if (coinRb != null)
         {
-            RaycastHit2D hit = Physics2D.Raycast(coinRb.transform.position, Vector2.down, 0.5f, groundLayer);
+            RaycastHit2D hit = Physics2D.Raycast(
+                coinRb.transform.position,
+                Vector2.down,
+                0.5f,
+                groundLayer
+            );
             if (hit.collider != null)
             {
                 coinRb.transform.position += Vector3.up * 0.3f;
@@ -349,7 +438,7 @@ public class Attack : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
 
-        if (orb != null && player != null) 
+        if (orb != null && player != null)
         {
             Rigidbody2D orbRb = orb.GetComponent<Rigidbody2D>();
             if (orbRb != null)
@@ -358,7 +447,9 @@ public class Attack : MonoBehaviour
                 {
                     Vector3 direction = (player.position - orb.transform.position).normalized;
 
-                    orbRb.MovePosition(orb.transform.position + direction * Time.deltaTime * orbMoveToPlayer);
+                    orbRb.MovePosition(
+                        orb.transform.position + direction * Time.deltaTime * orbMoveToPlayer
+                    );
 
                     if (Vector3.Distance(orb.transform.position, player.position) < 0.5f)
                     {
@@ -392,7 +483,8 @@ public class Attack : MonoBehaviour
             Rigidbody2D potionRb = potion.GetComponent<Rigidbody2D>();
             if (potionRb != null)
             {
-                Vector2 randomForce = new Vector2(Random.Range(-2f, 2f), Random.Range(1f, 1f)) * 2.5f;
+                Vector2 randomForce =
+                    new Vector2(Random.Range(-2f, 2f), Random.Range(1f, 1f)) * 2.5f;
                 potionRb.AddForce(randomForce, ForceMode2D.Impulse);
 
                 potionRb.bodyType = RigidbodyType2D.Kinematic;
@@ -414,7 +506,9 @@ public class Attack : MonoBehaviour
                 while (potion != null && player != null)
                 {
                     Vector3 direction = (player.position - potion.transform.position).normalized;
-                    potionRb.MovePosition(potion.transform.position + direction * Time.deltaTime * potionMoveToPlayer);
+                    potionRb.MovePosition(
+                        potion.transform.position + direction * Time.deltaTime * potionMoveToPlayer
+                    );
 
                     if (Vector3.Distance(potion.transform.position, player.position) < 0.5f)
                     {
@@ -439,5 +533,4 @@ public class Attack : MonoBehaviour
 
         Gizmos.DrawWireCube(attackPoints.position, boxSize);
     }
-
 }

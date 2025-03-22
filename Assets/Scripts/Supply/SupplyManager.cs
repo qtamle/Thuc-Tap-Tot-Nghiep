@@ -83,7 +83,6 @@ public class SupplyManager : NetworkBehaviour
     public void ResetInitialization()
     {
         hasInitialized = false;
-        
     }
 
     // void Start()
@@ -95,17 +94,13 @@ public class SupplyManager : NetworkBehaviour
     {
         if (IsServer)
         {
-            
-
             InitializeSlots();
             Debug.Log("Server của Supply Manager được khởi động.");
             InitializeNetworkSupplyList();
         }
     }
 
-    public override void OnNetworkDespawn()
-    {
-    }
+    public override void OnNetworkDespawn() { }
 
     private void InitializeNetworkSupplyList()
     {

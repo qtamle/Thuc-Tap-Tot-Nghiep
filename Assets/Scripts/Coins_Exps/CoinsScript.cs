@@ -1,12 +1,15 @@
-﻿using UnityEngine;
-using UnityEngine.SceneManagement;  
+﻿using Unity.Netcode;
+using Unity.Netcode.Components;
+using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class CoinsScript : MonoBehaviour
+public class CoinsScript : NetworkBehaviour
 {
     [Header("Layer")]
     public LayerMask groundLayer;
     public LayerMask wallLayer;
-    private Rigidbody2D rb;
+    private NetworkRigidbody2D rb;
 
     [Header("Coin Type")]
     public bool isCoinType1;
@@ -23,6 +26,9 @@ public class CoinsScript : MonoBehaviour
     private SpriteRenderer sprite;
 
     private CoinPoolManager coinPoolManager;
+
+    [Header("Network Settings")]
+    private NetworkVariable<bool> isCollected = new NetworkVariable<bool>(false);
 
     private void OnEnable()
     {
@@ -66,7 +72,7 @@ public class CoinsScript : MonoBehaviour
 
         coinsManager = UnityEngine.Object.FindFirstObjectByType<CoinsManager>();
 
-        rb = GetComponent<Rigidbody2D>();
+        rb = GetComponent<NetworkRigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
 
         if (coinsManager == null)
@@ -90,7 +96,7 @@ public class CoinsScript : MonoBehaviour
         }
         else
         {
-            coinPoolManager.ReturnCoinToPool(gameObject);
+            coinPoolManager.ReturnCoinToPool(GetComponent<NetworkObject>());
         }
     }
 
@@ -104,6 +110,9 @@ public class CoinsScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (!IsServer)
+            return;
+        Debug.Log("Ontrigger 2D cua CoinScript");
         if (collision.CompareTag("FinalFloor"))
         {
             StopCoin();
@@ -126,6 +135,7 @@ public class CoinsScript : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             CollectCoin();
+            // RequestCollectCoinServerRpc();
         }
 
         if ((wallLayer.value & (1 << collision.gameObject.layer)) > 0)
@@ -134,21 +144,63 @@ public class CoinsScript : MonoBehaviour
         }
     }
 
+    // [ServerRpc(RequireOwnership = false)]
+    // private void RequestCollectCoinServerRpc()
+    // {
+    //     if (isCollected.Value)
+    //         return;
+
+    //     // Đánh dấu đã thu thập
+    //     isCollected.Value = true;
+    //     CollectCoinClientRpc();
+    // }
+
+    // [ClientRpc]
+    // private void CollectCoinClientRpc()
+    // {
+    //     // Client nhận thông báo từ server
+    //     if (IsServer)
+    //         return;
+
+    //     Debug.Log("Client received collection confirmation");
+    //     HandleClientSideCollection();
+    // }
+
+    // private void HandleClientSideCollection()
+    // {
+    //     // Ẩn coin ngay lập tức trên mọi client
+    //     gameObject.SetActive(false);
+
+    //     // Cập nhật UI/effect cục bộ
+    //     if (IsOwner)
+    //     {
+    //         coinsManager.AddCoins(isCoinType1 ? 1 : 0, isCoinType2 ? 1 : 0);
+    //     }
+    // }
+
     private void BounceOffGround()
     {
-        rb.AddForce(new Vector2(Random.Range(-1f, 1f), Random.Range(2f, 3f)) * 2f, ForceMode2D.Impulse);
+        rb.Rigidbody2D.AddForce(
+            new Vector2(Random.Range(-1f, 1f), Random.Range(2f, 3f)) * 2f,
+            ForceMode2D.Impulse
+        );
     }
 
     private void StopCoin()
     {
-        rb.gravityScale = 0;
-        rb.bodyType = RigidbodyType2D.Kinematic;
-        rb.linearVelocity = Vector2.zero;
+        rb.Rigidbody2D.gravityScale = 0;
+        rb.Rigidbody2D.bodyType = RigidbodyType2D.Kinematic;
+        rb.Rigidbody2D.linearVelocity = Vector2.zero;
+        // Trước mắt test để Stop coin vì lỗi Rơi tiền mà ko trigger với tag player để collection được
+        coinPoolManager.ReturnCoinToPool(GetComponent<NetworkObject>());
     }
 
     private void BounceOffWall()
     {
-        rb.AddForce(new Vector2(-rb.linearVelocity.x, rb.linearVelocity.y) * 2f, ForceMode2D.Impulse);
+        rb.Rigidbody2D.AddForce(
+            new Vector2(-rb.Rigidbody2D.linearVelocity.x, rb.Rigidbody2D.linearVelocity.y) * 2f,
+            ForceMode2D.Impulse
+        );
     }
 
     public void CollectCoin()
@@ -169,8 +221,7 @@ public class CoinsScript : MonoBehaviour
             Debug.LogError("CoinsManager không tồn tại.");
         }
 
-        coinPoolManager.ReturnCoinToPool(gameObject);
-        gameObject.SetActive(false);
+        coinPoolManager.ReturnCoinToPool(GetComponent<NetworkObject>());
     }
 
     public void SetCoinType(bool type1, bool type2)

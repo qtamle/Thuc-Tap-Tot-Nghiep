@@ -1,39 +1,69 @@
 ﻿using System.Collections;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class GangsterHealth : MonoBehaviour, DamageInterface
+public class GangsterHealth : NetworkBehaviour, DamageInterface
 {
+    public static GangsterHealth Instance;
+
     [Header("Health Settings")]
-    public int maxHealth = 3;
-    public int currentHealth;
+    private int maxHealth = 3;
+    public NetworkVariable<int> currentHealth = new NetworkVariable<int>(3);
 
     [Header("UI Settings")]
     public Slider healthBarSlider;
     public Image healthBarFill;
 
-    private bool canBeDamaged = false;
+    private NetworkVariable<bool> canBeDamaged = new NetworkVariable<bool>(false);
     private float timeWhenStunned = 0f;
-    private bool isStunned = false;
+    private NetworkVariable<bool> isStunned = new NetworkVariable<bool>(false);
 
     public UnityEvent startTimeline;
-    [SerializeField] private HandleBoss currentBoss;
+
+    [SerializeField]
+    private HandleBoss currentBoss;
+
+
     private void Start()
     {
-        currentHealth = maxHealth;
+        IntializeBossHealth();
         UpdateHealthBar();
         UpdateHealthBarColor();
     }
 
+    public void IntializeBossHealth()
+    {
+        GameObject sliderObj = GameObject.FindWithTag("BossSlider");
+        if (sliderObj != null)
+        {
+            healthBarSlider = sliderObj.GetComponent<Slider>();
+        }
+        else
+        {
+            Debug.LogWarning("BossSlider tag not found!");
+        }
+
+        GameObject fillObj = GameObject.FindWithTag("BossFill");
+        if (fillObj != null)
+        {
+            healthBarFill = fillObj.GetComponent<Image>();
+        }
+        else
+        {
+            Debug.LogWarning("BossFill tag not found!");
+        }
+    }
+
     public void TakeDamage(int damage)
     {
-        if (canBeDamaged)
+        if (canBeDamaged.Value)
         {
-            currentHealth -= damage;
+            currentHealth.Value -= damage;
             UpdateHealthBar();
 
-            if (currentHealth <= 0)
+            if (currentHealth.Value <= 0)
             {
                 startTimeline.Invoke();
                 Die();
@@ -44,23 +74,43 @@ public class GangsterHealth : MonoBehaviour, DamageInterface
     public IEnumerator OnBossDeath()
     {
         yield return new WaitForSeconds(1f);
-
-        BossManager.Instance.HandleBossDefeated(currentBoss);
+        // GameManager.Instance.LoadNextScene();
+        // BossManager.Instance.HandleBossDefeated(currentBoss);
     }
 
     private void UpdateHealthBar()
     {
+        // if (healthBarSlider != null)
+        // {
+        //     healthBarSlider.value = (float)currentHealth.Value / maxHealth;
+        // }
+        UpdateHealthBarClientRpc();
+    }
+
+    [ClientRpc]
+    private void UpdateHealthBarClientRpc()
+    {
         if (healthBarSlider != null)
         {
-            healthBarSlider.value = (float)currentHealth / maxHealth;
+            healthBarSlider.value = (float)currentHealth.Value / maxHealth;
         }
     }
 
     private void UpdateHealthBarColor()
     {
+        // if (healthBarFill != null)
+        // {
+        //     healthBarFill.color = canBeDamaged.Value ? Color.red : Color.cyan;
+        // }
+        UpdateHealthBarColorClientRpc();
+    }
+
+    [ClientRpc]
+    private void UpdateHealthBarColorClientRpc()
+    {
         if (healthBarFill != null)
         {
-            healthBarFill.color = canBeDamaged ? Color.red : Color.cyan;
+            healthBarFill.color = canBeDamaged.Value ? Color.red : Color.cyan;
         }
     }
 
@@ -73,8 +123,8 @@ public class GangsterHealth : MonoBehaviour, DamageInterface
     public void StunForDuration(float stunDuration)
     {
         Debug.Log(canBeDamaged + "Before stun");
-        isStunned = true;
-        canBeDamaged = true;
+        isStunned.Value = true;
+        canBeDamaged.Value = true;
         Debug.Log(canBeDamaged + "After stun");
         timeWhenStunned = Time.time + stunDuration;
         UpdateHealthBarColor();
@@ -82,23 +132,24 @@ public class GangsterHealth : MonoBehaviour, DamageInterface
 
     public bool CanBeDamaged()
     {
-        return canBeDamaged;
+        return canBeDamaged.Value;
     }
 
     public void SetCanBeDamaged(bool value)
     {
-        canBeDamaged = value;
+        canBeDamaged.Value = value;
         UpdateHealthBarColor();
     }
 
     private void Update()
     {
-        if (isStunned && Time.time > timeWhenStunned)
+        if (!IsServer)
+            return;
+        if (isStunned.Value && Time.time > timeWhenStunned)
         {
-            isStunned = false;
-            canBeDamaged = false;
+            isStunned.Value = false;
+            canBeDamaged.Value = false;
             UpdateHealthBarColor();
         }
     }
-
 }

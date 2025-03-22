@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.IO.Pipes;
 using System.Linq;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -60,7 +61,14 @@ public class Claws : MonoBehaviour
     private Transform player;
     private IEnemySpawner[] enemySpawners;
 
-    private enum SwipeDirection { None, Up, Down, Normal }
+    private enum SwipeDirection
+    {
+        None,
+        Up,
+        Down,
+        Normal,
+    }
+
     private SwipeDirection currentSwipeDirection = SwipeDirection.Normal;
 
     private Gold goldIncrease;
@@ -104,7 +112,8 @@ public class Claws : MonoBehaviour
             int playerLayer = LayerMask.NameToLayer("Player");
             if (playerLayer >= 0)
             {
-                playerObject = FindObjectsOfType<GameObject>().FirstOrDefault(obj => obj.layer == playerLayer);
+                playerObject = FindObjectsOfType<GameObject>()
+                    .FirstOrDefault(obj => obj.layer == playerLayer);
             }
         }
 
@@ -117,7 +126,7 @@ public class Claws : MonoBehaviour
         lucky = FindFirstObjectByType<Lucky>();
 
         weaponInfo = GetComponent<WeaponInfo>();
-        
+
         if (weaponInfo != null && weaponInfo.weaponLevel > 3)
         {
             GameObject planePrefab = Instantiate(plane);
@@ -257,27 +266,28 @@ public class Claws : MonoBehaviour
 
         Vector2 attackBoxSize;
         Transform attackPoint;
-        float attackRadius; 
+        float attackRadius;
 
         switch (direction)
         {
             case SwipeDirection.Up:
-                attackRadius = boxSizeUp.x / 2f;  
+                attackRadius = boxSizeUp.x / 2f;
                 attackPoint = attackPointUp;
                 break;
             case SwipeDirection.Down:
-                attackRadius = boxSizeDown.x / 2f; 
+                attackRadius = boxSizeDown.x / 2f;
                 attackPoint = attackPointDown;
                 break;
             default:
-                attackRadius = boxSize.x / 2f; 
+                attackRadius = boxSize.x / 2f;
                 attackPoint = attackPoints;
                 break;
         }
 
-        Collider2D[] enemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRadius, enemyLayer)
-        .OrderBy(c => Vector2.Distance(attackPoint.position, c.transform.position))
-        .ToArray();
+        Collider2D[] enemies = Physics2D
+            .OverlapCircleAll(attackPoint.position, attackRadius, enemyLayer)
+            .OrderBy(c => Vector2.Distance(attackPoint.position, c.transform.position))
+            .ToArray();
 
         foreach (Collider2D enemy in enemies)
         {
@@ -303,7 +313,12 @@ public class Claws : MonoBehaviour
 
                 if (Random.value <= 0.30f)
                 {
-                    SpawnCoins(secondaryCoinPrefab, secondaryCoinSpawnMin, secondaryCoinSpawnMax, enemy.transform.position);
+                    SpawnCoins(
+                        secondaryCoinPrefab,
+                        secondaryCoinSpawnMin,
+                        secondaryCoinSpawnMax,
+                        enemy.transform.position
+                    );
                 }
 
                 if (Random.value <= 0.15f && lucky != null)
@@ -315,7 +330,11 @@ public class Claws : MonoBehaviour
             }
         }
 
-        Collider2D[] bosses = Physics2D.OverlapCircleAll(attackPoint.position, attackRadius, bossLayer);
+        Collider2D[] bosses = Physics2D.OverlapCircleAll(
+            attackPoint.position,
+            attackRadius,
+            bossLayer
+        );
 
         foreach (Collider2D boss in bosses)
         {
@@ -327,11 +346,21 @@ public class Claws : MonoBehaviour
                 isAttackBoss = true;
                 damageable.SetCanBeDamaged(false);
 
-                SpawnCoins(coinPrefab, coinSpawnMin * 10, coinSpawnMax * 10, boss.transform.position);
+                SpawnCoins(
+                    coinPrefab,
+                    coinSpawnMin * 10,
+                    coinSpawnMax * 10,
+                    boss.transform.position
+                );
 
                 if (Random.value <= 0.25f)
                 {
-                    SpawnCoins(secondaryCoinPrefab, secondaryCoinSpawnMin * 5, secondaryCoinSpawnMax * 5, boss.transform.position);
+                    SpawnCoins(
+                        secondaryCoinPrefab,
+                        secondaryCoinSpawnMin * 5,
+                        secondaryCoinSpawnMax * 5,
+                        boss.transform.position
+                    );
                 }
 
                 if (Random.value <= 0.15f && lucky != null)
@@ -345,7 +374,11 @@ public class Claws : MonoBehaviour
 
         isAttackBoss = false;
 
-        Collider2D[] Snake = Physics2D.OverlapCircleAll(attackPoint.position, attackRadius, bossLayer);
+        Collider2D[] Snake = Physics2D.OverlapCircleAll(
+            attackPoint.position,
+            attackRadius,
+            bossLayer
+        );
 
         foreach (Collider2D sn in Snake)
         {
@@ -354,18 +387,33 @@ public class Claws : MonoBehaviour
 
             if (partHealth != null && !isAttackBoss && snakeHealth.IsStunned())
             {
-                if ((MachineSnakeHealth.attackedPartID == -1 || MachineSnakeHealth.attackedPartID == partHealth.partID) && !partHealth.isAlreadyHit)
+                if (
+                    (
+                        MachineSnakeHealth.attackedPartID == -1
+                        || MachineSnakeHealth.attackedPartID == partHealth.partID
+                    ) && !partHealth.isAlreadyHit
+                )
                 {
                     partHealth.TakeDamage(1);
                     isAttackBoss = true;
 
                     snakeHealth.SetCanBeDamaged(false);
 
-                    SpawnCoins(coinPrefab, coinSpawnMin * 13, coinSpawnMax * 13, partHealth.transform.position);
+                    SpawnCoins(
+                        coinPrefab,
+                        coinSpawnMin * 13,
+                        coinSpawnMax * 13,
+                        partHealth.transform.position
+                    );
 
                     if (Random.value <= 0.25f)
                     {
-                        SpawnCoins(secondaryCoinPrefab, secondaryCoinSpawnMin * 5, secondaryCoinSpawnMax * 5, partHealth.transform.position);
+                        SpawnCoins(
+                            secondaryCoinPrefab,
+                            secondaryCoinSpawnMin * 5,
+                            secondaryCoinSpawnMax * 5,
+                            partHealth.transform.position
+                        );
                     }
 
                     if (Random.value <= 0.15f && lucky != null)
@@ -387,11 +435,21 @@ public class Claws : MonoBehaviour
                     headController.isHeadAttacked = true;
 
                     snakeHealth.SetCanBeDamaged(false);
-                    SpawnCoins(coinPrefab, coinSpawnMin * 13, coinSpawnMax * 13, headController.transform.position);
+                    SpawnCoins(
+                        coinPrefab,
+                        coinSpawnMin * 13,
+                        coinSpawnMax * 13,
+                        headController.transform.position
+                    );
 
                     if (Random.value <= 0.25f)
                     {
-                        SpawnCoins(secondaryCoinPrefab, secondaryCoinSpawnMin * 5, secondaryCoinSpawnMax * 5, headController.transform.position);
+                        SpawnCoins(
+                            secondaryCoinPrefab,
+                            secondaryCoinSpawnMin * 5,
+                            secondaryCoinSpawnMax * 5,
+                            headController.transform.position
+                        );
                     }
 
                     if (Random.value <= 0.15f && lucky != null)
@@ -420,7 +478,7 @@ public class Claws : MonoBehaviour
             {
                 SwipeDirection.Up => attackPointUp,
                 SwipeDirection.Down => attackPointDown,
-                _ => attackPoints
+                _ => attackPoints,
             };
 
             vfx.transform.position = attackPoint.position;
@@ -435,6 +493,7 @@ public class Claws : MonoBehaviour
             StartCoroutine(ReturnVFXToPool(vfx, 0.5f));
         }
     }
+
     private IEnumerator ReturnVFXToPool(GameObject vfx, float delay)
     {
         yield return new WaitForSeconds(delay);
@@ -443,6 +502,7 @@ public class Claws : MonoBehaviour
             vfxPool.ReturnToPool(vfx);
         }
     }
+
     void SpawnCoins(GameObject coinType, float minAmount, float maxAmount, Vector3 position)
     {
         bool isGoldIncreaseActive = goldIncrease != null && goldIncrease.IsReady();
@@ -458,14 +518,18 @@ public class Claws : MonoBehaviour
         {
             Vector3 spawnPosition = position + Vector3.up * 0.2f;
 
-            GameObject coin = coinPoolManager.GetCoinFromPool(coinType);
+            NetworkObject coin = CoinPoolManager.Instance.GetCoinFromPool(
+                spawnPosition,
+                coinType == secondaryCoinPrefab
+            );
             coin.transform.position = spawnPosition;
 
             Rigidbody2D coinRb = coin.GetComponent<Rigidbody2D>();
 
             if (coinRb != null)
             {
-                Vector2 forceDirection = new Vector2(Random.Range(-1.5f, 1.5f), Random.Range(1f, 1f)) * 2.5f;
+                Vector2 forceDirection =
+                    new Vector2(Random.Range(-1.5f, 1.5f), Random.Range(1f, 1f)) * 2.5f;
                 coinRb.AddForce(forceDirection, ForceMode2D.Impulse);
 
                 StartCoroutine(CheckIfCoinIsStuck(coinRb));
@@ -478,7 +542,6 @@ public class Claws : MonoBehaviour
                     coinScript.SetCoinType(true, false);
                 else
                     coinScript.SetCoinType(false, true);
-
             }
         }
     }
@@ -489,7 +552,12 @@ public class Claws : MonoBehaviour
 
         if (coinRb != null)
         {
-            RaycastHit2D hit = Physics2D.Raycast(coinRb.transform.position, Vector2.down, 0.5f, groundLayer);
+            RaycastHit2D hit = Physics2D.Raycast(
+                coinRb.transform.position,
+                Vector2.down,
+                0.5f,
+                groundLayer
+            );
             if (hit.collider != null)
             {
                 coinRb.transform.position += Vector3.up * 0.3f;
@@ -501,6 +569,7 @@ public class Claws : MonoBehaviour
             yield break;
         }
     }
+
     void SpawnExperienceOrbs(Vector3 position, int orbCount)
     {
         Debug.Log($"Initial orb count: {orbCount}");
@@ -551,7 +620,9 @@ public class Claws : MonoBehaviour
                 {
                     Vector3 direction = (player.position - orb.transform.position).normalized;
 
-                    orbRb.MovePosition(orb.transform.position + direction * Time.deltaTime * orbMoveToPlayer);
+                    orbRb.MovePosition(
+                        orb.transform.position + direction * Time.deltaTime * orbMoveToPlayer
+                    );
 
                     if (Vector3.Distance(orb.transform.position, player.position) < 0.5f)
                     {
@@ -585,7 +656,8 @@ public class Claws : MonoBehaviour
             Rigidbody2D potionRb = potion.GetComponent<Rigidbody2D>();
             if (potionRb != null)
             {
-                Vector2 randomForce = new Vector2(Random.Range(-2f, 2f), Random.Range(1f, 1f)) * 2.5f;
+                Vector2 randomForce =
+                    new Vector2(Random.Range(-2f, 2f), Random.Range(1f, 1f)) * 2.5f;
                 potionRb.AddForce(randomForce, ForceMode2D.Impulse);
 
                 potionRb.bodyType = RigidbodyType2D.Kinematic;
@@ -607,7 +679,9 @@ public class Claws : MonoBehaviour
                 while (potion != null && player != null)
                 {
                     Vector3 direction = (player.position - potion.transform.position).normalized;
-                    potionRb.MovePosition(potion.transform.position + direction * Time.deltaTime * potionMoveToPlayer);
+                    potionRb.MovePosition(
+                        potion.transform.position + direction * Time.deltaTime * potionMoveToPlayer
+                    );
 
                     if (Vector3.Distance(potion.transform.position, player.position) < 0.5f)
                     {
@@ -625,16 +699,17 @@ public class Claws : MonoBehaviour
             yield break;
         }
     }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = currentSwipeDirection switch
         {
             SwipeDirection.Up => Color.green,
             SwipeDirection.Down => Color.red,
-            _ => Color.blue
+            _ => Color.blue,
         };
 
-        Transform gizmoAttackPoint; 
+        Transform gizmoAttackPoint;
         float attackRadius;
 
         switch (currentSwipeDirection)

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Linq;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -38,8 +39,8 @@ public class EneryOrb : MonoBehaviour
     public int increaseExperience;
 
     [Header("Time-based Modifications - Upgrade Level 3")]
-    public float timeInterval = 10f; 
-    private float timeElapsed = 0f; 
+    public float timeInterval = 10f;
+    private float timeElapsed = 0f;
     private bool isBoosted = false;
 
     [Header("Settings Amount")]
@@ -154,12 +155,20 @@ public class EneryOrb : MonoBehaviour
         {
             float angle = (i * 120f) + (Time.time * orbitSpeed);
 
-            Vector2 orbitPositionXY = new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad) * orbitRadius, Mathf.Sin(angle * Mathf.Deg2Rad) * orbitRadius);
-            Vector2 newPositionXY = new Vector2(playerSpawn.position.x, playerSpawn.position.y) + orbitPositionXY;
-            Vector3 newPosition = new Vector3(newPositionXY.x, newPositionXY.y, playerSpawn.position.z);
+            Vector2 orbitPositionXY = new Vector2(
+                Mathf.Cos(angle * Mathf.Deg2Rad) * orbitRadius,
+                Mathf.Sin(angle * Mathf.Deg2Rad) * orbitRadius
+            );
+            Vector2 newPositionXY =
+                new Vector2(playerSpawn.position.x, playerSpawn.position.y) + orbitPositionXY;
+            Vector3 newPosition = new Vector3(
+                newPositionXY.x,
+                newPositionXY.y,
+                playerSpawn.position.z
+            );
 
             attackOrbs[i].transform.position = newPosition;
-            attackOrbs[i].transform.SetParent(null); 
+            attackOrbs[i].transform.SetParent(null);
         }
     }
 
@@ -180,7 +189,7 @@ public class EneryOrb : MonoBehaviour
 
         if (canShootOrbs && weaponInfo.weaponLevel > 3)
         {
-            canShootOrbs = false;  
+            canShootOrbs = false;
             StartCoroutine(ShootOrbsRoutine());
         }
     }
@@ -196,17 +205,18 @@ public class EneryOrb : MonoBehaviour
 
         canShootOrbs = true;
     }
+
     private IEnumerator HandleSpeedBoostAfterTime()
     {
         if (weaponInfo.weaponLevel > 2)
         {
-            orbitSpeed = 420f; 
+            orbitSpeed = 420f;
             isBoosted = true;
             Debug.Log("Speed Boost Activated!");
 
             yield return new WaitForSeconds(7f);
 
-            orbitSpeed = orbitSpeedOrignal; 
+            orbitSpeed = orbitSpeedOrignal;
             isBoosted = false;
             Debug.Log("Speed Boost Ended.");
         }
@@ -218,7 +228,7 @@ public class EneryOrb : MonoBehaviour
         {
             while (true)
             {
-                if (!isBoosted) 
+                if (!isBoosted)
                 {
                     yield return new WaitForSeconds(timeInterval);
 
@@ -237,9 +247,14 @@ public class EneryOrb : MonoBehaviour
     {
         foreach (GameObject orb in attackOrbs)
         {
-            if (orb == null) continue;
+            if (orb == null)
+                continue;
 
-            Collider2D[] enemies = Physics2D.OverlapCircleAll(orb.transform.position, attackRadius, enemyLayer);
+            Collider2D[] enemies = Physics2D.OverlapCircleAll(
+                orb.transform.position,
+                attackRadius,
+                enemyLayer
+            );
 
             foreach (Collider2D enemy in enemies)
             {
@@ -265,7 +280,12 @@ public class EneryOrb : MonoBehaviour
 
                     if (Random.value <= 0.30f)
                     {
-                        SpawnCoins(secondaryCoinPrefab, secondaryCoinSpawnMin, secondaryCoinSpawnMax, enemy.transform.position);
+                        SpawnCoins(
+                            secondaryCoinPrefab,
+                            secondaryCoinSpawnMin,
+                            secondaryCoinSpawnMax,
+                            enemy.transform.position
+                        );
                     }
 
                     if (Random.value <= 0.15f && lucky != null)
@@ -277,7 +297,11 @@ public class EneryOrb : MonoBehaviour
                 }
             }
 
-            Collider2D[] bosses = Physics2D.OverlapCircleAll(orb.transform.position, attackRadius, bossLayer);
+            Collider2D[] bosses = Physics2D.OverlapCircleAll(
+                orb.transform.position,
+                attackRadius,
+                bossLayer
+            );
 
             foreach (Collider2D boss in bosses)
             {
@@ -289,11 +313,21 @@ public class EneryOrb : MonoBehaviour
                     isAttackBoss = true;
                     damageable.SetCanBeDamaged(false);
 
-                    SpawnCoins(coinPrefab, coinSpawnMin * 10, coinSpawnMax * 10, boss.transform.position);
+                    SpawnCoins(
+                        coinPrefab,
+                        coinSpawnMin * 10,
+                        coinSpawnMax * 10,
+                        boss.transform.position
+                    );
 
                     if (Random.value <= 0.25f)
                     {
-                        SpawnCoins(secondaryCoinPrefab, secondaryCoinSpawnMin * 5, secondaryCoinSpawnMax * 5, boss.transform.position);
+                        SpawnCoins(
+                            secondaryCoinPrefab,
+                            secondaryCoinSpawnMin * 5,
+                            secondaryCoinSpawnMax * 5,
+                            boss.transform.position
+                        );
                     }
 
                     if (Random.value <= 0.15f && lucky != null)
@@ -307,7 +341,11 @@ public class EneryOrb : MonoBehaviour
 
             isAttackBoss = false;
 
-            Collider2D[] Snake = Physics2D.OverlapCircleAll(orb.transform.position, attackRadius, bossLayer);
+            Collider2D[] Snake = Physics2D.OverlapCircleAll(
+                orb.transform.position,
+                attackRadius,
+                bossLayer
+            );
 
             foreach (Collider2D sn in Snake)
             {
@@ -316,18 +354,33 @@ public class EneryOrb : MonoBehaviour
 
                 if (partHealth != null && !isAttackBoss && snakeHealth.IsStunned())
                 {
-                    if ((MachineSnakeHealth.attackedPartID == -1 || MachineSnakeHealth.attackedPartID == partHealth.partID) && !partHealth.isAlreadyHit)
+                    if (
+                        (
+                            MachineSnakeHealth.attackedPartID == -1
+                            || MachineSnakeHealth.attackedPartID == partHealth.partID
+                        ) && !partHealth.isAlreadyHit
+                    )
                     {
                         partHealth.TakeDamage(1);
                         isAttackBoss = true;
 
                         snakeHealth.SetCanBeDamaged(false);
 
-                        SpawnCoins(coinPrefab, coinSpawnMin * 13, coinSpawnMax * 13, partHealth.transform.position);
+                        SpawnCoins(
+                            coinPrefab,
+                            coinSpawnMin * 13,
+                            coinSpawnMax * 13,
+                            partHealth.transform.position
+                        );
 
                         if (Random.value <= 0.25f)
                         {
-                            SpawnCoins(secondaryCoinPrefab, secondaryCoinSpawnMin * 5, secondaryCoinSpawnMax * 5, partHealth.transform.position);
+                            SpawnCoins(
+                                secondaryCoinPrefab,
+                                secondaryCoinSpawnMin * 5,
+                                secondaryCoinSpawnMax * 5,
+                                partHealth.transform.position
+                            );
                         }
 
                         if (Random.value <= 0.15f && lucky != null)
@@ -339,7 +392,10 @@ public class EneryOrb : MonoBehaviour
                     }
                 }
 
-                if (snakeHealth != null && snakeHealth.bodyPartsAttacked == snakeHealth.totalBodyParts)
+                if (
+                    snakeHealth != null
+                    && snakeHealth.bodyPartsAttacked == snakeHealth.totalBodyParts
+                )
                 {
                     HeadController headController = sn.GetComponentInChildren<HeadController>();
                     if (headController != null && !headController.isHeadAttacked && !isAttackBoss)
@@ -349,11 +405,21 @@ public class EneryOrb : MonoBehaviour
                         headController.isHeadAttacked = true;
 
                         snakeHealth.SetCanBeDamaged(false);
-                        SpawnCoins(coinPrefab, coinSpawnMin * 13, coinSpawnMax * 13, headController.transform.position);
+                        SpawnCoins(
+                            coinPrefab,
+                            coinSpawnMin * 13,
+                            coinSpawnMax * 13,
+                            headController.transform.position
+                        );
 
                         if (Random.value <= 0.25f)
                         {
-                            SpawnCoins(secondaryCoinPrefab, secondaryCoinSpawnMin * 5, secondaryCoinSpawnMax * 5, headController.transform.position);
+                            SpawnCoins(
+                                secondaryCoinPrefab,
+                                secondaryCoinSpawnMin * 5,
+                                secondaryCoinSpawnMax * 5,
+                                headController.transform.position
+                            );
                         }
 
                         if (Random.value <= 0.15f && lucky != null)
@@ -372,6 +438,7 @@ public class EneryOrb : MonoBehaviour
             isAttackBoss = false;
         }
     }
+
     void SpawnCoins(GameObject coinType, float minAmount, float maxAmount, Vector3 position)
     {
         bool isGoldIncreaseActive = goldIncrease != null && goldIncrease.IsReady();
@@ -387,14 +454,18 @@ public class EneryOrb : MonoBehaviour
         {
             Vector3 spawnPosition = position + Vector3.up * 0.2f;
 
-            GameObject coin = coinPoolManager.GetCoinFromPool(coinType);
+            NetworkObject coin = CoinPoolManager.Instance.GetCoinFromPool(
+                spawnPosition,
+                coinType == secondaryCoinPrefab
+            );
             coin.transform.position = spawnPosition;
 
             Rigidbody2D coinRb = coin.GetComponent<Rigidbody2D>();
 
             if (coinRb != null)
             {
-                Vector2 forceDirection = new Vector2(Random.Range(-1.5f, 1.5f), Random.Range(1f, 1f)) * 2.5f;
+                Vector2 forceDirection =
+                    new Vector2(Random.Range(-1.5f, 1.5f), Random.Range(1f, 1f)) * 2.5f;
                 coinRb.AddForce(forceDirection, ForceMode2D.Impulse);
 
                 StartCoroutine(CheckIfCoinIsStuck(coinRb));
@@ -407,7 +478,6 @@ public class EneryOrb : MonoBehaviour
                     coinScript.SetCoinType(true, false);
                 else
                     coinScript.SetCoinType(false, true);
-
             }
         }
     }
@@ -418,7 +488,12 @@ public class EneryOrb : MonoBehaviour
 
         if (coinRb != null)
         {
-            RaycastHit2D hit = Physics2D.Raycast(coinRb.transform.position, Vector2.down, 0.5f, groundLayer);
+            RaycastHit2D hit = Physics2D.Raycast(
+                coinRb.transform.position,
+                Vector2.down,
+                0.5f,
+                groundLayer
+            );
 
             if (hit.collider != null && hit.collider != coinRb.GetComponent<Collider2D>())
             {
@@ -482,7 +557,9 @@ public class EneryOrb : MonoBehaviour
                 {
                     Vector3 direction = (player.position - orb.transform.position).normalized;
 
-                    orbRb.MovePosition(orb.transform.position + direction * Time.deltaTime * orbMoveToPlayer);
+                    orbRb.MovePosition(
+                        orb.transform.position + direction * Time.deltaTime * orbMoveToPlayer
+                    );
 
                     if (Vector3.Distance(orb.transform.position, player.position) < 0.5f)
                     {
@@ -516,7 +593,8 @@ public class EneryOrb : MonoBehaviour
             Rigidbody2D potionRb = potion.GetComponent<Rigidbody2D>();
             if (potionRb != null)
             {
-                Vector2 randomForce = new Vector2(Random.Range(-2f, 2f), Random.Range(1f, 1f)) * 2.5f;
+                Vector2 randomForce =
+                    new Vector2(Random.Range(-2f, 2f), Random.Range(1f, 1f)) * 2.5f;
                 potionRb.AddForce(randomForce, ForceMode2D.Impulse);
 
                 potionRb.bodyType = RigidbodyType2D.Kinematic;
@@ -538,7 +616,9 @@ public class EneryOrb : MonoBehaviour
                 while (potion != null && player != null)
                 {
                     Vector3 direction = (player.position - potion.transform.position).normalized;
-                    potionRb.MovePosition(potion.transform.position + direction * Time.deltaTime * potionMoveToPlayer);
+                    potionRb.MovePosition(
+                        potion.transform.position + direction * Time.deltaTime * potionMoveToPlayer
+                    );
 
                     if (Vector3.Distance(potion.transform.position, player.position) < 0.5f)
                     {
@@ -556,6 +636,7 @@ public class EneryOrb : MonoBehaviour
             yield break;
         }
     }
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.blue;

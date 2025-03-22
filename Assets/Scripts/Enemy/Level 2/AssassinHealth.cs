@@ -1,10 +1,13 @@
 ﻿using System.Collections;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class AssassinHealth : MonoBehaviour, DamageInterface
+public class AssassinHealth : NetworkBehaviour, DamageInterface
 {
+    public static AssassinHealth Instance;
+
     [Header("Health Settings")]
     public int maxHealth = 3;
     public int currentHealth;
@@ -18,13 +21,51 @@ public class AssassinHealth : MonoBehaviour, DamageInterface
     private bool isStunned = false;
 
     public UnityEvent startTimeline;
-    [SerializeField] private HandleBoss currentBoss;
+
+    [SerializeField]
+    private HandleBoss currentBoss;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     private void Start()
     {
         currentHealth = maxHealth;
+        IntializeBossHealth();
         UpdateHealthBar();
         UpdateHealthBarColor();
+    }
+
+    public void IntializeBossHealth()
+    {
+        GameObject sliderObj = GameObject.FindWithTag("BossSlider");
+        if (sliderObj != null)
+        {
+            healthBarSlider = sliderObj.GetComponent<Slider>();
+        }
+        else
+        {
+            Debug.LogWarning("BossSlider tag not found!");
+        }
+
+        GameObject fillObj = GameObject.FindWithTag("BossFill");
+        if (fillObj != null)
+        {
+            healthBarFill = fillObj.GetComponent<Image>();
+        }
+        else
+        {
+            Debug.LogWarning("BossFill tag not found!");
+        }
     }
 
     public void TakeDamage(int damage)

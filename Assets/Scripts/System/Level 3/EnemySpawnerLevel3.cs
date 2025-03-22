@@ -1,157 +1,220 @@
-﻿// using System.Collections;
-// using UnityEngine;
+﻿using System.Collections;
+using Unity.Netcode;
+using UnityEngine;
 
-// public class EnemySpawnerLevel3 : MonoBehaviour, IEnemySpawner
-// {
-//     [Header("Enemy Data")]
-//     public EnemySpawnData[] enemySpawnDatas;
+public class EnemySpawnerLevel3 : NetworkBehaviour, IEnemySpawner
+{
+    [Header("Enemy Data")]
+    public EnemySpawnData[] enemySpawnDatas;
 
-//     [Header("Show UI")]
-//     public GameObject warningBoss;
-//     public GameObject bossLevel1;
-//     public GameObject UIHealthBoss;
+    [Header("Show UI")]
+    public GameObject warningBoss;
+    public GameObject bossLevel1;
+    public GameObject UIHealthBoss;
 
-//     [Header("Hide UI")]
-//     public GameObject remain;
+    [Header("Hide UI")]
+    public GameObject remain;
 
-//     [Header("Boss Level 1 Script")]
-//     public Cyborg cyborg;
+    [Header("Boss Level 1 Script")]
+    public Cyborg cyborg;
+    public GameObject BossSpawnPostion;
 
-//     private bool stopSpawning = false;
+    private NetworkVariable<bool> stopSpawning = new NetworkVariable<bool>(false);
 
-//     [Header("Max and current enemy in level")]
-//     public int currentTotalSpawnCount = 0;
-//     public int maxTotalSpawnCount;
+    [Header("Max and current enemy in level")]
+    private NetworkVariable<int> currentTotalSpawnCount = new NetworkVariable<int>(0);
+    public int maxTotalSpawnCount;
 
-//     [Header("Time Spawn")]
-//     private float timeElapsed = 0f;
-//     public float spawnSpeedIncreaseInterval = 70f;
-//     public float spawnSpeedDecreaseAmount = 0.2f;
-//     private float minSpawnTimeLimit = 1f;
-//     private float maxSpawnTimeLimit = 1f;
+    [Header("Time Spawn")]
+    private float timeElapsed = 0f;
+    public float spawnSpeedIncreaseInterval = 70f;
+    public float spawnSpeedDecreaseAmount = 0.2f;
+    private float minSpawnTimeLimit = 1f;
+    private float maxSpawnTimeLimit = 1f;
 
-//     private bool isBossSpawned = false;
-//     private void Start()
-//     {
-//         if (bossLevel1 != null)
-//         {
-//             bossLevel1.SetActive(false);
-//         }
+    private NetworkVariable<bool> isBossSpawn = new NetworkVariable<bool>(false);
 
-//         if (UIHealthBoss != null)
-//         {
-//             UIHealthBoss.SetActive(false);
-//         }
+    private void Start()
+    {
+        if (!IsServer)
+            return;
 
-//         if (warningBoss != null)
-//         {
-//             warningBoss.SetActive(false);
-//         }
+        if (bossLevel1 != null)
+        {
+            // bossLevel1.SetActive(false);
+        }
 
-//         foreach (var spawnData in enemySpawnDatas)
-//         {
-//             StartCoroutine(SpawnEnemyIndependently(spawnData));
-//         }
-//     }
+        if (UIHealthBoss != null)
+        {
+            UIHealthBoss.SetActive(false);
+        }
 
-//     void Update()
-//     {
-//         timeElapsed += Time.deltaTime;
+        if (warningBoss != null)
+        {
+            warningBoss.SetActive(false);
+        }
 
-//         if (timeElapsed >= spawnSpeedIncreaseInterval)
-//         {
-//             foreach (var spawnData in enemySpawnDatas)
-//             {
-//                 if (spawnData.minSpawnTime > minSpawnTimeLimit)
-//                 {
-//                     spawnData.minSpawnTime -= spawnSpeedDecreaseAmount;
-//                 }
+        foreach (var spawnData in enemySpawnDatas)
+        {
+            // StartCoroutine(SpawnEnemyIndependently(spawnData));
+        }
+    }
 
-//                 if (spawnData.maxSpawnTime > maxSpawnTimeLimit)
-//                 {
-//                     spawnData.maxSpawnTime -= spawnSpeedDecreaseAmount;
-//                 }
+    void Update()
+    {
+        if (!IsServer)
+            return;
 
-//                 spawnData.minSpawnTime = Mathf.Max(spawnData.minSpawnTime, minSpawnTimeLimit);
-//                 spawnData.maxSpawnTime = Mathf.Max(spawnData.maxSpawnTime, maxSpawnTimeLimit);
-//             }
+        timeElapsed += Time.deltaTime;
 
-//             timeElapsed = 0f;
-//         }
-//     }
+        if (timeElapsed >= spawnSpeedIncreaseInterval)
+        {
+            foreach (var spawnData in enemySpawnDatas)
+            {
+                if (spawnData.minSpawnTime > minSpawnTimeLimit)
+                {
+                    spawnData.minSpawnTime -= spawnSpeedDecreaseAmount;
+                }
 
-//     private IEnumerator SpawnEnemyIndependently(EnemySpawnData spawnData)
-//     {
-//         yield return new WaitForSeconds(1f);
+                if (spawnData.maxSpawnTime > maxSpawnTimeLimit)
+                {
+                    spawnData.maxSpawnTime -= spawnSpeedDecreaseAmount;
+                }
 
-//         while (!stopSpawning)
-//         {
-//             if (currentTotalSpawnCount < maxTotalSpawnCount)
-//             {
-//                 Transform spawnPoint = spawnData.spawnPoints[Random.Range(0, spawnData.spawnPoints.Length)];
-//                 Vector3 spawnPosition = spawnPoint.position;
-//                 spawnPosition.y += 1.5f;
+                spawnData.minSpawnTime = Mathf.Max(spawnData.minSpawnTime, minSpawnTimeLimit);
+                spawnData.maxSpawnTime = Mathf.Max(spawnData.maxSpawnTime, maxSpawnTimeLimit);
+            }
 
-//                 GameObject spawnedEnemy = Instantiate(spawnData.enemyPrefab, spawnPosition, Quaternion.identity);
+            timeElapsed = 0f;
+        }
+    }
 
-//                 if (!spawnedEnemy.CompareTag("Enemy"))
-//                 {
-//                     spawnedEnemy.tag = "Enemy";
-//                 }
+    private IEnumerator SpawnEnemyIndependently(EnemySpawnData spawnData)
+    {
+        yield return new WaitForSeconds(1f);
 
-//                 currentTotalSpawnCount++;
-//             }
+        while (!stopSpawning.Value)
+        {
+            if (currentTotalSpawnCount.Value < maxTotalSpawnCount)
+            {
+                Transform spawnPoint = spawnData.spawnPoints[
+                    Random.Range(0, spawnData.spawnPoints.Length)
+                ];
+                Vector3 spawnPosition = spawnPoint.position;
+                spawnPosition.y += 1.5f;
 
-//             yield return new WaitForSeconds(Random.Range(spawnData.minSpawnTime, spawnData.maxSpawnTime));
+                GameObject spawnedEnemy = Instantiate(
+                    spawnData.enemyPrefab,
+                    spawnPosition,
+                    Quaternion.identity
+                );
+                spawnedEnemy.GetComponent<NetworkObject>().Spawn();
 
-//             if (EnemyManager.Instance != null && EnemyManager.Instance.killTarget <= EnemyManager.Instance.enemiesKilled && !isBossSpawned)
-//             {
-//                 stopSpawning = true;
-//                 isBossSpawned = true;
-//                 StartCoroutine(HandleBossSpawn());
-//                 break;
-//             }
+                if (!spawnedEnemy.CompareTag("Enemy"))
+                {
+                    spawnedEnemy.tag = "Enemy";
+                }
 
-//             yield return null;
-//         }
-//     }
+                currentTotalSpawnCount.Value++;
+            }
 
-//     public void OnEnemyKilled()
-//     {
-//         currentTotalSpawnCount--;
+            yield return new WaitForSeconds(
+                Random.Range(spawnData.minSpawnTime, spawnData.maxSpawnTime)
+            );
 
-//     }
+            if (
+                EnemyManager.Instance != null
+                && EnemyManager.Instance.killTarget.Value
+                    <= EnemyManager.Instance.enemiesKilled.Value
+                && !isBossSpawn.Value
+            )
+            {
+                stopSpawning.Value = true;
+                isBossSpawn.Value = true;
+                StartCoroutine(HandleBossSpawn());
+                break;
+            }
 
-//     private IEnumerator HandleBossSpawn()
-//     {
-//         if (remain != null)
-//         {
-//             remain.SetActive(false);
-//         }
+            yield return null;
+        }
+    }
 
-//         if (warningBoss != null)
-//         {
-//             warningBoss.SetActive(true);
-//         }
+    public void OnEnemyKilled()
+    {
+        currentTotalSpawnCount.Value--;
+    }
 
-//         yield return new WaitForSeconds(3f);
+    private IEnumerator HandleBossSpawn()
+    {
+        if (!IsServer)
+            yield break;
 
-//         if (warningBoss != null)
-//         {
-//             warningBoss.SetActive(false);
-//         }
+        if (remain != null)
+        {
+            remain.SetActive(false);
+        }
 
-//         if (bossLevel1 != null)
-//         {
-//             bossLevel1.SetActive(true);
-//             cyborg.Active();
-//         }
+        if (warningBoss != null)
+        {
+            warningBoss.SetActive(true);
+        }
 
-//         yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(3f);
 
-//         if (UIHealthBoss != null)
-//         {
-//             UIHealthBoss.SetActive(true);
-//         }
-//     }
-// }
+        if (warningBoss != null)
+        {
+            warningBoss.SetActive(false);
+        }
+
+        if (bossLevel1 != null)
+        {
+            bossLevel1.SetActive(true);
+            cyborg.Active();
+            bossLevel1.GetComponent<NetworkObject>().Spawn();
+        }
+
+        yield return new WaitForSeconds(0.5f);
+
+        if (UIHealthBoss != null)
+        {
+            UIHealthBoss.SetActive(true);
+        }
+    }
+
+    public void TestHandleBossSpawn()
+    {
+        if (!IsServer)
+            return;
+
+        if (remain != null)
+        {
+            remain.SetActive(false);
+        }
+
+        if (warningBoss != null)
+        {
+            warningBoss.SetActive(true);
+        }
+
+        if (warningBoss != null)
+        {
+            warningBoss.SetActive(false);
+        }
+
+        if (bossLevel1 != null)
+        {
+            GameObject bossSpawned = Instantiate(
+                bossLevel1,
+                BossSpawnPostion.transform.position,
+                Quaternion.identity
+            );
+            bossSpawned.GetComponent<NetworkObject>().Spawn(true);
+            Cyborg.Instance.Active();
+        }
+
+        if (UIHealthBoss != null)
+        {
+            UIHealthBoss.SetActive(true);
+        }
+    }
+}

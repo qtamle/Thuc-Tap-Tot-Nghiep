@@ -1,9 +1,12 @@
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class CaptainHealth : MonoBehaviour, DamageInterface
+public class CaptainHealth : NetworkBehaviour, DamageInterface
 {
+    public static CaptainHealth Instance;
+
     [Header("Health Settings")]
     public int maxHealth = 3;
     public int currentHealth;
@@ -18,11 +21,47 @@ public class CaptainHealth : MonoBehaviour, DamageInterface
 
     public UnityEvent startTimeline;
 
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     private void Start()
     {
         currentHealth = maxHealth;
+        IntializeBossHealth();
         UpdateHealthBar();
         UpdateHealthBarColor();
+    }
+
+    public void IntializeBossHealth()
+    {
+        GameObject sliderObj = GameObject.FindWithTag("BossSlider");
+        if (sliderObj != null)
+        {
+            healthBarSlider = sliderObj.GetComponent<Slider>();
+        }
+        else
+        {
+            Debug.LogWarning("BossSlider tag not found!");
+        }
+
+        GameObject fillObj = GameObject.FindWithTag("BossFill");
+        if (fillObj != null)
+        {
+            healthBarFill = fillObj.GetComponent<Image>();
+        }
+        else
+        {
+            Debug.LogWarning("BossFill tag not found!");
+        }
     }
 
     public void TakeDamage(int damage)

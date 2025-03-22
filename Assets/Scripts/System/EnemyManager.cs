@@ -5,7 +5,7 @@ public class EnemyManager : NetworkBehaviour
 {
     public static EnemyManager Instance;
 
-    public NetworkVariable<int> killTarget = new NetworkVariable<int>();
+    public NetworkVariable<int> killTarget = new NetworkVariable<int>(10);
     public NetworkVariable<int> enemiesKilled = new NetworkVariable<int>();
 
     private void Awake()
@@ -26,6 +26,24 @@ public class EnemyManager : NetworkBehaviour
             return; // Chỉ Server quản lý việc tiêu diệt quái
 
         enemiesKilled.Value = 0;
+
+        // Khi giá trị thay đổi, gọi ClientRpc để cập nhật UI trên tất cả client
+        enemiesKilled.OnValueChanged += (oldValue, newValue) =>
+            UpdateKillCounterUIClientRpc(newValue, killTarget.Value);
+        killTarget.OnValueChanged += (oldValue, newValue) =>
+            UpdateKillCounterUIClientRpc(enemiesKilled.Value, newValue);
+    }
+
+    [ClientRpc]
+    private void UpdateKillCounterUIClientRpc(int currentKills, int targetKills)
+    {
+        KillCounterUI.Instance?.UpdateKillCounterUI(currentKills, targetKills);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void onEnemyKilledServerRpc()
+    {
+        enemiesKilled.Value++;
     }
 
     // Gọi hàm này khi quái bị tiêu diệt
@@ -33,9 +51,7 @@ public class EnemyManager : NetworkBehaviour
     {
         if (!IsServer)
             return; // Chỉ Server mới cập nhật biến
-
-        enemiesKilled.Value++;
-
+        onEnemyKilledServerRpc();
         if (enemiesKilled.Value >= killTarget.Value)
         {
             DestroyRemainingEnemies();
@@ -49,14 +65,19 @@ public class EnemyManager : NetworkBehaviour
 
         foreach (GameObject enemy in remainingEnemies)
         {
+            if (enemy == null) // Kiểm tra enemy có tồn tại không
+            {
+                continue; // Bỏ qua nếu enemy không tồn tại
+            }
+
             NetworkObject netObj = enemy.GetComponent<NetworkObject>();
             if (netObj != null)
             {
-                netObj.Despawn(); // Hủy trên tất cả client
+                // netObj.Despawn(true); // Hủy trên tất cả client
             }
             else
             {
-                Destroy(enemy);
+                Destroy(enemy); // Hủy đối tượng nếu không có NetworkObject
             }
         }
 

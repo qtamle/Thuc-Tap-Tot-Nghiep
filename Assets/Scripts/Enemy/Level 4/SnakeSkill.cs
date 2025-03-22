@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SnakeSkill : MonoBehaviour
 {
+    public static SnakeSkill Instance;
+
     [Header("Bullet")]
     public float bulletSpeed = 8f;
     public float fireRate = 1f;
@@ -60,7 +62,12 @@ public class SnakeSkill : MonoBehaviour
     {
         isFiring = true;
 
-        if (direction == Vector2.left || direction == Vector2.right || direction == Vector2.up || direction == Vector2.down)
+        if (
+            direction == Vector2.left
+            || direction == Vector2.right
+            || direction == Vector2.up
+            || direction == Vector2.down
+        )
         {
             if (direction == Vector2.right)
             {
@@ -68,7 +75,7 @@ public class SnakeSkill : MonoBehaviour
                 yield return new WaitForSeconds(1f);
 
                 FireSequentialVolley(direction, 3, firePoints.Length);
-                yield return new WaitForSeconds(1f); 
+                yield return new WaitForSeconds(1f);
 
                 yield return FireSingleVolley(direction, 5, 1f);
 
@@ -133,9 +140,10 @@ public class SnakeSkill : MonoBehaviour
 
         isFiring = false;
     }
+
     private void FireLaser(Transform firePoint)
     {
-        Vector3 spawnPosition = firePoint.position + new Vector3(-2f, -0.15f, 0f);  
+        Vector3 spawnPosition = firePoint.position + new Vector3(-2f, -0.15f, 0f);
 
         GameObject laser = Instantiate(laserPrefab, spawnPosition, Quaternion.Euler(0, 0, -90));
 
@@ -146,7 +154,7 @@ public class SnakeSkill : MonoBehaviour
             lineRenderer.startWidth = 0.5f;
             lineRenderer.endWidth = 0.5f;
             lineRenderer.SetPosition(0, spawnPosition);
-            lineRenderer.SetPosition(1, spawnPosition + new Vector3(0, 5f, 0)); 
+            lineRenderer.SetPosition(1, spawnPosition + new Vector3(0, 5f, 0));
         }
 
         StartCoroutine(DestroyLaserAfterDuration(laser, 1.5f));
@@ -179,7 +187,7 @@ public class SnakeSkill : MonoBehaviour
     {
         Vector3 spawnPosition = firePoint.position + new Vector3(2f, 0.1f, 0f);
 
-        GameObject laser = Instantiate(laserPrefab, spawnPosition, Quaternion.Euler(0, 0, 90));  
+        GameObject laser = Instantiate(laserPrefab, spawnPosition, Quaternion.Euler(0, 0, 90));
 
         LineRenderer lineRenderer = laser.GetComponent<LineRenderer>();
 
@@ -188,7 +196,7 @@ public class SnakeSkill : MonoBehaviour
             lineRenderer.startWidth = 0.5f;
             lineRenderer.endWidth = 0.5f;
             lineRenderer.SetPosition(0, spawnPosition);
-            lineRenderer.SetPosition(1, spawnPosition + new Vector3(0, 5f, 0));  
+            lineRenderer.SetPosition(1, spawnPosition + new Vector3(0, 5f, 0));
         }
 
         StartCoroutine(DestroyLaserAfterDuration(laser, 2f));
@@ -220,7 +228,7 @@ public class SnakeSkill : MonoBehaviour
     private IEnumerator DestroyLaserAfterDuration(GameObject laser, float duration)
     {
         yield return new WaitForSeconds(duration);
-        Destroy(laser); 
+        Destroy(laser);
     }
 
     private void FireSequentialVolley(Vector2 direction, int startIndex, int endIndex)
@@ -246,7 +254,12 @@ public class SnakeSkill : MonoBehaviour
         }
     }
 
-    private IEnumerator FireReverseSingleVolley(Vector2 direction, int startTransformIndex, int endTransformIndex, float delay)
+    private IEnumerator FireReverseSingleVolley(
+        Vector2 direction,
+        int startTransformIndex,
+        int endTransformIndex,
+        float delay
+    )
     {
         Vector2 fireDirection = GetFireDirection(direction);
         for (int i = startTransformIndex; i >= endTransformIndex; i--)
@@ -269,7 +282,8 @@ public class SnakeSkill : MonoBehaviour
 
     private void FireRandomSingleBullet(Vector2 direction)
     {
-        if (firePoints.Length == 0) return;
+        if (firePoints.Length == 0)
+            return;
 
         int randomIndex = Random.Range(0, firePoints.Length);
         Transform firePoint = firePoints[randomIndex];

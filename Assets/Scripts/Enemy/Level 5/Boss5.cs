@@ -6,24 +6,40 @@ using UnityEngine;
 
 public class Boss5 : MonoBehaviour
 {
+    public static Boss5 Instance;
+
     [Header("Other")]
     private Rigidbody2D rb;
-    [SerializeField] public float groundCheckRadius = 0.2f;
-    [SerializeField] public LayerMask wallLayer;
+
+    [SerializeField]
+    public float groundCheckRadius = 0.2f;
+
+    [SerializeField]
+    public LayerMask wallLayer;
     private Transform BossTrans;
     private Vector3 defaultPosition;
 
     [Header("Check")]
-    [SerializeField] public FloorCheck floorCheck;
-    [SerializeField] public SideManager sideManager;
+    [SerializeField]
+    public FloorCheck floorCheck;
+
+    [SerializeField]
+    public SideManager sideManager;
 
     [Header("Skill 1 Settings")]
-    [SerializeField] private GameObject Skill1Left;
-    [SerializeField] private GameObject Skill1Right;
-    private bool canMove = false;  
-    [SerializeField] public float moveSpeed;
-    private Transform targetTransform; 
-    [SerializeField] private float targetOffset = 1f;
+    [SerializeField]
+    private GameObject Skill1Left;
+
+    [SerializeField]
+    private GameObject Skill1Right;
+    private bool canMove = false;
+
+    [SerializeField]
+    public float moveSpeed;
+    private Transform targetTransform;
+
+    [SerializeField]
+    private float targetOffset = 1f;
 
     private GameObject summonedObject;
     private Vector3 spawnPosition;
@@ -31,25 +47,44 @@ public class Boss5 : MonoBehaviour
     private bool isMovingLeft;
 
     [Header("Skill 2 Settings")]
-    [SerializeField] public GameObject[] SpamPointsLeft;
-    [SerializeField] public GameObject[] SpamPointsRight;
-    private List<GameObject> spawnedObjects = new List<GameObject>(); 
+    [SerializeField]
+    public GameObject[] SpamPointsLeft;
+
+    [SerializeField]
+    public GameObject[] SpamPointsRight;
+    private List<GameObject> spawnedObjects = new List<GameObject>();
     public float spamDelay = 0.1f;
-    
+
     [Header("Skull Projectile Settings")]
-    [SerializeField] private GameObject skullPrefab;
-    [SerializeField] private float orbitRadius = 2f; 
-    [SerializeField] private float orbitSpeed = 180f; 
-    [SerializeField] private float projectileSpeed = 15f; 
-    [SerializeField] private int numberOfSkulls = 3;
-    [SerializeField] private float orbitDuration = 2f; 
+    [SerializeField]
+    private GameObject skullPrefab;
+
+    [SerializeField]
+    private float orbitRadius = 2f;
+
+    [SerializeField]
+    private float orbitSpeed = 180f;
+
+    [SerializeField]
+    private float projectileSpeed = 15f;
+
+    [SerializeField]
+    private int numberOfSkulls = 3;
+
+    [SerializeField]
+    private float orbitDuration = 2f;
     private List<GameObject> orbitingSkulls = new List<GameObject>();
     private float orbitTimer = 0f;
-    [SerializeField] private float skullSkillCooldown = 5f;
+
+    [SerializeField]
+    private float skullSkillCooldown = 5f;
     private float skullSkillTimer = 0f;
+
     // Có thể thêm biến để kiểm tra trạng thái
     private bool isSkullSkillActive = false;
-    [SerializeField] Transform playerTrans;
+
+    [SerializeField]
+    Transform playerTrans;
 
     [Header("Move Bomb")]
     public GameObject boomb;
@@ -72,6 +107,18 @@ public class Boss5 : MonoBehaviour
 
     private BombBoss5Pool bombBossPool;
 
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     void Start()
     {
         // Object Pooling
@@ -81,7 +128,8 @@ public class Boss5 : MonoBehaviour
         damage = GetComponentInChildren<MoveDamagePlayer>();
         BossTrans = transform;
         rb = GetComponent<Rigidbody2D>();
-
+        floorCheck = FindAnyObjectByType<FloorCheck>();
+        sideManager = FindAnyObjectByType<SideManager>();
         // Transform Player
         GameObject Player = GameObject.FindGameObjectWithTag("Player");
         playerTrans = Player.transform;
@@ -95,7 +143,7 @@ public class Boss5 : MonoBehaviour
             skullSkillTimer -= Time.deltaTime;
         }
 
-        if (canMove) 
+        if (canMove)
         {
             MoveObject();
         }
@@ -132,7 +180,7 @@ public class Boss5 : MonoBehaviour
 
                 isSkillSequenceActive = false;
             }
-            yield return null; 
+            yield return null;
         }
     }
 
@@ -164,7 +212,7 @@ public class Boss5 : MonoBehaviour
     {
         TeleportDefault();
         Debug.Log("Executing MoveThrough Skill...");
-        if (wayPoints.Length > 0)
+        if (MoveBoomSkill.Instance.wayPoints.Length > 0)
         {
             yield return StartCoroutine(MoveThroughWayPoints());
         }
@@ -209,7 +257,9 @@ public class Boss5 : MonoBehaviour
 
         if (leftTransform != null && rightTransform != null)
         {
-            Debug.Log($"LeftFloor: {leftTransform.position}, RightFloor: {rightTransform.position}");
+            Debug.Log(
+                $"LeftFloor: {leftTransform.position}, RightFloor: {rightTransform.position}"
+            );
         }
 
         bool isOnLeft = sideManager?.IsOnLeft ?? false;
@@ -228,6 +278,7 @@ public class Boss5 : MonoBehaviour
             Debug.Log("Player position unknown.");
         }
     }
+
     private void TeleportDefault()
     {
         BossTrans.position = defaultPosition;
@@ -256,22 +307,28 @@ public class Boss5 : MonoBehaviour
             }
             else
             {
-                Debug.Log($"Cannot teleport. Player position unknown or target floor is missing. Iteration: {i + 1}");
+                Debug.Log(
+                    $"Cannot teleport. Player position unknown or target floor is missing. Iteration: {i + 1}"
+                );
             }
 
-            if (i < repeatCount - 1) 
+            if (i < repeatCount - 1)
             {
                 yield return new WaitForSeconds(delayBetweenTeleports);
             }
         }
     }
 
-    private IEnumerator SummonAfterDelay(Transform targetFloor, GameObject skillPrefab, bool movingLeft)
+    private IEnumerator SummonAfterDelay(
+        Transform targetFloor,
+        GameObject skillPrefab,
+        bool movingLeft
+    )
     {
         yield return new WaitForSeconds(0.5f);
 
-        float spawnX = movingLeft ? -10f : 10f;  
-        Vector3 spawnPosition = targetFloor.position + new Vector3(spawnX, 0.2f, 0);  
+        float spawnX = movingLeft ? -10f : 10f;
+        Vector3 spawnPosition = targetFloor.position + new Vector3(spawnX, 0.2f, 0);
 
         summonedObject = Instantiate(skillPrefab, spawnPosition, Quaternion.identity);
 
@@ -281,7 +338,6 @@ public class Boss5 : MonoBehaviour
 
         StartCoroutine(StartMovementAfterDelay());
     }
-
 
     private void SummonObject()
     {
@@ -331,9 +387,11 @@ public class Boss5 : MonoBehaviour
         isMovingForward = true;
         canMove = true;
     }
+
     private void MoveObject()
     {
-        if (summonedObject == null || targetTransform == null) return;
+        if (summonedObject == null || targetTransform == null)
+            return;
 
         if (isMovingForward)
         {
@@ -343,7 +401,9 @@ public class Boss5 : MonoBehaviour
 
             if (Mathf.Abs(summonedObject.transform.position.x - finalTargetX) > 2.5f)
             {
-                summonedObject.transform.Translate(Vector3.right * moveDirection * moveSpeed * Time.deltaTime);
+                summonedObject.transform.Translate(
+                    Vector3.right * moveDirection * moveSpeed * Time.deltaTime
+                );
             }
             else
             {
@@ -357,7 +417,9 @@ public class Boss5 : MonoBehaviour
 
             if (Mathf.Abs(summonedObject.transform.position.x - finalSpawnX) > 0.01f)
             {
-                summonedObject.transform.Translate(Vector3.right * moveDirection * moveSpeed * Time.deltaTime);
+                summonedObject.transform.Translate(
+                    Vector3.right * moveDirection * moveSpeed * Time.deltaTime
+                );
                 Destroy(summonedObject, 1f);
             }
             else
@@ -371,8 +433,8 @@ public class Boss5 : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
 
-        isMovingForward = false; 
-        canMove = true; 
+        isMovingForward = false;
+        canMove = true;
     }
 
     private void SummonSkullProjectile()
@@ -389,7 +451,8 @@ public class Boss5 : MonoBehaviour
         for (int i = 0; i < numberOfSkulls; i++)
         {
             float angle = i * angleStep;
-            Vector3 spawnPos = transform.position + Quaternion.Euler(0, 0, angle) * Vector3.right * orbitRadius;
+            Vector3 spawnPos =
+                transform.position + Quaternion.Euler(0, 0, angle) * Vector3.right * orbitRadius;
             GameObject skull = Instantiate(skullPrefab, spawnPos, Quaternion.identity);
             orbitingSkulls.Add(skull);
         }
@@ -407,7 +470,8 @@ public class Boss5 : MonoBehaviour
 
             for (int i = 0; i < orbitingSkulls.Count; i++)
             {
-                if (orbitingSkulls[i] == null) continue;
+                if (orbitingSkulls[i] == null)
+                    continue;
 
                 float angle = currentAngle + (i * (360f / numberOfSkulls));
                 Vector3 offset = Quaternion.Euler(0, 0, angle) * Vector3.right * orbitRadius;
@@ -420,7 +484,8 @@ public class Boss5 : MonoBehaviour
         {
             foreach (var skull in orbitingSkulls)
             {
-                if (skull == null) continue;
+                if (skull == null)
+                    continue;
 
                 Vector2 direction = (playerTrans.position - skull.transform.position).normalized;
 
@@ -455,12 +520,12 @@ public class Boss5 : MonoBehaviour
 
         if (sideManager?.IsOnLeft ?? false)
         {
-            spawnPoints = SpamPointsRight;
+            spawnPoints = SpawnPointCheck.Instance.SpamPointsLeft;
             prefabToSpawn = Skill1Right;
         }
         else
         {
-            spawnPoints = SpamPointsLeft;
+            spawnPoints = SpawnPointCheck.Instance.SpamPointsLeft;
             prefabToSpawn = Skill1Left;
         }
 
@@ -469,7 +534,11 @@ public class Boss5 : MonoBehaviour
         {
             if (point != null)
             {
-                GameObject spawnedObj = Instantiate(prefabToSpawn, point.transform.position, Quaternion.identity);
+                GameObject spawnedObj = Instantiate(
+                    prefabToSpawn,
+                    point.transform.position,
+                    Quaternion.identity
+                );
                 spawnedObjects.Add(spawnedObj);
                 yield return new WaitForSeconds(spamDelay);
             }
@@ -481,9 +550,9 @@ public class Boss5 : MonoBehaviour
         damage.SetCanDamage(true);
         yield return new WaitForSeconds(1f);
 
-        while (currentWaypointIndex < wayPoints.Length)
+        while (currentWaypointIndex < MoveBoomSkill.Instance.wayPoints.Length)
         {
-            Transform target = wayPoints[currentWaypointIndex];
+            Transform target = MoveBoomSkill.Instance.wayPoints[currentWaypointIndex];
             yield return StartCoroutine(MoveToTarget(target));
 
             yield return new WaitForSeconds(1f);
@@ -494,14 +563,19 @@ public class Boss5 : MonoBehaviour
         yield return StartCoroutine(MoveRight());
         damage.SetCanDamage(false);
     }
+
     private IEnumerator MoveToTarget(Transform target)
     {
         Vector3 targetPosition = target.position;
-        targetPosition.y += 1f; 
+        targetPosition.y += 1f;
 
         while (Vector3.Distance(transform.position, targetPosition) > 0.1f)
         {
-            transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeedBomb * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(
+                transform.position,
+                targetPosition,
+                moveSpeedBomb * Time.deltaTime
+            );
             yield return null;
         }
 
@@ -509,17 +583,20 @@ public class Boss5 : MonoBehaviour
         SpawnBoomAtPosition(transform.position);
     }
 
-
     private IEnumerator MoveRight()
     {
         Vector3 startPosition = transform.position;
-        Vector3 endPosition = startPosition + new Vector3(20f, 0, 0); 
+        Vector3 endPosition = startPosition + new Vector3(20f, 0, 0);
 
         float elapsedTime = 0f;
 
         while (elapsedTime < moveRightDuration)
         {
-            transform.position = Vector3.Lerp(startPosition, endPosition, elapsedTime / moveRightDuration);
+            transform.position = Vector3.Lerp(
+                startPosition,
+                endPosition,
+                elapsedTime / moveRightDuration
+            );
             elapsedTime += Time.deltaTime;
             yield return null;
         }
@@ -527,7 +604,7 @@ public class Boss5 : MonoBehaviour
         transform.position = endPosition;
         currentWaypointIndex = 0;
 
-        Vector3 highPosition = defaultPosition + new Vector3(0f,15f,0f);    
+        Vector3 highPosition = defaultPosition + new Vector3(0f, 15f, 0f);
 
         transform.position = highPosition;
 
@@ -538,7 +615,11 @@ public class Boss5 : MonoBehaviour
     {
         while (Vector3.Distance(transform.position, targetPosition) > 0.1f)
         {
-            transform.position = Vector3.MoveTowards(transform.position, targetPosition, 5f * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(
+                transform.position,
+                targetPosition,
+                5f * Time.deltaTime
+            );
             yield return null;
         }
         transform.position = targetPosition;
@@ -558,9 +639,9 @@ public class Boss5 : MonoBehaviour
 
     private IEnumerator BombSKill()
     {
-        for (int i = 0; i < targetTransformBomb.Length; i++)
+        for (int i = 0; i < FireBoomTransfrom.Instance.targetTransformBomb.Length; i++)
         {
-            Transform target = targetTransformBomb[i];
+            Transform target = FireBoomTransfrom.Instance.targetTransformBomb[i];
             if (target != null)
             {
                 yield return StartCoroutine(MoveAndShootBigBomb(target));
@@ -573,11 +654,11 @@ public class Boss5 : MonoBehaviour
         List<int> selectedIndices = new List<int>();
         while (selectedIndices.Count < 10)
         {
-            int randomIndex = Random.Range(0, newTarget.Length);
+            int randomIndex = Random.Range(0, FireBoomTransfrom.Instance.newTarget.Length);
             if (!selectedIndices.Contains(randomIndex))
             {
                 selectedIndices.Add(randomIndex);
-                Transform randomTarget = newTarget[randomIndex];
+                Transform randomTarget = FireBoomTransfrom.Instance.newTarget[randomIndex];
                 if (randomTarget != null)
                 {
                     StartCoroutine(MoveAndShootBomb(randomTarget));
@@ -594,17 +675,29 @@ public class Boss5 : MonoBehaviour
     {
         if (bigbombPrefab != null)
         {
-            GameObject bigBomb = Instantiate(bigbombPrefab, transform.position, Quaternion.identity);
+            GameObject bigBomb = Instantiate(
+                bigbombPrefab,
+                transform.position,
+                Quaternion.identity
+            );
             while (Vector3.Distance(bigBomb.transform.position, target.position) > 1f)
             {
-                bigBomb.transform.position = Vector3.MoveTowards(bigBomb.transform.position, target.position, bombSpeed * Time.deltaTime);
+                bigBomb.transform.position = Vector3.MoveTowards(
+                    bigBomb.transform.position,
+                    target.position,
+                    bombSpeed * Time.deltaTime
+                );
                 yield return null;
             }
             yield return new WaitForSeconds(0.3f);
             Destroy(bigBomb);
             if (bigBombLaserPrefab != null)
             {
-                GameObject bigBombLaser = Instantiate(bigBombLaserPrefab, bigBomb.transform.position, Quaternion.identity);
+                GameObject bigBombLaser = Instantiate(
+                    bigBombLaserPrefab,
+                    bigBomb.transform.position,
+                    Quaternion.identity
+                );
                 LineRenderer laserLine = bigBombLaser.GetComponentInChildren<LineRenderer>();
                 laserLine.transform.rotation = Quaternion.Euler(0f, 0f, 90f);
                 Vector3 newLaserPosition = laserLine.transform.position;
@@ -630,7 +723,11 @@ public class Boss5 : MonoBehaviour
 
             while (Vector3.Distance(bomb.transform.position, target.position) > 0.5f)
             {
-                bomb.transform.position = Vector3.MoveTowards(bomb.transform.position, target.position, bombSpeed * Time.deltaTime);
+                bomb.transform.position = Vector3.MoveTowards(
+                    bomb.transform.position,
+                    target.position,
+                    bombSpeed * Time.deltaTime
+                );
                 yield return null;
             }
             yield return new WaitForSeconds(0.3f);
@@ -639,9 +736,13 @@ public class Boss5 : MonoBehaviour
 
             if (bombLaserPrefab != null)
             {
-                GameObject bombLaser = Instantiate(bombLaserPrefab, bomb.transform.position, Quaternion.identity);
+                GameObject bombLaser = Instantiate(
+                    bombLaserPrefab,
+                    bomb.transform.position,
+                    Quaternion.identity
+                );
                 Vector3 newPosition = bombLaser.transform.position;
-                newPosition.y -= 0.5f; 
+                newPosition.y -= 0.5f;
                 bombLaser.transform.position = newPosition;
 
                 LineRenderer laserLine = bombLaser.GetComponentInChildren<LineRenderer>();

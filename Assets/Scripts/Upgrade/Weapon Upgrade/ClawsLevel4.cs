@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using System.Linq;
+using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.SceneManagement; 
+using UnityEngine.SceneManagement;
 
 public class ClawsLevel4 : MonoBehaviour
 {
@@ -15,7 +16,7 @@ public class ClawsLevel4 : MonoBehaviour
     public Vector2 yMoveRange = new Vector2(4.49f, -4.66f);
 
     [Header("Attack Settings")]
-    public Vector2 boxSize = new Vector2(2f, 2f); 
+    public Vector2 boxSize = new Vector2(2f, 2f);
     public LayerMask enemyLayer;
 
     [Header("Coins")]
@@ -50,7 +51,7 @@ public class ClawsLevel4 : MonoBehaviour
 
     private void OnDisable()
     {
-        SceneManager.sceneLoaded -= OnSceneLoaded; 
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -71,7 +72,8 @@ public class ClawsLevel4 : MonoBehaviour
             int playerLayer = LayerMask.NameToLayer("Player");
             if (playerLayer >= 0)
             {
-                playerObject = FindObjectsOfType<GameObject>().FirstOrDefault(obj => obj.layer == playerLayer);
+                playerObject = FindObjectsOfType<GameObject>()
+                    .FirstOrDefault(obj => obj.layer == playerLayer);
             }
         }
 
@@ -79,7 +81,8 @@ public class ClawsLevel4 : MonoBehaviour
 
         enemySpawners = FindObjectsOfType<MonoBehaviour>().OfType<IEnemySpawner>().ToArray();
 
-        if (isActivated) return;
+        if (isActivated)
+            return;
 
         isActivated = true;
 
@@ -99,7 +102,11 @@ public class ClawsLevel4 : MonoBehaviour
     {
         while (Vector2.Distance(transform.position, spawnPoint) > 0.1f)
         {
-            transform.position = Vector2.MoveTowards(transform.position, spawnPoint, moveSpeed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(
+                transform.position,
+                spawnPoint,
+                moveSpeed * Time.deltaTime
+            );
             yield return null;
         }
 
@@ -120,7 +127,11 @@ public class ClawsLevel4 : MonoBehaviour
                     SetNewRandomTarget();
                 }
 
-                transform.position = Vector2.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+                transform.position = Vector2.MoveTowards(
+                    transform.position,
+                    targetPosition,
+                    moveSpeed * Time.deltaTime
+                );
 
                 CheckForEnemies();
             }
@@ -152,7 +163,12 @@ public class ClawsLevel4 : MonoBehaviour
 
                 if (Random.value <= 0.30f)
                 {
-                    SpawnCoins(secondaryCoinPrefab, secondaryCoinSpawnMin, secondaryCoinSpawnMax, enemy.transform.position);
+                    SpawnCoins(
+                        secondaryCoinPrefab,
+                        secondaryCoinSpawnMin,
+                        secondaryCoinSpawnMax,
+                        enemy.transform.position
+                    );
                 }
 
                 SpawnExperienceOrbs(enemy.transform.position, 5);
@@ -177,14 +193,18 @@ public class ClawsLevel4 : MonoBehaviour
         {
             Vector3 spawnPosition = position + Vector3.up * 0.2f;
 
-            GameObject coin = coinPoolManager.GetCoinFromPool(coinType);
+            NetworkObject coin = CoinPoolManager.Instance.GetCoinFromPool(
+                spawnPosition,
+                coinType == secondaryCoinPrefab
+            );
             coin.transform.position = spawnPosition;
 
             Rigidbody2D coinRb = coin.GetComponent<Rigidbody2D>();
 
             if (coinRb != null)
             {
-                Vector2 forceDirection = new Vector2(Random.Range(-1.5f, 1.5f), Random.Range(1f, 1f)) * 2.5f;
+                Vector2 forceDirection =
+                    new Vector2(Random.Range(-1.5f, 1.5f), Random.Range(1f, 1f)) * 2.5f;
                 coinRb.AddForce(forceDirection, ForceMode2D.Impulse);
 
                 StartCoroutine(CheckIfCoinIsStuck(coinRb));
@@ -197,7 +217,6 @@ public class ClawsLevel4 : MonoBehaviour
                     coinScript.SetCoinType(true, false);
                 else
                     coinScript.SetCoinType(false, true);
-
             }
         }
     }
@@ -208,7 +227,12 @@ public class ClawsLevel4 : MonoBehaviour
 
         if (coinRb != null)
         {
-            RaycastHit2D hit = Physics2D.Raycast(coinRb.transform.position, Vector2.down, 0.5f, groundLayer);
+            RaycastHit2D hit = Physics2D.Raycast(
+                coinRb.transform.position,
+                Vector2.down,
+                0.5f,
+                groundLayer
+            );
             if (hit.collider != null)
             {
                 coinRb.transform.position += Vector3.up * 0.3f;
@@ -220,6 +244,7 @@ public class ClawsLevel4 : MonoBehaviour
             yield break;
         }
     }
+
     void SpawnExperienceOrbs(Vector3 position, int orbCount)
     {
         for (int i = 0; i < orbCount; i++)
@@ -258,7 +283,9 @@ public class ClawsLevel4 : MonoBehaviour
                 {
                     Vector3 direction = (player.position - orb.transform.position).normalized;
 
-                    orbRb.MovePosition(orb.transform.position + direction * Time.deltaTime * orbMoveToPlayer);
+                    orbRb.MovePosition(
+                        orb.transform.position + direction * Time.deltaTime * orbMoveToPlayer
+                    );
 
                     if (Vector3.Distance(orb.transform.position, player.position) < 0.5f)
                     {

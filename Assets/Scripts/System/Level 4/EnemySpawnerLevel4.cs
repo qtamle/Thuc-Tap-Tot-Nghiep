@@ -1,160 +1,206 @@
-﻿// using System.Collections;
-// using UnityEngine;
+﻿using System.Collections;
+using Unity.Netcode;
+using UnityEngine;
 
-// public class EnemySpawnerLevel4 : MonoBehaviour, IEnemySpawner
-// {
-//     [Header("Enemy Data")]
-//     public EnemySpawnData[] enemySpawnDatas;
+public class EnemySpawnerLevel4 : NetworkBehaviour, IEnemySpawner
+{
+    [Header("Enemy Data")]
+    public EnemySpawnData[] enemySpawnDatas;
 
-//     [Header("Show UI")]
-//     public GameObject warningBoss;
-//     public GameObject bossLevel1;
-//     public GameObject UIHealthBoss;
+    [Header("Show UI")]
+    public GameObject warningBoss;
+    public GameObject bossLevel1;
+    public GameObject UIHealthBoss;
 
-//     [Header("Hide UI")]
-//     public GameObject remain;
+    [Header("Hide UI")]
+    public GameObject remain;
 
-//     [Header("Boss Level 1 Script")]
-//     public SnakeController snakeBoss;
+    [Header("Boss Level 1 Script")]
+    public SnakeController snakeBoss;
 
-//     private bool stopSpawning = false;
+    private NetworkVariable<bool> stopSpawning = new NetworkVariable<bool>(false);
 
-//     [Header("Max and current enemy in level")]
-//     public int currentTotalSpawnCount = 0;
-//     public int maxTotalSpawnCount;
+    [Header("Max and current enemy in level")]
+    private NetworkVariable<int> currentTotalSpawnCount = new NetworkVariable<int>(0);
+    public int maxTotalSpawnCount;
 
-//     [Header("Time Spawn")]
-//     private float timeElapsed = 0f;
-//     public float spawnSpeedIncreaseInterval = 70f;
-//     public float spawnSpeedDecreaseAmount = 0.2f;
-//     private float minSpawnTimeLimit = 1f;
-//     private float maxSpawnTimeLimit = 1f;
+    [Header("Time Spawn")]
+    private float timeElapsed = 0f;
+    public float spawnSpeedIncreaseInterval = 70f;
+    public float spawnSpeedDecreaseAmount = 0.2f;
+    private float minSpawnTimeLimit = 1f;
+    private float maxSpawnTimeLimit = 1f;
 
-//     private bool isBossSpawned = false;
-//     private void Start()
-//     {
-//         if (bossLevel1 != null)
-//         {
-//             bossLevel1.SetActive(false);
-//         }
+    private NetworkVariable<bool> isBossSpawn = new NetworkVariable<bool>(false);
 
-//         if (UIHealthBoss != null)
-//         {
-//             UIHealthBoss.SetActive(false);
-//         }
+    private void Start()
+    {
+        if (bossLevel1 != null)
+        {
+            // bossLevel1.SetActive(false);
+        }
 
-//         if (warningBoss != null)
-//         {
-//             warningBoss.SetActive(false);
-//         }
+        if (UIHealthBoss != null)
+        {
+            UIHealthBoss.SetActive(false);
+        }
 
-//         foreach (var spawnData in enemySpawnDatas)
-//         {
-//             StartCoroutine(SpawnEnemyIndependently(spawnData));
-//         }
-//     }
+        if (warningBoss != null)
+        {
+            warningBoss.SetActive(false);
+        }
 
-//     void Update()
-//     {
-//         timeElapsed += Time.deltaTime;
+        foreach (var spawnData in enemySpawnDatas)
+        {
+            // StartCoroutine(SpawnEnemyIndependently(spawnData));
+        }
+    }
 
-//         if (timeElapsed >= spawnSpeedIncreaseInterval)
-//         {
-//             foreach (var spawnData in enemySpawnDatas)
-//             {
-//                 if (spawnData.minSpawnTime > minSpawnTimeLimit)
-//                 {
-//                     spawnData.minSpawnTime -= spawnSpeedDecreaseAmount;
-//                 }
+    void Update()
+    {
+        timeElapsed += Time.deltaTime;
 
-//                 if (spawnData.maxSpawnTime > maxSpawnTimeLimit)
-//                 {
-//                     spawnData.maxSpawnTime -= spawnSpeedDecreaseAmount;
-//                 }
+        if (timeElapsed >= spawnSpeedIncreaseInterval)
+        {
+            foreach (var spawnData in enemySpawnDatas)
+            {
+                if (spawnData.minSpawnTime > minSpawnTimeLimit)
+                {
+                    spawnData.minSpawnTime -= spawnSpeedDecreaseAmount;
+                }
 
-//                 spawnData.minSpawnTime = Mathf.Max(spawnData.minSpawnTime, minSpawnTimeLimit);
-//                 spawnData.maxSpawnTime = Mathf.Max(spawnData.maxSpawnTime, maxSpawnTimeLimit);
-//             }
+                if (spawnData.maxSpawnTime > maxSpawnTimeLimit)
+                {
+                    spawnData.maxSpawnTime -= spawnSpeedDecreaseAmount;
+                }
 
-//             timeElapsed = 0f;
-//         }
-//     }
-//     private IEnumerator SpawnEnemyIndependently(EnemySpawnData spawnData)
-//     {
-//         yield return new WaitForSeconds(1f);
+                spawnData.minSpawnTime = Mathf.Max(spawnData.minSpawnTime, minSpawnTimeLimit);
+                spawnData.maxSpawnTime = Mathf.Max(spawnData.maxSpawnTime, maxSpawnTimeLimit);
+            }
 
-//         while (!stopSpawning)
-//         {
-//             if (currentTotalSpawnCount < maxTotalSpawnCount)
-//             {
-//                 Transform spawnPoint = spawnData.spawnPoints[Random.Range(0, spawnData.spawnPoints.Length)];
-//                 Vector3 spawnPosition = spawnPoint.position;
-//                 spawnPosition.y += 1.5f;
+            timeElapsed = 0f;
+        }
+    }
 
-//                 GameObject spawnedEnemy = Instantiate(spawnData.enemyPrefab, spawnPosition, Quaternion.identity);
+    private IEnumerator SpawnEnemyIndependently(EnemySpawnData spawnData)
+    {
+        yield return new WaitForSeconds(1f);
 
-//                 if (!spawnedEnemy.CompareTag("Enemy"))
-//                 {
-//                     spawnedEnemy.tag = "Enemy";
-//                 }
+        while (!stopSpawning.Value)
+        {
+            if (currentTotalSpawnCount.Value < maxTotalSpawnCount)
+            {
+                Transform spawnPoint = spawnData.spawnPoints[
+                    Random.Range(0, spawnData.spawnPoints.Length)
+                ];
+                Vector3 spawnPosition = spawnPoint.position;
+                spawnPosition.y += 1.5f;
 
-//                 currentTotalSpawnCount++;
-//             }
+                GameObject spawnedEnemy = Instantiate(
+                    spawnData.enemyPrefab,
+                    spawnPosition,
+                    Quaternion.identity
+                );
 
-//             yield return new WaitForSeconds(Random.Range(spawnData.minSpawnTime, spawnData.maxSpawnTime));
+                if (!spawnedEnemy.CompareTag("Enemy"))
+                {
+                    spawnedEnemy.tag = "Enemy";
+                }
 
-//             if (EnemyManager.Instance != null && EnemyManager.Instance.killTarget <= EnemyManager.Instance.enemiesKilled && !isBossSpawned)
-//             {
-//                 stopSpawning = true;
-//                 isBossSpawned = true;
-//                 StartCoroutine(HandleBossSpawn());
-//                 break;
-//             }
+                currentTotalSpawnCount.Value++;
+            }
 
-//             yield return null;
-//         }
-//     }
+            yield return new WaitForSeconds(
+                Random.Range(spawnData.minSpawnTime, spawnData.maxSpawnTime)
+            );
 
-//     public void OnEnemyKilled()
-//     {
-//         currentTotalSpawnCount--;
+            if (
+                EnemyManager.Instance != null
+                && EnemyManager.Instance.killTarget.Value
+                    <= EnemyManager.Instance.enemiesKilled.Value
+                && !isBossSpawn.Value
+            )
+            {
+                stopSpawning.Value = true;
+                isBossSpawn.Value = true;
+                StartCoroutine(HandleBossSpawn());
+                break;
+            }
 
-//         if (stopSpawning)
-//         {
-//             currentTotalSpawnCount = 0;
-//         }
-//     }
+            yield return null;
+        }
+    }
 
-//     private IEnumerator HandleBossSpawn()
-//     {
-//         if (remain != null)
-//         {
-//             remain.SetActive(false);
-//         }
+    public void OnEnemyKilled()
+    {
+        currentTotalSpawnCount.Value--;
 
-//         if (warningBoss != null)
-//         {
-//             warningBoss.SetActive(true);
-//         }
+        if (stopSpawning.Value)
+        {
+            currentTotalSpawnCount.Value = 0;
+        }
+    }
 
-//         yield return new WaitForSeconds(3f);
+    private IEnumerator HandleBossSpawn()
+    {
+        if (remain != null)
+        {
+            remain.SetActive(false);
+        }
 
-//         if (warningBoss != null)
-//         {
-//             warningBoss.SetActive(false);
-//         }
+        if (warningBoss != null)
+        {
+            warningBoss.SetActive(true);
+        }
 
-//         if (bossLevel1 != null)
-//         {
-//             bossLevel1.SetActive(true);
-//             snakeBoss.Active();
-//         }
+        yield return new WaitForSeconds(3f);
 
-//         yield return new WaitForSeconds(0.5f);
+        if (warningBoss != null)
+        {
+            warningBoss.SetActive(false);
+        }
 
-//         if (UIHealthBoss != null)
-//         {
-//             UIHealthBoss.SetActive(true);
-//         }
-//     }
-// }
+        if (bossLevel1 != null)
+        {
+            bossLevel1.SetActive(true);
+            snakeBoss.Active();
+        }
+
+        yield return new WaitForSeconds(0.5f);
+
+        if (UIHealthBoss != null)
+        {
+            UIHealthBoss.SetActive(true);
+        }
+    }
+
+    public void TestHandleBossSpawn()
+    {
+        if (remain != null)
+        {
+            remain.SetActive(false);
+        }
+
+        if (warningBoss != null)
+        {
+            warningBoss.SetActive(true);
+        }
+
+        if (warningBoss != null)
+        {
+            warningBoss.SetActive(false);
+        }
+
+        if (bossLevel1 != null)
+        {
+            bossLevel1.SetActive(true);
+            SnakeController.Instance.Active();
+        }
+        ;
+
+        if (UIHealthBoss != null)
+        {
+            UIHealthBoss.SetActive(true);
+        }
+    }
+}
