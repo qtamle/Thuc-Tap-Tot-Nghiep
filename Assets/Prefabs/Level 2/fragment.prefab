@@ -140,6 +140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+  destroyTime: 10
 --- !u!114 &9145306198116242786
 MonoBehaviour:
   m_ObjectHideFlags: 0

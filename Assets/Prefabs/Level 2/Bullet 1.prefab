@@ -142,6 +142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+  destroyTime: 10
 --- !u!50 &-2252656496739801792
 Rigidbody2D:
   serializedVersion: 5

@@ -243,8 +243,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  maxHealth: 1
-  currentHealth: 0
+  currentHealth:
+    m_InternalValue: 0
   healthBarSlider: {fileID: 0}
   healthBarFill: {fileID: 0}
   startTimeline:

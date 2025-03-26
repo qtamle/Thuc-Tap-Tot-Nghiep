@@ -168,6 +168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e77de631b82092849b2ed75fa28a01cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   fragmentPrefab: {fileID: 957018120678714827, guid: c4ed2a534e2cdf640a547f235bec7b11, type: 3}
   fragmentSpeed: 7
 --- !u!114 &4435309599852336797
