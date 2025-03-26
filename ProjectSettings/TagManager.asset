@@ -37,6 +37,8 @@ TagManager:
   - BossSlider
   - BossFill
   - BossSpawner
+  - CyborgLaser
+  - DiscoBall
   layers:
   - Default
   - TransparentFX

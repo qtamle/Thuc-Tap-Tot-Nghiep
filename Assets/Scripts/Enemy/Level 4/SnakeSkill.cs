@@ -308,7 +308,7 @@ public class SnakeSkill : MonoBehaviour
 
     private void FireBullet(Transform firePoint, Vector2 fireDirection)
     {
-        GameObject bullet = bulletBoss4Pool.GetBullet();
+        GameObject bullet = bulletBoss4Pool.GetBullet(firePoint.position);
 
         bullet.transform.position = firePoint.position;
 

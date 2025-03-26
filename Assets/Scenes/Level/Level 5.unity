@@ -1874,6 +1874,7 @@ GameObject:
   - component: {fileID: 258206130}
   - component: {fileID: 258206131}
   - component: {fileID: 258206132}
+  - component: {fileID: 258206133}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1984,6 +1985,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 918517c0ddc088148ac72a5b3e0b863a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   killCounterText: {fileID: 1224762733}
 --- !u!114 &258206131
 MonoBehaviour:
@@ -2012,6 +2014,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   experienceText: {fileID: 512577287}
+--- !u!114 &258206133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 258206125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 1299207915
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
 --- !u!1 &261974308
 GameObject:
   m_ObjectHideFlags: 0
@@ -3541,8 +3568,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  coinPrefab: {fileID: 2378999455891136806, guid: 7f9121f4ef7af7a469478e8d27f61512, type: 3}
-  secondaryCoinPrefab: {fileID: 2378999455891136806, guid: 570e85d03a1681f4b8e83153a845ac34, type: 3}
+  coinPrefab: {fileID: -5421448773651281902, guid: 7f9121f4ef7af7a469478e8d27f61512, type: 3}
+  secondaryCoinPrefab: {fileID: -2333134803016369592, guid: 570e85d03a1681f4b8e83153a845ac34, type: 3}
   initialPoolSize: 25
 --- !u!4 &403724004
 Transform:
@@ -5144,7 +5171,7 @@ GameObject:
   - component: {fileID: 612989577}
   m_Layer: 5
   m_Name: Fill
-  m_TagString: Fill
+  m_TagString: BossFill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8969,6 +8996,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1115152009}
   - component: {fileID: 1115152010}
+  - component: {fileID: 1115152011}
   m_Layer: 0
   m_Name: BombManager
   m_TagString: Untagged
@@ -8985,7 +9013,7 @@ Transform:
   m_GameObject: {fileID: 1115152008}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.14, y: 5.47, z: -0.0040251464}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9003,8 +9031,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b454e5a061bae54da355a4622f5c2cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   bombPrefab: {fileID: 2774234204776816512, guid: cb95c4e88814cb64883a87dec2386b91, type: 3}
   poolSize: 10
+--- !u!114 &1115152011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1115152008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 4004757694
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
 --- !u!1 &1115378823
 GameObject:
   m_ObjectHideFlags: 0
@@ -13273,6 +13327,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1420307607}
+  - component: {fileID: 1420307608}
   m_Layer: 0
   m_Name: Pool
   m_TagString: Untagged
@@ -13299,6 +13354,22 @@ Transform:
   - {fileID: 967289857}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1420307608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1420307606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a0c3a5a73298164893fcc6cd99014b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  PooledPrefabsList:
+  - Prefab: {fileID: 2774234204776816512, guid: cb95c4e88814cb64883a87dec2386b91, type: 3}
+    PrewarmCount: 10
 --- !u!1 &1426225335
 GameObject:
   m_ObjectHideFlags: 0
@@ -15742,7 +15813,7 @@ GameObject:
   - component: {fileID: 1806180031}
   m_Layer: 5
   m_Name: Slider
-  m_TagString: Untagged
+  m_TagString: BossSlider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

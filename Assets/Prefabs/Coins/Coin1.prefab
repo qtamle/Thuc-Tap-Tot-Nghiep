@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: -2988527080003221144}
   - component: {fileID: -4896329349418496528}
   - component: {fileID: -8034000910716117641}
-  - component: {fileID: 6234628385761649253}
   m_Layer: 11
   m_Name: Coin1
   m_TagString: Coin
@@ -169,7 +168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2183386610
+  GlobalObjectIdHash: 775113695
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -257,20 +256,5 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   NetworkRigidbodyBaseExpanded: 0
   UseRigidBodyForMotion: 0
-  AutoUpdateKinematicState: 1
-  AutoSetKinematicOnDespawn: 1
---- !u!114 &6234628385761649253
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2378999455891136806}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1aa8aa452894b44799ea7863348b56f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
-  IsActive:
-    m_InternalValue: 0
+  AutoUpdateKinematicState: 0
+  AutoSetKinematicOnDespawn: 0

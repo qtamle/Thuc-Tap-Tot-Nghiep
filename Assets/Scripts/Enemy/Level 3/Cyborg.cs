@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
+using Unity.Netcode.Components;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
@@ -31,7 +32,7 @@ public class Cyborg : NetworkBehaviour
     [Header("Bomb Skill")]
     public GameObject bombPrefab;
 
-    // public Transform[] bombPositions;
+    public Transform[] bombPositions;
     public float bombDuration = 3f;
     public float laserLength = 10f;
     public GameObject laserBomb;
@@ -41,7 +42,7 @@ public class Cyborg : NetworkBehaviour
     [Header("Other")]
     public LayerMask groundLayer;
     public Transform groundCheck;
-    public Rigidbody2D rb;
+    public NetworkRigidbody2D rb;
 
     private bool isSkillActive = false;
     private Vector3 originalPosition;
@@ -66,6 +67,11 @@ public class Cyborg : NetworkBehaviour
     private void Start()
     {
         Cyborghealth = GetComponent<CyborgHealth>();
+        gunPositions = GunPositions.Instance.gunPositions;
+        bombPositions = BoomPostion.Instance.bombPositions;
+        // laserSpawnPoint = GameObject.FindWithTag("CyborgLaser").transform;
+        spawnPoint = GameObject.FindWithTag("DiscoBall").transform;
+        rb = GetComponent<NetworkRigidbody2D>();
     }
 
     public void Active()
@@ -75,10 +81,26 @@ public class Cyborg : NetworkBehaviour
 
     private void Update()
     {
-        if (Cyborghealth != null && Cyborghealth.currentHealth <= 0)
+        if (Cyborghealth != null && Cyborghealth.currentHealth.Value <= 0)
         {
             StopAllCoroutines();
         }
+        // if (Input.GetKeyDown(KeyCode.Q))
+        // {
+        //     StartCoroutine(DiscoBallSkill());
+        // }
+        // if (Input.GetKeyDown(KeyCode.W))
+        // {
+        //     StartCoroutine(BombSkill());
+        // }
+        // if (Input.GetKeyDown(KeyCode.E))
+        // {
+        //     StartCoroutine(TurretSkill());
+        // }
+        // if (Input.GetKeyDown(KeyCode.R))
+        // {
+        //     StartCoroutine(MoveAndFireLaser());
+        // }
     }
 
     private IEnumerator MoveBossToTarget()
@@ -129,18 +151,22 @@ public class Cyborg : NetworkBehaviour
 
             yield return StartCoroutine(MoveAndFireLaser());
 
-            rb.bodyType = RigidbodyType2D.Dynamic;
+            rb.Rigidbody2D.bodyType = RigidbodyType2D.Dynamic;
             yield return new WaitUntil(
                 () => Physics2D.Raycast(groundCheck.position, Vector2.down, 0.1f, groundLayer)
             );
             isStunned = true;
-            rb.bodyType = RigidbodyType2D.Static;
+            Debug.Log("Stunned: " + isStunned);
+            rb.Rigidbody2D.bodyType = RigidbodyType2D.Static;
 
             if (isStunned)
             {
                 Cyborghealth.SetCanBeDamaged(true);
                 yield return new WaitForSeconds(4f);
                 Cyborghealth.SetCanBeDamaged(false);
+                // Cyborghealth.SetCanBeDamaged(true);
+                // yield return new WaitForSeconds(4f);
+                // Cyborghealth.SetCanBeDamaged(false);
             }
             isStunned = false;
 
@@ -157,7 +183,7 @@ public class Cyborg : NetworkBehaviour
         Vector3 startPosition = spawnPoint.position;
         Vector3 targetPosition = new Vector3(0, -1.5f, 0);
         orb = Instantiate(orbPrefab, startPosition, Quaternion.identity);
-
+        orb.GetComponent<NetworkObject>().Spawn();
         float moveDuration = 2f;
         float elapsedTime = 0f;
 
@@ -179,7 +205,8 @@ public class Cyborg : NetworkBehaviour
         yield return new WaitForSeconds(2f);
         foreach (GameObject laser in plusLasers)
         {
-            Destroy(laser);
+            laser.GetComponent<NetworkObject>().Despawn(true);
+            // Destroy(laser);
         }
 
         yield return new WaitForSeconds(1f);
@@ -188,11 +215,12 @@ public class Cyborg : NetworkBehaviour
         yield return new WaitForSeconds(2f);
         foreach (GameObject laser in xLasers)
         {
-            Destroy(laser);
+            laser.GetComponent<NetworkObject>().Despawn(true);
+            // Destroy(laser);
         }
 
         yield return new WaitForSeconds(0.5f);
-        Destroy(orb);
+        orb.GetComponent<NetworkObject>().Despawn(true);
 
         isSkillActive = false;
     }
@@ -248,6 +276,7 @@ public class Cyborg : NetworkBehaviour
     private GameObject CreateLaser(Vector3 startPosition, Vector3 direction, Quaternion rotation)
     {
         GameObject lineObject = Instantiate(linePrefab);
+        lineObject.GetComponent<NetworkObject>().Spawn();
         lineObject.transform.position = startPosition + direction * lineLength / 2;
         lineObject.transform.rotation = rotation;
 
@@ -272,8 +301,9 @@ public class Cyborg : NetworkBehaviour
             Transform position2 = GetRandomGunPosition(availablePositions);
 
             GameObject turret1 = Instantiate(turretPrefab, position1.position, Quaternion.identity);
+            turret1.GetComponent<NetworkObject>().Spawn();
             GameObject turret2 = Instantiate(turretPrefab, position2.position, Quaternion.identity);
-
+            turret2.GetComponent<NetworkObject>().Spawn();
             Turret turretScript1 = turret1.GetComponent<Turret>();
             Turret turretScript2 = turret2.GetComponent<Turret>();
 
@@ -282,8 +312,10 @@ public class Cyborg : NetworkBehaviour
 
             yield return new WaitForSeconds(4.5f);
 
-            Destroy(turret1);
-            Destroy(turret2);
+            turret1.GetComponent<NetworkObject>().Despawn(true);
+            turret2.GetComponent<NetworkObject>().Despawn(true);
+            // Destroy(turret1);
+            // Destroy(turret2);
         }
 
         isSkillActive = false;
@@ -334,14 +366,15 @@ public class Cyborg : NetworkBehaviour
             laserSpawnPoint.position,
             Quaternion.Euler(0, 0, 0)
         );
+        laser.GetComponent<NetworkObject>().Spawn();
         LineRenderer lineRenderer = laser.GetComponent<LineRenderer>();
         if (lineRenderer != null)
         {
             lineRenderer.SetPosition(0, laserSpawnPoint.position);
             lineRenderer.SetPosition(1, laserSpawnPoint.position + transform.right * 5f);
         }
-
-        Destroy(laser, laserDuration);
+        StartCoroutine(DespawnAfterSeconds(laser, laserDuration));
+        // Destroy(laser, laserDuration);
     }
 
     private IEnumerator BombSkill()
@@ -354,7 +387,7 @@ public class Cyborg : NetworkBehaviour
         {
             Transform bombPosition = GetRandomBombPosition();
             GameObject bomb = Instantiate(bombPrefab, spawnPosition.position, Quaternion.identity);
-
+            bomb.GetComponent<NetworkObject>().Spawn();
             bombs.Add(bomb);
 
             StartCoroutine(MoveBombToPosition(bomb, bombPosition.position));
@@ -365,13 +398,23 @@ public class Cyborg : NetworkBehaviour
         foreach (GameObject bomb in bombs)
         {
             GameObject laser = CreateLaserAtPosition(bomb.transform.position);
-            Destroy(laser, laserDuration);
-            Destroy(bomb);
+            StartCoroutine(DespawnAfterSeconds(laser, bombDuration));
+            // Destroy(laser, laserDuration);
+
+            bomb.GetComponent<NetworkObject>().Despawn(true);
+            // Destroy(bomb);
         }
 
         yield return new WaitForSeconds(0.5f);
 
         isSkillActive = false;
+    }
+
+    IEnumerator DespawnAfterSeconds(GameObject laser, float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+
+        laser.GetComponent<NetworkObject>().Despawn(true); // Đồng bộ hóa việc hủy đối tượng với các client
     }
 
     private IEnumerator MoveBombToPosition(GameObject bomb, Vector3 targetPosition)
@@ -400,7 +443,7 @@ public class Cyborg : NetworkBehaviour
         position.y = 10f;
 
         GameObject laser = Instantiate(laserBomb, position, Quaternion.Euler(0, 0, 0));
-
+        laser.GetComponent<NetworkObject>().Spawn();
         LineRenderer lineRenderer = laser.GetComponent<LineRenderer>();
         if (lineRenderer != null)
         {

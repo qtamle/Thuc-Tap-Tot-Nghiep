@@ -55,6 +55,9 @@ public class CaptainSkill : NetworkBehaviour
     public Transform laserPositionTransform;
     private GameObject laserObject;
 
+    [Header("Clone ")]
+    public GameObject clonePrefab;
+
     [Header("Ground Check")]
     public Transform groundCheckTransform;
     public float groundCheckRadius = 0.1f;
@@ -80,6 +83,8 @@ public class CaptainSkill : NetworkBehaviour
     private CaptainHealth health;
     private Coroutine skillSequenceCoroutine;
 
+    private BulletBoss4Pool bulletBoss4Pool;
+
     private void Awake()
     {
         if (Instance == null)
@@ -103,9 +108,9 @@ public class CaptainSkill : NetworkBehaviour
     private void Start()
     {
         health = GetComponent<CaptainHealth>();
-        // throwTargets = ThrowTargetPosition.Instance.throwTargets;
-        // shootingPoints = ShootingPointPosition.Instance.shootingPoints;
-
+        throwTargets = ThrowTargetPosition.Instance.throwTargets;
+        shootingPoints = ShootingPointPosition.Instance.shootingPoints;
+        bulletBoss4Pool = FindFirstObjectByType<BulletBoss4Pool>();
         collider2d = GetComponent<Collider2D>();
         if (collider2d != null)
         {
@@ -127,6 +132,26 @@ public class CaptainSkill : NetworkBehaviour
         {
             MoveBlade();
         }
+        // if (Input.GetKeyDown(KeyCode.Q))
+        // {
+        //     BladeSkill();
+        // }
+        // if (Input.GetKeyDown(KeyCode.W))
+        // {
+        //     StartCoroutine(FireLaserRounds());
+        // }
+        // if (Input.GetKeyDown(KeyCode.E))
+        // {
+        //     LaserSkill();
+        // }
+        // if (Input.GetKeyDown(KeyCode.R))
+        // {
+        //     StartCoroutine(ActivateBombSkill());
+        // }
+        // if (Input.GetKeyDown(KeyCode.T))
+        // {
+        //     StartCoroutine(FlashSkill());
+        // }
     }
 
     public void Active()
@@ -169,7 +194,7 @@ public class CaptainSkill : NetworkBehaviour
     {
         if (health != null)
         {
-            if (health.currentHealth <= 0)
+            if (health.currentHealth.Value <= 0)
             {
                 GameObject[] lasers = GameObject.FindGameObjectsWithTag("Laser");
 
@@ -206,6 +231,7 @@ public class CaptainSkill : NetworkBehaviour
         t = 0;
 
         bladeInstance = Instantiate(bladePrefab, origin, Quaternion.identity);
+        bladeInstance.GetComponent<NetworkObject>().Spawn();
     }
 
     void MoveBlade()
@@ -244,7 +270,8 @@ public class CaptainSkill : NetworkBehaviour
 
         if (t >= 1.5f)
         {
-            Destroy(bladeInstance);
+            bladeInstance.GetComponent<NetworkObject>().Despawn(true);
+            // Destroy(bladeInstance);
             isSkillActive = false;
         }
     }
@@ -375,8 +402,10 @@ public class CaptainSkill : NetworkBehaviour
             laserShootTransform.position,
             Quaternion.Euler(0, 0, rotationAngle)
         );
+        laser.GetComponent<NetworkObject>().Spawn();
 
         LineRenderer laserRenderer = laser.GetComponent<LineRenderer>();
+
         if (laserRenderer != null)
         {
             laserRenderer.positionCount = 2;
@@ -391,8 +420,17 @@ public class CaptainSkill : NetworkBehaviour
             laserRenderer.endWidth = 0.1f;
             laserRenderer.numCapVertices = 5;
         }
+        StartCoroutine(DespawnAfterDelay(laser, laserDuration));
+        // Destroy(laser, laserDuration);
+    }
 
-        Destroy(laser, laserDuration);
+    private IEnumerator DespawnAfterDelay(GameObject gameObject, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        if (gameObject != null && gameObject.TryGetComponent(out NetworkObject networkObject))
+        {
+            networkObject.Despawn(true);
+        }
     }
 
     IEnumerator MoveToPosition(Vector3 targetPosition, float duration)
@@ -427,10 +465,11 @@ public class CaptainSkill : NetworkBehaviour
         );
 
         LineRenderer laserRenderer = laser.GetComponent<LineRenderer>();
+        laser.GetComponent<NetworkObject>().Spawn();
         if (laserRenderer != null)
         {
             laserRenderer.positionCount = 2;
-
+            laser.GetComponent<NetworkObject>().Spawn();
             Vector3 laserStart = laserShootTransform.position;
             Vector3 laserEnd =
                 laserStart
@@ -447,8 +486,9 @@ public class CaptainSkill : NetworkBehaviour
             laserRenderer.endWidth = 0.1f;
             laserRenderer.numCapVertices = 5;
         }
+        StartCoroutine(DespawnAfterDelay(laser, laserDuration));
 
-        Destroy(laser, laserDuration);
+        // Destroy(laser, laserDuration);
     }
 
     void FlipCharacterBasedOnAngle(float angle)
@@ -525,6 +565,8 @@ public class CaptainSkill : NetworkBehaviour
             }
 
             GameObject bomb = Instantiate(bombPrefab, transform.position, Quaternion.identity);
+
+            bomb.GetComponent<NetworkObject>().Spawn();
             bombs.Add(bomb);
 
             StartCoroutine(MoveBombToPosition(bomb, targetPosition));
@@ -537,9 +579,11 @@ public class CaptainSkill : NetworkBehaviour
             if (bomb != null)
             {
                 GameObject laser = CreateLaserAtPosition(bomb.transform.position);
-                Destroy(laser, 2f);
+                StartCoroutine(DespawnAfterDelay(laser, 2f));
+                // Destroy(laser, 2f);
                 SpawnSmallBombs(bomb.transform.position);
-                Destroy(bomb);
+                bomb.GetComponent<NetworkObject>().Despawn(true);
+                // Destroy(bomb);
             }
         }
 
@@ -587,7 +631,7 @@ public class CaptainSkill : NetworkBehaviour
         position.y = 15f;
 
         GameObject laser = Instantiate(laserBomb, position, Quaternion.Euler(0, 0, 0));
-
+        laser.GetComponent<NetworkObject>().Spawn();
         LineRenderer lineRenderer = laser.GetComponent<LineRenderer>();
         if (lineRenderer != null)
         {
@@ -605,6 +649,8 @@ public class CaptainSkill : NetworkBehaviour
         float upwardForce = 3f;
 
         GameObject leftBomb = Instantiate(smallBombPrefab, position, Quaternion.identity);
+        leftBomb.GetComponent<NetworkObject>().Spawn();
+
         Rigidbody2D leftRb = leftBomb.GetComponent<Rigidbody2D>();
         if (leftRb != null)
         {
@@ -616,6 +662,7 @@ public class CaptainSkill : NetworkBehaviour
         }
 
         GameObject rightBomb = Instantiate(smallBombPrefab, position, Quaternion.identity);
+        rightBomb.GetComponent<NetworkObject>().Spawn();
         Rigidbody2D rightRb = rightBomb.GetComponent<Rigidbody2D>();
         if (rightRb != null)
         {
@@ -637,7 +684,7 @@ public class CaptainSkill : NetworkBehaviour
 
             GameObject bomb = Instantiate(bombPrefab, transform.position, Quaternion.identity);
             BigBomb bigBomb = bomb.GetComponent<BigBomb>();
-
+            bomb.GetComponent<NetworkObject>().Spawn();
             Vector3 targetPosition = bomb.transform.position + Vector3.up * moveDistance;
             float moveSpeed = 4f;
             while (Vector3.Distance(bomb.transform.position, targetPosition) > 0.1f)
@@ -822,39 +869,44 @@ public class CaptainSkill : NetworkBehaviour
         yield return new WaitForSeconds(0.2f);
         RotateTowards(Vector3.down, 180f);
 
-        Vector3 leftClonePosition = transform.position + new Vector3(-5f, 0, 0);
-        Vector3 rightClonePosition = transform.position + new Vector3(5f, 0, 0);
+        Vector3 leftClonePosition = targetPosition + new Vector3(-10.5f, 0, 0);
+        Vector3 rightClonePosition = targetPosition + new Vector3(-1.5f, 0, 0);
 
-        GameObject leftClone = Instantiate(gameObject, leftClonePosition, transform.rotation);
-        GameObject rightClone = Instantiate(gameObject, rightClonePosition, transform.rotation);
+        GameObject leftClone = Instantiate(clonePrefab, leftClonePosition, transform.rotation);
 
-        leftClone.GetComponent<CaptainHealth>().enabled = false;
-        rightClone.GetComponent<CaptainHealth>().enabled = false;
-        leftClone.GetComponent<BoxCollider2D>().enabled = false;
-        rightClone.GetComponent<BoxCollider2D>().enabled = false;
+        GameObject rightClone = Instantiate(clonePrefab, rightClonePosition, transform.rotation);
 
         leftClone.transform.Rotate(0, 0, 180f);
         rightClone.transform.Rotate(0, 0, 180f);
-
+        leftClone.GetComponent<NetworkObject>().Spawn();
+        rightClone.GetComponent<NetworkObject>().Spawn();
         dashDirection = Vector3.down;
 
-        StartCoroutine(BlinkEffect(leftClone, 3f, 0.1f));
-        StartCoroutine(BlinkEffect(rightClone, 3f, 0.1f));
+        // yield return StartCoroutine(
+        //     leftClone.GetComponent<CloneSkill>().BlinkEffect(leftClone, 3f, 0.1f)
+        // );
+        // yield return StartCoroutine(
+        //     rightClone.GetComponent<CloneSkill>().BlinkEffect(rightClone, 3f, 0.1f)
+        // );
+        // StartCoroutine(BlinkEffect(leftClone, 3f, 0.1f));
+        // StartCoroutine(BlinkEffect(rightClone, 3f, 0.1f));
 
         Coroutine mainCharacterDash = StartCoroutine(DashInDirection(dashDirection, 3f));
         Coroutine leftCloneDash = StartCoroutine(
-            leftClone.GetComponent<CaptainSkill>().DashInDirection(dashDirection, 3f)
+            leftClone.GetComponent<CloneSkill>().DashInDirection(dashDirection, 3f)
         );
         Coroutine rightCloneDash = StartCoroutine(
-            rightClone.GetComponent<CaptainSkill>().DashInDirection(dashDirection, 3f)
+            rightClone.GetComponent<CloneSkill>().DashInDirection(dashDirection, 3f)
         );
 
         yield return mainCharacterDash;
         yield return leftCloneDash;
         yield return rightCloneDash;
 
-        Destroy(leftClone);
-        Destroy(rightClone);
+        leftClone.GetComponent<NetworkObject>().Despawn(true);
+        rightClone.GetComponent<NetworkObject>().Despawn(true);
+        // Destroy(leftClone);
+        // Destroy(rightClone);
 
         // 6. Dịch chuyển xuống dưới và đâm thẳng lên
         Vector3 bottomPosition = Camera.main.ViewportToWorldPoint(
@@ -868,43 +920,56 @@ public class CaptainSkill : NetworkBehaviour
 
         RotateTowards(Vector3.up, 0f);
 
-        Vector3 leftClonePositionNew = transform.position + new Vector3(-5f, 0, 0);
-        Vector3 rightClonePositionNew = transform.position + new Vector3(5f, 0, 0);
+        Vector3 leftClonePositionNew = transform.position + new Vector3(-10.5f, 0, 0);
+        Vector3 rightClonePositionNew = transform.position + new Vector3(-1.5f, 0, 0);
 
-        GameObject leftCloneNew = Instantiate(gameObject, leftClonePositionNew, transform.rotation);
+        GameObject leftCloneNew = Instantiate(
+            clonePrefab,
+            leftClonePositionNew,
+            transform.rotation
+        );
+        leftCloneNew.GetComponent<NetworkObject>().Spawn();
         GameObject rightCloneNew = Instantiate(
-            gameObject,
+            clonePrefab,
             rightClonePositionNew,
             transform.rotation
         );
-
-        leftCloneNew.GetComponent<CaptainHealth>().enabled = false;
-        rightCloneNew.GetComponent<CaptainHealth>().enabled = false;
-        leftCloneNew.GetComponent<BoxCollider2D>().enabled = false;
-        rightCloneNew.GetComponent<BoxCollider2D>().enabled = false;
+        rightCloneNew.GetComponent<NetworkObject>().Spawn();
 
         leftCloneNew.transform.Rotate(0, 0, 0f);
         rightCloneNew.transform.Rotate(0, 0, 0f);
 
         Vector3 dashDirectionUp = Vector3.up;
 
-        StartCoroutine(BlinkEffect(leftCloneNew, 3f, 0.1f));
-        StartCoroutine(BlinkEffect(rightCloneNew, 3f, 0.1f));
+        // Coroutine leftCloneNewBlink = StartCoroutine(
+        //     leftCloneNew.GetComponent<CloneSkill>().BlinkEffect(leftCloneNew, 3f, 0.1f)
+        // );
+        // Coroutine rightCloneNewBlink = StartCoroutine(
+        //     leftCloneNew.GetComponent<CloneSkill>().BlinkEffect(rightCloneNew, 3f, 0.1f)
+        // );
+
+        // yield return leftCloneNewBlink;
+        // yield return rightCloneNewBlink;
+
+        // StartCoroutine(BlinkEffect(leftCloneNew, 3f, 0.1f));
+        // StartCoroutine(BlinkEffect(rightCloneNew, 3f, 0.1f));
 
         Coroutine mainCharacterDashUp = StartCoroutine(DashInDirection(dashDirectionUp, 3f));
         Coroutine leftCloneDashUp = StartCoroutine(
-            leftCloneNew.GetComponent<CaptainSkill>().DashInDirection(dashDirectionUp, 3f)
+            leftCloneNew.GetComponent<CloneSkill>().DashInDirection(dashDirectionUp, 3f)
         );
         Coroutine rightCloneDashUp = StartCoroutine(
-            rightCloneNew.GetComponent<CaptainSkill>().DashInDirection(dashDirectionUp, 3f)
+            rightCloneNew.GetComponent<CloneSkill>().DashInDirection(dashDirectionUp, 3f)
         );
 
         yield return mainCharacterDashUp;
         yield return leftCloneDashUp;
         yield return rightCloneDashUp;
 
-        Destroy(leftCloneNew);
-        Destroy(rightCloneNew);
+        leftCloneNew.GetComponent<NetworkObject>().Despawn(true);
+        rightCloneNew.GetComponent<NetworkObject>().Despawn(true);
+        // Destroy(leftCloneNew);
+        // Destroy(rightCloneNew);
 
         // 7. Dịch chuyển về target position và hạ cánh
         transform.position = targetPosition;
@@ -1025,6 +1090,7 @@ public class CaptainSkill : NetworkBehaviour
         {
             Vector3 laserPosition = laserPositionTransform.position - new Vector3(15f, 1.6f, 0);
             laserObject = Instantiate(linePrefab, laserPosition, Quaternion.identity);
+            laserObject.GetComponent<NetworkObject>().Spawn(true);
         }
     }
 
@@ -1032,13 +1098,14 @@ public class CaptainSkill : NetworkBehaviour
     {
         if (laserObject != null)
         {
-            Destroy(laserObject);
+            laserObject.GetComponent<NetworkObject>().Despawn(true);
+            // Destroy(laserObject);
         }
     }
 
     private void FireBullet(Transform firePoint)
     {
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+        GameObject bullet = BulletBoss4Pool.Instance.GetBullet(firePoint.transform.position);
 
         Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
         if (bulletRb != null)

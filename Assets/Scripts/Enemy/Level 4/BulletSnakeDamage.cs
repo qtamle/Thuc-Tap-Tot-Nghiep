@@ -1,7 +1,8 @@
 using System.Collections;
+using Unity.Netcode;
 using UnityEngine;
 
-public class BulletSnakeDamage : MonoBehaviour
+public class BulletSnakeDamage : NetworkBehaviour
 {
     private BulletBoss4Pool BulletBoss4Pool;
 
@@ -9,6 +10,7 @@ public class BulletSnakeDamage : MonoBehaviour
     {
         BulletBoss4Pool = FindFirstObjectByType<BulletBoss4Pool>();
     }
+
     private void OnEnable()
     {
         StartCoroutine(WaitForReturnToPool());

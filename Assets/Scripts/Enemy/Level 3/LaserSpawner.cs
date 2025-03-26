@@ -1,11 +1,12 @@
 ﻿using System.Collections;
+using Unity.Netcode;
 using UnityEngine;
 
-public class LaserSpawner : MonoBehaviour
+public class LaserSpawner : NetworkBehaviour
 {
-    public GameObject laserPrefab;  
-    public Transform spawnPosition; 
-    public float laserDuration = 5f; 
+    public GameObject laserPrefab;
+    public Transform spawnPosition;
+    public float laserDuration = 5f;
 
     private void Start()
     {
@@ -29,7 +30,11 @@ public class LaserSpawner : MonoBehaviour
 
     private void SpawnLaserAtPosition()
     {
-        GameObject laser = Instantiate(laserPrefab, spawnPosition.position, Quaternion.Euler(0f,0f,90f));
+        GameObject laser = Instantiate(
+            laserPrefab,
+            spawnPosition.position,
+            Quaternion.Euler(0f, 0f, 90f)
+        );
 
         Destroy(laser, laserDuration);
     }

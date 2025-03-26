@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using Unity.Netcode;
+using UnityEngine;
 
-public class BombDamage : MonoBehaviour
+public class BombDamage : NetworkBehaviour
 {
     public float radius;
     public LayerMask bombLayer;
@@ -15,9 +16,14 @@ public class BombDamage : MonoBehaviour
             if (damageable != null)
             {
                 damageable.DamagePlayer(1);
+                if (IsServer)
+                {
+                    NetworkObject go = GetComponent<NetworkObject>();
+                    // go.Despawn(true);
+                }
             }
         }
 
-        Destroy(gameObject);
+  
     }
 }

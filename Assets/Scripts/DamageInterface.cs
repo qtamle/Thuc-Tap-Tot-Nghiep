@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public interface DamageInterface 
+public interface DamageInterface
 {
     void TakeDamage(int damage);
     bool CanBeDamaged();
@@ -9,5 +9,5 @@ public interface DamageInterface
 
 public interface DamagePlayerInterface
 {
-    void DamagePlayer(int damage);  
+    void DamagePlayer(int damage);
 }

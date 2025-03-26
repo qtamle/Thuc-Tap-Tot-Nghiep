@@ -10,15 +10,15 @@ public class AssassinHealth : NetworkBehaviour, DamageInterface
 
     [Header("Health Settings")]
     public int maxHealth = 3;
-    public int currentHealth;
+    public NetworkVariable<int> currentHealth = new NetworkVariable<int>();
+    private NetworkVariable<bool> isStunned = new NetworkVariable<bool>(false);
+    private NetworkVariable<bool> canBeDamaged = new NetworkVariable<bool>(false);
 
     [Header("UI Settings")]
     public Slider healthBarSlider;
     public Image healthBarFill;
 
-    private bool canBeDamaged = false;
     private float timeWhenStunned = 0f;
-    private bool isStunned = false;
 
     public UnityEvent startTimeline;
 
@@ -39,7 +39,7 @@ public class AssassinHealth : NetworkBehaviour, DamageInterface
 
     private void Start()
     {
-        currentHealth = maxHealth;
+        currentHealth.Value = maxHealth;
         IntializeBossHealth();
         UpdateHealthBar();
         UpdateHealthBarColor();
@@ -70,12 +70,12 @@ public class AssassinHealth : NetworkBehaviour, DamageInterface
 
     public void TakeDamage(int damage)
     {
-        if (canBeDamaged)
+        if (canBeDamaged.Value)
         {
-            currentHealth -= damage;
+            currentHealth.Value -= damage;
             UpdateHealthBar();
 
-            if (currentHealth <= 0)
+            if (currentHealth.Value <= 0)
             {
                 startTimeline.Invoke();
                 Die();
@@ -87,7 +87,7 @@ public class AssassinHealth : NetworkBehaviour, DamageInterface
     {
         if (healthBarSlider != null)
         {
-            healthBarSlider.value = (float)currentHealth / maxHealth;
+            healthBarSlider.value = (float)currentHealth.Value / maxHealth;
         }
     }
 
@@ -95,7 +95,7 @@ public class AssassinHealth : NetworkBehaviour, DamageInterface
     {
         if (healthBarFill != null)
         {
-            healthBarFill.color = canBeDamaged ? Color.red : Color.cyan;
+            healthBarFill.color = canBeDamaged.Value ? Color.red : Color.cyan;
         }
     }
 
@@ -114,29 +114,29 @@ public class AssassinHealth : NetworkBehaviour, DamageInterface
 
     public void StunForDuration(float stunDuration)
     {
-        isStunned = true;
-        canBeDamaged = true;
+        isStunned.Value = true;
+        canBeDamaged.Value = true;
         timeWhenStunned = Time.time + stunDuration;
         UpdateHealthBarColor();
     }
 
     public bool CanBeDamaged()
     {
-        return canBeDamaged;
+        return canBeDamaged.Value;
     }
 
     public void SetCanBeDamaged(bool value)
     {
-        canBeDamaged = value;
+        canBeDamaged.Value = value;
         UpdateHealthBarColor();
     }
 
     private void Update()
     {
-        if (isStunned && Time.time > timeWhenStunned)
+        if (isStunned.Value && Time.time > timeWhenStunned)
         {
-            isStunned = false;
-            canBeDamaged = false;
+            isStunned.Value = false;
+            canBeDamaged.Value = false;
             UpdateHealthBarColor();
         }
     }

@@ -1,7 +1,8 @@
 using System.Collections;
+using Unity.Netcode;
 using UnityEngine;
 
-public class Turret : MonoBehaviour
+public class Turret : NetworkBehaviour
 {
     [Header("Turret Settings")]
     public GameObject linePrefab;
@@ -40,7 +41,8 @@ public class Turret : MonoBehaviour
 
         if (laser != null)
         {
-            Destroy(laser);
+            laser.GetComponent<NetworkObject>().Despawn(true);
+            // Destroy(laser);
         }
 
         isLaserActive = false;
@@ -49,6 +51,7 @@ public class Turret : MonoBehaviour
     private GameObject CreateLaser(Vector3 startPosition)
     {
         GameObject laserObject = Instantiate(linePrefab);
+        laserObject.GetComponent<NetworkObject>().Spawn();
         laserObject.transform.position = startPosition;
 
         laserObject.transform.rotation = Quaternion.Euler(0, 0, 90);
@@ -59,8 +62,18 @@ public class Turret : MonoBehaviour
             lineRenderer.SetPosition(0, startPosition);
             lineRenderer.SetPosition(1, startPosition + laserObject.transform.up * lineLength);
         }
-        Destroy(laserObject, 2f);
+
+        StartCoroutine(DespawnAfterDelay(laserObject, 2f)); // Destroy(laserObject, 2f);
         return laserObject;
+    }
+
+    private IEnumerator DespawnAfterDelay(GameObject laserObject, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        if (laserObject != null && laserObject.TryGetComponent(out NetworkObject networkObject))
+        {
+            networkObject.Despawn(true);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -70,5 +83,4 @@ public class Turret : MonoBehaviour
             rb.gravityScale = 0;
         }
     }
-
 }

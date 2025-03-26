@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
+using Unity.Netcode.Components;
 using UnityEngine;
 
 public class AssassinBossSkill : NetworkBehaviour
 {
     public static AssassinBossSkill Instance;
-    private Rigidbody2D rb;
+    private NetworkRigidbody2D rb;
     private bool isGrounded = false;
     public Transform groundCheck;
     public float groundCheckRadius = 0.2f;
@@ -68,9 +69,10 @@ public class AssassinBossSkill : NetworkBehaviour
     {
         trap = GetComponent<TrapDamage>();
         assassinHealth = GetComponent<AssassinHealth>();
-        rb = GetComponent<Rigidbody2D>();
+        rb = GetComponent<NetworkRigidbody2D>();
         dashTargets = DashTarget.Instance.dashTargets;
-        // randomBombTargets = 
+        randomBombTargets = BoomPosition.Instance.randomBombTargets;
+        targetPositions = TrapPosition.Instance.targetPositions;
         GameObject playerObject = GameObject.FindWithTag("Player");
 
         if (playerObject != null)
@@ -115,11 +117,31 @@ public class AssassinBossSkill : NetworkBehaviour
         originalPosition = transform.position;
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            ThrowTraps(4);
+        }
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            TeleportToPlayer();
+        }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            ThrowBombAtPlayer();
+        }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            CloneAndDash();
+        }
+    }
+
     public void Active()
     {
         gameObject.SetActive(true);
 
-        StartCoroutine(SkillActive());
+        // StartCoroutine(SkillActive());
     }
 
     IEnumerator SkillActive()
@@ -201,7 +223,7 @@ public class AssassinBossSkill : NetworkBehaviour
             Debug.LogWarning("Ground Check Transform is not assigned!");
         }
 
-        if (assassinHealth != null && assassinHealth.currentHealth <= 0)
+        if (assassinHealth != null && assassinHealth.currentHealth.Value <= 0)
         {
             StopAllCoroutines();
         }
@@ -242,6 +264,7 @@ public class AssassinBossSkill : NetworkBehaviour
             Transform target = targetPositions[randomIndex];
 
             GameObject trap = Instantiate(trapPrefab, transform.position, Quaternion.identity);
+            trap.GetComponent<NetworkObject>().Spawn(true);
 
             StartCoroutine(MoveTrapToTarget(trap, target.position));
         }
@@ -287,7 +310,6 @@ public class AssassinBossSkill : NetworkBehaviour
         {
             Debug.LogError("TrapDamage component is missing on the trap!");
         }
-
         Debug.Log("Trap reached adjusted target: " + targetPosition);
     }
 
@@ -303,18 +325,21 @@ public class AssassinBossSkill : NetworkBehaviour
 
         Vector3 playerTargetPosition = playerTransform.position;
         GameObject bomb1 = Instantiate(bombPrefab, transform.position, Quaternion.identity);
+        bomb1.GetComponent<NetworkObject>().Spawn(true);
         StartCoroutine(MoveBombToTarget(bomb1, playerTargetPosition));
 
         Vector3 randomTargetPosition1 = randomBombTargets[
             Random.Range(0, randomBombTargets.Length)
         ].position;
         GameObject bomb2 = Instantiate(bombPrefab, transform.position, Quaternion.identity);
+        bomb2.GetComponent<NetworkObject>().Spawn(true);
         StartCoroutine(MoveBombToTarget(bomb2, randomTargetPosition1));
 
         Vector3 randomTargetPosition2 = randomBombTargets[
             Random.Range(0, randomBombTargets.Length)
         ].position;
         GameObject bomb3 = Instantiate(bombPrefab, transform.position, Quaternion.identity);
+        bomb3.GetComponent<NetworkObject>().Spawn(true);
         StartCoroutine(MoveBombToTarget(bomb3, randomTargetPosition2));
 
         isSkillActive = false;
@@ -335,17 +360,14 @@ public class AssassinBossSkill : NetworkBehaviour
             yield return null;
         }
 
-        Debug.Log("Bomb reached Player's position: " + targetPosition);
-
         yield return new WaitForSeconds(2f);
 
         BombExplosion(bomb);
+        bomb.GetComponent<NetworkObject>().Despawn(true);
     }
 
     void BombExplosion(GameObject bomb)
     {
-        Debug.Log("Bomb exploded!");
-
         BombDamage Bomb = bomb.GetComponent<BombDamage>();
 
         if (Bomb != null)
@@ -354,17 +376,10 @@ public class AssassinBossSkill : NetworkBehaviour
         }
 
         CreateBombFragments(bomb.transform.position);
-        Destroy(bomb);
     }
 
     void CreateBombFragments(Vector3 explosionPosition)
     {
-        if (bombFragmentPrefab == null)
-        {
-            Debug.LogError("Bomb Fragment Prefab is missing!");
-            return;
-        }
-
         Vector3[] fragmentDirections = new Vector3[]
         {
             new Vector3(1f, 1, 0), // Đi chéo lên phải
@@ -380,7 +395,7 @@ public class AssassinBossSkill : NetworkBehaviour
                 explosionPosition,
                 Quaternion.identity
             );
-
+            fragment.GetComponent<NetworkObject>().Spawn(true);
             StartCoroutine(MoveFragment(fragment, direction.normalized));
         }
     }
@@ -389,7 +404,6 @@ public class AssassinBossSkill : NetworkBehaviour
     {
         float fragmentLifetime = 4f;
         float timer = 0f;
-
         while (timer < fragmentLifetime && fragment != null)
         {
             fragment.transform.position += direction * fragmentSpeed * Time.deltaTime;
@@ -397,7 +411,10 @@ public class AssassinBossSkill : NetworkBehaviour
             yield return null;
         }
 
-        Destroy(fragment);
+        if (fragment != null)
+        {
+            fragment.GetComponent<NetworkObject>().Despawn(true);
+        }
     }
 
     public void TeleportToPlayer()
@@ -434,7 +451,8 @@ public class AssassinBossSkill : NetworkBehaviour
         targetPosition.y += additionalHeight;
 
         transform.position = targetPosition;
-        rb.gravityScale = 4f;
+
+        rb.Rigidbody2D.gravityScale = 4f;
 
         Debug.Log("Assassin Boss teleported to: " + targetPosition);
 
@@ -468,6 +486,7 @@ public class AssassinBossSkill : NetworkBehaviour
                 shootingPoint.position,
                 Quaternion.identity
             );
+            bullet.GetComponent<NetworkObject>().Spawn(true);
             Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
 
             if (bulletRb != null)
@@ -481,6 +500,11 @@ public class AssassinBossSkill : NetworkBehaviour
 
     public void CloneAndDash()
     {
+        if (!IsServer) // Chỉ server mới được phép tạo clone và thực hiện dash
+        {
+            return;
+        }
+
         isSkillActive = true;
 
         if (clonePrefab == null || DashTarget.Instance.dashTargets.Length == 0)
@@ -490,8 +514,9 @@ public class AssassinBossSkill : NetworkBehaviour
         }
 
         GameObject clone1 = Instantiate(clonePrefab, transform.position, Quaternion.identity);
+        clone1.GetComponent<NetworkObject>().Spawn(true);
         GameObject clone2 = Instantiate(clonePrefab, transform.position, Quaternion.identity);
-
+        clone2.GetComponent<NetworkObject>().Spawn(true);
         GameObject[] allCharacters = new GameObject[] { gameObject, clone1, clone2 };
 
         StartCoroutine(BlinkClones(clone1, clone2));
@@ -622,10 +647,26 @@ public class AssassinBossSkill : NetworkBehaviour
         if (playerCloneDash != null)
             playerCloneDash.DashTowardsPlayer();
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(4f);
 
-        Destroy(characters[1]);
-        Destroy(characters[2]);
+        // Sử dụng Despawn thay vì Destroy
+        if (
+            characters[1] != null
+            && characters[1].TryGetComponent(out NetworkObject networkObject1)
+            && networkObject1.IsSpawned
+        )
+        {
+            networkObject1.Despawn(true);
+        }
+
+        if (
+            characters[2] != null
+            && characters[2].TryGetComponent(out NetworkObject networkObject2)
+            && networkObject2.IsSpawned
+        )
+        {
+            networkObject2.Despawn(true);
+        }
 
         characters[0].transform.position = originalPosition;
 
@@ -690,7 +731,7 @@ public class AssassinBossSkill : NetworkBehaviour
     {
         if ((groundLayer.value & (1 << collision.gameObject.layer)) > 0)
         {
-            rb.gravityScale = 0;
+            rb.Rigidbody2D.gravityScale = 0;
         }
     }
 

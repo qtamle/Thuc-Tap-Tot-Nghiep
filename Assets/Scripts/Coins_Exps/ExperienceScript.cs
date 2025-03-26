@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using Unity.Netcode;
+using UnityEngine;
 
-public class ExperienceScript : MonoBehaviour
+public class ExperienceScript : NetworkBehaviour
 {
     private ExperienceManager experienceManager;
     private ExperienceOrbPoolManager orbPoolManager;
@@ -9,7 +10,7 @@ public class ExperienceScript : MonoBehaviour
     {
         experienceManager = UnityEngine.Object.FindFirstObjectByType<ExperienceManager>();
 
-        if (experienceManager == null )
+        if (experienceManager == null)
         {
             Debug.Log("Khong co experience manager");
         }
@@ -29,13 +30,14 @@ public class ExperienceScript : MonoBehaviour
             CollectExperience();
         }
     }
+
     private void CollectExperience()
     {
         int randomExperience = Random.Range(5, 10);
 
         if (experienceManager != null)
         {
-            experienceManager.AddExperience(randomExperience); 
+            experienceManager.AddExperience(randomExperience);
         }
         else
         {
@@ -44,12 +46,12 @@ public class ExperienceScript : MonoBehaviour
 
         if (orbPoolManager != null)
         {
-            orbPoolManager.ReturnOrbToPool(gameObject);
+            orbPoolManager.ReturnOrbToPool(gameObject.GetComponent<NetworkObject>());
         }
         else
         {
             Debug.LogError("OrbPoolManager not assigned. Destroying the object.");
-            Destroy(gameObject); 
+            Destroy(gameObject);
         }
     }
 }

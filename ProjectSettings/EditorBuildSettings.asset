@@ -50,7 +50,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level/Level 6.unity
     guid: 584e73fbe772d5a4c82a25cde8382579
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SupplyScene 1.unity
     guid: a26265e80ffbc384c93476a6f3aaa8a2
   - enabled: 1

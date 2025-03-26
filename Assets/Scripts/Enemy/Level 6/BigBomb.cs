@@ -1,7 +1,8 @@
 ﻿using System.Collections;
+using Unity.Netcode;
 using UnityEngine;
 
-public class BigBomb : MonoBehaviour
+public class BigBomb : NetworkBehaviour
 {
     public float damageRadius = 1.3f;
     public int damageAmount = 2;
@@ -16,16 +17,21 @@ public class BigBomb : MonoBehaviour
     {
         StartCoroutine(WaitForExplode());
 
-        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, damageRadius, playerLayer);
+        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(
+            transform.position,
+            damageRadius,
+            playerLayer
+        );
         foreach (var hitCollider in hitColliders)
         {
             DamagePlayerInterface damage = hitCollider.GetComponent<DamagePlayerInterface>();
             if (damage != null)
-            {   
+            {
                 damage.DamagePlayer(damageAmount);
             }
         }
-        Destroy(gameObject);
+        gameObject.GetComponent<NetworkObject>().Despawn(true);
+        // Destroy(gameObject);
     }
 
     private void OnDrawGizmosSelected()
@@ -33,5 +39,4 @@ public class BigBomb : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, damageRadius);
     }
-
 }

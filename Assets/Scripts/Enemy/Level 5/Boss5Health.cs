@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Events;
@@ -9,15 +10,15 @@ public class Boss5Health : NetworkBehaviour, DamageInterface
 
     [Header("Health Settings")]
     public int maxHealth = 3;
-    public int currentHealth;
+    public NetworkVariable<int> currentHealth = new NetworkVariable<int>(3);
+    private NetworkVariable<bool> isStunned = new NetworkVariable<bool>(false);
+    private NetworkVariable<bool> canBeDamaged = new NetworkVariable<bool>(false);
 
     [Header("UI Settings")]
     public Slider healthBarSlider;
     public Image healthBarFill;
 
-    private bool canBeDamaged = false;
     private float timeWhenStunned = 0f;
-    private bool isStunned = false;
 
     public UnityEvent startTimeline;
 
@@ -35,51 +36,106 @@ public class Boss5Health : NetworkBehaviour, DamageInterface
 
     private void Start()
     {
-        currentHealth = maxHealth;
-        IntializeBossHealth();
+        if (IsServer) // Chỉ server mới gọi ServerRpc
+        {
+            IntializeBossHealthServerRpc();
+        }
         UpdateHealthBar();
         UpdateHealthBarColor();
     }
 
-    public void IntializeBossHealth()
+    [ServerRpc(RequireOwnership = false)]
+    public void IntializeBossHealthServerRpc()
     {
         GameObject sliderObj = GameObject.FindWithTag("BossSlider");
-        if (sliderObj != null)
+        GameObject fillObj = GameObject.FindWithTag("BossFill");
+
+        if (sliderObj != null && fillObj != null)
         {
             healthBarSlider = sliderObj.GetComponent<Slider>();
-        }
-        else
-        {
-            Debug.LogWarning("BossSlider tag not found!");
-        }
-
-        GameObject fillObj = GameObject.FindWithTag("BossFill");
-        if (fillObj != null)
-        {
             healthBarFill = fillObj.GetComponent<Image>();
+
+            ShowBossHealthUIClientRpc(); // Gửi tín hiệu cho tất cả client
         }
         else
         {
-            Debug.LogWarning("BossFill tag not found!");
+            Debug.LogWarning("Boss UI elements not found!");
+        }
+    }
+
+    [ClientRpc]
+    public void ShowBossHealthUIClientRpc()
+    {
+        GameObject sliderObj = GameObject.FindWithTag("BossSlider");
+        GameObject fillObj = GameObject.FindWithTag("BossFill");
+
+        if (sliderObj != null && fillObj != null)
+        {
+            healthBarSlider = sliderObj.GetComponent<Slider>();
+            healthBarFill = fillObj.GetComponent<Image>();
+
+            healthBarSlider.gameObject.SetActive(true); // Hiển thị thanh máu
+        }
+        else
+        {
+            Debug.LogWarning("Boss UI elements not found on client!");
         }
     }
 
     public void TakeDamage(int damage)
     {
-        if (canBeDamaged)
+        if (!IsServer) // Nếu không phải server, gửi yêu cầu lên server
         {
-            currentHealth -= damage;
+            Debug.Log($"[Client] Request TakeDamage: {damage}");
+            TakeDamageServerRpc(damage);
+            return;
+        }
+
+        Debug.Log(
+            $"[Server] TakeDamage called. CanBeDamaged: {canBeDamaged.Value}, Current Health: {currentHealth.Value}"
+        );
+
+        if (canBeDamaged.Value)
+        {
+            int beforeHealth = currentHealth.Value;
+            currentHealth.Value -= damage;
+            Debug.Log($"[Server] Health changed: {beforeHealth} -> {currentHealth.Value}");
+
             UpdateHealthBar();
 
-            if (currentHealth <= 0)
+            if (currentHealth.Value <= 0)
             {
+                Debug.Log("[Server] Boss is dead!");
                 startTimeline.Invoke();
                 Die();
             }
         }
+        else
+        {
+            Debug.Log("[Server] Boss is immune to damage!");
+        }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void TakeDamageServerRpc(int damage)
+    {
+        TakeDamage(damage); // Server xử lý logic trừ máu
+    }
+
+    public IEnumerator OnBossDeath()
+    {
+        yield return new WaitForSeconds(1f);
+        GameManager.Instance.LoadNextScene();
+        // BossManager.Instance.HandleBossDefeated(currentBoss);
     }
 
     private void UpdateHealthBar()
+    {
+        UpdateHealthBarClientRpc(currentHealth.Value, maxHealth);
+    }
+
+    [ClientRpc]
+    private void UpdateHealthBarClientRpc(int currentHealth, int maxHealth)
     {
         if (healthBarSlider != null)
         {
@@ -89,6 +145,17 @@ public class Boss5Health : NetworkBehaviour, DamageInterface
 
     private void UpdateHealthBarColor()
     {
+        // if (healthBarFill != null)
+        // {
+        //     healthBarFill.color = canBeDamaged.Value ? Color.red : Color.cyan;
+        // }
+        UpdateHealthBarColorClientRpc(canBeDamaged.Value);
+    }
+
+    [ClientRpc]
+    private void UpdateHealthBarColorClientRpc(bool canBeDamaged)
+    {
+        Debug.Log("UpdateHealthBarColorClientRpc: " + canBeDamaged);
         if (healthBarFill != null)
         {
             healthBarFill.color = canBeDamaged ? Color.red : Color.cyan;
@@ -98,33 +165,54 @@ public class Boss5Health : NetworkBehaviour, DamageInterface
     private void Die()
     {
         Debug.Log("Boss bi tieu diet");
+        StartCoroutine(OnBossDeath());
     }
 
     public void StunForDuration(float stunDuration)
     {
-        isStunned = true;
-        canBeDamaged = true;
+        Debug.Log(canBeDamaged + "Before stun");
+        isStunned.Value = true;
+        canBeDamaged.Value = true;
+        Debug.Log(canBeDamaged + "After stun");
         timeWhenStunned = Time.time + stunDuration;
         UpdateHealthBarColor();
     }
 
     public bool CanBeDamaged()
     {
-        return canBeDamaged;
+        return canBeDamaged.Value;
     }
 
     public void SetCanBeDamaged(bool value)
     {
-        canBeDamaged = value;
+        if (IsServer)
+        {
+            Debug.Log("SetCanBeDamaged called on server");
+            canBeDamaged.Value = value;
+            UpdateHealthBarColor();
+        }
+        else
+        {
+            // Gọi ServerRpc để yêu cầu server thay đổi giá trị
+            SetCanBeDamagedServerRpc(value);
+        }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void SetCanBeDamagedServerRpc(bool value)
+    {
+        canBeDamaged.Value = value;
         UpdateHealthBarColor();
     }
 
     private void Update()
     {
-        if (isStunned && Time.time > timeWhenStunned)
+        if (!IsServer)
+            return;
+        if (isStunned.Value && Time.time > timeWhenStunned)
         {
-            isStunned = false;
-            canBeDamaged = false;
+            isStunned.Value = false;
+            canBeDamaged.Value = false;
             UpdateHealthBarColor();
         }
     }

@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
+using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Boss5 : MonoBehaviour
+public class Boss5 : NetworkBehaviour
 {
     public static Boss5 Instance;
 
@@ -130,6 +131,11 @@ public class Boss5 : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         floorCheck = FindAnyObjectByType<FloorCheck>();
         sideManager = FindAnyObjectByType<SideManager>();
+        SpamPointsLeft = SpawnPointCheck.Instance.SpamPointsLeft;
+        SpamPointsRight = SpawnPointCheck.Instance.SpamPointsRight;
+        wayPoints = MoveBoomSkill.Instance.wayPoints;
+        targetTransformBomb = FireBoomTransfrom.Instance.targetTransformBomb;
+        newTarget = FireBoomTransfrom.Instance.newTarget;
         // Transform Player
         GameObject Player = GameObject.FindGameObjectWithTag("Player");
         playerTrans = Player.transform;
@@ -234,13 +240,14 @@ public class Boss5 : MonoBehaviour
     {
         if (health != null)
         {
-            if (health.currentHealth <= 0)
+            if (health.currentHealth.Value <= 0)
             {
                 GameObject[] lasers = GameObject.FindGameObjectsWithTag("Laser");
 
                 foreach (GameObject laser in lasers)
                 {
-                    Destroy(laser);
+                    laser.GetComponent<NetworkObject>().Despawn(true);
+                    // Destroy(laser);
                 }
 
                 StopAllCoroutines();
@@ -331,7 +338,7 @@ public class Boss5 : MonoBehaviour
         Vector3 spawnPosition = targetFloor.position + new Vector3(spawnX, 0.2f, 0);
 
         summonedObject = Instantiate(skillPrefab, spawnPosition, Quaternion.identity);
-
+        summonedObject.GetComponent<NetworkObject>().Spawn();
         targetTransform = (movingLeft) ? floorCheck.CurrentRightFloor : floorCheck.CurrentLeftFloor;
         isMovingLeft = movingLeft;
         canMove = false;
@@ -363,6 +370,7 @@ public class Boss5 : MonoBehaviour
             spawnPosition = rightTransform.position + yOffset;
             targetTransform = leftTransform;
             summonedObject = Instantiate(Skill1Right, spawnPosition, Quaternion.identity);
+            summonedObject.GetComponent<NetworkObject>().Spawn();
         }
         else if (sideManager?.IsOnRight ?? false && leftTransform != null)
         {
@@ -371,6 +379,7 @@ public class Boss5 : MonoBehaviour
             spawnPosition = leftTransform.position + yOffset;
             targetTransform = rightTransform;
             summonedObject = Instantiate(Skill1Left, spawnPosition, Quaternion.identity);
+            summonedObject.GetComponent<NetworkObject>().Spawn();
         }
         else
         {
@@ -420,11 +429,13 @@ public class Boss5 : MonoBehaviour
                 summonedObject.transform.Translate(
                     Vector3.right * moveDirection * moveSpeed * Time.deltaTime
                 );
-                Destroy(summonedObject, 1f);
+                StartCoroutine(DespawnAfterDelay(summonedObject, 1f));
+                // Destroy(summonedObject, 1f);
             }
             else
             {
-                Destroy(summonedObject);
+                summonedObject.GetComponent<NetworkObject>().Despawn(true);
+                // Destroy(summonedObject);
             }
         }
     }
@@ -441,8 +452,11 @@ public class Boss5 : MonoBehaviour
     {
         foreach (var skull in orbitingSkulls)
         {
-            if (skull != null)
-                Destroy(skull);
+            if (skull != null && skull.TryGetComponent(out NetworkObject no))
+            {
+                no.Despawn(true);
+            }
+            // Destroy(skull);
         }
         orbitingSkulls.Clear();
 
@@ -454,6 +468,7 @@ public class Boss5 : MonoBehaviour
             Vector3 spawnPos =
                 transform.position + Quaternion.Euler(0, 0, angle) * Vector3.right * orbitRadius;
             GameObject skull = Instantiate(skullPrefab, spawnPos, Quaternion.identity);
+            skull.GetComponent<NetworkObject>().Spawn();
             orbitingSkulls.Add(skull);
         }
 
@@ -496,14 +511,37 @@ public class Boss5 : MonoBehaviour
                 }
 
                 rb.linearVelocity = direction * projectileSpeed;
-
-                Destroy(skull, 3f);
+                StartCoroutine(DespawnAfterDelay(skull, 3f));
+                // Destroy(skull, 3f);
 
                 yield return new WaitForSeconds(1f);
             }
         }
 
         isSkullSkillActive = false;
+    }
+
+    private IEnumerator DespawnAfterDelay(GameObject go, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        if (go == null)
+            yield break;
+
+        if (!go.TryGetComponent(out NetworkObject netObj))
+        {
+            Destroy(go);
+            yield break;
+        }
+
+        if (netObj.IsSpawned)
+        {
+            netObj.Despawn(true);
+        }
+        else
+        {
+            Destroy(go);
+        }
     }
 
     private IEnumerator SpawnManyObject()
@@ -628,8 +666,33 @@ public class Boss5 : MonoBehaviour
     private void SpawnBoomAtPosition(Vector3 position)
     {
         if (boomb != null)
-        {
-            Instantiate(boomb, position, Quaternion.identity);
+        { // Tạo instance
+            GameObject boomInstance = Instantiate(boomb, position, Quaternion.identity);
+
+            // Lấy component NetworkObject
+            NetworkObject networkObject = boomInstance.GetComponent<NetworkObject>();
+            if (networkObject != null)
+            {
+                // Spawn object trên mạng
+                networkObject.Spawn();
+                // Lấy component BombLaser và gọi hàm
+                BombLaser bombLaser = boomInstance.GetComponent<BombLaser>();
+                if (bombLaser != null)
+                {
+                    // Gọi hàm qua RPC để đảm bảo chạy trên tất cả clients
+                    StartCoroutine(bombLaser.WaitForExplode());
+                }
+                else
+                {
+                    Debug.LogError("Boom prefab is missing BombLaser component!");
+                }
+            }
+            else
+            {
+                Debug.LogError("Boom prefab is missing NetworkObject component!");
+                Destroy(boomInstance);
+            }
+            StartCoroutine(DespawnAfterDelay(boomInstance, 3f));
         }
         else
         {
@@ -680,6 +743,7 @@ public class Boss5 : MonoBehaviour
                 transform.position,
                 Quaternion.identity
             );
+            bigBomb.GetComponent<NetworkObject>().Spawn();
             while (Vector3.Distance(bigBomb.transform.position, target.position) > 1f)
             {
                 bigBomb.transform.position = Vector3.MoveTowards(
@@ -689,8 +753,10 @@ public class Boss5 : MonoBehaviour
                 );
                 yield return null;
             }
+
             yield return new WaitForSeconds(0.3f);
-            Destroy(bigBomb);
+            bigBomb.GetComponent<NetworkObject>().Despawn(true);
+            // Destroy(bigBomb);
             if (bigBombLaserPrefab != null)
             {
                 GameObject bigBombLaser = Instantiate(
@@ -698,13 +764,15 @@ public class Boss5 : MonoBehaviour
                     bigBomb.transform.position,
                     Quaternion.identity
                 );
+
                 LineRenderer laserLine = bigBombLaser.GetComponentInChildren<LineRenderer>();
                 laserLine.transform.rotation = Quaternion.Euler(0f, 0f, 90f);
                 Vector3 newLaserPosition = laserLine.transform.position;
+                bigBombLaser.GetComponent<NetworkObject>().Spawn();
                 newLaserPosition.y -= 0.7f;
                 laserLine.transform.position = newLaserPosition;
-
-                Destroy(bigBombLaser, 1.5f);
+                StartCoroutine(DespawnAfterDelay(bigBombLaser, 1.5f));
+                // Destroy(bigBombLaser, 1.5f);
             }
         }
         else
@@ -717,9 +785,9 @@ public class Boss5 : MonoBehaviour
     {
         if (bombBossPool != null)
         {
-            GameObject bomb = bombBossPool.GetBomb();
+            GameObject bomb = bombBossPool.GetBomb(target.position);
 
-            bomb.transform.position = transform.position;
+            // bomb.transform.position = transform.position;
 
             while (Vector3.Distance(bomb.transform.position, target.position) > 0.5f)
             {
@@ -741,12 +809,14 @@ public class Boss5 : MonoBehaviour
                     bomb.transform.position,
                     Quaternion.identity
                 );
+                bombLaser.GetComponent<NetworkObject>().Spawn();
                 Vector3 newPosition = bombLaser.transform.position;
                 newPosition.y -= 0.5f;
                 bombLaser.transform.position = newPosition;
 
                 LineRenderer laserLine = bombLaser.GetComponentInChildren<LineRenderer>();
-                Destroy(bombLaser, 1.5f);
+                StartCoroutine(DespawnAfterDelay(bombLaser, 1.5f));
+                // Destroy(bombLaser, 1.5f);
             }
         }
         else

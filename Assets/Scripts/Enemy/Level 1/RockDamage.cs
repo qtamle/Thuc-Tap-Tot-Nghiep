@@ -1,7 +1,8 @@
 using System.Collections;
+using Unity.Netcode;
 using UnityEngine;
 
-public class RockDamage : MonoBehaviour
+public class RockDamage : NetworkBehaviour
 {
     private RockPool rockPool;
 
@@ -9,6 +10,7 @@ public class RockDamage : MonoBehaviour
     {
         rockPool = FindFirstObjectByType<RockPool>();
     }
+
     private void OnEnable()
     {
         StartCoroutine(WaitForReturnToPool());
@@ -24,7 +26,11 @@ public class RockDamage : MonoBehaviour
             {
                 damage.DamagePlayer(2);
                 StopAllCoroutines();
-                rockPool.ReturnRock(gameObject);
+                // Chỉ server mới được phép trả đối tượng về pool
+                if (IsServer)
+                {
+                    rockPool.ReturnRock(gameObject);
+                }
             }
         }
     }

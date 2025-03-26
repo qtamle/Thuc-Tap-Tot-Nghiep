@@ -2129,8 +2129,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  coinPrefab: {fileID: -5421448773651281902, guid: 7f9121f4ef7af7a469478e8d27f61512, type: 3}
-  secondaryCoinPrefab: {fileID: -2333134803016369592, guid: 570e85d03a1681f4b8e83153a845ac34, type: 3}
+  coinPrefab: {fileID: 2378999455891136806, guid: 7f9121f4ef7af7a469478e8d27f61512, type: 3}
+  secondaryCoinPrefab: {fileID: 2378999455891136806, guid: 570e85d03a1681f4b8e83153a845ac34, type: 3}
   initialPoolSize: 25
 --- !u!4 &311697336
 Transform:
@@ -5781,6 +5781,7 @@ GameObject:
   m_Component:
   - component: {fileID: 770204747}
   - component: {fileID: 770204748}
+  - component: {fileID: 770204749}
   m_Layer: 0
   m_Name: RockManager
   m_TagString: Untagged
@@ -5815,8 +5816,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0417ed1e2d932a34c9cddef5b19a91e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   rock: {fileID: 7609825812673247571, guid: b0318490356e4554d91cbdaba7e1f207, type: 3}
   poolSize: 6
+--- !u!114 &770204749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 770204746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 3317700273
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
 --- !u!1 &790893625
 GameObject:
   m_ObjectHideFlags: 0
@@ -12217,8 +12244,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2bd13555e255ec44883531b7c6a2a7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   experienceOrbPrefab: {fileID: 2895849976222171966, guid: cd6804d89834c0b4cb23a1ece1ff33fc, type: 3}
-  poolSize: 20
+  initialPoolSize: 20
 --- !u!4 &1452913419
 Transform:
   m_ObjectHideFlags: 0
@@ -13380,6 +13408,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1666825016}
+  - component: {fileID: 1666825017}
   m_Layer: 0
   m_Name: Pool
   m_TagString: Untagged
@@ -13406,6 +13435,28 @@ Transform:
   - {fileID: 1852440698}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1666825017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1666825015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a0c3a5a73298164893fcc6cd99014b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  PooledPrefabsList:
+  - Prefab: {fileID: 7609825812673247571, guid: b0318490356e4554d91cbdaba7e1f207, type: 3}
+    PrewarmCount: 6
+  - Prefab: {fileID: 2378999455891136806, guid: 7f9121f4ef7af7a469478e8d27f61512, type: 3}
+    PrewarmCount: 25
+  - Prefab: {fileID: 2378999455891136806, guid: 570e85d03a1681f4b8e83153a845ac34, type: 3}
+    PrewarmCount: 25
+  - Prefab: {fileID: 2895849976222171966, guid: cd6804d89834c0b4cb23a1ece1ff33fc, type: 3}
+    PrewarmCount: 20
 --- !u!1 &1691331800
 GameObject:
   m_ObjectHideFlags: 0

@@ -189,207 +189,6 @@ public class Dagger : NetworkBehaviour
         }
     }
 
-    // // [ServerRpc(RequireOwnership = false)]
-    // // private void SpawnCoinsServerRpc(
-    // //     string coinPrefabName,
-    // //     float minAmount,
-    // //     float maxAmount,
-    // //     Vector3 position
-    // // )
-    // // {
-    // //     GameObject coinPrefab = coinPrefabName == "Coin" ? this.coinPrefab : secondaryCoinPrefab;
-    // //     bool isGoldIncreaseActive = goldIncrease != null && goldIncrease.IsReady();
-
-    // //     int initialCoinCount = Random.Range((int)minAmount, (int)maxAmount + 1);
-    // //     int coinCount = initialCoinCount;
-
-    // //     if (isGoldIncreaseActive)
-    // //     {
-    // //         coinCount += goldIncrease.increaseGoldChange;
-    // //     }
-
-    // //     if (weaponInfo != null && weaponInfo.weaponLevel > 1)
-    // //     {
-    // //         coinCount += increaseCoin;
-    // //     }
-
-    // //     for (int i = 0; i < coinCount; i++)
-    // //     {
-    // //         Vector3 spawnPosition = position + Vector3.up * 0.2f;
-
-    // //         GameObject coin = coinPoolManager.GetCoinFromPool(coinPrefab);
-    // //         coin.transform.position = spawnPosition;
-
-    // //         Rigidbody2D coinRb = coin.GetComponent<Rigidbody2D>();
-
-    // //         if (coinRb != null)
-    // //         {
-    // //             Vector2 forceDirection =
-    // //                 new Vector2(Random.Range(-1.5f, 1.5f), Random.Range(1f, 1f)) * 2.5f;
-    // //             coinRb.AddForce(forceDirection, ForceMode2D.Impulse);
-
-    // //             StartCoroutine(CheckIfCoinIsStuck(coinRb));
-    // //         }
-
-    // //         CoinsScript coinScript = coin.GetComponent<CoinsScript>();
-    // //         if (coinScript != null)
-    // //         {
-    // //             if (coinPrefab == this.coinPrefab)
-    // //                 coinScript.SetCoinType(true, false);
-    // //             else
-    // //                 coinScript.SetCoinType(false, true);
-    // //         }
-
-    // //         // Gọi ClientRpc để thông báo cho tất cả client
-    // //         SpawnCoinClientRpc(coin.GetComponent<NetworkObject>().NetworkObjectId, spawnPosition);
-    // //     }
-    // // }
-
-    // [ClientRpc]
-    // private void SpawnCoinClientRpc(ulong coinNetworkId, Vector3 spawnPosition)
-    // {
-    //     // Tìm đối tượng coin dựa trên NetworkObjectId
-    //     if (
-    //         NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(
-    //             coinNetworkId,
-    //             out NetworkObject netObj
-    //         )
-    //     )
-    //     {
-    //         GameObject coin = netObj.gameObject;
-
-    //         // Kích hoạt đối tượng
-    //         coin.SetActive(true);
-    //         coin.transform.position = spawnPosition;
-
-    //         // Thiết lập các component
-    //         CoinsScript coinScript = coin.GetComponent<CoinsScript>();
-    //         if (coinScript != null)
-    //         {
-    //             coinScript.enabled = true;
-    //         }
-
-    //         CircleCollider2D collider = coin.GetComponent<CircleCollider2D>();
-    //         if (collider != null)
-    //         {
-    //             collider.enabled = true;
-    //         }
-
-    //         Rigidbody2D rb = coin.GetComponent<Rigidbody2D>();
-    //         if (rb != null)
-    //         {
-    //             rb.bodyType = RigidbodyType2D.Dynamic;
-    //             rb.simulated = true;
-    //             rb.linearVelocity = Vector2.zero;
-    //             rb.gravityScale = 1;
-    //         }
-    //     }
-    //     else
-    //     {
-    //         Debug.LogWarning("Coin not found in SpawnedObjects!");
-    //     }
-    // }
-
-    [ServerRpc(RequireOwnership = false)]
-    private void SpawnExperienceOrbsServerRpc(Vector3 position, int orbCount)
-    {
-        Debug.Log($"Initial orb count: {orbCount}");
-
-        if (weaponInfo != null && weaponInfo.weaponLevel > 2)
-        {
-            orbCount += increaseExperience;
-            Debug.Log($"Orb count after adding increaseExperience: {orbCount}");
-        }
-        else
-        {
-            Debug.Log("Weapon level is not high enough to increase orb count.");
-        }
-
-        for (int i = 0; i < orbCount; i++)
-        {
-            float randomAngle = Random.Range(0f, 360f);
-
-            float orbX = position.x + Mathf.Cos(randomAngle * Mathf.Deg2Rad);
-            float orbY = position.y + Mathf.Sin(randomAngle * Mathf.Deg2Rad);
-            Vector3 spawnPosition = new Vector3(orbX, orbY, position.z);
-
-            GameObject orb = orbPoolManager.GetOrbFromPool(spawnPosition);
-            if (orb == null)
-            {
-                Debug.LogError("Failed to get orb from pool!");
-                return;
-            }
-
-            Rigidbody2D orbRb = orb.GetComponent<Rigidbody2D>();
-            if (orbRb == null)
-            {
-                Debug.LogError("Orb does not have a Rigidbody2D component!");
-                return;
-            }
-
-            if (orbRb != null)
-            {
-                Vector2 forceDirection = (spawnPosition - position).normalized * orbLaunchForce;
-                orbRb.AddForce(forceDirection, ForceMode2D.Impulse);
-
-                orbRb.bodyType = RigidbodyType2D.Kinematic;
-
-                StartCoroutine(MoveOrbToPlayer(orb, orbMoveDelay));
-            }
-
-            // Gọi ClientRpc để thông báo cho tất cả client
-            SpawnExperienceOrbClientRpc(
-                orb.GetComponent<NetworkObject>().NetworkObjectId,
-                spawnPosition
-            );
-        }
-    }
-
-    [ClientRpc]
-    private void SpawnExperienceOrbClientRpc(ulong orbNetworkId, Vector3 spawnPosition)
-    {
-        // Tìm đối tượng orb dựa trên NetworkObjectId
-        if (
-            NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(
-                orbNetworkId,
-                out NetworkObject netObj
-            )
-        )
-        {
-            GameObject orb = netObj.gameObject;
-
-            // Kích hoạt đối tượng
-            orb.SetActive(true);
-            orb.transform.position = spawnPosition;
-
-            // Thiết lập các component
-            ExperienceScript experienceScript = orb.GetComponent<ExperienceScript>();
-            if (experienceScript != null)
-            {
-                experienceScript.enabled = true;
-            }
-
-            PolygonCollider2D collider = orb.GetComponent<PolygonCollider2D>();
-            if (collider != null)
-            {
-                collider.enabled = true;
-            }
-
-            Rigidbody2D rb = orb.GetComponent<Rigidbody2D>();
-            if (rb != null)
-            {
-                rb.bodyType = RigidbodyType2D.Dynamic;
-                rb.simulated = true;
-                rb.linearVelocity = Vector2.zero;
-                rb.gravityScale = 1;
-            }
-        }
-        else
-        {
-            Debug.LogWarning("Experience orb not found in SpawnedObjects!");
-        }
-    }
-
     private void PerformAttack()
     {
         ShowAttackVFX();
@@ -447,7 +246,7 @@ public class Dagger : NetworkBehaviour
                     SpawnHealthPotions(enemy.transform.position, 1);
                 }
 
-                SpawnExperienceOrbs(enemy.transform.position, 5);
+                SpawnOrbsServerRpc(enemy.transform.position, 5);
             }
         }
 
@@ -490,7 +289,7 @@ public class Dagger : NetworkBehaviour
                     SpawnHealthPotions(boss.transform.position, 1);
                 }
 
-                SpawnExperienceOrbs(boss.transform.position, 20);
+                SpawnOrbsServerRpc(boss.transform.position, 20);
             }
         }
 
@@ -539,7 +338,7 @@ public class Dagger : NetworkBehaviour
                         SpawnHealthPotions(partHealth.transform.position, 1);
                     }
 
-                    SpawnExperienceOrbs(partHealth.transform.position, 25);
+                    SpawnOrbsServerRpc(partHealth.transform.position, 25);
                 }
             }
 
@@ -575,7 +374,7 @@ public class Dagger : NetworkBehaviour
                         SpawnHealthPotions(headController.transform.position, 1);
                     }
 
-                    SpawnExperienceOrbs(headController.transform.position, 25);
+                    SpawnOrbsServerRpc(headController.transform.position, 25);
                 }
             }
             else
@@ -644,9 +443,31 @@ public class Dagger : NetworkBehaviour
         }
     }
 
-    void SpawnExperienceOrbs(Vector3 position, int orbCount)
+    [ServerRpc(RequireOwnership = false)]
+    private void SpawnOrbsServerRpc(Vector3 position, int orbCount)
     {
-        SpawnExperienceOrbsServerRpc(position, orbCount);
+        for (int i = 0; i < orbCount; i++)
+        {
+            float randomAngle = Random.Range(0f, 360f);
+            float orbX = position.x + Mathf.Cos(randomAngle * Mathf.Deg2Rad);
+            float orbY = position.y + Mathf.Sin(randomAngle * Mathf.Deg2Rad);
+            Vector3 spawnPosition = new Vector3(orbX, orbY, position.z);
+
+            NetworkObject orb = orbPoolManager.GetOrbFromPool(spawnPosition);
+            if (orb == null)
+                continue;
+
+            Rigidbody2D orbRb = orb.GetComponent<Rigidbody2D>();
+            if (orbRb != null)
+            {
+                Vector2 forceDirection = (spawnPosition - position).normalized * orbLaunchForce;
+                orbRb.AddForce(forceDirection, ForceMode2D.Impulse);
+                orbRb.bodyType = RigidbodyType2D.Kinematic;
+
+                // Gửi RPC đến tất cả clients để bắt đầu coroutine
+                StartCoroutine(MoveOrbToPlayer(orb.gameObject, orbMoveDelay));
+            }
+        }
     }
 
     IEnumerator MoveOrbToPlayer(GameObject orb, float delay)
@@ -668,7 +489,7 @@ public class Dagger : NetworkBehaviour
 
                     if (Vector3.Distance(orb.transform.position, player.position) < 0.5f)
                     {
-                        orbPoolManager.ReturnOrbToPool(orb);
+                        orbPoolManager.ReturnOrbToPool(orb.GetComponent<NetworkObject>());
                         yield break;
                     }
 

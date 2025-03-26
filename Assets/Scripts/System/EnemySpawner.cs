@@ -24,9 +24,10 @@ public class EnemySpawner : NetworkBehaviour, IEnemySpawner
     // public GangsterHealth gangsterHealth;
 
     private NetworkVariable<bool> stopSpawning = new NetworkVariable<bool>(false);
+    private NetworkVariable<int> currentTotalSpawnCount = new NetworkVariable<int>(0);
+    private NetworkVariable<bool> isBossSpawn = new NetworkVariable<bool>(false);
 
     [Header("Max and current enemy in level")]
-    private NetworkVariable<int> currentTotalSpawnCount = new NetworkVariable<int>(0);
     public int maxTotalSpawnCount;
 
     [Header("Time Spawn")]
@@ -36,13 +37,15 @@ public class EnemySpawner : NetworkBehaviour, IEnemySpawner
     private float minSpawnTimeLimit = 1f;
     private float maxSpawnTimeLimit = 1f;
 
-    private NetworkVariable<bool> isBossSpawn = new NetworkVariable<bool>(false);
-
     void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
         }
     }
 
@@ -55,25 +58,11 @@ public class EnemySpawner : NetworkBehaviour, IEnemySpawner
             EnemyManager.Instance.killTarget.Value = 10;
             // KillCounterUI.Instance.CounterUI();
             BossSpawnPostion = GameObject.FindWithTag("BossSpawner");
-            if (bossLevel1 != null)
-            {
-                // bossLevel1.SetActive(false);
-            }
 
-            if (UIHealthBoss != null)
+            foreach (var spawnData in enemySpawnDatas)
             {
-                // UIHealthBoss.SetActive(false);
+                StartCoroutine(SpawnEnemyIndependently(spawnData));
             }
-
-            if (warningBoss != null)
-            {
-                // warningBoss.SetActive(false);
-            }
-
-            // foreach (var spawnData in enemySpawnDatas)
-            // {
-            //     StartCoroutine(SpawnEnemyIndependently(spawnData));
-            // }
         }
     }
 
@@ -90,14 +79,14 @@ public class EnemySpawner : NetworkBehaviour, IEnemySpawner
         if (!IsServer)
             return; // Chỉ server mới điều chỉnh tốc độ spawn
         timeElapsed += Time.deltaTime;
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            ShowBossHealthUI();
-        }
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            HideBossHealthUI();
-        }
+        // if (Input.GetKeyDown(KeyCode.A))
+        // {
+        //     ShowBossHealthUI();
+        // }
+        // if (Input.GetKeyDown(KeyCode.S))
+        // {
+        //     HideBossHealthUI();
+        // }
         if (timeElapsed >= spawnSpeedIncreaseInterval)
         {
             foreach (var spawnData in enemySpawnDatas)
@@ -182,6 +171,21 @@ public class EnemySpawner : NetworkBehaviour, IEnemySpawner
 
     public void OnEnemyKilled()
     {
+        // Chỉ gọi ServerRpc nếu là Client (tránh gọi thừa khi đang là Server)
+        if (!IsServer)
+        {
+            OnEnemyKilledServerRpc();
+        }
+        // Nếu là Server, xử lý trực tiếp
+        else
+        {
+            currentTotalSpawnCount.Value--;
+        }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void OnEnemyKilledServerRpc()
+    {
         currentTotalSpawnCount.Value--;
     }
 
@@ -203,19 +207,22 @@ public class EnemySpawner : NetworkBehaviour, IEnemySpawner
         {
             warningBoss.SetActive(false);
         }
+        ShowBossHealthUI();
 
         if (bossLevel1 != null)
         {
-            bossLevel1.SetActive(true);
+            GameObject bossSpawned = Instantiate(
+                bossLevel1,
+                BossSpawnPostion.transform.position,
+                Quaternion.identity
+            );
+            bossSpawned.GetComponent<NetworkObject>().Spawn(true);
+
+            GangsterHealth.Instance.IntializeBossHealthServerRpc();
             Gangster.Instance.Active();
         }
 
         yield return new WaitForSeconds(0.5f);
-
-        if (UIHealthBoss != null)
-        {
-            UIHealthBoss.SetActive(true);
-        }
     }
 
     public void TestHandleBossSpawn()
@@ -239,7 +246,7 @@ public class EnemySpawner : NetworkBehaviour, IEnemySpawner
             );
             bossSpawned.GetComponent<NetworkObject>().Spawn(true);
 
-            GangsterHealth.Instance.IntializeBossHealth();
+            GangsterHealth.Instance.IntializeBossHealthServerRpc();
             Gangster.Instance.Active();
         }
     }

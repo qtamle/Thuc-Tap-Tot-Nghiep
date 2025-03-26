@@ -293,7 +293,7 @@ public class EneryOrb : MonoBehaviour
                         SpawnHealthPotions(enemy.transform.position, 1);
                     }
 
-                    SpawnExperienceOrbs(enemy.transform.position, 5);
+                    SpawnOrbsServerRpc(enemy.transform.position, 5);
                 }
             }
 
@@ -335,7 +335,7 @@ public class EneryOrb : MonoBehaviour
                         SpawnHealthPotions(boss.transform.position, 1);
                     }
 
-                    SpawnExperienceOrbs(boss.transform.position, 20);
+                    SpawnOrbsServerRpc(boss.transform.position, 20);
                 }
             }
 
@@ -388,7 +388,7 @@ public class EneryOrb : MonoBehaviour
                             SpawnHealthPotions(partHealth.transform.position, 1);
                         }
 
-                        SpawnExperienceOrbs(partHealth.transform.position, 25);
+                        SpawnOrbsServerRpc(partHealth.transform.position, 25);
                     }
                 }
 
@@ -427,7 +427,7 @@ public class EneryOrb : MonoBehaviour
                             SpawnHealthPotions(headController.transform.position, 1);
                         }
 
-                        SpawnExperienceOrbs(headController.transform.position, 25);
+                        SpawnOrbsServerRpc(headController.transform.position, 25);
                     }
                 }
                 else
@@ -507,39 +507,29 @@ public class EneryOrb : MonoBehaviour
         }
     }
 
-    void SpawnExperienceOrbs(Vector3 position, int orbCount)
+    [ServerRpc(RequireOwnership = false)]
+    private void SpawnOrbsServerRpc(Vector3 position, int orbCount)
     {
-        Debug.Log($"Initial orb count: {orbCount}");
-
-        if (weaponInfo != null && weaponInfo.weaponLevel > 1)
-        {
-            orbCount += increaseExperience;
-            Debug.Log($"Orb count after adding increaseExperience: {orbCount}");
-        }
-        else
-        {
-            Debug.Log("Weapon level is not high enough to increase orb count.");
-        }
-
         for (int i = 0; i < orbCount; i++)
         {
             float randomAngle = Random.Range(0f, 360f);
-
             float orbX = position.x + Mathf.Cos(randomAngle * Mathf.Deg2Rad);
             float orbY = position.y + Mathf.Sin(randomAngle * Mathf.Deg2Rad);
             Vector3 spawnPosition = new Vector3(orbX, orbY, position.z);
 
-            GameObject orb = orbPoolManager.GetOrbFromPool(spawnPosition);
-            Rigidbody2D orbRb = orb.GetComponent<Rigidbody2D>();
+            NetworkObject orb = orbPoolManager.GetOrbFromPool(spawnPosition);
+            if (orb == null)
+                continue;
 
+            Rigidbody2D orbRb = orb.GetComponent<Rigidbody2D>();
             if (orbRb != null)
             {
                 Vector2 forceDirection = (spawnPosition - position).normalized * orbLaunchForce;
                 orbRb.AddForce(forceDirection, ForceMode2D.Impulse);
-
                 orbRb.bodyType = RigidbodyType2D.Kinematic;
 
-                StartCoroutine(MoveOrbToPlayer(orb, orbMoveDelay));
+                // Gửi RPC đến tất cả clients để bắt đầu coroutine
+                StartCoroutine(MoveOrbToPlayer(orb.gameObject, orbMoveDelay));
             }
         }
     }
@@ -563,7 +553,7 @@ public class EneryOrb : MonoBehaviour
 
                     if (Vector3.Distance(orb.transform.position, player.position) < 0.5f)
                     {
-                        orbPoolManager.ReturnOrbToPool(orb);
+                        orbPoolManager.ReturnOrbToPool(orb.GetComponent<NetworkObject>());
                         yield break;
                     }
 

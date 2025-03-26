@@ -119,6 +119,8 @@ public class Attack : NetworkBehaviour
 
     private void Update()
     {
+        if (!IsOwner)
+            return;
         Collider2D[] enemies = Physics2D.OverlapBoxAll(
             attackPoints.position,
             boxSize,
@@ -146,12 +148,24 @@ public class Attack : NetworkBehaviour
                 }
 
                 Destroy(enemy.gameObject);
-                SpawnCoins(coinPrefab, coinSpawnMin, coinSpawnMax, enemy.transform.position);
+                // SpawnCoins(coinPrefab, coinSpawnMin, coinSpawnMax, enemy.transform.position);
+
+                // if (Random.value <= 0.30f)
+                // {
+                //     SpawnCoins(
+                //         secondaryCoinPrefab,
+                //         secondaryCoinSpawnMin,
+                //         secondaryCoinSpawnMax,
+                //         enemy.transform.position
+                //     );
+                // }
+                // Spawn coins
+                SpawnCoinsServerRpc(false, coinSpawnMin, coinSpawnMax, enemy.transform.position);
 
                 if (Random.value <= 0.30f)
                 {
-                    SpawnCoins(
-                        secondaryCoinPrefab,
+                    SpawnCoinsServerRpc(
+                        true,
                         secondaryCoinSpawnMin,
                         secondaryCoinSpawnMax,
                         enemy.transform.position
@@ -168,7 +182,7 @@ public class Attack : NetworkBehaviour
                     bouncingSaw.LaunchBouncingSaw();
                 }
 
-                SpawnExperienceOrbs(enemy.transform.position, 5);
+                SpawnOrbsServerRpc(enemy.transform.position, 5);
             }
         }
 
@@ -185,12 +199,36 @@ public class Attack : NetworkBehaviour
 
             if (damageable != null && damageable.CanBeDamaged() && !isAttackBoss)
             {
-                AttackBossServerRpc();
-                isAttackBoss = true;
-                damageable.SetCanBeDamaged(false);
+                NetworkObject bossNetworkObject = boss.GetComponent<NetworkObject>();
+                if (bossNetworkObject != null && bossNetworkObject.IsSpawned)
+                {
+                    AttackBossServerRpc(bossNetworkObject);
+                    isAttackBoss = true;
+                    damageable.SetCanBeDamaged(false);
+                }
+                else
+                {
+                    Debug.LogError("[Client] Boss NetworkObject is null or not spawned!");
+                }
 
-                SpawnCoins(
-                    coinPrefab,
+                // SpawnCoins(
+                //     coinPrefab,
+                //     coinSpawnMin * 10,
+                //     coinSpawnMax * 10,
+                //     boss.transform.position
+                // );
+
+                // if (Random.value <= 0.25f)
+                // {
+                //     SpawnCoins(
+                //         secondaryCoinPrefab,
+                //         secondaryCoinSpawnMin * 5,
+                //         secondaryCoinSpawnMax * 5,
+                //         boss.transform.position
+                //     );
+                // }
+                SpawnCoinsServerRpc(
+                    false,
                     coinSpawnMin * 10,
                     coinSpawnMax * 10,
                     boss.transform.position
@@ -198,10 +236,10 @@ public class Attack : NetworkBehaviour
 
                 if (Random.value <= 0.25f)
                 {
-                    SpawnCoins(
-                        secondaryCoinPrefab,
-                        secondaryCoinSpawnMin * 5,
-                        secondaryCoinSpawnMax * 5,
+                    SpawnCoinsServerRpc(
+                        true,
+                        secondaryCoinSpawnMin,
+                        secondaryCoinSpawnMax,
                         boss.transform.position
                     );
                 }
@@ -211,7 +249,7 @@ public class Attack : NetworkBehaviour
                     SpawnHealthPotions(boss.transform.position, 1);
                 }
 
-                SpawnExperienceOrbs(boss.transform.position, 20);
+                SpawnOrbsServerRpc(boss.transform.position, 20);
             }
         }
 
@@ -238,8 +276,24 @@ public class Attack : NetworkBehaviour
 
                     snakeHealth.SetCanBeDamaged(false);
 
-                    SpawnCoins(
-                        coinPrefab,
+                    // SpawnCoins(
+                    //     coinPrefab,
+                    //     coinSpawnMin * 13,
+                    //     coinSpawnMax * 13,
+                    //     partHealth.transform.position
+                    // );
+
+                    // if (Random.value <= 0.25f)
+                    // {
+                    //     SpawnCoins(
+                    //         secondaryCoinPrefab,
+                    //         secondaryCoinSpawnMin * 5,
+                    //         secondaryCoinSpawnMax * 5,
+                    //         partHealth.transform.position
+                    //     );
+                    // }
+                    SpawnCoinsServerRpc(
+                        false,
                         coinSpawnMin * 13,
                         coinSpawnMax * 13,
                         partHealth.transform.position
@@ -247,8 +301,8 @@ public class Attack : NetworkBehaviour
 
                     if (Random.value <= 0.25f)
                     {
-                        SpawnCoins(
-                            secondaryCoinPrefab,
+                        SpawnCoinsServerRpc(
+                            true,
                             secondaryCoinSpawnMin * 5,
                             secondaryCoinSpawnMax * 5,
                             partHealth.transform.position
@@ -260,7 +314,7 @@ public class Attack : NetworkBehaviour
                         SpawnHealthPotions(partHealth.transform.position, 1);
                     }
 
-                    SpawnExperienceOrbs(partHealth.transform.position, 25);
+                    SpawnOrbsServerRpc(partHealth.transform.position, 25);
                 }
             }
 
@@ -274,29 +328,44 @@ public class Attack : NetworkBehaviour
                     headController.isHeadAttacked = true;
 
                     snakeHealth.SetCanBeDamaged(false);
-                    SpawnCoins(
-                        coinPrefab,
+                    // SpawnCoins(
+                    //     coinPrefab,
+                    //     coinSpawnMin * 13,
+                    //     coinSpawnMax * 13,
+                    //     headController.transform.position
+                    // );
+
+                    // if (Random.value <= 0.25f)
+                    // {
+                    //     SpawnCoins(
+                    //         secondaryCoinPrefab,
+                    //         secondaryCoinSpawnMin * 5,
+                    //         secondaryCoinSpawnMax * 5,
+                    //         headController.transform.position
+                    //     );
+                    // }
+                    SpawnCoinsServerRpc(
+                        false,
                         coinSpawnMin * 13,
                         coinSpawnMax * 13,
-                        headController.transform.position
+                        partHealth.transform.position
                     );
 
-                    if (Random.value <= 0.25f)
+                    if (Random.value <= 0.30f)
                     {
-                        SpawnCoins(
-                            secondaryCoinPrefab,
+                        SpawnCoinsServerRpc(
+                            true,
                             secondaryCoinSpawnMin * 5,
                             secondaryCoinSpawnMax * 5,
-                            headController.transform.position
+                            partHealth.transform.position
                         );
                     }
-
                     if (Random.value <= 0.15f && lucky != null)
                     {
                         SpawnHealthPotions(headController.transform.position, 1);
                     }
 
-                    SpawnExperienceOrbs(headController.transform.position, 25);
+                    SpawnOrbsServerRpc(headController.transform.position, 25);
                 }
             }
         }
@@ -320,25 +389,67 @@ public class Attack : NetworkBehaviour
     }
 
     [ServerRpc(RequireOwnership = false)]
-    private void AttackBossServerRpc()
+    private void AttackBossServerRpc(NetworkObjectReference bossReference)
     {
-        DamageInterface damageable = GetComponent<DamageInterface>();
-        if (damageable != null && damageable.CanBeDamaged())
+        Debug.Log("[Server] AttackBossServerRpc called.");
+
+        if (bossReference.TryGet(out NetworkObject bossObject))
         {
-            damageable.TakeDamage(1);
-            damageable.SetCanBeDamaged(false);
+            DamageInterface damageable = bossObject.GetComponent<DamageInterface>();
+            if (damageable != null)
+            {
+                Debug.Log(
+                    $"[Server] DamageInterface found. CanBeDamaged: {damageable.CanBeDamaged()}"
+                );
+
+                if (damageable.CanBeDamaged())
+                {
+                    Debug.Log("[Server] Boss is taking damage...");
+                    damageable.TakeDamage(1);
+                    damageable.SetCanBeDamaged(false);
+                }
+                else
+                {
+                    Debug.Log("[Server] Boss is currently immune!");
+                }
+            }
+            else
+            {
+                Debug.LogError("[Server] DamageInterface not found on this GameObject!");
+            }
+        }
+        else
+        {
+            Debug.LogError("[Server] Failed to retrieve NetworkObject from reference!");
         }
     }
 
     void SpawnCoins(GameObject coinType, float minAmount, float maxAmount, Vector3 position)
     {
-        bool isSecondary = (coinType == secondaryCoinPrefab);
+        if (!IsOwner)
+            return;
 
+        // Chuyển yêu cầu spawn coin đến server
+        SpawnCoinsServerRpc(
+            coinType == secondaryCoinPrefab,
+            (int)minAmount,
+            (int)maxAmount,
+            position
+        );
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void SpawnCoinsServerRpc(
+        bool isSecondary,
+        float minAmount,
+        float maxAmount,
+        Vector3 position
+    )
+    {
+        Debug.Log($"ServerRpc called - isSecondary: {isSecondary}, position: {position}");
         bool isGoldIncreaseActive = goldIncrease != null && goldIncrease.IsReady();
-
-        int initialCoinCount = Random.Range((int)minAmount, (int)maxAmount + 1);
-
-        int coinCount = initialCoinCount;
+        float initialCoinCount = Random.Range(minAmount, maxAmount + 1);
+        float coinCount = initialCoinCount;
 
         if (isGoldIncreaseActive)
         {
@@ -353,15 +464,12 @@ public class Attack : NetworkBehaviour
         for (int i = 0; i < coinCount; i++)
         {
             Vector3 spawnPosition = position + Vector3.up * 0.2f;
-
-            // Mới: Cần sửa thành
             NetworkObject coin = CoinPoolManager.Instance.GetCoinFromPool(
                 spawnPosition,
-                coinType == secondaryCoinPrefab
+                isSecondary
             );
 
             Rigidbody2D coinRb = coin.GetComponent<Rigidbody2D>();
-
             if (coinRb != null)
             {
                 Vector2 forceDirection =
@@ -373,14 +481,7 @@ public class Attack : NetworkBehaviour
             CoinsScript coinScript = coin.GetComponent<CoinsScript>();
             if (coinScript != null)
             {
-                if (coinType == coinPrefab)
-                    coinScript.SetCoinType(true, false);
-                else
-                    coinScript.SetCoinType(false, true);
-            }
-            else
-            {
-                Debug.LogError("CoinsScript is missing on the coin.");
+                coinScript.SetCoinType(!isSecondary, isSecondary);
             }
         }
     }
@@ -409,27 +510,35 @@ public class Attack : NetworkBehaviour
         }
     }
 
-    void SpawnExperienceOrbs(Vector3 position, int orbCount)
+    [ServerRpc(RequireOwnership = false)]
+    private void RequestSpawnOrbsServerRpc(Vector3 position, int orbCount)
+    {
+        SpawnOrbsServerRpc(position, orbCount);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void SpawnOrbsServerRpc(Vector3 position, int orbCount)
     {
         for (int i = 0; i < orbCount; i++)
         {
             float randomAngle = Random.Range(0f, 360f);
-
             float orbX = position.x + Mathf.Cos(randomAngle * Mathf.Deg2Rad);
             float orbY = position.y + Mathf.Sin(randomAngle * Mathf.Deg2Rad);
             Vector3 spawnPosition = new Vector3(orbX, orbY, position.z);
 
-            GameObject orb = orbPoolManager.GetOrbFromPool(spawnPosition);
-            Rigidbody2D orbRb = orb.GetComponent<Rigidbody2D>();
+            NetworkObject orb = orbPoolManager.GetOrbFromPool(spawnPosition);
+            if (orb == null)
+                continue;
 
+            Rigidbody2D orbRb = orb.GetComponent<Rigidbody2D>();
             if (orbRb != null)
             {
                 Vector2 forceDirection = (spawnPosition - position).normalized * orbLaunchForce;
                 orbRb.AddForce(forceDirection, ForceMode2D.Impulse);
-
                 orbRb.bodyType = RigidbodyType2D.Kinematic;
 
-                StartCoroutine(MoveOrbToPlayer(orb, orbMoveDelay));
+                // Gửi RPC đến tất cả clients để bắt đầu coroutine
+                StartCoroutine(MoveOrbToPlayer(orb.gameObject, orbMoveDelay));
             }
         }
     }
@@ -453,7 +562,7 @@ public class Attack : NetworkBehaviour
 
                     if (Vector3.Distance(orb.transform.position, player.position) < 0.5f)
                     {
-                        orbPoolManager.ReturnOrbToPool(orb);
+                        orbPoolManager.ReturnOrbToPool(orb.GetComponent<NetworkObject>());
                         yield break;
                     }
 

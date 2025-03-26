@@ -1696,6 +1696,7 @@ GameObject:
   - component: {fileID: 258206130}
   - component: {fileID: 258206131}
   - component: {fileID: 258206132}
+  - component: {fileID: 258206133}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1806,6 +1807,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 918517c0ddc088148ac72a5b3e0b863a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   killCounterText: {fileID: 1224762733}
 --- !u!114 &258206131
 MonoBehaviour:
@@ -1834,6 +1836,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   experienceText: {fileID: 512577287}
+--- !u!114 &258206133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 258206125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 1005077046
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
 --- !u!1 &275166176
 GameObject:
   m_ObjectHideFlags: 0
@@ -2558,6 +2585,7 @@ Transform:
   - {fileID: 1257452414}
   - {fileID: 1221081235}
   - {fileID: 346044822}
+  - {fileID: 457179034}
   - {fileID: 314459775}
   - {fileID: 1995702464}
   - {fileID: 1002377858}
@@ -3755,6 +3783,55 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &457179033
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 457179034}
+  - component: {fileID: 457179035}
+  m_Layer: 0
+  m_Name: GunPositions
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &457179034
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 457179033}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -5.57, y: 0.61, z: 0.030881593}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 377778126}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &457179035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 457179033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 888077e1822a0114888b399d7a9c9835, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gunPositions:
+  - {fileID: 854070721}
+  - {fileID: 821138515}
+  - {fileID: 118952047}
+  - {fileID: 91795153}
 --- !u!1 &466547430
 GameObject:
   m_ObjectHideFlags: 0
@@ -5926,7 +6003,7 @@ GameObject:
   - component: {fileID: 752981478}
   m_Layer: 0
   m_Name: SpawnDiscoBall
-  m_TagString: Untagged
+  m_TagString: DiscoBall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7466,7 +7543,7 @@ GameObject:
   - component: {fileID: 935038570}
   m_Layer: 0
   m_Name: SpawnLaser
-  m_TagString: Untagged
+  m_TagString: CyborgLaser
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -36,24 +36,26 @@ public class EnemySpawnerLevel5 : NetworkBehaviour, IEnemySpawner
 
     private void Start()
     {
-        if (bossLevel1 != null)
+        if (!IsServer)
+            return; // Chỉ server mới spawn quái
+        else
         {
-            // bossLevel1.SetActive(false);
-        }
+            // EnemyManager.Instance.killTarget.Value = 2;
+            // KillCounterUI.Instance.CounterUI();
+            BossSpawnPostion = GameObject.FindWithTag("BossSpawner");
 
-        if (UIHealthBoss != null)
-        {
-            UIHealthBoss.SetActive(false);
+            foreach (var spawnData in enemySpawnDatas)
+            {
+                StartCoroutine(SpawnEnemyIndependently(spawnData));
+            }
         }
+    }
 
-        if (warningBoss != null)
+    public override void OnNetworkSpawn()
+    {
+        if (IsClient)
         {
-            warningBoss.SetActive(false);
-        }
-
-        foreach (var spawnData in enemySpawnDatas)
-        {
-            // StartCoroutine(SpawnEnemyIndependently(spawnData));
+            HideBossHealthUI();
         }
     }
 
@@ -177,21 +179,16 @@ public class EnemySpawnerLevel5 : NetworkBehaviour, IEnemySpawner
 
     public void TestHandleBossSpawn()
     {
-        if (remain != null)
+        if (!IsServer)
         {
-            remain.SetActive(false);
+            return;
         }
+        remain.SetActive(false);
 
-        if (warningBoss != null)
-        {
-            warningBoss.SetActive(true);
-        }
+        warningBoss.SetActive(true);
 
-        if (warningBoss != null)
-        {
-            warningBoss.SetActive(false);
-        }
-
+        warningBoss.SetActive(false);
+        ShowBossHealthUI();
         if (bossLevel1 != null)
         {
             GameObject bossSpawned = Instantiate(
@@ -206,6 +203,47 @@ public class EnemySpawnerLevel5 : NetworkBehaviour, IEnemySpawner
         if (UIHealthBoss != null)
         {
             UIHealthBoss.SetActive(true);
+        }
+    }
+
+    public void ShowBossHealthUI()
+    {
+        ShowBossHealthUIServerRpc();
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void ShowBossHealthUIServerRpc()
+    {
+        UIHealthBoss.SetActive(true);
+        warningBoss.SetActive(true);
+        ShowBossHealthUIClientRpc();
+    }
+
+    [ClientRpc]
+    private void ShowBossHealthUIClientRpc()
+    {
+        UIHealthBoss.SetActive(true);
+        warningBoss.SetActive(true);
+        warningBoss.SetActive(false);
+    }
+
+    public void HideBossHealthUI()
+    {
+        if (!IsServer)
+            return; // Chỉ Server mới có quyền gọi
+
+        UIHealthBoss.SetActive(false);
+        warningBoss.SetActive(false);
+        HideBossHealthUIClientRpc();
+    }
+
+    [ClientRpc]
+    private void HideBossHealthUIClientRpc()
+    {
+        if (!IsServer) // Server đã tự bật, chỉ client cần bật
+        {
+            warningBoss.SetActive(false);
+            UIHealthBoss.SetActive(false);
         }
     }
 }

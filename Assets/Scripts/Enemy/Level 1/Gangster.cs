@@ -38,6 +38,17 @@ public class Gangster : NetworkBehaviour
     private GangsterHealth gangsterHealth;
     private RockPool rockPool;
 
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     private void Start()
     {
@@ -136,7 +147,7 @@ public class Gangster : NetworkBehaviour
     {
         Debug.Log("Boss.spawn()");
         transform.position = spawnPosition;
-        // NetworkObject.Spawn(true);
+
         if (rb != null)
         {
             rb.Rigidbody2D.linearVelocity = Vector2.zero;
@@ -339,7 +350,7 @@ public class Gangster : NetworkBehaviour
             lastRockX = randomX;
 
             Vector2 rockPosition = new Vector2(randomX, 15f);
-            GameObject rock = rockPool.GetRock();
+            GameObject rock = rockPool.GetRock(rockPosition);
 
             rock.transform.position = rockPosition;
         }

@@ -145,6 +145,8 @@ public class GameManager : NetworkBehaviour
             Debug.Log("Loading SupplyScene");
             NetworkManager.Singleton.SceneManager.LoadScene("SupplyScene", LoadSceneMode.Single);
         }
+        // string bossScene = "Level 6";
+        // NetworkManager.Singleton.SceneManager.LoadScene(bossScene, LoadSceneMode.Single);
     }
 
     // Phương thức để lấy dữ liệu vũ khí của người chơi

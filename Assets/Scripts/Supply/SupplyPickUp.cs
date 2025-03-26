@@ -32,7 +32,6 @@ public class SupplyPickup : NetworkBehaviour
             ShowSupplyInfoClientRpc(playerId);
         }
     }
-
     [ClientRpc]
     private void ShowSupplyInfoClientRpc(ulong targetClientId)
     {

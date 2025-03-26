@@ -1,115 +1,123 @@
-﻿using System.Collections.Generic;
-using Unity.Netcode;
+﻿using Unity.Netcode;
 using UnityEngine;
 
 public class CoinPoolManager : NetworkBehaviour
 {
-    public NetworkObject coinPrefab;
-    public NetworkObject secondaryCoinPrefab;
+    public static CoinPoolManager Instance;
+
+    [Header("Coin Pool Settings")]
+    public GameObject coinPrefab;
+    public GameObject secondaryCoinPrefab;
     public int initialPoolSize = 10;
-
-    private Queue<NetworkObject> coinPool = new Queue<NetworkObject>();
-    private Queue<NetworkObject> secondaryCoinPool = new Queue<NetworkObject>();
-
-    public static CoinPoolManager Instance { get; private set; }
 
     private void Awake()
     {
-        if (Instance != null && Instance != this)
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
         {
             Destroy(gameObject);
-            return;
         }
-        Instance = this;
+        NetworkObjectPool.Singleton.RegisterPrefabInternal(coinPrefab, initialPoolSize);
+        NetworkObjectPool.Singleton.RegisterPrefabInternal(secondaryCoinPrefab, initialPoolSize);
     }
 
-    private void Start()
+    // public override void OnNetworkSpawn()
+    // {
+    //     if (IsServer)
+    //     {
+    //         // Đăng ký các prefab với NetworkObjectPool
+    //     }
+    // }
+
+    public NetworkObject GetCoinFromPool(Vector3 position, bool isSecondary)
     {
-        if (IsServer)
+        if (!IsServer)
         {
-            InitializePools();
+            Debug.LogWarning("Client tried to get coin from pool");
+            return null;
         }
-    }
-
-    private void InitializePools()
-    {
-        PopulatePool(initialPoolSize, coinPrefab, coinPool);
-        PopulatePool(initialPoolSize, secondaryCoinPrefab, secondaryCoinPool);
-    }
-
-    private void PopulatePool(int size, NetworkObject prefab, Queue<NetworkObject> pool)
-    {
-        for (int i = 0; i < size; i++)
+        else
         {
-            NetworkObject coin = Instantiate(prefab, transform);
-            coin.Spawn();
-            ReturnCoinToPool(coin);
-            Debug.Log("Spawn coin tu Pool: Coin " + i);
+            Debug.Log("Server RPC get coin from pool");
         }
-    }
 
-    public NetworkObject GetCoinFromPool(Vector3 position, bool isSecondary = false)
-    {
-        if (!IsServer || Instance == null)
+        GameObject prefab = isSecondary ? secondaryCoinPrefab : coinPrefab;
+        if (prefab == null)
         {
-            Debug.LogError("CoinPoolManager instance is null or not running on the server.");
+            Debug.LogError("Coin prefab is null!");
+            return null;
+        }
+        NetworkObject networkObject = NetworkObjectPool.Singleton.GetNetworkObject(
+            prefab,
+            position
+        );
+        GameObject obj = networkObject.gameObject;
+        obj.GetComponent<NetworkObject>().Spawn();
+        if (networkObject == null)
+        {
+            Debug.LogError("Failed to get coin from pool");
             return null;
         }
 
-        Queue<NetworkObject> targetPool = isSecondary ? secondaryCoinPool : coinPool;
-        NetworkObject prefab = isSecondary ? secondaryCoinPrefab : coinPrefab;
-
-        if (targetPool.Count > 0)
+        if (!networkObject.IsSpawned)
         {
-            NetworkObject coin = targetPool.Dequeue();
-            InitializeCoin(coin, position);
-            return coin;
+            networkObject.Spawn();
         }
-        return CreateNewCoin(prefab, position);
-    }
 
-    private NetworkObject CreateNewCoin(NetworkObject prefab, Vector3 position)
-    {
-        NetworkObject newCoin = Instantiate(prefab, position, Quaternion.identity);
-        newCoin.Spawn();
-        InitializeCoin(newCoin, position);
-        return newCoin;
-    }
+        // Kích hoạt các component
+        CoinsScript coinScript = networkObject.GetComponent<CoinsScript>();
+        if (coinScript != null)
+            coinScript.enabled = true;
 
-    private void InitializeCoin(NetworkObject coin, Vector3 position)
-    {
-        coin.transform.position = position;
-        NetworkCoin networkCoin = coin.GetComponent<NetworkCoin>();
-        if (networkCoin != null)
+        CircleCollider2D collider = networkObject.GetComponent<CircleCollider2D>();
+        if (collider != null)
+            collider.enabled = true;
+
+        Rigidbody2D rb = networkObject.GetComponent<Rigidbody2D>();
+        if (rb != null)
         {
-            networkCoin.IsActive.Value = true;
+            rb.bodyType = RigidbodyType2D.Dynamic;
+            rb.simulated = true;
+            rb.linearVelocity = Vector2.zero;
+            rb.gravityScale = 1;
         }
+
+        return networkObject;
     }
 
     public void ReturnCoinToPool(NetworkObject coin)
     {
-        if (!IsServer || coin == null)
-        {
-            Debug.LogError("Invalid attempt to return coin to pool.");
+        if (!IsServer)
             return;
+
+        // Vô hiệu hóa các component
+        CoinsScript coinScript = coin.GetComponent<CoinsScript>();
+        if (coinScript != null)
+            coinScript.enabled = false;
+
+        CircleCollider2D collider = coin.GetComponent<CircleCollider2D>();
+        if (collider != null)
+            collider.enabled = false;
+
+        Rigidbody2D rb = coin.GetComponent<Rigidbody2D>();
+        if (rb != null)
+        {
+            rb.bodyType = RigidbodyType2D.Kinematic;
+            rb.simulated = false;
+            rb.linearVelocity = Vector2.zero;
         }
 
-        NetworkCoin networkCoin = coin.GetComponent<NetworkCoin>();
-        if (networkCoin != null)
+        if (coin.IsSpawned)
         {
-            networkCoin.IsActive.Value = false;
+            coin.Despawn(false);
         }
 
-        coin.transform.SetParent(transform);
-        coin.transform.localPosition = Vector3.zero;
-
-        if (coin.CompareTag("Coin"))
-        {
-            coinPool.Enqueue(coin);
-        }
-        else if (coin.CompareTag("SecondaryCoin"))
-        {
-            secondaryCoinPool.Enqueue(coin);
-        }
+        NetworkObjectPool.Singleton.ReturnNetworkObject(
+            coin,
+            coin.CompareTag("Coin") ? coinPrefab : secondaryCoinPrefab
+        );
     }
 }
