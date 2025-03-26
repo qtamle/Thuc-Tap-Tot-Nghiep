@@ -1,7 +1,9 @@
 ﻿using System.Collections;
+using Unity.Netcode;
+using Unity.Netcode.Components;
 using UnityEngine;
 
-public class Drone : MonoBehaviour
+public class Drone : NetworkBehaviour
 {
     [Header("Move Settings")]
     public float moveSpeed;
@@ -19,7 +21,7 @@ public class Drone : MonoBehaviour
     private float nextShootTime;
 
     [Header("Raycast Settings")]
-    public LayerMask wallLayer; 
+    public LayerMask wallLayer;
     public float rayDistance = 5f;
 
     private bool initialRaycastUsed = false;
@@ -61,7 +63,12 @@ public class Drone : MonoBehaviour
     {
         if (!initialRaycastUsed)
         {
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right, rayDistance, wallLayer);
+            RaycastHit2D hit = Physics2D.Raycast(
+                transform.position,
+                Vector2.right,
+                rayDistance,
+                wallLayer
+            );
 
             if (hit.collider != null)
             {
@@ -78,7 +85,11 @@ public class Drone : MonoBehaviour
 
     void MoveToRandomTarget()
     {
-        transform.position = Vector2.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(
+            transform.position,
+            targetPosition,
+            moveSpeed * Time.deltaTime
+        );
 
         if (transform.position.x < targetPosition.x && !movingRight)
         {
@@ -145,11 +156,12 @@ public class Drone : MonoBehaviour
         foreach (Vector3 dir in directions)
         {
             GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
-            Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+            bullet.GetComponent<NetworkObject>().Spawn();
+            NetworkRigidbody2D rb = bullet.GetComponent<NetworkRigidbody2D>();
 
             if (rb != null)
             {
-                rb.linearVelocity = dir * bulletSpeed;
+                rb.Rigidbody2D.linearVelocity = dir * bulletSpeed;
             }
         }
     }
@@ -164,6 +176,9 @@ public class Drone : MonoBehaviour
 
         Gizmos.color = Color.blue;
         Vector2 direction = movingRight ? Vector2.right : Vector2.left;
-        Gizmos.DrawLine(transform.position, transform.position + (Vector3)(direction * rayDistance));
+        Gizmos.DrawLine(
+            transform.position,
+            transform.position + (Vector3)(direction * rayDistance)
+        );
     }
 }

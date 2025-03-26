@@ -42,13 +42,13 @@ EditorBuildSettings:
     path: Assets/Scenes/Level/Level 3.unity
     guid: 1b30af29fbe08d74abf1519dc8d08ac6
   - enabled: 1
-    path: Assets/Scenes/Level/Level 4.unity
+    path: Assets/Scenes/Level/Level Snake.unity
     guid: 2f9f33744825a1e4ebda9ab7b1e6ab79
   - enabled: 1
-    path: Assets/Scenes/Level/Level 5.unity
+    path: Assets/Scenes/Level/Level 4.unity
     guid: 22d7a77c485cb4a4e9d090e9c3841784
   - enabled: 1
-    path: Assets/Scenes/Level/Level 6.unity
+    path: Assets/Scenes/Level/Level 5.unity
     guid: 584e73fbe772d5a4c82a25cde8382579
   - enabled: 0
     path: Assets/Scenes/SupplyScene 1.unity

@@ -85,19 +85,14 @@ public class SupplyManager : NetworkBehaviour
         hasInitialized = false;
     }
 
-    // void Start()
-    // {
-    //     DontDestroyOnLoad(gameObject);
-    // }
-
     public override void OnNetworkSpawn()
     {
-        if (IsServer)
-        {
-            InitializeSlots();
-            Debug.Log("Server của Supply Manager được khởi động.");
-            InitializeNetworkSupplyList();
-        }
+        // if (IsServer)
+        // {
+        //     InitializeSlots();
+        //     Debug.Log("Server của Supply Manager được khởi động.");
+        //     InitializeNetworkSupplyList();
+        // }
     }
 
     public override void OnNetworkDespawn() { }
@@ -229,7 +224,7 @@ public class SupplyManager : NetworkBehaviour
         return supplyDataList.FirstOrDefault(s => s.supplyID == id);
     }
 
-    private void InitializeSlots()
+    public void InitializeSlots()
     {
         supplySlot1 = GameObject.FindGameObjectWithTag("Supply").transform;
         supplySlot2 = GameObject.FindGameObjectWithTag("Supply1").transform;

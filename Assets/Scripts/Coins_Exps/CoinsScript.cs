@@ -96,7 +96,7 @@ public class CoinsScript : NetworkBehaviour
         }
         else
         {
-            coinPoolManager.ReturnCoinToPool(GetComponent<NetworkObject>());
+            coinPoolManager.ReturnCoinToPool(gameObject.GetComponent<NetworkObject>());
         }
     }
 
@@ -192,7 +192,7 @@ public class CoinsScript : NetworkBehaviour
         rb.Rigidbody2D.bodyType = RigidbodyType2D.Kinematic;
         rb.Rigidbody2D.linearVelocity = Vector2.zero;
         // Trước mắt test để Stop coin vì lỗi Rơi tiền mà ko trigger với tag player để collection được
-        coinPoolManager.ReturnCoinToPool(GetComponent<NetworkObject>());
+        // coinPoolManager.ReturnCoinToPool(GetComponent<NetworkObject>());
     }
 
     private void BounceOffWall()

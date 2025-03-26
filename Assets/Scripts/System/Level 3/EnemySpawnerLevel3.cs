@@ -137,31 +137,27 @@ public class EnemySpawnerLevel3 : NetworkBehaviour, IEnemySpawner
 
     private IEnumerator HandleBossSpawn()
     {
-        if (!IsServer)
-            yield break;
-
         if (remain != null)
-        {
             remain.SetActive(false);
-        }
-
         if (warningBoss != null)
-        {
             warningBoss.SetActive(true);
-        }
 
         yield return new WaitForSeconds(3f);
 
         if (warningBoss != null)
-        {
             warningBoss.SetActive(false);
-        }
+        ShowBossHealthUI();
 
         if (bossLevel1 != null)
         {
-            bossLevel1.SetActive(true);
-            cyborg.Active();
-            bossLevel1.GetComponent<NetworkObject>().Spawn();
+            GameObject bossSpawned = Instantiate(
+                bossLevel1,
+                BossSpawnPostion.transform.position,
+                Quaternion.identity
+            );
+            bossSpawned.GetComponent<NetworkObject>().Spawn();
+            CyborgHealth.Instance.IntializeBossHealthServerRpc();
+            Cyborg.Instance.Active();
         }
 
         yield return new WaitForSeconds(0.5f);

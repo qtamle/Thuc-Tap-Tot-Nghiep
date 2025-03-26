@@ -49,8 +49,8 @@ public class ExperienceOrbPoolManager : NetworkBehaviour
         }
 
         // Kích hoạt object
-        GameObject obj = networkObject.gameObject;
-        obj.GetComponent<NetworkObject>().Spawn();
+        // GameObject obj = networkObject.gameObject;
+        // obj.GetComponent<NetworkObject>().Spawn();
 
         if (!networkObject.IsSpawned)
         {

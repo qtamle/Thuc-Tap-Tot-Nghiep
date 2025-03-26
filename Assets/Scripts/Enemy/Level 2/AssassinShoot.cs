@@ -1,7 +1,8 @@
 ﻿using System.Collections;
+using Unity.Netcode;
 using UnityEngine;
 
-public class AssassinShoot : MonoBehaviour
+public class AssassinShoot : NetworkBehaviour
 {
     [Header("Move Settings")]
     public float moveSpeed;
@@ -73,7 +74,12 @@ public class AssassinShoot : MonoBehaviour
     {
         if (!initialRaycastUsed)
         {
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right * (movingRight ? 1 : -1), 5f, wallLayer);
+            RaycastHit2D hit = Physics2D.Raycast(
+                transform.position,
+                Vector2.right * (movingRight ? 1 : -1),
+                5f,
+                wallLayer
+            );
 
             if (hit.collider != null)
             {
@@ -111,10 +117,20 @@ public class AssassinShoot : MonoBehaviour
     {
         if (bulletPrefabs != null && shootPoint != null && shootPointDown != null)
         {
-            bool hitGround = Physics2D.Raycast(raycastOrigin.position, Vector2.up, raycastDistance, groundLayer);
+            bool hitGround = Physics2D.Raycast(
+                raycastOrigin.position,
+                Vector2.up,
+                raycastDistance,
+                groundLayer
+            );
             Transform selectedShootPoint = hitGround ? shootPoint : shootPointDown;
 
-            GameObject bullet = Instantiate(bulletPrefabs, selectedShootPoint.position, Quaternion.identity);
+            GameObject bullet = Instantiate(
+                bulletPrefabs,
+                selectedShootPoint.position,
+                Quaternion.identity
+            );
+            bullet.GetComponent<NetworkObject>().Spawn();
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
 
             if (rb != null)
@@ -126,12 +142,12 @@ public class AssassinShoot : MonoBehaviour
 
     void ResumeMovement()
     {
-        moveSpeed = moveSpeed == 0 ? 1.5f : moveSpeed; 
+        moveSpeed = moveSpeed == 0 ? 1.5f : moveSpeed;
     }
 
     void SetNextShootTime()
     {
-        nextShootTime = Time.time + Random.Range(4f, 6f); 
+        nextShootTime = Time.time + Random.Range(4f, 6f);
     }
 
     private void OnDrawGizmosSelected()
@@ -151,13 +167,19 @@ public class AssassinShoot : MonoBehaviour
         if (raycastOrigin != null)
         {
             Gizmos.color = Color.blue;
-            Gizmos.DrawLine(raycastOrigin.position, raycastOrigin.position + Vector3.up * raycastDistance);
+            Gizmos.DrawLine(
+                raycastOrigin.position,
+                raycastOrigin.position + Vector3.up * raycastDistance
+            );
         }
 
         if (raycastOrigin != null)
         {
             Gizmos.color = Color.blue;
-            Gizmos.DrawLine(transform.position, transform.position + Vector3.right * 5f * (movingRight ? 1 : -1));
+            Gizmos.DrawLine(
+                transform.position,
+                transform.position + Vector3.right * 5f * (movingRight ? 1 : -1)
+            );
         }
     }
 

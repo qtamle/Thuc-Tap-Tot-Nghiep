@@ -73,7 +73,7 @@ public class EnemyManager : NetworkBehaviour
             NetworkObject netObj = enemy.GetComponent<NetworkObject>();
             if (netObj != null)
             {
-                // netObj.Despawn(true); // Hủy trên tất cả client
+                netObj.Despawn(true); // Hủy trên tất cả client
             }
             else
             {

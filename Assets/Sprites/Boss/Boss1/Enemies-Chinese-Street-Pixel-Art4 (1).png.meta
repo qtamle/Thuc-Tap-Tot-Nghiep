@@ -1,0 +1,754 @@
+fileFormatVersion: 2
+guid: f7c59947861a8d14386c5937b8a051c9
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3674148083790183324
+    second: Enemies-Chinese-Street-Pixel-Art4 (1)_0
+  - first:
+      213: -881001750409248372
+    second: Enemies-Chinese-Street-Pixel-Art4 (1)_1
+  - first:
+      213: -532809503126969384
+    second: Enemies-Chinese-Street-Pixel-Art4 (1)_2
+  - first:
+      213: -257256078290118768
+    second: Enemies-Chinese-Street-Pixel-Art4 (1)_3
+  - first:
+      213: -3481786235499321196
+    second: Enemies-Chinese-Street-Pixel-Art4 (1)_4
+  - first:
+      213: -5799329635127522856
+    second: Enemies-Chinese-Street-Pixel-Art4 (1)_5
+  - first:
+      213: -2710028278359043320
+    second: Enemies-Chinese-Street-Pixel-Art4 (1)_6
+  - first:
+      213: 569169329679627020
+    second: Enemies-Chinese-Street-Pixel-Art4 (1)_7
+  - first:
+      213: -8112986532310672455
+    second: Enemies-Chinese-Street-Pixel-Art4 (1)_8
+  - first:
+      213: -538577351902670681
+    second: Enemies-Chinese-Street-Pixel-Art4 (1)_9
+  - first:
+      213: 8700516567198600596
+    second: Enemies-Chinese-Street-Pixel-Art4 (1)_10
+  - first:
+      213: -4408625795616591847
+    second: Enemies-Chinese-Street-Pixel-Art4 (1)_11
+  - first:
+      213: -3007910077208163706
+    second: Enemies-Chinese-Street-Pixel-Art4 (1)_12
+  - first:
+      213: -411127302711856898
+    second: Enemies-Chinese-Street-Pixel-Art4 (1)_13
+  - first:
+      213: -2827967305033006568
+    second: Enemies-Chinese-Street-Pixel-Art4 (1)_14
+  - first:
+      213: 3456042888414950411
+    second: Enemies-Chinese-Street-Pixel-Art4 (1)_15
+  - first:
+      213: 6374434951108012306
+    second: Enemies-Chinese-Street-Pixel-Art4 (1)_16
+  - first:
+      213: 310498668198985191
+    second: Enemies-Chinese-Street-Pixel-Art4 (1)_17
+  - first:
+      213: 7825524861589830875
+    second: Enemies-Chinese-Street-Pixel-Art4 (1)_18
+  - first:
+      213: -3786297189091476837
+    second: Enemies-Chinese-Street-Pixel-Art4 (1)_19
+  - first:
+      213: 1640587639361443164
+    second: Enemies-Chinese-Street-Pixel-Art4 (1)_20
+  - first:
+      213: -5587835344510918155
+    second: Enemies-Chinese-Street-Pixel-Art4 (1)_21
+  - first:
+      213: 7381773254806877031
+    second: Enemies-Chinese-Street-Pixel-Art4 (1)_22
+  - first:
+      213: 1524513912281367560
+    second: Enemies-Chinese-Street-Pixel-Art4 (1)_23
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 180
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Enemies-Chinese-Street-Pixel-Art4 (1)_0
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 839
+        width: 109
+        height: 164
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4640185c8cdc20dc0800000000000000
+      internalID: -3674148083790183324
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemies-Chinese-Street-Pixel-Art4 (1)_1
+      rect:
+        serializedVersion: 2
+        x: 245
+        y: 837
+        width: 104
+        height: 165
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c810c54639d06c3f0800000000000000
+      internalID: -881001750409248372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemies-Chinese-Street-Pixel-Art4 (1)_2
+      rect:
+        serializedVersion: 2
+        x: 445
+        y: 839
+        width: 105
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d32a2174941b98f0800000000000000
+      internalID: -532809503126969384
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemies-Chinese-Street-Pixel-Art4 (1)_3
+      rect:
+        serializedVersion: 2
+        x: 673
+        y: 838
+        width: 134
+        height: 164
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0971535b5fa0e6cf0800000000000000
+      internalID: -257256078290118768
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemies-Chinese-Street-Pixel-Art4 (1)_4
+      rect:
+        serializedVersion: 2
+        x: 883
+        y: 838
+        width: 105
+        height: 159
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 498e739bdd53eafc0800000000000000
+      internalID: -3481786235499321196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemies-Chinese-Street-Pixel-Art4 (1)_5
+      rect:
+        serializedVersion: 2
+        x: 1093
+        y: 837
+        width: 97
+        height: 161
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d904da4c64a48fa0800000000000000
+      internalID: -5799329635127522856
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemies-Chinese-Street-Pixel-Art4 (1)_6
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 629
+        width: 109
+        height: 163
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8035521a3ab046ad0800000000000000
+      internalID: -2710028278359043320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemies-Chinese-Street-Pixel-Art4 (1)_7
+      rect:
+        serializedVersion: 2
+        x: 252
+        y: 629
+        width: 149
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c03f9906d7816e700800000000000000
+      internalID: 569169329679627020
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemies-Chinese-Street-Pixel-Art4 (1)_8
+      rect:
+        serializedVersion: 2
+        x: 461
+        y: 629
+        width: 163
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9bb181abbb1e86f80800000000000000
+      internalID: -8112986532310672455
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemies-Chinese-Street-Pixel-Art4 (1)_9
+      rect:
+        serializedVersion: 2
+        x: 673
+        y: 629
+        width: 167
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a055cf70c69688f0800000000000000
+      internalID: -538577351902670681
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemies-Chinese-Street-Pixel-Art4 (1)_10
+      rect:
+        serializedVersion: 2
+        x: 883
+        y: 629
+        width: 171
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 49d064678b17eb870800000000000000
+      internalID: 8700516567198600596
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemies-Chinese-Street-Pixel-Art4 (1)_11
+      rect:
+        serializedVersion: 2
+        x: 1093
+        y: 629
+        width: 164
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 91036a0623a61d2c0800000000000000
+      internalID: -4408625795616591847
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemies-Chinese-Street-Pixel-Art4 (1)_12
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 420
+        width: 109
+        height: 162
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 68a80bba8b1c146d0800000000000000
+      internalID: -3007910077208163706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemies-Chinese-Street-Pixel-Art4 (1)_13
+      rect:
+        serializedVersion: 2
+        x: 225
+        y: 420
+        width: 115
+        height: 162
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef0356c75e16b4af0800000000000000
+      internalID: -411127302711856898
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemies-Chinese-Street-Pixel-Art4 (1)_14
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 210
+        width: 109
+        height: 161
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 812c61328ba01c8d0800000000000000
+      internalID: -2827967305033006568
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemies-Chinese-Street-Pixel-Art4 (1)_15
+      rect:
+        serializedVersion: 2
+        x: 230
+        y: 209
+        width: 110
+        height: 162
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b04fc7432b456ff20800000000000000
+      internalID: 3456042888414950411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemies-Chinese-Street-Pixel-Art4 (1)_16
+      rect:
+        serializedVersion: 2
+        x: 445
+        y: 209
+        width: 106
+        height: 162
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 219a0a890da867850800000000000000
+      internalID: 6374434951108012306
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemies-Chinese-Street-Pixel-Art4 (1)_17
+      rect:
+        serializedVersion: 2
+        x: 655
+        y: 209
+        width: 105
+        height: 162
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ed7b35c4ec1f4400800000000000000
+      internalID: 310498668198985191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemies-Chinese-Street-Pixel-Art4 (1)_18
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 0
+        width: 97
+        height: 152
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bdcbc047669d99c60800000000000000
+      internalID: 7825524861589830875
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemies-Chinese-Street-Pixel-Art4 (1)_19
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 0
+        width: 65
+        height: 148
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b9a742664ce547bc0800000000000000
+      internalID: -3786297189091476837
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemies-Chinese-Street-Pixel-Art4 (1)_20
+      rect:
+        serializedVersion: 2
+        x: 453
+        y: 0
+        width: 110
+        height: 148
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c55190b04c984c610800000000000000
+      internalID: 1640587639361443164
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemies-Chinese-Street-Pixel-Art4 (1)_21
+      rect:
+        serializedVersion: 2
+        x: 660
+        y: 0
+        width: 140
+        height: 152
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f1ed0b1c550472b0800000000000000
+      internalID: -5587835344510918155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemies-Chinese-Street-Pixel-Art4 (1)_22
+      rect:
+        serializedVersion: 2
+        x: 866
+        y: 0
+        width: 137
+        height: 148
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7633e393aa3517660800000000000000
+      internalID: 7381773254806877031
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemies-Chinese-Street-Pixel-Art4 (1)_23
+      rect:
+        serializedVersion: 2
+        x: 1084
+        y: 0
+        width: 122
+        height: 148
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8040ca47359282510800000000000000
+      internalID: 1524513912281367560
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Enemies-Chinese-Street-Pixel-Art4 (1)_0: -3674148083790183324
+      Enemies-Chinese-Street-Pixel-Art4 (1)_1: -881001750409248372
+      Enemies-Chinese-Street-Pixel-Art4 (1)_10: 8700516567198600596
+      Enemies-Chinese-Street-Pixel-Art4 (1)_11: -4408625795616591847
+      Enemies-Chinese-Street-Pixel-Art4 (1)_12: -3007910077208163706
+      Enemies-Chinese-Street-Pixel-Art4 (1)_13: -411127302711856898
+      Enemies-Chinese-Street-Pixel-Art4 (1)_14: -2827967305033006568
+      Enemies-Chinese-Street-Pixel-Art4 (1)_15: 3456042888414950411
+      Enemies-Chinese-Street-Pixel-Art4 (1)_16: 6374434951108012306
+      Enemies-Chinese-Street-Pixel-Art4 (1)_17: 310498668198985191
+      Enemies-Chinese-Street-Pixel-Art4 (1)_18: 7825524861589830875
+      Enemies-Chinese-Street-Pixel-Art4 (1)_19: -3786297189091476837
+      Enemies-Chinese-Street-Pixel-Art4 (1)_2: -532809503126969384
+      Enemies-Chinese-Street-Pixel-Art4 (1)_20: 1640587639361443164
+      Enemies-Chinese-Street-Pixel-Art4 (1)_21: -5587835344510918155
+      Enemies-Chinese-Street-Pixel-Art4 (1)_22: 7381773254806877031
+      Enemies-Chinese-Street-Pixel-Art4 (1)_23: 1524513912281367560
+      Enemies-Chinese-Street-Pixel-Art4 (1)_3: -257256078290118768
+      Enemies-Chinese-Street-Pixel-Art4 (1)_4: -3481786235499321196
+      Enemies-Chinese-Street-Pixel-Art4 (1)_5: -5799329635127522856
+      Enemies-Chinese-Street-Pixel-Art4 (1)_6: -2710028278359043320
+      Enemies-Chinese-Street-Pixel-Art4 (1)_7: 569169329679627020
+      Enemies-Chinese-Street-Pixel-Art4 (1)_8: -8112986532310672455
+      Enemies-Chinese-Street-Pixel-Art4 (1)_9: -538577351902670681
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

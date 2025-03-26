@@ -122,17 +122,17 @@ public class GameManager : NetworkBehaviour
             {
                 SupplyManager.Instance.DestroySpawnedSupplies();
             }
-            if (currentBoss.Value == 6)
+            if (currentBoss.Value == 5)
             {
                 isSupplyScene.Value = false;
             }
-            if (currentBoss.Value <= 6)
+            if (currentBoss.Value <= 5)
             {
                 string bossScene = "Level " + currentBoss.Value;
                 Debug.Log($"Loading {bossScene}");
                 NetworkManager.Singleton.SceneManager.LoadScene(bossScene, LoadSceneMode.Single);
             }
-            if (currentBoss.Value > 6)
+            if (currentBoss.Value > 5)
             {
                 Debug.Log("Loading SummaryScene");
                 ResetGame();
@@ -143,10 +143,24 @@ public class GameManager : NetworkBehaviour
         {
             isSupplyScene.Value = false;
             Debug.Log("Loading SupplyScene");
+
+            NetworkManager.Singleton.SceneManager.OnLoadComplete += OnSupplySceneLoaded;
             NetworkManager.Singleton.SceneManager.LoadScene("SupplyScene", LoadSceneMode.Single);
         }
-        // string bossScene = "Level 6";
+        // string bossScene = "Level 3";
         // NetworkManager.Singleton.SceneManager.LoadScene(bossScene, LoadSceneMode.Single);
+    }
+
+    private void OnSupplySceneLoaded(ulong clientId, string sceneName, LoadSceneMode mode)
+    {
+        if (sceneName == "SupplyScene")
+        {
+            Debug.Log("SupplyScene Loaded! Initializing slots...");
+            SupplyManager.Instance.InitializeSlots();
+
+            // Hủy đăng ký sự kiện để tránh bị gọi nhiều lần
+            NetworkManager.Singleton.SceneManager.OnLoadComplete -= OnSupplySceneLoaded;
+        }
     }
 
     // Phương thức để lấy dữ liệu vũ khí của người chơi

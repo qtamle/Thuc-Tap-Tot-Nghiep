@@ -53,7 +53,7 @@ public class EnemySpawnerLevel2 : NetworkBehaviour, IEnemySpawner
             return; // Chỉ server mới spawn quái
         else
         {
-            EnemyManager.Instance.killTarget.Value = 2;
+            EnemyManager.Instance.killTarget.Value = 5;
             // KillCounterUI.Instance.CounterUI();
             BossSpawnPosition = GameObject.FindWithTag("BossSpawner");
 
@@ -170,7 +170,7 @@ public class EnemySpawnerLevel2 : NetworkBehaviour, IEnemySpawner
 
         if (warningBoss != null)
             warningBoss.SetActive(false);
-
+        ShowBossHealthUI();
         if (bossLevel1 != null)
         {
             GameObject bossSpawned = Instantiate(
@@ -179,7 +179,7 @@ public class EnemySpawnerLevel2 : NetworkBehaviour, IEnemySpawner
                 Quaternion.identity
             );
             bossSpawned.GetComponent<NetworkObject>().Spawn(true);
-
+            AssassinHealth.Instance.IntializeBossHealthServerRpc();
             AssassinBossSkill.Instance.Active();
         }
 

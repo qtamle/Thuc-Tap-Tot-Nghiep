@@ -119,29 +119,29 @@ public class AssassinBossSkill : NetworkBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            ThrowTraps(4);
-        }
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            TeleportToPlayer();
-        }
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            ThrowBombAtPlayer();
-        }
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            CloneAndDash();
-        }
+        // if (Input.GetKeyDown(KeyCode.Q))
+        // {
+        //     ThrowTraps(4);
+        // }
+        // if (Input.GetKeyDown(KeyCode.W))
+        // {
+        //     TeleportToPlayer();
+        // }
+        // if (Input.GetKeyDown(KeyCode.E))
+        // {
+        //     ThrowBombAtPlayer();
+        // }
+        // if (Input.GetKeyDown(KeyCode.R))
+        // {
+        //     CloneAndDash();
+        // }
     }
 
     public void Active()
     {
         gameObject.SetActive(true);
 
-        // StartCoroutine(SkillActive());
+        StartCoroutine(SkillActive());
     }
 
     IEnumerator SkillActive()

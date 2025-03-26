@@ -40,7 +40,7 @@ public class EnemySpawnerLevel5 : NetworkBehaviour, IEnemySpawner
             return; // Chỉ server mới spawn quái
         else
         {
-            // EnemyManager.Instance.killTarget.Value = 2;
+            EnemyManager.Instance.killTarget.Value = 2;
             // KillCounterUI.Instance.CounterUI();
             BossSpawnPostion = GameObject.FindWithTag("BossSpawner");
 
@@ -147,26 +147,26 @@ public class EnemySpawnerLevel5 : NetworkBehaviour, IEnemySpawner
     private IEnumerator HandleBossSpawn()
     {
         if (remain != null)
-        {
             remain.SetActive(false);
-        }
-
         if (warningBoss != null)
-        {
             warningBoss.SetActive(true);
-        }
 
         yield return new WaitForSeconds(3f);
 
         if (warningBoss != null)
-        {
             warningBoss.SetActive(false);
-        }
+        ShowBossHealthUI();
 
         if (bossLevel1 != null)
         {
-            bossLevel1.SetActive(true);
-            skullBoss.Active();
+            GameObject bossSpawned = Instantiate(
+                bossLevel1,
+                BossSpawnPostion.transform.position,
+                Quaternion.identity
+            );
+            bossSpawned.GetComponent<NetworkObject>().Spawn();
+            Boss5Health.Instance.IntializeBossHealthServerRpc();
+            Boss5.Instance.Active();
         }
 
         yield return new WaitForSeconds(0.5f);

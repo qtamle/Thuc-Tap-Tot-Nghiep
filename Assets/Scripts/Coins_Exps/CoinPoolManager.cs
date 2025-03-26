@@ -55,7 +55,7 @@ public class CoinPoolManager : NetworkBehaviour
             position
         );
         GameObject obj = networkObject.gameObject;
-        obj.GetComponent<NetworkObject>().Spawn();
+        // obj.GetComponent<NetworkObject>().Spawn();
         if (networkObject == null)
         {
             Debug.LogError("Failed to get coin from pool");
