@@ -1048,7 +1048,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.89, y: 0}
+  m_AnchoredPosition: {x: 0.8899994, y: 0}
   m_SizeDelta: {x: -29.98, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &255237094
@@ -2198,6 +2198,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   username: {fileID: 288771300}
   password: {fileID: 1270888789}
+  usernameSignUp: {fileID: 1617972428}
+  passwordSignUp: {fileID: 2062488413}
   errorMessageText: {fileID: 969473341}
 --- !u!4 &530299294
 Transform:
@@ -7091,7 +7093,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 2.06, y: -0.5}
+  m_AnchoredPosition: {x: 2.0599976, y: -0.5}
   m_SizeDelta: {x: -53.51, y: -13}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1644686876
