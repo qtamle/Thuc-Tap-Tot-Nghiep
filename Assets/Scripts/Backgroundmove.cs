@@ -6,7 +6,7 @@ public class Backgroundmove : MonoBehaviour
     float distance;
 
     [Range(0f,0.5f)]
-    public float speed=0.2f;
+    public float speed=0.1f;
     void Start()
     {
         mat = GetComponent<Renderer>().material;
