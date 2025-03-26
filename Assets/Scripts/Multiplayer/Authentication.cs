@@ -3,12 +3,16 @@ using TMPro;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Authentication : MonoBehaviour
 {
     public static Authentication Instance { get; private set; }
     public TMP_InputField username;
     public TMP_InputField password;
+
+     public TMP_InputField usernameSignUp;
+    public TMP_InputField passwordSignUp;
 
     public TMP_Text errorMessageText;
 
@@ -44,13 +48,13 @@ public class Authentication : MonoBehaviour
 
     public void OnSignUpClicked()
     {
-        if (string.IsNullOrEmpty(username.text) || string.IsNullOrEmpty(password.text))
+        if (string.IsNullOrEmpty(usernameSignUp.text) || string.IsNullOrEmpty(passwordSignUp.text))
         {
             Debug.LogError("Username or Password is empty!");
             return;
         }
 
-        _ = SignUpWithUsernamePasswordAsync(username.text, password.text);
+        _ = SignUpWithUsernamePasswordAsync(usernameSignUp.text, passwordSignUp.text);
 
         CheckPlayerId();
     }
@@ -156,6 +160,7 @@ public class Authentication : MonoBehaviour
                 password
             );
             Debug.Log("SignUp is successful.");
+            LoadShopOnlineScene();
         }
         catch (AuthenticationException ex)
         {
@@ -181,6 +186,7 @@ public class Authentication : MonoBehaviour
             );
             CheckPlayerId();
             Debug.Log("SignIn is successful.");
+            LoadShopOnlineScene();
         }
         catch (AuthenticationException ex)
         {
@@ -236,5 +242,9 @@ public class Authentication : MonoBehaviour
             // Notify the player with the proper error message
             Debug.LogException(ex);
         }
+    }
+    private void LoadShopOnlineScene()
+    {
+        SceneManager.LoadScene("Shop_Online");
     }
 }
