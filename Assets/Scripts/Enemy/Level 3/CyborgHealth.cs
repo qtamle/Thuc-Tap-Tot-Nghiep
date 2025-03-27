@@ -168,6 +168,7 @@ public class CyborgHealth : NetworkBehaviour, DamageInterface
     private void Die()
     {
         Debug.Log("Boss bi tieu diet");
+        gameObject.GetComponent<NetworkObject>().Despawn(true);
         StartCoroutine(OnBossDeath());
     }
 

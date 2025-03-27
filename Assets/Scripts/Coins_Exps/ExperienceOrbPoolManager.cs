@@ -80,9 +80,15 @@ public class ExperienceOrbPoolManager : NetworkBehaviour
 
     public void ReturnOrbToPool(NetworkObject orb)
     {
-        if (!IsServer)
+        if (!IsServer || orb == null || !orb.IsSpawned)
             return;
 
+        // Check if the orb is already being returned
+        if (orb.TryGetComponent<ExperienceScript>(out var Exp) && !Exp.enabled)
+        {
+            // Already being returned
+            return;
+        }
         // Vô hiệu hóa các component
         ExperienceScript experienceScript = orb.GetComponent<ExperienceScript>();
         if (experienceScript != null)

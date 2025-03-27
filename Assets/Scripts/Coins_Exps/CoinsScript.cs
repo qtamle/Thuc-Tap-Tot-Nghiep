@@ -6,9 +6,16 @@ using UnityEngine.SceneManagement;
 
 public class CoinsScript : NetworkBehaviour
 {
+    // Thêm biến kiểm tra trạng thái
+    public bool isReturnedToPool = false;
+
+    // Thêm property để kiểm tra từ xa
+    public bool IsCollected => !enabled;
+
     [Header("Layer")]
     public LayerMask groundLayer;
     public LayerMask wallLayer;
+
     private NetworkRigidbody2D rb;
 
     [Header("Coin Type")]
@@ -96,7 +103,8 @@ public class CoinsScript : NetworkBehaviour
         }
         else
         {
-            coinPoolManager.ReturnCoinToPool(gameObject.GetComponent<NetworkObject>());
+            isReturnedToPool = true;
+            CollectCoin();
         }
     }
 
@@ -108,15 +116,23 @@ public class CoinsScript : NetworkBehaviour
         }
     }
 
+    [ServerRpc(RequireOwnership = false)]
+    public void CollectCoinServerRpc()
+    {
+        if (IsCollected)
+            return;
+
+        CollectCoin();
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!IsServer)
             return;
-        Debug.Log("Ontrigger 2D cua CoinScript");
+
         if (collision.CompareTag("FinalFloor"))
         {
             StopCoin();
-            return;
         }
 
         if ((groundLayer.value & (1 << collision.gameObject.layer)) > 0)
@@ -132,51 +148,11 @@ public class CoinsScript : NetworkBehaviour
             }
         }
 
-        if (collision.CompareTag("Player"))
-        {
-            CollectCoin();
-            // RequestCollectCoinServerRpc();
-        }
-
         if ((wallLayer.value & (1 << collision.gameObject.layer)) > 0)
         {
             BounceOffWall();
         }
     }
-
-    // [ServerRpc(RequireOwnership = false)]
-    // private void RequestCollectCoinServerRpc()
-    // {
-    //     if (isCollected.Value)
-    //         return;
-
-    //     // Đánh dấu đã thu thập
-    //     isCollected.Value = true;
-    //     CollectCoinClientRpc();
-    // }
-
-    // [ClientRpc]
-    // private void CollectCoinClientRpc()
-    // {
-    //     // Client nhận thông báo từ server
-    //     if (IsServer)
-    //         return;
-
-    //     Debug.Log("Client received collection confirmation");
-    //     HandleClientSideCollection();
-    // }
-
-    // private void HandleClientSideCollection()
-    // {
-    //     // Ẩn coin ngay lập tức trên mọi client
-    //     gameObject.SetActive(false);
-
-    //     // Cập nhật UI/effect cục bộ
-    //     if (IsOwner)
-    //     {
-    //         coinsManager.AddCoins(isCoinType1 ? 1 : 0, isCoinType2 ? 1 : 0);
-    //     }
-    // }
 
     private void BounceOffGround()
     {
@@ -193,6 +169,7 @@ public class CoinsScript : NetworkBehaviour
         rb.Rigidbody2D.linearVelocity = Vector2.zero;
         // Trước mắt test để Stop coin vì lỗi Rơi tiền mà ko trigger với tag player để collection được
         // coinPoolManager.ReturnCoinToPool(GetComponent<NetworkObject>());
+        CollectCoin();
     }
 
     private void BounceOffWall()
@@ -205,6 +182,8 @@ public class CoinsScript : NetworkBehaviour
 
     public void CollectCoin()
     {
+        isReturnedToPool = true;
+
         if (coinsManager != null)
         {
             if (isCoinType1)
@@ -221,6 +200,7 @@ public class CoinsScript : NetworkBehaviour
             Debug.LogError("CoinsManager không tồn tại.");
         }
 
+        isReturnedToPool = false;
         coinPoolManager.ReturnCoinToPool(GetComponent<NetworkObject>());
     }
 

@@ -32,8 +32,7 @@ public class NetworkCoin : NetworkBehaviour
         gameObject.SetActive(active);
         if (coinScript)
             coinScript.enabled = active;
-        if (collider)
-            collider.enabled = active;
+        if (collider)            collider.enabled = active;
         // if (rb)
         // {
         //     rb.simulated = active;

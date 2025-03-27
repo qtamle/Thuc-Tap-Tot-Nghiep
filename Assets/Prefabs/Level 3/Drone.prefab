@@ -153,6 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab464c8171e6f1241a2bc343e30d98b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   moveSpeed: 1.2
   xMoveRange: {x: -4.2, y: 4.2}
   yMoveRange: {x: 4.49, y: -4.66}

@@ -16,8 +16,8 @@ GameObject:
   - component: {fileID: 8511434895146004527}
   - component: {fileID: 7123294602840504747}
   - component: {fileID: 6041951061316013030}
-  - component: {fileID: 2437334282400954424}
-  - component: {fileID: 2754305607886654016}
+  - component: {fileID: 1159729837581428499}
+  - component: {fileID: -3518507305825487163}
   m_Layer: 12
   m_Name: Gangster
   m_TagString: Untagged
@@ -293,7 +293,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
---- !u!114 &2437334282400954424
+--- !u!114 &1159729837581428499
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -316,9 +316,9 @@ MonoBehaviour:
   SyncRotAngleX: 1
   SyncRotAngleY: 1
   SyncRotAngleZ: 1
-  SyncScaleX: 1
-  SyncScaleY: 1
-  SyncScaleZ: 1
+  SyncScaleX: 0
+  SyncScaleY: 0
+  SyncScaleZ: 0
   PositionThreshold: 0.001
   RotAngleThreshold: 0.01
   ScaleThreshold: 0.01
@@ -329,7 +329,7 @@ MonoBehaviour:
   SwitchTransformSpaceWhenParented: 0
   Interpolate: 1
   SlerpPosition: 0
---- !u!114 &2754305607886654016
+--- !u!114 &-3518507305825487163
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

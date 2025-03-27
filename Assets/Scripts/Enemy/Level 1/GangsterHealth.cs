@@ -10,7 +10,7 @@ public class GangsterHealth : NetworkBehaviour, DamageInterface
 
     [Header("Health Settings")]
     private int maxHealth = 3;
-    public NetworkVariable<int> currentHealth = new NetworkVariable<int>();
+    public NetworkVariable<int> currentHealth = new NetworkVariable<int>(3);
     private NetworkVariable<bool> isStunned = new NetworkVariable<bool>(false);
     private NetworkVariable<bool> canBeDamaged = new NetworkVariable<bool>(false);
 

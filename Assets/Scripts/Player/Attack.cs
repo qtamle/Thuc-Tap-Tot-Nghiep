@@ -53,6 +53,11 @@ public class Attack : NetworkBehaviour
     private WeaponInfo weaponInfo;
     private BouncingSawLauncher bouncingSaw;
 
+    private string playerTag = "Player";
+    private string coinTag = "Coin";
+
+    private Transform playerTransform;
+
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -65,11 +70,14 @@ public class Attack : NetworkBehaviour
 
     private void Start()
     {
+        FindPlayer();
         OnSceneLoaded(SceneManager.GetActiveScene(), LoadSceneMode.Single);
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        FindPlayer();
+
         coinPoolManager = FindFirstObjectByType<CoinPoolManager>();
         orbPoolManager = FindFirstObjectByType<ExperienceOrbPoolManager>();
         coinsManager = UnityEngine.Object.FindFirstObjectByType<CoinsManager>();
@@ -372,22 +380,6 @@ public class Attack : NetworkBehaviour
         isAttackBoss = false;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Coin"))
-        {
-            CoinsScript coinScript = collision.GetComponent<CoinsScript>();
-            if (coinScript != null)
-            {
-                coinScript.CollectCoin();
-            }
-            else
-            {
-                Debug.LogWarning("CoinsScript not found on collided object.");
-            }
-        }
-    }
-
     [ServerRpc(RequireOwnership = false)]
     private void AttackBossServerRpc(NetworkObjectReference bossReference)
     {
@@ -421,6 +413,41 @@ public class Attack : NetworkBehaviour
         else
         {
             Debug.LogError("[Server] Failed to retrieve NetworkObject from reference!");
+        }
+    }
+
+    private void FindPlayer()
+    {
+        GameObject player = GameObject.FindGameObjectWithTag(playerTag);
+        if (player != null)
+        {
+            playerTransform = player.transform;
+            Debug.Log("Player found in scene: " + player.name);
+        }
+        else
+        {
+            Debug.LogError("Player not found! Make sure the Player has the correct tag.");
+
+            int playerLayer = LayerMask.NameToLayer("Player");
+            if (playerLayer != -1)
+            {
+                GameObject[] objectsInLayer = FindObjectsOfType<GameObject>();
+                foreach (GameObject obj in objectsInLayer)
+                {
+                    if (obj.layer == playerLayer)
+                    {
+                        playerTransform = obj.transform;
+                        Debug.Log($"Player found using layer: {obj.name}");
+                        break;
+                    }
+                }
+            }
+            if (playerTransform == null)
+            {
+                Debug.LogError(
+                    "Player not found! Make sure the Player has the correct tag or layer."
+                );
+            }
         }
     }
 
@@ -482,7 +509,63 @@ public class Attack : NetworkBehaviour
             if (coinScript != null)
             {
                 coinScript.SetCoinType(!isSecondary, isSecondary);
+                // StartCoroutine(HookCoinsContinuously());
             }
+        }
+    }
+
+    private IEnumerator HookCoinsContinuously()
+    {
+        while (true)
+        {
+            GameObject[] allCoins = GameObject.FindGameObjectsWithTag(coinTag);
+            foreach (GameObject coin in allCoins)
+            {
+                StartCoroutine(MoveCoinToPlayer(coin));
+            }
+            yield return new WaitForSeconds(3f);
+        }
+    }
+
+    private IEnumerator MoveCoinToPlayer(GameObject coin)
+    {
+        Rigidbody2D coinRb = coin.GetComponent<Rigidbody2D>();
+        if (coinRb != null)
+        {
+            if (coinRb.bodyType == RigidbodyType2D.Kinematic)
+            {
+                coinRb.bodyType = RigidbodyType2D.Kinematic;
+                coinRb.gravityScale = 0f;
+            }
+
+            while (coin != null && gameObject.transform != null)
+            {
+                Debug.Log(
+                    $"Player Position: {gameObject.transform.position}, Coin Position: {coin.transform.position}"
+                );
+
+                coin.transform.position = Vector3.MoveTowards(
+                    coin.transform.position,
+                    gameObject.transform.position,
+                    Time.deltaTime * 10f
+                );
+
+                if (Vector3.Distance(coin.transform.position, gameObject.transform.position) < 0.5f)
+                {
+                    CoinsScript coinScript = coin.GetComponent<CoinsScript>();
+                    if (coinScript != null)
+                    {
+                        coinScript.CollectCoin();
+                    }
+                    yield break;
+                }
+
+                yield return null;
+            }
+        }
+        else
+        {
+            Debug.LogWarning($"GameObject {coin.name} không có Rigidbody2D!");
         }
     }
 

@@ -93,15 +93,23 @@ public class CoinPoolManager : NetworkBehaviour
         if (!IsServer)
             return;
 
+        // Kiểm tra null và đã được spawn
+        if (coin == null || !coin.IsSpawned)
+            return;
         // Vô hiệu hóa các component
         CoinsScript coinScript = coin.GetComponent<CoinsScript>();
         if (coinScript != null)
-            coinScript.enabled = false;
-
+        {
+            if (coinScript.enabled) // Chỉ disable nếu đang enabled
+            {
+                coinScript.enabled = false;
+            }
+        }
         CircleCollider2D collider = coin.GetComponent<CircleCollider2D>();
-        if (collider != null)
+        if (collider != null && collider.enabled)
+        {
             collider.enabled = false;
-
+        }
         Rigidbody2D rb = coin.GetComponent<Rigidbody2D>();
         if (rb != null)
         {
@@ -110,14 +118,28 @@ public class CoinPoolManager : NetworkBehaviour
             rb.linearVelocity = Vector2.zero;
         }
 
-        if (coin.IsSpawned)
+        // Despawn trước khi trả về pool
+        coin.Despawn(false);
+
+        // Kiểm tra prefab hợp lệ
+        GameObject prefab = null;
+        if (coin.TryGetComponent<CoinsScript>(out var script))
         {
-            coin.Despawn(false);
+            prefab = script.isCoinType1 ? coinPrefab : secondaryCoinPrefab;
+        }
+        else
+        {
+            prefab = coin.CompareTag("Coin") ? coinPrefab : secondaryCoinPrefab;
         }
 
-        NetworkObjectPool.Singleton.ReturnNetworkObject(
-            coin,
-            coin.CompareTag("Coin") ? coinPrefab : secondaryCoinPrefab
-        );
+        if (prefab != null && NetworkObjectPool.Singleton != null)
+        {
+            NetworkObjectPool.Singleton.ReturnNetworkObject(coin, prefab);
+        }
+        else
+        {
+            Debug.LogError("Không thể trả coin về pool");
+            Destroy(coin.gameObject);
+        }
     }
 }

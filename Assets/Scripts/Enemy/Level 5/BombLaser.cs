@@ -38,7 +38,7 @@ public class BombLaser : NetworkBehaviour
     {
         GameObject laser = Instantiate(laserPrefab, position, Quaternion.identity);
 
-        laser.transform.Rotate(Vector3.forward, -90f);
+        laser.transform.Rotate(Vector3.forward, 0f);
         laser.GetComponent<NetworkObject>().Spawn();
         LineRenderer lineRenderer = laser.GetComponentInChildren<LineRenderer>();
 

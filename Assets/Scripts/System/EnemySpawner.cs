@@ -61,7 +61,7 @@ public class EnemySpawner : NetworkBehaviour, IEnemySpawner
 
             foreach (var spawnData in enemySpawnDatas)
             {
-                StartCoroutine(SpawnEnemyIndependently(spawnData));
+                // StartCoroutine(SpawnEnemyIndependently(spawnData));
             }
         }
     }
@@ -231,24 +231,28 @@ public class EnemySpawner : NetworkBehaviour, IEnemySpawner
         {
             return;
         }
-        remain.SetActive(false);
-
-        warningBoss.SetActive(true);
-
-        warningBoss.SetActive(false);
-        ShowBossHealthUI();
-        if (bossLevel1 != null)
+        foreach (var spawnData in enemySpawnDatas)
         {
-            GameObject bossSpawned = Instantiate(
-                bossLevel1,
-                BossSpawnPostion.transform.position,
-                Quaternion.identity
-            );
-            bossSpawned.GetComponent<NetworkObject>().Spawn(true);
-
-            GangsterHealth.Instance.IntializeBossHealthServerRpc();
-            Gangster.Instance.Active();
+            StartCoroutine(SpawnEnemyIndependently(spawnData));
         }
+        // remain.SetActive(false);
+
+        // warningBoss.SetActive(true);
+
+        // warningBoss.SetActive(false);
+        // ShowBossHealthUI();
+        // if (bossLevel1 != null)
+        // {
+        //     GameObject bossSpawned = Instantiate(
+        //         bossLevel1,
+        //         BossSpawnPostion.transform.position,
+        //         Quaternion.identity
+        //     );
+        //     bossSpawned.GetComponent<NetworkObject>().Spawn(true);
+
+        //     GangsterHealth.Instance.IntializeBossHealthServerRpc();
+        //     Gangster.Instance.Active();
+        // }
     }
 
     public void ShowBossHealthUI()

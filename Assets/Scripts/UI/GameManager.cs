@@ -147,7 +147,7 @@ public class GameManager : NetworkBehaviour
             NetworkManager.Singleton.SceneManager.OnLoadComplete += OnSupplySceneLoaded;
             NetworkManager.Singleton.SceneManager.LoadScene("SupplyScene", LoadSceneMode.Single);
         }
-        // string bossScene = "Level 3";
+        // string bossScene = "Level 4";
         // NetworkManager.Singleton.SceneManager.LoadScene(bossScene, LoadSceneMode.Single);
     }
 

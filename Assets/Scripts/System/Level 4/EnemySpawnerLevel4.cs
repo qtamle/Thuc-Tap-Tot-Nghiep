@@ -52,7 +52,7 @@ public class EnemySpawnerLevel4 : NetworkBehaviour, IEnemySpawner
 
         foreach (var spawnData in enemySpawnDatas)
         {
-            // StartCoroutine(SpawnEnemyIndependently(spawnData));
+            StartCoroutine(SpawnEnemyIndependently(spawnData));
         }
     }
 

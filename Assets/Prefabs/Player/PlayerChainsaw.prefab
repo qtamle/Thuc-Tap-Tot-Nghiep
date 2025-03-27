@@ -142,6 +142,7 @@ GameObject:
   - component: {fileID: 4279029774091857590}
   - component: {fileID: -6699450147265448326}
   - component: {fileID: -596502417142962758}
+  - component: {fileID: -2647678339544508011}
   m_Layer: 3
   m_Name: PlayerChainsaw
   m_TagString: Player
@@ -473,6 +474,23 @@ MonoBehaviour:
   SwitchTransformSpaceWhenParented: 0
   Interpolate: 1
   SlerpPosition: 0
+--- !u!114 &-2647678339544508011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7346428832547731079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80d7c879794dfda4687da0e400131852, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  NetworkRigidbodyBaseExpanded: 0
+  UseRigidBodyForMotion: 0
+  AutoUpdateKinematicState: 0
+  AutoSetKinematicOnDespawn: 0
 --- !u!1 &9059466250284250557
 GameObject:
   m_ObjectHideFlags: 0

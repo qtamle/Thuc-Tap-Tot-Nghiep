@@ -153,13 +153,17 @@ public class Boss5 : NetworkBehaviour
         {
             MoveObject();
         }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            StartCoroutine(MoveThroughSkill());
+        }
 
         CheckHealth();
     }
 
     public void Active()
     {
-        StartCoroutine(SkillSequence());
+        // StartCoroutine(SkillSequence());
     }
 
     private IEnumerator SkillSequence()
