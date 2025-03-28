@@ -87,6 +87,7 @@ public class GameManager : NetworkBehaviour
             Debug.Log(
                 $"Player {clientId} ready status: {playerReadyStatus.ContainsKey(clientId) && playerReadyStatus[clientId]}"
             );
+
             if (!playerReadyStatus.ContainsKey(clientId) || !playerReadyStatus[clientId])
             {
                 return; // Nếu có người chơi chưa Ready, thoát khỏi hàm
@@ -135,8 +136,8 @@ public class GameManager : NetworkBehaviour
             if (currentBoss.Value > 5)
             {
                 Debug.Log("Loading SummaryScene");
+                NetworkManager.Singleton.SceneManager.LoadScene("Summary", LoadSceneMode.Single);
                 ResetGame();
-                NetworkManager.Singleton.SceneManager.LoadScene("Lobby", LoadSceneMode.Single);
             }
         }
         else
@@ -191,6 +192,6 @@ public class GameManager : NetworkBehaviour
         currentBoss.Value = 0;
         isSupplyScene.Value = false;
         Debug.Log("Resetting game, loading Boss1");
-        // NetworkManager.Singleton.SceneManager.LoadScene("Level 1", LoadSceneMode.Single);
+        NetworkManager.Singleton.Shutdown();
     }
 }

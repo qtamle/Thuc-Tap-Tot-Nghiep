@@ -44,9 +44,10 @@ public class CoinsManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        if (scene.name == "Shop_Online")
+        if (scene.name == "Shop_Online") { }
+        if (scene.name == "Summary")
         {
-            OnCoinsUpdated?.Invoke(totalCoinType1Count, totalCoinType2Count);
+            SaveCoinsToCloud();
         }
     }
 

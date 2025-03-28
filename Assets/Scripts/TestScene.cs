@@ -33,6 +33,11 @@ public class TestScene : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 
+    public void testSpawn()
+    {
+        // GameManager.Instance.CreatePlayersWeaponInfo();
+    }
+
     public void LoadTest1()
     {
         if (

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4841002242859083128
+--- !u!1 &7204776611615952279
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,45 +8,59 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6207351293486495750}
-  - component: {fileID: 4235013100078726204}
-  - component: {fileID: 580073827288321501}
+  - component: {fileID: 3772612354579162438}
+  - component: {fileID: 4763306908101132868}
+  - component: {fileID: 4154736225010359859}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: PlayerWeaponInfo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6207351293486495750
+--- !u!4 &3772612354579162438
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4841002242859083128}
+  m_GameObject: {fileID: 7204776611615952279}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 525.3927, y: 786.6993, z: -3.5001264}
+  m_LocalPosition: {x: 1097.3247, y: 205.894, z: 12.14901}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4235013100078726204
+--- !u!114 &4763306908101132868
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4841002242859083128}
+  m_GameObject: {fileID: 7204776611615952279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eed01bb30388cd74585dd8f45fa4a40b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponName: 
+  weaponLevel: 0
+--- !u!114 &4154736225010359859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7204776611615952279}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1283590420
-  InScenePlacedSourceGlobalObjectIdHash: 1283590420
+  GlobalObjectIdHash: 2528400623
+  InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
   AlwaysReplicateAsRoot: 0
@@ -54,25 +68,7 @@ MonoBehaviour:
   ActiveSceneSynchronization: 1
   SceneMigrationSynchronization: 1
   SpawnWithObservers: 1
-  DontDestroyWithOwner: 1
+  DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
   AllowOwnerToParent: 0
---- !u!114 &580073827288321501
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4841002242859083128}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08b91b850ae03b6478f1f22b753b8348, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
-  currentBoss:
-    m_InternalValue: 0
-  isSupplyScene:
-    m_InternalValue: 0
-  weaponInfoPrefab: {fileID: 7204776611615952279, guid: de4bc2f3a6f743d478501df95684ed6b, type: 3}

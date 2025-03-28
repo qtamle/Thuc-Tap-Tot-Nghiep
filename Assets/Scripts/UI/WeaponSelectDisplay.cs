@@ -48,6 +48,9 @@ public class WeaponSelectDisplay : NetworkBehaviour
 
     public GameObject PlayerSlotsDisplay;
 
+    [SerializeField]
+    public GameObject weaponInfoPrefab; // Prefab chứa WeaponPlayerInfo
+
     private void Awake()
     {
         players = new NetworkList<WeaponSelectState>();
@@ -238,11 +241,35 @@ public class WeaponSelectDisplay : NetworkBehaviour
         {
             SetPlayerReadyServerRpc(clientId, true, weaponData.weaponData.WeaponID);
             // GameManager.Instance.SetPlayerReadyStatus(clientId, true, weaponData.weaponData);
+            CreatePlayersWeaponInfo(clientId, weaponData);
         }
         else
         {
             Debug.LogError("WeaponData is null or weaponData.weaponData is null");
         }
+    }
+
+    public void CreatePlayersWeaponInfo(ulong clientId, WeaponData weaponData)
+    {
+        // Chuyển đổi sang WeaponDataStorage trước khi gửi
+        var storage = WeaponDataStorage.FromWeaponData(weaponData);
+        CreateWeaponInfoForPlayerServerRpc(clientId, storage);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void CreateWeaponInfoForPlayerServerRpc(
+        ulong clientId,
+        WeaponDataStorage weaponDataStorage
+    )
+    {
+        string weaponName = weaponDataStorage.weaponName;
+        int weaponLevel = weaponDataStorage.currentLevel;
+
+        GameObject weaponInfoObj = Instantiate(weaponInfoPrefab);
+        NetworkObject networkObject = weaponInfoObj.GetComponent<NetworkObject>();
+
+        networkObject.SpawnWithOwnership(clientId);
+        weaponInfoObj.GetComponent<WeaponPlayerInfo>().SetWeaponInfo(weaponName, weaponLevel);
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -362,5 +389,31 @@ public class WeaponSelectDisplay : NetworkBehaviour
         }
 
         string weaponID = snappedWeapon.weaponData.WeaponID;
+    }
+}
+
+public struct WeaponDataStorage : INetworkSerializable
+{
+    public string weaponName;
+    public int currentLevel;
+
+    // Add other fields you need
+
+    public void NetworkSerialize<T>(BufferSerializer<T> serializer)
+        where T : IReaderWriter
+    {
+        serializer.SerializeValue(ref weaponName);
+        serializer.SerializeValue(ref currentLevel);
+        // Serialize other fields
+    }
+
+    // Chuyển từ WeaponData thông thường sang WeaponDataStorage
+    public static WeaponDataStorage FromWeaponData(WeaponData data)
+    {
+        return new WeaponDataStorage
+        {
+            weaponName = data.weaponName,
+            currentLevel = data.currentLevel,
+        };
     }
 }
