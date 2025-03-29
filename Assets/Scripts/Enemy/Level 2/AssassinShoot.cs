@@ -26,8 +26,13 @@ public class AssassinShoot : NetworkBehaviour
     private bool hasCollidedWithWall = false;
     private bool initialRaycastUsed = false;
 
+    private Animator animator;
+
     private void Start()
     {
+        animator = GetComponent<Animator>();
+
+        animator.SetBool("isWalk", true);
         PerformInitialRaycast();
         StartCoroutine(CallHitColliderr());
         SetNextShootTime();
@@ -58,6 +63,7 @@ public class AssassinShoot : NetworkBehaviour
 
     void Move()
     {
+        animator.SetBool("isWalk", true);
         transform.Translate(Vector2.right * moveSpeed * Time.deltaTime * (movingRight ? 1 : -1));
     }
 
@@ -115,6 +121,9 @@ public class AssassinShoot : NetworkBehaviour
 
     void ShootBullet()
     {
+        animator.SetBool("isWalk", false);
+        animator.SetBool("isShoot", true);
+
         if (bulletPrefabs != null && shootPoint != null && shootPointDown != null)
         {
             bool hitGround = Physics2D.Raycast(
@@ -124,6 +133,13 @@ public class AssassinShoot : NetworkBehaviour
                 groundLayer
             );
             Transform selectedShootPoint = hitGround ? shootPoint : shootPointDown;
+
+            Quaternion originalRotation = transform.rotation;
+
+            if (hitGround)
+            {
+                transform.rotation = Quaternion.Euler(0, 0, 180);
+            }
 
             GameObject bullet = Instantiate(
                 bulletPrefabs,
@@ -137,7 +153,18 @@ public class AssassinShoot : NetworkBehaviour
             {
                 rb.linearVelocity = (hitGround ? Vector2.up : Vector2.down) * bulletSpeed;
             }
+
+            StartCoroutine(ResetRotation(originalRotation));
         }
+    }
+
+    IEnumerator ResetRotation(Quaternion originalRotation)
+    {
+        yield return new WaitForSeconds(1f);
+        transform.rotation = originalRotation;
+
+        animator.SetBool("isWalk", true);
+        animator.SetBool("isShoot", false);
     }
 
     void ResumeMovement()
