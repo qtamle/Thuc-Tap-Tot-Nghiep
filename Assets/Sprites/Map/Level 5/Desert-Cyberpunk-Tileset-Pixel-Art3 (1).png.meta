@@ -1,0 +1,2457 @@
+fileFormatVersion: 2
+guid: 364d2911b3eb745489fec770971236f7
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1364023727388827278
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_0
+  - first:
+      213: -7104475680927311827
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_1
+  - first:
+      213: 6102940306890199525
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_2
+  - first:
+      213: -3196001520894403049
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_3
+  - first:
+      213: -6506922661643932009
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_4
+  - first:
+      213: -8337003323957406562
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_5
+  - first:
+      213: -9013066025356042271
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_6
+  - first:
+      213: -4964361151433560850
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_7
+  - first:
+      213: 4693462752098090133
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_8
+  - first:
+      213: 39460343731735732
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_9
+  - first:
+      213: -8656169516715709111
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_10
+  - first:
+      213: 5992234744446505424
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_11
+  - first:
+      213: -342941976067868647
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_12
+  - first:
+      213: -1289209046525933687
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_13
+  - first:
+      213: -4340262421451636572
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_14
+  - first:
+      213: -1089948257876957363
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_15
+  - first:
+      213: -6625381627805038164
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_16
+  - first:
+      213: -5811065270458853973
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_17
+  - first:
+      213: -4890245329492481084
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_18
+  - first:
+      213: -3953226880129512614
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_19
+  - first:
+      213: 8414128076707442143
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_20
+  - first:
+      213: 2881830941951677251
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_21
+  - first:
+      213: -9158172543589227766
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_22
+  - first:
+      213: 3341134443072494824
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_23
+  - first:
+      213: -6591547913856320535
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_24
+  - first:
+      213: 143385963813009411
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_25
+  - first:
+      213: -1852532093804087781
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_26
+  - first:
+      213: 2597602837241314253
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_27
+  - first:
+      213: -3899502830306731768
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_28
+  - first:
+      213: -6731509588522842958
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_29
+  - first:
+      213: 4506317001806241603
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_30
+  - first:
+      213: -5877138618612495858
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_31
+  - first:
+      213: 6693908646121401811
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_32
+  - first:
+      213: 5547887919043145636
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_33
+  - first:
+      213: -4862467502988623870
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_34
+  - first:
+      213: 8493806499557953119
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_35
+  - first:
+      213: -8967965739803086928
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_36
+  - first:
+      213: -6250301812346737848
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_37
+  - first:
+      213: -2530121583283043135
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_38
+  - first:
+      213: -6889066119382768859
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_39
+  - first:
+      213: 6490214302890199090
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_40
+  - first:
+      213: 3356017612749169986
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_41
+  - first:
+      213: 1929224709636067548
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_42
+  - first:
+      213: -712815638980074698
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_43
+  - first:
+      213: -7149751384979565865
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_44
+  - first:
+      213: -5162314126213591038
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_45
+  - first:
+      213: 1557052490948916685
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_46
+  - first:
+      213: -7346036427383604317
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_47
+  - first:
+      213: 8840820447868633573
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_48
+  - first:
+      213: -4430079408216761052
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_49
+  - first:
+      213: 1355264834741508824
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_50
+  - first:
+      213: -3590139172644790281
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_51
+  - first:
+      213: -4570642618983359409
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_52
+  - first:
+      213: 4433964488790510000
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_53
+  - first:
+      213: -727510751771649790
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_54
+  - first:
+      213: -8020622718064439748
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_55
+  - first:
+      213: -4527304958177627096
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_56
+  - first:
+      213: -4882031422002227794
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_57
+  - first:
+      213: 6163427058843694087
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_58
+  - first:
+      213: -9095023795840531285
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_59
+  - first:
+      213: 5838423058239645363
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_60
+  - first:
+      213: -7286100321564896838
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_61
+  - first:
+      213: -7531335186010458576
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_62
+  - first:
+      213: -28762218681908973
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_63
+  - first:
+      213: 7538095737826012413
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_64
+  - first:
+      213: -2735755976162772310
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_65
+  - first:
+      213: -4087465493755585196
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_66
+  - first:
+      213: 474036037058969837
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_67
+  - first:
+      213: 187415656290210563
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_68
+  - first:
+      213: -1408110991357384994
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_69
+  - first:
+      213: 3242442844333069974
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_70
+  - first:
+      213: -9175781300301413749
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_71
+  - first:
+      213: 1400092989310205503
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_72
+  - first:
+      213: 1532551274581995597
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_73
+  - first:
+      213: 1082014659039968246
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_74
+  - first:
+      213: -5445371640415590460
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_75
+  - first:
+      213: -1595770131517526375
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_76
+  - first:
+      213: 3416924159015085963
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_77
+  - first:
+      213: 2107145075453762728
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_78
+  - first:
+      213: -286644617363580452
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_79
+  - first:
+      213: -5685224249619670694
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_80
+  - first:
+      213: -6504859519164608097
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_81
+  - first:
+      213: 5324074838235963727
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_82
+  - first:
+      213: 9085219176796896847
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_83
+  - first:
+      213: 845721774090033059
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_84
+  - first:
+      213: -8223644527496880561
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_85
+  - first:
+      213: 8012999938347391268
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_86
+  - first:
+      213: 6914414474518893428
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_87
+  - first:
+      213: -2826084621082910090
+    second: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_88
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 120
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_0
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 1040
+        width: 139
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 271e8c795a3021de0800000000000000
+      internalID: -1364023727388827278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_1
+      rect:
+        serializedVersion: 2
+        x: 249
+        y: 1040
+        width: 141
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d281de26205d76d90800000000000000
+      internalID: -7104475680927311827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_2
+      rect:
+        serializedVersion: 2
+        x: 395
+        y: 1040
+        width: 141
+        height: 140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e19a95dfdff1b450800000000000000
+      internalID: 6102940306890199525
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_3
+      rect:
+        serializedVersion: 2
+        x: 541
+        y: 1040
+        width: 139
+        height: 140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 71e1b75cc8585a3d0800000000000000
+      internalID: -3196001520894403049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_4
+      rect:
+        serializedVersion: 2
+        x: 686
+        y: 1039
+        width: 138
+        height: 140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79e26cb7054c2b5a0800000000000000
+      internalID: -6506922661643932009
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_5
+      rect:
+        serializedVersion: 2
+        x: 832
+        y: 1041
+        width: 139
+        height: 138
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e949440f5a30d4c80800000000000000
+      internalID: -8337003323957406562
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_6
+      rect:
+        serializedVersion: 2
+        x: 976
+        y: 1040
+        width: 140
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1efd28504382be280800000000000000
+      internalID: -9013066025356042271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_7
+      rect:
+        serializedVersion: 2
+        x: 1122
+        y: 1040
+        width: 139
+        height: 140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eecad08c5db0b1bb0800000000000000
+      internalID: -4964361151433560850
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_8
+      rect:
+        serializedVersion: 2
+        x: 1265
+        y: 1040
+        width: 141
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59c75598187822140800000000000000
+      internalID: 4693462752098090133
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_9
+      rect:
+        serializedVersion: 2
+        x: 1437
+        y: 1040
+        width: 114
+        height: 140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4bc48da39f03c8000800000000000000
+      internalID: 39460343731735732
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_10
+      rect:
+        serializedVersion: 2
+        x: 1581
+        y: 1042
+        width: 92
+        height: 137
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 94d6898dfab1fd780800000000000000
+      internalID: -8656169516715709111
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_11
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 895
+        width: 130
+        height: 140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d1dc7970c1b82350800000000000000
+      internalID: 5992234744446505424
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_12
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 895
+        width: 140
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 91877e9f610ad3bf0800000000000000
+      internalID: -342941976067868647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_13
+      rect:
+        serializedVersion: 2
+        x: 396
+        y: 896
+        width: 139
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9870a94e33fcb1ee0800000000000000
+      internalID: -1289209046525933687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_14
+      rect:
+        serializedVersion: 2
+        x: 541
+        y: 895
+        width: 130
+        height: 140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a00669c25a44c3c0800000000000000
+      internalID: -4340262421451636572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_15
+      rect:
+        serializedVersion: 2
+        x: 696
+        y: 895
+        width: 121
+        height: 141
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4720b195d9bfd0f0800000000000000
+      internalID: -1089948257876957363
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_16
+      rect:
+        serializedVersion: 2
+        x: 832
+        y: 897
+        width: 139
+        height: 138
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ca90845238aed04a0800000000000000
+      internalID: -6625381627805038164
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_17
+      rect:
+        serializedVersion: 2
+        x: 975
+        y: 896
+        width: 140
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba5d0b3cce2fa5fa0800000000000000
+      internalID: -5811065270458853973
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_18
+      rect:
+        serializedVersion: 2
+        x: 1120
+        y: 895
+        width: 140
+        height: 140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4cb661f48cb522cb0800000000000000
+      internalID: -4890245329492481084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_19
+      rect:
+        serializedVersion: 2
+        x: 1265
+        y: 895
+        width: 141
+        height: 140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a5bca5df8115329c0800000000000000
+      internalID: -3953226880129512614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_20
+      rect:
+        serializedVersion: 2
+        x: 1410
+        y: 896
+        width: 141
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fdda9c2e7ecf4c470800000000000000
+      internalID: 8414128076707442143
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_21
+      rect:
+        serializedVersion: 2
+        x: 1556
+        y: 896
+        width: 139
+        height: 138
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 34352cd19f15ef720800000000000000
+      internalID: 2881830941951677251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_22
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 752
+        width: 131
+        height: 137
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a03e0abf792a7e080800000000000000
+      internalID: -9158172543589227766
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_23
+      rect:
+        serializedVersion: 2
+        x: 251
+        y: 752
+        width: 139
+        height: 136
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ec982ae2181e5e20800000000000000
+      internalID: 3341134443072494824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_24
+      rect:
+        serializedVersion: 2
+        x: 395
+        y: 752
+        width: 140
+        height: 136
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9eb70aa881e1684a0800000000000000
+      internalID: -6591547913856320535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_25
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 752
+        width: 131
+        height: 137
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 308f9de36c86df100800000000000000
+      internalID: 143385963813009411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_26
+      rect:
+        serializedVersion: 2
+        x: 696
+        y: 752
+        width: 121
+        height: 137
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b16fbc530eb7a46e0800000000000000
+      internalID: -1852532093804087781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_27
+      rect:
+        serializedVersion: 2
+        x: 831
+        y: 751
+        width: 138
+        height: 138
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dcbb05d840a8c0420800000000000000
+      internalID: 2597602837241314253
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_28
+      rect:
+        serializedVersion: 2
+        x: 977
+        y: 751
+        width: 139
+        height: 138
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 809dfe616de22e9c0800000000000000
+      internalID: -3899502830306731768
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_29
+      rect:
+        serializedVersion: 2
+        x: 1120
+        y: 751
+        width: 139
+        height: 137
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2b4c5fdb1bfd492a0800000000000000
+      internalID: -6731509588522842958
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_30
+      rect:
+        serializedVersion: 2
+        x: 1267
+        y: 751
+        width: 139
+        height: 137
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 34fd6f90077a98e30800000000000000
+      internalID: 4506317001806241603
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_31
+      rect:
+        serializedVersion: 2
+        x: 1412
+        y: 752
+        width: 111
+        height: 136
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e0a4fd59095307ea0800000000000000
+      internalID: -5877138618612495858
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_32
+      rect:
+        serializedVersion: 2
+        x: 1583
+        y: 752
+        width: 112
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3dd6bf2a27a85ec50800000000000000
+      internalID: 6693908646121401811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_33
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 606
+        width: 141
+        height: 138
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4af6f3c1bae0efc40800000000000000
+      internalID: 5547887919043145636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_34
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 605
+        width: 141
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2008b78819b058cb0800000000000000
+      internalID: -4862467502988623870
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_35
+      rect:
+        serializedVersion: 2
+        x: 395
+        y: 606
+        width: 141
+        height: 138
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f5e4e0d520010e570800000000000000
+      internalID: 8493806499557953119
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_36
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 606
+        width: 131
+        height: 138
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0bfe9298ca26b8380800000000000000
+      internalID: -8967965739803086928
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_37
+      rect:
+        serializedVersion: 2
+        x: 686
+        y: 606
+        width: 139
+        height: 138
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84ba7100e977249a0800000000000000
+      internalID: -6250301812346737848
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_38
+      rect:
+        serializedVersion: 2
+        x: 831
+        y: 605
+        width: 140
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c48ddd33d333ecd0800000000000000
+      internalID: -2530121583283043135
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_39
+      rect:
+        serializedVersion: 2
+        x: 976
+        y: 606
+        width: 141
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 523e2004dde1560a0800000000000000
+      internalID: -6889066119382768859
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_40
+      rect:
+        serializedVersion: 2
+        x: 1120
+        y: 606
+        width: 141
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2380ee7958fd11a50800000000000000
+      internalID: 6490214302890199090
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_41
+      rect:
+        serializedVersion: 2
+        x: 1264
+        y: 606
+        width: 142
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2456ed3ec38f29e20800000000000000
+      internalID: 3356017612749169986
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_42
+      rect:
+        serializedVersion: 2
+        x: 1411
+        y: 605
+        width: 139
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd093c5e6abf5ca10800000000000000
+      internalID: 1929224709636067548
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_43
+      rect:
+        serializedVersion: 2
+        x: 1555
+        y: 605
+        width: 140
+        height: 140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 633ef38f3f19b16f0800000000000000
+      internalID: -712815638980074698
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_44
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 460
+        width: 139
+        height: 140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7d29fe11ffaf6cc90800000000000000
+      internalID: -7149751384979565865
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_45
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 461
+        width: 140
+        height: 138
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 200de0047a6cb58b0800000000000000
+      internalID: -5162314126213591038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_46
+      rect:
+        serializedVersion: 2
+        x: 395
+        y: 460
+        width: 140
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dc5b5abadf2cb9510800000000000000
+      internalID: 1557052490948916685
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_47
+      rect:
+        serializedVersion: 2
+        x: 542
+        y: 460
+        width: 139
+        height: 140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ab78be4ac2ad0a90800000000000000
+      internalID: -7346036427383604317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_48
+      rect:
+        serializedVersion: 2
+        x: 685
+        y: 461
+        width: 140
+        height: 137
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e1483e4b57e0ba70800000000000000
+      internalID: 8840820447868633573
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_49
+      rect:
+        serializedVersion: 2
+        x: 831
+        y: 461
+        width: 140
+        height: 138
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 42d9772ff323582c0800000000000000
+      internalID: -4430079408216761052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_50
+      rect:
+        serializedVersion: 2
+        x: 976
+        y: 459
+        width: 138
+        height: 142
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8da985bcf2edec210800000000000000
+      internalID: 1355264834741508824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_51
+      rect:
+        serializedVersion: 2
+        x: 1121
+        y: 460
+        width: 140
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ffda40a1734d2ec0800000000000000
+      internalID: -3590139172644790281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_52
+      rect:
+        serializedVersion: 2
+        x: 1265
+        y: 460
+        width: 141
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f4c5c3c11c0d190c0800000000000000
+      internalID: -4570642618983359409
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_53
+      rect:
+        serializedVersion: 2
+        x: 1410
+        y: 456
+        width: 141
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b90e0dd53b988d30800000000000000
+      internalID: 4433964488790510000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_54
+      rect:
+        serializedVersion: 2
+        x: 1555
+        y: 456
+        width: 140
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2099f5663dc57e5f0800000000000000
+      internalID: -727510751771649790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_55
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 417
+        width: 140
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c3e475c022601b090800000000000000
+      internalID: -8020622718064439748
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_56
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 417
+        width: 140
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 82435f19028cb21c0800000000000000
+      internalID: -4527304958177627096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_57
+      rect:
+        serializedVersion: 2
+        x: 395
+        y: 413
+        width: 139
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea5134da94a8f3cb0800000000000000
+      internalID: -4882031422002227794
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_58
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 417
+        width: 141
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 704b8693144e88550800000000000000
+      internalID: 6163427058843694087
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_59
+      rect:
+        serializedVersion: 2
+        x: 686
+        y: 417
+        width: 138
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba443319b0cf7c180800000000000000
+      internalID: -9095023795840531285
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_60
+      rect:
+        serializedVersion: 2
+        x: 925
+        y: 350
+        width: 45
+        height: 104
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b6e2d296de360150800000000000000
+      internalID: 5838423058239645363
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_61
+      rect:
+        serializedVersion: 2
+        x: 1002
+        y: 384
+        width: 84
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ab1d3476c5292ea90800000000000000
+      internalID: -7286100321564896838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_62
+      rect:
+        serializedVersion: 2
+        x: 1266
+        y: 349
+        width: 54
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 03632711d825b7790800000000000000
+      internalID: -7531335186010458576
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_63
+      rect:
+        serializedVersion: 2
+        x: 1411
+        y: 312
+        width: 140
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 311438c1ae0d99ff0800000000000000
+      internalID: -28762218681908973
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_64
+      rect:
+        serializedVersion: 2
+        x: 1556
+        y: 312
+        width: 139
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dfc61009222bc9860800000000000000
+      internalID: 7538095737826012413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_65
+      rect:
+        serializedVersion: 2
+        x: 1121
+        y: 314
+        width: 50
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aaa7aa03f64a80ad0800000000000000
+      internalID: -2735755976162772310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_66
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 169
+        width: 114
+        height: 140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45d180d2ac76647c0800000000000000
+      internalID: -4087465493755585196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_67
+      rect:
+        serializedVersion: 2
+        x: 267
+        y: 170
+        width: 115
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de042af934d149600800000000000000
+      internalID: 474036037058969837
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_68
+      rect:
+        serializedVersion: 2
+        x: 395
+        y: 169
+        width: 115
+        height: 140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3035682eb85d99200800000000000000
+      internalID: 187415656290210563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_69
+      rect:
+        serializedVersion: 2
+        x: 568
+        y: 204
+        width: 113
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed6e1db8382657ce0800000000000000
+      internalID: -1408110991357384994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_70
+      rect:
+        serializedVersion: 2
+        x: 686
+        y: 205
+        width: 138
+        height: 104
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 696daf476987ffc20800000000000000
+      internalID: 3242442844333069974
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_71
+      rect:
+        serializedVersion: 2
+        x: 832
+        y: 205
+        width: 138
+        height: 104
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b82ccd2d58319a080800000000000000
+      internalID: -9175781300301413749
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_72
+      rect:
+        serializedVersion: 2
+        x: 976
+        y: 204
+        width: 112
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f3e7950e7212e6310800000000000000
+      internalID: 1400092989310205503
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_73
+      rect:
+        serializedVersion: 2
+        x: 1134
+        y: 251
+        width: 118
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d403881b347b44510800000000000000
+      internalID: 1532551274581995597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_74
+      rect:
+        serializedVersion: 2
+        x: 1275
+        y: 285
+        width: 122
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6fbb7d18996140f00800000000000000
+      internalID: 1082014659039968246
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_75
+      rect:
+        serializedVersion: 2
+        x: 1411
+        y: 233
+        width: 114
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c7ea0708572e64b0800000000000000
+      internalID: -5445371640415590460
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_76
+      rect:
+        serializedVersion: 2
+        x: 1582
+        y: 233
+        width: 88
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 99e28b7258faad9e0800000000000000
+      internalID: -1595770131517526375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_77
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 23
+        width: 45
+        height: 142
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b876b824b6a5b6f20800000000000000
+      internalID: 3416924159015085963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_78
+      rect:
+        serializedVersion: 2
+        x: 294
+        y: 24
+        width: 58
+        height: 140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ac92a038451e3d10800000000000000
+      internalID: 2107145075453762728
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_79
+      rect:
+        serializedVersion: 2
+        x: 396
+        y: 23
+        width: 44
+        height: 140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd9144d3d32a50cf0800000000000000
+      internalID: -286644617363580452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_80
+      rect:
+        serializedVersion: 2
+        x: 541
+        y: 24
+        width: 140
+        height: 141
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a599bf4aaa60a11b0800000000000000
+      internalID: -5685224249619670694
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_81
+      rect:
+        serializedVersion: 2
+        x: 686
+        y: 25
+        width: 138
+        height: 138
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f9110664bb81ab5a0800000000000000
+      internalID: -6504859519164608097
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_82
+      rect:
+        serializedVersion: 2
+        x: 832
+        y: 26
+        width: 138
+        height: 138
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f4166a27bd9e2e940800000000000000
+      internalID: 5324074838235963727
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_83
+      rect:
+        serializedVersion: 2
+        x: 976
+        y: 25
+        width: 140
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f4ebb8ba4be251e70800000000000000
+      internalID: 9085219176796896847
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_84
+      rect:
+        serializedVersion: 2
+        x: 1155
+        y: 41
+        width: 61
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a71373097b9cbb00800000000000000
+      internalID: 845721774090033059
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_85
+      rect:
+        serializedVersion: 2
+        x: 1312
+        y: 98
+        width: 50
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f4e967b7fdebfdd80800000000000000
+      internalID: -8223644527496880561
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_86
+      rect:
+        serializedVersion: 2
+        x: 1504
+        y: 88
+        width: 47
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4295c6e3df4e33f60800000000000000
+      internalID: 8012999938347391268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_87
+      rect:
+        serializedVersion: 2
+        x: 1555
+        y: 87
+        width: 141
+        height: 142
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4739487945fe4ff50800000000000000
+      internalID: 6914414474518893428
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_88
+      rect:
+        serializedVersion: 2
+        x: 1427
+        y: 20
+        width: 115
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 672a827a20bb7c8d0800000000000000
+      internalID: -2826084621082910090
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_0: -1364023727388827278
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_1: -7104475680927311827
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_10: -8656169516715709111
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_11: 5992234744446505424
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_12: -342941976067868647
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_13: -1289209046525933687
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_14: -4340262421451636572
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_15: -1089948257876957363
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_16: -6625381627805038164
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_17: -5811065270458853973
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_18: -4890245329492481084
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_19: -3953226880129512614
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_2: 6102940306890199525
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_20: 8414128076707442143
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_21: 2881830941951677251
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_22: -9158172543589227766
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_23: 3341134443072494824
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_24: -6591547913856320535
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_25: 143385963813009411
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_26: -1852532093804087781
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_27: 2597602837241314253
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_28: -3899502830306731768
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_29: -6731509588522842958
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_3: -3196001520894403049
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_30: 4506317001806241603
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_31: -5877138618612495858
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_32: 6693908646121401811
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_33: 5547887919043145636
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_34: -4862467502988623870
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_35: 8493806499557953119
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_36: -8967965739803086928
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_37: -6250301812346737848
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_38: -2530121583283043135
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_39: -6889066119382768859
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_4: -6506922661643932009
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_40: 6490214302890199090
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_41: 3356017612749169986
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_42: 1929224709636067548
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_43: -712815638980074698
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_44: -7149751384979565865
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_45: -5162314126213591038
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_46: 1557052490948916685
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_47: -7346036427383604317
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_48: 8840820447868633573
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_49: -4430079408216761052
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_5: -8337003323957406562
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_50: 1355264834741508824
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_51: -3590139172644790281
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_52: -4570642618983359409
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_53: 4433964488790510000
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_54: -727510751771649790
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_55: -8020622718064439748
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_56: -4527304958177627096
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_57: -4882031422002227794
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_58: 6163427058843694087
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_59: -9095023795840531285
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_6: -9013066025356042271
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_60: 5838423058239645363
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_61: -7286100321564896838
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_62: -7531335186010458576
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_63: -28762218681908973
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_64: 7538095737826012413
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_65: -2735755976162772310
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_66: -4087465493755585196
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_67: 474036037058969837
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_68: 187415656290210563
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_69: -1408110991357384994
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_7: -4964361151433560850
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_70: 3242442844333069974
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_71: -9175781300301413749
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_72: 1400092989310205503
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_73: 1532551274581995597
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_74: 1082014659039968246
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_75: -5445371640415590460
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_76: -1595770131517526375
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_77: 3416924159015085963
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_78: 2107145075453762728
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_79: -286644617363580452
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_8: 4693462752098090133
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_80: -5685224249619670694
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_81: -6504859519164608097
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_82: 5324074838235963727
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_83: 9085219176796896847
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_84: 845721774090033059
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_85: -8223644527496880561
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_86: 8012999938347391268
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_87: 6914414474518893428
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_88: -2826084621082910090
+      Desert-Cyberpunk-Tileset-Pixel-Art3 (1)_9: 39460343731735732
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

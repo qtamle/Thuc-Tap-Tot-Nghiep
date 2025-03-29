@@ -432,6 +432,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b06179a1498a98e4bbdbd3545a5d8247, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   bouncingSawPrefab: {fileID: 8223095997635945948, guid: 2d255ae7a68ec9d4e84bb49b91b61460, type: 3}
   throwSpeed: 5
   enemyLayer:

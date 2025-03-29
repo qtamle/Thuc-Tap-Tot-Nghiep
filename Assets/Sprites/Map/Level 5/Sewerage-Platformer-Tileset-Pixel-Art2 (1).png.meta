@@ -1,0 +1,3893 @@
+fileFormatVersion: 2
+guid: 070c21fc6f06b4a4db13b190fef407f3
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8415907760987663993
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_0
+  - first:
+      213: 9105919621389122842
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_1
+  - first:
+      213: 218943922514829840
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_2
+  - first:
+      213: 8937644354930622400
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_3
+  - first:
+      213: -7416662268676990489
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_4
+  - first:
+      213: -5033219266703553376
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_5
+  - first:
+      213: -7613985283223304164
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_6
+  - first:
+      213: -3628303123512979670
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_7
+  - first:
+      213: 231169798954590317
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_8
+  - first:
+      213: 8946813450382059039
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_9
+  - first:
+      213: -5580816128742406667
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_10
+  - first:
+      213: 1517254520793223715
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_11
+  - first:
+      213: -5169311956727100556
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_12
+  - first:
+      213: 279000387431040333
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_13
+  - first:
+      213: 5887952904238805251
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_14
+  - first:
+      213: 6335330685006774998
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_15
+  - first:
+      213: 7392417089344747220
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_16
+  - first:
+      213: 4002326697096469809
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_17
+  - first:
+      213: 1471493758856262299
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_18
+  - first:
+      213: 1404355053144937258
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_19
+  - first:
+      213: 4351323063255974675
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_20
+  - first:
+      213: -4263517952234901345
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_21
+  - first:
+      213: -135665209839668422
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_22
+  - first:
+      213: -3963833268261020801
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_23
+  - first:
+      213: -5114887770804150226
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_24
+  - first:
+      213: -9080498120012203927
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_25
+  - first:
+      213: -7978181780817936604
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_26
+  - first:
+      213: -8155190632256108679
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_27
+  - first:
+      213: -2735884757464175867
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_28
+  - first:
+      213: -6803219129064507408
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_29
+  - first:
+      213: 1921115064610518495
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_30
+  - first:
+      213: -2522494957110129903
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_31
+  - first:
+      213: -8994388873450534690
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_32
+  - first:
+      213: -4489838952485648198
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_33
+  - first:
+      213: -6222716995639286096
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_34
+  - first:
+      213: -8383944396662496148
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_35
+  - first:
+      213: -7206027184362217824
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_36
+  - first:
+      213: -7786424034583591454
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_37
+  - first:
+      213: -2349863433510564524
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_38
+  - first:
+      213: 439864574123906754
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_39
+  - first:
+      213: -7721380443645740180
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_40
+  - first:
+      213: -7076172328600414668
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_41
+  - first:
+      213: 8866545656327289522
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_42
+  - first:
+      213: 4799025933930953345
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_43
+  - first:
+      213: 428780231712188097
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_44
+  - first:
+      213: 8813163065264461516
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_45
+  - first:
+      213: 5010367564779903055
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_46
+  - first:
+      213: 8234655989889478874
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_47
+  - first:
+      213: -7985176967981806753
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_48
+  - first:
+      213: 5083264183008767771
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_49
+  - first:
+      213: 3330970733640380808
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_50
+  - first:
+      213: -7172847258927444044
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_51
+  - first:
+      213: 8673421308589083535
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_52
+  - first:
+      213: -3216204239918713401
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_53
+  - first:
+      213: 3714985468940201479
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_54
+  - first:
+      213: -5975254947571703891
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_55
+  - first:
+      213: -3016044542206926014
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_56
+  - first:
+      213: 4158077461656163909
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_57
+  - first:
+      213: -2764963674859647025
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_58
+  - first:
+      213: 8240858134318167546
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_59
+  - first:
+      213: -4556259972437029824
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_60
+  - first:
+      213: 4371507617565060275
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_61
+  - first:
+      213: 2008009346823229614
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_62
+  - first:
+      213: 2515672992878908968
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_63
+  - first:
+      213: -3088419696912212706
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_64
+  - first:
+      213: -972466760923909108
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_65
+  - first:
+      213: -8359841855212890208
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_66
+  - first:
+      213: 6706607575109492899
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_67
+  - first:
+      213: -5178369055141935534
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_68
+  - first:
+      213: -9088627070735457465
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_69
+  - first:
+      213: -5517034129865469241
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_70
+  - first:
+      213: 8172084545241316438
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_71
+  - first:
+      213: -3197651941044809656
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_72
+  - first:
+      213: -2336353983145485104
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_73
+  - first:
+      213: -7015874450234341182
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_74
+  - first:
+      213: 5889519901213276429
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_75
+  - first:
+      213: 715671084210433937
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_76
+  - first:
+      213: -7335840464964187805
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_77
+  - first:
+      213: -6463583370709671900
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_78
+  - first:
+      213: -7805884067769357505
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_79
+  - first:
+      213: -8258406315931063889
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_80
+  - first:
+      213: -5772004534807288483
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_81
+  - first:
+      213: -683041100763064636
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_82
+  - first:
+      213: 1524669447737176384
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_83
+  - first:
+      213: 5437310627572481848
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_84
+  - first:
+      213: -4537560433247352893
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_85
+  - first:
+      213: 6773615251922565007
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_86
+  - first:
+      213: -6507262042258433280
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_87
+  - first:
+      213: -8990008962382298917
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_88
+  - first:
+      213: 5586266570360737369
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_89
+  - first:
+      213: 6587877949853407983
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_90
+  - first:
+      213: 5871812978266796579
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_91
+  - first:
+      213: 957879940789032352
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_92
+  - first:
+      213: 7268628565898883320
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_93
+  - first:
+      213: 3345558816943231810
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_94
+  - first:
+      213: 9184305770940337233
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_95
+  - first:
+      213: -1636188720940927892
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_96
+  - first:
+      213: -3873470056676462673
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_97
+  - first:
+      213: 5887919680328467043
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_98
+  - first:
+      213: 6237410652680635822
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_99
+  - first:
+      213: 5480511577773606475
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_100
+  - first:
+      213: -7661342777577047271
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_101
+  - first:
+      213: 3242011202466643860
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_102
+  - first:
+      213: 5522942640838944105
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_103
+  - first:
+      213: -5562157927743961906
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_104
+  - first:
+      213: -1948835411659338438
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_105
+  - first:
+      213: 3594758005778091020
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_106
+  - first:
+      213: 509816719539555183
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_107
+  - first:
+      213: -7338381534810754186
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_108
+  - first:
+      213: 3592911577199194610
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_109
+  - first:
+      213: 576726855599790601
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_110
+  - first:
+      213: -4284287469866729508
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_111
+  - first:
+      213: -6456679503809014869
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_112
+  - first:
+      213: -3024404540165270978
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_113
+  - first:
+      213: 6497495617449241621
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_114
+  - first:
+      213: -335804083542928602
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_115
+  - first:
+      213: -2616151186840590069
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_116
+  - first:
+      213: -5236500114452496866
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_117
+  - first:
+      213: -2379944322260995750
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_118
+  - first:
+      213: 6397307630304765808
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_119
+  - first:
+      213: -917536143145469862
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_120
+  - first:
+      213: 2393268688569996669
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_121
+  - first:
+      213: -1922117196888812165
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_122
+  - first:
+      213: 6255777023903704865
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_123
+  - first:
+      213: -5520253103957268304
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_124
+  - first:
+      213: -8100414721490331327
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_125
+  - first:
+      213: 217436610546104747
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_126
+  - first:
+      213: 849804214409913356
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_127
+  - first:
+      213: 107885270798571387
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_128
+  - first:
+      213: -5921211364227352187
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_129
+  - first:
+      213: -5740527654735916524
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_130
+  - first:
+      213: 5045874475925976189
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_131
+  - first:
+      213: 5597319539093975201
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_132
+  - first:
+      213: -8892923212380221623
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_133
+  - first:
+      213: -2784914552146089654
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_134
+  - first:
+      213: -8382365876534145832
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_135
+  - first:
+      213: -2895061513842308718
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_136
+  - first:
+      213: 5176486856274494847
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_137
+  - first:
+      213: 5166683062277492695
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_138
+  - first:
+      213: 2170451518066430202
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_139
+  - first:
+      213: -8435471888154308562
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_140
+  - first:
+      213: 4570391356318146010
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_141
+  - first:
+      213: -8209650761991203048
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_142
+  - first:
+      213: -7723087099054130516
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_143
+  - first:
+      213: 30377694085758537
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_144
+  - first:
+      213: -2628351946314345050
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_145
+  - first:
+      213: 2964370976597389080
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_146
+  - first:
+      213: -8920660851140030233
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_147
+  - first:
+      213: 2910545302578626015
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_148
+  - first:
+      213: 4938280579410525900
+    second: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_149
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_0
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 1063
+        width: 146
+        height: 78
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97e6f1ce48f4bc470800000000000000
+      internalID: 8415907760987663993
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_1
+      rect:
+        serializedVersion: 2
+        x: 199
+        y: 1063
+        width: 146
+        height: 78
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a1d782286a9be5e70800000000000000
+      internalID: 9105919621389122842
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_2
+      rect:
+        serializedVersion: 2
+        x: 351
+        y: 1063
+        width: 146
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0122a376658d90300800000000000000
+      internalID: 218943922514829840
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_3
+      rect:
+        serializedVersion: 2
+        x: 543
+        y: 1047
+        width: 170
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0cf3a68ef24e80c70800000000000000
+      internalID: 8937644354930622400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_4
+      rect:
+        serializedVersion: 2
+        x: 791
+        y: 863
+        width: 146
+        height: 286
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e9177836f8b21990800000000000000
+      internalID: -7416662268676990489
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_5
+      rect:
+        serializedVersion: 2
+        x: 943
+        y: 863
+        width: 146
+        height: 287
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0ac8b7b7eb9662ab0800000000000000
+      internalID: -5033219266703553376
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_6
+      rect:
+        serializedVersion: 2
+        x: 1111
+        y: 1060
+        width: 66
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c184c6cb9b0b55690800000000000000
+      internalID: -7613985283223304164
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_7
+      rect:
+        serializedVersion: 2
+        x: 1199
+        y: 1059
+        width: 66
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a2f8191688da5adc0800000000000000
+      internalID: -3628303123512979670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_8
+      rect:
+        serializedVersion: 2
+        x: 1278
+        y: 1060
+        width: 65
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d60ac7515b7453300800000000000000
+      internalID: 231169798954590317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_9
+      rect:
+        serializedVersion: 2
+        x: 1359
+        y: 1059
+        width: 66
+        height: 67
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f16a5bd4e67792c70800000000000000
+      internalID: 8946813450382059039
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_10
+      rect:
+        serializedVersion: 2
+        x: 1439
+        y: 1059
+        width: 71
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f5c981ac45fc82b0800000000000000
+      internalID: -5580816128742406667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_11
+      rect:
+        serializedVersion: 2
+        x: 1511
+        y: 1058
+        width: 66
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3225cb9a2fe5e0510800000000000000
+      internalID: 1517254520793223715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_12
+      rect:
+        serializedVersion: 2
+        x: 1591
+        y: 1059
+        width: 66
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 47b0a1ed92ae248b0800000000000000
+      internalID: -5169311956727100556
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_13
+      rect:
+        serializedVersion: 2
+        x: 1659
+        y: 1059
+        width: 68
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d450609cf553fd300800000000000000
+      internalID: 279000387431040333
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_14
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 919
+        width: 122
+        height: 94
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 301326f78f536b150800000000000000
+      internalID: 5887952904238805251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_15
+      rect:
+        serializedVersion: 2
+        x: 159
+        y: 919
+        width: 98
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d2067621bd9be750800000000000000
+      internalID: 6335330685006774998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_16
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 919
+        width: 96
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d6bbe11d24279660800000000000000
+      internalID: 7392417089344747220
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_17
+      rect:
+        serializedVersion: 2
+        x: 367
+        y: 919
+        width: 50
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13d5f7ffcee1b8730800000000000000
+      internalID: 4002326697096469809
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_18
+      rect:
+        serializedVersion: 2
+        x: 425
+        y: 919
+        width: 38
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b92f4d107cbcb6410800000000000000
+      internalID: 1471493758856262299
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_19
+      rect:
+        serializedVersion: 2
+        x: 527
+        y: 871
+        width: 186
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a239a31fa754d7310800000000000000
+      internalID: 1404355053144937258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_20
+      rect:
+        serializedVersion: 2
+        x: 1127
+        y: 823
+        width: 162
+        height: 146
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 31346509541036c30800000000000000
+      internalID: 4351323063255974675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_21
+      rect:
+        serializedVersion: 2
+        x: 1319
+        y: 826
+        width: 90
+        height: 143
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f90b983f201f4d4c0800000000000000
+      internalID: -4263517952234901345
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_22
+      rect:
+        serializedVersion: 2
+        x: 1439
+        y: 823
+        width: 66
+        height: 146
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a33b02fd5350e1ef0800000000000000
+      internalID: -135665209839668422
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_23
+      rect:
+        serializedVersion: 2
+        x: 1603
+        y: 927
+        width: 107
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f7b1d60d4a2adf8c0800000000000000
+      internalID: -3963833268261020801
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_24
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 819
+        width: 34
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e20aa3b1ca44409b0800000000000000
+      internalID: -5114887770804150226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_25
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 819
+        width: 90
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 968f11502179bf180800000000000000
+      internalID: -9080498120012203927
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_26
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 819
+        width: 65
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 42f7ad8c0fdc74190800000000000000
+      internalID: -7978181780817936604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_27
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 768
+        width: 87
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97708c8f351f2de80800000000000000
+      internalID: -8155190632256108679
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_28
+      rect:
+        serializedVersion: 2
+        x: 351
+        y: 767
+        width: 130
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50b21f4fe4f280ad0800000000000000
+      internalID: -2735884757464175867
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_29
+      rect:
+        serializedVersion: 2
+        x: 1607
+        y: 816
+        width: 66
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f7b7f24f3c1691a0800000000000000
+      internalID: -6803219129064507408
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_30
+      rect:
+        serializedVersion: 2
+        x: 1674
+        y: 818
+        width: 31
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd5f2c609fb29aa10800000000000000
+      internalID: 1921115064610518495
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_31
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 767
+        width: 44
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11b8cb5833c4efcd0800000000000000
+      internalID: -2522494957110129903
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_32
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 767
+        width: 39
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed8414259f28d2380800000000000000
+      internalID: -8994388873450534690
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_33
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 767
+        width: 71
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ab8816ac243e0b1c0800000000000000
+      internalID: -4489838952485648198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_34
+      rect:
+        serializedVersion: 2
+        x: 207
+        y: 768
+        width: 41
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b66221acd774a9a0800000000000000
+      internalID: -6222716995639286096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_35
+      rect:
+        serializedVersion: 2
+        x: 544
+        y: 697
+        width: 136
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c642e44cdfe36ab80800000000000000
+      internalID: -8383944396662496148
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_36
+      rect:
+        serializedVersion: 2
+        x: 791
+        y: 623
+        width: 82
+        height: 146
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0ae184a747c0ffb90800000000000000
+      internalID: -7206027184362217824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_37
+      rect:
+        serializedVersion: 2
+        x: 911
+        y: 623
+        width: 62
+        height: 146
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e5c414489011f390800000000000000
+      internalID: -7786424034583591454
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_38
+      rect:
+        serializedVersion: 2
+        x: 1015
+        y: 623
+        width: 82
+        height: 146
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45d4ce648ab936fd0800000000000000
+      internalID: -2349863433510564524
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_39
+      rect:
+        serializedVersion: 2
+        x: 1015
+        y: 763
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c61fe9ef76ba1600800000000000000
+      internalID: 439864574123906754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_40
+      rect:
+        serializedVersion: 2
+        x: 1132
+        y: 623
+        width: 61
+        height: 146
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6bf8d8656528d490800000000000000
+      internalID: -7721380443645740180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_41
+      rect:
+        serializedVersion: 2
+        x: 1239
+        y: 623
+        width: 50
+        height: 146
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 436d25022c26ccd90800000000000000
+      internalID: -7076172328600414668
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_42
+      rect:
+        serializedVersion: 2
+        x: 1344
+        y: 623
+        width: 41
+        height: 146
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2babb262c4c4c0b70800000000000000
+      internalID: 8866545656327289522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_43
+      rect:
+        serializedVersion: 2
+        x: 1439
+        y: 624
+        width: 50
+        height: 145
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 18a77db19a0999240800000000000000
+      internalID: 4799025933930953345
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_44
+      rect:
+        serializedVersion: 2
+        x: 1535
+        y: 623
+        width: 50
+        height: 146
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c62ae5595553f500800000000000000
+      internalID: 428780231712188097
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_45
+      rect:
+        serializedVersion: 2
+        x: 1608
+        y: 733
+        width: 105
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc65eac1d15ae4a70800000000000000
+      internalID: 8813163065264461516
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_46
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 567
+        width: 58
+        height: 121
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f4858dc01c6688540800000000000000
+      internalID: 5010367564779903055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_47
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 567
+        width: 82
+        height: 154
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad0b7e46eff574270800000000000000
+      internalID: 8234655989889478874
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_48
+      rect:
+        serializedVersion: 2
+        x: 231
+        y: 567
+        width: 90
+        height: 119
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f5b40dadad3fe2190800000000000000
+      internalID: -7985176967981806753
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_49
+      rect:
+        serializedVersion: 2
+        x: 348
+        y: 658
+        width: 68
+        height: 78
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b1f24b797d16b8640800000000000000
+      internalID: 5083264183008767771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_50
+      rect:
+        serializedVersion: 2
+        x: 439
+        y: 659
+        width: 42
+        height: 78
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8817bd7eb3cf93e20800000000000000
+      internalID: 3330970733640380808
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_51
+      rect:
+        serializedVersion: 2
+        x: 1607
+        y: 624
+        width: 122
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4bfce7fdb6de47c90800000000000000
+      internalID: -7172847258927444044
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_52
+      rect:
+        serializedVersion: 2
+        x: 349
+        y: 567
+        width: 68
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f8b81c5f9be2e5870800000000000000
+      internalID: 8673421308589083535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_53
+      rect:
+        serializedVersion: 2
+        x: 439
+        y: 568
+        width: 42
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c53a82b84fbd53d0800000000000000
+      internalID: -3216204239918713401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_54
+      rect:
+        serializedVersion: 2
+        x: 547
+        y: 559
+        width: 187
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 70e2be5e9974e8330800000000000000
+      internalID: 3714985468940201479
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_55
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 471
+        width: 54
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dafd79f8841a31da0800000000000000
+      internalID: -5975254947571703891
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_56
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 471
+        width: 62
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2432003f77bd426d0800000000000000
+      internalID: -3016044542206926014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_57
+      rect:
+        serializedVersion: 2
+        x: 166
+        y: 471
+        width: 43
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 546d292cb6574b930800000000000000
+      internalID: 4158077461656163909
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_58
+      rect:
+        serializedVersion: 2
+        x: 215
+        y: 471
+        width: 38
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fcfc127ef20e0a9d0800000000000000
+      internalID: -2764963674859647025
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_59
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 471
+        width: 42
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af53c6cafc86d5270800000000000000
+      internalID: 8240858134318167546
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_60
+      rect:
+        serializedVersion: 2
+        x: 298
+        y: 471
+        width: 43
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 04c4f86f1b9e4c0c0800000000000000
+      internalID: -4556259972437029824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_61
+      rect:
+        serializedVersion: 2
+        x: 544
+        y: 409
+        width: 185
+        height: 119
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3bc21e55407baac30800000000000000
+      internalID: 4371507617565060275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_62
+      rect:
+        serializedVersion: 2
+        x: 823
+        y: 465
+        width: 122
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea0101facd1eddb10800000000000000
+      internalID: 2008009346823229614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_63
+      rect:
+        serializedVersion: 2
+        x: 982
+        y: 468
+        width: 134
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8265797224779e220800000000000000
+      internalID: 2515672992878908968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_64
+      rect:
+        serializedVersion: 2
+        x: 1136
+        y: 467
+        width: 145
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e1d5a3816aab325d0800000000000000
+      internalID: -3088419696912212706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_65
+      rect:
+        serializedVersion: 2
+        x: 1295
+        y: 466
+        width: 314
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c04714f12aa1182f0800000000000000
+      internalID: -972466760923909108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_66
+      rect:
+        serializedVersion: 2
+        x: 1607
+        y: 466
+        width: 160
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a7d7910020ebfb80800000000000000
+      internalID: -8359841855212890208
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_67
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 336
+        width: 26
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a068527e08a21d50800000000000000
+      internalID: 6706607575109492899
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_68
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 266
+        width: 34
+        height: 151
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 256c360d7ccb228b0800000000000000
+      internalID: -5178369055141935534
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_69
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 319
+        width: 106
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74360d035d5bed180800000000000000
+      internalID: -9088627070735457465
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_70
+      rect:
+        serializedVersion: 2
+        x: 231
+        y: 271
+        width: 90
+        height: 146
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c299ab70be8f63b0800000000000000
+      internalID: -5517034129865469241
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_71
+      rect:
+        serializedVersion: 2
+        x: 327
+        y: 271
+        width: 90
+        height: 146
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65c7199a893196170800000000000000
+      internalID: 8172084545241316438
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_72
+      rect:
+        serializedVersion: 2
+        x: 423
+        y: 271
+        width: 90
+        height: 146
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8409fa26088af93d0800000000000000
+      internalID: -3197651941044809656
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_73
+      rect:
+        serializedVersion: 2
+        x: 549
+        y: 271
+        width: 244
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0dc5b0d4e6a939fd0800000000000000
+      internalID: -2336353983145485104
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_74
+      rect:
+        serializedVersion: 2
+        x: 980
+        y: 271
+        width: 101
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c80b05fb5b92ae90800000000000000
+      internalID: -7015874450234341182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_75
+      rect:
+        serializedVersion: 2
+        x: 1135
+        y: 271
+        width: 106
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0939696527cbb150800000000000000
+      internalID: 5889519901213276429
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_76
+      rect:
+        serializedVersion: 2
+        x: 1295
+        y: 271
+        width: 117
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 19fa16e2f039ee900800000000000000
+      internalID: 715671084210433937
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_77
+      rect:
+        serializedVersion: 2
+        x: 824
+        y: 271
+        width: 91
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3698fdcc6fbd13a90800000000000000
+      internalID: -7335840464964187805
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_78
+      rect:
+        serializedVersion: 2
+        x: 1448
+        y: 271
+        width: 127
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4206abc7b2dbc46a0800000000000000
+      internalID: -6463583370709671900
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_79
+      rect:
+        serializedVersion: 2
+        x: 1607
+        y: 271
+        width: 122
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f3be9b63ccdeba390800000000000000
+      internalID: -7805884067769357505
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_80
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 144
+        width: 34
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa92618e53f346d80800000000000000
+      internalID: -8258406315931063889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_81
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 147
+        width: 119
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d552edcf478b5efa0800000000000000
+      internalID: -5772004534807288483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_82
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 144
+        width: 119
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c6960edcb95586f0800000000000000
+      internalID: -683041100763064636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_83
+      rect:
+        serializedVersion: 2
+        x: 353
+        y: 146
+        width: 152
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 041f340e8c6b82510800000000000000
+      internalID: 1524669447737176384
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_84
+      rect:
+        serializedVersion: 2
+        x: 522
+        y: 143
+        width: 119
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 83ff9e92535357b40800000000000000
+      internalID: 5437310627572481848
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_85
+      rect:
+        serializedVersion: 2
+        x: 648
+        y: 146
+        width: 97
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c78c65b3d85701c0800000000000000
+      internalID: -4537560433247352893
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_86
+      rect:
+        serializedVersion: 2
+        x: 754
+        y: 147
+        width: 153
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f873308fe27b00e50800000000000000
+      internalID: 6773615251922565007
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_87
+      rect:
+        serializedVersion: 2
+        x: 936
+        y: 148
+        width: 145
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 00b9dc646af81b5a0800000000000000
+      internalID: -6507262042258433280
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_88
+      rect:
+        serializedVersion: 2
+        x: 1098
+        y: 147
+        width: 103
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd000a5da721d3380800000000000000
+      internalID: -8990008962382298917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_89
+      rect:
+        serializedVersion: 2
+        x: 1215
+        y: 144
+        width: 138
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 95ecdf239d7668d40800000000000000
+      internalID: 5586266570360737369
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_90
+      rect:
+        serializedVersion: 2
+        x: 1366
+        y: 147
+        width: 131
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fea14a06718dc6b50800000000000000
+      internalID: 6587877949853407983
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_91
+      rect:
+        serializedVersion: 2
+        x: 1509
+        y: 147
+        width: 136
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 322fe152bcedc7150800000000000000
+      internalID: 5871812978266796579
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_92
+      rect:
+        serializedVersion: 2
+        x: 1653
+        y: 143
+        width: 108
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a5d3382bb21b4d00800000000000000
+      internalID: 957879940789032352
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_93
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 60
+        width: 26
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8f0f8aa7b2b5fd460800000000000000
+      internalID: 7268628565898883320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_94
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 55
+        width: 43
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 243d31bb400dd6e20800000000000000
+      internalID: 3345558816943231810
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_95
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 74
+        width: 8
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 15c08792075357f70800000000000000
+      internalID: 9184305770940337233
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_96
+      rect:
+        serializedVersion: 2
+        x: 158
+        y: 60
+        width: 26
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c64b0d6f6071b49e0800000000000000
+      internalID: -1636188720940927892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_97
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 69
+        width: 8
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fafefa7818bae3ac0800000000000000
+      internalID: -3873470056676462673
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_98
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 74
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3628204f0c716b150800000000000000
+      internalID: 5887919680328467043
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_99
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 63
+        width: 26
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea5444ff0fbbf8650800000000000000
+      internalID: 6237410652680635822
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_100
+      rect:
+        serializedVersion: 2
+        x: 275
+        y: 78
+        width: 10
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b468c943e30be0c40800000000000000
+      internalID: 5480511577773606475
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_101
+      rect:
+        serializedVersion: 2
+        x: 282
+        y: 69
+        width: 46
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 91bf308d5517da590800000000000000
+      internalID: -7661342777577047271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_102
+      rect:
+        serializedVersion: 2
+        x: 328
+        y: 78
+        width: 8
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 49f7cd00300fdfc20800000000000000
+      internalID: 3242011202466643860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_103
+      rect:
+        serializedVersion: 2
+        x: 354
+        y: 60
+        width: 34
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 965201ee11f65ac40800000000000000
+      internalID: 5522942640838944105
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_104
+      rect:
+        serializedVersion: 2
+        x: 388
+        y: 74
+        width: 9
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec4c23495de3fc2b0800000000000000
+      internalID: -5562157927743961906
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_105
+      rect:
+        serializedVersion: 2
+        x: 419
+        y: 71
+        width: 10
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a3dc75ab48854f4e0800000000000000
+      internalID: -1948835411659338438
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_106
+      rect:
+        serializedVersion: 2
+        x: 428
+        y: 64
+        width: 26
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c0c05e34c5523e130800000000000000
+      internalID: 3594758005778091020
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_107
+      rect:
+        serializedVersion: 2
+        x: 444
+        y: 86
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f6bc5b4fa9b331700800000000000000
+      internalID: 509816719539555183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_108
+      rect:
+        serializedVersion: 2
+        x: 454
+        y: 74
+        width: 10
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 673b15fdfd4d82a90800000000000000
+      internalID: -7338381534810754186
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_109
+      rect:
+        serializedVersion: 2
+        x: 463
+        y: 78
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f1b85c1b069cd130800000000000000
+      internalID: 3592911577199194610
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_110
+      rect:
+        serializedVersion: 2
+        x: 498
+        y: 52
+        width: 52
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 90a14700502f00800800000000000000
+      internalID: 576726855599790601
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_111
+      rect:
+        serializedVersion: 2
+        x: 575
+        y: 69
+        width: 27
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cdfbfeace372b84c0800000000000000
+      internalID: -4284287469866729508
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_112
+      rect:
+        serializedVersion: 2
+        x: 602
+        y: 69
+        width: 9
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba31be243344566a0800000000000000
+      internalID: -6456679503809014869
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_113
+      rect:
+        serializedVersion: 2
+        x: 610
+        y: 72
+        width: 10
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e32de5e38182706d0800000000000000
+      internalID: -3024404540165270978
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_114
+      rect:
+        serializedVersion: 2
+        x: 650
+        y: 56
+        width: 35
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51c28bfb6ddbb2a50800000000000000
+      internalID: 6497495617449241621
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_115
+      rect:
+        serializedVersion: 2
+        x: 685
+        y: 69
+        width: 9
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6235c4617fbf65bf0800000000000000
+      internalID: -335804083542928602
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_116
+      rect:
+        serializedVersion: 2
+        x: 722
+        y: 52
+        width: 46
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b0966a54b5091bbd0800000000000000
+      internalID: -2616151186840590069
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_117
+      rect:
+        serializedVersion: 2
+        x: 751
+        y: 82
+        width: 8
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e1e34cbd3e63457b0800000000000000
+      internalID: -5236500114452496866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_118
+      rect:
+        serializedVersion: 2
+        x: 807
+        y: 63
+        width: 17
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a51fc669f3db8fed0800000000000000
+      internalID: -2379944322260995750
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_119
+      rect:
+        serializedVersion: 2
+        x: 825
+        y: 78
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0772637356dc7c850800000000000000
+      internalID: 6397307630304765808
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_120
+      rect:
+        serializedVersion: 2
+        x: 868
+        y: 74
+        width: 9
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a587b373db14443f0800000000000000
+      internalID: -917536143145469862
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_121
+      rect:
+        serializedVersion: 2
+        x: 876
+        y: 56
+        width: 44
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d7597423139963120800000000000000
+      internalID: 2393268688569996669
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_122
+      rect:
+        serializedVersion: 2
+        x: 921
+        y: 74
+        width: 8
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b75d5ced7944355e0800000000000000
+      internalID: -1922117196888812165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_123
+      rect:
+        serializedVersion: 2
+        x: 947
+        y: 64
+        width: 27
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 127a4d70f0cf0d650800000000000000
+      internalID: 6255777023903704865
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_124
+      rect:
+        serializedVersion: 2
+        x: 973
+        y: 78
+        width: 8
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b8216cac0f1463b0800000000000000
+      internalID: -5520253103957268304
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_125
+      rect:
+        serializedVersion: 2
+        x: 982
+        y: 69
+        width: 8
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 14959388abb859f80800000000000000
+      internalID: -8100414721490331327
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_126
+      rect:
+        serializedVersion: 2
+        x: 1038
+        y: 55
+        width: 18
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba9f3ccf17d740300800000000000000
+      internalID: 217436610546104747
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_127
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 72
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c0468883e6c1bcb00800000000000000
+      internalID: 849804214409913356
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_128
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 73
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b77127a05194f7100800000000000000
+      internalID: 107885270798571387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_129
+      rect:
+        serializedVersion: 2
+        x: 254
+        y: 74
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 589f83bd2a1a3dda0800000000000000
+      internalID: -5921211364227352187
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_130
+      rect:
+        serializedVersion: 2
+        x: 620
+        y: 74
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 412d82c338c8550b0800000000000000
+      internalID: -5740527654735916524
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_131
+      rect:
+        serializedVersion: 2
+        x: 716
+        y: 60
+        width: 9
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d7437c60a1c860640800000000000000
+      internalID: 5045874475925976189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_132
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 65
+        width: 8
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a0bc06077cadad40800000000000000
+      internalID: 5597319539093975201
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_133
+      rect:
+        serializedVersion: 2
+        x: 799
+        y: 69
+        width: 9
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 94f404f747df59480800000000000000
+      internalID: -8892923212380221623
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_134
+      rect:
+        serializedVersion: 2
+        x: 824
+        y: 59
+        width: 10
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a49248d48fef959d0800000000000000
+      internalID: -2784914552146089654
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_135
+      rect:
+        serializedVersion: 2
+        x: 833
+        y: 69
+        width: 9
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8dc83df95aadbab80800000000000000
+      internalID: -8382365876534145832
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_136
+      rect:
+        serializedVersion: 2
+        x: 842
+        y: 74
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 299468054eca2d7d0800000000000000
+      internalID: -2895061513842308718
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_137
+      rect:
+        serializedVersion: 2
+        x: 972
+        y: 65
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f7548bc9e5396d740800000000000000
+      internalID: 5176486856274494847
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_138
+      rect:
+        serializedVersion: 2
+        x: 990
+        y: 69
+        width: 9
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7dfc312fedeb3b740800000000000000
+      internalID: 5166683062277492695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_139
+      rect:
+        serializedVersion: 2
+        x: 999
+        y: 74
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af09e88f72efe1e10800000000000000
+      internalID: 2170451518066430202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_140
+      rect:
+        serializedVersion: 2
+        x: 1030
+        y: 69
+        width: 8
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e20d4c1c20f2fea80800000000000000
+      internalID: -8435471888154308562
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_141
+      rect:
+        serializedVersion: 2
+        x: 1056
+        y: 69
+        width: 8
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: adddbdd39ba4d6f30800000000000000
+      internalID: 4570391356318146010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_142
+      rect:
+        serializedVersion: 2
+        x: 166
+        y: 51
+        width: 10
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 817df79e026711e80800000000000000
+      internalID: -8209650761991203048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_143
+      rect:
+        serializedVersion: 2
+        x: 310
+        y: 60
+        width: 9
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: caaf97bb33512d490800000000000000
+      internalID: -7723087099054130516
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_144
+      rect:
+        serializedVersion: 2
+        x: 437
+        y: 56
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 94eb3111a5ceb6000800000000000000
+      internalID: 30377694085758537
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_145
+      rect:
+        serializedVersion: 2
+        x: 594
+        y: 60
+        width: 8
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a51a3794d7368bd0800000000000000
+      internalID: -2628351946314345050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_146
+      rect:
+        serializedVersion: 2
+        x: 668
+        y: 52
+        width: 8
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 81fa09282bf832920800000000000000
+      internalID: 2964370976597389080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_147
+      rect:
+        serializedVersion: 2
+        x: 816
+        y: 52
+        width: 8
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e090163832733480800000000000000
+      internalID: -8920660851140030233
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_148
+      rect:
+        serializedVersion: 2
+        x: 886
+        y: 52
+        width: 8
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fdd71ee2885546820800000000000000
+      internalID: 2910545302578626015
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sewerage-Platformer-Tileset-Pixel-Art2 (1)_149
+      rect:
+        serializedVersion: 2
+        x: 964
+        y: 55
+        width: 9
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cce79f8d50c488440800000000000000
+      internalID: 4938280579410525900
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable: {}
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
