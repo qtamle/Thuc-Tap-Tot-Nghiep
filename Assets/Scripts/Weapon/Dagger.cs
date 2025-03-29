@@ -81,6 +81,21 @@ public class Dagger : NetworkBehaviour
 
     private void Start()
     {
+        if (IsServer)
+        {
+            NetworkObject myPlayerObject = NetworkManager.Singleton.LocalClient.PlayerObject;
+            WeaponPlayerInfo weaponPlayerInfo = FindAnyObjectByType<WeaponPlayerInfo>(); // Hoặc dùng cách khác để tìm đúng object
+            // Đưa WeaponPlayerInfo thành con của PlayerObject
+            weaponPlayerInfo.transform.SetParent(myPlayerObject.transform);
+
+            weaponInfo.weaponName = weaponPlayerInfo.weaponName;
+            weaponInfo.weaponLevel = weaponPlayerInfo.weaponLevel;
+        }
+        else
+        {
+            FindPlayerServerRpc();
+        }
+
         OnSceneLoaded(SceneManager.GetActiveScene(), LoadSceneMode.Single);
     }
 
@@ -162,6 +177,20 @@ public class Dagger : NetworkBehaviour
         return false;
     }
 
+    [ServerRpc(RequireOwnership = false)]
+    private void FindPlayerServerRpc()
+    {
+        NetworkObject myPlayerObject = NetworkManager.Singleton.LocalClient.PlayerObject;
+        WeaponPlayerInfo weaponPlayerInfo = FindAnyObjectByType<WeaponPlayerInfo>(); // Hoặc dùng cách khác để tìm đúng object
+        // Đưa WeaponPlayerInfo thành con của PlayerObject
+        weaponPlayerInfo.transform.SetParent(myPlayerObject.transform);
+
+        weaponInfo.weaponName = weaponPlayerInfo.weaponName;
+        weaponInfo.weaponLevel = weaponPlayerInfo.weaponLevel;
+
+        Debug.Log("Weapon info cua player = " + weaponInfo.weaponLevel);
+    }
+
     private bool CanAttack()
     {
         return Time.time >= lastAttackTime + attackCooldown;
@@ -217,33 +246,36 @@ public class Dagger : NetworkBehaviour
                     health.HealHealth(1);
                 }
                 // Kiểm tra và hủy enemy
-                NetworkObject networkObject = enemyObject.GetComponent<NetworkObject>();
+                NetworkObject networkObject = enemyObject.GetComponentInParent<NetworkObject>();
                 if (networkObject != null)
                 {
                     // Gọi ServerRpc để hủy đối tượng
                     AttackEnemyServerRpc(networkObject.NetworkObjectId);
+                    SpawnCoinsServerRpc(
+                        false,
+                        coinSpawnMin,
+                        coinSpawnMax,
+                        enemy.transform.position
+                    );
+
+                    if (Random.value <= 0.30f)
+                    {
+                        SpawnCoinsServerRpc(
+                            true,
+                            secondaryCoinSpawnMin,
+                            secondaryCoinSpawnMax,
+                            enemy.transform.position
+                        );
+                    }
+
+                    if (ShouldSpawnPotion())
+                    {
+                        SpawnHealthPotions(enemy.transform.position, 1);
+                    }
                 }
                 else
                 {
                     Debug.LogWarning("Enemy does not have a NetworkObject component!");
-                }
-                Destroy(enemy.gameObject);
-
-                SpawnCoins(coinPrefab, coinSpawnMin, coinSpawnMax, enemy.transform.position);
-
-                if (Random.value <= 0.30f)
-                {
-                    SpawnCoins(
-                        secondaryCoinPrefab,
-                        secondaryCoinSpawnMin,
-                        secondaryCoinSpawnMax,
-                        enemy.transform.position
-                    );
-                }
-
-                if (ShouldSpawnPotion())
-                {
-                    SpawnHealthPotions(enemy.transform.position, 1);
                 }
 
                 SpawnOrbsServerRpc(enemy.transform.position, 5);
@@ -263,31 +295,60 @@ public class Dagger : NetworkBehaviour
 
             if (damageable != null && damageable.CanBeDamaged() && !isAttackBoss)
             {
-                damageable.TakeDamage(1);
-                isAttackBoss = true;
-                damageable.SetCanBeDamaged(false);
-
-                SpawnCoins(
-                    coinPrefab,
-                    coinSpawnMin * 10,
-                    coinSpawnMax * 10,
-                    boss.transform.position
-                );
-
-                if (Random.value <= 0.25f)
+                NetworkObject bossNetworkObject = boss.GetComponent<NetworkObject>();
+                if (bossNetworkObject != null && bossNetworkObject.IsSpawned)
                 {
-                    SpawnCoins(
-                        secondaryCoinPrefab,
-                        secondaryCoinSpawnMin * 5,
-                        secondaryCoinSpawnMax * 5,
+                    AttackBossServerRpc(bossNetworkObject);
+                    isAttackBoss = true;
+                    damageable.SetCanBeDamaged(false);
+                    SpawnCoinsServerRpc(
+                        false,
+                        coinSpawnMin * 10,
+                        coinSpawnMax * 10,
                         boss.transform.position
                     );
+
+                    if (Random.value <= 0.30f)
+                    {
+                        SpawnCoinsServerRpc(
+                            true,
+                            secondaryCoinSpawnMin * 5,
+                            secondaryCoinSpawnMax * 5,
+                            boss.transform.position
+                        );
+                    }
+
+                    if (ShouldSpawnPotion())
+                    {
+                        SpawnHealthPotions(boss.transform.position, 1);
+                    }
+                }
+                else
+                {
+                    Debug.LogError("[Client] Boss NetworkObject is null or not spawned!");
                 }
 
-                if (ShouldSpawnPotion())
-                {
-                    SpawnHealthPotions(boss.transform.position, 1);
-                }
+                // SpawnCoins(
+                //     coinPrefab,
+                //     coinSpawnMin * 10,
+                //     coinSpawnMax * 10,
+                //     boss.transform.position
+                // );
+
+                // if (Random.value <= 0.25f)
+                // {
+                //     SpawnCoins(
+                //         secondaryCoinPrefab,
+                //         secondaryCoinSpawnMin * 5,
+                //         secondaryCoinSpawnMax * 5,
+                //         boss.transform.position
+                //     );
+                // }
+
+                // if (ShouldSpawnPotion())
+                // {
+                //     SpawnHealthPotions(boss.transform.position, 1);
+                // }
 
                 SpawnOrbsServerRpc(boss.transform.position, 20);
             }
@@ -316,17 +377,17 @@ public class Dagger : NetworkBehaviour
 
                     snakeHealth.SetCanBeDamaged(false);
 
-                    SpawnCoins(
-                        coinPrefab,
+                    SpawnCoinsServerRpc(
+                        false,
                         coinSpawnMin * 13,
                         coinSpawnMax * 13,
                         partHealth.transform.position
                     );
 
-                    if (Random.value <= 0.25f)
+                    if (Random.value <= 0.30f)
                     {
-                        SpawnCoins(
-                            secondaryCoinPrefab,
+                        SpawnCoinsServerRpc(
+                            true,
                             secondaryCoinSpawnMin * 5,
                             secondaryCoinSpawnMax * 5,
                             partHealth.transform.position
@@ -352,17 +413,17 @@ public class Dagger : NetworkBehaviour
                     headController.isHeadAttacked = true;
 
                     snakeHealth.SetCanBeDamaged(false);
-                    SpawnCoins(
-                        coinPrefab,
+                    SpawnCoinsServerRpc(
+                        false,
                         coinSpawnMin * 13,
                         coinSpawnMax * 13,
                         headController.transform.position
                     );
 
-                    if (Random.value <= 0.25f)
+                    if (Random.value <= 0.30f)
                     {
-                        SpawnCoins(
-                            secondaryCoinPrefab,
+                        SpawnCoinsServerRpc(
+                            true,
                             secondaryCoinSpawnMin * 5,
                             secondaryCoinSpawnMax * 5,
                             headController.transform.position
@@ -383,6 +444,55 @@ public class Dagger : NetworkBehaviour
             }
         }
         isAttackBoss = false;
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void SpawnCoinsServerRpc(
+        bool isSecondary,
+        float minAmount,
+        float maxAmount,
+        Vector3 position
+    )
+    {
+        Debug.Log($"ServerRpc called - isSecondary: {isSecondary}, position: {position}");
+        bool isGoldIncreaseActive = goldIncrease != null && goldIncrease.IsReady();
+        float initialCoinCount = Random.Range(minAmount, maxAmount + 1);
+        float coinCount = initialCoinCount;
+
+        if (isGoldIncreaseActive)
+        {
+            coinCount += goldIncrease.increaseGoldChange;
+        }
+
+        if (weaponInfo != null && weaponInfo.weaponLevel > 1)
+        {
+            coinCount += increaseCoin;
+        }
+
+        for (int i = 0; i < coinCount; i++)
+        {
+            Vector3 spawnPosition = position + Vector3.up * 0.2f;
+            NetworkObject coin = CoinPoolManager.Instance.GetCoinFromPool(
+                spawnPosition,
+                isSecondary
+            );
+
+            Rigidbody2D coinRb = coin.GetComponent<Rigidbody2D>();
+            if (coinRb != null)
+            {
+                Vector2 forceDirection =
+                    new Vector2(Random.Range(-1.5f, 1.5f), Random.Range(1f, 1f)) * 2.5f;
+                coinRb.AddForce(forceDirection, ForceMode2D.Impulse);
+                StartCoroutine(CheckIfCoinIsStuck(coinRb));
+            }
+
+            CoinsScript coinScript = coin.GetComponent<CoinsScript>();
+            if (coinScript != null)
+            {
+                coinScript.SetCoinType(!isSecondary, isSecondary);
+                // StartCoroutine(HookCoinsContinuously());
+            }
+        }
     }
 
     private void ShowAttackVFX()
@@ -440,6 +550,42 @@ public class Dagger : NetworkBehaviour
         else
         {
             yield break;
+        }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void AttackBossServerRpc(NetworkObjectReference bossReference)
+    {
+        Debug.Log("[Server] AttackBossServerRpc called.");
+
+        if (bossReference.TryGet(out NetworkObject bossObject))
+        {
+            DamageInterface damageable = bossObject.GetComponent<DamageInterface>();
+            if (damageable != null)
+            {
+                Debug.Log(
+                    $"[Server] DamageInterface found. CanBeDamaged: {damageable.CanBeDamaged()}"
+                );
+
+                if (damageable.CanBeDamaged())
+                {
+                    Debug.Log("[Server] Boss is taking damage...");
+                    damageable.TakeDamage(1);
+                    damageable.SetCanBeDamaged(false);
+                }
+                else
+                {
+                    Debug.Log("[Server] Boss is currently immune!");
+                }
+            }
+            else
+            {
+                Debug.LogError("[Server] DamageInterface not found on this GameObject!");
+            }
+        }
+        else
+        {
+            Debug.LogError("[Server] Failed to retrieve NetworkObject from reference!");
         }
     }
 

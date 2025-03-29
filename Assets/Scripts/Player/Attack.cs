@@ -33,10 +33,10 @@ public class Attack : NetworkBehaviour
     public int increaseCoins;
 
     [Header("Settings Amount")]
-    public float coinSpawnMin = 3;
-    public float coinSpawnMax = 6;
-    public float secondaryCoinSpawnMin = 2;
-    public float secondaryCoinSpawnMax = 4;
+    public float coinSpawnMin = 1;
+    public float coinSpawnMax = 4;
+    public float secondaryCoinSpawnMin = 1;
+    public float secondaryCoinSpawnMax = 2;
 
     private CoinsManager coinsManager;
     private Transform player;
@@ -50,7 +50,7 @@ public class Attack : NetworkBehaviour
     private CoinPoolManager coinPoolManager;
     private ExperienceOrbPoolManager orbPoolManager;
 
-    private WeaponInfo weaponInfo;
+    private WeaponPlayerInfo weaponInfo;
     private BouncingSawLauncher bouncingSaw;
 
     private string playerTag = "Player";
@@ -70,14 +70,27 @@ public class Attack : NetworkBehaviour
 
     private void Start()
     {
-        FindPlayer();
+        if (IsServer)
+        {
+            NetworkObject myPlayerObject = NetworkManager
+                .Singleton
+                .ConnectedClients[OwnerClientId]
+                .PlayerObject;
+
+            WeaponPlayerInfo weaponPlayerInfo = FindAnyObjectByType<WeaponPlayerInfo>(); // Hoặc dùng cách khác để tìm đúng object
+            // Đưa WeaponPlayerInfo thành con của PlayerObject
+            weaponPlayerInfo.transform.SetParent(myPlayerObject.transform);
+            weaponInfo = GetComponentInChildren<WeaponPlayerInfo>();
+        }
+        else
+        {
+            FindPlayerServerRpc();
+        }
         OnSceneLoaded(SceneManager.GetActiveScene(), LoadSceneMode.Single);
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        FindPlayer();
-
         coinPoolManager = FindFirstObjectByType<CoinPoolManager>();
         orbPoolManager = FindFirstObjectByType<ExperienceOrbPoolManager>();
         coinsManager = UnityEngine.Object.FindFirstObjectByType<CoinsManager>();
@@ -116,7 +129,6 @@ public class Attack : NetworkBehaviour
         brutal = FindFirstObjectByType<Brutal>();
         lucky = FindFirstObjectByType<Lucky>();
 
-        weaponInfo = GetComponent<WeaponInfo>();
         bouncingSaw = GetComponent<BouncingSawLauncher>();
     }
 
@@ -138,6 +150,7 @@ public class Attack : NetworkBehaviour
 
         foreach (Collider2D enemy in enemies)
         {
+            Debug.Log("coli voi Enemy");
             if (enemy != null && enemy.gameObject != null && enemy.gameObject.activeInHierarchy)
             {
                 if (EnemyManager.Instance != null)
@@ -154,8 +167,48 @@ public class Attack : NetworkBehaviour
                 {
                     health.HealHealth(1);
                 }
+                if (gameObject != null)
+                {
+                    Debug.Log("Co game object trogn enemy");
+                }
+                NetworkObject networkObject =
+                    enemy.gameObject.GetComponentInParent<NetworkObject>();
+                if (networkObject != null)
+                {
+                    // Gọi ServerRpc để hủy đối tượng
+                    AttackEnemyServerRpc(networkObject.NetworkObjectId);
+                    SpawnCoinsServerRpc(
+                        false,
+                        coinSpawnMin,
+                        coinSpawnMax,
+                        enemy.transform.position
+                    );
+                    if (Random.value <= 0.30f)
+                    {
+                        SpawnCoinsServerRpc(
+                            true,
+                            secondaryCoinSpawnMin,
+                            secondaryCoinSpawnMax,
+                            enemy.transform.position
+                        );
+                    }
 
-                Destroy(enemy.gameObject);
+                    if (Random.value <= 0.15f && lucky != null)
+                    {
+                        SpawnHealthPotions(enemy.transform.position, 1);
+                    }
+
+                    if (Random.value <= 0.35f && bouncingSaw != null && weaponInfo.weaponLevel > 3)
+                    {
+                        bouncingSaw.LaunchBouncingSaw();
+                    }
+
+                    SpawnOrbsServerRpc(enemy.transform.position, 5);
+                }
+                else
+                {
+                    Debug.LogWarning("Enemy does not have a NetworkObject component!");
+                }
                 // SpawnCoins(coinPrefab, coinSpawnMin, coinSpawnMax, enemy.transform.position);
 
                 // if (Random.value <= 0.30f)
@@ -168,29 +221,6 @@ public class Attack : NetworkBehaviour
                 //     );
                 // }
                 // Spawn coins
-                SpawnCoinsServerRpc(false, coinSpawnMin, coinSpawnMax, enemy.transform.position);
-
-                if (Random.value <= 0.30f)
-                {
-                    SpawnCoinsServerRpc(
-                        true,
-                        secondaryCoinSpawnMin,
-                        secondaryCoinSpawnMax,
-                        enemy.transform.position
-                    );
-                }
-
-                if (Random.value <= 0.15f && lucky != null)
-                {
-                    SpawnHealthPotions(enemy.transform.position, 1);
-                }
-
-                if (Random.value <= 0.35f && bouncingSaw != null && weaponInfo.weaponLevel > 3)
-                {
-                    bouncingSaw.LaunchBouncingSaw();
-                }
-
-                SpawnOrbsServerRpc(enemy.transform.position, 5);
             }
         }
 
@@ -213,6 +243,30 @@ public class Attack : NetworkBehaviour
                     AttackBossServerRpc(bossNetworkObject);
                     isAttackBoss = true;
                     damageable.SetCanBeDamaged(false);
+                    SpawnCoinsServerRpc(
+                        false,
+                        coinSpawnMin * 10,
+                        coinSpawnMax * 10,
+                        boss.transform.position
+                    );
+
+                    if (Random.value <= 0.25f)
+                    {
+                        Debug.Log("Attack cua ChainSaw de spawn coin2");
+                        SpawnCoinsServerRpc(
+                            true,
+                            secondaryCoinSpawnMin,
+                            secondaryCoinSpawnMax,
+                            boss.transform.position
+                        );
+                    }
+
+                    if (Random.value <= 0.15f && lucky != null)
+                    {
+                        SpawnHealthPotions(boss.transform.position, 1);
+                    }
+
+                    SpawnOrbsServerRpc(boss.transform.position, 20);
                 }
                 else
                 {
@@ -235,29 +289,6 @@ public class Attack : NetworkBehaviour
                 //         boss.transform.position
                 //     );
                 // }
-                SpawnCoinsServerRpc(
-                    false,
-                    coinSpawnMin * 10,
-                    coinSpawnMax * 10,
-                    boss.transform.position
-                );
-
-                if (Random.value <= 0.25f)
-                {
-                    SpawnCoinsServerRpc(
-                        true,
-                        secondaryCoinSpawnMin,
-                        secondaryCoinSpawnMax,
-                        boss.transform.position
-                    );
-                }
-
-                if (Random.value <= 0.15f && lucky != null)
-                {
-                    SpawnHealthPotions(boss.transform.position, 1);
-                }
-
-                SpawnOrbsServerRpc(boss.transform.position, 20);
             }
         }
 
@@ -301,7 +332,7 @@ public class Attack : NetworkBehaviour
                     //     );
                     // }
                     SpawnCoinsServerRpc(
-                        false,
+                        true,
                         coinSpawnMin * 13,
                         coinSpawnMax * 13,
                         partHealth.transform.position
@@ -310,7 +341,7 @@ public class Attack : NetworkBehaviour
                     if (Random.value <= 0.25f)
                     {
                         SpawnCoinsServerRpc(
-                            true,
+                            false,
                             secondaryCoinSpawnMin * 5,
                             secondaryCoinSpawnMax * 5,
                             partHealth.transform.position
@@ -381,6 +412,19 @@ public class Attack : NetworkBehaviour
     }
 
     [ServerRpc(RequireOwnership = false)]
+    private void AttackEnemyServerRpc(ulong enemyNetworkId)
+    {
+        NetworkObject enemyObject = NetworkManager.Singleton.SpawnManager.SpawnedObjects[
+            enemyNetworkId
+        ];
+        if (enemyObject != null)
+        {
+            // Hủy đối tượng trên server
+            enemyObject.Despawn(true);
+        }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
     private void AttackBossServerRpc(NetworkObjectReference bossReference)
     {
         Debug.Log("[Server] AttackBossServerRpc called.");
@@ -416,39 +460,18 @@ public class Attack : NetworkBehaviour
         }
     }
 
-    private void FindPlayer()
+    [ServerRpc(RequireOwnership = false)]
+    private void FindPlayerServerRpc()
     {
-        GameObject player = GameObject.FindGameObjectWithTag(playerTag);
-        if (player != null)
-        {
-            playerTransform = player.transform;
-            Debug.Log("Player found in scene: " + player.name);
-        }
-        else
-        {
-            Debug.LogError("Player not found! Make sure the Player has the correct tag.");
+        NetworkObject myPlayerObject = NetworkManager
+            .Singleton
+            .ConnectedClients[OwnerClientId]
+            .PlayerObject;
+        WeaponPlayerInfo weaponPlayerInfo = FindAnyObjectByType<WeaponPlayerInfo>(); // Hoặc dùng cách khác để tìm đúng object
+        // Đưa WeaponPlayerInfo thành con của PlayerObject
+        weaponPlayerInfo.transform.SetParent(myPlayerObject.transform);
 
-            int playerLayer = LayerMask.NameToLayer("Player");
-            if (playerLayer != -1)
-            {
-                GameObject[] objectsInLayer = FindObjectsOfType<GameObject>();
-                foreach (GameObject obj in objectsInLayer)
-                {
-                    if (obj.layer == playerLayer)
-                    {
-                        playerTransform = obj.transform;
-                        Debug.Log($"Player found using layer: {obj.name}");
-                        break;
-                    }
-                }
-            }
-            if (playerTransform == null)
-            {
-                Debug.LogError(
-                    "Player not found! Make sure the Player has the correct tag or layer."
-                );
-            }
-        }
+        weaponInfo = GetComponentInChildren<WeaponPlayerInfo>();
     }
 
     void SpawnCoins(GameObject coinType, float minAmount, float maxAmount, Vector3 position)

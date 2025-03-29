@@ -31,7 +31,6 @@ public class PlayerSpawner : NetworkBehaviour
         {
             ulong clientId = entry.Key; // Player ID (0 hoặc 1)
             string weaponID = entry.Value;
-            Debug.Log($"Player {clientId} chọn weaponID: {weaponID}");
 
             WeaponSO weaponData = allWeapons.Find(weapon => weapon.WeaponID == weaponID);
             if (weaponData != null)

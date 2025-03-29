@@ -94,7 +94,16 @@ public class Claws : MonoBehaviour
 
     private void Start()
     {
+        FindPlayer();
         OnSceneLoaded(SceneManager.GetActiveScene(), LoadSceneMode.Single);
+    }
+
+    private void FindPlayer()
+    {
+        NetworkObject myPlayerObject = NetworkManager.Singleton.LocalClient.PlayerObject;
+        WeaponPlayerInfo weaponInfo = FindAnyObjectByType<WeaponPlayerInfo>(); // Hoặc dùng cách khác để tìm đúng object
+        // Đưa WeaponPlayerInfo thành con của PlayerObject
+        weaponInfo.transform.SetParent(myPlayerObject.transform);
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -307,14 +316,14 @@ public class Claws : MonoBehaviour
                 {
                     health.HealHealth(1);
                 }
-
-                Destroy(enemy.gameObject);
-                SpawnCoins(coinPrefab, coinSpawnMin, coinSpawnMax, enemy.transform.position);
+                NetworkObject networkObject = enemy.GetComponentInParent<NetworkObject>();
+                AttackEnemyServerRpc(networkObject.NetworkObjectId);
+                SpawnCoinsServerRpc(false, coinSpawnMin, coinSpawnMax, enemy.transform.position);
 
                 if (Random.value <= 0.30f)
                 {
-                    SpawnCoins(
-                        secondaryCoinPrefab,
+                    SpawnCoinsServerRpc(
+                        true,
                         secondaryCoinSpawnMin,
                         secondaryCoinSpawnMax,
                         enemy.transform.position
@@ -339,24 +348,24 @@ public class Claws : MonoBehaviour
         foreach (Collider2D boss in bosses)
         {
             DamageInterface damageable = boss.GetComponent<DamageInterface>();
-
+            NetworkObject bossNetworkObject = boss.GetComponent<NetworkObject>();
             if (damageable != null && damageable.CanBeDamaged() && !isAttackBoss)
             {
-                damageable.TakeDamage(1);
+                AttackBossServerRpc(bossNetworkObject);
                 isAttackBoss = true;
                 damageable.SetCanBeDamaged(false);
 
-                SpawnCoins(
-                    coinPrefab,
+                SpawnCoinsServerRpc(
+                    false,
                     coinSpawnMin * 10,
                     coinSpawnMax * 10,
                     boss.transform.position
                 );
 
-                if (Random.value <= 0.25f)
+                if (Random.value <= 0.30f)
                 {
-                    SpawnCoins(
-                        secondaryCoinPrefab,
+                    SpawnCoinsServerRpc(
+                        true,
                         secondaryCoinSpawnMin * 5,
                         secondaryCoinSpawnMax * 5,
                         boss.transform.position
@@ -500,6 +509,99 @@ public class Claws : MonoBehaviour
         if (vfxPool != null)
         {
             vfxPool.ReturnToPool(vfx);
+        }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void AttackEnemyServerRpc(ulong enemyNetworkId)
+    {
+        NetworkObject enemyObject = NetworkManager.Singleton.SpawnManager.SpawnedObjects[
+            enemyNetworkId
+        ];
+        if (enemyObject != null)
+        {
+            // Hủy đối tượng trên server
+            enemyObject.Despawn(true);
+        }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void AttackBossServerRpc(NetworkObjectReference bossReference)
+    {
+        Debug.Log("[Server] AttackBossServerRpc called.");
+
+        if (bossReference.TryGet(out NetworkObject bossObject))
+        {
+            DamageInterface damageable = bossObject.GetComponent<DamageInterface>();
+            if (damageable != null)
+            {
+                Debug.Log(
+                    $"[Server] DamageInterface found. CanBeDamaged: {damageable.CanBeDamaged()}"
+                );
+
+                if (damageable.CanBeDamaged())
+                {
+                    Debug.Log("[Server] Boss is taking damage...");
+                    damageable.TakeDamage(1);
+                    damageable.SetCanBeDamaged(false);
+                }
+                else
+                {
+                    Debug.Log("[Server] Boss is currently immune!");
+                }
+            }
+            else
+            {
+                Debug.LogError("[Server] DamageInterface not found on this GameObject!");
+            }
+        }
+        else
+        {
+            Debug.LogError("[Server] Failed to retrieve NetworkObject from reference!");
+        }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void SpawnCoinsServerRpc(
+        bool isSecondary,
+        float minAmount,
+        float maxAmount,
+        Vector3 position
+    )
+    {
+        Debug.Log($"ServerRpc called - isSecondary: {isSecondary}, position: {position}");
+        bool isGoldIncreaseActive = goldIncrease != null && goldIncrease.IsReady();
+        float initialCoinCount = Random.Range(minAmount, maxAmount + 1);
+        float coinCount = initialCoinCount;
+
+        if (isGoldIncreaseActive)
+        {
+            coinCount += goldIncrease.increaseGoldChange;
+        }
+
+        for (int i = 0; i < coinCount; i++)
+        {
+            Vector3 spawnPosition = position + Vector3.up * 0.2f;
+            NetworkObject coin = CoinPoolManager.Instance.GetCoinFromPool(
+                spawnPosition,
+                isSecondary
+            );
+
+            Rigidbody2D coinRb = coin.GetComponent<Rigidbody2D>();
+            if (coinRb != null)
+            {
+                Vector2 forceDirection =
+                    new Vector2(Random.Range(-1.5f, 1.5f), Random.Range(1f, 1f)) * 2.5f;
+                coinRb.AddForce(forceDirection, ForceMode2D.Impulse);
+                StartCoroutine(CheckIfCoinIsStuck(coinRb));
+            }
+
+            CoinsScript coinScript = coin.GetComponent<CoinsScript>();
+            if (coinScript != null)
+            {
+                coinScript.SetCoinType(!isSecondary, isSecondary);
+                // StartCoroutine(HookCoinsContinuously());
+            }
         }
     }
 

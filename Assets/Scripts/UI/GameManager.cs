@@ -108,6 +108,7 @@ public class GameManager : NetworkBehaviour
         foreach (var client in NetworkManager.Singleton.ConnectedClientsList)
         {
             NetworkObject playerObject = client.PlayerObject;
+
             if (playerObject != null)
             {
                 playerObject.Despawn(false);

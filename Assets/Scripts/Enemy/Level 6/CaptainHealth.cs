@@ -38,6 +38,7 @@ public class CaptainHealth : NetworkBehaviour, DamageInterface
     {
         if (IsServer) // Chỉ server mới gọi ServerRpc
         {
+            currentHealth.Value = 3;
             IntializeBossHealthServerRpc();
         }
         UpdateHealthBar();

@@ -5,7 +5,7 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ChainsawLevel4 : MonoBehaviour
+public class ChainsawLevel4 : NetworkBehaviour
 {
     [Header("Saw Settings")]
     public float moveSpeed = 10f;
@@ -90,7 +90,8 @@ public class ChainsawLevel4 : MonoBehaviour
         }
         else
         {
-            Destroy(gameObject);
+            gameObject.GetComponent<NetworkObject>().Despawn(true);
+            // Destroy(gameObject);
         }
     }
 
@@ -122,7 +123,8 @@ public class ChainsawLevel4 : MonoBehaviour
         }
         else
         {
-            Destroy(gameObject);
+            gameObject.GetComponent<NetworkObject>().Despawn(true);
+            // Destroy(gameObject);
         }
     }
 
@@ -179,19 +181,80 @@ public class ChainsawLevel4 : MonoBehaviour
                 {
                     spawner.OnEnemyKilled();
                 }
+                NetworkObject networkObject =
+                    enemy.gameObject.GetComponentInParent<NetworkObject>();
 
-                Destroy(enemy.gameObject);
-                SpawnCoins(coinPrefab, coinSpawnMin, coinSpawnMax, enemy.transform.position);
-
+                AttackEnemyServerRpc(networkObject.NetworkObjectId);
+                SpawnCoinsServerRpc(
+                    coinPrefab,
+                    coinSpawnMin,
+                    coinSpawnMax,
+                    enemy.transform.position
+                );
                 if (Random.value <= 0.30f)
                 {
-                    SpawnCoins(
+                    SpawnCoinsServerRpc(
                         secondaryCoinPrefab,
                         secondaryCoinSpawnMin,
                         secondaryCoinSpawnMax,
                         enemy.transform.position
                     );
                 }
+            }
+        }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void AttackEnemyServerRpc(ulong enemyNetworkId)
+    {
+        NetworkObject enemyObject = NetworkManager.Singleton.SpawnManager.SpawnedObjects[
+            enemyNetworkId
+        ];
+        if (enemyObject != null)
+        {
+            // Hủy đối tượng trên server
+            enemyObject.Despawn(true);
+        }
+        else
+        {
+            gameObject.GetComponent<NetworkObject>().Despawn(true);
+        }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void SpawnCoinsServerRpc(
+        bool isSecondary,
+        float minAmount,
+        float maxAmount,
+        Vector3 position
+    )
+    {
+        Debug.Log($"ServerRpc called - isSecondary: {isSecondary}, position: {position}");
+        float initialCoinCount = Random.Range(minAmount, maxAmount + 1);
+        float coinCount = initialCoinCount;
+
+        for (int i = 0; i < coinCount; i++)
+        {
+            Vector3 spawnPosition = position + Vector3.up * 0.2f;
+            NetworkObject coin = CoinPoolManager.Instance.GetCoinFromPool(
+                spawnPosition,
+                isSecondary
+            );
+
+            Rigidbody2D coinRb = coin.GetComponent<Rigidbody2D>();
+            if (coinRb != null)
+            {
+                Vector2 forceDirection =
+                    new Vector2(Random.Range(-1.5f, 1.5f), Random.Range(1f, 1f)) * 2.5f;
+                coinRb.AddForce(forceDirection, ForceMode2D.Impulse);
+                StartCoroutine(CheckIfCoinIsStuck(coinRb));
+            }
+
+            CoinsScript coinScript = coin.GetComponent<CoinsScript>();
+            if (coinScript != null)
+            {
+                coinScript.SetCoinType(!isSecondary, isSecondary);
+                // StartCoroutine(HookCoinsContinuously());
             }
         }
     }
