@@ -1,22 +1,10 @@
 fileFormatVersion: 2
-guid: 4f1798f510f912e4f97c6d43b66e8580
+guid: 49389460f0137fa429f1507677b3e0a1
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7909743977867431446
-    second: MonedaP_0
-  - first:
-      213: 2494353536357545931
-    second: MonedaP_1
-  - first:
-      213: -1451745731202529892
-    second: MonedaP_2
-  - first:
-      213: -3831586325613545685
-    second: MonedaP_3
-  - first:
-      213: -7142416684250839623
-    second: MonedaP_4
+      213: -2589257360003011558
+    second: Item 3-1.png_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -63,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 10
+  spritePixelsToUnits: 20
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -138,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: MonedaP_0
+      name: Item 3-1.png_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 16
-        height: 16
+        x: 22
+        y: 26
+        width: 23
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,96 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ae13dee72c1fa3290800000000000000
-      internalID: -7909743977867431446
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: MonedaP_1
-      rect:
-        serializedVersion: 2
-        x: 18
-        y: 0
-        width: 12
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: bc7b4de5359bd9220800000000000000
-      internalID: 2494353536357545931
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: MonedaP_2
-      rect:
-        serializedVersion: 2
-        x: 36
-        y: 0
-        width: 8
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: c95cb7bf2fc5adbe0800000000000000
-      internalID: -1451745731202529892
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: MonedaP_3
-      rect:
-        serializedVersion: 2
-        x: 50
-        y: 0
-        width: 12
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: b277f87998873dac0800000000000000
-      internalID: -3831586325613545685
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: MonedaP_4
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 0
-        width: 15
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 9b5c7692ed901ec90800000000000000
-      internalID: -7142416684250839623
+      spriteID: a1c64f8462c111cd0800000000000000
+      internalID: -2589257360003011558
       vertices: []
       indices: 
       edges: []
@@ -261,11 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      MonedaP_0: -7909743977867431446
-      MonedaP_1: 2494353536357545931
-      MonedaP_2: -1451745731202529892
-      MonedaP_3: -3831586325613545685
-      MonedaP_4: -7142416684250839623
+      Item 3-1.png_0: -2589257360003011558
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
