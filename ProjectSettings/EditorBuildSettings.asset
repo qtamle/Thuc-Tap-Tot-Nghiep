@@ -51,6 +51,21 @@ EditorBuildSettings:
     path: Assets/Scenes/Level/Level 5.unity
     guid: 584e73fbe772d5a4c82a25cde8382579
   - enabled: 1
+    path: Assets/Scenes/Level/Level 1 - Remake.unity
+    guid: de376e5a0d47bc043a001897dfccfb71
+  - enabled: 1
+    path: Assets/Scenes/Level/Level 2 - Remake.unity
+    guid: 5cb7ad7f28246ef469bc32391db3b48f
+  - enabled: 1
+    path: Assets/Scenes/Level/Level 3 - Remake.unity
+    guid: d37627652c2b7d947bea232246c88dbf
+  - enabled: 1
+    path: Assets/Scenes/Level/Level 4 - Remake.unity
+    guid: e98125dbf16c15148af78f0884683db7
+  - enabled: 1
+    path: Assets/Scenes/Level/Level 5 - Remake.unity
+    guid: 26b95bd3564fc1e479c1adf58bacf3fe
+  - enabled: 1
     path: Assets/Scenes/Summary.unity
     guid: f969852cd5be56248bcba7a71829ecfb
   - enabled: 0
