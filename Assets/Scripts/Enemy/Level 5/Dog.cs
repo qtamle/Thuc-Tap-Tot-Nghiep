@@ -33,9 +33,11 @@ public class Dog : MonoBehaviour
     private bool isDashOne = false;  
 
     private Rigidbody2D rb;
+    private Animator animator;
 
     private void Awake()
     {
+        animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -85,11 +87,18 @@ public class Dog : MonoBehaviour
     private IEnumerator Dash()
     {
         canDash = false;
+
+        animator.SetBool("Idle", false);
+        animator.SetBool("BeforeRun", true);
+
         yield return new WaitForSeconds(waitBeforeDash);
 
         isDashing = true;
         Vector2 dashDirection = transform.localScale.x > 0 ? Vector2.right : Vector2.left;
         float dashTime = 0f;
+
+        animator.SetBool("Run", true);
+        animator.SetBool("BeforeRun", false);
 
         while (dashTime < dashDuration)
         {
@@ -109,6 +118,10 @@ public class Dog : MonoBehaviour
     {
         isDashing = false;
         rb.linearVelocity = Vector2.zero;
+
+        animator.SetBool("Idle", true);
+        animator.SetBool("BeforeRun", false);
+        animator.SetBool("Run", false);
     }
 
     private IEnumerator DestroyAfterDelay()

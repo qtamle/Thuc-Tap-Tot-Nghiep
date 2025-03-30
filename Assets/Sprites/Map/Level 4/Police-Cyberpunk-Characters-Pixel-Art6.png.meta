@@ -1,0 +1,1287 @@
+fileFormatVersion: 2
+guid: 3cb09b9cb5ce6f541911ad56f1a98c33
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3930226458932262171
+    second: Police-Cyberpunk-Characters-Pixel-Art6_0
+  - first:
+      213: 883488134177850393
+    second: Police-Cyberpunk-Characters-Pixel-Art6_1
+  - first:
+      213: 5410514326831003763
+    second: Police-Cyberpunk-Characters-Pixel-Art6_2
+  - first:
+      213: 8091622588358579774
+    second: Police-Cyberpunk-Characters-Pixel-Art6_3
+  - first:
+      213: 6888760840544700241
+    second: Police-Cyberpunk-Characters-Pixel-Art6_4
+  - first:
+      213: -2840279666005149377
+    second: Police-Cyberpunk-Characters-Pixel-Art6_5
+  - first:
+      213: 8449451715585340055
+    second: Police-Cyberpunk-Characters-Pixel-Art6_6
+  - first:
+      213: -2942295231830325864
+    second: Police-Cyberpunk-Characters-Pixel-Art6_7
+  - first:
+      213: -4511812915475516579
+    second: Police-Cyberpunk-Characters-Pixel-Art6_8
+  - first:
+      213: -7000348197023712301
+    second: Police-Cyberpunk-Characters-Pixel-Art6_9
+  - first:
+      213: -578651946992880723
+    second: Police-Cyberpunk-Characters-Pixel-Art6_10
+  - first:
+      213: 5762220444835589697
+    second: Police-Cyberpunk-Characters-Pixel-Art6_11
+  - first:
+      213: 4918733760255511669
+    second: Police-Cyberpunk-Characters-Pixel-Art6_12
+  - first:
+      213: -1183939372575003059
+    second: Police-Cyberpunk-Characters-Pixel-Art6_13
+  - first:
+      213: 755054234873295006
+    second: Police-Cyberpunk-Characters-Pixel-Art6_14
+  - first:
+      213: 7243033771898353488
+    second: Police-Cyberpunk-Characters-Pixel-Art6_15
+  - first:
+      213: -6976432941406223398
+    second: Police-Cyberpunk-Characters-Pixel-Art6_16
+  - first:
+      213: -4116572993840818555
+    second: Police-Cyberpunk-Characters-Pixel-Art6_17
+  - first:
+      213: 6113200756128143344
+    second: Police-Cyberpunk-Characters-Pixel-Art6_18
+  - first:
+      213: 5560092712999052146
+    second: Police-Cyberpunk-Characters-Pixel-Art6_19
+  - first:
+      213: -1396818429917613248
+    second: Police-Cyberpunk-Characters-Pixel-Art6_20
+  - first:
+      213: 2873934597628790845
+    second: Police-Cyberpunk-Characters-Pixel-Art6_21
+  - first:
+      213: -7515224409325920314
+    second: Police-Cyberpunk-Characters-Pixel-Art6_22
+  - first:
+      213: 3528697087905235372
+    second: Police-Cyberpunk-Characters-Pixel-Art6_23
+  - first:
+      213: 630965328378853686
+    second: Police-Cyberpunk-Characters-Pixel-Art6_24
+  - first:
+      213: -3834401778399394063
+    second: Police-Cyberpunk-Characters-Pixel-Art6_25
+  - first:
+      213: -8723070129083378347
+    second: Police-Cyberpunk-Characters-Pixel-Art6_26
+  - first:
+      213: 1810224245497542557
+    second: Police-Cyberpunk-Characters-Pixel-Art6_27
+  - first:
+      213: 6751687070466358340
+    second: Police-Cyberpunk-Characters-Pixel-Art6_28
+  - first:
+      213: -2634823775718070330
+    second: Police-Cyberpunk-Characters-Pixel-Art6_29
+  - first:
+      213: 4452708631051723543
+    second: Police-Cyberpunk-Characters-Pixel-Art6_30
+  - first:
+      213: 6167061243052223844
+    second: Police-Cyberpunk-Characters-Pixel-Art6_31
+  - first:
+      213: 6083134944508318105
+    second: Police-Cyberpunk-Characters-Pixel-Art6_32
+  - first:
+      213: 392143256391851128
+    second: Police-Cyberpunk-Characters-Pixel-Art6_33
+  - first:
+      213: 6218847122174710237
+    second: Police-Cyberpunk-Characters-Pixel-Art6_34
+  - first:
+      213: -936648708689408716
+    second: Police-Cyberpunk-Characters-Pixel-Art6_35
+  - first:
+      213: -6766143739088170344
+    second: Police-Cyberpunk-Characters-Pixel-Art6_36
+  - first:
+      213: 5160658959518700246
+    second: Police-Cyberpunk-Characters-Pixel-Art6_37
+  - first:
+      213: -791488450026579735
+    second: Police-Cyberpunk-Characters-Pixel-Art6_38
+  - first:
+      213: 6835366045223470697
+    second: Police-Cyberpunk-Characters-Pixel-Art6_39
+  - first:
+      213: 1485108671427906531
+    second: Police-Cyberpunk-Characters-Pixel-Art6_40
+  - first:
+      213: -1879021587784929767
+    second: Police-Cyberpunk-Characters-Pixel-Art6_41
+  - first:
+      213: -4555403117037057905
+    second: Police-Cyberpunk-Characters-Pixel-Art6_42
+  - first:
+      213: 5334790155312248260
+    second: Police-Cyberpunk-Characters-Pixel-Art6_43
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Police-Cyberpunk-Characters-Pixel-Art6_0
+      rect:
+        serializedVersion: 2
+        x: 386
+        y: 951
+        width: 118
+        height: 146
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ea408cdbd70579c0800000000000000
+      internalID: -3930226458932262171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police-Cyberpunk-Characters-Pixel-Art6_1
+      rect:
+        serializedVersion: 2
+        x: 599
+        y: 951
+        width: 197
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 91481f0f6c7c24c00800000000000000
+      internalID: 883488134177850393
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police-Cyberpunk-Characters-Pixel-Art6_2
+      rect:
+        serializedVersion: 2
+        x: 807
+        y: 951
+        width: 121
+        height: 138
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3787ce63d12061b40800000000000000
+      internalID: 5410514326831003763
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police-Cyberpunk-Characters-Pixel-Art6_3
+      rect:
+        serializedVersion: 2
+        x: 1015
+        y: 951
+        width: 122
+        height: 154
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e36d3a37fd73b4070800000000000000
+      internalID: 8091622588358579774
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police-Cyberpunk-Characters-Pixel-Art6_4
+      rect:
+        serializedVersion: 2
+        x: 1132
+        y: 1047
+        width: 13
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 157c94b7c7bc99f50800000000000000
+      internalID: 6888760840544700241
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police-Cyberpunk-Characters-Pixel-Art6_5
+      rect:
+        serializedVersion: 2
+        x: 1123
+        y: 1004
+        width: 19
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f397ff431bc4598d0800000000000000
+      internalID: -2840279666005149377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police-Cyberpunk-Characters-Pixel-Art6_6
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 953
+        width: 31
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7927746719b724570800000000000000
+      internalID: 8449451715585340055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police-Cyberpunk-Characters-Pixel-Art6_7
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 953
+        width: 31
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8958d6a531eda27d0800000000000000
+      internalID: -2942295231830325864
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police-Cyberpunk-Characters-Pixel-Art6_8
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 953
+        width: 33
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d53ff08de02d261c0800000000000000
+      internalID: -4511812915475516579
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police-Cyberpunk-Characters-Pixel-Art6_9
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 953
+        width: 33
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3dbfa5c7764c9de90800000000000000
+      internalID: -7000348197023712301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police-Cyberpunk-Characters-Pixel-Art6_10
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 953
+        width: 32
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da3b6eabe1738f7f0800000000000000
+      internalID: -578651946992880723
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police-Cyberpunk-Characters-Pixel-Art6_11
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 953
+        width: 32
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 14e2beb07f487ff40800000000000000
+      internalID: 5762220444835589697
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police-Cyberpunk-Characters-Pixel-Art6_12
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 743
+        width: 30
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 57c40cc5b4ad24440800000000000000
+      internalID: 4918733760255511669
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police-Cyberpunk-Characters-Pixel-Art6_13
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 743
+        width: 32
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4e6116d96dc19fe0800000000000000
+      internalID: -1183939372575003059
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police-Cyberpunk-Characters-Pixel-Art6_14
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 743
+        width: 33
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e90f6cf73dd7a7a00800000000000000
+      internalID: 755054234873295006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police-Cyberpunk-Characters-Pixel-Art6_15
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 743
+        width: 33
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 057b82e17dc648460800000000000000
+      internalID: 7243033771898353488
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police-Cyberpunk-Characters-Pixel-Art6_16
+      rect:
+        serializedVersion: 2
+        x: 215
+        y: 743
+        width: 33
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad30628d33bbe2f90800000000000000
+      internalID: -6976432941406223398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police-Cyberpunk-Characters-Pixel-Art6_17
+      rect:
+        serializedVersion: 2
+        x: 383
+        y: 743
+        width: 122
+        height: 146
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 586d6223caefed6c0800000000000000
+      internalID: -4116572993840818555
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police-Cyberpunk-Characters-Pixel-Art6_18
+      rect:
+        serializedVersion: 2
+        x: 599
+        y: 743
+        width: 113
+        height: 138
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f7daa5d2b376d450800000000000000
+      internalID: 6113200756128143344
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police-Cyberpunk-Characters-Pixel-Art6_19
+      rect:
+        serializedVersion: 2
+        x: 808
+        y: 743
+        width: 113
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 273eb842dda692d40800000000000000
+      internalID: 5560092712999052146
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police-Cyberpunk-Characters-Pixel-Art6_20
+      rect:
+        serializedVersion: 2
+        x: 1015
+        y: 743
+        width: 118
+        height: 113
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 043ba05e9018d9ce0800000000000000
+      internalID: -1396818429917613248
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police-Cyberpunk-Characters-Pixel-Art6_21
+      rect:
+        serializedVersion: 2
+        x: 1224
+        y: 743
+        width: 119
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d388e5f2a4442e720800000000000000
+      internalID: 2873934597628790845
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police-Cyberpunk-Characters-Pixel-Art6_22
+      rect:
+        serializedVersion: 2
+        x: 1439
+        y: 743
+        width: 114
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6cf98c2973f84b790800000000000000
+      internalID: -7515224409325920314
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police-Cyberpunk-Characters-Pixel-Art6_23
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 535
+        width: 30
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ca10c8c3e4378f030800000000000000
+      internalID: 3528697087905235372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police-Cyberpunk-Characters-Pixel-Art6_24
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 535
+        width: 31
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 639fb978f93a1c800800000000000000
+      internalID: 630965328378853686
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police-Cyberpunk-Characters-Pixel-Art6_25
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 535
+        width: 33
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f6c068e5e779cac0800000000000000
+      internalID: -3834401778399394063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police-Cyberpunk-Characters-Pixel-Art6_26
+      rect:
+        serializedVersion: 2
+        x: 175
+        y: 535
+        width: 34
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5551a253fed61f680800000000000000
+      internalID: -8723070129083378347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police-Cyberpunk-Characters-Pixel-Art6_27
+      rect:
+        serializedVersion: 2
+        x: 383
+        y: 535
+        width: 122
+        height: 146
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d973eac3c553f1910800000000000000
+      internalID: 1810224245497542557
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police-Cyberpunk-Characters-Pixel-Art6_28
+      rect:
+        serializedVersion: 2
+        x: 591
+        y: 535
+        width: 122
+        height: 154
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44cbebd5e9fc2bd50800000000000000
+      internalID: 6751687070466358340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police-Cyberpunk-Characters-Pixel-Art6_29
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 323
+        width: 15
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c722926cb93f6bd0800000000000000
+      internalID: -2634823775718070330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police-Cyberpunk-Characters-Pixel-Art6_30
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 324
+        width: 32
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 713672298e23bcd30800000000000000
+      internalID: 4452708631051723543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police-Cyberpunk-Characters-Pixel-Art6_31
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 321
+        width: 31
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 46de43ca68dc59550800000000000000
+      internalID: 6167061243052223844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police-Cyberpunk-Characters-Pixel-Art6_32
+      rect:
+        serializedVersion: 2
+        x: 159
+        y: 323
+        width: 31
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9911f209003ab6450800000000000000
+      internalID: 6083134944508318105
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police-Cyberpunk-Characters-Pixel-Art6_33
+      rect:
+        serializedVersion: 2
+        x: 383
+        y: 321
+        width: 122
+        height: 148
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 87c1d4ac63c217500800000000000000
+      internalID: 392143256391851128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police-Cyberpunk-Characters-Pixel-Art6_34
+      rect:
+        serializedVersion: 2
+        x: 599
+        y: 319
+        width: 114
+        height: 146
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd11fad3288cd4650800000000000000
+      internalID: 6218847122174710237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police-Cyberpunk-Characters-Pixel-Art6_35
+      rect:
+        serializedVersion: 2
+        x: 807
+        y: 319
+        width: 114
+        height: 146
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 43d4d3746fa5003f0800000000000000
+      internalID: -936648708689408716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police-Cyberpunk-Characters-Pixel-Art6_36
+      rect:
+        serializedVersion: 2
+        x: 1015
+        y: 321
+        width: 121
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8929a6c2e14d912a0800000000000000
+      internalID: -6766143739088170344
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police-Cyberpunk-Characters-Pixel-Art6_37
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 111
+        width: 30
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d29c093bf75e9740800000000000000
+      internalID: 5160658959518700246
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police-Cyberpunk-Characters-Pixel-Art6_38
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 111
+        width: 33
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e8575cb2711405f0800000000000000
+      internalID: -791488450026579735
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police-Cyberpunk-Characters-Pixel-Art6_39
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 113
+        width: 32
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 966cf4be3391cde50800000000000000
+      internalID: 6835366045223470697
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police-Cyberpunk-Characters-Pixel-Art6_40
+      rect:
+        serializedVersion: 2
+        x: 391
+        y: 111
+        width: 114
+        height: 151
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3eb005dd77a2c9410800000000000000
+      internalID: 1485108671427906531
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police-Cyberpunk-Characters-Pixel-Art6_41
+      rect:
+        serializedVersion: 2
+        x: 607
+        y: 111
+        width: 106
+        height: 145
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 91ee9c642df5ce5e0800000000000000
+      internalID: -1879021587784929767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police-Cyberpunk-Characters-Pixel-Art6_42
+      rect:
+        serializedVersion: 2
+        x: 802
+        y: 111
+        width: 118
+        height: 146
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f888c482005f7c0c0800000000000000
+      internalID: -4555403117037057905
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police-Cyberpunk-Characters-Pixel-Art6_43
+      rect:
+        serializedVersion: 2
+        x: 999
+        y: 111
+        width: 126
+        height: 145
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c533ae916bf80a40800000000000000
+      internalID: 5334790155312248260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Police-Cyberpunk-Characters-Pixel-Art6_0: -3930226458932262171
+      Police-Cyberpunk-Characters-Pixel-Art6_1: 883488134177850393
+      Police-Cyberpunk-Characters-Pixel-Art6_10: -578651946992880723
+      Police-Cyberpunk-Characters-Pixel-Art6_11: 5762220444835589697
+      Police-Cyberpunk-Characters-Pixel-Art6_12: 4918733760255511669
+      Police-Cyberpunk-Characters-Pixel-Art6_13: -1183939372575003059
+      Police-Cyberpunk-Characters-Pixel-Art6_14: 755054234873295006
+      Police-Cyberpunk-Characters-Pixel-Art6_15: 7243033771898353488
+      Police-Cyberpunk-Characters-Pixel-Art6_16: -6976432941406223398
+      Police-Cyberpunk-Characters-Pixel-Art6_17: -4116572993840818555
+      Police-Cyberpunk-Characters-Pixel-Art6_18: 6113200756128143344
+      Police-Cyberpunk-Characters-Pixel-Art6_19: 5560092712999052146
+      Police-Cyberpunk-Characters-Pixel-Art6_2: 5410514326831003763
+      Police-Cyberpunk-Characters-Pixel-Art6_20: -1396818429917613248
+      Police-Cyberpunk-Characters-Pixel-Art6_21: 2873934597628790845
+      Police-Cyberpunk-Characters-Pixel-Art6_22: -7515224409325920314
+      Police-Cyberpunk-Characters-Pixel-Art6_23: 3528697087905235372
+      Police-Cyberpunk-Characters-Pixel-Art6_24: 630965328378853686
+      Police-Cyberpunk-Characters-Pixel-Art6_25: -3834401778399394063
+      Police-Cyberpunk-Characters-Pixel-Art6_26: -8723070129083378347
+      Police-Cyberpunk-Characters-Pixel-Art6_27: 1810224245497542557
+      Police-Cyberpunk-Characters-Pixel-Art6_28: 6751687070466358340
+      Police-Cyberpunk-Characters-Pixel-Art6_29: -2634823775718070330
+      Police-Cyberpunk-Characters-Pixel-Art6_3: 8091622588358579774
+      Police-Cyberpunk-Characters-Pixel-Art6_30: 4452708631051723543
+      Police-Cyberpunk-Characters-Pixel-Art6_31: 6167061243052223844
+      Police-Cyberpunk-Characters-Pixel-Art6_32: 6083134944508318105
+      Police-Cyberpunk-Characters-Pixel-Art6_33: 392143256391851128
+      Police-Cyberpunk-Characters-Pixel-Art6_34: 6218847122174710237
+      Police-Cyberpunk-Characters-Pixel-Art6_35: -936648708689408716
+      Police-Cyberpunk-Characters-Pixel-Art6_36: -6766143739088170344
+      Police-Cyberpunk-Characters-Pixel-Art6_37: 5160658959518700246
+      Police-Cyberpunk-Characters-Pixel-Art6_38: -791488450026579735
+      Police-Cyberpunk-Characters-Pixel-Art6_39: 6835366045223470697
+      Police-Cyberpunk-Characters-Pixel-Art6_4: 6888760840544700241
+      Police-Cyberpunk-Characters-Pixel-Art6_40: 1485108671427906531
+      Police-Cyberpunk-Characters-Pixel-Art6_41: -1879021587784929767
+      Police-Cyberpunk-Characters-Pixel-Art6_42: -4555403117037057905
+      Police-Cyberpunk-Characters-Pixel-Art6_43: 5334790155312248260
+      Police-Cyberpunk-Characters-Pixel-Art6_5: -2840279666005149377
+      Police-Cyberpunk-Characters-Pixel-Art6_6: 8449451715585340055
+      Police-Cyberpunk-Characters-Pixel-Art6_7: -2942295231830325864
+      Police-Cyberpunk-Characters-Pixel-Art6_8: -4511812915475516579
+      Police-Cyberpunk-Characters-Pixel-Art6_9: -7000348197023712301
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

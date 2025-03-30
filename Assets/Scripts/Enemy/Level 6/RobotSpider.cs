@@ -36,9 +36,15 @@ public class RobotSpider : MonoBehaviour
     private bool isZigZagHeightPositive = false;
     private bool hasRaycastCollided = false;
 
+    private Animator animator;
+
     void Start()
     {
+        animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+
+        animator.SetBool("Idle", true);
+
         rb.bodyType = RigidbodyType2D.Dynamic;
         StartCoroutine(HandleRigidbodyAndMovement());
     }
@@ -126,6 +132,9 @@ public class RobotSpider : MonoBehaviour
                     FlipCharacter();
                 }
 
+                animator.SetBool("Move", true);
+                animator.SetBool("Idle", false);
+
                 while (Vector3.Distance(transform.position, targetPosition) > 0.01f)
                 {
                     transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
@@ -133,6 +142,9 @@ public class RobotSpider : MonoBehaviour
                 }
 
                 transform.position = targetPosition;
+
+                animator.SetBool("Move", false);
+                animator.SetBool("Idle", true);
 
                 yield return new WaitForSeconds(stopDuration);
 
