@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -28,6 +30,11 @@ public class WeaponData : MonoBehaviour
 
     public event Action<WeaponData> OnSlotSelected; // Sự kiện khi chọn vũ khí
 
+    public GameObject upgradeSuccessPanel;
+    public TextMeshProUGUI upgradeMessageText;
+
+    private SnapToWeapon snapToWeapon;
+
     public void SelectWeapon()
     {
         OnSlotSelected?.Invoke(this);
@@ -47,6 +54,9 @@ public class WeaponData : MonoBehaviour
     {
         ResourcesService.ResetWeapons();
         coinsManager = FindFirstObjectByType<CoinsManager>();
+        snapToWeapon = FindAnyObjectByType<SnapToWeapon>();
+
+        upgradeSuccessPanel.gameObject.SetActive(false);
 
         // Kiểm tra xem dữ liệu đã tồn tại chưa
         bool dataExists = await LoadWeaponData();
@@ -138,6 +148,10 @@ public class WeaponData : MonoBehaviour
         weaponData.isOwned = true;
         isOwned = true;
         // Debug.Log($"✅ {weaponName} has been purchased for {basePrice} coins!");
+
+        upgradeMessageText.text = "Successful Purchase!";
+        upgradeSuccessPanel.SetActive(true);
+        StartCoroutine(HideUpgradeSuccessPanel());
     }
 
     public async void UpgradeWeapon()
@@ -205,6 +219,10 @@ public class WeaponData : MonoBehaviour
             $"✅ {weaponName} đã nâng cấp lên cấp {currentLevel} với giá {upgradeCost} coins!"
         );
 
+        upgradeMessageText.text = "Successful Upgrade!";
+        upgradeSuccessPanel.SetActive(true);
+        StartCoroutine(HideUpgradeSuccessPanel());
+
         FindAnyObjectByType<SnapToWeapon>()?.UpdateButtonStates();
     }
 
@@ -259,6 +277,9 @@ public class WeaponData : MonoBehaviour
             isOwned = false,
         };
 
+        upgradeSuccessPanel.SetActive(true);
+        StartCoroutine(HideUpgradeSuccessPanel());
+
         await SaveService.SaveWeaponData(data);
         updateData(data);
         // Debug.Log($"✅ Dữ liệu vũ khí {weaponName} đã được tạo. Level: {currentLevel}");
@@ -306,5 +327,17 @@ public class WeaponData : MonoBehaviour
         weaponSprite = weaponData.weaponSprite;
         currentLevel = savedData.currentLevel;
         weaponData.isOwned = savedData.isOwned;
+    }
+
+    private IEnumerator HideUpgradeSuccessPanel()
+    {
+        yield return new WaitForSeconds(2f);
+        upgradeSuccessPanel.SetActive(false);
+        upgradeMessageText.text = "";
+
+        if (snapToWeapon != null)
+        {
+            snapToWeapon.CloseUpgradeInfo();
+        }
     }
 }

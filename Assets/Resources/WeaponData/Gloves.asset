@@ -21,3 +21,7 @@ MonoBehaviour:
   isOwned: 0
   requiredLevel: 0
   upgradeCosts: 960000002c010000c201000058020000
+  upgradeLevel2Des: Gain increased money drops upon enemy kills.
+  upgradeLevel3Des: Gain 10 additional shield upon entering the match.
+  upgradeLevel4Des: The gloves have a 35% chance to release an electrical current
+    that jumps to adjacent enemies.

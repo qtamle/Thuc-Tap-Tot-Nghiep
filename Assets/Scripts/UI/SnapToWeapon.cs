@@ -17,14 +17,26 @@ public class SnapToWeapon : MonoBehaviour
     public Button previousButton;
     public Button upgradeButton;
     public Button buyButton;
+    public Button showUpgradeInfoButton;
+    public Button maxLevelButton;
+    public Button closeUpgradeInfoButton;
 
     // Text
     public Text buyButtonText;
+    public TextMeshProUGUI descriptionInfo;
+    public TextMeshProUGUI upgradeCost;
+    public TextMeshProUGUI upgradeText;
+
+    // Image
+    public Image weaponSprite;
+
+    // GameObject
+    public GameObject upgradeInfoPanel;
 
     // Max Level
     public Text upgradeButtonText;
-    public Sprite normalUpgradeSprite;
-    public Sprite maxLevelSprite;
+    //public Sprite normalUpgradeSprite;
+    //public Sprite maxLevelSprite;
 
     // Action
     public event Action<WeaponData> OnSnapChanged;
@@ -59,9 +71,51 @@ public class SnapToWeapon : MonoBehaviour
         previousButton.onClick.AddListener(PreviousWeapon);
         upgradeButton.onClick.AddListener(UpgradeWeapon);
         buyButton.onClick.AddListener(TryBuyWeapon);
+        showUpgradeInfoButton.onClick.AddListener(ShowUpgradeInfo);
+        closeUpgradeInfoButton.onClick.AddListener(CloseUpgradeInfo);
+
+        upgradeButton.gameObject.SetActive(false);
+        showUpgradeInfoButton.gameObject.SetActive(false);
+        maxLevelButton.gameObject.SetActive(false);
 
         // Cập nhật trạng thái nút khi bắt đầu
         UpdateButtonStates();
+    }
+
+    private void ShowUpgradeInfo()
+    {
+        if (currentSnapWeapon != null)
+        {
+            int nextLevel = currentSnapWeapon.currentLevel + 1;
+
+            if (currentSnapWeapon.weaponData != null && nextLevel <= currentSnapWeapon.weaponData.upgradeCosts.Length)
+            {
+                string upgradeDescription = nextLevel switch
+                {
+                    2 => currentSnapWeapon.weaponData.upgradeLevel2Des,
+                    3 => currentSnapWeapon.weaponData.upgradeLevel3Des,
+                    4 => currentSnapWeapon.weaponData.upgradeLevel4Des,
+                    _ => "No further upgrades available"
+                };
+
+                descriptionInfo.text = upgradeDescription;
+                upgradeText.text = $"Level {nextLevel} Upgrade";
+                upgradeCost.text = $"{currentSnapWeapon.weaponData.upgradeCosts[nextLevel - 1]}";
+
+                weaponSprite.sprite = currentSnapWeapon.weaponData.weaponSprite;
+
+                upgradeInfoPanel.SetActive(true);
+                upgradeButton.gameObject.SetActive(true);
+
+                currentSnapWeapon.weaponSprite = currentSnapWeapon.weaponData.weaponSprite;
+                currentSnapWeapon.upgradePrices = currentSnapWeapon.weaponData.upgradeCosts;
+            }
+        }
+    }
+
+    public void CloseUpgradeInfo()
+    {
+        upgradeInfoPanel.SetActive(false);
     }
 
     private void InitializeWeaponNames()
@@ -206,23 +260,10 @@ public class SnapToWeapon : MonoBehaviour
 
             bool isMaxLevel = currentSnapWeapon.currentLevel >= currentSnapWeapon.maxLevel;
 
-            upgradeButton.gameObject.SetActive(isOwned);
+            showUpgradeInfoButton.gameObject.SetActive(isOwned && !isMaxLevel);
 
-            if (isOwned)
-            {
-                if (isMaxLevel)
-                {
-                    upgradeButton.interactable = false;
-                    upgradeButtonText.text = "Max Level";
-                    upgradeButton.image.sprite = maxLevelSprite;
-                }
-                else
-                {
-                    upgradeButton.interactable = true;
-                    upgradeButtonText.text = "Upgrade";
-                    upgradeButton.image.sprite = normalUpgradeSprite;
-                }
-            }
+            upgradeButton.gameObject.SetActive(isOwned && !isMaxLevel);
+            maxLevelButton.gameObject.SetActive(isOwned && isMaxLevel);
 
             buyButton.gameObject.SetActive(!isOwned);
 

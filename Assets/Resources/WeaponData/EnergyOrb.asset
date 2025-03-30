@@ -21,3 +21,7 @@ MonoBehaviour:
   isOwned: 0
   requiredLevel: 0
   upgradeCosts: c8000000900100005802000020030000
+  upgradeLevel2Des: Gain more experience dropped when you defeat enemies.
+  upgradeLevel3Des: Every 30 seconds, the sphere's rotation speed will increase.
+  upgradeLevel4Des: Every 7 seconds, two energy orbs are fired randomly in different
+    directions.

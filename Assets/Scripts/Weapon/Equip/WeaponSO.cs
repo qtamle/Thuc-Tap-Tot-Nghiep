@@ -24,4 +24,12 @@ public class WeaponSO : ScriptableObject
 
     [Header("Upgrade Price")]
     public int[] upgradeCosts = new int[4];
+
+    [Header("Upgrade Descriptions")]
+    [TextArea(2, 10)]
+    public string upgradeLevel2Des;
+    [TextArea(2, 10)]
+    public string upgradeLevel3Des;
+    [TextArea(2, 10)]
+    public string upgradeLevel4Des;
 }

@@ -21,3 +21,7 @@ MonoBehaviour:
   isOwned: 1
   requiredLevel: 0
   upgradeCosts: 2c010000c2010000f4010000e8030000
+  upgradeLevel2Des: Gain increased money drops upon enemy kills.
+  upgradeLevel3Des: Gain 15 additional shield upon entering the match.
+  upgradeLevel4Des: There is a chance to spawn a saw blade that chases enemies, targeting
+    up to 3 enemies. (Enemies killed by the saw blade will not drop experience.)

@@ -21,3 +21,7 @@ MonoBehaviour:
   isOwned: 0
   requiredLevel: 0
   upgradeCosts: 960000002c010000c201000058020000
+  upgradeLevel2Des: Gain more experience dropped when you defeat enemies.
+  upgradeLevel3Des: Gain 10 additional health upon entering the match.
+  upgradeLevel4Des: At the start of each match, you summon a drone to help you attack
+    enemies.
