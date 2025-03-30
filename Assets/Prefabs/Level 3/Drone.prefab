@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 4943017852931645105}
   - component: {fileID: 1761971579606880249}
   - component: {fileID: -2999586399769908619}
+  - component: {fileID: 7092283006470443465}
   m_Layer: 9
   m_Name: Drone
   m_TagString: Untagged
@@ -34,7 +35,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 6.76, y: -1.63, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 4, y: 4, z: 1.3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7365569105520352561}
@@ -83,9 +84,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 20
-  m_Sprite: {fileID: -2135585597343286014, guid: 5aa8b770bc43046bc8d993d0d5b7f4a5, type: 3}
-  m_Color: {r: 0.5492854, g: 0.36922976, b: 0.7987421, a: 1}
+  m_SortingOrder: 999
+  m_Sprite: {fileID: 6337757556742298555, guid: 651177713287c114396142bf8731b79e, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -129,17 +130,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.0014636219, y: 0.002927214}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.8828125, y: 1}
+    oldSize: {x: 0.38, y: 0.21}
     newSize: {x: 0.8828125, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.8828125, y: 1}
+  m_Size: {x: 0.36471575, y: 0.22724557}
   m_EdgeRadius: 0
 --- !u!114 &582981997732563950
 MonoBehaviour:
@@ -202,7 +203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4508e56722b09c0478492b8251b82102, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boxSize: {x: 0.89, y: 1}
+  boxSize: {x: 1.38, y: 0.8}
   playerLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -271,7 +272,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2003606559
+  GlobalObjectIdHash: 1934714378
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -284,6 +285,28 @@ MonoBehaviour:
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
   AllowOwnerToParent: 0
+--- !u!95 &7092283006470443465
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1562509349317316727}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ac8368acdb1e3c74093e1d4a4a8524c6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &5915588295650055904
 GameObject:
   m_ObjectHideFlags: 0

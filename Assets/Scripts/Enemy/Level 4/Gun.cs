@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
@@ -20,9 +21,11 @@ public class Gun : MonoBehaviour
     public Transform groundCheck;
 
     private Rigidbody2D rb;
+    private Animator animator;
 
     private void Start()
     {
+        animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
     }
     private void Update()
@@ -48,7 +51,7 @@ public class Gun : MonoBehaviour
         shootTimer += Time.deltaTime;
         if (shootTimer >= shootInterval && IsGrounded())
         {
-            Shoot();
+            StartCoroutine(Shoot());
             shootTimer = 0f;
         }
 
@@ -61,8 +64,12 @@ public class Gun : MonoBehaviour
         transform.localScale = localScale;
     }
 
-    private void Shoot()
+    private IEnumerator Shoot()
     {
+        animator.SetTrigger("Shoot");
+
+        yield return new WaitForSeconds(0.5f);
+
         GameObject bullet = Instantiate(bulletPrefab, shootTransform.position, Quaternion.identity);
 
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();

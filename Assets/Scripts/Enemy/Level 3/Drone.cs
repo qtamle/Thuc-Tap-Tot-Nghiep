@@ -26,8 +26,12 @@ public class Drone : NetworkBehaviour
 
     private bool initialRaycastUsed = false;
 
+    private Animator droneAnim;
+
     private void Start()
     {
+        droneAnim = GetComponent<Animator>();
+
         PerformInitialRaycast();
         StartCoroutine(InitialMoveRoutine());
         SetNewRandomTarget();
@@ -140,13 +144,21 @@ public class Drone : NetworkBehaviour
         float originalSpeed = moveSpeed;
         moveSpeed = 0;
 
-        yield return new WaitForSeconds(0.5f);
+        droneAnim.SetBool("Fly", false);
+        droneAnim.SetTrigger("Fire");
+
+        yield return new WaitForSeconds(1f);
 
         ShootCrossPattern();
+
+        droneAnim.SetBool("Idle", true);
 
         yield return new WaitForSeconds(0.5f);
 
         moveSpeed = originalSpeed;
+
+        droneAnim.SetBool("Idle", false);
+        droneAnim.SetBool("Fly", true);
     }
 
     void ShootCrossPattern()

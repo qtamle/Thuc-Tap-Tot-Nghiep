@@ -25960,6 +25960,30 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 833241234}
     - target: {fileID: 3746279170215515468, guid: 298a5845a1105d44e89e7c075a6d90f2, type: 3}
+      propertyPath: enemySpawnDatas.Array.data[0].maxSpawnTime
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3746279170215515468, guid: 298a5845a1105d44e89e7c075a6d90f2, type: 3}
+      propertyPath: enemySpawnDatas.Array.data[0].minSpawnTime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3746279170215515468, guid: 298a5845a1105d44e89e7c075a6d90f2, type: 3}
+      propertyPath: enemySpawnDatas.Array.data[1].maxSpawnTime
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3746279170215515468, guid: 298a5845a1105d44e89e7c075a6d90f2, type: 3}
+      propertyPath: enemySpawnDatas.Array.data[1].minSpawnTime
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3746279170215515468, guid: 298a5845a1105d44e89e7c075a6d90f2, type: 3}
+      propertyPath: enemySpawnDatas.Array.data[2].maxSpawnTime
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3746279170215515468, guid: 298a5845a1105d44e89e7c075a6d90f2, type: 3}
+      propertyPath: enemySpawnDatas.Array.data[2].minSpawnTime
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3746279170215515468, guid: 298a5845a1105d44e89e7c075a6d90f2, type: 3}
       propertyPath: 'enemySpawnDatas.Array.data[0].spawnPoints.Array.data[0]'
       value: 
       objectReference: {fileID: 385575197}
