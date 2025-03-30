@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 1536135762103367088}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 0, z: 0}
+  m_LocalPosition: {x: 0.04, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -80,6 +80,7 @@ GameObject:
   - component: {fileID: 1534452581918658139}
   - component: {fileID: -2107772597862824167}
   - component: {fileID: -1119875795779615404}
+  - component: {fileID: 8730747632854315748}
   m_Layer: 9
   m_Name: Gun
   m_TagString: Untagged
@@ -376,6 +377,28 @@ MonoBehaviour:
   UseRigidBodyForMotion: 0
   AutoUpdateKinematicState: 0
   AutoSetKinematicOnDespawn: 0
+--- !u!114 &8730747632854315748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2227088648653770263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8d0727d5ae3244e3b569694d3912374, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  TransitionStateInfoList:
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: 1014957280
+    DestinationState: -1116495460
+    TransitionDuration: 0.25
+    TriggerNameHash: -1316629574
+    TransitionIndex: 0
+  m_Animator: {fileID: 1534452581918658139}
 --- !u!1 &9090322187420524132
 GameObject:
   m_ObjectHideFlags: 0

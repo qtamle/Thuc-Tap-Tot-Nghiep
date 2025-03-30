@@ -7576,7 +7576,7 @@ BoxCollider2D:
   m_UsedByEffector: 1
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.46768284, y: 2.1196656}
+  m_Offset: {x: -0.46768284, y: 2.0704324}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -7586,7 +7586,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 10.035336, y: 0.78022456}
+  m_Size: {x: 10.035336, y: 0.6817589}
   m_EdgeRadius: 0
 --- !u!251 &722294386
 PlatformEffector2D:
@@ -20579,7 +20579,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 26837b5d04348ce4498447820cd3854e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

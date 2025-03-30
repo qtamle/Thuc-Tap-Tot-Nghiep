@@ -14,9 +14,11 @@ public class Turret : NetworkBehaviour
     private GameObject laser;
     private bool isLaserActive = false;
     private Rigidbody2D rb;
+    private Animator animator;
 
     private void Start()
     {
+        animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -31,6 +33,8 @@ public class Turret : NetworkBehaviour
     private IEnumerator FireLaser()
     {
         isLaserActive = true;
+
+        animator.SetTrigger("Shoot");
 
         yield return new WaitForSeconds(1.5f);
 

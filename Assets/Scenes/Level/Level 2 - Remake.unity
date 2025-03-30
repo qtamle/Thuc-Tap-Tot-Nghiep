@@ -5686,7 +5686,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.036317825, y: 1.7079091}
+  m_Offset: {x: -0.22624922, y: 1.7079086}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -5696,7 +5696,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.0726357, y: 21.699043}
+  m_Size: {x: 1.0351267, y: 21.699043}
   m_EdgeRadius: 0
 --- !u!4 &566229464
 Transform:
@@ -7337,7 +7337,7 @@ BoxCollider2D:
   m_UsedByEffector: 1
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.51056385, y: 2.1318755}
+  m_Offset: {x: -0.51056385, y: 2.1216478}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -7347,7 +7347,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 11.958578, y: 0.79016006}
+  m_Size: {x: 11.958578, y: 0.7697048}
   m_EdgeRadius: 0
 --- !u!251 &750493620
 PlatformEffector2D:
@@ -16053,7 +16053,7 @@ BoxCollider2D:
   m_UsedByEffector: 1
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.5229726, y: 2.1332226}
+  m_Offset: {x: -0.5229726, y: 2.0992777}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -16063,7 +16063,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 11.96238, y: 0.78746676}
+  m_Size: {x: 11.96238, y: 0.7195779}
   m_EdgeRadius: 0
 --- !u!1 &1540283677
 GameObject:
@@ -21690,7 +21690,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 1.8698726}
+  m_Offset: {x: -0.03750992, y: 1.869873}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -21700,7 +21700,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 22.459007}
+  m_Size: {x: 1.0750198, y: 22.459007}
   m_EdgeRadius: 0
 --- !u!4 &1657005101
 Transform:

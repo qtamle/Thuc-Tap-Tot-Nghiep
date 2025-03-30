@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 1761971579606880249}
   - component: {fileID: -2999586399769908619}
   - component: {fileID: 7092283006470443465}
+  - component: {fileID: 3214074652303416858}
   m_Layer: 9
   m_Name: Drone
   m_TagString: Untagged
@@ -272,7 +273,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1934714378
+  GlobalObjectIdHash: 2003606559
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -307,6 +308,28 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3214074652303416858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1562509349317316727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8d0727d5ae3244e3b569694d3912374, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  TransitionStateInfoList:
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: 1808254291
+    DestinationState: -118708495
+    TransitionDuration: 0.25
+    TriggerNameHash: -118708495
+    TransitionIndex: 0
+  m_Animator: {fileID: 7092283006470443465}
 --- !u!1 &5915588295650055904
 GameObject:
   m_ObjectHideFlags: 0

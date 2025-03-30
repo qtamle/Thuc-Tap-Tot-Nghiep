@@ -164,6 +164,7 @@ GameObject:
   - component: {fileID: 5335181188079496292}
   - component: {fileID: 5149989748986548515}
   - component: {fileID: 3410899333530629228}
+  - component: {fileID: 8779901997291365595}
   m_Layer: 9
   m_Name: RobotSpider
   m_TagString: Untagged
@@ -202,6 +203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc05746a4f1e4484b84524d3eb6e241b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   wallCheck:
     serializedVersion: 2
     m_Bits: 64
@@ -319,7 +321,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 217392320
+  GlobalObjectIdHash: 115204898
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -462,6 +464,21 @@ MonoBehaviour:
   UseRigidBodyForMotion: 0
   AutoUpdateKinematicState: 0
   AutoSetKinematicOnDespawn: 0
+--- !u!114 &8779901997291365595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6627385571682601832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8d0727d5ae3244e3b569694d3912374, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  TransitionStateInfoList: []
+  m_Animator: {fileID: 5335181188079496292}
 --- !u!1 &6728159068198684545
 GameObject:
   m_ObjectHideFlags: 0
