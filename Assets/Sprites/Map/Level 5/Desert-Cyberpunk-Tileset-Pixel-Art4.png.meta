@@ -160,7 +160,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Desert-Cyberpunk-Tileset-Pixel-Art4_0: -3073676402865271177
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -360,7 +360,16 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Skateboard_0: -1049678543892241128
+      Skateboard_1: -2552661699297507040
+      Skateboard_2: 1104739201346365283
+      Skateboard_3: 5472243833939484789
+      Skateboard_4: 6668139485982878627
+      Skateboard_5: 1561545346867397404
+      Skateboard_6: 3740121865358365027
+      Skateboard_7: -4011757429572878872
+      Skateboard_8: -4191447859292291379
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
