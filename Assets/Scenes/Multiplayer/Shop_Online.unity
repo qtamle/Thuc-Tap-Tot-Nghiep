@@ -211,7 +211,7 @@ MonoBehaviour:
   weaponData: {fileID: 11400000, guid: 2f88d731e1cfb3444b2fc388af443f70, type: 2}
   weaponName: Dagger
   basePrice: 100
-  weaponSprite: {fileID: -5151153562373494563, guid: 2aac49780cc76db4da9e2c7f83864276, type: 3}
+  weaponSprite: {fileID: 9214599474657386639, guid: d2e8a6893914b764286f5af7652fbe40, type: 3}
   upgradePrices: 64000000c80000002c01000090010000
   currentLevel: 1
   maxLevel: 4
@@ -1942,15 +1942,15 @@ RectTransform:
   m_GameObject: {fileID: 607849635}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 2.99, y: 2.99, z: 2.99}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 52076973}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 200}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &607849637
 MonoBehaviour:
@@ -1972,7 +1972,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -2486521743634864436, guid: bddb254de3f53c74eb98f92f04fedcea, type: 3}
+  m_Sprite: {fileID: 9214599474657386639, guid: d2e8a6893914b764286f5af7652fbe40, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2323,7 +2323,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -2486521743634864436, guid: bddb254de3f53c74eb98f92f04fedcea, type: 3}
+  m_Sprite: {fileID: 7142250386333915158, guid: 1fa1afe7abbec0b4b8b0a73df4c6903c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3373,7 +3373,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -2486521743634864436, guid: bddb254de3f53c74eb98f92f04fedcea, type: 3}
+  m_Sprite: {fileID: 7403718101583450526, guid: ee5a1848026a1e1468b031cfde3b255e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

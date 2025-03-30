@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WeaponID: 1
   weapon: {fileID: 6425361517199885815, guid: 1be1b50cc9b6c41449c27cba27d443dc, type: 3}
-  weaponSprite: {fileID: -5151153562373494563, guid: 2aac49780cc76db4da9e2c7f83864276, type: 3}
+  weaponSprite: {fileID: 9214599474657386639, guid: d2e8a6893914b764286f5af7652fbe40, type: 3}
   weaponName: Dagger
   description: 
   currentLevel: 1

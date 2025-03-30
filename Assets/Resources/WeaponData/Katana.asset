@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WeaponID: 6
   weapon: {fileID: 3094505062376793977, guid: 310cdb867d9b68c46a88098748afd3ff, type: 3}
-  weaponSprite: {fileID: -5151153562373494563, guid: 2aac49780cc76db4da9e2c7f83864276, type: 3}
+  weaponSprite: {fileID: 7403718101583450526, guid: ee5a1848026a1e1468b031cfde3b255e, type: 3}
   weaponName: Katana
   description: 
   currentLevel: 1
