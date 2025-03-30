@@ -23542,6 +23542,38 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 520457582}
     - target: {fileID: 8878063953520464746, guid: c2685f48e8e9c3e488e077b7faa608c7, type: 3}
+      propertyPath: 'enemySpawnDatas.Array.data[5].spawnPoints.Array.data[0]'
+      value: 
+      objectReference: {fileID: 291893346}
+    - target: {fileID: 8878063953520464746, guid: c2685f48e8e9c3e488e077b7faa608c7, type: 3}
+      propertyPath: 'enemySpawnDatas.Array.data[5].spawnPoints.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1591650128}
+    - target: {fileID: 8878063953520464746, guid: c2685f48e8e9c3e488e077b7faa608c7, type: 3}
+      propertyPath: 'enemySpawnDatas.Array.data[5].spawnPoints.Array.data[2]'
+      value: 
+      objectReference: {fileID: 1868206866}
+    - target: {fileID: 8878063953520464746, guid: c2685f48e8e9c3e488e077b7faa608c7, type: 3}
+      propertyPath: 'enemySpawnDatas.Array.data[5].spawnPoints.Array.data[3]'
+      value: 
+      objectReference: {fileID: 870499690}
+    - target: {fileID: 8878063953520464746, guid: c2685f48e8e9c3e488e077b7faa608c7, type: 3}
+      propertyPath: 'enemySpawnDatas.Array.data[5].spawnPoints.Array.data[4]'
+      value: 
+      objectReference: {fileID: 916838137}
+    - target: {fileID: 8878063953520464746, guid: c2685f48e8e9c3e488e077b7faa608c7, type: 3}
+      propertyPath: 'enemySpawnDatas.Array.data[5].spawnPoints.Array.data[5]'
+      value: 
+      objectReference: {fileID: 1254879334}
+    - target: {fileID: 8878063953520464746, guid: c2685f48e8e9c3e488e077b7faa608c7, type: 3}
+      propertyPath: 'enemySpawnDatas.Array.data[5].spawnPoints.Array.data[6]'
+      value: 
+      objectReference: {fileID: 385575197}
+    - target: {fileID: 8878063953520464746, guid: c2685f48e8e9c3e488e077b7faa608c7, type: 3}
+      propertyPath: 'enemySpawnDatas.Array.data[5].spawnPoints.Array.data[7]'
+      value: 
+      objectReference: {fileID: 520457582}
+    - target: {fileID: 8878063953520464746, guid: c2685f48e8e9c3e488e077b7faa608c7, type: 3}
       propertyPath: 'enemySpawnDatas.Array.data[0].spawnPoints.Array.data[10]'
       value: 
       objectReference: {fileID: 1254879334}
