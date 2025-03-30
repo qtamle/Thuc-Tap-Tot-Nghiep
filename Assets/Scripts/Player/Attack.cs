@@ -72,19 +72,23 @@ public class Attack : NetworkBehaviour
     {
         if (IsServer)
         {
-            NetworkObject myPlayerObject = NetworkManager
-                .Singleton
-                .ConnectedClients[OwnerClientId]
-                .PlayerObject;
+            // NetworkObject myPlayerObject = NetworkManager
+            //     .Singleton
+            //     .ConnectedClients[OwnerClientId]
+            //     .PlayerObject;
 
-            WeaponPlayerInfo weaponPlayerInfo = FindAnyObjectByType<WeaponPlayerInfo>(); // Hoặc dùng cách khác để tìm đúng object
-            // Đưa WeaponPlayerInfo thành con của PlayerObject
-            weaponPlayerInfo.transform.SetParent(myPlayerObject.transform);
-            weaponInfo = GetComponentInChildren<WeaponPlayerInfo>();
+            // WeaponPlayerInfo weaponPlayerInfo = FindAnyObjectByType<WeaponPlayerInfo>(); // Hoặc dùng cách khác để tìm đúng object
+            // // Đưa WeaponPlayerInfo thành con của PlayerObject
+            // weaponPlayerInfo.transform.SetParent(myPlayerObject.transform);
+            // weaponInfo = GetComponentInChildren<WeaponPlayerInfo>();
+            ulong myClientId = NetworkManager.Singleton.LocalClientId;
+            FindPlayerServerRpc(myClientId);
         }
         else
         {
-            FindPlayerServerRpc();
+            ulong myClientId = NetworkManager.Singleton.LocalClientId;
+
+            FindPlayerServerRpc(myClientId);
         }
         OnSceneLoaded(SceneManager.GetActiveScene(), LoadSceneMode.Single);
     }
@@ -461,17 +465,32 @@ public class Attack : NetworkBehaviour
     }
 
     [ServerRpc(RequireOwnership = false)]
-    private void FindPlayerServerRpc()
+    private void FindPlayerServerRpc(ulong clientId) // Thêm clientId làm tham số
     {
-        NetworkObject myPlayerObject = NetworkManager
-            .Singleton
-            .ConnectedClients[OwnerClientId]
-            .PlayerObject;
-        WeaponPlayerInfo weaponPlayerInfo = FindAnyObjectByType<WeaponPlayerInfo>(); // Hoặc dùng cách khác để tìm đúng object
-        // Đưa WeaponPlayerInfo thành con của PlayerObject
-        weaponPlayerInfo.transform.SetParent(myPlayerObject.transform);
+        // Kiểm tra nếu client tồn tại
+        if (NetworkManager.Singleton.ConnectedClients.TryGetValue(clientId, out var client))
+        {
+            NetworkObject playerObject = client.PlayerObject;
 
-        weaponInfo = GetComponentInChildren<WeaponPlayerInfo>();
+            // Tìm tất cả WeaponPlayerInfo và chọn cái có OwnerClientId trùng khớp
+            WeaponPlayerInfo[] allWeapons = FindObjectsByType<WeaponPlayerInfo>(
+                FindObjectsInactive.Include,
+                FindObjectsSortMode.None
+            );
+            WeaponPlayerInfo targetWeapon = allWeapons.FirstOrDefault(w =>
+                w.NetworkObject.OwnerClientId == clientId
+            );
+
+            if (targetWeapon != null)
+            {
+                targetWeapon.transform.SetParent(playerObject.transform);
+                targetWeapon.transform.localPosition = Vector3.zero; // Đặt vị trí phù hợp
+            }
+            else
+            {
+                Debug.LogError($"Không tìm thấy WeaponPlayerInfo cho client {clientId}");
+            }
+        }
     }
 
     void SpawnCoins(GameObject coinType, float minAmount, float maxAmount, Vector3 position)

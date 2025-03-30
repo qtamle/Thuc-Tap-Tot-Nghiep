@@ -15,7 +15,7 @@ public class EnemySpawnerLevel6 : NetworkBehaviour, IEnemySpawner
     [Header("Hide UI")]
     public GameObject remain;
 
-    [Header("Boss Level 1 Script")]
+    [Header("Boss Level 6 Script")]
     public CaptainSkill captainBoss;
     public GameObject BossSpawnPostion;
     private NetworkVariable<bool> stopSpawning = new NetworkVariable<bool>(false);
@@ -171,10 +171,17 @@ public class EnemySpawnerLevel6 : NetworkBehaviour, IEnemySpawner
         {
             warningBoss.SetActive(false);
         }
-
+        ShowBossHealthUI();
         if (bossLevel1 != null)
         {
-            bossLevel1.SetActive(true);
+            GameObject bossSpawned = Instantiate(
+                bossLevel1,
+                BossSpawnPostion.transform.position,
+                Quaternion.identity
+            );
+            bossSpawned.GetComponent<NetworkObject>().Spawn(true);
+            CaptainHealth.Instance.IntializeBossHealthServerRpc();
+            CaptainSkill.Instance.Active();
         }
 
         yield return new WaitForSeconds(0.5f);
@@ -205,6 +212,8 @@ public class EnemySpawnerLevel6 : NetworkBehaviour, IEnemySpawner
                 Quaternion.identity
             );
             bossSpawned.GetComponent<NetworkObject>().Spawn(true);
+            CaptainHealth.Instance.IntializeBossHealthServerRpc();
+
             CaptainSkill.Instance.Active();
         }
 

@@ -268,7 +268,7 @@ public class WeaponSelectDisplay : NetworkBehaviour
         GameObject weaponInfoObj = Instantiate(weaponInfoPrefab);
         NetworkObject networkObject = weaponInfoObj.GetComponent<NetworkObject>();
 
-        networkObject.SpawnWithOwnership(clientId);
+        networkObject.SpawnWithOwnership(clientId, false);
         weaponInfoObj.GetComponent<WeaponPlayerInfo>().SetWeaponInfo(weaponName, weaponLevel);
     }
 
