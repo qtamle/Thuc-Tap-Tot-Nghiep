@@ -17232,6 +17232,14 @@ PrefabInstance:
       value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8475231646053935250, guid: dcdac1a663a91db41b6910d44c6aaed0, type: 3}
+      propertyPath: enemySpawnDatas.Array.data[0].maxSpawnTime
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8475231646053935250, guid: dcdac1a663a91db41b6910d44c6aaed0, type: 3}
+      propertyPath: enemySpawnDatas.Array.data[0].minSpawnTime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8475231646053935250, guid: dcdac1a663a91db41b6910d44c6aaed0, type: 3}
       propertyPath: 'enemySpawnDatas.Array.data[0].spawnPoints.Array.data[0]'
       value: 
       objectReference: {fileID: 866592060}
