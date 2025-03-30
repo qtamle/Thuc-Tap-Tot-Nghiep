@@ -109,7 +109,7 @@ public class EnemySpawnerLevel5 : NetworkBehaviour, IEnemySpawner
                 {
                     spawnedEnemy.tag = "Enemy";
                 }
-
+                spawnedEnemy.GetComponent<NetworkObject>().Spawn(true);
                 currentTotalSpawnCount.Value++;
             }
 
@@ -136,12 +136,22 @@ public class EnemySpawnerLevel5 : NetworkBehaviour, IEnemySpawner
 
     public void OnEnemyKilled()
     {
-        currentTotalSpawnCount.Value--;
-
-        if (stopSpawning.Value)
+        // Chỉ gọi ServerRpc nếu là Client (tránh gọi thừa khi đang là Server)
+        if (!IsServer)
         {
-            currentTotalSpawnCount.Value = 0;
+            OnEnemyKilledServerRpc();
         }
+        // Nếu là Server, xử lý trực tiếp
+        else
+        {
+            currentTotalSpawnCount.Value--;
+        }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void OnEnemyKilledServerRpc()
+    {
+        currentTotalSpawnCount.Value--;
     }
 
     private IEnumerator HandleBossSpawn()

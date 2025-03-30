@@ -39,13 +39,13 @@ public class EnemySpawnerLevel6 : NetworkBehaviour, IEnemySpawner
             return; // Chỉ server mới spawn quái
         else
         {
-            // EnemyManager.Instance.killTarget.Value = 2;
+            EnemyManager.Instance.killTarget.Value = 2;
             // KillCounterUI.Instance.CounterUI();
             BossSpawnPostion = GameObject.FindWithTag("BossSpawner");
 
             foreach (var spawnData in enemySpawnDatas)
             {
-                // StartCoroutine(SpawnEnemyIndependently(spawnData));
+                StartCoroutine(SpawnEnemyIndependently(spawnData));
             }
         }
     }
@@ -108,7 +108,7 @@ public class EnemySpawnerLevel6 : NetworkBehaviour, IEnemySpawner
                 {
                     spawnedEnemy.tag = "Enemy";
                 }
-
+                spawnedEnemy.GetComponent<NetworkObject>().Spawn(true);
                 currentTotalSpawnCount.Value++;
             }
 
@@ -135,12 +135,22 @@ public class EnemySpawnerLevel6 : NetworkBehaviour, IEnemySpawner
 
     public void OnEnemyKilled()
     {
-        currentTotalSpawnCount.Value--;
-
-        if (stopSpawning.Value)
+        // Chỉ gọi ServerRpc nếu là Client (tránh gọi thừa khi đang là Server)
+        if (!IsServer)
         {
-            currentTotalSpawnCount.Value = 0;
+            OnEnemyKilledServerRpc();
         }
+        // Nếu là Server, xử lý trực tiếp
+        else
+        {
+            currentTotalSpawnCount.Value--;
+        }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void OnEnemyKilledServerRpc()
+    {
+        currentTotalSpawnCount.Value--;
     }
 
     private IEnumerator HandleBossSpawn()
