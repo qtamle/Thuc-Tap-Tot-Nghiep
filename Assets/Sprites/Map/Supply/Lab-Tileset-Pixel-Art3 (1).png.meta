@@ -1,0 +1,1495 @@
+fileFormatVersion: 2
+guid: 6b0f7827a9b00384fb28c875d76cd326
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4242530048839182178
+    second: Lab-Tileset-Pixel-Art3 (1)_0
+  - first:
+      213: 3961960443653222270
+    second: Lab-Tileset-Pixel-Art3 (1)_1
+  - first:
+      213: 7314798760753047825
+    second: Lab-Tileset-Pixel-Art3 (1)_2
+  - first:
+      213: -4433789948907802758
+    second: Lab-Tileset-Pixel-Art3 (1)_3
+  - first:
+      213: -4596480461799050334
+    second: Lab-Tileset-Pixel-Art3 (1)_4
+  - first:
+      213: 3341077672532317268
+    second: Lab-Tileset-Pixel-Art3 (1)_5
+  - first:
+      213: -7841478071233506230
+    second: Lab-Tileset-Pixel-Art3 (1)_6
+  - first:
+      213: -8336694197575639315
+    second: Lab-Tileset-Pixel-Art3 (1)_7
+  - first:
+      213: -2238596638201443960
+    second: Lab-Tileset-Pixel-Art3 (1)_8
+  - first:
+      213: -4547329353774742790
+    second: Lab-Tileset-Pixel-Art3 (1)_9
+  - first:
+      213: -591099334623901611
+    second: Lab-Tileset-Pixel-Art3 (1)_10
+  - first:
+      213: -2598440556107418454
+    second: Lab-Tileset-Pixel-Art3 (1)_11
+  - first:
+      213: -4007501824231438838
+    second: Lab-Tileset-Pixel-Art3 (1)_12
+  - first:
+      213: -1208577477817483548
+    second: Lab-Tileset-Pixel-Art3 (1)_13
+  - first:
+      213: -3101165227624039083
+    second: Lab-Tileset-Pixel-Art3 (1)_14
+  - first:
+      213: -4103690776226305686
+    second: Lab-Tileset-Pixel-Art3 (1)_15
+  - first:
+      213: 5355131247696817929
+    second: Lab-Tileset-Pixel-Art3 (1)_16
+  - first:
+      213: -4532786814426005242
+    second: Lab-Tileset-Pixel-Art3 (1)_17
+  - first:
+      213: 7096769957197481325
+    second: Lab-Tileset-Pixel-Art3 (1)_18
+  - first:
+      213: -6503201506963264773
+    second: Lab-Tileset-Pixel-Art3 (1)_19
+  - first:
+      213: -3509263818998345533
+    second: Lab-Tileset-Pixel-Art3 (1)_20
+  - first:
+      213: 8816193300410665566
+    second: Lab-Tileset-Pixel-Art3 (1)_21
+  - first:
+      213: 8171425308166439591
+    second: Lab-Tileset-Pixel-Art3 (1)_22
+  - first:
+      213: 4162401663657605359
+    second: Lab-Tileset-Pixel-Art3 (1)_23
+  - first:
+      213: 3046444494394972072
+    second: Lab-Tileset-Pixel-Art3 (1)_24
+  - first:
+      213: -4692381122467034548
+    second: Lab-Tileset-Pixel-Art3 (1)_25
+  - first:
+      213: 2886706546130081752
+    second: Lab-Tileset-Pixel-Art3 (1)_26
+  - first:
+      213: 5921009255228434367
+    second: Lab-Tileset-Pixel-Art3 (1)_27
+  - first:
+      213: -2123070288576455237
+    second: Lab-Tileset-Pixel-Art3 (1)_28
+  - first:
+      213: -8341829115918443849
+    second: Lab-Tileset-Pixel-Art3 (1)_29
+  - first:
+      213: 7440716042341476573
+    second: Lab-Tileset-Pixel-Art3 (1)_30
+  - first:
+      213: 7916515012332805587
+    second: Lab-Tileset-Pixel-Art3 (1)_31
+  - first:
+      213: 7706552726908674368
+    second: Lab-Tileset-Pixel-Art3 (1)_32
+  - first:
+      213: -4458700575904414226
+    second: Lab-Tileset-Pixel-Art3 (1)_33
+  - first:
+      213: -6150571166209810480
+    second: Lab-Tileset-Pixel-Art3 (1)_34
+  - first:
+      213: 6602421065717219080
+    second: Lab-Tileset-Pixel-Art3 (1)_35
+  - first:
+      213: -3354632196024140452
+    second: Lab-Tileset-Pixel-Art3 (1)_36
+  - first:
+      213: 331645595523603191
+    second: Lab-Tileset-Pixel-Art3 (1)_37
+  - first:
+      213: -2911112021694546400
+    second: Lab-Tileset-Pixel-Art3 (1)_38
+  - first:
+      213: -1957738093843796074
+    second: Lab-Tileset-Pixel-Art3 (1)_39
+  - first:
+      213: -8713440847907911923
+    second: Lab-Tileset-Pixel-Art3 (1)_40
+  - first:
+      213: 546178034438101537
+    second: Lab-Tileset-Pixel-Art3 (1)_41
+  - first:
+      213: 8497902943877969684
+    second: Lab-Tileset-Pixel-Art3 (1)_42
+  - first:
+      213: -813057123908115359
+    second: Lab-Tileset-Pixel-Art3 (1)_43
+  - first:
+      213: 330927203793416549
+    second: Lab-Tileset-Pixel-Art3 (1)_44
+  - first:
+      213: 7700766706261065717
+    second: Lab-Tileset-Pixel-Art3 (1)_45
+  - first:
+      213: 1099013864360055016
+    second: Lab-Tileset-Pixel-Art3 (1)_46
+  - first:
+      213: 1576165794588293555
+    second: Lab-Tileset-Pixel-Art3 (1)_47
+  - first:
+      213: 6063933545172672535
+    second: Lab-Tileset-Pixel-Art3 (1)_48
+  - first:
+      213: -4417671387074968038
+    second: Lab-Tileset-Pixel-Art3 (1)_49
+  - first:
+      213: 6865023331207909819
+    second: Lab-Tileset-Pixel-Art3 (1)_50
+  - first:
+      213: -6032001374685381502
+    second: Lab-Tileset-Pixel-Art3 (1)_51
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 150
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Lab-Tileset-Pixel-Art3 (1)_0
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 1071
+        width: 213
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 267eafdf99e70ea30800000000000000
+      internalID: 4242530048839182178
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lab-Tileset-Pixel-Art3 (1)_1
+      rect:
+        serializedVersion: 2
+        x: 287
+        y: 1071
+        width: 218
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e7f691a3806bbf630800000000000000
+      internalID: 3961960443653222270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lab-Tileset-Pixel-Art3 (1)_2
+      rect:
+        serializedVersion: 2
+        x: 511
+        y: 1071
+        width: 218
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 119272aa7b2638560800000000000000
+      internalID: 7314798760753047825
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lab-Tileset-Pixel-Art3 (1)_3
+      rect:
+        serializedVersion: 2
+        x: 735
+        y: 1071
+        width: 92
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7f27ae58830872c0800000000000000
+      internalID: -4433789948907802758
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lab-Tileset-Pixel-Art3 (1)_4
+      rect:
+        serializedVersion: 2
+        x: 839
+        y: 1071
+        width: 82
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a3b1798f550630c0800000000000000
+      internalID: -4596480461799050334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lab-Tileset-Pixel-Art3 (1)_5
+      rect:
+        serializedVersion: 2
+        x: 927
+        y: 1071
+        width: 66
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 454174ef074ed5e20800000000000000
+      internalID: 3341077672532317268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lab-Tileset-Pixel-Art3 (1)_6
+      rect:
+        serializedVersion: 2
+        x: 1015
+        y: 1072
+        width: 66
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a449c1a7d397d2390800000000000000
+      internalID: -7841478071233506230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lab-Tileset-Pixel-Art3 (1)_7
+      rect:
+        serializedVersion: 2
+        x: 1175
+        y: 839
+        width: 90
+        height: 327
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dee91780ccc1e4c80800000000000000
+      internalID: -8336694197575639315
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lab-Tileset-Pixel-Art3 (1)_8
+      rect:
+        serializedVersion: 2
+        x: 1373
+        y: 839
+        width: 108
+        height: 326
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8898e98d738eee0e0800000000000000
+      internalID: -2238596638201443960
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lab-Tileset-Pixel-Art3 (1)_9
+      rect:
+        serializedVersion: 2
+        x: 1551
+        y: 839
+        width: 146
+        height: 326
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af2cc87ab04a4e0c0800000000000000
+      internalID: -4547329353774742790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lab-Tileset-Pixel-Art3 (1)_10
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 808
+        width: 200
+        height: 248
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 558c5c4794efbc7f0800000000000000
+      internalID: -591099334623901611
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lab-Tileset-Pixel-Art3 (1)_11
+      rect:
+        serializedVersion: 2
+        x: 273
+        y: 807
+        width: 200
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa4bf33d41c70fbd0800000000000000
+      internalID: -2598440556107418454
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lab-Tileset-Pixel-Art3 (1)_12
+      rect:
+        serializedVersion: 2
+        x: 513
+        y: 807
+        width: 200
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a0684f1d25e7268c0800000000000000
+      internalID: -4007501824231438838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lab-Tileset-Pixel-Art3 (1)_13
+      rect:
+        serializedVersion: 2
+        x: 736
+        y: 809
+        width: 257
+        height: 247
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4eeb62fef254a3fe0800000000000000
+      internalID: -1208577477817483548
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lab-Tileset-Pixel-Art3 (1)_14
+      rect:
+        serializedVersion: 2
+        x: 977
+        y: 488
+        width: 127
+        height: 329
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 55dfca9f7a276f4d0800000000000000
+      internalID: -3101165227624039083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lab-Tileset-Pixel-Art3 (1)_15
+      rect:
+        serializedVersion: 2
+        x: 1119
+        y: 511
+        width: 650
+        height: 306
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a69ebf63bf2cc07c0800000000000000
+      internalID: -4103690776226305686
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lab-Tileset-Pixel-Art3 (1)_16
+      rect:
+        serializedVersion: 2
+        x: 511
+        y: 487
+        width: 202
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 90f20904f7f315a40800000000000000
+      internalID: 5355131247696817929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lab-Tileset-Pixel-Art3 (1)_17
+      rect:
+        serializedVersion: 2
+        x: 721
+        y: 647
+        width: 248
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6014093786e4811c0800000000000000
+      internalID: -4532786814426005242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lab-Tileset-Pixel-Art3 (1)_18
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 488
+        width: 200
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d658b6ffcaacc7260800000000000000
+      internalID: 7096769957197481325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lab-Tileset-Pixel-Art3 (1)_19
+      rect:
+        serializedVersion: 2
+        x: 273
+        y: 487
+        width: 200
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bfa6ba25facffb5a0800000000000000
+      internalID: -6503201506963264773
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lab-Tileset-Pixel-Art3 (1)_20
+      rect:
+        serializedVersion: 2
+        x: 708
+        y: 567
+        width: 101
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c0197546279c4fc0800000000000000
+      internalID: -3509263818998345533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lab-Tileset-Pixel-Art3 (1)_21
+      rect:
+        serializedVersion: 2
+        x: 815
+        y: 568
+        width: 91
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e5a0826b819695a70800000000000000
+      internalID: 8816193300410665566
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lab-Tileset-Pixel-Art3 (1)_22
+      rect:
+        serializedVersion: 2
+        x: 906
+        y: 563
+        width: 71
+        height: 78
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a2c5e1160cb66170800000000000000
+      internalID: 8171425308166439591
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lab-Tileset-Pixel-Art3 (1)_23
+      rect:
+        serializedVersion: 2
+        x: 727
+        y: 489
+        width: 66
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe87ece7242d3c930800000000000000
+      internalID: 4162401663657605359
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lab-Tileset-Pixel-Art3 (1)_24
+      rect:
+        serializedVersion: 2
+        x: 801
+        y: 487
+        width: 79
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8a75b5c7025274a20800000000000000
+      internalID: 3046444494394972072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lab-Tileset-Pixel-Art3 (1)_25
+      rect:
+        serializedVersion: 2
+        x: 887
+        y: 495
+        width: 58
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c4a8a9cfa3051eeb0800000000000000
+      internalID: -4692381122467034548
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lab-Tileset-Pixel-Art3 (1)_26
+      rect:
+        serializedVersion: 2
+        x: 1319
+        y: 368
+        width: 250
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d7d0ec2f44af0820800000000000000
+      internalID: 2886706546130081752
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lab-Tileset-Pixel-Art3 (1)_27
+      rect:
+        serializedVersion: 2
+        x: 1599
+        y: 328
+        width: 170
+        height: 169
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb7e0b9fb86ab2250800000000000000
+      internalID: 5921009255228434367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lab-Tileset-Pixel-Art3 (1)_28
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 335
+        width: 82
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bbdd63032d65982e0800000000000000
+      internalID: -2123070288576455237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lab-Tileset-Pixel-Art3 (1)_29
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 335
+        width: 61
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ba9ba0bd9edb3c80800000000000000
+      internalID: -8341829115918443849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lab-Tileset-Pixel-Art3 (1)_30
+      rect:
+        serializedVersion: 2
+        x: 207
+        y: 335
+        width: 56
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd8605261dbb24760800000000000000
+      internalID: 7440716042341476573
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lab-Tileset-Pixel-Art3 (1)_31
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 335
+        width: 65
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ddd421d57c1ddd60800000000000000
+      internalID: 7916515012332805587
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lab-Tileset-Pixel-Art3 (1)_32
+      rect:
+        serializedVersion: 2
+        x: 359
+        y: 335
+        width: 54
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 041a532cfdc23fa60800000000000000
+      internalID: 7706552726908674368
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lab-Tileset-Pixel-Art3 (1)_33
+      rect:
+        serializedVersion: 2
+        x: 431
+        y: 335
+        width: 42
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee5436d03738f12c0800000000000000
+      internalID: -4458700575904414226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lab-Tileset-Pixel-Art3 (1)_34
+      rect:
+        serializedVersion: 2
+        x: 497
+        y: 335
+        width: 35
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0dfdd488c18c4aaa0800000000000000
+      internalID: -6150571166209810480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lab-Tileset-Pixel-Art3 (1)_35
+      rect:
+        serializedVersion: 2
+        x: 559
+        y: 335
+        width: 29
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 80f71a76af280ab50800000000000000
+      internalID: 6602421065717219080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lab-Tileset-Pixel-Art3 (1)_36
+      rect:
+        serializedVersion: 2
+        x: 655
+        y: 343
+        width: 306
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5d74e39ac3f171d0800000000000000
+      internalID: -3354632196024140452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lab-Tileset-Pixel-Art3 (1)_37
+      rect:
+        serializedVersion: 2
+        x: 1001
+        y: 328
+        width: 248
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7fad18879ed3a9400800000000000000
+      internalID: 331645595523603191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lab-Tileset-Pixel-Art3 (1)_38
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 59
+        width: 169
+        height: 206
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 02ef68d3a07a997d0800000000000000
+      internalID: -2911112021694546400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lab-Tileset-Pixel-Art3 (1)_39
+      rect:
+        serializedVersion: 2
+        x: 207
+        y: 231
+        width: 130
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 69fa0318397b4d4e0800000000000000
+      internalID: -1957738093843796074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lab-Tileset-Pixel-Art3 (1)_40
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 232
+        width: 52
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d070211f6b3a31780800000000000000
+      internalID: -8713440847907911923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lab-Tileset-Pixel-Art3 (1)_41
+      rect:
+        serializedVersion: 2
+        x: 407
+        y: 159
+        width: 154
+        height: 150
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 12addce470a649700800000000000000
+      internalID: 546178034438101537
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lab-Tileset-Pixel-Art3 (1)_42
+      rect:
+        serializedVersion: 2
+        x: 583
+        y: 151
+        width: 114
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 417b79124bd9ee570800000000000000
+      internalID: 8497902943877969684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lab-Tileset-Pixel-Art3 (1)_43
+      rect:
+        serializedVersion: 2
+        x: 732
+        y: 123
+        width: 203
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1642b538ad077b4f0800000000000000
+      internalID: -813057123908115359
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lab-Tileset-Pixel-Art3 (1)_44
+      rect:
+        serializedVersion: 2
+        x: 959
+        y: 193
+        width: 90
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 561be9cd980b79400800000000000000
+      internalID: 330927203793416549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lab-Tileset-Pixel-Art3 (1)_45
+      rect:
+        serializedVersion: 2
+        x: 1199
+        y: 191
+        width: 90
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ff78d8d48e9eda60800000000000000
+      internalID: 7700766706261065717
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lab-Tileset-Pixel-Art3 (1)_46
+      rect:
+        serializedVersion: 2
+        x: 1308
+        y: 167
+        width: 115
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e0196c694b704f00800000000000000
+      internalID: 1099013864360055016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lab-Tileset-Pixel-Art3 (1)_47
+      rect:
+        serializedVersion: 2
+        x: 1468
+        y: 249
+        width: 115
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b97e85707aafd510800000000000000
+      internalID: 1576165794588293555
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lab-Tileset-Pixel-Art3 (1)_48
+      rect:
+        serializedVersion: 2
+        x: 1599
+        y: 207
+        width: 170
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 710a7956e6b672450800000000000000
+      internalID: 6063933545172672535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lab-Tileset-Pixel-Art3 (1)_49
+      rect:
+        serializedVersion: 2
+        x: 223
+        y: 167
+        width: 146
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a164dfe774741b2c0800000000000000
+      internalID: -4417671387074968038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lab-Tileset-Pixel-Art3 (1)_50
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 39
+        width: 120
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb19a67e856754f50800000000000000
+      internalID: 6865023331207909819
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lab-Tileset-Pixel-Art3 (1)_51
+      rect:
+        serializedVersion: 2
+        x: 907
+        y: 31
+        width: 106
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 28cb53965b60a4ca0800000000000000
+      internalID: -6032001374685381502
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Lab-Tileset-Pixel-Art3 (1)_0: 4242530048839182178
+      Lab-Tileset-Pixel-Art3 (1)_1: 3961960443653222270
+      Lab-Tileset-Pixel-Art3 (1)_10: -591099334623901611
+      Lab-Tileset-Pixel-Art3 (1)_11: -2598440556107418454
+      Lab-Tileset-Pixel-Art3 (1)_12: -4007501824231438838
+      Lab-Tileset-Pixel-Art3 (1)_13: -1208577477817483548
+      Lab-Tileset-Pixel-Art3 (1)_14: -3101165227624039083
+      Lab-Tileset-Pixel-Art3 (1)_15: -4103690776226305686
+      Lab-Tileset-Pixel-Art3 (1)_16: 5355131247696817929
+      Lab-Tileset-Pixel-Art3 (1)_17: -4532786814426005242
+      Lab-Tileset-Pixel-Art3 (1)_18: 7096769957197481325
+      Lab-Tileset-Pixel-Art3 (1)_19: -6503201506963264773
+      Lab-Tileset-Pixel-Art3 (1)_2: 7314798760753047825
+      Lab-Tileset-Pixel-Art3 (1)_20: -3509263818998345533
+      Lab-Tileset-Pixel-Art3 (1)_21: 8816193300410665566
+      Lab-Tileset-Pixel-Art3 (1)_22: 8171425308166439591
+      Lab-Tileset-Pixel-Art3 (1)_23: 4162401663657605359
+      Lab-Tileset-Pixel-Art3 (1)_24: 3046444494394972072
+      Lab-Tileset-Pixel-Art3 (1)_25: -4692381122467034548
+      Lab-Tileset-Pixel-Art3 (1)_26: 2886706546130081752
+      Lab-Tileset-Pixel-Art3 (1)_27: 5921009255228434367
+      Lab-Tileset-Pixel-Art3 (1)_28: -2123070288576455237
+      Lab-Tileset-Pixel-Art3 (1)_29: -8341829115918443849
+      Lab-Tileset-Pixel-Art3 (1)_3: -4433789948907802758
+      Lab-Tileset-Pixel-Art3 (1)_30: 7440716042341476573
+      Lab-Tileset-Pixel-Art3 (1)_31: 7916515012332805587
+      Lab-Tileset-Pixel-Art3 (1)_32: 7706552726908674368
+      Lab-Tileset-Pixel-Art3 (1)_33: -4458700575904414226
+      Lab-Tileset-Pixel-Art3 (1)_34: -6150571166209810480
+      Lab-Tileset-Pixel-Art3 (1)_35: 6602421065717219080
+      Lab-Tileset-Pixel-Art3 (1)_36: -3354632196024140452
+      Lab-Tileset-Pixel-Art3 (1)_37: 331645595523603191
+      Lab-Tileset-Pixel-Art3 (1)_38: -2911112021694546400
+      Lab-Tileset-Pixel-Art3 (1)_39: -1957738093843796074
+      Lab-Tileset-Pixel-Art3 (1)_4: -4596480461799050334
+      Lab-Tileset-Pixel-Art3 (1)_40: -8713440847907911923
+      Lab-Tileset-Pixel-Art3 (1)_41: 546178034438101537
+      Lab-Tileset-Pixel-Art3 (1)_42: 8497902943877969684
+      Lab-Tileset-Pixel-Art3 (1)_43: -813057123908115359
+      Lab-Tileset-Pixel-Art3 (1)_44: 330927203793416549
+      Lab-Tileset-Pixel-Art3 (1)_45: 7700766706261065717
+      Lab-Tileset-Pixel-Art3 (1)_46: 1099013864360055016
+      Lab-Tileset-Pixel-Art3 (1)_47: 1576165794588293555
+      Lab-Tileset-Pixel-Art3 (1)_48: 6063933545172672535
+      Lab-Tileset-Pixel-Art3 (1)_49: -4417671387074968038
+      Lab-Tileset-Pixel-Art3 (1)_5: 3341077672532317268
+      Lab-Tileset-Pixel-Art3 (1)_50: 6865023331207909819
+      Lab-Tileset-Pixel-Art3 (1)_51: -6032001374685381502
+      Lab-Tileset-Pixel-Art3 (1)_6: -7841478071233506230
+      Lab-Tileset-Pixel-Art3 (1)_7: -8336694197575639315
+      Lab-Tileset-Pixel-Art3 (1)_8: -2238596638201443960
+      Lab-Tileset-Pixel-Art3 (1)_9: -4547329353774742790
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
