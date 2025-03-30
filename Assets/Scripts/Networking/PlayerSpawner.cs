@@ -13,7 +13,11 @@ public class PlayerSpawner : NetworkBehaviour
         {
             return;
         }
+        SpawnPlayers();
+    }
 
+    public void SpawnPlayers()
+    {
         GameObject spawnPoint = GameObject.FindGameObjectWithTag("PlayerSpawn");
         GameObject spawn2Point = GameObject.FindGameObjectWithTag("Player2Spawn");
 

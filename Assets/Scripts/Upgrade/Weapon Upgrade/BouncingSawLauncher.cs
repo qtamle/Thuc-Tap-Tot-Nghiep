@@ -26,7 +26,7 @@ public class BouncingSawLauncher : NetworkBehaviour
                 transform.position,
                 Quaternion.identity
             );
-            saw.GetComponent<NetworkObject>().Spawn();
+            saw.GetComponent<NetworkObject>().Spawn(true);
             ChainsawLevel4 bouncingSaw = saw.GetComponent<ChainsawLevel4>();
             if (bouncingSaw != null)
             {

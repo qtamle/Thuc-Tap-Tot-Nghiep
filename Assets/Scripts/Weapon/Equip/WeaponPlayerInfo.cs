@@ -8,6 +8,11 @@ public class WeaponPlayerInfo : NetworkBehaviour
 
     public int weaponLevel;
 
+    void Start()
+    {
+        // DontDestroyOnLoad(gameObject);
+    }
+
     public void SetWeaponInfo(string name, int level)
     {
         weaponName = name;
