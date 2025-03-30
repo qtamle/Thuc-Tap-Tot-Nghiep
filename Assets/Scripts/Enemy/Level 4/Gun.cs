@@ -1,7 +1,8 @@
 ﻿using System.Collections;
+using Unity.Netcode;
 using UnityEngine;
 
-public class Gun : MonoBehaviour
+public class Gun : NetworkBehaviour
 {
     [Header("Raycast Check")]
     public LayerMask wallCheck;
@@ -78,6 +79,8 @@ public class Gun : MonoBehaviour
             Vector2 shootDirection = (transform.localScale.x > 0) ? Vector2.right : Vector2.left;
             rb.linearVelocity = shootDirection * bulletSpeed;
         }
+
+        bullet.GetComponent<NetworkObject>().Spawn();
     }
 
     bool IsGrounded()

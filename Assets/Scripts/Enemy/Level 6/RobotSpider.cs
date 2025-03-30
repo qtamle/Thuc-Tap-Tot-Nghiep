@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
-public class RobotSpider : MonoBehaviour
+public class RobotSpider : NetworkBehaviour
 {
     [Header("Raycast Check")]
     public LayerMask wallCheck;

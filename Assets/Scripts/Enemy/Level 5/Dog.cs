@@ -1,7 +1,8 @@
 ﻿using System.Collections;
+using Unity.Netcode;
 using UnityEngine;
 
-public class Dog : MonoBehaviour
+public class Dog : NetworkBehaviour
 {
     [Header("Raycast Check")]
     public LayerMask wallCheck;
@@ -127,7 +128,8 @@ public class Dog : MonoBehaviour
     private IEnumerator DestroyAfterDelay()
     {
         yield return new WaitForSeconds(destroyDelay);
-        Destroy(gameObject);
+        //Destroy(gameObject);
+        gameObject.GetComponent<NetworkObject>().Despawn(true);
     }
 
     private void Flip()

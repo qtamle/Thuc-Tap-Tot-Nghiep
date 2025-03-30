@@ -101,56 +101,56 @@ public class GameManager : NetworkBehaviour
     // Phương thức để chuyển scene
     public void LoadNextScene()
     {
-        if (!NetworkManager.Singleton.IsServer)
-            return;
+        //if (!NetworkManager.Singleton.IsServer)
+        //    return;
 
-        // Xóa tất cả player cũ trước khi chuyển scene
-        foreach (var client in NetworkManager.Singleton.ConnectedClientsList)
-        {
-            NetworkObject playerObject = client.PlayerObject;
+        //// Xóa tất cả player cũ trước khi chuyển scene
+        //foreach (var client in NetworkManager.Singleton.ConnectedClientsList)
+        //{
+        //    NetworkObject playerObject = client.PlayerObject;
 
-            if (playerObject != null)
-            {
-                playerObject.Despawn(false);
-            }
-        }
+        //    if (playerObject != null)
+        //    {
+        //        playerObject.Despawn(false);
+        //    }
+        //}
 
-        if (isSupplyScene.Value == false) // Nếu đang ở màn Supply thì chuyển sang Boss tiếp theo
-        {
-            isSupplyScene.Value = true;
+        //if (isSupplyScene.Value == false) // Nếu đang ở màn Supply thì chuyển sang Boss tiếp theo
+        //{
+        //    isSupplyScene.Value = true;
 
-            currentBoss.Value++;
-            if (SupplyManager.Instance != null)
-            {
-                SupplyManager.Instance.DestroySpawnedSupplies();
-            }
-            if (currentBoss.Value == 5)
-            {
-                isSupplyScene.Value = false;
-            }
-            if (currentBoss.Value <= 5)
-            {
-                string bossScene = "Level " + currentBoss.Value;
-                Debug.Log($"Loading {bossScene}");
-                NetworkManager.Singleton.SceneManager.LoadScene(bossScene, LoadSceneMode.Single);
-            }
-            if (currentBoss.Value > 5)
-            {
-                Debug.Log("Loading SummaryScene");
-                NetworkManager.Singleton.SceneManager.LoadScene("Summary", LoadSceneMode.Single);
-                ResetGame();
-            }
-        }
-        else
-        {
-            isSupplyScene.Value = false;
-            Debug.Log("Loading SupplyScene");
+        //    currentBoss.Value++;
+        //    if (SupplyManager.Instance != null)
+        //    {
+        //        SupplyManager.Instance.DestroySpawnedSupplies();
+        //    }
+        //    if (currentBoss.Value == 5)
+        //    {
+        //        isSupplyScene.Value = false;
+        //    }
+        //    if (currentBoss.Value <= 5)
+        //    {
+        //        string bossScene = "Level " + currentBoss.Value;
+        //        Debug.Log($"Loading {bossScene}");
+        //        NetworkManager.Singleton.SceneManager.LoadScene(bossScene, LoadSceneMode.Single);
+        //    }
+        //    if (currentBoss.Value > 5)
+        //    {
+        //        Debug.Log("Loading SummaryScene");
+        //        NetworkManager.Singleton.SceneManager.LoadScene("Summary", LoadSceneMode.Single);
+        //        ResetGame();
+        //    }
+        //}
+        //else
+        //{
+        //    isSupplyScene.Value = false;
+        //    Debug.Log("Loading SupplyScene");
 
-            NetworkManager.Singleton.SceneManager.OnLoadComplete += OnSupplySceneLoaded;
-            NetworkManager.Singleton.SceneManager.LoadScene("SupplyScene", LoadSceneMode.Single);
-        }
-        // string bossScene = "Level 4";
-        // NetworkManager.Singleton.SceneManager.LoadScene(bossScene, LoadSceneMode.Single);
+        //    NetworkManager.Singleton.SceneManager.OnLoadComplete += OnSupplySceneLoaded;
+        //    NetworkManager.Singleton.SceneManager.LoadScene("SupplyScene", LoadSceneMode.Single);
+        //}
+        string bossScene = "Level 4";
+        NetworkManager.Singleton.SceneManager.LoadScene(bossScene, LoadSceneMode.Single);
     }
 
     private void OnSupplySceneLoaded(ulong clientId, string sceneName, LoadSceneMode mode)

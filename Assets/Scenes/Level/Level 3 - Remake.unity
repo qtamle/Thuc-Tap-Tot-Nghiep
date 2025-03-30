@@ -25585,6 +25585,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 845846106}
     - target: {fileID: 4486472362738778418, guid: 1e466c86bca1d23489564c6f2c2bb1e2, type: 3}
+      propertyPath: maxTotalSpawnCount
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4486472362738778418, guid: 1e466c86bca1d23489564c6f2c2bb1e2, type: 3}
       propertyPath: enemySpawnDatas.Array.data[0].maxSpawnTime
       value: 4
       objectReference: {fileID: 0}
