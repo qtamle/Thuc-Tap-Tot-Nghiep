@@ -301,7 +301,42 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  TransitionStateInfoList: []
+  TransitionStateInfoList:
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: -1143216085
+    DestinationState: -524472596
+    TransitionDuration: 0.25
+    TriggerNameHash: -524472596
+    TransitionIndex: 0
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: -1143216085
+    DestinationState: 1403154793
+    TransitionDuration: 0.25
+    TriggerNameHash: 1403154793
+    TransitionIndex: 1
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: -1143216085
+    DestinationState: 646380074
+    TransitionDuration: 0.25
+    TriggerNameHash: 646380074
+    TransitionIndex: 2
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: -1143216085
+    DestinationState: -932085974
+    TransitionDuration: 0.25
+    TriggerNameHash: -932085974
+    TransitionIndex: 3
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: -1143216085
+    DestinationState: 1291333633
+    TransitionDuration: 0.25
+    TriggerNameHash: 540923433
+    TransitionIndex: 4
   m_Animator: {fileID: 7474039701447119647}
 --- !u!1 &5722961187558316646
 GameObject:
@@ -465,7 +500,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 877458089
+  GlobalObjectIdHash: 2941548670
   InScenePlacedSourceGlobalObjectIdHash: 2941548670
   DeferredDespawnTick: 0
   Ownership: 1

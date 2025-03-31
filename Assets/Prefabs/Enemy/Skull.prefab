@@ -138,7 +138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 972009242
+  GlobalObjectIdHash: 4279721165
   InScenePlacedSourceGlobalObjectIdHash: 4279721165
   DeferredDespawnTick: 0
   Ownership: 1
@@ -629,5 +629,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  TransitionStateInfoList: []
+  TransitionStateInfoList:
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: -526271962
+    DestinationState: -876152609
+    TransitionDuration: 0.25
+    TriggerNameHash: -876152609
+    TransitionIndex: 0
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: -526271962
+    DestinationState: 569504987
+    TransitionDuration: 0.25
+    TriggerNameHash: 569504987
+    TransitionIndex: 1
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: -526271962
+    DestinationState: 646380074
+    TransitionDuration: 0.25
+    TriggerNameHash: 646380074
+    TransitionIndex: 3
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: -526271962
+    DestinationState: -383438302
+    TransitionDuration: 0.25
+    TriggerNameHash: -2024739407
+    TransitionIndex: 4
   m_Animator: {fileID: 6824892504423148527}
