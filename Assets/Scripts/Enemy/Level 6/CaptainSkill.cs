@@ -913,6 +913,17 @@ public class CaptainSkill : NetworkBehaviour
             rightCloneAnimator.SetBool("Idle", false);
         }
 
+        FlashDamagePlayer leftCloneDamage = leftClone.GetComponent<FlashDamagePlayer>();
+        if (leftCloneDamage != null)
+        {
+            leftCloneDamage.SetCanDamage(true);
+        }
+        FlashDamagePlayer rightCloneDamge = rightClone.GetComponent<FlashDamagePlayer>();
+        if (leftCloneDamage != null)
+        {
+            rightCloneDamge.SetCanDamage(true);
+        }
+
         dashDirection = Vector3.down;
 
         // yield return StartCoroutine(
@@ -990,6 +1001,17 @@ public class CaptainSkill : NetworkBehaviour
             rightCloneAnimatorNew.SetBool("Idle", false);
         }
 
+        FlashDamagePlayer leftCloneDamageNew = leftCloneNew.GetComponent<FlashDamagePlayer>();
+        if (leftCloneDamageNew != null)
+        {
+            leftCloneDamageNew.SetCanDamage(true);
+        }
+        FlashDamagePlayer rightCloneDamgeNew = rightCloneNew.GetComponent<FlashDamagePlayer>();
+        if (rightCloneDamgeNew != null)
+        {
+            rightCloneDamgeNew.SetCanDamage(true);
+        }
+
         Vector3 dashDirectionUp = Vector3.up;
 
         // Coroutine leftCloneNewBlink = StartCoroutine(
@@ -1062,6 +1084,10 @@ public class CaptainSkill : NetworkBehaviour
         Debug.Log("FlashSkill complete!");
         isSkillActive = false;
 
+        leftCloneDamageNew.SetCanDamage(false);
+        rightCloneDamgeNew.SetCanDamage(false);
+        leftCloneDamage.SetCanDamage(false);
+        rightCloneDamge.SetCanDamage(false);
     }
 
     void RotateTowards(Vector3 direction, float fixedAngle)
