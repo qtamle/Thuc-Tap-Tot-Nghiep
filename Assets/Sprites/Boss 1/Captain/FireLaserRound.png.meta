@@ -1,0 +1,705 @@
+fileFormatVersion: 2
+guid: 532d7b1af7646ec41acd9d3755151575
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -9158704392620136165
+    second: FireLaserRound_0
+  - first:
+      213: -304838721863848256
+    second: FireLaserRound_1
+  - first:
+      213: -3747192473947659288
+    second: FireLaserRound_2
+  - first:
+      213: 1183025609857292251
+    second: FireLaserRound_3
+  - first:
+      213: -20535479733280326
+    second: FireLaserRound_4
+  - first:
+      213: -6948795242439764037
+    second: FireLaserRound_5
+  - first:
+      213: 1956927402538060166
+    second: FireLaserRound_6
+  - first:
+      213: 5405006884604363355
+    second: FireLaserRound_7
+  - first:
+      213: -5496307101189825565
+    second: FireLaserRound_8
+  - first:
+      213: 1781110939643691243
+    second: FireLaserRound_9
+  - first:
+      213: 7540933288813112653
+    second: FireLaserRound_10
+  - first:
+      213: 1170361853488941679
+    second: FireLaserRound_11
+  - first:
+      213: 5505463552343484708
+    second: FireLaserRound_12
+  - first:
+      213: -8059855819809300951
+    second: FireLaserRound_13
+  - first:
+      213: 167950311140751127
+    second: FireLaserRound_14
+  - first:
+      213: 2840630881158392930
+    second: FireLaserRound_15
+  - first:
+      213: -1109955303112535464
+    second: FireLaserRound_16
+  - first:
+      213: 2330609216528201884
+    second: FireLaserRound_17
+  - first:
+      213: -8431517406476296758
+    second: FireLaserRound_18
+  - first:
+      213: 6450169425855861913
+    second: FireLaserRound_19
+  - first:
+      213: -8279108994320836254
+    second: FireLaserRound_20
+  - first:
+      213: 2315193476103139802
+    second: FireLaserRound_21
+  - first:
+      213: 7305424511258780125
+    second: FireLaserRound_22
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: FireLaserRound_0
+      rect:
+        serializedVersion: 2
+        x: 3229
+        y: 181
+        width: 23
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b19211b31eeb5e080800000000000000
+      internalID: -9158704392620136165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireLaserRound_1
+      rect:
+        serializedVersion: 2
+        x: 3822
+        y: 192
+        width: 16
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0ce658d2ccef4cbf0800000000000000
+      internalID: -304838721863848256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireLaserRound_2
+      rect:
+        serializedVersion: 2
+        x: 3881
+        y: 188
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e325556c4c4ffbc0800000000000000
+      internalID: -3747192473947659288
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireLaserRound_3
+      rect:
+        serializedVersion: 2
+        x: 1432
+        y: 160
+        width: 30
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd7dbb33683fa6010800000000000000
+      internalID: 1183025609857292251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireLaserRound_4
+      rect:
+        serializedVersion: 2
+        x: 2043
+        y: 157
+        width: 23
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ab1a439071b07bff0800000000000000
+      internalID: -20535479733280326
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireLaserRound_5
+      rect:
+        serializedVersion: 2
+        x: 2057
+        y: 178
+        width: 23
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb714751b8be09f90800000000000000
+      internalID: -6948795242439764037
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireLaserRound_6
+      rect:
+        serializedVersion: 2
+        x: 2611
+        y: 174
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6894287ba17682b10800000000000000
+      internalID: 1956927402538060166
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireLaserRound_7
+      rect:
+        serializedVersion: 2
+        x: 2636
+        y: 150
+        width: 37
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b524265ef11720b40800000000000000
+      internalID: 5405006884604363355
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireLaserRound_8
+      rect:
+        serializedVersion: 2
+        x: 2681
+        y: 178
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3eb9f19efc139b3b0800000000000000
+      internalID: -5496307101189825565
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireLaserRound_9
+      rect:
+        serializedVersion: 2
+        x: 3271
+        y: 178
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be0460f76f6c7b810800000000000000
+      internalID: 1781110939643691243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireLaserRound_10
+      rect:
+        serializedVersion: 2
+        x: 5032
+        y: 160
+        width: 30
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4daf926fd6c6a860800000000000000
+      internalID: 7540933288813112653
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireLaserRound_11
+      rect:
+        serializedVersion: 2
+        x: 5643
+        y: 157
+        width: 23
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f6a40e7a7e5fd3010800000000000000
+      internalID: 1170361853488941679
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireLaserRound_12
+      rect:
+        serializedVersion: 2
+        x: 5657
+        y: 178
+        width: 23
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4292b418ee5576c40800000000000000
+      internalID: 5505463552343484708
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireLaserRound_13
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 0
+        width: 86
+        height: 166
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 92ed667b5d3a52090800000000000000
+      internalID: -8059855819809300951
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireLaserRound_14
+      rect:
+        serializedVersion: 2
+        x: 804
+        y: 0
+        width: 86
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 717f57b0beda45200800000000000000
+      internalID: 167950311140751127
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireLaserRound_15
+      rect:
+        serializedVersion: 2
+        x: 1401
+        y: 0
+        width: 107
+        height: 166
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26c63717cb2fb6720800000000000000
+      internalID: 2840630881158392930
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireLaserRound_16
+      rect:
+        serializedVersion: 2
+        x: 1987
+        y: 0
+        width: 135
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8529a695885a890f0800000000000000
+      internalID: -1109955303112535464
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireLaserRound_17
+      rect:
+        serializedVersion: 2
+        x: 2587
+        y: 0
+        width: 135
+        height: 166
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c983a6dfbbcf75020800000000000000
+      internalID: 2330609216528201884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireLaserRound_18
+      rect:
+        serializedVersion: 2
+        x: 3187
+        y: 0
+        width: 135
+        height: 166
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: acd1575479b3dfa80800000000000000
+      internalID: -8431517406476296758
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireLaserRound_19
+      rect:
+        serializedVersion: 2
+        x: 3797
+        y: 0
+        width: 111
+        height: 166
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 99459391bea938950800000000000000
+      internalID: 6450169425855861913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireLaserRound_20
+      rect:
+        serializedVersion: 2
+        x: 4404
+        y: 0
+        width: 86
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 269d3c8fb32ba1d80800000000000000
+      internalID: -8279108994320836254
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireLaserRound_21
+      rect:
+        serializedVersion: 2
+        x: 5001
+        y: 0
+        width: 107
+        height: 166
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad1fd693338312020800000000000000
+      internalID: 2315193476103139802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireLaserRound_22
+      rect:
+        serializedVersion: 2
+        x: 5587
+        y: 0
+        width: 135
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd1e20f13e4126560800000000000000
+      internalID: 7305424511258780125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable: {}
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

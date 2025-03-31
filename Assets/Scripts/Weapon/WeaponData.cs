@@ -70,7 +70,10 @@ public class WeaponData : MonoBehaviour
         }
         // OnSceneLoaded(SceneManager.GetActiveScene(), LoadSceneMode.Single);
 
-        upgradeSuccessPanel.gameObject.SetActive(false);
+        if (!SceneManager.GetSceneByName("Lobby").IsValid())
+        {
+            upgradeSuccessPanel.gameObject.SetActive(false);
+        }
     }
 
     private void OnDestroy()

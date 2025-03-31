@@ -1,0 +1,1080 @@
+fileFormatVersion: 2
+guid: 8b7073709ca70314683b46bb61da3565
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3393290374525721053
+    second: ShowUp_0
+  - first:
+      213: 4116654796464140135
+    second: ShowUp_1
+  - first:
+      213: 8838391946565628156
+    second: ShowUp_2
+  - first:
+      213: -2337192470894416584
+    second: ShowUp_3
+  - first:
+      213: 158352903357523641
+    second: ShowUp_4
+  - first:
+      213: 7916818577792639014
+    second: ShowUp_5
+  - first:
+      213: -2227464160024842272
+    second: ShowUp_6
+  - first:
+      213: -1341114345273745273
+    second: ShowUp_7
+  - first:
+      213: 5723507216927223484
+    second: ShowUp_8
+  - first:
+      213: 8678011775102579922
+    second: ShowUp_9
+  - first:
+      213: -5953543309161057958
+    second: ShowUp_10
+  - first:
+      213: -3432836281407306125
+    second: ShowUp_11
+  - first:
+      213: 5167511105335199180
+    second: ShowUp_12
+  - first:
+      213: -5397341868454413026
+    second: ShowUp_13
+  - first:
+      213: -5232773831887464938
+    second: ShowUp_14
+  - first:
+      213: 1266440665689554410
+    second: ShowUp_15
+  - first:
+      213: 2691077456922556689
+    second: ShowUp_16
+  - first:
+      213: 6217286227848383799
+    second: ShowUp_17
+  - first:
+      213: -4206460963663315451
+    second: ShowUp_18
+  - first:
+      213: 3764797095854058176
+    second: ShowUp_19
+  - first:
+      213: -7400870316353544386
+    second: ShowUp_20
+  - first:
+      213: -111443127128389496
+    second: ShowUp_21
+  - first:
+      213: 6512210511084965617
+    second: ShowUp_22
+  - first:
+      213: -6055464320399900008
+    second: ShowUp_23
+  - first:
+      213: -7927770827198587999
+    second: ShowUp_24
+  - first:
+      213: 2382488819080210946
+    second: ShowUp_25
+  - first:
+      213: -6018117407596323059
+    second: ShowUp_26
+  - first:
+      213: 3277554768207517037
+    second: ShowUp_27
+  - first:
+      213: 6122167547212962802
+    second: ShowUp_28
+  - first:
+      213: -5084535908797117206
+    second: ShowUp_29
+  - first:
+      213: -2074776192921733636
+    second: ShowUp_30
+  - first:
+      213: 6639192088068163898
+    second: ShowUp_31
+  - first:
+      213: 4201836753022529321
+    second: ShowUp_32
+  - first:
+      213: -7362408168202030642
+    second: ShowUp_33
+  - first:
+      213: 2424212604064850115
+    second: ShowUp_34
+  - first:
+      213: -7090908052911523922
+    second: ShowUp_35
+  - first:
+      213: 1403882318694745147
+    second: ShowUp_36
+  - first:
+      213: 8415618483991899304
+    second: ShowUp_37
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: ShowUp_0
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 55
+        width: 134
+        height: 167
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd99b510e93671f20800000000000000
+      internalID: 3393290374525721053
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShowUp_1
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 61
+        width: 101
+        height: 167
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76f2726f9bb412930800000000000000
+      internalID: 4116654796464140135
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShowUp_2
+      rect:
+        serializedVersion: 2
+        x: 905
+        y: 172
+        width: 22
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf0b7b8c5a648aa70800000000000000
+      internalID: 8838391946565628156
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShowUp_3
+      rect:
+        serializedVersion: 2
+        x: 1412
+        y: 70
+        width: 104
+        height: 161
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 83dee98a4df909fd0800000000000000
+      internalID: -2337192470894416584
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShowUp_4
+      rect:
+        serializedVersion: 2
+        x: 1524
+        y: 203
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b6e6c96025923200800000000000000
+      internalID: 158352903357523641
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShowUp_5
+      rect:
+        serializedVersion: 2
+        x: 1980
+        y: 184
+        width: 15
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6202b882d803edd60800000000000000
+      internalID: 7916818577792639014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShowUp_6
+      rect:
+        serializedVersion: 2
+        x: 2012
+        y: 70
+        width: 114
+        height: 161
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0ef2ec7e5257611e0800000000000000
+      internalID: -2227464160024842272
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShowUp_7
+      rect:
+        serializedVersion: 2
+        x: 2575
+        y: 182
+        width: 21
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 78027c6cb97636de0800000000000000
+      internalID: -1341114345273745273
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShowUp_8
+      rect:
+        serializedVersion: 2
+        x: 2615
+        y: 61
+        width: 98
+        height: 167
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cbee4564d7bfd6f40800000000000000
+      internalID: 5723507216927223484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShowUp_9
+      rect:
+        serializedVersion: 2
+        x: 3191
+        y: 55
+        width: 134
+        height: 167
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d475ab3bbd7e6870800000000000000
+      internalID: 8678011775102579922
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShowUp_10
+      rect:
+        serializedVersion: 2
+        x: 3815
+        y: 61
+        width: 98
+        height: 167
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a513d8e47e3c06da0800000000000000
+      internalID: -5953543309161057958
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShowUp_11
+      rect:
+        serializedVersion: 2
+        x: 4412
+        y: 70
+        width: 92
+        height: 161
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 37605aa079d1c50d0800000000000000
+      internalID: -3432836281407306125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShowUp_12
+      rect:
+        serializedVersion: 2
+        x: 5012
+        y: 70
+        width: 92
+        height: 161
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc5046eb8ffa6b740800000000000000
+      internalID: 5167511105335199180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShowUp_13
+      rect:
+        serializedVersion: 2
+        x: 5600
+        y: 61
+        width: 101
+        height: 167
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e1d7e6fba2ac815b0800000000000000
+      internalID: -5397341868454413026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShowUp_14
+      rect:
+        serializedVersion: 2
+        x: 6185
+        y: 55
+        width: 134
+        height: 167
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6165360ace37167b0800000000000000
+      internalID: -5232773831887464938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShowUp_15
+      rect:
+        serializedVersion: 2
+        x: 6785
+        y: 55
+        width: 134
+        height: 167
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aedf887531d439110800000000000000
+      internalID: 1266440665689554410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShowUp_16
+      rect:
+        serializedVersion: 2
+        x: 7400
+        y: 61
+        width: 101
+        height: 167
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1193eea60b0a85520800000000000000
+      internalID: 2691077456922556689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShowUp_17
+      rect:
+        serializedVersion: 2
+        x: 8012
+        y: 70
+        width: 92
+        height: 161
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 73dc4d532ec384650800000000000000
+      internalID: 6217286227848383799
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShowUp_18
+      rect:
+        serializedVersion: 2
+        x: 8612
+        y: 70
+        width: 92
+        height: 161
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50efc435a06af95c0800000000000000
+      internalID: -4206460963663315451
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShowUp_19
+      rect:
+        serializedVersion: 2
+        x: 9215
+        y: 61
+        width: 98
+        height: 167
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0caadcd030f3f3430800000000000000
+      internalID: 3764797095854058176
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShowUp_20
+      rect:
+        serializedVersion: 2
+        x: 9791
+        y: 55
+        width: 134
+        height: 167
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e3f9305a8a3da4990800000000000000
+      internalID: -7400870316353544386
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShowUp_21
+      rect:
+        serializedVersion: 2
+        x: 10415
+        y: 61
+        width: 98
+        height: 167
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8888adaf013147ef0800000000000000
+      internalID: -111443127128389496
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShowUp_22
+      rect:
+        serializedVersion: 2
+        x: 11012
+        y: 70
+        width: 92
+        height: 161
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1fec8c7e4f4006a50800000000000000
+      internalID: 6512210511084965617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShowUp_23
+      rect:
+        serializedVersion: 2
+        x: 11612
+        y: 70
+        width: 92
+        height: 161
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8920388a84ba6fba0800000000000000
+      internalID: -6055464320399900008
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShowUp_24
+      rect:
+        serializedVersion: 2
+        x: 12200
+        y: 61
+        width: 101
+        height: 167
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ab9f109f66eaf190800000000000000
+      internalID: -7927770827198587999
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShowUp_25
+      rect:
+        serializedVersion: 2
+        x: 12785
+        y: 55
+        width: 134
+        height: 167
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 20aad9e35fc401120800000000000000
+      internalID: 2382488819080210946
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShowUp_26
+      rect:
+        serializedVersion: 2
+        x: 321
+        y: 171
+        width: 10
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0f50a76a1a5b7ca0800000000000000
+      internalID: -6018117407596323059
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShowUp_27
+      rect:
+        serializedVersion: 2
+        x: 937
+        y: 174
+        width: 13
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d6595ea42b63c7d20800000000000000
+      internalID: 3277554768207517037
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShowUp_28
+      rect:
+        serializedVersion: 2
+        x: 1508
+        y: 188
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2fb9d0392fe46f450800000000000000
+      internalID: 6122167547212962802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShowUp_29
+      rect:
+        serializedVersion: 2
+        x: 1519
+        y: 186
+        width: 11
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aec0e6ca7891079b0800000000000000
+      internalID: -5084535908797117206
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShowUp_30
+      rect:
+        serializedVersion: 2
+        x: 1544
+        y: 177
+        width: 16
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf576709b0ae433e0800000000000000
+      internalID: -2074776192921733636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShowUp_31
+      rect:
+        serializedVersion: 2
+        x: 1995
+        y: 181
+        width: 11
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a3903e43706232c50800000000000000
+      internalID: 6639192088068163898
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShowUp_32
+      rect:
+        serializedVersion: 2
+        x: 2597
+        y: 178
+        width: 15
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 92fa61cb34cef4a30800000000000000
+      internalID: 4201836753022529321
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShowUp_33
+      rect:
+        serializedVersion: 2
+        x: 903
+        y: 148
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec132ea57c873d990800000000000000
+      internalID: -7362408168202030642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShowUp_34
+      rect:
+        serializedVersion: 2
+        x: 920
+        y: 150
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c06f45f48884a120800000000000000
+      internalID: 2424212604064850115
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShowUp_35
+      rect:
+        serializedVersion: 2
+        x: 1511
+        y: 150
+        width: 17
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea77043f1b8089d90800000000000000
+      internalID: -7090908052911523922
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShowUp_36
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 153
+        width: 10
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b348040e7879b7310800000000000000
+      internalID: 1403882318694745147
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShowUp_37
+      rect:
+        serializedVersion: 2
+        x: 2136
+        y: 158
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ac6c8f5c684ac470800000000000000
+      internalID: 8415618483991899304
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable: {}
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

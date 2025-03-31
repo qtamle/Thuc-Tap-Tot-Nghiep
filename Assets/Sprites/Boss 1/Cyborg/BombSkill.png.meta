@@ -1,0 +1,442 @@
+fileFormatVersion: 2
+guid: b57c9e687218cf54eab92d24202a0a0c
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6493458397604630868
+    second: BombSkill_0
+  - first:
+      213: -1519662019140093167
+    second: BombSkill_1
+  - first:
+      213: -4124540872641069553
+    second: BombSkill_2
+  - first:
+      213: -7072041549858016557
+    second: BombSkill_3
+  - first:
+      213: -3926543741331386793
+    second: BombSkill_4
+  - first:
+      213: -3972095664447206473
+    second: BombSkill_5
+  - first:
+      213: -8940722678657136473
+    second: BombSkill_6
+  - first:
+      213: -5267523245492149963
+    second: BombSkill_7
+  - first:
+      213: -3204109164403041789
+    second: BombSkill_8
+  - first:
+      213: -3836773912334966258
+    second: BombSkill_9
+  - first:
+      213: -4631087946898841099
+    second: BombSkill_10
+  - first:
+      213: 2146803995974171981
+    second: BombSkill_11
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: BombSkill_0
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 0
+        width: 95
+        height: 148
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 451500142066d1a50800000000000000
+      internalID: 6493458397604630868
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BombSkill_1
+      rect:
+        serializedVersion: 2
+        x: 803
+        y: 0
+        width: 101
+        height: 148
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11b7082f17319eae0800000000000000
+      internalID: -1519662019140093167
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BombSkill_2
+      rect:
+        serializedVersion: 2
+        x: 1388
+        y: 0
+        width: 89
+        height: 181
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f0e36a8ddefa2c6c0800000000000000
+      internalID: -4124540872641069553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BombSkill_3
+      rect:
+        serializedVersion: 2
+        x: 2012
+        y: 0
+        width: 140
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3d2f8effdaf0bdd90800000000000000
+      internalID: -7072041549858016557
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BombSkill_4
+      rect:
+        serializedVersion: 2
+        x: 2612
+        y: 0
+        width: 101
+        height: 148
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 75ec8ee554d1289c0800000000000000
+      internalID: -3926543741331386793
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BombSkill_5
+      rect:
+        serializedVersion: 2
+        x: 3209
+        y: 0
+        width: 86
+        height: 148
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7bb41cac90840e8c0800000000000000
+      internalID: -3972095664447206473
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BombSkill_6
+      rect:
+        serializedVersion: 2
+        x: 3791
+        y: 0
+        width: 95
+        height: 148
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a8cc5ff71c2ce380800000000000000
+      internalID: -8940722678657136473
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BombSkill_7
+      rect:
+        serializedVersion: 2
+        x: 4403
+        y: 0
+        width: 101
+        height: 148
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 531e35a448ff5e6b0800000000000000
+      internalID: -5267523245492149963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BombSkill_8
+      rect:
+        serializedVersion: 2
+        x: 4988
+        y: 0
+        width: 89
+        height: 181
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 30ade2ae0b7b883d0800000000000000
+      internalID: -3204109164403041789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BombSkill_9
+      rect:
+        serializedVersion: 2
+        x: 5612
+        y: 0
+        width: 140
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e02e9cf647a01cac0800000000000000
+      internalID: -3836773912334966258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BombSkill_10
+      rect:
+        serializedVersion: 2
+        x: 6212
+        y: 0
+        width: 101
+        height: 148
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f160818c021bbfb0800000000000000
+      internalID: -4631087946898841099
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BombSkill_11
+      rect:
+        serializedVersion: 2
+        x: 6809
+        y: 0
+        width: 86
+        height: 148
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4dfd6e2cdafacd10800000000000000
+      internalID: 2146803995974171981
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      BombSkill_0: 6493458397604630868
+      BombSkill_1: -1519662019140093167
+      BombSkill_10: -4631087946898841099
+      BombSkill_11: 2146803995974171981
+      BombSkill_2: -4124540872641069553
+      BombSkill_3: -7072041549858016557
+      BombSkill_4: -3926543741331386793
+      BombSkill_5: -3972095664447206473
+      BombSkill_6: -8940722678657136473
+      BombSkill_7: -5267523245492149963
+      BombSkill_8: -3204109164403041789
+      BombSkill_9: -3836773912334966258
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
