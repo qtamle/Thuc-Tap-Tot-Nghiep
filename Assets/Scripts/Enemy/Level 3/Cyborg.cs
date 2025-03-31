@@ -51,7 +51,8 @@ public class Cyborg : NetworkBehaviour
     private CyborgHealth Cyborghealth;
 
     private bool isSpawn;
-
+    
+    private Animator animator;
     private void Awake()
     {
         if (Instance == null)
@@ -66,12 +67,15 @@ public class Cyborg : NetworkBehaviour
 
     private void Start()
     {
+        animator = GetComponentInChildren<Animator>();
         Cyborghealth = GetComponent<CyborgHealth>();
         gunPositions = GunPositions.Instance.gunPositions;
         bombPositions = BoomPostion.Instance.bombPositions;
         // laserSpawnPoint = GameObject.FindWithTag("CyborgLaser").transform;
         spawnPoint = GameObject.FindWithTag("DiscoBall").transform;
         rb = GetComponent<NetworkRigidbody2D>();
+
+        animator.SetBool("Idle", true);
     }
 
     public void Active()
@@ -83,6 +87,7 @@ public class Cyborg : NetworkBehaviour
     {
         if (Cyborghealth != null && Cyborghealth.currentHealth.Value <= 0)
         {
+            animator.SetTrigger("Death");
             StopAllCoroutines();
         }
         // if (Input.GetKeyDown(KeyCode.Q))
@@ -178,6 +183,10 @@ public class Cyborg : NetworkBehaviour
 
     private IEnumerator DiscoBallSkill()
     {
+        animator.SetTrigger("SummonDisco");
+
+        yield return new WaitForSeconds(1.2f);
+
         isSkillActive = true;
 
         Vector3 startPosition = spawnPoint.position;
@@ -300,6 +309,9 @@ public class Cyborg : NetworkBehaviour
             Transform position1 = GetRandomGunPosition(availablePositions);
             Transform position2 = GetRandomGunPosition(availablePositions);
 
+            animator.SetTrigger("Turret");
+            yield return new WaitForSeconds(1.2f);
+
             GameObject turret1 = Instantiate(turretPrefab, position1.position, Quaternion.identity);
             turret1.GetComponent<NetworkObject>().Spawn();
             GameObject turret2 = Instantiate(turretPrefab, position2.position, Quaternion.identity);
@@ -329,6 +341,7 @@ public class Cyborg : NetworkBehaviour
         Vector3 leftPosition = transform.position - new Vector3(moveDistance, 0, 0);
         yield return StartCoroutine(MoveToPositionAndFire(leftPosition));
 
+
         Vector3 rightPosition = transform.position + new Vector3(moveDistance * 2, 0, 0);
         yield return StartCoroutine(MoveToPositionAndFire(rightPosition));
 
@@ -353,6 +366,9 @@ public class Cyborg : NetworkBehaviour
         }
 
         transform.position = targetPosition;
+
+        animator.SetTrigger("Fire");
+        yield return new WaitForSeconds(0.5f);
 
         FireLaser();
 
@@ -383,9 +399,13 @@ public class Cyborg : NetworkBehaviour
 
         List<GameObject> bombs = new List<GameObject>();
 
-        for (int i = 0; i < 4; i++)
+        animator.SetTrigger("Bomb");
+        yield return new WaitForSeconds(1.2f);
+
+        for (int i = 0; i < 3; i++)
         {
             Transform bombPosition = GetRandomBombPosition();
+
             GameObject bomb = Instantiate(bombPrefab, spawnPosition.position, Quaternion.identity);
             bomb.GetComponent<NetworkObject>().Spawn();
             bombs.Add(bomb);

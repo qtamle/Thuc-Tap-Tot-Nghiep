@@ -53,6 +53,8 @@ public class AssassinBossSkill : NetworkBehaviour
     private AssassinHealth assassinHealth;
     private TrapDamage trap;
 
+    private Animator anim;
+
     private void Awake()
     {
         if (Instance == null)
@@ -67,6 +69,7 @@ public class AssassinBossSkill : NetworkBehaviour
 
     private void Start()
     {
+        anim = GetComponent<Animator>();
         trap = GetComponent<TrapDamage>();
         assassinHealth = GetComponent<AssassinHealth>();
         rb = GetComponent<NetworkRigidbody2D>();
@@ -117,25 +120,25 @@ public class AssassinBossSkill : NetworkBehaviour
         originalPosition = transform.position;
     }
 
-    private void Update()
-    {
-        // if (Input.GetKeyDown(KeyCode.Q))
-        // {
-        //     ThrowTraps(4);
-        // }
-        // if (Input.GetKeyDown(KeyCode.W))
-        // {
-        //     TeleportToPlayer();
-        // }
-        // if (Input.GetKeyDown(KeyCode.E))
-        // {
-        //     ThrowBombAtPlayer();
-        // }
-        // if (Input.GetKeyDown(KeyCode.R))
-        // {
-        //     CloneAndDash();
-        // }
-    }
+    //private void Update()
+    //{
+    //    // if (Input.GetKeyDown(KeyCode.Q))
+    //    // {
+    //    //     ThrowTraps(4);
+    //    // }
+    //    // if (Input.GetKeyDown(KeyCode.W))
+    //    // {
+    //    //     TeleportToPlayer();
+    //    // }
+    //    // if (Input.GetKeyDown(KeyCode.E))
+    //    // {
+    //    //     ThrowBombAtPlayer();
+    //    // }
+    //    // if (Input.GetKeyDown(KeyCode.R))
+    //    // {
+    //    //     CloneAndDash();
+    //    // }
+    //}
 
     public void Active()
     {
@@ -170,7 +173,7 @@ public class AssassinBossSkill : NetworkBehaviour
                         case 1:
                             yield return new WaitForSeconds(1.5f);
                             Debug.Log("Throwing traps...");
-                            ThrowTraps(4);
+                            ThrowTraps(5);
                             yield return new WaitForSeconds(0.5f);
                             break;
 
@@ -225,6 +228,7 @@ public class AssassinBossSkill : NetworkBehaviour
 
         if (assassinHealth != null && assassinHealth.currentHealth.Value <= 0)
         {
+            anim.SetTrigger("Death");
             StopAllCoroutines();
         }
     }
@@ -462,8 +466,6 @@ public class AssassinBossSkill : NetworkBehaviour
 
         FlipToPlayer();
 
-        yield return new WaitForSeconds(0.5f);
-
         StartCoroutine(ShootBullets());
 
         isSkillActive = false;
@@ -481,6 +483,12 @@ public class AssassinBossSkill : NetworkBehaviour
 
         for (int i = 0; i < 3; i++)
         {
+
+            anim.SetBool("Idle", false);
+            anim.SetBool("Teleport", true);
+
+            yield return new WaitForSeconds(0.3f);
+
             GameObject bullet = Instantiate(
                 bulletPrefab,
                 shootingPoint.position,
@@ -494,8 +502,14 @@ public class AssassinBossSkill : NetworkBehaviour
                 bulletRb.linearVelocity = direction * bulletSpeed;
             }
 
-            yield return new WaitForSeconds(1.2f);
+            yield return new WaitForSeconds(0.3f); 
+
+            anim.SetBool("Teleport", false);
+            anim.SetBool("Idle", true);
+
+            yield return new WaitForSeconds(0.2f);
         }
+
     }
 
     public void CloneAndDash()
@@ -519,7 +533,7 @@ public class AssassinBossSkill : NetworkBehaviour
         clone2.GetComponent<NetworkObject>().Spawn(true);
         GameObject[] allCharacters = new GameObject[] { gameObject, clone1, clone2 };
 
-        StartCoroutine(BlinkClones(clone1, clone2));
+        //StartCoroutine(BlinkClones(clone1, clone2));
 
         StartCoroutine(MoveClonesToSides(clone1, clone2, allCharacters));
     }
@@ -647,7 +661,28 @@ public class AssassinBossSkill : NetworkBehaviour
         if (playerCloneDash != null)
             playerCloneDash.DashTowardsPlayer();
 
+
+        foreach (var character in characters)
+        {
+            Animator anim = character.GetComponent<Animator>();
+            if (anim != null)
+            {
+                anim.SetBool("Dash", true);
+                anim.SetBool("Idle", false);
+            }
+        }
+
         yield return new WaitForSeconds(4f);
+
+        foreach (var character in characters)
+        {
+            Animator anim = character.GetComponent<Animator>();
+            if (anim != null)
+            {
+                anim.SetBool("Dash", false);
+                anim.SetBool("Idle", true);
+            }
+        }
 
         // Sử dụng Despawn thay vì Destroy
         if (

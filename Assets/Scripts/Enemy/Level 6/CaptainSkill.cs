@@ -84,6 +84,7 @@ public class CaptainSkill : NetworkBehaviour
     private Coroutine skillSequenceCoroutine;
 
     private BulletBoss4Pool bulletBoss4Pool;
+    private Animator animator;
 
     private void Awake()
     {
@@ -107,6 +108,7 @@ public class CaptainSkill : NetworkBehaviour
 
     private void Start()
     {
+        animator = GetComponentInChildren<Animator>();
         health = GetComponent<CaptainHealth>();
         throwTargets = ThrowTargetPosition.Instance.throwTargets;
         shootingPoints = ShootingPointPosition.Instance.shootingPoints;
@@ -117,6 +119,8 @@ public class CaptainSkill : NetworkBehaviour
             collider2d.enabled = false;
         }
         damagePlayer = GetComponent<FlashDamagePlayer>();
+
+        animator.SetBool("Idle", true);
     }
 
     private void Update()
@@ -166,6 +170,9 @@ public class CaptainSkill : NetworkBehaviour
         while (true)
         {
             // BladeSkill
+            animator.SetTrigger("Blade");
+            yield return new WaitForSeconds(1.5f);
+
             BladeSkill();
             yield return new WaitUntil(() => !isSkillActive);
             yield return new WaitForSeconds(1f);
@@ -203,6 +210,7 @@ public class CaptainSkill : NetworkBehaviour
                     Destroy(laser);
                 }
 
+                animator.SetTrigger("Death");
                 StopAllCoroutines();
             }
         }
@@ -303,11 +311,11 @@ public class CaptainSkill : NetworkBehaviour
 
     IEnumerator FlipAndFireLaser(GameObject player)
     {
-        yield return new WaitForSeconds(0.5f);
-
         FlipCharacter(player);
 
-        yield return new WaitForSeconds(0.2f);
+        animator.SetTrigger("LaserSkill");
+
+        yield return new WaitForSeconds(1f);
 
         FireLaser();
     }
@@ -682,6 +690,9 @@ public class CaptainSkill : NetworkBehaviour
         {
             playerLastPositionBig = FindPlayerPosition();
 
+            animator.SetTrigger("Bomb");
+            yield return new WaitForSeconds(0.7f);
+
             GameObject bomb = Instantiate(bombPrefab, transform.position, Quaternion.identity);
             BigBomb bigBomb = bomb.GetComponent<BigBomb>();
             bomb.GetComponent<NetworkObject>().Spawn();
@@ -787,6 +798,9 @@ public class CaptainSkill : NetworkBehaviour
 
     IEnumerator FlashSkill()
     {
+        animator.SetBool("Flash", true);
+        animator.SetBool("Idle", false);
+
         isSkillActive = true;
         damagePlayer.SetCanDamage(true);
 
@@ -880,6 +894,25 @@ public class CaptainSkill : NetworkBehaviour
         rightClone.transform.Rotate(0, 0, 180f);
         leftClone.GetComponent<NetworkObject>().Spawn();
         rightClone.GetComponent<NetworkObject>().Spawn();
+
+        Animator leftCloneAnimator = leftClone.GetComponentInChildren<Animator>();
+        Animator rightCloneAnimator = rightClone.GetComponentInChildren<Animator>();
+
+        leftCloneAnimator.SetBool("Idle", true);
+        rightCloneAnimator.SetBool("Idle", true);
+
+        if (leftCloneAnimator != null)
+        {
+            leftCloneAnimator.SetBool("Flash", true);
+            leftCloneAnimator.SetBool("Idle", false);
+        }
+
+        if (rightCloneAnimator != null)
+        {
+            rightCloneAnimator.SetBool("Flash", true);
+            rightCloneAnimator.SetBool("Idle", false);
+        }
+
         dashDirection = Vector3.down;
 
         // yield return StartCoroutine(
@@ -939,6 +972,24 @@ public class CaptainSkill : NetworkBehaviour
         leftCloneNew.transform.Rotate(0, 0, 0f);
         rightCloneNew.transform.Rotate(0, 0, 0f);
 
+        Animator leftCloneAnimatorNew = leftCloneNew.GetComponentInChildren<Animator>();
+        Animator rightCloneAnimatorNew = rightCloneNew.GetComponentInChildren<Animator>();
+
+        leftCloneAnimatorNew.SetBool("Idle", true);
+        rightCloneAnimatorNew.SetBool("Idle", true);
+
+        if (leftCloneAnimatorNew != null)
+        {
+            leftCloneAnimatorNew.SetBool("Flash", true);
+            leftCloneAnimatorNew.SetBool("Idle", false);
+        }
+
+        if (rightCloneAnimator != null)
+        {
+            rightCloneAnimatorNew.SetBool("Flash", true);
+            rightCloneAnimatorNew.SetBool("Idle", false);
+        }
+
         Vector3 dashDirectionUp = Vector3.up;
 
         // Coroutine leftCloneNewBlink = StartCoroutine(
@@ -972,6 +1023,10 @@ public class CaptainSkill : NetworkBehaviour
         // Destroy(rightCloneNew);
 
         // 7. Dịch chuyển về target position và hạ cánh
+
+        animator.SetBool("Flash", false);
+        animator.SetBool("Idle", true);
+
         transform.position = targetPosition;
         yield return StartCoroutine(BombSkill());
         damagePlayer.SetCanDamage(false);
@@ -1006,6 +1061,7 @@ public class CaptainSkill : NetworkBehaviour
 
         Debug.Log("FlashSkill complete!");
         isSkillActive = false;
+
     }
 
     void RotateTowards(Vector3 direction, float fixedAngle)
@@ -1042,6 +1098,7 @@ public class CaptainSkill : NetworkBehaviour
 
     private IEnumerator FireLaserRounds()
     {
+        animator.SetTrigger("LaserRound");
         isSkillActive = true;
 
         CreateLaser();

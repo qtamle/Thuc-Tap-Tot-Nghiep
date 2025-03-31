@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 6041951061316013030}
   - component: {fileID: 1159729837581428499}
   - component: {fileID: -3518507305825487163}
+  - component: {fileID: 5500909545768679235}
   m_Layer: 12
   m_Name: Gangster
   m_TagString: Untagged
@@ -35,7 +36,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.82, y: 19.78, z: 0.042046547}
-  m_LocalScale: {x: 1.3039, y: 1.5009, z: 1}
+  m_LocalScale: {x: 1.11, y: 1.11, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7228001221118354820}
@@ -88,8 +89,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0, g: 1, b: 0.3113191, a: 1}
+  m_Sprite: {fileID: 4723107735738678597, guid: 73ab4153e7180d2438eb8d1d740561da, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -133,17 +134,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.0023823977, y: 0.002542153}
+  m_Offset: {x: 0.09591453, y: -0.21458453}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 1.46, y: 2.1749074}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.9094697, y: 0.9121294}
+  m_Size: {x: 1.0965334, y: 1.7071525}
   m_EdgeRadius: 0
 --- !u!50 &8439787012914911871
 Rigidbody2D:
@@ -229,7 +230,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   ChargingAttackTransform: {fileID: 7913124264575651118}
-  radiusCharging: 0.5
+  radiusCharging: 0.84
 --- !u!114 &7123294602840504747
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -346,6 +347,28 @@ MonoBehaviour:
   UseRigidBodyForMotion: 0
   AutoUpdateKinematicState: 0
   AutoSetKinematicOnDespawn: 0
+--- !u!95 &5500909545768679235
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2971549148569300707}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7387febb4be163c46b32d8cf75b8b336, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &3626712981456727053
 GameObject:
   m_ObjectHideFlags: 0
@@ -402,7 +425,7 @@ Transform:
   m_GameObject: {fileID: 3629174292645462923}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.51, z: 0}
+  m_LocalPosition: {x: 0.13, y: -0.98, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -433,7 +456,7 @@ Transform:
   m_GameObject: {fileID: 9010366878594421854}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.43, y: -0.03, z: 0}
+  m_LocalPosition: {x: 0.53, y: -0.03, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -464,7 +487,7 @@ Transform:
   m_GameObject: {fileID: 9185209940736329440}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.51, y: 0.037, z: 0}
+  m_LocalPosition: {x: 0.78, y: -0.12, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

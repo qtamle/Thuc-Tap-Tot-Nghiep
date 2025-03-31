@@ -108,6 +108,13 @@ public class Boss5 : NetworkBehaviour
 
     private BombBoss5Pool bombBossPool;
 
+    private Vector3 originalPosition;
+    private Vector3 originalPositionSkillRandom;
+    private Vector3 lastBossPosition;
+    private bool isSpawn;
+
+    private Animator anim;
+
     private void Awake()
     {
         if (Instance == null)
@@ -140,6 +147,10 @@ public class Boss5 : NetworkBehaviour
         GameObject Player = GameObject.FindGameObjectWithTag("Player");
         playerTrans = Player.transform;
         defaultPosition = transform.position;
+
+        anim = GetComponentInChildren<Animator>();
+
+        anim.SetBool("Idle", true);
     }
 
     private void Update()
@@ -153,24 +164,53 @@ public class Boss5 : NetworkBehaviour
         {
             MoveObject();
         }
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            StartCoroutine(MoveThroughSkill());
-        }
+        //if (Input.GetKeyDown(KeyCode.P))
+        //{
+        //    StartCoroutine(MoveThroughSkill());
+        //}
 
         CheckHealth();
     }
 
+    private IEnumerator MoveBossToTarget()
+    {
+        Vector3 startPosition = new Vector3(0.4f, 15.22f, transform.position.z);
+
+        Vector3 targetPosition = new Vector3(0.4f, 3.5f, transform.position.z);
+
+        float moveDuration = 3.5f;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < moveDuration)
+        {
+            transform.position = Vector3.Lerp(
+                startPosition,
+                targetPosition,
+                elapsedTime / moveDuration
+            );
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.position = targetPosition;
+        originalPositionSkillRandom = targetPosition;
+        lastBossPosition = targetPosition;
+
+        isSpawn = true;
+
+        StartCoroutine(SkillSequence());
+    }
+
     public void Active()
     {
-        // StartCoroutine(SkillSequence());
+        StartCoroutine(MoveBossToTarget());
     }
 
     private IEnumerator SkillSequence()
     {
         yield return new WaitForSeconds(2f);
 
-        while (true)
+        while (isSpawn)
         {
             if (!isSkillSequenceActive)
             {
@@ -196,6 +236,9 @@ public class Boss5 : NetworkBehaviour
 
     private IEnumerator SkullSkill()
     {
+        anim.SetTrigger("Summon");
+        yield return new WaitForSeconds(1.5f);
+
         Debug.Log("Executing Skull Skill...");
         if (skullSkillTimer <= 0)
         {
@@ -212,6 +255,9 @@ public class Boss5 : NetworkBehaviour
 
     private IEnumerator TeleportSkill()
     {
+        anim.SetTrigger("Teleport");
+        yield return new WaitForSeconds(1.3f);
+
         Debug.Log("Executing Teleport Skill...");
         yield return StartCoroutine(TeleportMultipleTimes(5, 2f));
         yield return new WaitForSeconds(0.5f);
@@ -254,6 +300,7 @@ public class Boss5 : NetworkBehaviour
                     // Destroy(laser);
                 }
 
+                anim.SetTrigger("Death");
                 StopAllCoroutines();
             }
         }
@@ -336,6 +383,8 @@ public class Boss5 : NetworkBehaviour
         bool movingLeft
     )
     {
+        anim.SetTrigger("Hand");
+
         yield return new WaitForSeconds(0.5f);
 
         float spawnX = movingLeft ? -10f : 10f;
@@ -589,6 +638,9 @@ public class Boss5 : NetworkBehaviour
 
     private IEnumerator MoveThroughWayPoints()
     {
+        anim.SetBool("Move", true);
+        anim.SetBool("Idle", false);
+
         damage.SetCanDamage(true);
         yield return new WaitForSeconds(1f);
 
@@ -650,7 +702,10 @@ public class Boss5 : NetworkBehaviour
 
         transform.position = highPosition;
 
-        yield return StartCoroutine(MoveToTarget(defaultPosition));
+        anim.SetBool("Move", false);
+        anim.SetBool("Idle", true);
+
+        yield return StartCoroutine(MoveToTarget(lastBossPosition));
     }
 
     private IEnumerator MoveToTarget(Vector3 targetPosition)
@@ -791,7 +846,7 @@ public class Boss5 : NetworkBehaviour
         {
             GameObject bomb = bombBossPool.GetBomb(target.position);
 
-            // bomb.transform.position = transform.position;
+            bomb.transform.position = transform.position;
 
             while (Vector3.Distance(bomb.transform.position, target.position) > 0.5f)
             {

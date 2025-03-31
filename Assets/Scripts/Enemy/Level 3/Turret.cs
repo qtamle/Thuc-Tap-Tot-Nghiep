@@ -19,6 +19,10 @@ public class Turret : NetworkBehaviour
     private void Start()
     {
         animator = GetComponent<Animator>();
+        if (animator == null)
+        {
+            Debug.Log("Not found anim");
+        }
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -34,9 +38,7 @@ public class Turret : NetworkBehaviour
     {
         isLaserActive = true;
 
-        animator.SetTrigger("Shoot");
-
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1f);
 
         Vector3 offsetPosition = transform.position + new Vector3(laserOffsetX, 0, 0);
         laser = CreateLaser(offsetPosition);

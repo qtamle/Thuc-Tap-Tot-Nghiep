@@ -83,7 +83,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 50
-  m_Sprite: {fileID: 5916169426483601706, guid: fae9d7caf2693ff40b14713198daf97c, type: 3}
+  m_Sprite: {fileID: 6615347469485374236, guid: fae9d7caf2693ff40b14713198daf97c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -128,8 +128,8 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.025872601, y: 0.0010841622}
-  m_Radius: 0.049603038
+  m_Offset: {x: -0.00016878711, y: 0.0010841622}
+  m_Radius: 0.05888217
 --- !u!50 &4323502053733270080
 Rigidbody2D:
   serializedVersion: 5
@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3356075696
+  GlobalObjectIdHash: 2146073801
   InScenePlacedSourceGlobalObjectIdHash: 3356075696
   DeferredDespawnTick: 0
   Ownership: 1

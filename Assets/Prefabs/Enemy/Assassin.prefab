@@ -49,6 +49,8 @@ GameObject:
   - component: {fileID: 6670492007800921641}
   - component: {fileID: -8391139595622064162}
   - component: {fileID: 5336094055224454118}
+  - component: {fileID: 6835512653249718670}
+  - component: {fileID: 4876826386506927468}
   m_Layer: 12
   m_Name: Assassin
   m_TagString: Assassin
@@ -64,9 +66,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6502307019091612828}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.79, y: 21.36, z: 0}
-  m_LocalScale: {x: 0.8132447, y: 1.741097, z: 1.3}
+  m_LocalScale: {x: 0.82, y: 0.82, z: 1.3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2929346673341685100}
@@ -117,9 +119,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 60
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0, g: 0.70352376, b: 0.9748427, a: 1}
+  m_SortingOrder: 300
+  m_Sprite: {fileID: 4723107735738678597, guid: 0a15a6c7f97b51649b8168e678f6e80a, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -163,17 +165,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.00013828278, y: 0.015761241}
+  m_Offset: {x: 0.12294185, y: -0.055104256}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 1.28, y: 2.41}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.0199206, y: 0.9629264}
+  m_Size: {x: 0.95278597, y: 2.3578362}
   m_EdgeRadius: 0
 --- !u!50 &3489315565245974993
 Rigidbody2D:
@@ -214,8 +216,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 32505431
-  InScenePlacedSourceGlobalObjectIdHash: 0
+  GlobalObjectIdHash: 1212828164
+  InScenePlacedSourceGlobalObjectIdHash: 32505431
   DeferredDespawnTick: 0
   Ownership: 1
   AlwaysReplicateAsRoot: 0
@@ -394,6 +396,50 @@ MonoBehaviour:
   UseRigidBodyForMotion: 0
   AutoUpdateKinematicState: 0
   AutoSetKinematicOnDespawn: 0
+--- !u!95 &6835512653249718670
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6502307019091612828}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7e29f6905625cd64399692cb73d1abeb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4876826386506927468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6502307019091612828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8d0727d5ae3244e3b569694d3912374, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  TransitionStateInfoList:
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: -210243013
+    DestinationState: 1002343334
+    TransitionDuration: 0.25
+    TriggerNameHash: 646380074
+    TransitionIndex: 2
+  m_Animator: {fileID: 6835512653249718670}
 --- !u!1 &7987955614932339466
 GameObject:
   m_ObjectHideFlags: 0
@@ -450,7 +496,7 @@ Transform:
   m_GameObject: {fileID: 8921561103166995899}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.07, y: -0.399, z: 0}
+  m_LocalPosition: {x: 0.091, y: -1.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

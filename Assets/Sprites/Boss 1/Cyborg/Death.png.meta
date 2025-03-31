@@ -102,7 +102,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 16384
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -139,6 +139,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -146,10 +159,10 @@ TextureImporter:
       name: Death_0
       rect:
         serializedVersion: 2
-        x: 185
+        x: 0
         y: 0
-        width: 164
-        height: 148
+        width: 600
+        height: 301
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -168,10 +181,10 @@ TextureImporter:
       name: Death_1
       rect:
         serializedVersion: 2
-        x: 791
+        x: 600
         y: 0
-        width: 146
-        height: 151
+        width: 600
+        height: 301
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -190,10 +203,10 @@ TextureImporter:
       name: Death_2
       rect:
         serializedVersion: 2
-        x: 1406
+        x: 1200
         y: 0
-        width: 101
-        height: 151
+        width: 600
+        height: 301
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -212,10 +225,10 @@ TextureImporter:
       name: Death_3
       rect:
         serializedVersion: 2
-        x: 1991
+        x: 1800
         y: 0
-        width: 95
-        height: 148
+        width: 600
+        height: 301
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -234,10 +247,10 @@ TextureImporter:
       name: Death_4
       rect:
         serializedVersion: 2
-        x: 2591
+        x: 2400
         y: 0
-        width: 110
-        height: 130
+        width: 600
+        height: 301
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -256,10 +269,10 @@ TextureImporter:
       name: Death_5
       rect:
         serializedVersion: 2
-        x: 3203
+        x: 3000
         y: 0
-        width: 122
-        height: 112
+        width: 600
+        height: 301
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -278,10 +291,10 @@ TextureImporter:
       name: Death_6
       rect:
         serializedVersion: 2
-        x: 3809
+        x: 3600
         y: 0
-        width: 101
-        height: 106
+        width: 600
+        height: 301
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -300,10 +313,10 @@ TextureImporter:
       name: Death_7
       rect:
         serializedVersion: 2
-        x: 4406
-        y: 83
-        width: 11
-        height: 20
+        x: 4200
+        y: 0
+        width: 600
+        height: 301
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -322,10 +335,10 @@ TextureImporter:
       name: Death_8
       rect:
         serializedVersion: 2
-        x: 3917
-        y: 50
-        width: 14
-        height: 20
+        x: 4800
+        y: 0
+        width: 600
+        height: 301
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -340,55 +353,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: Death_9
-      rect:
-        serializedVersion: 2
-        x: 4415
-        y: 0
-        width: 125
-        height: 61
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: fe3f5de036c69faa0800000000000000
-      internalID: -6126746645354384401
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Death_10
-      rect:
-        serializedVersion: 2
-        x: 5015
-        y: 0
-        width: 128
-        height: 25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 1b6d27015ed508920800000000000000
-      internalID: 2990493390978864817
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 0da6bf8d139562747a5c139acbf1b975
     internalID: 0
     vertices: []
     indices: 
@@ -400,7 +369,6 @@ TextureImporter:
     nameFileIdTable:
       Death_0: 6991849013916550155
       Death_1: -276728812324164698
-      Death_10: 2990493390978864817
       Death_2: 3156895337291164288
       Death_3: 1400002288684528572
       Death_4: -1891625820773287384
@@ -408,7 +376,6 @@ TextureImporter:
       Death_6: 3968659893341466949
       Death_7: 6495761399759928590
       Death_8: 4800267807231483719
-      Death_9: -6126746645354384401
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
