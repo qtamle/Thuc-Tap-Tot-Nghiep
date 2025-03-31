@@ -220,6 +220,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -1072,7 +1085,45 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      ShowUp_0: 3393290374525721053
+      ShowUp_1: 4116654796464140135
+      ShowUp_10: -5953543309161057958
+      ShowUp_11: -3432836281407306125
+      ShowUp_12: 5167511105335199180
+      ShowUp_13: -5397341868454413026
+      ShowUp_14: -5232773831887464938
+      ShowUp_15: 1266440665689554410
+      ShowUp_16: 2691077456922556689
+      ShowUp_17: 6217286227848383799
+      ShowUp_18: -4206460963663315451
+      ShowUp_19: 3764797095854058176
+      ShowUp_2: 8838391946565628156
+      ShowUp_20: -7400870316353544386
+      ShowUp_21: -111443127128389496
+      ShowUp_22: 6512210511084965617
+      ShowUp_23: -6055464320399900008
+      ShowUp_24: -7927770827198587999
+      ShowUp_25: 2382488819080210946
+      ShowUp_26: -6018117407596323059
+      ShowUp_27: 3277554768207517037
+      ShowUp_28: 6122167547212962802
+      ShowUp_29: -5084535908797117206
+      ShowUp_3: -2337192470894416584
+      ShowUp_30: -2074776192921733636
+      ShowUp_31: 6639192088068163898
+      ShowUp_32: 4201836753022529321
+      ShowUp_33: -7362408168202030642
+      ShowUp_34: 2424212604064850115
+      ShowUp_35: -7090908052911523922
+      ShowUp_36: 1403882318694745147
+      ShowUp_37: 8415618483991899304
+      ShowUp_4: 158352903357523641
+      ShowUp_5: 7916818577792639014
+      ShowUp_6: -2227464160024842272
+      ShowUp_7: -1341114345273745273
+      ShowUp_8: 5723507216927223484
+      ShowUp_9: 8678011775102579922
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

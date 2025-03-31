@@ -175,6 +175,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -697,7 +710,30 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      FireLaserRound_0: -9158704392620136165
+      FireLaserRound_1: -304838721863848256
+      FireLaserRound_10: 7540933288813112653
+      FireLaserRound_11: 1170361853488941679
+      FireLaserRound_12: 5505463552343484708
+      FireLaserRound_13: -8059855819809300951
+      FireLaserRound_14: 167950311140751127
+      FireLaserRound_15: 2840630881158392930
+      FireLaserRound_16: -1109955303112535464
+      FireLaserRound_17: 2330609216528201884
+      FireLaserRound_18: -8431517406476296758
+      FireLaserRound_19: 6450169425855861913
+      FireLaserRound_2: -3747192473947659288
+      FireLaserRound_20: -8279108994320836254
+      FireLaserRound_21: 2315193476103139802
+      FireLaserRound_22: 7305424511258780125
+      FireLaserRound_3: 1183025609857292251
+      FireLaserRound_4: -20535479733280326
+      FireLaserRound_5: -6948795242439764037
+      FireLaserRound_6: 1956927402538060166
+      FireLaserRound_7: 5405006884604363355
+      FireLaserRound_8: -5496307101189825565
+      FireLaserRound_9: 1781110939643691243
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
