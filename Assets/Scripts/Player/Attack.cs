@@ -83,6 +83,7 @@ public class Attack : NetworkBehaviour
             // weaponInfo = GetComponentInChildren<WeaponPlayerInfo>();
             ulong myClientId = NetworkManager.Singleton.LocalClientId;
             FindPlayerServerRpc(myClientId);
+            weaponInfo = GetComponentInChildren<WeaponPlayerInfo>();
         }
         else
         {
@@ -204,6 +205,7 @@ public class Attack : NetworkBehaviour
 
                     if (Random.value <= 0.35f && bouncingSaw != null && weaponInfo.weaponLevel > 3)
                     {
+                        Debug.Log("Bouncing saw");
                         bouncingSaw.LaunchBouncingSaw();
                     }
 
@@ -490,6 +492,7 @@ public class Attack : NetworkBehaviour
             {
                 Debug.LogError($"Không tìm thấy WeaponPlayerInfo cho client {clientId}");
             }
+            weaponInfo = GetComponentInChildren<WeaponPlayerInfo>();
         }
     }
 

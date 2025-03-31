@@ -56,8 +56,6 @@ public class WeaponData : MonoBehaviour
         coinsManager = FindFirstObjectByType<CoinsManager>();
         snapToWeapon = FindAnyObjectByType<SnapToWeapon>();
 
-        upgradeSuccessPanel.gameObject.SetActive(false);
-
         // Kiểm tra xem dữ liệu đã tồn tại chưa
         bool dataExists = await LoadWeaponData();
 
@@ -66,8 +64,13 @@ public class WeaponData : MonoBehaviour
             Debug.Log("Create weaponData");
             CreateWeaponData(); // Chỉ tạo nếu chưa có dữ liệu
         }
-
+        else
+        {
+            Debug.Log("weapon exist");
+        }
         // OnSceneLoaded(SceneManager.GetActiveScene(), LoadSceneMode.Single);
+
+        upgradeSuccessPanel.gameObject.SetActive(false);
     }
 
     private void OnDestroy()

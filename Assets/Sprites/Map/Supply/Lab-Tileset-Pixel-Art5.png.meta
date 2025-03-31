@@ -160,7 +160,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Lab-Tileset-Pixel-Art5_0: -8516009362272193840
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
