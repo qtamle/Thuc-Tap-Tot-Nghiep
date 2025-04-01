@@ -19,7 +19,6 @@ GameObject:
   - component: {fileID: 1159729837581428499}
   - component: {fileID: -3518507305825487163}
   - component: {fileID: 5500909545768679235}
-  - component: {fileID: -4625083730607864800}
   m_Layer: 12
   m_Name: Gangster
   m_TagString: Untagged
@@ -135,21 +134,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.09591454, y: -0.039670467}
+  m_Offset: {x: 0.09591453, y: -0.21458453}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-<<<<<<< Updated upstream
     oldSize: {x: 6, y: 3.02}
-=======
-    oldSize: {x: 1.44, y: 2.16}
->>>>>>> Stashed changes
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.0965334, y: 2.001008}
+  m_Size: {x: 1.0965334, y: 1.7071525}
   m_EdgeRadius: 0
 --- !u!50 &8439787012914911871
 Rigidbody2D:
@@ -190,7 +185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 295995167
+  GlobalObjectIdHash: 3437476352
   InScenePlacedSourceGlobalObjectIdHash: 3437476352
   DeferredDespawnTick: 0
   Ownership: 1
@@ -374,28 +369,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &-4625083730607864800
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2971549148569300707}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8d0727d5ae3244e3b569694d3912374, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
-  TransitionStateInfoList:
-  - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: -438729860
-    DestinationState: -1639042945
-    TransitionDuration: 0.25
-    TriggerNameHash: 125937960
-    TransitionIndex: 0
-  m_Animator: {fileID: 5500909545768679235}
 --- !u!1 &3626712981456727053
 GameObject:
   m_ObjectHideFlags: 0

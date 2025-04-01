@@ -124,7 +124,7 @@ public class Gangster : NetworkBehaviour
                 if (skillUsageCount < 3)
                 {
                     animator.SetTrigger("Jump");
-                    yield return new WaitForSeconds(0.5f);
+                    yield return new WaitForSeconds(0.4f);
                     UseJumpSkill();
                     skillUsageCount++;
                 }
