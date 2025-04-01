@@ -279,7 +279,12 @@ public class Dagger : NetworkBehaviour
                     health.HealHealth(1);
                 }
                 // Kiểm tra và hủy enemy
-                NetworkObject networkObject = enemyObject.GetComponentInParent<NetworkObject>();
+                NetworkObject networkObject =
+                    enemy.gameObject.GetComponentInParent<NetworkObject>();
+                if (networkObject == null)
+                {
+                    networkObject = enemy.GetComponent<NetworkObject>();
+                }
                 if (networkObject != null)
                 {
                     // Gọi ServerRpc để hủy đối tượng
