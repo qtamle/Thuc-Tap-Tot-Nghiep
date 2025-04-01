@@ -3,7 +3,7 @@ using System.Linq;
 using Unity.Netcode;
 using UnityEngine;
 
-public class BladeDamage : MonoBehaviour
+public class BladeDamage : NetworkBehaviour
 {
     [Header("Damage")]
     public Vector2 boxSize = new Vector2(2f, 2f);
@@ -81,20 +81,67 @@ public class BladeDamage : MonoBehaviour
                     spawner.OnEnemyKilled();
                 }
 
-                Destroy(enemy.gameObject);
-                SpawnCoins(coinPrefab, coinSpawnMin, coinSpawnMax, enemy.transform.position);
-
-                if (Random.value <= 0.30f)
+                NetworkObject networkObject = enemy.GetComponentInParent<NetworkObject>();
+                if (networkObject != null)
                 {
-                    SpawnCoins(
-                        secondaryCoinPrefab,
-                        secondaryCoinSpawnMin,
-                        secondaryCoinSpawnMax,
+                    // Gọi ServerRpc để hủy đối tượng
+                    AttackEnemyServerRpc(networkObject.NetworkObjectId);
+                    SpawnCoinsServerRpc(
+                        false,
+                        coinSpawnMin,
+                        coinSpawnMax,
                         enemy.transform.position
                     );
-                }
 
-                SpawnOrbsServerRpc(enemy.transform.position, 3);
+                    if (Random.value <= 0.30f)
+                    {
+                        SpawnCoinsServerRpc(
+                            true,
+                            secondaryCoinSpawnMin,
+                            secondaryCoinSpawnMax,
+                            enemy.transform.position
+                        );
+                    }
+                    SpawnOrbsServerRpc(enemy.transform.position, 5);
+                }
+            }
+        }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void SpawnCoinsServerRpc(
+    bool isSecondary,
+    float minAmount,
+    float maxAmount,
+    Vector3 position
+)
+    {
+        Debug.Log($"ServerRpc called - isSecondary: {isSecondary}, position: {position}");
+        float initialCoinCount = Random.Range(minAmount, maxAmount + 1);
+        float coinCount = initialCoinCount;
+
+        for (int i = 0; i < coinCount; i++)
+        {
+            Vector3 spawnPosition = position + Vector3.up * 0.2f;
+            NetworkObject coin = CoinPoolManager.Instance.GetCoinFromPool(
+                spawnPosition,
+                isSecondary
+            );
+
+            Rigidbody2D coinRb = coin.GetComponent<Rigidbody2D>();
+            if (coinRb != null)
+            {
+                Vector2 forceDirection =
+                    new Vector2(Random.Range(-1.5f, 1.5f), Random.Range(1f, 1f)) * 2.5f;
+                coinRb.AddForce(forceDirection, ForceMode2D.Impulse);
+                StartCoroutine(CheckIfCoinIsStuck(coinRb));
+            }
+
+            CoinsScript coinScript = coin.GetComponent<CoinsScript>();
+            if (coinScript != null)
+            {
+                coinScript.SetCoinType(!isSecondary, isSecondary);
+                // StartCoroutine(HookCoinsContinuously());
             }
         }
     }
@@ -217,6 +264,20 @@ public class BladeDamage : MonoBehaviour
         {
             // Nếu orb hoặc player bị xóa, dừng Coroutine
             yield break;
+        }
+    }
+
+
+    [ServerRpc(RequireOwnership = false)]
+    private void AttackEnemyServerRpc(ulong enemyNetworkId)
+    {
+        NetworkObject enemyObject = NetworkManager.Singleton.SpawnManager.SpawnedObjects[
+            enemyNetworkId
+        ];
+        if (enemyObject != null)
+        {
+            // Hủy đối tượng trên server
+            enemyObject.Despawn(true);
         }
     }
 
