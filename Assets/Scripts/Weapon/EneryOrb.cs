@@ -4,7 +4,7 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class EneryOrb : MonoBehaviour
+public class EneryOrb : NetworkBehaviour
 {
     [Header("Settings Attack")]
     public LayerMask enemyLayer;
@@ -64,7 +64,7 @@ public class EneryOrb : MonoBehaviour
     private PlayerHealth health;
     private Lucky lucky;
 
-    private WeaponInfo weaponInfo;
+    private WeaponPlayerInfo weaponInfo;
     private EnergyOrbShooter energyOrbShooter;
 
     private bool canShootOrbs = true;
@@ -81,16 +81,93 @@ public class EneryOrb : MonoBehaviour
 
     private void Start()
     {
-        FindPlayer();
+        if (IsServer)
+        {
+            // NetworkObject myPlayerObject = NetworkManager
+            //     .Singleton
+            //     .ConnectedClients[OwnerClientId]
+            //     .PlayerObject;
+
+            // WeaponPlayerInfo weaponPlayerInfo = FindAnyObjectByType<WeaponPlayerInfo>(); // Hoặc dùng cách khác để tìm đúng object
+            // // Đưa WeaponPlayerInfo thành con của PlayerObject
+            // weaponPlayerInfo.transform.SetParent(myPlayerObject.transform);
+            // weaponInfo = GetComponentInChildren<WeaponPlayerInfo>();
+            ulong myClientId = NetworkManager.Singleton.LocalClientId;
+            FindPlayerServerRpc(myClientId);
+            weaponInfo = GetComponentInChildren<WeaponPlayerInfo>();
+            for (int i = 0; i < attackOrbs.Length; i++)
+            {
+                if (attackOrbPrefab == null)
+                {
+                    Debug.LogError("Attack Orb Prefab is not assigned!");
+                    continue;
+                }
+
+                attackOrbs[i] = Instantiate(
+                    attackOrbPrefab,
+                    playerSpawn.position,
+                    Quaternion.identity
+                );
+                attackOrbs[i].GetComponent<NetworkObject>().Spawn(true);
+
+                attackOrbs[i].transform.parent = playerSpawn;
+            }
+        }
+        else
+        {
+            ulong myClientId = NetworkManager.Singleton.LocalClientId;
+
+            FindPlayerServerRpc(myClientId);
+            weaponInfo = GetComponentInChildren<WeaponPlayerInfo>();
+            for (int i = 0; i < attackOrbs.Length; i++)
+            {
+                if (attackOrbPrefab == null)
+                {
+                    Debug.LogError("Attack Orb Prefab is not assigned!");
+                    continue;
+                }
+
+                attackOrbs[i] = Instantiate(
+                    attackOrbPrefab,
+                    playerSpawn.position,
+                    Quaternion.identity
+                );
+                attackOrbs[i].GetComponent<NetworkObject>().Spawn(false);
+
+                attackOrbs[i].transform.parent = playerSpawn;
+            }
+        }
         OnSceneLoaded(SceneManager.GetActiveScene(), LoadSceneMode.Single);
     }
 
-    private void FindPlayer()
+    [ServerRpc(RequireOwnership = false)]
+    private void FindPlayerServerRpc(ulong clientId) // Thêm clientId làm tham số
     {
-        NetworkObject myPlayerObject = NetworkManager.Singleton.LocalClient.PlayerObject;
-        WeaponPlayerInfo weaponInfo = FindAnyObjectByType<WeaponPlayerInfo>(); // Hoặc dùng cách khác để tìm đúng object
-        // Đưa WeaponPlayerInfo thành con của PlayerObject
-        weaponInfo.transform.SetParent(myPlayerObject.transform);
+        // Kiểm tra nếu client tồn tại
+        if (NetworkManager.Singleton.ConnectedClients.TryGetValue(clientId, out var client))
+        {
+            NetworkObject playerObject = client.PlayerObject;
+
+            // Tìm tất cả WeaponPlayerInfo và chọn cái có OwnerClientId trùng khớp
+            WeaponPlayerInfo[] allWeapons = FindObjectsByType<WeaponPlayerInfo>(
+                FindObjectsInactive.Include,
+                FindObjectsSortMode.None
+            );
+            WeaponPlayerInfo targetWeapon = allWeapons.FirstOrDefault(w =>
+                w.NetworkObject.OwnerClientId == clientId
+            );
+
+            if (targetWeapon != null)
+            {
+                targetWeapon.transform.SetParent(playerObject.transform);
+                targetWeapon.transform.localPosition = Vector3.zero; // Đặt vị trí phù hợp
+            }
+            else
+            {
+                Debug.LogError($"Không tìm thấy WeaponPlayerInfo cho client {clientId}");
+            }
+            weaponInfo = GetComponentInChildren<WeaponPlayerInfo>();
+        }
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -129,25 +206,12 @@ public class EneryOrb : MonoBehaviour
             return;
         }
 
-        for (int i = 0; i < attackOrbs.Length; i++)
-        {
-            if (attackOrbPrefab == null)
-            {
-                Debug.LogError("Attack Orb Prefab is not assigned!");
-                continue;
-            }
-
-            attackOrbs[i] = Instantiate(attackOrbPrefab, playerSpawn.position, Quaternion.identity);
-            attackOrbs[i].transform.parent = playerSpawn;
-        }
-
         enemySpawners = FindObjectsOfType<MonoBehaviour>().OfType<IEnemySpawner>().ToArray();
 
         goldIncrease = FindFirstObjectByType<Gold>();
         brutal = FindFirstObjectByType<Brutal>();
         lucky = FindFirstObjectByType<Lucky>();
 
-        weaponInfo = GetComponent<WeaponInfo>();
         energyOrbShooter = GetComponent<EnergyOrbShooter>();
 
         StartCoroutine(OrbSpeedBoostRoutine());
@@ -283,7 +347,12 @@ public class EneryOrb : MonoBehaviour
                     {
                         health.HealHealth(1);
                     }
-                    NetworkObject networkObject = enemy.GetComponentInParent<NetworkObject>();
+                    NetworkObject networkObject =
+                        enemy.gameObject.GetComponentInParent<NetworkObject>();
+                    if (networkObject == null)
+                    {
+                        networkObject = enemy.GetComponent<NetworkObject>();
+                    }
                     if (networkObject != null)
                     {
                         // Gọi ServerRpc để hủy đối tượng

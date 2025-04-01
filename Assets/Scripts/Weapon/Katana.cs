@@ -4,7 +4,7 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Katana : MonoBehaviour
+public class Katana : NetworkBehaviour
 {
     [Header("Settings Attack")]
     public Vector2 boxSize;
@@ -72,7 +72,8 @@ public class Katana : MonoBehaviour
     private PlayerHealth health;
     private Lucky lucky;
 
-    private WeaponInfo weaponInfo;
+    private WeaponPlayerInfo weaponInfo;
+
     private KatanaLevel4 katanaLevel4;
 
     private void OnEnable()
@@ -87,17 +88,61 @@ public class Katana : MonoBehaviour
 
     private void Start()
     {
-        FindPlayer();
+        if (IsServer)
+        {
+            // NetworkObject myPlayerObject = NetworkManager
+            //     .Singleton
+            //     .ConnectedClients[OwnerClientId]
+            //     .PlayerObject;
+
+            // WeaponPlayerInfo weaponPlayerInfo = FindAnyObjectByType<WeaponPlayerInfo>(); // Hoặc dùng cách khác để tìm đúng object
+            // // Đưa WeaponPlayerInfo thành con của PlayerObject
+            // weaponPlayerInfo.transform.SetParent(myPlayerObject.transform);
+            // weaponInfo = GetComponentInChildren<WeaponPlayerInfo>();
+            ulong myClientId = NetworkManager.Singleton.LocalClientId;
+            FindPlayerServerRpc(myClientId);
+            weaponInfo = GetComponentInChildren<WeaponPlayerInfo>();
+        }
+        else
+        {
+            ulong myClientId = NetworkManager.Singleton.LocalClientId;
+
+            FindPlayerServerRpc(myClientId);
+        }
         OnSceneLoaded(SceneManager.GetActiveScene(), LoadSceneMode.Single);
     }
 
-    private void FindPlayer()
+
+    [ServerRpc(RequireOwnership = false)]
+    private void FindPlayerServerRpc(ulong clientId) // Thêm clientId làm tham số
     {
-        NetworkObject myPlayerObject = NetworkManager.Singleton.LocalClient.PlayerObject;
-        WeaponPlayerInfo weaponInfo = FindAnyObjectByType<WeaponPlayerInfo>(); // Hoặc dùng cách khác để tìm đúng object
-        // Đưa WeaponPlayerInfo thành con của PlayerObject
-        weaponInfo.transform.SetParent(myPlayerObject.transform);
+        // Kiểm tra nếu client tồn tại
+        if (NetworkManager.Singleton.ConnectedClients.TryGetValue(clientId, out var client))
+        {
+            NetworkObject playerObject = client.PlayerObject;
+
+            // Tìm tất cả WeaponPlayerInfo và chọn cái có OwnerClientId trùng khớp
+            WeaponPlayerInfo[] allWeapons = FindObjectsByType<WeaponPlayerInfo>(
+                FindObjectsInactive.Include,
+                FindObjectsSortMode.None
+            );
+            WeaponPlayerInfo targetWeapon = allWeapons.FirstOrDefault(w =>
+                w.NetworkObject.OwnerClientId == clientId
+            );
+
+            if (targetWeapon != null)
+            {
+                targetWeapon.transform.SetParent(playerObject.transform);
+                targetWeapon.transform.localPosition = Vector3.zero; // Đặt vị trí phù hợp
+            }
+            else
+            {
+                Debug.LogError($"Không tìm thấy WeaponPlayerInfo cho client {clientId}");
+            }
+            weaponInfo = GetComponentInChildren<WeaponPlayerInfo>();
+        }
     }
+
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
@@ -127,7 +172,6 @@ public class Katana : MonoBehaviour
         brutal = FindFirstObjectByType<Brutal>();
         lucky = FindFirstObjectByType<Lucky>();
 
-        weaponInfo = GetComponent<WeaponInfo>();
         katanaLevel4 = GetComponent<KatanaLevel4>();
     }
 

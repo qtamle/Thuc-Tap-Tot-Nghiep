@@ -149,6 +149,7 @@ public class Claws : NetworkBehaviour
             {
                 Debug.Log("Chua dat du level cua claws !!!!!!!");
             }
+            weaponInfo = GetComponentInChildren<WeaponPlayerInfo>();
         }
         OnSceneLoaded(SceneManager.GetActiveScene(), LoadSceneMode.Single);
     }
@@ -381,7 +382,12 @@ public class Claws : NetworkBehaviour
                 {
                     health.HealHealth(1);
                 }
-                NetworkObject networkObject = enemy.GetComponentInParent<NetworkObject>();
+                NetworkObject networkObject =
+                    enemy.gameObject.GetComponentInParent<NetworkObject>();
+                if (networkObject == null)
+                {
+                    networkObject = enemy.GetComponent<NetworkObject>();
+                }
                 AttackEnemyServerRpc(networkObject.NetworkObjectId);
                 SpawnCoinsServerRpc(false, coinSpawnMin, coinSpawnMax, enemy.transform.position);
 
