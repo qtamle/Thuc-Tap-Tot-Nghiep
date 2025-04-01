@@ -177,8 +177,9 @@ public class Attack : NetworkBehaviour
                     Debug.Log("Co game object trogn enemy");
                 }
                 NetworkObject networkObject =
-                    enemy.gameObject.GetComponentInParent<NetworkObject>();
-                if (networkObject != null)
+                    enemy.gameObject.GetComponentInParent<NetworkObject>()
+                    ?? GetComponent<NetworkObject>();
+                if (networkObject != null && networkObject.IsSpawned)
                 {
                     // Gọi ServerRpc để hủy đối tượng
                     AttackEnemyServerRpc(networkObject.NetworkObjectId);
@@ -420,13 +421,24 @@ public class Attack : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     private void AttackEnemyServerRpc(ulong enemyNetworkId)
     {
-        NetworkObject enemyObject = NetworkManager.Singleton.SpawnManager.SpawnedObjects[
-            enemyNetworkId
-        ];
-        if (enemyObject != null)
+        if (
+            !NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(
+                enemyNetworkId,
+                out NetworkObject enemyObject
+            )
+        )
         {
-            // Hủy đối tượng trên server
+            Debug.LogError($"Enemy {enemyNetworkId} not found on server!");
+            return;
+        }
+        if (enemyObject != null && enemyObject.IsSpawned)
+        {
+            Debug.Log("Despawning enemy: " + enemyNetworkId);
             enemyObject.Despawn(true);
+        }
+        else
+        {
+            Debug.Log("Enemy no networkobject");
         }
     }
 

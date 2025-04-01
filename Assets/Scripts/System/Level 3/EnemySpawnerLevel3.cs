@@ -155,7 +155,7 @@ public class EnemySpawnerLevel3 : NetworkBehaviour, IEnemySpawner
                 BossSpawnPostion.transform.position,
                 Quaternion.identity
             );
-            bossSpawned.GetComponent<NetworkObject>().Spawn();
+            bossSpawned.GetComponent<NetworkObject>().Spawn(true);
             CyborgHealth.Instance.IntializeBossHealthServerRpc();
             Cyborg.Instance.Active();
         }

@@ -2391,6 +2391,18 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 2576054655
       objectReference: {fileID: 0}
+    - target: {fileID: 4259511524768408044, guid: 575db4ba95057c848beb4295e377738f, type: 3}
+      propertyPath: PooledPrefabsList.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4259511524768408044, guid: 575db4ba95057c848beb4295e377738f, type: 3}
+      propertyPath: PooledPrefabsList.Array.data[4].Prefab
+      value: 
+      objectReference: {fileID: 2774234204776816512, guid: cb95c4e88814cb64883a87dec2386b91, type: 3}
+    - target: {fileID: 4259511524768408044, guid: 575db4ba95057c848beb4295e377738f, type: 3}
+      propertyPath: PooledPrefabsList.Array.data[4].PrewarmCount
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4597573992559027624, guid: 575db4ba95057c848beb4295e377738f, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 1391732213
@@ -2401,9 +2413,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 776283517973635682, guid: 575db4ba95057c848beb4295e377738f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1115152009}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 575db4ba95057c848beb4295e377738f, type: 3}
+--- !u!4 &192562577 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 776283517973635682, guid: 575db4ba95057c848beb4295e377738f, type: 3}
+  m_PrefabInstance: {fileID: 192562576}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &206100956
 GameObject:
   m_ObjectHideFlags: 0
@@ -11124,12 +11144,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1115152008}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.14, y: 5.47, z: -0.0040251464}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.14, y: 5.47, z: -0.0040254593}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1420307607}
+  m_Father: {fileID: 192562577}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1115152010
 MonoBehaviour:
@@ -15785,7 +15805,6 @@ Transform:
   m_Children:
   - {fileID: 403724004}
   - {fileID: 1688982626}
-  - {fileID: 1115152009}
   - {fileID: 967289857}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

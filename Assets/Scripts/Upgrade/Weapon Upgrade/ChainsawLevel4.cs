@@ -91,6 +91,7 @@ public class ChainsawLevel4 : NetworkBehaviour
         else
         {
             gameObject.GetComponent<NetworkObject>().Despawn(true);
+
             // Destroy(gameObject);
         }
     }

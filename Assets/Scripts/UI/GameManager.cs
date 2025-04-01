@@ -130,7 +130,9 @@ public class GameManager : NetworkBehaviour
             }
             if (currentBoss.Value <= 5)
             {
-                string bossScene = "Level " + currentBoss.Value + " - Remake";
+                // string bossScene = "Level " + currentBoss.Value + " - Remake";
+                string bossScene = "Level 4 - Remake";
+
                 Debug.Log($"Loading {bossScene}");
                 NetworkManager.Singleton.SceneManager.LoadScene(bossScene, LoadSceneMode.Single);
             }
@@ -149,7 +151,7 @@ public class GameManager : NetworkBehaviour
             NetworkManager.Singleton.SceneManager.OnLoadComplete += OnSupplySceneLoaded;
             NetworkManager.Singleton.SceneManager.LoadScene("SupplyScene", LoadSceneMode.Single);
         }
-        // string bossScene = "Level 5 - Remake";
+        // string bossScene = "Level 3 - Remake";
         // NetworkManager.Singleton.SceneManager.LoadScene(bossScene, LoadSceneMode.Single);
     }
 

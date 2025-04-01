@@ -174,7 +174,7 @@ public class EnemySpawnerLevel5 : NetworkBehaviour, IEnemySpawner
                 BossSpawnPostion.transform.position,
                 Quaternion.identity
             );
-            bossSpawned.GetComponent<NetworkObject>().Spawn();
+            bossSpawned.GetComponent<NetworkObject>().Spawn(true);
             Boss5Health.Instance.IntializeBossHealthServerRpc();
             Boss5.Instance.Active();
         }
