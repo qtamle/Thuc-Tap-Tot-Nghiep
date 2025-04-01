@@ -37,6 +37,7 @@ public class Gangster : NetworkBehaviour
 
     private GangsterHealth gangsterHealth;
     private RockPool rockPool;
+    private Animator animator;
 
     void Awake()
     {
@@ -52,6 +53,9 @@ public class Gangster : NetworkBehaviour
 
     private void Start()
     {
+        animator = GetComponent<Animator>();
+        animator.SetBool("Idle", true);
+
         Debug.Log("Boss.Start()");
         rockPool = FindFirstObjectByType<RockPool>();
         rb = GetComponent<NetworkRigidbody2D>();
@@ -119,6 +123,8 @@ public class Gangster : NetworkBehaviour
             {
                 if (skillUsageCount < 3)
                 {
+                    animator.SetTrigger("Jump");
+                    yield return new WaitForSeconds(0.5f);
                     UseJumpSkill();
                     skillUsageCount++;
                 }
@@ -178,6 +184,7 @@ public class Gangster : NetworkBehaviour
 
     private void StopAllActions()
     {
+        animator.SetTrigger("Death");
         StopAllCoroutines();
         rb.Rigidbody2D.linearVelocity = Vector2.zero;
         isUsingSkill = false;
@@ -240,6 +247,7 @@ public class Gangster : NetworkBehaviour
 
         FindPlayerTransform();
 
+
         float offsetX = playerTransform.position.x > transform.position.x ? -3f : 3f;
         Vector2 targetPosition = new Vector2(
             playerTransform.position.x + offsetX,
@@ -268,11 +276,17 @@ public class Gangster : NetworkBehaviour
         float chargeDirectionX = playerTransform.position.x > transform.position.x ? 1f : -1f;
         FlipToDirection(chargeDirectionX);
 
+
         if (WallCheck != null)
         {
             while (!Physics2D.OverlapCircle(WallCheck.position, wallCheckRadius, wallLayer))
             {
                 FlipToDirection(chargeDirectionX);
+
+                animator.SetBool("Run", true);
+                animator.SetBool("Idle", false);
+
+                yield return new WaitForSeconds(0.1f);
 
                 if (isGrounded)
                 {
@@ -309,6 +323,8 @@ public class Gangster : NetworkBehaviour
 
         if (gangsterHealth != null)
         {
+            animator.SetBool("Run", false);
+            animator.SetBool("Stun", true);
             gangsterHealth.StunForDuration(3f);
         }
 
@@ -320,6 +336,9 @@ public class Gangster : NetworkBehaviour
         rb.Rigidbody2D.gravityScale = 4f;
         isCharging = false;
         isUsingSkill = false;
+
+        animator.SetBool("Idle", true);
+        animator.SetBool("Stun", false);
     }
 
     private void FlipToDirection(float directionX)

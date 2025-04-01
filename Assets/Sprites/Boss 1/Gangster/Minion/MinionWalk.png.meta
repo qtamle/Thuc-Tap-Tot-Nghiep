@@ -69,7 +69,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 150
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -147,10 +147,10 @@ TextureImporter:
       name: MinionWalk_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 180
         y: 0
-        width: 600
-        height: 302
+        width: 120
+        height: 198
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -169,10 +169,10 @@ TextureImporter:
       name: MinionWalk_1
       rect:
         serializedVersion: 2
-        x: 600
+        x: 792
         y: 0
-        width: 600
-        height: 302
+        width: 102
+        height: 198
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -191,10 +191,10 @@ TextureImporter:
       name: MinionWalk_2
       rect:
         serializedVersion: 2
-        x: 1200
+        x: 1404
         y: 0
-        width: 600
-        height: 302
+        width: 72
+        height: 204
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -213,10 +213,10 @@ TextureImporter:
       name: MinionWalk_3
       rect:
         serializedVersion: 2
-        x: 1800
+        x: 1986
         y: 0
-        width: 600
-        height: 302
+        width: 132
+        height: 204
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -235,10 +235,10 @@ TextureImporter:
       name: MinionWalk_4
       rect:
         serializedVersion: 2
-        x: 2400
+        x: 2568
         y: 0
-        width: 600
-        height: 302
+        width: 150
+        height: 198
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -257,10 +257,10 @@ TextureImporter:
       name: MinionWalk_5
       rect:
         serializedVersion: 2
-        x: 3000
+        x: 3204
         y: 0
-        width: 600
-        height: 302
+        width: 108
+        height: 204
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -279,10 +279,10 @@ TextureImporter:
       name: MinionWalk_6
       rect:
         serializedVersion: 2
-        x: 3600
+        x: 3810
         y: 0
-        width: 600
-        height: 302
+        width: 72
+        height: 204
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

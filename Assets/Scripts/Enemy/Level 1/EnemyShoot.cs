@@ -59,7 +59,7 @@ public class EnemyShoot : MonoBehaviour
         isShooting = true;
         anim.SetTrigger("Shoot");
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.4f);
 
         Shoot();
 
