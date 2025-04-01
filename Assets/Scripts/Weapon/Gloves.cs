@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Linq;
 using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -62,7 +63,8 @@ public class Gloves : NetworkBehaviour
     private Lucky lucky;
 
     private WeaponPlayerInfo weaponInfo;
-    private LightningChain lightningChain;
+
+    public GameObject lightingLevel4;
 
     private void OnEnable()
     {
@@ -157,8 +159,6 @@ public class Gloves : NetworkBehaviour
         goldIncrease = FindFirstObjectByType<Gold>();
         brutal = FindFirstObjectByType<Brutal>();
         lucky = FindFirstObjectByType<Lucky>();
-
-        lightningChain = GetComponent<LightningChain>();
     }
 
     private void OnDestroy()
@@ -270,7 +270,19 @@ public class Gloves : NetworkBehaviour
                     }
                     if (Random.value <= 1f && weaponInfo.weaponLevel > 3)
                     {
-                        lightningChain.TriggerLightning();
+                        GameObject lighting = Instantiate(lightingLevel4, transform.position, Quaternion.identity);
+
+                        if (lighting != null)
+                        {
+                            lighting.GetComponent<LineRenderer>().enabled = true;
+                            LightningChain light = lighting.GetComponent<LightningChain>();
+                            if (light != null)
+                            {
+                                light.TriggerLightning();
+                            }
+                        }
+
+                        Destroy(lighting, 5f);
                     }
                 }
 
