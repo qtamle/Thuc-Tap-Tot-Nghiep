@@ -67,7 +67,7 @@ public class Dagger : NetworkBehaviour
     private PlayerHealth health;
     private Lucky lucky;
 
-    private WeaponInfo weaponInfo;
+    private WeaponPlayerInfo weaponInfo;
 
     private void OnEnable()
     {
@@ -83,20 +83,56 @@ public class Dagger : NetworkBehaviour
     {
         if (IsServer)
         {
-            NetworkObject myPlayerObject = NetworkManager.Singleton.LocalClient.PlayerObject;
-            WeaponPlayerInfo weaponPlayerInfo = FindAnyObjectByType<WeaponPlayerInfo>(); // Hoặc dùng cách khác để tìm đúng object
-            // Đưa WeaponPlayerInfo thành con của PlayerObject
-            weaponPlayerInfo.transform.SetParent(myPlayerObject.transform);
+            // NetworkObject myPlayerObject = NetworkManager
+            //     .Singleton
+            //     .ConnectedClients[OwnerClientId]
+            //     .PlayerObject;
 
-            weaponInfo.weaponName = weaponPlayerInfo.weaponName;
-            weaponInfo.weaponLevel = weaponPlayerInfo.weaponLevel;
+            // WeaponPlayerInfo weaponPlayerInfo = FindAnyObjectByType<WeaponPlayerInfo>(); // Hoặc dùng cách khác để tìm đúng object
+            // // Đưa WeaponPlayerInfo thành con của PlayerObject
+            // weaponPlayerInfo.transform.SetParent(myPlayerObject.transform);
+            // weaponInfo = GetComponentInChildren<WeaponPlayerInfo>();
+            ulong myClientId = NetworkManager.Singleton.LocalClientId;
+            FindPlayerServerRpc(myClientId);
+            weaponInfo = GetComponentInChildren<WeaponPlayerInfo>();
         }
         else
         {
-            FindPlayerServerRpc();
-        }
+            ulong myClientId = NetworkManager.Singleton.LocalClientId;
 
+            FindPlayerServerRpc(myClientId);
+        }
         OnSceneLoaded(SceneManager.GetActiveScene(), LoadSceneMode.Single);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void FindPlayerServerRpc(ulong clientId) // Thêm clientId làm tham số
+    {
+        // Kiểm tra nếu client tồn tại
+        if (NetworkManager.Singleton.ConnectedClients.TryGetValue(clientId, out var client))
+        {
+            NetworkObject playerObject = client.PlayerObject;
+
+            // Tìm tất cả WeaponPlayerInfo và chọn cái có OwnerClientId trùng khớp
+            WeaponPlayerInfo[] allWeapons = FindObjectsByType<WeaponPlayerInfo>(
+                FindObjectsInactive.Include,
+                FindObjectsSortMode.None
+            );
+            WeaponPlayerInfo targetWeapon = allWeapons.FirstOrDefault(w =>
+                w.NetworkObject.OwnerClientId == clientId
+            );
+
+            if (targetWeapon != null)
+            {
+                targetWeapon.transform.SetParent(playerObject.transform);
+                targetWeapon.transform.localPosition = Vector3.zero; // Đặt vị trí phù hợp
+            }
+            else
+            {
+                Debug.LogError($"Không tìm thấy WeaponPlayerInfo cho client {clientId}");
+            }
+            weaponInfo = GetComponentInChildren<WeaponPlayerInfo>();
+        }
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -129,9 +165,6 @@ public class Dagger : NetworkBehaviour
         goldIncrease = FindFirstObjectByType<Gold>();
         brutal = FindFirstObjectByType<Brutal>();
         lucky = FindFirstObjectByType<Lucky>();
-
-        // weapon and upgrade manager
-        weaponInfo = FindFirstObjectByType<WeaponInfo>();
     }
 
     private void OnDestroy()

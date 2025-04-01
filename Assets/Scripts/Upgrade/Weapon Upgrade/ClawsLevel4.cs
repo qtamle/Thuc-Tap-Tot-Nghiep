@@ -4,7 +4,7 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ClawsLevel4 : MonoBehaviour
+public class ClawsLevel4 : NetworkBehaviour
 {
     [Header("Move Settings")]
     public float moveSpeed;
@@ -56,7 +56,14 @@ public class ClawsLevel4 : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        Destroy(gameObject);
+        if (NetworkObject != null && NetworkObject.IsSpawned)
+        {
+            NetworkObject.Despawn(true);
+        }
+        else
+        {
+            Debug.Log("Plane k co network");
+        }
     }
 
     public void Activate()
@@ -157,14 +164,19 @@ public class ClawsLevel4 : MonoBehaviour
                 {
                     spawner.OnEnemyKilled();
                 }
-
-                Destroy(enemy.gameObject);
-                SpawnCoins(coinPrefab, coinSpawnMin, coinSpawnMax, enemy.transform.position);
+                NetworkObject networkObject =
+                    enemy.gameObject.GetComponentInParent<NetworkObject>();
+                if (networkObject == null)
+                {
+                    networkObject = enemy.GetComponent<NetworkObject>();
+                }
+                AttackEnemyServerRpc(networkObject.NetworkObjectId);
+                SpawnCoinsServerRpc(false, coinSpawnMin, coinSpawnMax, enemy.transform.position);
 
                 if (Random.value <= 0.30f)
                 {
-                    SpawnCoins(
-                        secondaryCoinPrefab,
+                    SpawnCoinsServerRpc(
+                        true,
                         secondaryCoinSpawnMin,
                         secondaryCoinSpawnMax,
                         enemy.transform.position
@@ -176,6 +188,57 @@ public class ClawsLevel4 : MonoBehaviour
         }
     }
 
+    [ServerRpc(RequireOwnership = false)]
+    private void SpawnCoinsServerRpc(
+        bool isSecondary,
+        float minAmount,
+        float maxAmount,
+        Vector3 position
+    )
+    {
+        Debug.Log($"ServerRpc called - isSecondary: {isSecondary}, position: {position}");
+        float initialCoinCount = Random.Range(minAmount, maxAmount + 1);
+        float coinCount = initialCoinCount;
+
+        for (int i = 0; i < coinCount; i++)
+        {
+            Vector3 spawnPosition = position + Vector3.up * 0.2f;
+            NetworkObject coin = CoinPoolManager.Instance.GetCoinFromPool(
+                spawnPosition,
+                isSecondary
+            );
+
+            Rigidbody2D coinRb = coin.GetComponent<Rigidbody2D>();
+            if (coinRb != null)
+            {
+                Vector2 forceDirection =
+                    new Vector2(Random.Range(-1.5f, 1.5f), Random.Range(1f, 1f)) * 2.5f;
+                coinRb.AddForce(forceDirection, ForceMode2D.Impulse);
+                StartCoroutine(CheckIfCoinIsStuck(coinRb));
+            }
+
+            CoinsScript coinScript = coin.GetComponent<CoinsScript>();
+            if (coinScript != null)
+            {
+                coinScript.SetCoinType(!isSecondary, isSecondary);
+                // StartCoroutine(HookCoinsContinuously());
+            }
+        }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void AttackEnemyServerRpc(ulong enemyNetworkId)
+    {
+        NetworkObject enemyObject = NetworkManager.Singleton.SpawnManager.SpawnedObjects[
+            enemyNetworkId
+        ];
+        if (enemyObject != null)
+        {
+            // Hủy đối tượng trên server
+            enemyObject.Despawn(true);
+        }
+    }
+
     void SetNewRandomTarget()
     {
         targetPosition = new Vector3(
@@ -183,42 +246,6 @@ public class ClawsLevel4 : MonoBehaviour
             Random.Range(yMoveRange.y, yMoveRange.x),
             transform.position.z
         );
-    }
-
-    void SpawnCoins(GameObject coinType, float minAmount, float maxAmount, Vector3 position)
-    {
-        int coinCount = Random.Range((int)minAmount, (int)maxAmount + 1);
-
-        for (int i = 0; i < coinCount; i++)
-        {
-            Vector3 spawnPosition = position + Vector3.up * 0.2f;
-
-            NetworkObject coin = CoinPoolManager.Instance.GetCoinFromPool(
-                spawnPosition,
-                coinType == secondaryCoinPrefab
-            );
-            coin.transform.position = spawnPosition;
-
-            Rigidbody2D coinRb = coin.GetComponent<Rigidbody2D>();
-
-            if (coinRb != null)
-            {
-                Vector2 forceDirection =
-                    new Vector2(Random.Range(-1.5f, 1.5f), Random.Range(1f, 1f)) * 2.5f;
-                coinRb.AddForce(forceDirection, ForceMode2D.Impulse);
-
-                StartCoroutine(CheckIfCoinIsStuck(coinRb));
-            }
-
-            CoinsScript coinScript = coin.GetComponent<CoinsScript>();
-            if (coinScript != null)
-            {
-                if (coinType == coinPrefab)
-                    coinScript.SetCoinType(true, false);
-                else
-                    coinScript.SetCoinType(false, true);
-            }
-        }
     }
 
     private IEnumerator CheckIfCoinIsStuck(Rigidbody2D coinRb)
