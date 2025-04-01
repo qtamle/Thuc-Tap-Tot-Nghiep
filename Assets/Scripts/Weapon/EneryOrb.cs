@@ -522,13 +522,24 @@ public class EneryOrb : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     private void AttackEnemyServerRpc(ulong enemyNetworkId)
     {
-        NetworkObject enemyObject = NetworkManager.Singleton.SpawnManager.SpawnedObjects[
-            enemyNetworkId
-        ];
-        if (enemyObject != null)
+        if (
+            !NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(
+                enemyNetworkId,
+                out NetworkObject enemyObject
+            )
+        )
         {
-            // Hủy đối tượng trên server
+            Debug.LogError($"Enemy {enemyNetworkId} not found on server!");
+            return;
+        }
+        if (enemyObject != null && enemyObject.IsSpawned)
+        {
+            Debug.Log("Despawning enemy: " + enemyNetworkId);
             enemyObject.Despawn(true);
+        }
+        else
+        {
+            Debug.Log("Enemy no networkobject");
         }
     }
 

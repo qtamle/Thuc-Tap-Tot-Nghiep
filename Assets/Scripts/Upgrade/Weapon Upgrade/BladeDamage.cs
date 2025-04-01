@@ -110,11 +110,11 @@ public class BladeDamage : NetworkBehaviour
 
     [ServerRpc(RequireOwnership = false)]
     private void SpawnCoinsServerRpc(
-    bool isSecondary,
-    float minAmount,
-    float maxAmount,
-    Vector3 position
-)
+        bool isSecondary,
+        float minAmount,
+        float maxAmount,
+        Vector3 position
+    )
     {
         Debug.Log($"ServerRpc called - isSecondary: {isSecondary}, position: {position}");
         float initialCoinCount = Random.Range(minAmount, maxAmount + 1);
@@ -267,17 +267,27 @@ public class BladeDamage : NetworkBehaviour
         }
     }
 
-
     [ServerRpc(RequireOwnership = false)]
     private void AttackEnemyServerRpc(ulong enemyNetworkId)
     {
-        NetworkObject enemyObject = NetworkManager.Singleton.SpawnManager.SpawnedObjects[
-            enemyNetworkId
-        ];
-        if (enemyObject != null)
+        if (
+            !NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(
+                enemyNetworkId,
+                out NetworkObject enemyObject
+            )
+        )
         {
-            // Hủy đối tượng trên server
+            Debug.LogError($"Enemy {enemyNetworkId} not found on server!");
+            return;
+        }
+        if (enemyObject != null && enemyObject.IsSpawned)
+        {
+            Debug.Log("Despawning enemy: " + enemyNetworkId);
             enemyObject.Despawn(true);
+        }
+        else
+        {
+            Debug.Log("Enemy no networkobject");
         }
     }
 

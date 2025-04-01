@@ -207,6 +207,15 @@ public class Gloves : NetworkBehaviour
         return Time.time >= lastAttackTime + attackCooldown;
     }
 
+    private IEnumerator DespawnAfterDelay(GameObject laserObject, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        if (laserObject != null && laserObject.TryGetComponent(out NetworkObject networkObject))
+        {
+            networkObject.Despawn(true);
+        }
+    }
+
     private void PerformAttack()
     {
         ShowAttackVFX();
@@ -270,7 +279,12 @@ public class Gloves : NetworkBehaviour
                     }
                     if (Random.value <= 1f && weaponInfo.weaponLevel > 3)
                     {
-                        GameObject lighting = Instantiate(lightingLevel4, transform.position, Quaternion.identity);
+                        GameObject lighting = Instantiate(
+                            lightingLevel4,
+                            transform.position,
+                            Quaternion.identity
+                        );
+                        lighting.GetComponent<NetworkObject>().Spawn(true);
 
                         if (lighting != null)
                         {
@@ -282,7 +296,8 @@ public class Gloves : NetworkBehaviour
                             }
                         }
 
-                        Destroy(lighting, 5f);
+                        StartCoroutine(DespawnAfterDelay(lighting, 5f));
+                        // Destroy(lighting, 5f);
                     }
                 }
 
@@ -427,13 +442,24 @@ public class Gloves : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     private void AttackEnemyServerRpc(ulong enemyNetworkId)
     {
-        NetworkObject enemyObject = NetworkManager.Singleton.SpawnManager.SpawnedObjects[
-            enemyNetworkId
-        ];
-        if (enemyObject != null)
+        if (
+            !NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(
+                enemyNetworkId,
+                out NetworkObject enemyObject
+            )
+        )
         {
-            // Hủy đối tượng trên server
+            Debug.LogError($"Enemy {enemyNetworkId} not found on server!");
+            return;
+        }
+        if (enemyObject != null && enemyObject.IsSpawned)
+        {
+            Debug.Log("Despawning enemy: " + enemyNetworkId);
             enemyObject.Despawn(true);
+        }
+        else
+        {
+            Debug.Log("Enemy no networkobject");
         }
     }
 
