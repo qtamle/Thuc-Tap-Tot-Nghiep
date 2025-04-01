@@ -55,7 +55,7 @@ public class EnemySpawner : NetworkBehaviour, IEnemySpawner
             return; // Chỉ server mới spawn quái
         else
         {
-            EnemyManager.Instance.killTarget.Value = 2;
+            EnemyManager.Instance.killTarget.Value = 20;
             // KillCounterUI.Instance.CounterUI();
             BossSpawnPostion = GameObject.FindWithTag("BossSpawner");
 

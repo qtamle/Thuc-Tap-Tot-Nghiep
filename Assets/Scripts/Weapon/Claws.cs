@@ -5,7 +5,7 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Claws : MonoBehaviour
+public class Claws : NetworkBehaviour
 {
     [Header("Settings Attack")]
     public Vector2 boxSize;
@@ -79,7 +79,7 @@ public class Claws : MonoBehaviour
     private PlayerHealth health;
     private Lucky lucky;
 
-    private WeaponInfo weaponInfo;
+    private WeaponPlayerInfo weaponInfo;
     private ClawsLevel4 clawsLevel4;
 
     private void OnEnable()
@@ -94,8 +94,93 @@ public class Claws : MonoBehaviour
 
     private void Start()
     {
-        FindPlayer();
+        if (IsServer)
+        {
+            // NetworkObject myPlayerObject = NetworkManager
+            //     .Singleton
+            //     .ConnectedClients[OwnerClientId]
+            //     .PlayerObject;
+
+            // WeaponPlayerInfo weaponPlayerInfo = FindAnyObjectByType<WeaponPlayerInfo>(); // Hoặc dùng cách khác để tìm đúng object
+            // // Đưa WeaponPlayerInfo thành con của PlayerObject
+            // weaponPlayerInfo.transform.SetParent(myPlayerObject.transform);
+            // weaponInfo = GetComponentInChildren<WeaponPlayerInfo>();
+            ulong myClientId = NetworkManager.Singleton.LocalClientId;
+            FindPlayerServerRpc(myClientId);
+            weaponInfo = GetComponentInChildren<WeaponPlayerInfo>();
+            if (weaponInfo != null && weaponInfo.weaponLevel > 3)
+            {
+                GameObject planePrefab = Instantiate(plane);
+                planePrefab.GetComponent<NetworkObject>().Spawn(true);
+                if (planePrefab != null)
+                {
+                    ClawsLevel4 clawsLevel4 = planePrefab.GetComponent<ClawsLevel4>();
+                    if (clawsLevel4 != null)
+                    {
+                        clawsLevel4.Activate();
+                    }
+                }
+            }
+            else
+            {
+                Debug.Log("Chua dat du level cua claws !!!!!!!");
+            }
+        }
+        else
+        {
+            ulong myClientId = NetworkManager.Singleton.LocalClientId;
+
+            FindPlayerServerRpc(myClientId);
+            if (weaponInfo != null && weaponInfo.weaponLevel > 3)
+            {
+                GameObject planePrefab = Instantiate(plane);
+                planePrefab.GetComponent<NetworkObject>().Spawn(true);
+
+                if (planePrefab != null)
+                {
+                    ClawsLevel4 clawsLevel4 = planePrefab.GetComponent<ClawsLevel4>();
+                    if (clawsLevel4 != null)
+                    {
+                        clawsLevel4.Activate();
+                    }
+                }
+            }
+            else
+            {
+                Debug.Log("Chua dat du level cua claws !!!!!!!");
+            }
+        }
         OnSceneLoaded(SceneManager.GetActiveScene(), LoadSceneMode.Single);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void FindPlayerServerRpc(ulong clientId) // Thêm clientId làm tham số
+    {
+        // Kiểm tra nếu client tồn tại
+        if (NetworkManager.Singleton.ConnectedClients.TryGetValue(clientId, out var client))
+        {
+            NetworkObject playerObject = client.PlayerObject;
+
+            // Tìm tất cả WeaponPlayerInfo và chọn cái có OwnerClientId trùng khớp
+            WeaponPlayerInfo[] allWeapons = FindObjectsByType<WeaponPlayerInfo>(
+                FindObjectsInactive.Include,
+                FindObjectsSortMode.None
+            );
+            WeaponPlayerInfo targetWeapon = allWeapons.FirstOrDefault(w =>
+                w.NetworkObject.OwnerClientId == clientId
+            );
+
+            if (targetWeapon != null)
+            {
+                targetWeapon.transform.SetParent(playerObject.transform);
+                targetWeapon.transform.localPosition = Vector3.zero; // Đặt vị trí phù hợp
+            }
+            else
+            {
+                Debug.LogError($"Không tìm thấy WeaponPlayerInfo cho client {clientId}");
+            }
+            weaponInfo = GetComponentInChildren<WeaponPlayerInfo>();
+        }
     }
 
     private void FindPlayer()
@@ -133,26 +218,6 @@ public class Claws : MonoBehaviour
         goldIncrease = FindFirstObjectByType<Gold>();
         brutal = FindFirstObjectByType<Brutal>();
         lucky = FindFirstObjectByType<Lucky>();
-
-        weaponInfo = GetComponent<WeaponInfo>();
-
-        if (weaponInfo != null && weaponInfo.weaponLevel > 3)
-        {
-            GameObject planePrefab = Instantiate(plane);
-
-            if (planePrefab != null)
-            {
-                ClawsLevel4 clawsLevel4 = planePrefab.GetComponent<ClawsLevel4>();
-                if (clawsLevel4 != null)
-                {
-                    clawsLevel4.Activate();
-                }
-            }
-        }
-        else
-        {
-            Debug.Log("Chua dat du level cua claws !!!!!!!");
-        }
     }
 
     private void OnDestroy()
@@ -383,98 +448,98 @@ public class Claws : MonoBehaviour
 
         isAttackBoss = false;
 
-        Collider2D[] Snake = Physics2D.OverlapCircleAll(
-            attackPoint.position,
-            attackRadius,
-            bossLayer
-        );
+        // Collider2D[] Snake = Physics2D.OverlapCircleAll(
+        //     attackPoint.position,
+        //     attackRadius,
+        //     bossLayer
+        // );
 
-        foreach (Collider2D sn in Snake)
-        {
-            MachineSnakeHealth partHealth = sn.GetComponent<MachineSnakeHealth>();
-            SnakeHealth snakeHealth = sn.GetComponentInParent<SnakeHealth>();
+        // // // foreach (Collider2D sn in Snake)
+        // // // {
+        // // //     MachineSnakeHealth partHealth = sn.GetComponent<MachineSnakeHealth>();
+        // // //     SnakeHealth snakeHealth = sn.GetComponentInParent<SnakeHealth>();
 
-            if (partHealth != null && !isAttackBoss && snakeHealth.IsStunned())
-            {
-                if (
-                    (
-                        MachineSnakeHealth.attackedPartID == -1
-                        || MachineSnakeHealth.attackedPartID == partHealth.partID
-                    ) && !partHealth.isAlreadyHit
-                )
-                {
-                    partHealth.TakeDamage(1);
-                    isAttackBoss = true;
+        // // //     if (partHealth != null && !isAttackBoss && snakeHealth.IsStunned())
+        // // //     {
+        // // //         if (
+        // // //             (
+        // // //                 MachineSnakeHealth.attackedPartID == -1
+        // // //                 || MachineSnakeHealth.attackedPartID == partHealth.partID
+        // // //             ) && !partHealth.isAlreadyHit
+        // // //         )
+        // // //         {
+        // // //             partHealth.TakeDamage(1);
+        // // //             isAttackBoss = true;
 
-                    snakeHealth.SetCanBeDamaged(false);
+        // // //             snakeHealth.SetCanBeDamaged(false);
 
-                    SpawnCoins(
-                        coinPrefab,
-                        coinSpawnMin * 13,
-                        coinSpawnMax * 13,
-                        partHealth.transform.position
-                    );
+        // // //             SpawnCoins(
+        // // //                 coinPrefab,
+        // // //                 coinSpawnMin * 13,
+        // // //                 coinSpawnMax * 13,
+        // // //                 partHealth.transform.position
+        // // //             );
 
-                    if (Random.value <= 0.25f)
-                    {
-                        SpawnCoins(
-                            secondaryCoinPrefab,
-                            secondaryCoinSpawnMin * 5,
-                            secondaryCoinSpawnMax * 5,
-                            partHealth.transform.position
-                        );
-                    }
+        // // //             if (Random.value <= 0.25f)
+        // // //             {
+        // // //                 SpawnCoins(
+        // // //                     secondaryCoinPrefab,
+        // // //                     secondaryCoinSpawnMin * 5,
+        // // //                     secondaryCoinSpawnMax * 5,
+        // // //                     partHealth.transform.position
+        // // //                 );
+        // // //             }
 
-                    if (Random.value <= 0.15f && lucky != null)
-                    {
-                        SpawnHealthPotions(partHealth.transform.position, 1);
-                    }
+        // // //             if (Random.value <= 0.15f && lucky != null)
+        // // //             {
+        // // //                 SpawnHealthPotions(partHealth.transform.position, 1);
+        // // //             }
 
-                    SpawnOrbsServerRpc(partHealth.transform.position, 25);
-                }
-            }
+        // // //             SpawnOrbsServerRpc(partHealth.transform.position, 25);
+        // // //         }
+        // // //     }
 
-            if (snakeHealth != null && snakeHealth.bodyPartsAttacked == snakeHealth.totalBodyParts)
-            {
-                HeadController headController = sn.GetComponentInChildren<HeadController>();
-                if (headController != null && !headController.isHeadAttacked && !isAttackBoss)
-                {
-                    headController.TakeDamage(1);
-                    isAttackBoss = true;
-                    headController.isHeadAttacked = true;
+        // //     if (snakeHealth != null && snakeHealth.bodyPartsAttacked == snakeHealth.totalBodyParts)
+        // //     {
+        // //         HeadController headController = sn.GetComponentInChildren<HeadController>();
+        // //         if (headController != null && !headController.isHeadAttacked && !isAttackBoss)
+        // //         {
+        // //             headController.TakeDamage(1);
+        // //             isAttackBoss = true;
+        // //             headController.isHeadAttacked = true;
 
-                    snakeHealth.SetCanBeDamaged(false);
-                    SpawnCoins(
-                        coinPrefab,
-                        coinSpawnMin * 13,
-                        coinSpawnMax * 13,
-                        headController.transform.position
-                    );
+        // //             snakeHealth.SetCanBeDamaged(false);
+        // //             SpawnCoins(
+        // //                 coinPrefab,
+        // //                 coinSpawnMin * 13,
+        // //                 coinSpawnMax * 13,
+        // //                 headController.transform.position
+        // //             );
 
-                    if (Random.value <= 0.25f)
-                    {
-                        SpawnCoins(
-                            secondaryCoinPrefab,
-                            secondaryCoinSpawnMin * 5,
-                            secondaryCoinSpawnMax * 5,
-                            headController.transform.position
-                        );
-                    }
+        // //             if (Random.value <= 0.25f)
+        // //             {
+        // //                 SpawnCoins(
+        // //                     secondaryCoinPrefab,
+        // //                     secondaryCoinSpawnMin * 5,
+        // //                     secondaryCoinSpawnMax * 5,
+        // //                     headController.transform.position
+        // //                 );
+        // //             }
 
-                    if (Random.value <= 0.15f && lucky != null)
-                    {
-                        SpawnHealthPotions(headController.transform.position, 1);
-                    }
+        // //             if (Random.value <= 0.15f && lucky != null)
+        // //             {
+        // //                 SpawnHealthPotions(headController.transform.position, 1);
+        // //             }
 
-                    SpawnOrbsServerRpc(headController.transform.position, 25);
-                }
-            }
-            else
-            {
-                Debug.LogWarning($"SnakeHealth is null for {sn.gameObject.name}");
-            }
-        }
-        isAttackBoss = false;
+        // //             SpawnOrbsServerRpc(headController.transform.position, 25);
+        // //         }
+        // //     }
+        // //     else
+        // //     {
+        // //         Debug.LogWarning($"SnakeHealth is null for {sn.gameObject.name}");
+        // //     }
+        // // }
+        // isAttackBoss = false;
     }
 
     private void ShowAttackVFX(SwipeDirection direction)
