@@ -39,6 +39,11 @@ TagManager:
   - BossSpawner
   - CyborgLaser
   - DiscoBall
+  - LevelText
+  - CoinType1Text
+  - CoinType2Text
+  - HealthText
+  - CollectButton
   layers:
   - Default
   - TransparentFX
