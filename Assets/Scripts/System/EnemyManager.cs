@@ -70,15 +70,14 @@ public class EnemyManager : NetworkBehaviour
                 continue; // Bỏ qua nếu enemy không tồn tại
             }
 
-            NetworkObject netObj =
-                enemy.GetComponent<NetworkObject>() ?? GetComponentInParent<NetworkObject>();
-            if (netObj != null)
+            NetworkObject netObj = enemy.GetComponent<NetworkObject>();
+            if (netObj == null)
+            {
+                netObj = enemy.GetComponentInParent<NetworkObject>();
+            }
+            if (netObj != null && netObj.IsSpawned)
             {
                 netObj.Despawn(true); // Hủy trên tất cả client
-            }
-            else
-            {
-                Destroy(enemy); // Hủy đối tượng nếu không có NetworkObject
             }
         }
 

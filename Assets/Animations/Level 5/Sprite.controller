@@ -73,7 +73,7 @@ AnimatorStateMachine:
     m_Position: {x: 330, y: 240, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4654615632555881906}
-    m_Position: {x: 590, y: 190, z: 0}
+    m_Position: {x: 590, y: 240, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 5738008437616641554}
     m_Position: {x: 570, y: 40, z: 0}
@@ -174,12 +174,6 @@ AnimatorController:
   m_Name: Sprite
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: Idle
-    m_Type: 4
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
   - m_Name: Blade
     m_Type: 9
     m_DefaultFloat: 0
@@ -211,6 +205,12 @@ AnimatorController:
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
   - m_Name: Flash
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
+  - m_Name: Empty
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0

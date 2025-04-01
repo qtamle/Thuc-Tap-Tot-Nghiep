@@ -131,7 +131,7 @@ public class GameManager : NetworkBehaviour
             if (currentBoss.Value <= 5)
             {
                 // string bossScene = "Level " + currentBoss.Value + " - Remake";
-                string bossScene = "Level 4 - Remake";
+                string bossScene = "Level 5 - Remake";
 
                 Debug.Log($"Loading {bossScene}");
                 NetworkManager.Singleton.SceneManager.LoadScene(bossScene, LoadSceneMode.Single);

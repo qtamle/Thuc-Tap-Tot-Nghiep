@@ -177,8 +177,11 @@ public class Attack : NetworkBehaviour
                     Debug.Log("Co game object trogn enemy");
                 }
                 NetworkObject networkObject =
-                    enemy.gameObject.GetComponentInParent<NetworkObject>()
-                    ?? GetComponent<NetworkObject>();
+                    enemy.gameObject.GetComponentInParent<NetworkObject>();
+                if (networkObject == null)
+                {
+                    networkObject = enemy.GetComponent<NetworkObject>();
+                }
                 if (networkObject != null && networkObject.IsSpawned)
                 {
                     // Gọi ServerRpc để hủy đối tượng

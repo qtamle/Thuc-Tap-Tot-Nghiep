@@ -1072,7 +1072,7 @@ public class CaptainSkill : NetworkBehaviour
         }
 
         rb.bodyType = RigidbodyType2D.Kinematic;
-        rb.gravityScale = 0f;
+        rb.gravityScale = 1f;
         health.SetCanBeDamaged(true);
 
         yield return new WaitForSeconds(4f);

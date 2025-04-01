@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1283590420
+  GlobalObjectIdHash: 1433493568
   InScenePlacedSourceGlobalObjectIdHash: 1283590420
   DeferredDespawnTick: 0
   Ownership: 1
@@ -75,4 +75,3 @@ MonoBehaviour:
     m_InternalValue: 0
   isSupplyScene:
     m_InternalValue: 0
-  weaponInfoPrefab: {fileID: 7204776611615952279, guid: de4bc2f3a6f743d478501df95684ed6b, type: 3}
