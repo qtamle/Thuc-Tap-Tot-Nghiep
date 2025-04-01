@@ -93,7 +93,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 16384
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -130,6 +130,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -137,10 +150,10 @@ TextureImporter:
       name: Skill1_0
       rect:
         serializedVersion: 2
-        x: 173
-        y: 0
-        width: 146
-        height: 217
+        x: 0
+        y: 2
+        width: 600
+        height: 302
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -159,10 +172,10 @@ TextureImporter:
       name: Skill1_1
       rect:
         serializedVersion: 2
-        x: 803
-        y: 0
-        width: 128
-        height: 211
+        x: 600
+        y: 2
+        width: 600
+        height: 302
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -181,10 +194,10 @@ TextureImporter:
       name: Skill1_2
       rect:
         serializedVersion: 2
-        x: 1403
-        y: 0
-        width: 176
-        height: 217
+        x: 1200
+        y: 2
+        width: 600
+        height: 302
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -203,10 +216,10 @@ TextureImporter:
       name: Skill1_3
       rect:
         serializedVersion: 2
-        x: 2003
-        y: 0
-        width: 140
-        height: 205
+        x: 1800
+        y: 2
+        width: 600
+        height: 302
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -225,10 +238,10 @@ TextureImporter:
       name: Skill1_4
       rect:
         serializedVersion: 2
-        x: 2603
-        y: 0
-        width: 140
-        height: 198
+        x: 2400
+        y: 2
+        width: 600
+        height: 302
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -247,10 +260,10 @@ TextureImporter:
       name: Skill1_5
       rect:
         serializedVersion: 2
-        x: 3197
-        y: 0
-        width: 134
-        height: 217
+        x: 3000
+        y: 2
+        width: 600
+        height: 302
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -269,10 +282,10 @@ TextureImporter:
       name: Skill1_6
       rect:
         serializedVersion: 2
-        x: 3779
-        y: 0
-        width: 140
-        height: 235
+        x: 3600
+        y: 2
+        width: 600
+        height: 302
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -291,10 +304,10 @@ TextureImporter:
       name: Skill1_7
       rect:
         serializedVersion: 2
-        x: 4402
-        y: 0
-        width: 190
-        height: 202
+        x: 4200
+        y: 2
+        width: 600
+        height: 302
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -313,7 +326,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: ce4507245e4e6e94589bf411e472922b
     internalID: 0
     vertices: []
     indices: 

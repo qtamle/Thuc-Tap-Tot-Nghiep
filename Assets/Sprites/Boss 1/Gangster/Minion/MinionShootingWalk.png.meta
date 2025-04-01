@@ -93,7 +93,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 16384
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -150,10 +150,10 @@ TextureImporter:
       name: MinionShootingWalk_0
       rect:
         serializedVersion: 2
-        x: 197
+        x: 0
         y: 0
-        width: 128
-        height: 205
+        width: 600
+        height: 302
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -172,10 +172,10 @@ TextureImporter:
       name: MinionShootingWalk_1
       rect:
         serializedVersion: 2
-        x: 797
+        x: 600
         y: 0
-        width: 128
-        height: 205
+        width: 600
+        height: 302
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -194,10 +194,10 @@ TextureImporter:
       name: MinionShootingWalk_2
       rect:
         serializedVersion: 2
-        x: 1403
+        x: 1200
         y: 0
-        width: 110
-        height: 205
+        width: 600
+        height: 302
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -216,10 +216,10 @@ TextureImporter:
       name: MinionShootingWalk_3
       rect:
         serializedVersion: 2
-        x: 2009
+        x: 1800
         y: 0
-        width: 80
-        height: 211
+        width: 600
+        height: 302
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -238,10 +238,10 @@ TextureImporter:
       name: MinionShootingWalk_4
       rect:
         serializedVersion: 2
-        x: 2591
+        x: 2400
         y: 0
-        width: 122
-        height: 211
+        width: 600
+        height: 302
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -260,10 +260,10 @@ TextureImporter:
       name: MinionShootingWalk_5
       rect:
         serializedVersion: 2
-        x: 3185
+        x: 3000
         y: 0
-        width: 134
-        height: 205
+        width: 600
+        height: 302
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -282,10 +282,10 @@ TextureImporter:
       name: MinionShootingWalk_6
       rect:
         serializedVersion: 2
-        x: 3809
+        x: 3600
         y: 0
-        width: 92
-        height: 211
+        width: 600
+        height: 302
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -304,10 +304,10 @@ TextureImporter:
       name: MinionShootingWalk_7
       rect:
         serializedVersion: 2
-        x: 4409
+        x: 4200
         y: 0
-        width: 80
-        height: 211
+        width: 600
+        height: 302
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -326,7 +326,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: d30fab4708f75aa4d9ec1caa27f82b56
     internalID: 0
     vertices: []
     indices: 

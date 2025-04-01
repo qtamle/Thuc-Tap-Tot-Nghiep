@@ -93,7 +93,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 16384
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -130,6 +130,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -137,10 +150,10 @@ TextureImporter:
       name: Stun_0
       rect:
         serializedVersion: 2
-        x: 173
-        y: 0
-        width: 146
-        height: 230
+        x: 0
+        y: 2
+        width: 600
+        height: 302
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -159,10 +172,10 @@ TextureImporter:
       name: Stun_1
       rect:
         serializedVersion: 2
-        x: 773
-        y: 0
-        width: 146
-        height: 232
+        x: 600
+        y: 2
+        width: 600
+        height: 302
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -181,10 +194,10 @@ TextureImporter:
       name: Stun_2
       rect:
         serializedVersion: 2
-        x: 1379
-        y: 0
-        width: 140
-        height: 230
+        x: 1200
+        y: 2
+        width: 600
+        height: 302
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -203,10 +216,10 @@ TextureImporter:
       name: Stun_3
       rect:
         serializedVersion: 2
-        x: 1979
-        y: 0
-        width: 140
-        height: 232
+        x: 1800
+        y: 2
+        width: 600
+        height: 302
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -225,10 +238,10 @@ TextureImporter:
       name: Stun_4
       rect:
         serializedVersion: 2
-        x: 2573
-        y: 0
-        width: 146
-        height: 230
+        x: 2400
+        y: 2
+        width: 600
+        height: 302
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -247,10 +260,10 @@ TextureImporter:
       name: Stun_5
       rect:
         serializedVersion: 2
-        x: 3173
-        y: 0
-        width: 146
-        height: 230
+        x: 3000
+        y: 2
+        width: 600
+        height: 302
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -269,10 +282,10 @@ TextureImporter:
       name: Stun_6
       rect:
         serializedVersion: 2
-        x: 3779
-        y: 0
-        width: 140
-        height: 230
+        x: 3600
+        y: 2
+        width: 600
+        height: 302
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -291,10 +304,10 @@ TextureImporter:
       name: Stun_7
       rect:
         serializedVersion: 2
-        x: 4379
-        y: 0
-        width: 140
-        height: 230
+        x: 4200
+        y: 2
+        width: 600
+        height: 302
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -313,7 +326,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: d043bc74d847a7b43967eb6e0f6ae8f8
     internalID: 0
     vertices: []
     indices: 

@@ -90,7 +90,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 16384
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -147,10 +147,10 @@ TextureImporter:
       name: MinionAttack_0
       rect:
         serializedVersion: 2
-        x: 185
+        x: 0
         y: 0
-        width: 128
-        height: 199
+        width: 600
+        height: 302
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -169,10 +169,10 @@ TextureImporter:
       name: MinionAttack_1
       rect:
         serializedVersion: 2
-        x: 785
+        x: 600
         y: 0
-        width: 116
-        height: 199
+        width: 600
+        height: 302
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -191,10 +191,10 @@ TextureImporter:
       name: MinionAttack_2
       rect:
         serializedVersion: 2
-        x: 1379
+        x: 1200
         y: 0
-        width: 194
-        height: 199
+        width: 600
+        height: 302
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -213,10 +213,10 @@ TextureImporter:
       name: MinionAttack_3
       rect:
         serializedVersion: 2
-        x: 1973
+        x: 1800
         y: 0
-        width: 212
-        height: 199
+        width: 600
+        height: 302
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -235,10 +235,10 @@ TextureImporter:
       name: MinionAttack_4
       rect:
         serializedVersion: 2
-        x: 2579
+        x: 2400
         y: 0
-        width: 158
-        height: 199
+        width: 600
+        height: 302
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -257,10 +257,10 @@ TextureImporter:
       name: MinionAttack_5
       rect:
         serializedVersion: 2
-        x: 3185
+        x: 3000
         y: 0
-        width: 134
-        height: 199
+        width: 600
+        height: 302
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -279,10 +279,10 @@ TextureImporter:
       name: MinionAttack_6
       rect:
         serializedVersion: 2
-        x: 3785
+        x: 3600
         y: 0
-        width: 128
-        height: 199
+        width: 600
+        height: 302
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -301,7 +301,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: e359b6f2c1cfa7e439b96d1bc7d8cb69
     internalID: 0
     vertices: []
     indices: 

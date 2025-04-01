@@ -90,7 +90,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 16384
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -147,10 +147,10 @@ TextureImporter:
       name: MinionShooting_0
       rect:
         serializedVersion: 2
-        x: 191
+        x: 0
         y: 0
-        width: 176
-        height: 205
+        width: 600
+        height: 302
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -169,10 +169,10 @@ TextureImporter:
       name: MinionShooting_1
       rect:
         serializedVersion: 2
-        x: 791
+        x: 600
         y: 0
-        width: 194
-        height: 205
+        width: 600
+        height: 302
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -191,10 +191,10 @@ TextureImporter:
       name: MinionShooting_2
       rect:
         serializedVersion: 2
-        x: 1385
+        x: 1200
         y: 0
-        width: 170
-        height: 205
+        width: 600
+        height: 302
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -213,10 +213,10 @@ TextureImporter:
       name: MinionShooting_3
       rect:
         serializedVersion: 2
-        x: 1565
-        y: 185
-        width: 14
-        height: 14
+        x: 1800
+        y: 0
+        width: 600
+        height: 302
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -231,77 +231,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: MinionShooting_4
-      rect:
-        serializedVersion: 2
-        x: 1991
-        y: 0
-        width: 170
-        height: 205
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: aadbdef98a840bcf0800000000000000
-      internalID: -238610891175772758
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: MinionShooting_5
-      rect:
-        serializedVersion: 2
-        x: 1583
-        y: 173
-        width: 14
-        height: 8
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 9606796a1fe7428d0800000000000000
-      internalID: -2872031086008377239
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: MinionShooting_6
-      rect:
-        serializedVersion: 2
-        x: 1571
-        y: 149
-        width: 14
-        height: 14
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a7d5506da6fb96450800000000000000
-      internalID: 6082603237318679930
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 47de2e9fe851d854cbcea9cb36756468
     internalID: 0
     vertices: []
     indices: 
@@ -315,9 +249,6 @@ TextureImporter:
       MinionShooting_1: 3611536541893410200
       MinionShooting_2: -6589401588050111329
       MinionShooting_3: -3355340900194700620
-      MinionShooting_4: -238610891175772758
-      MinionShooting_5: -2872031086008377239
-      MinionShooting_6: 6082603237318679930
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
