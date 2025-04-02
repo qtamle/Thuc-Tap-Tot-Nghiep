@@ -362,6 +362,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c441ac2c0f5860b4aacfbbe15cc8df8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   enemyLayer:
     serializedVersion: 2
     m_Bits: 512

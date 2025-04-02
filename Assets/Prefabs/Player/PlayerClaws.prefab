@@ -299,6 +299,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2d95b0151325d04794aebe626760798, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   boxSize: {x: 1.8, y: 1.77}
   boxSizeUp: {x: 2.3, y: 1.4}
   boxSizeDown: {x: 2.3, y: 1.4}
