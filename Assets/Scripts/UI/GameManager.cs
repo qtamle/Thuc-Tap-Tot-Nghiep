@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
@@ -19,6 +20,14 @@ public class GameManager : NetworkBehaviour
 
     private Dictionary<ulong, int> playerHealthData = new Dictionary<ulong, int>();
     private Dictionary<ulong, int> playerShieldData = new Dictionary<ulong, int>();
+
+    //Su kien cho gameOver
+    public delegate void GameOverHandler(bool isGameOver);
+    public event GameOverHandler OnGameOver; // Sự kiện thông báo game over
+
+    private Dictionary<ulong, PlayerHealth> playerHealthComponents =
+        new Dictionary<ulong, PlayerHealth>();
+    private bool isGameOver = false;
 
     private void Awake()
     {
@@ -99,6 +108,58 @@ public class GameManager : NetworkBehaviour
         // Chỉ gọi Invoke khi tất cả người chơi đều đã Ready
         Debug.Log("All players ready! Starting countdown...");
         OnCountdownStart?.Invoke();
+    }
+
+    public void RegisterPlayerHealth(ulong clientId, PlayerHealth playerHealth)
+    {
+        if (!playerHealthComponents.ContainsKey(clientId))
+        {
+            playerHealthComponents[clientId] = playerHealth;
+            playerHealth.OnHealthChanged += CheckPlayersHealth;
+            Debug.Log($"Registered health for player {clientId}");
+        }
+    }
+
+    public void UnregisterPlayerHealth(ulong clientId)
+    {
+        if (playerHealthComponents.TryGetValue(clientId, out PlayerHealth playerHealth))
+        {
+            playerHealth.OnHealthChanged -= CheckPlayersHealth;
+            playerHealthComponents.Remove(clientId);
+            Debug.Log($"Unregistered health for player {clientId}");
+        }
+    }
+
+    private void CheckPlayersHealth(ulong clientId, int currentHealth)
+    {
+        if (!IsServer || isGameOver)
+            return;
+
+        bool allPlayersDead = true;
+        foreach (var player in playerHealthComponents)
+        {
+            if (player.Value.currentHealth > 0)
+            {
+                allPlayersDead = false;
+                break;
+            }
+        }
+
+        if (allPlayersDead)
+        {
+            isGameOver = true;
+            Debug.Log("All players are dead! Game over!");
+            OnGameOver?.Invoke(true);
+
+            // Load game over scene after 3 seconds
+            StartCoroutine(LoadGameOverSceneAfterDelay(3f));
+        }
+    }
+
+    private IEnumerator LoadGameOverSceneAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        NetworkManager.Singleton.SceneManager.LoadScene("GameOverScene", LoadSceneMode.Single);
     }
 
     // Phương thức để chuyển scene
@@ -221,6 +282,13 @@ public class GameManager : NetworkBehaviour
         playerShieldData.Clear();
     }
 
+    // Trong GameManager
+    public void ResetGameOver()
+    {
+        isGameOver = false;
+        OnGameOver?.Invoke(false);
+    }
+
     public void ResetGame()
     {
         if (!NetworkManager.Singleton.IsServer)
@@ -228,7 +296,8 @@ public class GameManager : NetworkBehaviour
 
         currentBoss.Value = 0;
         isSupplyScene.Value = false;
-        ClearHealthData(); // Thêm dòng này
+        ClearHealthData();
+        ResetGameOver();
         Debug.Log("Resetting game, loading Boss1");
         NetworkManager.Singleton.Shutdown();
     }

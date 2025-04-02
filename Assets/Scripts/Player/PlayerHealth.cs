@@ -56,7 +56,8 @@ public class PlayerHealth : NetworkBehaviour, DamagePlayerInterface
     [SerializeField]
     private PlayerHealthData healthData;
 
-    public bool healthDataSO = false;
+    public delegate void HealthChangedHandler(ulong clientId, int currentHealth);
+    public event HealthChangedHandler OnHealthChanged;
 
     private void Awake() { }
 
@@ -79,11 +80,8 @@ public class PlayerHealth : NetworkBehaviour, DamagePlayerInterface
     {
         if (IsServer)
         {
-            // Lưu trạng thái máu và khiên trước khi destroy
             GameManager.Instance.SavePlayerHealthData(OwnerClientId, currentHealth, currentShield);
-            Debug.Log(
-                $"Lưu trạng thái trước khi destroy - Health: {currentHealth}, Shield: {currentShield}"
-            );
+            GameManager.Instance.UnregisterPlayerHealth(OwnerClientId);
         }
     }
 

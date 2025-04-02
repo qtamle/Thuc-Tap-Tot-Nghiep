@@ -53,29 +53,19 @@ public class PlayerSpawner : NetworkBehaviour
 
                 playerInstance.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId);
                 // Khôi phục máu và khiên
-                // var (health, shield) = GameManager.Instance.GetPlayerHealthData(clientId);
-                // var playerHealth = playerInstance.GetComponent<PlayerHealth>();
-                // if (playerHealth != null)
-                // {
-                //     if (health > 0) // Chỉ khôi phục nếu có dữ liệu
-                //     {
-                //         playerHealth.currentHealth = health;
-                //         playerHealth.currentShield = shield;
-                //         playerHealth.UpdateHealthUI();
-                //         playerHealth.UpdateShieldUI();
-                //         Debug.Log(
-                //             $"Khôi phục máu/khiên cho Player {clientId}: Health={health}, Shield={shield}"
-                //         );
-                //     }
-
-                //     Debug.Log(
-                //         $"Đã spawn weapon của Player ID {clientId} tại {spawnPos} với weapon {weaponData.weaponName}, weapon ID {weaponData.WeaponID}"
-                //     );
-                // }
-                // else
-                // {
-                //     Debug.LogError($"Không tìm thấy weapon với ID: {weaponID}");
-                // }
+                var (health, shield) = GameManager.Instance.GetPlayerHealthData(clientId);
+                var playerHealth = playerInstance.GetComponent<PlayerHealth>();
+                if (playerHealth != null)
+                {
+                    if (health > 0) // Chỉ khôi phục nếu có dữ liệu
+                    {
+                        GameManager.Instance.RegisterPlayerHealth(clientId, playerHealth);
+                    }
+                }
+                else
+                {
+                    Debug.LogError($"Không tìm thấy weapon với ID: {weaponID}");
+                }
             }
         }
     }

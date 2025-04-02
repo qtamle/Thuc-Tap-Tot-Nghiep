@@ -186,21 +186,21 @@ public class Attack : NetworkBehaviour
                 {
                     // Gọi ServerRpc để hủy đối tượng
                     AttackEnemyServerRpc(networkObject.NetworkObjectId);
-                    SpawnCoinsServerRpc(
-                        false,
-                        coinSpawnMin,
-                        coinSpawnMax,
-                        enemy.transform.position
-                    );
-                    if (Random.value <= 0.30f)
-                    {
-                        SpawnCoinsServerRpc(
-                            true,
-                            secondaryCoinSpawnMin,
-                            secondaryCoinSpawnMax,
-                            enemy.transform.position
-                        );
-                    }
+                    // SpawnCoinsServerRpc(
+                    //     false,
+                    //     coinSpawnMin,
+                    //     coinSpawnMax,
+                    //     enemy.transform.position
+                    // );
+                    // if (Random.value <= 0.30f)
+                    // {
+                    //     SpawnCoinsServerRpc(
+                    //         true,
+                    //         secondaryCoinSpawnMin,
+                    //         secondaryCoinSpawnMax,
+                    //         enemy.transform.position
+                    //     );
+                    // }
 
                     if (Random.value <= 0.15f && lucky != null)
                     {
@@ -212,8 +212,6 @@ public class Attack : NetworkBehaviour
                         Debug.Log("Bouncing saw");
                         bouncingSaw.LaunchBouncingSaw();
                     }
-
-                    SpawnOrbsServerRpc(enemy.transform.position, 5);
                 }
                 else
                 {
@@ -250,33 +248,33 @@ public class Attack : NetworkBehaviour
                 NetworkObject bossNetworkObject = boss.GetComponent<NetworkObject>();
                 if (bossNetworkObject != null && bossNetworkObject.IsSpawned)
                 {
-                    AttackBossServerRpc(bossNetworkObject);
-                    isAttackBoss = true;
-                    damageable.SetCanBeDamaged(false);
-                    SpawnCoinsServerRpc(
-                        false,
-                        coinSpawnMin * 10,
-                        coinSpawnMax * 10,
-                        boss.transform.position
-                    );
+                    // AttackBossServerRpc(bossNetworkObject);
+                    // isAttackBoss = true;
+                    // damageable.SetCanBeDamaged(false);
+                    // SpawnCoinsServerRpc(
+                    //     false,
+                    //     coinSpawnMin * 10,
+                    //     coinSpawnMax * 10,
+                    //     boss.transform.position
+                    // );
 
-                    if (Random.value <= 0.25f)
-                    {
-                        Debug.Log("Attack cua ChainSaw de spawn coin2");
-                        SpawnCoinsServerRpc(
-                            true,
-                            secondaryCoinSpawnMin,
-                            secondaryCoinSpawnMax,
-                            boss.transform.position
-                        );
-                    }
+                    // if (Random.value <= 0.25f)
+                    // {
+                    //     Debug.Log("Attack cua ChainSaw de spawn coin2");
+                    //     SpawnCoinsServerRpc(
+                    //         true,
+                    //         secondaryCoinSpawnMin,
+                    //         secondaryCoinSpawnMax,
+                    //         boss.transform.position
+                    //     );
+                    // }
 
-                    if (Random.value <= 0.15f && lucky != null)
-                    {
-                        SpawnHealthPotions(boss.transform.position, 1);
-                    }
+                    // if (Random.value <= 0.15f && lucky != null)
+                    // {
+                    //     SpawnHealthPotions(boss.transform.position, 1);
+                    // }
 
-                    SpawnOrbsServerRpc(boss.transform.position, 20);
+                    // SpawnOrbsServerRpc(boss.transform.position, 20);
                 }
                 else
                 {
@@ -306,119 +304,119 @@ public class Attack : NetworkBehaviour
 
         Collider2D[] Snake = Physics2D.OverlapBoxAll(attackPoints.position, boxSize, 0f, bossLayer);
 
-        foreach (Collider2D sn in Snake)
-        {
-            MachineSnakeHealth partHealth = sn.GetComponent<MachineSnakeHealth>();
-            SnakeHealth snakeHealth = sn.GetComponentInParent<SnakeHealth>();
+        // foreach (Collider2D sn in Snake)
+        // {
+        //     MachineSnakeHealth partHealth = sn.GetComponent<MachineSnakeHealth>();
+        //     SnakeHealth snakeHealth = sn.GetComponentInParent<SnakeHealth>();
 
-            if (partHealth != null && !isAttackBoss && snakeHealth.IsStunned())
-            {
-                if (
-                    (
-                        MachineSnakeHealth.attackedPartID == -1
-                        || MachineSnakeHealth.attackedPartID == partHealth.partID
-                    ) && !partHealth.isAlreadyHit
-                )
-                {
-                    partHealth.TakeDamage(1);
-                    isAttackBoss = true;
+        //     if (partHealth != null && !isAttackBoss && snakeHealth.IsStunned())
+        //     {
+        //         if (
+        //             (
+        //                 MachineSnakeHealth.attackedPartID == -1
+        //                 || MachineSnakeHealth.attackedPartID == partHealth.partID
+        //             ) && !partHealth.isAlreadyHit
+        //         )
+        //         {
+        //             partHealth.TakeDamage(1);
+        //             isAttackBoss = true;
 
-                    snakeHealth.SetCanBeDamaged(false);
+        //             snakeHealth.SetCanBeDamaged(false);
 
-                    // SpawnCoins(
-                    //     coinPrefab,
-                    //     coinSpawnMin * 13,
-                    //     coinSpawnMax * 13,
-                    //     partHealth.transform.position
-                    // );
+        //             // SpawnCoins(
+        //             //     coinPrefab,
+        //             //     coinSpawnMin * 13,
+        //             //     coinSpawnMax * 13,
+        //             //     partHealth.transform.position
+        //             // );
 
-                    // if (Random.value <= 0.25f)
-                    // {
-                    //     SpawnCoins(
-                    //         secondaryCoinPrefab,
-                    //         secondaryCoinSpawnMin * 5,
-                    //         secondaryCoinSpawnMax * 5,
-                    //         partHealth.transform.position
-                    //     );
-                    // }
-                    SpawnCoinsServerRpc(
-                        true,
-                        coinSpawnMin * 13,
-                        coinSpawnMax * 13,
-                        partHealth.transform.position
-                    );
+        //             // if (Random.value <= 0.25f)
+        //             // {
+        //             //     SpawnCoins(
+        //             //         secondaryCoinPrefab,
+        //             //         secondaryCoinSpawnMin * 5,
+        //             //         secondaryCoinSpawnMax * 5,
+        //             //         partHealth.transform.position
+        //             //     );
+        //             // }
+        //             SpawnCoinsServerRpc(
+        //                 true,
+        //                 coinSpawnMin * 13,
+        //                 coinSpawnMax * 13,
+        //                 partHealth.transform.position,
+        //             );
 
-                    if (Random.value <= 0.25f)
-                    {
-                        SpawnCoinsServerRpc(
-                            false,
-                            secondaryCoinSpawnMin * 5,
-                            secondaryCoinSpawnMax * 5,
-                            partHealth.transform.position
-                        );
-                    }
+        //             if (Random.value <= 0.25f)
+        //             {
+        //                 SpawnCoinsServerRpc(
+        //                     false,
+        //                     secondaryCoinSpawnMin * 5,
+        //                     secondaryCoinSpawnMax * 5,
+        //                     partHealth.transform.position
+        //                 );
+        //             }
 
-                    if (Random.value <= 0.15f && lucky != null)
-                    {
-                        SpawnHealthPotions(partHealth.transform.position, 1);
-                    }
+        //             if (Random.value <= 0.15f && lucky != null)
+        //             {
+        //                 SpawnHealthPotions(partHealth.transform.position, 1);
+        //             }
 
-                    SpawnOrbsServerRpc(partHealth.transform.position, 25);
-                }
-            }
+        //             SpawnOrbsServerRpc(partHealth.transform.position, 25);
+        //         }
+        //     }
 
-            if (snakeHealth != null && snakeHealth.bodyPartsAttacked == snakeHealth.totalBodyParts)
-            {
-                HeadController headController = sn.GetComponentInChildren<HeadController>();
-                if (headController != null && !headController.isHeadAttacked && !isAttackBoss)
-                {
-                    headController.TakeDamage(1);
-                    isAttackBoss = true;
-                    headController.isHeadAttacked = true;
+        //     if (snakeHealth != null && snakeHealth.bodyPartsAttacked == snakeHealth.totalBodyParts)
+        //     {
+        //         HeadController headController = sn.GetComponentInChildren<HeadController>();
+        //         if (headController != null && !headController.isHeadAttacked && !isAttackBoss)
+        //         {
+        //             headController.TakeDamage(1);
+        //             isAttackBoss = true;
+        //             headController.isHeadAttacked = true;
 
-                    snakeHealth.SetCanBeDamaged(false);
-                    // SpawnCoins(
-                    //     coinPrefab,
-                    //     coinSpawnMin * 13,
-                    //     coinSpawnMax * 13,
-                    //     headController.transform.position
-                    // );
+        //             snakeHealth.SetCanBeDamaged(false);
+        // SpawnCoins(
+        //     coinPrefab,
+        //     coinSpawnMin * 13,
+        //     coinSpawnMax * 13,
+        //     headController.transform.position
+        // );
 
-                    // if (Random.value <= 0.25f)
-                    // {
-                    //     SpawnCoins(
-                    //         secondaryCoinPrefab,
-                    //         secondaryCoinSpawnMin * 5,
-                    //         secondaryCoinSpawnMax * 5,
-                    //         headController.transform.position
-                    //     );
-                    // }
-                    SpawnCoinsServerRpc(
-                        false,
-                        coinSpawnMin * 13,
-                        coinSpawnMax * 13,
-                        partHealth.transform.position
-                    );
+        // if (Random.value <= 0.25f)
+        // {
+        //     SpawnCoins(
+        //         secondaryCoinPrefab,
+        //         secondaryCoinSpawnMin * 5,
+        //         secondaryCoinSpawnMax * 5,
+        //         headController.transform.position
+        //     );
+        // }
+        //             SpawnCoinsServerRpc(
+        //                 false,
+        //                 coinSpawnMin * 13,
+        //                 coinSpawnMax * 13,
+        //                 partHealth.transform.position
+        //             );
 
-                    if (Random.value <= 0.30f)
-                    {
-                        SpawnCoinsServerRpc(
-                            true,
-                            secondaryCoinSpawnMin * 5,
-                            secondaryCoinSpawnMax * 5,
-                            partHealth.transform.position
-                        );
-                    }
-                    if (Random.value <= 0.15f && lucky != null)
-                    {
-                        SpawnHealthPotions(headController.transform.position, 1);
-                    }
+        //             if (Random.value <= 0.30f)
+        //             {
+        //                 SpawnCoinsServerRpc(
+        //                     true,
+        //                     secondaryCoinSpawnMin * 5,
+        //                     secondaryCoinSpawnMax * 5,
+        //                     partHealth.transform.position
+        //                 );
+        //             }
+        //             if (Random.value <= 0.15f && lucky != null)
+        //             {
+        //                 SpawnHealthPotions(headController.transform.position, 1);
+        //             }
 
-                    SpawnOrbsServerRpc(headController.transform.position, 25);
-                }
-            }
-        }
-        isAttackBoss = false;
+        //             SpawnOrbsServerRpc(headController.transform.position, 25);
+        //         }
+        //     }
+        // }
+        // isAttackBoss = false;
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -438,6 +436,24 @@ public class Attack : NetworkBehaviour
         {
             Debug.Log("Despawning enemy: " + enemyNetworkId);
             enemyObject.Despawn(true);
+            SpawnCoinsServerRpc(
+                false,
+                coinSpawnMin,
+                coinSpawnMax,
+                enemyObject.transform.position,
+                enemyNetworkId
+            );
+            if (Random.value <= 0.30f)
+            {
+                SpawnCoinsServerRpc(
+                    true,
+                    secondaryCoinSpawnMin,
+                    secondaryCoinSpawnMax,
+                    enemyObject.transform.position,
+                    enemyNetworkId
+                );
+            }
+            SpawnOrbsServerRpc(enemyObject.transform.position, 5, enemyObject.NetworkObjectId);
         }
         else
         {
@@ -511,26 +527,13 @@ public class Attack : NetworkBehaviour
         }
     }
 
-    void SpawnCoins(GameObject coinType, float minAmount, float maxAmount, Vector3 position)
-    {
-        if (!IsOwner)
-            return;
-
-        // Chuyển yêu cầu spawn coin đến server
-        SpawnCoinsServerRpc(
-            coinType == secondaryCoinPrefab,
-            (int)minAmount,
-            (int)maxAmount,
-            position
-        );
-    }
-
     [ServerRpc(RequireOwnership = false)]
     private void SpawnCoinsServerRpc(
         bool isSecondary,
         float minAmount,
         float maxAmount,
-        Vector3 position
+        Vector3 position,
+        ulong clientId
     )
     {
         Debug.Log($"ServerRpc called - isSecondary: {isSecondary}, position: {position}");
@@ -654,13 +657,7 @@ public class Attack : NetworkBehaviour
     }
 
     [ServerRpc(RequireOwnership = false)]
-    private void RequestSpawnOrbsServerRpc(Vector3 position, int orbCount)
-    {
-        SpawnOrbsServerRpc(position, orbCount);
-    }
-
-    [ServerRpc(RequireOwnership = false)]
-    private void SpawnOrbsServerRpc(Vector3 position, int orbCount)
+    private void SpawnOrbsServerRpc(Vector3 position, int orbCount, ulong clientId)
     {
         for (int i = 0; i < orbCount; i++)
         {
