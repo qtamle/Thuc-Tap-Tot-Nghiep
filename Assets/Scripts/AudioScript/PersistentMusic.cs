@@ -99,4 +99,20 @@ public class PersistentMusic : MonoBehaviour
         Destroy(oldMusic.gameObject);
         newMusic.isFading = false;
     }
+    public IEnumerator FadeOutMusic(float duration)
+{
+    float startVolume = audioSource.volume;
+    float time = 0;
+
+    while (time < duration)
+    {
+        time += Time.deltaTime;
+        audioSource.volume = Mathf.Lerp(startVolume, 0, time / duration);
+        yield return null;
+    }
+
+    audioSource.volume = 0;
+    audioSource.Stop();
+}
+
 }
