@@ -55,6 +55,19 @@ public class ExperienceManager : MonoBehaviour
         UpdateExperienceUI();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            AddExperience(1000);
+        }
+
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            SceneManager.LoadScene("Summary");
+        }
+    }
+
     public void AddExperience(int amount)
     {
         experienceCount += amount;
