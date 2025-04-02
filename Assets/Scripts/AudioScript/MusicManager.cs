@@ -24,7 +24,7 @@ public class MusicManager : MonoBehaviour
             mainSource = gameObject.AddComponent<AudioSource>();
             mainSource.loop = true;
             mainSource.playOnAwake = false;
-            mainSource.volume = 1f; // Đảm bảo volume không bị mute
+            mainSource.volume = 1f;
             Debug.Log("MusicManager: Initialized");
         }
         else
@@ -41,13 +41,13 @@ public class MusicManager : MonoBehaviour
         if (enemyManager != null)
         {
             enemyManager.enemiesKilled.OnValueChanged += OnEnemyKilledUpdated;
+            Debug.Log("MusicManager: EnemyManager found and event registered");
         }
         else
         {
             Debug.LogWarning("MusicManager: Không tìm thấy EnemyManager!");
         }
 
-        // Phát âm thanh cho scene hiện tại khi khởi động
         string sceneName = FormatSceneName(SceneManager.GetActiveScene().name);
         currentScene = sceneName;
         PlayMusicForScene(sceneName);
@@ -71,15 +71,26 @@ public class MusicManager : MonoBehaviour
         currentScene = sceneName;
         isBossMusicPlaying = false;
 
+        // Tìm lại EnemyManager khi chuyển scene
+        enemyManager = FindObjectOfType<EnemyManager>();
+        if (enemyManager != null)
+        {
+            enemyManager.enemiesKilled.OnValueChanged -= OnEnemyKilledUpdated; // Hủy đăng ký trước để tránh trùng lặp
+            enemyManager.enemiesKilled.OnValueChanged += OnEnemyKilledUpdated;
+            Debug.Log("MusicManager: EnemyManager found in new scene and event re-registered");
+        }
+        else
+        {
+            Debug.LogWarning("MusicManager: Không tìm thấy EnemyManager in new scene!");
+        }
+
         PlayMusicForScene(sceneName);
     }
 
     private void PlayMusicForScene(string sceneName)
     {
-        // Kiểm tra nếu scene thuộc nhóm Shop_Online, MainMenu, Lobby
         if (IsShopOnlineGroup(sceneName))
         {
-            // Nếu âm thanh hiện tại đã là Shop_Online-Background, không làm gì
             if (currentAudioClipName == "Shop_Online-Background")
             {
                 Debug.Log("MusicManager: Already playing Shop_Online-Background, skipping...");
@@ -89,17 +100,18 @@ public class MusicManager : MonoBehaviour
         }
         else
         {
-            // Phát âm thanh riêng cho scene
             StartCoroutine(LoadAndPlayMusic($"{sceneName}-Background"));
         }
     }
 
     private void OnEnemyKilledUpdated(int oldValue, int newValue)
     {
+        Debug.Log($"MusicManager: OnEnemyKilledUpdated called - oldValue: {oldValue}, newValue: {newValue}, killTarget: {enemyManager.killTarget.Value}");
         if (enemyManager == null || isBossMusicPlaying) return;
 
         if (IsLevelScene(currentScene) && newValue >= enemyManager.killTarget.Value)
         {
+            Debug.Log($"MusicManager: Kill target reached, switching to boss music for {currentScene}");
             isBossMusicPlaying = true;
             StartCoroutine(LoadAndPlayMusic($"{currentScene}-Boss"));
         }
@@ -117,7 +129,7 @@ public class MusicManager : MonoBehaviour
         if (clip != null)
         {
             Debug.Log($"MusicManager: Audio loaded - {clip.name}");
-            currentAudioClipName = audioPath; // Lưu tên clip hiện tại
+            currentAudioClipName = audioPath;
             yield return StartCoroutine(SwitchMusic(clip));
         }
         else
@@ -165,19 +177,20 @@ public class MusicManager : MonoBehaviour
 
     private string FormatSceneName(string sceneName)
     {
-        // Thay thế khoảng trắng và ký tự đặc biệt, đảm bảo khớp với tên file
         return sceneName.Replace(" ", "").Replace("...", "").Replace("_", "-");
     }
 
     private bool IsLevelScene(string sceneName)
     {
-        return sceneName.StartsWith("Level1-Remake") || sceneName.StartsWith("Level2-Remake") ||
-               sceneName.StartsWith("Level3-Remake") || sceneName.StartsWith("Level4-Remake") ||
-               sceneName.StartsWith("Level5-Remake");
+        bool isLevel = sceneName.StartsWith("Level1-Remake") || sceneName.StartsWith("Level2-Remake") ||
+                       sceneName.StartsWith("Level3-Remake") || sceneName.StartsWith("Level4-Remake") ||
+                       sceneName.StartsWith("Level5-Remake");
+        Debug.Log($"MusicManager: IsLevelScene({sceneName}) = {isLevel}");
+        return isLevel;
     }
 
     private bool IsShopOnlineGroup(string sceneName)
     {
-        return sceneName == "Shop-Online" || sceneName == "MainMenu" || sceneName == "Lobby";
+        return sceneName == "Shop-Online" || sceneName == "MainMenu" || sceneName == "Lobby" /*|| sceneName =="Supply"*/;
     }
 }
