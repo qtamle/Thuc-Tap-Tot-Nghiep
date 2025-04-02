@@ -349,6 +349,7 @@ MonoBehaviour:
   hasAddShieldGloves: 0
   hasAddShieldClaws: 0
   hasAddShieldChainsaw: 0
+  healthData: {fileID: 11400000, guid: a76a0ca67258b134ebdf293c5b845f37, type: 2}
 --- !u!114 &4045210816057616919
 MonoBehaviour:
   m_ObjectHideFlags: 0

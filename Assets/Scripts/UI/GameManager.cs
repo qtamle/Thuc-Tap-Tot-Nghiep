@@ -17,6 +17,9 @@ public class GameManager : NetworkBehaviour
 
     public NetworkVariable<bool> isSupplyScene = new NetworkVariable<bool>(false);
 
+    private Dictionary<ulong, int> playerHealthData = new Dictionary<ulong, int>();
+    private Dictionary<ulong, int> playerShieldData = new Dictionary<ulong, int>();
+
     private void Awake()
     {
         if (Instance == null)
@@ -101,58 +104,63 @@ public class GameManager : NetworkBehaviour
     // Phương thức để chuyển scene
     public void LoadNextScene()
     {
-        //if (!NetworkManager.Singleton.IsServer)
-        //    return;
+        if (!NetworkManager.Singleton.IsServer)
+            return;
 
-        //// Xóa tất cả player cũ trước khi chuyển scene
-        //foreach (var client in NetworkManager.Singleton.ConnectedClientsList)
-        //{
-        //    NetworkObject playerObject = client.PlayerObject;
+        // Xóa tất cả player cũ trước khi chuyển scene
+        foreach (var client in NetworkManager.Singleton.ConnectedClientsList)
+        {
+            NetworkObject playerObject = client.PlayerObject;
+            if (playerObject != null)
+            {
+                PlayerHealth playerHealth = playerObject.GetComponent<PlayerHealth>();
+                if (playerHealth != null)
+                {
+                    playerHealthData[client.ClientId] = playerHealth.currentHealth;
+                    playerShieldData[client.ClientId] = playerHealth.currentShield;
+                }
+                playerObject.Despawn(false);
+            }
+        }
 
-        //    if (playerObject != null)
-        //    {
-        //        playerObject.Despawn(false);
-        //    }
-        //}
+        if (isSupplyScene.Value == false) // Nếu đang ở màn Supply thì chuyển sang Boss tiếp theo
+        {
+            isSupplyScene.Value = true;
 
-        //if (isSupplyScene.Value == false) // Nếu đang ở màn Supply thì chuyển sang Boss tiếp theo
-        //{
-        //    isSupplyScene.Value = true;
+            currentBoss.Value++;
+            if (SupplyManager.Instance != null)
+            {
+                SupplyManager.Instance.DestroySpawnedSupplies();
+            }
+            if (currentBoss.Value == 5)
+            {
+                isSupplyScene.Value = false;
+            }
+            if (currentBoss.Value <= 5)
+            {
+                string bossScene = "Level " + currentBoss.Value + " - Remake";
+                // string bossScene = "Level 5 - Remake";
 
-        //    currentBoss.Value++;
-        //    if (SupplyManager.Instance != null)
-        //    {
-        //        SupplyManager.Instance.DestroySpawnedSupplies();
-        //    }
-        //    if (currentBoss.Value == 5)
-        //    {
-        //        isSupplyScene.Value = false;
-        //    }
-        //    if (currentBoss.Value <= 5)
-        //    {
-        //        // string bossScene = "Level " + currentBoss.Value + " - Remake";
-        //        string bossScene = "Level 5 - Remake";
+                Debug.Log($"Loading {bossScene}");
+                NetworkManager.Singleton.SceneManager.LoadScene(bossScene, LoadSceneMode.Single);
+            }
+            if (currentBoss.Value > 5)
+            {
+                Debug.Log("Loading SummaryScene");
+                NetworkManager.Singleton.SceneManager.LoadScene("Summary", LoadSceneMode.Single);
+                ResetGame();
+            }
+        }
+        else
+        {
+            isSupplyScene.Value = false;
+            Debug.Log("Loading SupplyScene");
 
-        //        Debug.Log($"Loading {bossScene}");
-        //        NetworkManager.Singleton.SceneManager.LoadScene(bossScene, LoadSceneMode.Single);
-        //    }
-        //    if (currentBoss.Value > 5)
-        //    {
-        //        Debug.Log("Loading SummaryScene");
-        //        NetworkManager.Singleton.SceneManager.LoadScene("Summary", LoadSceneMode.Single);
-        //        ResetGame();
-        //    }
-        //}
-        //else
-        //{
-        //    isSupplyScene.Value = false;
-        //    Debug.Log("Loading SupplyScene");
-
-        //    NetworkManager.Singleton.SceneManager.OnLoadComplete += OnSupplySceneLoaded;
-        //    NetworkManager.Singleton.SceneManager.LoadScene("SupplyScene", LoadSceneMode.Single);
-        //}
-        string bossScene = "Level 1 - Remake";
-        NetworkManager.Singleton.SceneManager.LoadScene(bossScene, LoadSceneMode.Single);
+            NetworkManager.Singleton.SceneManager.OnLoadComplete += OnSupplySceneLoaded;
+            NetworkManager.Singleton.SceneManager.LoadScene("SupplyScene", LoadSceneMode.Single);
+        }
+        // string bossScene = "Level 1 - Remake";
+        // NetworkManager.Singleton.SceneManager.LoadScene(bossScene, LoadSceneMode.Single);
     }
 
     private void OnSupplySceneLoaded(ulong clientId, string sceneName, LoadSceneMode mode)
@@ -187,6 +195,32 @@ public class GameManager : NetworkBehaviour
         return new Dictionary<ulong, string>(playerWeaponIDs);
     }
 
+    // Thêm vào GameManager
+    public void SavePlayerHealthData(ulong clientId, int health, int shield)
+    {
+        playerHealthData[clientId] = health;
+        playerShieldData[clientId] = shield;
+        Debug.Log($"Saved health data for player {clientId}: Health={health}, Shield={shield}");
+    }
+
+    public (int health, int shield) GetPlayerHealthData(ulong clientId)
+    {
+        if (
+            playerHealthData.TryGetValue(clientId, out int health)
+            && playerShieldData.TryGetValue(clientId, out int shield)
+        )
+        {
+            return (health, shield);
+        }
+        return (0, 0); // Trả về giá trị mặc định nếu không tìm thấy
+    }
+
+    public void ClearHealthData()
+    {
+        playerHealthData.Clear();
+        playerShieldData.Clear();
+    }
+
     public void ResetGame()
     {
         if (!NetworkManager.Singleton.IsServer)
@@ -194,6 +228,7 @@ public class GameManager : NetworkBehaviour
 
         currentBoss.Value = 0;
         isSupplyScene.Value = false;
+        ClearHealthData(); // Thêm dòng này
         Debug.Log("Resetting game, loading Boss1");
         NetworkManager.Singleton.Shutdown();
     }

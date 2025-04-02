@@ -51,12 +51,14 @@ public class PlayerHealth : NetworkBehaviour, DamagePlayerInterface
     private Claws claws;
     private Attack attack; // Chainsaw
 
-    private WeaponInfo weaponInfo;
+    private WeaponPlayerInfo weaponInfo;
 
-    private void Awake()
-    {
-        currentHealth = maxHealth;
-    }
+    [SerializeField]
+    private PlayerHealthData healthData;
+
+    public bool healthDataSO = false;
+
+    private void Awake() { }
 
     private void Start()
     {
@@ -71,6 +73,18 @@ public class PlayerHealth : NetworkBehaviour, DamagePlayerInterface
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnDestroy()
+    {
+        if (IsServer)
+        {
+            // Lưu trạng thái máu và khiên trước khi destroy
+            GameManager.Instance.SavePlayerHealthData(OwnerClientId, currentHealth, currentShield);
+            Debug.Log(
+                $"Lưu trạng thái trước khi destroy - Health: {currentHealth}, Shield: {currentShield}"
+            );
+        }
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -101,7 +115,21 @@ public class PlayerHealth : NetworkBehaviour, DamagePlayerInterface
             shieldText = shieldObject?.GetComponent<TMP_Text>();
             shieldText.text = currentShield.ToString();
         }
-
+        // 1. KHÔI PHỤC DỮ LIỆU TỪ GAMEMANAGER (nếu có)
+        if (IsServer)
+        {
+            var (savedHealth, savedShield) = GameManager.Instance.GetPlayerHealthData(
+                OwnerClientId
+            );
+            if (savedHealth > 0) // Nếu có dữ liệu đã lưu
+            {
+                currentHealth = savedHealth;
+                currentShield = savedShield;
+                Debug.Log(
+                    $"Khôi phục máu/khiên: {currentHealth}/{maxHealth}, Shield: {currentShield}"
+                );
+            }
+        }
         // Find supply in scene
         angel = FindFirstObjectByType<AngelGuardian>();
         Sacrifice = FindFirstObjectByType<Sacrifice>();
@@ -110,29 +138,24 @@ public class PlayerHealth : NetworkBehaviour, DamagePlayerInterface
         brutal = FindFirstObjectByType<Brutal>();
         dodge = FindFirstObjectByType<Dodge>();
 
-        // Check level to upgrade shield
+        // 2. XỬ LÝ LEVEL SYSTEM (chỉ cộng vào maxHealth)
         levelSystem = FindFirstObjectByType<LevelSystem>();
         if (levelSystem != null && !hasAddedSavedHealth)
         {
-            //levelSystem.OnLevelDataUpdated += OnLevelUpdated;
-            int savedHealth = levelSystem.health;
-            maxHealth += savedHealth;
-            currentHealth = maxHealth;
-            hasAddedSavedHealth = true;
-            UpdateHealthUI();
+            int healthBonus = levelSystem.health; // Số máu thêm mỗi cấp
+            maxHealth = 20 + healthBonus; // Cập nhật maxHealth (20 + bonus)
 
-            Debug.Log(
-                $"Health from save file added: {levelSystem.health}. New MaxHealth: {maxHealth}"
-            );
+            // Nếu KHÔNG có dữ liệu từ GameManager (lần đầu vào game)
+            if (GameManager.Instance.GetPlayerHealthData(OwnerClientId).health <= 0)
+            {
+                currentHealth = maxHealth; // Set đầy máu
+            }
+
+            hasAddedSavedHealth = true;
+            Debug.Log($"Bonus máu từ LevelSystem: +{healthBonus}. MaxHealth: {maxHealth}");
         }
-        else if (hasAddedSavedHealth)
-        {
-            Debug.Log("Saved health already added. Skipping.");
-        }
-        else
-        {
-            Debug.Log("LevelSystem not found!");
-        }
+
+        UpdateHealthUI();
 
         // Check supply Sacrifice, convert health to shield
         CheckSacrifice();
@@ -144,7 +167,7 @@ public class PlayerHealth : NetworkBehaviour, DamagePlayerInterface
         }
 
         // Find Weapon Info (level weapon) and Gloves to upgrade shield for level 3
-        weaponInfo = GetComponent<WeaponInfo>();
+        weaponInfo = GetComponent<WeaponPlayerInfo>();
 
         gloves = GetComponent<Gloves>();
         if (
@@ -208,6 +231,8 @@ public class PlayerHealth : NetworkBehaviour, DamagePlayerInterface
     //        levelSystem.OnLevelDataUpdated -= OnLevelUpdated;
     //    }
     //}
+
+
 
     public void DamagePlayer(int damage)
     {
@@ -284,7 +309,7 @@ public class PlayerHealth : NetworkBehaviour, DamagePlayerInterface
         UpdateShieldUI();
     }
 
-    private void UpdateHealthUI()
+    public void UpdateHealthUI()
     {
         if (healthText != null)
         {
@@ -292,7 +317,7 @@ public class PlayerHealth : NetworkBehaviour, DamagePlayerInterface
         }
     }
 
-    private void UpdateShieldUI()
+    public void UpdateShieldUI()
     {
         if (shieldText != null)
         {
