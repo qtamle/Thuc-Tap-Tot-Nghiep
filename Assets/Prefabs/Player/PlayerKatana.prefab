@@ -269,6 +269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d256777bd0d2dd4dbe845fc3125ad5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   boxSize: {x: 2.44, y: 1.77}
   boxSizeUp: {x: 2.7, y: 1.4}
   boxSizeDown: {x: 2.7, y: 1.4}
@@ -312,6 +313,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d878ec01162bc84ab75f79fef103a37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   bladePrefab: {fileID: 4225929617293816271, guid: c99208ecf74a5ef4a8d186a2983b72d8, type: 3}
   bladeSpeed: 4
   bladeLifetime: 3
