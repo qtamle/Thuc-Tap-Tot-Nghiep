@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 4046690842
+  GlobalObjectIdHash: 2993338236
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -336,7 +336,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  maxHealth: 20
+  maxHealth: 2
   currentHealth: 0
   currentShield: 5
   healthText: {fileID: 0}
@@ -350,7 +350,6 @@ MonoBehaviour:
   hasAddShieldClaws: 0
   hasAddShieldChainsaw: 0
   healthData: {fileID: 11400000, guid: a76a0ca67258b134ebdf293c5b845f37, type: 2}
-  healthDataSO: 0
 --- !u!114 &4045210816057616919
 MonoBehaviour:
   m_ObjectHideFlags: 0

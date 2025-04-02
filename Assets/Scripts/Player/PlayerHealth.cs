@@ -57,6 +57,8 @@ public class PlayerHealth : NetworkBehaviour, DamagePlayerInterface
     private PlayerHealthData healthData;
 
     public delegate void HealthChangedHandler(ulong clientId, int currentHealth);
+    private bool isDead = false; // Thêm biến này
+
     public event HealthChangedHandler OnHealthChanged;
 
     private void Awake() { }
@@ -234,7 +236,7 @@ public class PlayerHealth : NetworkBehaviour, DamagePlayerInterface
 
     public void DamagePlayer(int damage)
     {
-        if (isInvincible)
+        if (isDead || isInvincible) // Kiểm tra thêm isDead
         {
             return;
         }
@@ -274,18 +276,19 @@ public class PlayerHealth : NetworkBehaviour, DamagePlayerInterface
 
             if (currentHealth <= 0 && currentShield <= 0)
             {
-                if (!hasRevived && angel.IsReady())
-                {
-                    Debug.Log("Player is resurrected!");
-                    currentHealth = maxHealth;
-                    angel.CanActive();
-                    hasRevived = true;
-                    UpdateHealthUI();
-                }
-                else
-                {
-                    Die();
-                }
+                // if (!hasRevived && angel.IsReady())
+                // {
+                //     Debug.Log("Player is resurrected!");
+                //     currentHealth = maxHealth;
+                //     angel.CanActive();
+                //     hasRevived = true;
+                //     UpdateHealthUI();
+                // }
+                // else
+                // {
+                //     Die();
+                // }
+                Die();
             }
             else
             {
@@ -325,7 +328,30 @@ public class PlayerHealth : NetworkBehaviour, DamagePlayerInterface
 
     private void Die()
     {
-        Debug.Log("Player has died!");
+        if (isDead)
+            return; // Đảm bảo chỉ thực hiện 1 lần
+        if (IsServer)
+        {
+            isDead = true;
+            Debug.Log("Player has died!");
+            // gameObject.SetActive(false);
+            GameManager.Instance.PlayerDied(NetworkObject.OwnerClientId, gameObject);
+        }
+        else
+        {
+            DieServerRpc();
+        }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void DieServerRpc()
+    {
+        if (isDead)
+            return; // Đảm bảo chỉ thực hiện 1 lần
+        isDead = true;
+        Debug.Log("Player form client died!");
+
+        GameManager.Instance.PlayerDied(NetworkObject.OwnerClientId, gameObject);
     }
 
     private System.Collections.IEnumerator InvincibilityCoroutine(float duration)

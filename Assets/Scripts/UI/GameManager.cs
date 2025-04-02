@@ -29,6 +29,9 @@ public class GameManager : NetworkBehaviour
         new Dictionary<ulong, PlayerHealth>();
     private bool isGameOver = false;
 
+    private int totalPlayers;
+    private int deadPlayersCount = 0;
+
     private void Awake()
     {
         if (Instance == null)
@@ -110,6 +113,43 @@ public class GameManager : NetworkBehaviour
         OnCountdownStart?.Invoke();
     }
 
+    public void PlayerDied(ulong clientId, GameObject gameObject)
+    {
+        if (isGameOver)
+            return; // Nếu game đã kết thúc thì không xử lý tiếp
+        gameObject.transform.position = new Vector3(0, 1000, 0);
+        Debug.Log("GameManager player die " + clientId);
+        deadPlayersCount++;
+
+        // Kiểm tra nếu tất cả người chơi đã chết
+        if (deadPlayersCount >= totalPlayers)
+        {
+            GameOver();
+        }
+    }
+
+    private void GameOver()
+    {
+        isGameOver = true;
+
+        // Kích hoạt sự kiện game over
+        OnGameOver?.Invoke(true);
+
+        // Chuyển scene sau một khoảng thời gian
+        StartCoroutine(LoadSummarySceneAfterDelay(3f)); // 3 giây trước khi chuyển scene
+    }
+
+    private IEnumerator LoadSummarySceneAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        // Chuyển scene
+        if (IsServer)
+        {
+            NetworkManager.Singleton.SceneManager.LoadScene("Summary", LoadSceneMode.Single);
+        }
+    }
+
     public void RegisterPlayerHealth(ulong clientId, PlayerHealth playerHealth)
     {
         if (!playerHealthComponents.ContainsKey(clientId))
@@ -165,6 +205,9 @@ public class GameManager : NetworkBehaviour
     // Phương thức để chuyển scene
     public void LoadNextScene()
     {
+        // Lấy tổng số người chơi khi bắt đầu game
+        totalPlayers = NetworkManager.Singleton.ConnectedClients.Count;
+        deadPlayersCount = 0;
         if (!NetworkManager.Singleton.IsServer)
             return;
 

@@ -9,8 +9,8 @@ public class GangsterHealth : NetworkBehaviour, DamageInterface
     public static GangsterHealth Instance;
 
     [Header("Health Settings")]
-    private int maxHealth = 3;
-    public NetworkVariable<int> currentHealth = new NetworkVariable<int>(3);
+    private int maxHealth = 1;
+    public NetworkVariable<int> currentHealth = new NetworkVariable<int>(1);
     private NetworkVariable<bool> isStunned = new NetworkVariable<bool>(false);
     private NetworkVariable<bool> canBeDamaged = new NetworkVariable<bool>(false);
 
@@ -41,7 +41,7 @@ public class GangsterHealth : NetworkBehaviour, DamageInterface
     {
         if (IsServer) // Chỉ server mới gọi ServerRpc
         {
-            currentHealth.Value = 3;
+            currentHealth.Value = 1;
             IntializeBossHealthServerRpc();
         }
         UpdateHealthBar();

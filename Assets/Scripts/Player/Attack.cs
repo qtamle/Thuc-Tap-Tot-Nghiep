@@ -248,33 +248,39 @@ public class Attack : NetworkBehaviour
                 NetworkObject bossNetworkObject = boss.GetComponent<NetworkObject>();
                 if (bossNetworkObject != null && bossNetworkObject.IsSpawned)
                 {
-                    // AttackBossServerRpc(bossNetworkObject);
-                    // isAttackBoss = true;
-                    // damageable.SetCanBeDamaged(false);
-                    // SpawnCoinsServerRpc(
-                    //     false,
-                    //     coinSpawnMin * 10,
-                    //     coinSpawnMax * 10,
-                    //     boss.transform.position
-                    // );
+                    AttackBossServerRpc(bossNetworkObject);
+                    isAttackBoss = true;
+                    damageable.SetCanBeDamaged(false);
+                    SpawnCoinsServerRpc(
+                        false,
+                        coinSpawnMin * 10,
+                        coinSpawnMax * 10,
+                        boss.transform.position,
+                        bossNetworkObject.NetworkObjectId
+                    );
 
-                    // if (Random.value <= 0.25f)
-                    // {
-                    //     Debug.Log("Attack cua ChainSaw de spawn coin2");
-                    //     SpawnCoinsServerRpc(
-                    //         true,
-                    //         secondaryCoinSpawnMin,
-                    //         secondaryCoinSpawnMax,
-                    //         boss.transform.position
-                    //     );
-                    // }
+                    if (Random.value <= 0.25f)
+                    {
+                        Debug.Log("Attack cua ChainSaw de spawn coin2");
+                        SpawnCoinsServerRpc(
+                            true,
+                            secondaryCoinSpawnMin,
+                            secondaryCoinSpawnMax,
+                            boss.transform.position,
+                            bossNetworkObject.NetworkObjectId
+                        );
+                    }
 
-                    // if (Random.value <= 0.15f && lucky != null)
-                    // {
-                    //     SpawnHealthPotions(boss.transform.position, 1);
-                    // }
+                    if (Random.value <= 0.15f && lucky != null)
+                    {
+                        SpawnHealthPotions(boss.transform.position, 1);
+                    }
 
-                    // SpawnOrbsServerRpc(boss.transform.position, 20);
+                    SpawnOrbsServerRpc(
+                        boss.transform.position,
+                        20,
+                        bossNetworkObject.NetworkObjectId
+                    );
                 }
                 else
                 {
