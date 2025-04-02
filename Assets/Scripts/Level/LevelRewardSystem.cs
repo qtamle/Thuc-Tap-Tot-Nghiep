@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
@@ -99,49 +100,64 @@ public class LevelRewardSystem : MonoBehaviour
             }
             // Cập nhật cấp độ thưởng cuối cùng sau khi đã cấp phát xong tất cả các phần thưởng
             await levelSystem.UpdateLastRewardedLevel(newLevel);
-            if (hasReward) ShowNextReward();
+                
+            if (hasReward && !isRewardUIActive)
+            {
+                ShowNextReward();
+            }
         }
     }
-
     private async void ShowNextReward()
     {
         if (pendingRewards.Count == 0)
         {
             rewardUI.SetActive(false);
             isRewardUIActive = false;
+
+            await levelSystem.UpdateLastRewardedLevel(lastRewardedLevel);
             return;
         }
 
-        if (pendingRewards.Count > 0 && !isRewardUIActive)
+        isRewardUIActive = true;
+
+        while (pendingRewards.Count > 0)
         {
             LevelReward reward = pendingRewards.Dequeue();
 
-            int nextLevel = lastRewardedLevel + 1;
+            lastRewardedLevel++;
 
-            levelText.text = $"Level up! You are now level {nextLevel}";
-
+            levelText.text = $"Level up! You are now level {lastRewardedLevel}";
             coinType1Text.text = $"Coins 1 + {reward.coinType1}";
             coinType2Text.text = $"Coins 2 + {reward.coinType2}";
             healthText.text = $"Health + {reward.health}";
 
             rewardUI.SetActive(true);
-            isRewardUIActive = true;
-
-            lastRewardedLevel = nextLevel;
 
             await ApplyReward(reward);
+
+            // Chờ người chơi ấn nút "Collect" trước khi tiếp tục
+            await WaitForCollect();
         }
+
+        rewardUI.SetActive(false);
+        isRewardUIActive = false;
+        await levelSystem.UpdateLastRewardedLevel(lastRewardedLevel);
     }
 
+    // Chờ người chơi nhấn nút "Collect"
+    private TaskCompletionSource<bool> collectPressed;
+
+    private Task WaitForCollect()
+    {
+        collectPressed = new TaskCompletionSource<bool>();
+        return collectPressed.Task;
+    }
 
     public void OnCollectButtonPressed()
     {
-        rewardUI.SetActive(false);
-        isRewardUIActive = false;
-
-        if (pendingRewards.Count > 0)
+        if (collectPressed != null && !collectPressed.Task.IsCompleted)
         {
-            ShowNextReward();
+            collectPressed.SetResult(true);
         }
     }
 
