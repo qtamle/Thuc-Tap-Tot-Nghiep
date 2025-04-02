@@ -1,4 +1,6 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -35,6 +37,10 @@ public class EnemySpawnerLevel2 : NetworkBehaviour, IEnemySpawner
 
     private NetworkVariable<bool> isBossSpawned = new NetworkVariable<bool>(false);
 
+
+    [Header("Enemy Select")]
+    public int numberOfPicks;
+
     void Awake()
     {
         if (Instance == null)
@@ -57,7 +63,9 @@ public class EnemySpawnerLevel2 : NetworkBehaviour, IEnemySpawner
             // KillCounterUI.Instance.CounterUI();
             BossSpawnPosition = GameObject.FindWithTag("BossSpawner");
 
-            foreach (var spawnData in enemySpawnDatas)
+            List<EnemySpawnData> pickedEnemies = PickRandomEnemies();
+
+            foreach (var spawnData in pickedEnemies)
             {
                 StartCoroutine(SpawnEnemyIndependently(spawnData));
             }
@@ -95,6 +103,26 @@ public class EnemySpawnerLevel2 : NetworkBehaviour, IEnemySpawner
 
             timeElapsed = 0f;
         }
+    }
+
+    private List<EnemySpawnData> PickRandomEnemies()
+    {
+        // Đảm bảo số lượng bóc không lớn hơn danh sách enemy có sẵn
+        int pickCount = Mathf.Min(numberOfPicks, enemySpawnDatas.Length);
+
+
+        List<EnemySpawnData> pickedEnemies = enemySpawnDatas
+        .OrderBy(x => Random.value) // Xáo trộn danh sách
+        .Take(pickCount) // Chọn số lượng cần bóc
+        .ToList();
+
+        Debug.Log("Enemy picked:");
+        foreach (var enemy in pickedEnemies)
+        {
+            Debug.Log($"- {enemy.enemyPrefab.name}");
+        }
+
+        return pickedEnemies;
     }
 
     private IEnumerator SpawnEnemyIndependently(EnemySpawnData spawnData)

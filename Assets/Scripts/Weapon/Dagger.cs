@@ -277,13 +277,17 @@ public class Dagger : NetworkBehaviour
         {
             if (enemy != null && enemy.gameObject != null && enemy.gameObject.activeInHierarchy)
             {
-                GameObject enemyObject = enemy.transform.root.gameObject;
-                NotifyEnemyKilledServerRpc();
+                //GameObject enemyObject = enemy.transform.root.gameObject;
 
-                // foreach (IEnemySpawner spawner in enemySpawners)
-                // {
-                //     spawner.OnEnemyKilled();
-                // }
+                if (EnemyManager.Instance != null)
+                {
+                    EnemyManager.Instance.OnEnemyKilled();
+                }
+
+                foreach (IEnemySpawner spawner in enemySpawners)
+                {
+                    spawner.OnEnemyKilled();
+                }
 
                 if (brutal != null)
                 {

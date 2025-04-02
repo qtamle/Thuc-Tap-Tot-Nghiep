@@ -36,6 +36,8 @@ public class Drone : NetworkBehaviour
         StartCoroutine(InitialMoveRoutine());
         SetNewRandomTarget();
         SetNextShootTime();
+
+        droneAnim.SetBool("Fly", true);
     }
 
     private void Update()

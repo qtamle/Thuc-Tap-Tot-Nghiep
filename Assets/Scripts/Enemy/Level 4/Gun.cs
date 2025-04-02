@@ -28,6 +28,8 @@ public class Gun : NetworkBehaviour
     {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+
+        animator.SetBool("Idle", true);
     }
     private void Update()
     {
