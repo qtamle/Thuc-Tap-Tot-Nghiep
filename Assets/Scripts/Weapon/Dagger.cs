@@ -132,6 +132,7 @@ public class Dagger : NetworkBehaviour
                 Debug.LogError($"Không tìm thấy WeaponPlayerInfo cho client {clientId}");
             }
             weaponInfo = GetComponentInChildren<WeaponPlayerInfo>();
+            
         }
     }
 

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -203,13 +204,15 @@ public class GameManager : NetworkBehaviour
     }
 
     // Phương thức để chuyển scene
-    public void LoadNextScene()
+    public async Task LoadNextScene()
     {
         // Lấy tổng số người chơi khi bắt đầu game
         totalPlayers = NetworkManager.Singleton.ConnectedClients.Count;
         deadPlayersCount = 0;
         if (!NetworkManager.Singleton.IsServer)
             return;
+        // Đợi vài giây trước khi despawn các player
+        await Task.Delay(2000); // Đợi 2 giây (2000 milliseconds)
 
         // Xóa tất cả player cũ trước khi chuyển scene
         foreach (var client in NetworkManager.Singleton.ConnectedClientsList)

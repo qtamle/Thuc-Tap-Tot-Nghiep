@@ -44,7 +44,7 @@ public class SupplyInfoDisplay : MonoBehaviour
     {
         if (currentSupply != null)
         {
-            currentSupply.PickupSupply();
+            currentSupply.PickupSupply(NetworkManager.Singleton.LocalClientId); // Truyền clientId
             infoCanvas.SetActive(false);
             if (playerMovement != null)
             {

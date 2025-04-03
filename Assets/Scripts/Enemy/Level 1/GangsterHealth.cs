@@ -130,6 +130,7 @@ public class GangsterHealth : NetworkBehaviour, DamageInterface
     {
         yield return new WaitForSeconds(1f);
         GameManager.Instance.LoadNextScene();
+        GetComponent<NetworkObject>().Despawn();
         // BossManager.Instance.HandleBossDefeated(currentBoss);
     }
 

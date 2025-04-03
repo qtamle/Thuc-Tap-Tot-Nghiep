@@ -9,10 +9,17 @@ public class SupplyPickup : NetworkBehaviour
     public SupplyData supplyData;
     private bool isTransitioning = false;
     private bool canTrigger = true;
+    private NetworkVariable<bool> isPickedUpNetwork = new NetworkVariable<bool>(false); // Thêm biến này
+    public bool isPickedUp => isPickedUpNetwork.Value;
+
+    void Start()
+    {
+        // DontDestroyOnLoad(gameObject);
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") && canTrigger)
+        if (collision.CompareTag("Player") && canTrigger && !isPickedUp) // Thêm kiểm tra !isPickedUp
         {
             // Lấy NetworkObject của Player va chạm
             NetworkObject playerNetworkObject = collision.GetComponent<NetworkObject>();
@@ -32,6 +39,7 @@ public class SupplyPickup : NetworkBehaviour
             ShowSupplyInfoClientRpc(playerId);
         }
     }
+
     [ClientRpc]
     private void ShowSupplyInfoClientRpc(ulong targetClientId)
     {
@@ -47,25 +55,102 @@ public class SupplyPickup : NetworkBehaviour
                 Debug.Log("Đã tạo SupplyInfoDisplay trên Client.");
             }
 
-            // Hiển thị thông tin
+            // Hiển thị thông tin và truyền SupplyPickup vào
             infoDisplay.DisplaySupplyInfo(this);
         }
     }
 
-    public void PickupSupply()
+    public override void OnNetworkDespawn()
+    {
+        base.OnNetworkDespawn();
+    }
+
+    public void PickupSupply(ulong clientId) // Thêm clientId vào tham số
     {
         if (IsClient)
         {
-            PlayerInventorySupply.Instance.playerInventorys.Add(supplyData);
+            // PlayerInventorySupply.Instance.playerInventorys.Add(supplyData);
+
             RequestRemoveSupplyServerRpc(supplyData.supplyID);
+
+            // Gọi RPC để yêu cầu server gắn object vào client
+            RequestAttachSupplyToServerRpc(clientId); // Gọi RPC mới
+            // Gọi RPC để yêu cầu server thay đổi quyền sở hữu
+            RequestChangeOwnershipServerRpc(clientId);
             // Gọi RPC để yêu cầu server despawn object
-            RequestDespawnSupplyServerRpc();
+            // RequestDespawnSupplyServerRpc();
         }
 
-        SupplyManager.Instance.RemoveSupply(supplyData.supplyID);
+        // SupplyManager.Instance.RemoveSupply(supplyData.supplyID);
         ApplyEffect();
 
         Debug.Log($"[PickupSupply] Hủy GameObject {gameObject.name}...");
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void RequestAttachSupplyToServerRpc(ulong clientId) // RPC mới
+    {
+        // Kiểm tra nếu supply đã được chọn
+        if (isPickedUp)
+            return;
+
+        // Tìm NetworkObject của client
+        NetworkClient client = NetworkManager.Singleton.ConnectedClients[clientId];
+        if (client != null && client.PlayerObject != null)
+        {
+            // Gắn supply vào client
+            transform.SetParent(client.PlayerObject.transform);
+            transform.localPosition = Vector3.zero; // Đặt vị trí cục bộ
+
+            // Đánh dấu là đã được chọn
+            isPickedUpNetwork.Value = true;
+
+            // Đồng bộ hóa việc gắn vào client
+            AttachSupplyClientRpc(clientId);
+        }
+    }
+
+    [ClientRpc]
+    private void AttachSupplyClientRpc(ulong clientId)
+    {
+        if (IsServer)
+            return; // Bỏ qua trên server
+
+        if (NetworkManager.Singleton.LocalClientId == clientId)
+        {
+            // Tìm NetworkObject của client
+            NetworkClient client = NetworkManager.Singleton.ConnectedClients[clientId];
+            if (client != null && client.PlayerObject != null)
+            {
+                // Gắn supply vào client
+                transform.SetParent(client.PlayerObject.transform);
+                transform.localPosition = Vector3.zero;
+                transform.localRotation = Quaternion.identity;
+            }
+        }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void RequestChangeOwnershipServerRpc(ulong clientId)
+    {
+        // Thay đổi quyền sở hữu cho client đã nhặt
+        NetworkObject.ChangeOwnership(clientId);
+        isPickedUpNetwork.Value = true; //Đánh dấu vật phẩm đã được nhặt.
+
+        // Đồng bộ hóa việc thay đổi quyền sở hữu với tất cả client
+        ChangeOwnershipClientRpc(clientId);
+    }
+
+    [ClientRpc]
+    private void ChangeOwnershipClientRpc(ulong clientId)
+    {
+        if (IsServer)
+            return; // Bỏ qua trên server
+
+        if (NetworkManager.Singleton.LocalClientId == clientId)
+        {
+            Debug.Log($"Client {clientId} đã nhận quyền sở hữu Supply {supplyData.supplyName}.");
+        }
     }
 
     [ServerRpc(RequireOwnership = false)]

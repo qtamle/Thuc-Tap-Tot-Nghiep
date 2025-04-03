@@ -29,7 +29,7 @@ public class SupplyManager : NetworkBehaviour
 
     private List<Transform> slots;
 
-    private List<GameObject> spawnedSupplies = new List<GameObject>();
+    public List<GameObject> spawnedSupplies = new List<GameObject>();
 
     // Khai báo delegate cho event
     public delegate void InventoryChangeHandler(SupplyData supply);
@@ -125,100 +125,6 @@ public class SupplyManager : NetworkBehaviour
         return availableSupplies;
     }
 
-    // private void Update()
-    // {
-    //     if (Input.GetKeyDown(KeyCode.D))
-    //     {
-    //         DebugRemainingSupplies();
-    //     }
-    //     if (Input.GetKeyDown(KeyCode.T))
-    //     {
-    //         InitializeSlots();
-    //     }
-    //     if (Input.GetKeyDown(KeyCode.I))
-    //     {
-    //         DebugInventory();
-    //     }
-    //     if (Input.GetKeyDown(KeyCode.E))
-    //     {
-    //         isUsingSupply = true;
-    //         useSupplyCoroutine = StartCoroutine(CallUseSupplyRepeatedly());
-    //     }
-    //     if (!isUsingSupply)
-    //     {
-    //         // Dừng Coroutine khi đối tượng bị vô hiệu hóa
-    //         if (useSupplyCoroutine != null)
-    //         {
-    //             StopCoroutine(useSupplyCoroutine);
-    //         }
-    //     }
-    // }
-
-    // private IEnumerator CallUseSupplyRepeatedly()
-    // {
-    //     while (isUsingSupply) // Lặp vô hạn, nếu muốn dừng thì cần dừng Coroutine
-    //     {
-    //         UseSupply(); // Gọi hàm UseSupply
-    //         yield return new WaitForSeconds(interval); // Đợi trong khoảng thời gian nhất định
-    //     }
-    // }
-
-    // public void UseSupply()
-    // {
-    //     // Duyệt qua tất cả các phần tử trong playerInventory
-    //     for (int index = 0; index < PlayerInventorySupply.Instance.playerInventorys.Count; index++)
-    //     {
-    //         SupplyData supply = PlayerInventorySupply.Instance.playerInventorys[index];
-
-    //         // Kiểm tra xem supply có null không
-    //         if (supply == null)
-    //         {
-    //             Debug.LogError($"Supply at index {index} is null!");
-    //             continue; // Nếu null thì bỏ qua phần tử này và tiếp tục với phần tử tiếp theo
-    //         }
-
-    //         // Kiểm tra SupplyPrefab có null không
-    //         if (supply.supplyPrefab == null)
-    //         {
-    //             Debug.LogError($"SupplyPrefab for {supply.supplyName} is null!");
-    //             continue; // Nếu null thì bỏ qua phần tử này và tiếp tục với phần tử tiếp theo
-    //         }
-
-    //         // Gọi phương thức kích hoạt supply nếu hợp lệ
-    //         inventorySupply.ActiveSupplyByIndex(index);
-    //     }
-    // }
-
-    // public void DebugRemainingSupplies()
-    // {
-    //     if (supplyDataLList.Count == 0)
-    //     {
-    //         Debug.Log("Không còn supply nào trong danh sách supplyDataLList.");
-    //         return;
-    //     }
-
-    //     string remainingSupplies = string.Join(
-    //         ", ",
-    //         supplyDataLList.ConvertAll(s => $"{s.supplyName} ({s.supplyType})")
-    //     );
-    //     Debug.Log($"Danh sách các supply còn lại trong supplyDataLList: {remainingSupplies}");
-    // }
-
-    // public void DebugInventory()
-    // {
-    //     if (playerInventory.Count == 0)
-    //     {
-    //         Debug.Log("Inventory đang trống.");
-    //         return;
-    //     }
-
-    //     string inventoryItems = string.Join(
-    //         ", ",
-    //         playerInventory.ConvertAll(s => $"{s.supplyName} ({s.supplyType})")
-    //     );
-    //     Debug.Log($"Danh sách các vật phẩm trong Inventory: {inventoryItems}");
-    // }
-
     public SupplyData GetSupplyByID(string id)
     {
         return supplyDataList.FirstOrDefault(s => s.supplyID == id);
@@ -302,7 +208,9 @@ public class SupplyManager : NetworkBehaviour
 
                 if (IsServer)
                 {
-                    spawnedSupply.GetComponent<NetworkObject>().Spawn();
+                    spawnedSupply
+                        .GetComponent<NetworkObject>()
+                        .SpawnWithOwnership(OwnerClientId, false);
                 }
 
                 // Gắn script SupplyPickup vào supply vừa spawn
@@ -339,9 +247,13 @@ public class SupplyManager : NetworkBehaviour
             {
                 if (IsServer)
                 {
-                    supply.GetComponent<NetworkObject>().Despawn(); // Hủy đối tượng trên server (nếu có Netcode)
+                    SupplyPickup sp = supply.GetComponent<SupplyPickup>();
+                    if (!sp.isPickedUp)
+                    {
+                        Debug.Log(sp.isPickedUp);
+                        supply.GetComponent<NetworkObject>().Despawn(); // Hủy đối tượng trên server (nếu có Netcode)
+                    }
                 }
-                Destroy(supply); // Xóa GameObject khỏi scene
             }
         }
         spawnedSupplies.Clear(); // Xóa danh sách sau khi hủy
@@ -357,6 +269,7 @@ public class SupplyManager : NetworkBehaviour
             if (!supplyToRemove.Equals(default(SupplyDataNetwork)))
             {
                 networkSupplyList.Remove(supplyToRemove);
+
                 Debug.Log($"Đã xóa vật phẩm với ID {supplyId} khỏi networkSupplyList.");
             }
 
@@ -401,20 +314,5 @@ public class SupplyManager : NetworkBehaviour
             list[i] = list[randomIndex];
             list[randomIndex] = temp;
         }
-    }
-
-    public void AddToInventory(SupplyData supply)
-    {
-        PlayerInventorySupply.Instance.playerInventorys.Add(supply);
-
-        OnInventoryChanged?.Invoke(supply);
-        Debug.Log(
-            $"Đã thêm {supply.supplyName} vào Inventory. Tổng số vật phẩm: {PlayerInventorySupply.Instance.playerInventorys.Count}"
-        );
-    }
-
-    public List<SupplyData> GetPlayerInventory()
-    {
-        return PlayerInventorySupply.Instance.playerInventorys;
     }
 }
