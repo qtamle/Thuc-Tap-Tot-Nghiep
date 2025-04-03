@@ -156,9 +156,18 @@ public class Gloves : NetworkBehaviour
 
         enemySpawners = FindObjectsOfType<MonoBehaviour>().OfType<IEnemySpawner>().ToArray();
 
-        goldIncrease = FindFirstObjectByType<Gold>();
-        brutal = FindFirstObjectByType<Brutal>();
-        lucky = FindFirstObjectByType<Lucky>();
+        goldIncrease = GetComponentInChildren<Gold>();
+        brutal = GetComponentInChildren<Brutal>();
+        lucky = GetComponentInChildren<Lucky>();
+
+        if (brutal != null)
+        {
+            Debug.Log("Tim thay Brutal");
+        }
+        if (goldIncrease != null)
+        {
+            Debug.Log("Tim thay Gold");
+        }
     }
 
     private void OnDestroy()

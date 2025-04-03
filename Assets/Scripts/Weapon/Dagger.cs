@@ -163,13 +163,18 @@ public class Dagger : NetworkBehaviour
         enemySpawners = FindObjectsOfType<MonoBehaviour>().OfType<IEnemySpawner>().ToArray();
 
         // supply manager
-        goldIncrease = FindFirstObjectByType<Gold>();
-        brutal = FindFirstObjectByType<Brutal>();
+        goldIncrease = GetComponentInChildren<Gold>();
+        brutal = GetComponentInChildren<Brutal>();
         lucky = GetComponentInChildren<Lucky>();
 
-        if (lucky != null)
+        if (brutal != null)
         {
-            Debug.Log("Tim thay lucky");
+            Debug.Log("Tim thay Brutal");
+        }
+
+        if (goldIncrease != null)
+        {
+            Debug.Log("Tim thay Gold");
         }
     }
 

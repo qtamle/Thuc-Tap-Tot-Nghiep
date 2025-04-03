@@ -135,7 +135,7 @@ public class PlayerHealth : NetworkBehaviour, DamagePlayerInterface
         Sacrifice = FindFirstObjectByType<Sacrifice>();
         energyShield = FindFirstObjectByType<EnergyShield>();
         immortal = FindFirstObjectByType<Immortal>();
-        brutal = FindFirstObjectByType<Brutal>();
+        brutal = GetComponentInChildren<Brutal>();
         dodge = FindFirstObjectByType<Dodge>();
 
         // 2. XỬ LÝ LEVEL SYSTEM (chỉ cộng vào maxHealth)

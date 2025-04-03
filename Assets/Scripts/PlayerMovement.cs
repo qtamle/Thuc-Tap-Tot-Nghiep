@@ -95,7 +95,7 @@ public class PlayerMovement : NetworkBehaviour
             Debug.LogWarning($"Layer {blockLayerName} không tồn tại.");
         }
 
-        boostMoveSpeed = FindFirstObjectByType<Shoes>();
+        boostMoveSpeed = GetComponentInChildren<Shoes>();
         iceStaking = GetComponentInChildren<IceStaking>();
 
         if (boostMoveSpeed != null && !isUpSpeed)

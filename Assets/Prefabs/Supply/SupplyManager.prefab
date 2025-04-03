@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 435830840
+  GlobalObjectIdHash: 4050616509
   InScenePlacedSourceGlobalObjectIdHash: 4050616509
   DeferredDespawnTick: 0
   Ownership: 1
@@ -73,15 +73,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   supplyDataList:
-  - {fileID: 11400000, guid: e24ee20d7b2d0004b9231932c26b39aa, type: 2}
-  - {fileID: 11400000, guid: 0529f0d4f60ed3a46afd0b5957e8f54b, type: 2}
-  - {fileID: 11400000, guid: d2c2232e64aeabb4a988a5796444c83f, type: 2}
+  - {fileID: 11400000, guid: d1f701d07f75c544cb1f2b084a0834e8, type: 2}
   - {fileID: 11400000, guid: 3d11da1065025b44cbf8aed918a6323f, type: 2}
-  - {fileID: 11400000, guid: 555b681c19961504ca33dc15d95593c7, type: 2}
-  - {fileID: 11400000, guid: 819e80edb6068af4eb2c65181157921a, type: 2}
+  - {fileID: 11400000, guid: e24ee20d7b2d0004b9231932c26b39aa, type: 2}
   supplySlot1: {fileID: 0}
   supplySlot2: {fileID: 0}
   supplySlot3: {fileID: 0}
+  spawnedSupplies: []
   isUsingSupply: 0
   interval: 2
   hasInitialized: 0

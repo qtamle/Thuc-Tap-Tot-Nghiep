@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -19,9 +19,11 @@ public class IceStaking : MonoBehaviour, ISupplyActive
 
     private PlayerHealth healthPlayer;
 
+    private bool hasAddShield = false;
+
     private void Start()
     {
-        healthPlayer = FindFirstObjectByType<PlayerHealth>();
+        healthPlayer = GetComponentInParent<PlayerHealth>();
 
         SceneManager.sceneLoaded += OnSceneLoaded;
 
@@ -34,7 +36,25 @@ public class IceStaking : MonoBehaviour, ISupplyActive
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        CheckAndHealPlayer();
+        hasAddShield = false;
+
+        StartCoroutine(DelayedCheckAndHeal());
+    }
+
+    private IEnumerator DelayedCheckAndHeal()
+    {
+        yield return new WaitForSeconds(0.5f); 
+
+        healthPlayer = GetComponentInParent<PlayerHealth>();
+        if (healthPlayer != null)
+        {
+            Debug.Log("Tìm thấy PlayerHealth, bắt đầu kiểm tra level...");
+            CheckAndHealPlayer();
+        }
+        else
+        {
+            Debug.LogWarning("Không tìm thấy PlayerHealth sau khi load scene!");
+        }
     }
 
     private void CheckAndHealPlayer()
@@ -49,10 +69,12 @@ public class IceStaking : MonoBehaviour, ISupplyActive
         {
             foreach (string tag in levelTags)
             {
-                if (obj.CompareTag(tag))
+                if (obj.CompareTag(tag) && hasAddShield == false)
                 {
                     HealPlayer(healAmount);
                     tagFound = true;
+                    hasAddShield = true;
+                    return;
                 }
             }
         }

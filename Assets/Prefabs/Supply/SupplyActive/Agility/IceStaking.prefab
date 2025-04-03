@@ -223,4 +223,4 @@ MonoBehaviour:
   supplyData: {fileID: 11400000, guid: 3d11da1065025b44cbf8aed918a6323f, type: 2}
   isActive: 1
   cooldownTime: 0
-  healAmount: 10
+  healAmount: 15
