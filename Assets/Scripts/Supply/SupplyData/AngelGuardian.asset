@@ -15,7 +15,7 @@ MonoBehaviour:
   supplyID: 1
   supplyName: Angel Guardian
   supplyPrefab: {fileID: 7600217266074923063, guid: 36c9fff2d1daeb94bbc58b858c516867, type: 3}
-  supplySprite: {fileID: -598910680004703242, guid: 1246be2011c3c4446bf2b81c43b3b9cb, type: 3}
+  supplySprite: {fileID: 4095509661475449876, guid: 00971538fbd2bcd489ad6fef02c4ad58, type: 3}
   supplyType: 0
   spawnWeight: 0
   description: "\rWhen you are killed, this will give you a 2nd chance (respawn)

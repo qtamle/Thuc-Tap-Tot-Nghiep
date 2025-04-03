@@ -15,7 +15,7 @@ MonoBehaviour:
   supplyID: 18
   supplyName: Turret
   supplyPrefab: {fileID: 5845531273689389248, guid: 34557ac9f0aaec946a5af0e8a7742414, type: 3}
-  supplySprite: {fileID: 21300000, guid: 5f7fa9a7940a64e79b5a42d9f661d42c, type: 3}
+  supplySprite: {fileID: -3798974478993202668, guid: 3f4a50c5106e5554dacfaf90d0671218, type: 3}
   supplyType: 1
   spawnWeight: 0
   description: A random gun turret will randomly spawn on a floor and attack everything,

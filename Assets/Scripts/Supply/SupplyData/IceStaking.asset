@@ -15,7 +15,7 @@ MonoBehaviour:
   supplyID: 9
   supplyName: Ice Staking
   supplyPrefab: {fileID: 5845531273689389248, guid: f52489cea0d284d48a30e5dd1cae1207, type: 3}
-  supplySprite: {fileID: -1080248026034109904, guid: 1246be2011c3c4446bf2b81c43b3b9cb, type: 3}
+  supplySprite: {fileID: -46381794136612436, guid: 00971538fbd2bcd489ad6fef02c4ad58, type: 3}
   supplyType: 2
   spawnWeight: 0
   description: They will give you in each level + 15 shields but movement will be

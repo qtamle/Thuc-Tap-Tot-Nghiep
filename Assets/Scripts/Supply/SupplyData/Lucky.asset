@@ -15,7 +15,7 @@ MonoBehaviour:
   supplyID: 11
   supplyName: Lucky
   supplyPrefab: {fileID: 5845531273689389248, guid: aa21a085849ed9f4ba31fbb0c4d8c446, type: 3}
-  supplySprite: {fileID: -3997913907858488725, guid: b06e5d3cd00678e49928cb865cd1f328, type: 3}
+  supplySprite: {fileID: -2138698884186886829, guid: b8cd76d80fb7d3849b32b256cc01c9e5, type: 3}
   supplyType: 1
   spawnWeight: 0
   description: Defeating an enemy has a 15% chance of dropping a healing potion that

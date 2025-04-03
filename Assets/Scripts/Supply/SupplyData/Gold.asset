@@ -15,7 +15,7 @@ MonoBehaviour:
   supplyID: 8
   supplyName: Gold Increase
   supplyPrefab: {fileID: 5845531273689389248, guid: 2fda9868b7af9354d9616170b143ee6c, type: 3}
-  supplySprite: {fileID: -741704495110865535, guid: 79a0d268f75592c43b10378a98faa940, type: 3}
+  supplySprite: {fileID: 3600098460352613636, guid: ea19b4fec60355b488ce5dce9f24551d, type: 3}
   supplyType: 1
   spawnWeight: 0
   description: Kill enemy create more coins.

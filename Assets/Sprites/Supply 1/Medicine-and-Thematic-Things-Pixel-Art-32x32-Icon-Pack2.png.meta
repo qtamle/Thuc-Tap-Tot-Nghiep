@@ -1,0 +1,1859 @@
+fileFormatVersion: 2
+guid: f417cfd42ab9b754ba0a631eca69760a
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6350215588501375243
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_0
+  - first:
+      213: 6866753075088389674
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_1
+  - first:
+      213: 2157790744245999826
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_2
+  - first:
+      213: -6733852672633826797
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_3
+  - first:
+      213: -4786017450011599179
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_4
+  - first:
+      213: -2117309370331335006
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_5
+  - first:
+      213: -6781037995718917554
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_6
+  - first:
+      213: -6107388231304080151
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_7
+  - first:
+      213: 4897591543938189284
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_8
+  - first:
+      213: -6244588637300925993
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_9
+  - first:
+      213: -4201334798975537531
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_10
+  - first:
+      213: 7165645291828803033
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_11
+  - first:
+      213: 795842531259630934
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_12
+  - first:
+      213: 3106078232008703424
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_13
+  - first:
+      213: 883063944166117946
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_14
+  - first:
+      213: 4536922777791863818
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_15
+  - first:
+      213: -3317913263771603773
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_16
+  - first:
+      213: -665465274349568839
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_17
+  - first:
+      213: 4803917606262775346
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_18
+  - first:
+      213: 8681303936463609705
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_19
+  - first:
+      213: -2465017978316394672
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_20
+  - first:
+      213: -8630526382381894370
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_21
+  - first:
+      213: 3023648387141784780
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_22
+  - first:
+      213: -7020052621058551129
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_23
+  - first:
+      213: -4425830494620882699
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_24
+  - first:
+      213: 5454294384274070231
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_25
+  - first:
+      213: -4935297186183997223
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_26
+  - first:
+      213: -4315735220846926257
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_27
+  - first:
+      213: 4109284118757965139
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_28
+  - first:
+      213: 2283155522005572727
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_29
+  - first:
+      213: -3438374878156281205
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_30
+  - first:
+      213: 6494327195060887865
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_31
+  - first:
+      213: -8492195314195371210
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_32
+  - first:
+      213: 3351981988086972968
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_33
+  - first:
+      213: 5318122166893678417
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_34
+  - first:
+      213: -4571796416198495277
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_35
+  - first:
+      213: -1487479817053617919
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_36
+  - first:
+      213: 84121607208938048
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_37
+  - first:
+      213: -136208718024945824
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_38
+  - first:
+      213: -9051423655211202168
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_39
+  - first:
+      213: 2227693356655293767
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_40
+  - first:
+      213: -3482234200397348182
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_41
+  - first:
+      213: 5934458366051358024
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_42
+  - first:
+      213: -83650568416708169
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_43
+  - first:
+      213: 3320363560587282692
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_44
+  - first:
+      213: -2595907860650647349
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_45
+  - first:
+      213: -3040752108089025400
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_46
+  - first:
+      213: 8692823596569888503
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_47
+  - first:
+      213: 6503068128009949792
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_48
+  - first:
+      213: -5271950106946373126
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_49
+  - first:
+      213: 3559182573391661834
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_50
+  - first:
+      213: -1953699694385203399
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_51
+  - first:
+      213: -5323959350348141474
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_52
+  - first:
+      213: -2532750560138538441
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_53
+  - first:
+      213: 9173713583398936929
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_54
+  - first:
+      213: -1060036449589810023
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_55
+  - first:
+      213: 6844256078434879214
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_56
+  - first:
+      213: -5168401096905266910
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_57
+  - first:
+      213: 4304138869686617854
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_58
+  - first:
+      213: -5157734393130880541
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_59
+  - first:
+      213: 659470978572207448
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_60
+  - first:
+      213: -7518438927220256286
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_61
+  - first:
+      213: 2863205253148537064
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_62
+  - first:
+      213: 5087095906944490458
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_63
+  - first:
+      213: -1633619735420594867
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_64
+  - first:
+      213: -5015887371418274032
+    second: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_65
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 150
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_0
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 967
+        width: 146
+        height: 137
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f63a3031908fd7a0800000000000000
+      internalID: -6350215588501375243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_1
+      rect:
+        serializedVersion: 2
+        x: 226
+        y: 967
+        width: 159
+        height: 136
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a26f6f84a8b9b4f50800000000000000
+      internalID: 6866753075088389674
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_2
+      rect:
+        serializedVersion: 2
+        x: 403
+        y: 959
+        width: 146
+        height: 151
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d8986adf3302fd10800000000000000
+      internalID: 2157790744245999826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_3
+      rect:
+        serializedVersion: 2
+        x: 573
+        y: 967
+        width: 146
+        height: 138
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 31298d5fbac8c82a0800000000000000
+      internalID: -6733852672633826797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_4
+      rect:
+        serializedVersion: 2
+        x: 736
+        y: 961
+        width: 158
+        height: 148
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5bedc339c76a49db0800000000000000
+      internalID: -4786017450011599179
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_5
+      rect:
+        serializedVersion: 2
+        x: 907
+        y: 977
+        width: 158
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a67bcd785ecd92e0800000000000000
+      internalID: -2117309370331335006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_6
+      rect:
+        serializedVersion: 2
+        x: 1081
+        y: 961
+        width: 151
+        height: 148
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e424fb0ded9e4e1a0800000000000000
+      internalID: -6781037995718917554
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_7
+      rect:
+        serializedVersion: 2
+        x: 1271
+        y: 959
+        width: 106
+        height: 154
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e418bf03c23e3ba0800000000000000
+      internalID: -6107388231304080151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_8
+      rect:
+        serializedVersion: 2
+        x: 1431
+        y: 967
+        width: 127
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e784678f8db7f340800000000000000
+      internalID: 4897591543938189284
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_9
+      rect:
+        serializedVersion: 2
+        x: 1585
+        y: 967
+        width: 158
+        height: 138
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7d9dc3938b3c659a0800000000000000
+      internalID: -6244588637300925993
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_10
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 783
+        width: 110
+        height: 160
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 58e639c824cd1b5c0800000000000000
+      internalID: -4201334798975537531
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_11
+      rect:
+        serializedVersion: 2
+        x: 231
+        y: 784
+        width: 146
+        height: 159
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d5f7ed7d6c717360800000000000000
+      internalID: 7165645291828803033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_12
+      rect:
+        serializedVersion: 2
+        x: 399
+        y: 791
+        width: 148
+        height: 146
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 655c0ecc0966b0b00800000000000000
+      internalID: 795842531259630934
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_13
+      rect:
+        serializedVersion: 2
+        x: 573
+        y: 799
+        width: 147
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0cdb37ff1b10b1b20800000000000000
+      internalID: 3106078232008703424
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_14
+      rect:
+        serializedVersion: 2
+        x: 735
+        y: 787
+        width: 136
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a321af18af5414c00800000000000000
+      internalID: 883063944166117946
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_15
+      rect:
+        serializedVersion: 2
+        x: 933
+        y: 787
+        width: 108
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a0c99af8a3366fe30800000000000000
+      internalID: 4536922777791863818
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_16
+      rect:
+        serializedVersion: 2
+        x: 1091
+        y: 787
+        width: 131
+        height: 156
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3cc2655377764f1d0800000000000000
+      internalID: -3317913263771603773
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_17
+      rect:
+        serializedVersion: 2
+        x: 1247
+        y: 807
+        width: 154
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9bc3908dbdac3c6f0800000000000000
+      internalID: -665465274349568839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_18
+      rect:
+        serializedVersion: 2
+        x: 1453
+        y: 783
+        width: 84
+        height: 162
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23e99835c91faa240800000000000000
+      internalID: 4803917606262775346
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_19
+      rect:
+        serializedVersion: 2
+        x: 1586
+        y: 800
+        width: 158
+        height: 121
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 96f1d184fef2a7870800000000000000
+      internalID: 8681303936463609705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_20
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 627
+        width: 145
+        height: 132
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 05fef7d753f7acdd0800000000000000
+      internalID: -2465017978316394672
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_21
+      rect:
+        serializedVersion: 2
+        x: 247
+        y: 618
+        width: 122
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e157d715bf53a3880800000000000000
+      internalID: -8630526382381894370
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_22
+      rect:
+        serializedVersion: 2
+        x: 399
+        y: 632
+        width: 154
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc4d449203826f920800000000000000
+      internalID: 3023648387141784780
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_23
+      rect:
+        serializedVersion: 2
+        x: 583
+        y: 617
+        width: 124
+        height: 156
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a25141c553c39e90800000000000000
+      internalID: -7020052621058551129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_24
+      rect:
+        serializedVersion: 2
+        x: 737
+        y: 617
+        width: 159
+        height: 156
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f8e70c3d9a4492c0800000000000000
+      internalID: -4425830494620882699
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_25
+      rect:
+        serializedVersion: 2
+        x: 907
+        y: 617
+        width: 156
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7da501b28db81bb40800000000000000
+      internalID: 5454294384274070231
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_26
+      rect:
+        serializedVersion: 2
+        x: 1079
+        y: 618
+        width: 154
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d894848b5d428bb0800000000000000
+      internalID: -4935297186183997223
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_27
+      rect:
+        serializedVersion: 2
+        x: 1251
+        y: 623
+        width: 146
+        height: 146
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f46e6c0bead6b14c0800000000000000
+      internalID: -4315735220846926257
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_28
+      rect:
+        serializedVersion: 2
+        x: 1417
+        y: 615
+        width: 156
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 35df8b3522c170930800000000000000
+      internalID: 4109284118757965139
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_29
+      rect:
+        serializedVersion: 2
+        x: 1599
+        y: 617
+        width: 135
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 77c1d10c9d56faf10800000000000000
+      internalID: 2283155522005572727
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_30
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 447
+        width: 157
+        height: 150
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b8a2edef3407840d0800000000000000
+      internalID: -3438374878156281205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_31
+      rect:
+        serializedVersion: 2
+        x: 227
+        y: 447
+        width: 158
+        height: 154
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 93163ccec2c702a50800000000000000
+      internalID: 6494327195060887865
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_32
+      rect:
+        serializedVersion: 2
+        x: 449
+        y: 472
+        width: 52
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63be526fa59a52a80800000000000000
+      internalID: -8492195314195371210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_33
+      rect:
+        serializedVersion: 2
+        x: 568
+        y: 447
+        width: 153
+        height: 154
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8228e6dcbd1a48e20800000000000000
+      internalID: 3351981988086972968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_34
+      rect:
+        serializedVersion: 2
+        x: 743
+        y: 447
+        width: 146
+        height: 154
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 15f04d52fe3cdc940800000000000000
+      internalID: 5318122166893678417
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_35
+      rect:
+        serializedVersion: 2
+        x: 907
+        y: 447
+        width: 156
+        height: 154
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3d3b513c167bd80c0800000000000000
+      internalID: -4571796416198495277
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_36
+      rect:
+        serializedVersion: 2
+        x: 1127
+        y: 447
+        width: 58
+        height: 154
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 101c4f5ccf86b5be0800000000000000
+      internalID: -1487479817053617919
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_37
+      rect:
+        serializedVersion: 2
+        x: 1247
+        y: 447
+        width: 154
+        height: 154
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 04aaf93f72cda2100800000000000000
+      internalID: 84121607208938048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_38
+      rect:
+        serializedVersion: 2
+        x: 1416
+        y: 447
+        width: 158
+        height: 154
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 06fcfc284e61c1ef0800000000000000
+      internalID: -136208718024945824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_39
+      rect:
+        serializedVersion: 2
+        x: 1591
+        y: 457
+        width: 146
+        height: 136
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 889819f5422e26280800000000000000
+      internalID: -9051423655211202168
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_40
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 282
+        width: 42
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 745bfe71e4b5aee10800000000000000
+      internalID: 2227693356655293767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_41
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 282
+        width: 44
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa28994c17e9cafc0800000000000000
+      internalID: -3482234200397348182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_42
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 283
+        width: 42
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84516da117e6b5250800000000000000
+      internalID: 5934458366051358024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_43
+      rect:
+        serializedVersion: 2
+        x: 223
+        y: 283
+        width: 42
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b933405040d6def0800000000000000
+      internalID: -83650568416708169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_44
+      rect:
+        serializedVersion: 2
+        x: 274
+        y: 283
+        width: 41
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 409c4f9f01d441e20800000000000000
+      internalID: 3320363560587282692
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_45
+      rect:
+        serializedVersion: 2
+        x: 347
+        y: 282
+        width: 42
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc02640fd8b79fbd0800000000000000
+      internalID: -2595907860650647349
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_46
+      rect:
+        serializedVersion: 2
+        x: 396
+        y: 282
+        width: 44
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 88c555b71141dc5d0800000000000000
+      internalID: -3040752108089025400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_47
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 282
+        width: 42
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f68ea8210d13a870800000000000000
+      internalID: 8692823596569888503
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_48
+      rect:
+        serializedVersion: 2
+        x: 499
+        y: 282
+        width: 55
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0629238f10a8f3a50800000000000000
+      internalID: 6503068128009949792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_49
+      rect:
+        serializedVersion: 2
+        x: 563
+        y: 283
+        width: 43
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af9f0e94f4546d6b0800000000000000
+      internalID: -5271950106946373126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_50
+      rect:
+        serializedVersion: 2
+        x: 615
+        y: 283
+        width: 42
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a0b45c171b1c46130800000000000000
+      internalID: 3559182573391661834
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_51
+      rect:
+        serializedVersion: 2
+        x: 664
+        y: 283
+        width: 45
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9377166aa7013e4e0800000000000000
+      internalID: -1953699694385203399
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_52
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 58
+        width: 121
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e5c21ebad2f7d16b0800000000000000
+      internalID: -5323959350348141474
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_53
+      rect:
+        serializedVersion: 2
+        x: 207
+        y: 104
+        width: 74
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 732554ed8ccd9dcd0800000000000000
+      internalID: -2532750560138538441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_54
+      rect:
+        serializedVersion: 2
+        x: 303
+        y: 58
+        width: 118
+        height: 157
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1616ba156e39f4f70800000000000000
+      internalID: 9173713583398936929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_55
+      rect:
+        serializedVersion: 2
+        x: 447
+        y: 151
+        width: 74
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 99cab35277ef941f0800000000000000
+      internalID: -1060036449589810023
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_56
+      rect:
+        serializedVersion: 2
+        x: 559
+        y: 73
+        width: 154
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee64be214aeabfe50800000000000000
+      internalID: 6844256078434879214
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_57
+      rect:
+        serializedVersion: 2
+        x: 837
+        y: 66
+        width: 147
+        height: 131
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 229e832f5962648b0800000000000000
+      internalID: -5168401096905266910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_58
+      rect:
+        serializedVersion: 2
+        x: 991
+        y: 104
+        width: 74
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef64f976f7f5bbb30800000000000000
+      internalID: 4304138869686617854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_59
+      rect:
+        serializedVersion: 2
+        x: 1083
+        y: 67
+        width: 146
+        height: 148
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e17e9375eb0c68b0800000000000000
+      internalID: -5157734393130880541
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_60
+      rect:
+        serializedVersion: 2
+        x: 1237
+        y: 103
+        width: 74
+        height: 78
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 855c9796c59e62900800000000000000
+      internalID: 659470978572207448
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_61
+      rect:
+        serializedVersion: 2
+        x: 1311
+        y: 79
+        width: 154
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e1519d41a329a790800000000000000
+      internalID: -7518438927220256286
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_62
+      rect:
+        serializedVersion: 2
+        x: 1470
+        y: 151
+        width: 73
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e073f002062cb720800000000000000
+      internalID: 2863205253148537064
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_63
+      rect:
+        serializedVersion: 2
+        x: 1577
+        y: 63
+        width: 143
+        height: 145
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: adb15c756cef89640800000000000000
+      internalID: 5087095906944490458
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_64
+      rect:
+        serializedVersion: 2
+        x: 447
+        y: 111
+        width: 74
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d45103481873459e0800000000000000
+      internalID: -1633619735420594867
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_65
+      rect:
+        serializedVersion: 2
+        x: 1470
+        y: 111
+        width: 75
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 017fe31d20df36ab0800000000000000
+      internalID: -5015887371418274032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_0: -6350215588501375243
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_1: 6866753075088389674
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_10: -4201334798975537531
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_11: 7165645291828803033
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_12: 795842531259630934
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_13: 3106078232008703424
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_14: 883063944166117946
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_15: 4536922777791863818
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_16: -3317913263771603773
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_17: -665465274349568839
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_18: 4803917606262775346
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_19: 8681303936463609705
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_2: 2157790744245999826
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_20: -2465017978316394672
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_21: -8630526382381894370
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_22: 3023648387141784780
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_23: -7020052621058551129
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_24: -4425830494620882699
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_25: 5454294384274070231
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_26: -4935297186183997223
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_27: -4315735220846926257
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_28: 4109284118757965139
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_29: 2283155522005572727
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_3: -6733852672633826797
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_30: -3438374878156281205
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_31: 6494327195060887865
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_32: -8492195314195371210
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_33: 3351981988086972968
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_34: 5318122166893678417
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_35: -4571796416198495277
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_36: -1487479817053617919
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_37: 84121607208938048
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_38: -136208718024945824
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_39: -9051423655211202168
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_4: -4786017450011599179
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_40: 2227693356655293767
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_41: -3482234200397348182
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_42: 5934458366051358024
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_43: -83650568416708169
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_44: 3320363560587282692
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_45: -2595907860650647349
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_46: -3040752108089025400
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_47: 8692823596569888503
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_48: 6503068128009949792
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_49: -5271950106946373126
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_5: -2117309370331335006
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_50: 3559182573391661834
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_51: -1953699694385203399
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_52: -5323959350348141474
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_53: -2532750560138538441
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_54: 9173713583398936929
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_55: -1060036449589810023
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_56: 6844256078434879214
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_57: -5168401096905266910
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_58: 4304138869686617854
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_59: -5157734393130880541
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_6: -6781037995718917554
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_60: 659470978572207448
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_61: -7518438927220256286
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_62: 2863205253148537064
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_63: 5087095906944490458
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_64: -1633619735420594867
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_65: -5015887371418274032
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_7: -6107388231304080151
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_8: 4897591543938189284
+      Medicine-and-Thematic-Things-Pixel-Art-32x32-Icon-Pack2_9: -6244588637300925993
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

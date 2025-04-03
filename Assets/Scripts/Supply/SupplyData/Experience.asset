@@ -15,7 +15,7 @@ MonoBehaviour:
   supplyID: 6
   supplyName: Experience
   supplyPrefab: {fileID: 5845531273689389248, guid: 3fb4f19f72f77b141856e9fe29de2e91, type: 3}
-  supplySprite: {fileID: 21300000, guid: 70141d51621e24facbca9196bbde84b4, type: 3}
+  supplySprite: {fileID: 8710723752907654049, guid: b5e32ee4d3973ab4fb5dbcde25d3240d, type: 3}
   supplyType: 2
   spawnWeight: 0
   description: Items will help increase experience points each time you kill an enemy.

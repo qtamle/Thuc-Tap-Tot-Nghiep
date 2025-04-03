@@ -15,7 +15,7 @@ MonoBehaviour:
   supplyID: 14
   supplyName: Medkit
   supplyPrefab: {fileID: 7600217266074923063, guid: db98393f487db1a4186138de0f4ef6ec, type: 3}
-  supplySprite: {fileID: -7303263551872947108, guid: ee4d72f248a4dff4d80490870b60ade5, type: 3}
+  supplySprite: {fileID: 3106078232008703424, guid: f417cfd42ab9b754ba0a631eca69760a, type: 3}
   supplyType: 0
   spawnWeight: 0
-  description: Healing the player....
+  description: Your health will be restored (heals 20 health).

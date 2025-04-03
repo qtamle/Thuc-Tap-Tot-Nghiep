@@ -15,7 +15,7 @@ MonoBehaviour:
   supplyID: 4
   supplyName: Dodge
   supplyPrefab: {fileID: 5845531273689389248, guid: 472a75d9efc525041be42141e6e2f82c, type: 3}
-  supplySprite: {fileID: 7444393773231589483, guid: 1246be2011c3c4446bf2b81c43b3b9cb, type: 3}
+  supplySprite: {fileID: 2009479317920108927, guid: f29d6bc09f086d94c8e84d2865f3fb60, type: 3}
   supplyType: 2
   spawnWeight: 0
   description: This item gives you a 15% chance to dodge an enemy attack.

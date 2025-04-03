@@ -15,7 +15,7 @@ MonoBehaviour:
   supplyID: 10
   supplyName: Immortal
   supplyPrefab: {fileID: 7600217266074923063, guid: 30af6b5fd90eab849a55605614540f87, type: 3}
-  supplySprite: {fileID: -5937313870123219910, guid: 1246be2011c3c4446bf2b81c43b3b9cb, type: 3}
+  supplySprite: {fileID: -1125172424352554676, guid: 00971538fbd2bcd489ad6fef02c4ad58, type: 3}
   supplyType: 0
   spawnWeight: 0
   description: Increase invulnerability duration by 1.5x when taking damage.

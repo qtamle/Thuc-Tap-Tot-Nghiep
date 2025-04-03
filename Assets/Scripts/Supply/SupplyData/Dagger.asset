@@ -15,7 +15,7 @@ MonoBehaviour:
   supplyID: 3
   supplyName: Dagger
   supplyPrefab: {fileID: 5845531273689389248, guid: d48e4414ceddb2048836bbb3bc471774, type: 3}
-  supplySprite: {fileID: -2486521743634864436, guid: bddb254de3f53c74eb98f92f04fedcea, type: 3}
+  supplySprite: {fileID: 8279658575030754756, guid: b7fa17362dccc694c93c08e78ad1b3ff, type: 3}
   supplyType: 1
   spawnWeight: 0
   description: "\rAfter about 10 seconds, one to two daggers will be thrown at random

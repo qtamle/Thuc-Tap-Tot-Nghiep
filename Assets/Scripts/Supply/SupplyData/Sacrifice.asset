@@ -15,7 +15,7 @@ MonoBehaviour:
   supplyID: 15
   supplyName: Sacrifice
   supplyPrefab: {fileID: 5845531273689389248, guid: 000c4cf42221f2b4bbc061bec3e01ca9, type: 3}
-  supplySprite: {fileID: -2331631197644114973, guid: 1246be2011c3c4446bf2b81c43b3b9cb, type: 3}
+  supplySprite: {fileID: 3691145096276509281, guid: 00971538fbd2bcd489ad6fef02c4ad58, type: 3}
   supplyType: 1
   spawnWeight: 0
   description: This item will take away all your current health to exchange for shields

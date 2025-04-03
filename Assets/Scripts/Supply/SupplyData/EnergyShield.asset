@@ -15,7 +15,7 @@ MonoBehaviour:
   supplyID: 5
   supplyName: Energy Shield
   supplyPrefab: {fileID: 7600217266074923063, guid: 853f3c7e34b873748b95fa5d6f874b2a, type: 3}
-  supplySprite: {fileID: -3948470577174462018, guid: f300c0e19c6be1744bf3e7914c708bd5, type: 3}
+  supplySprite: {fileID: -397487758587970903, guid: 00971538fbd2bcd489ad6fef02c4ad58, type: 3}
   supplyType: 0
   spawnWeight: 0
   description: Creates an energy shield that protects you from 3 attacks.
