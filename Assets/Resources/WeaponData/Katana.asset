@@ -18,9 +18,9 @@ MonoBehaviour:
   weaponName: Katana
   description: 
   currentLevel: 1
-  isOwned: 0
+  isOwned: 1
   requiredLevel: 0
-  upgradeCosts: 5e010000f40100008a02000020030000
+  upgradeCosts: 5e010000f40100006603000014050000
   upgradeLevel2Des: The drop rate of health potions is increased when enemies are
     killed.
   upgradeLevel3Des: You have a chance to heal 2 health upon enemy kills.

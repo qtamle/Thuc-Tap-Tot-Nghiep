@@ -20,7 +20,7 @@ MonoBehaviour:
   currentLevel: 1
   isOwned: 1
   requiredLevel: 0
-  upgradeCosts: 64000000c80000002c01000090010000
+  upgradeCosts: 64000000960000000401000072010000
   upgradeLevel2Des: Gain increased money drops upon enemy kills.
   upgradeLevel3Des: Gain more experience dropped when you defeat enemies.
   upgradeLevel4Des: Health potions may drop when you eliminate enemies.

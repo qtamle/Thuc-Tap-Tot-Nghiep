@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WeaponID: 5
   weapon: {fileID: 5500264472938616846, guid: 4f1a15215ec56144e95312abefdf5cd8, type: 3}
-  weaponSprite: {fileID: -5151153562373494563, guid: 2aac49780cc76db4da9e2c7f83864276, type: 3}
+  weaponSprite: {fileID: -5292260148759768495, guid: 476fdc33e16b94e44b7f8061220f1c89, type: 3}
   weaponName: EnergyOrb
   description: 
   currentLevel: 1
-  isOwned: 0
+  isOwned: 1
   requiredLevel: 0
-  upgradeCosts: c8000000900100005802000020030000
+  upgradeCosts: c80000005e01000052030000b0040000
   upgradeLevel2Des: Gain more experience dropped when you defeat enemies.
   upgradeLevel3Des: Every 30 seconds, the sphere's rotation speed will increase.
   upgradeLevel4Des: Every 7 seconds, two energy orbs are fired randomly in different

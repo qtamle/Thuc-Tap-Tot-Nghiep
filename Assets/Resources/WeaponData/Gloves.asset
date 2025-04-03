@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WeaponID: 2
   weapon: {fileID: 7400214680749074021, guid: 6cb3c023c7f917449b428c064f11286f, type: 3}
-  weaponSprite: {fileID: -5151153562373494563, guid: 2aac49780cc76db4da9e2c7f83864276, type: 3}
+  weaponSprite: {fileID: 8898851224144464999, guid: 97c7407465a0ff1498d431d6b0ccadb4, type: 3}
   weaponName: Gloves
   description: 
   currentLevel: 1
-  isOwned: 0
+  isOwned: 1
   requiredLevel: 0
-  upgradeCosts: 960000002c010000c201000058020000
+  upgradeCosts: 960000002c010000f401000080020000
   upgradeLevel2Des: Gain increased money drops upon enemy kills.
   upgradeLevel3Des: Gain 10 additional shield upon entering the match.
   upgradeLevel4Des: The gloves have a 35% chance to release an electrical current

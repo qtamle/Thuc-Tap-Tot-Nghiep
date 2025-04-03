@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WeaponID: 4
   weapon: {fileID: 1648484676377326022, guid: 63ecc9239699e4c40925b04b1e1171c4, type: 3}
-  weaponSprite: {fileID: -5151153562373494563, guid: 2aac49780cc76db4da9e2c7f83864276, type: 3}
+  weaponSprite: {fileID: -2478443863562118891, guid: 36e978b6f2c64c8479bfec9d46f85a00, type: 3}
   weaponName: Claws
   description: 
   currentLevel: 1
-  isOwned: 0
+  isOwned: 1
   requiredLevel: 0
-  upgradeCosts: 960000002c010000c201000058020000
+  upgradeCosts: 960000005e010000bc02000014050000
   upgradeLevel2Des: Gain more experience dropped when you defeat enemies.
   upgradeLevel3Des: Gain 10 additional health upon entering the match.
   upgradeLevel4Des: At the start of each match, you summon a drone to help you attack
