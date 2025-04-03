@@ -15,7 +15,44 @@ public class SupplyPickup : NetworkBehaviour
     void Start()
     {
         // DontDestroyOnLoad(gameObject);
+
+        if (isPickedUp)
+        {
+            FindAndAttachToOwner();
+        }
+
+        NetworkManager.SceneManager.OnSceneEvent += OnSceneChanged;
     }
+
+    private void OnSceneChanged(SceneEvent sceneEvent)
+    {
+        if (sceneEvent.SceneEventType == SceneEventType.LoadComplete)
+        {
+            if (isPickedUp)
+            {
+                FindAndAttachToOwner();
+            }
+        }
+    }
+
+    private void FindAndAttachToOwner()
+    {
+        // Tìm danh sách tất cả NetworkObjects trong game
+        foreach (var client in NetworkManager.Singleton.ConnectedClientsList)
+        {
+            if (client.ClientId == NetworkObject.OwnerClientId)
+            {
+                if (client.PlayerObject != null)
+                {
+                    transform.SetParent(client.PlayerObject.transform);
+                    transform.localPosition = Vector3.zero;
+                    transform.localRotation = Quaternion.identity;
+                }
+                break;
+            }
+        }
+    }
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

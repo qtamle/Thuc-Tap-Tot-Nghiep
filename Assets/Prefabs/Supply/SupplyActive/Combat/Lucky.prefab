@@ -196,7 +196,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   supplyData: {fileID: 11400000, guid: 819e80edb6068af4eb2c65181157921a, type: 2}
-  isActive: 0
+  isActive: 1
   cooldownTime: 0
 --- !u!114 &6723519808529680250
 MonoBehaviour:

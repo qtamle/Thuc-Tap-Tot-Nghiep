@@ -96,7 +96,7 @@ public class PlayerMovement : NetworkBehaviour
         }
 
         boostMoveSpeed = FindFirstObjectByType<Shoes>();
-        iceStaking = FindFirstObjectByType<IceStaking>();
+        iceStaking = GetComponentInChildren<IceStaking>();
 
         if (boostMoveSpeed != null && !isUpSpeed)
         {
@@ -343,7 +343,7 @@ public class PlayerMovement : NetworkBehaviour
         if (isIceMovementActive)
         {
             float adjustedMoveSpeed = moveSpeed + iceMoveSpeedMultiplier;
-            float lungeForce = 4f;
+            float lungeForce = 3f;
 
             if (Mathf.Sign(moveDirection) != Mathf.Sign(previousVelocity.x))
             {

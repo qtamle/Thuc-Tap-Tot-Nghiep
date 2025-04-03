@@ -220,8 +220,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad50b5f6fcaa95d48877cfc6c5c3e522, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   supplyData: {fileID: 11400000, guid: 555b681c19961504ca33dc15d95593c7, type: 2}
   isActive: 0
-  cooldownTime: 20
+  cooldownTime: 5
   gernadePrefab: {fileID: 163419635232156481, guid: a585ad28a22522e46acc93ca4d35a88b, type: 3}
-  moveSpeed: 5
+  moveSpeed: 10

@@ -165,7 +165,12 @@ public class Dagger : NetworkBehaviour
         // supply manager
         goldIncrease = FindFirstObjectByType<Gold>();
         brutal = FindFirstObjectByType<Brutal>();
-        lucky = FindFirstObjectByType<Lucky>();
+        lucky = GetComponentInChildren<Lucky>();
+
+        if (lucky != null)
+        {
+            Debug.Log("Tim thay lucky");
+        }
     }
 
     private void OnDestroy()

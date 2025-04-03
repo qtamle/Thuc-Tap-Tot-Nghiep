@@ -25,7 +25,6 @@ public class IceStaking : MonoBehaviour, ISupplyActive
 
         SceneManager.sceneLoaded += OnSceneLoaded;
 
-        CheckAndHealPlayer();
     }
 
     private void OnDestroy()
@@ -35,7 +34,7 @@ public class IceStaking : MonoBehaviour, ISupplyActive
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        isActive = true;
+        CheckAndHealPlayer();
     }
 
     private void CheckAndHealPlayer()

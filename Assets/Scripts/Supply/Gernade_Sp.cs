@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using Unity.Netcode;
 
-public class Gernade_Sp : MonoBehaviour, ISupplyActive
+public class Gernade_Sp : NetworkBehaviour, ISupplyActive
 {
     public SupplyData supplyData;
     [SerializeField] private bool isActive;
@@ -14,10 +15,11 @@ public class Gernade_Sp : MonoBehaviour, ISupplyActive
     private Transform playerTransform;
 
     public float CooldownTime => cooldownTime;
+    private bool hasThrown = false;
 
     private void Awake()
     {
-        FindPlayer();
+        StartCoroutine(CheckForPlayer());
     }
 
     private void OnEnable()
@@ -30,9 +32,21 @@ public class Gernade_Sp : MonoBehaviour, ISupplyActive
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
+
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        FindPlayer();
+        StartCoroutine(CheckForPlayer());
+        isActive = true;
+        Active();
+    }
+
+    IEnumerator CheckForPlayer()
+    {
+        while (playerTransform == null)
+        {
+            FindPlayer();
+            yield return new WaitForSeconds(1f);
+        }
     }
 
     private void FindPlayer()
@@ -63,10 +77,29 @@ public class Gernade_Sp : MonoBehaviour, ISupplyActive
             }
             if (playerTransform == null)
             {
-                Debug.LogError("Player not found! Make sure the Player has the correct tag or layer.");
+                if (transform.parent != null)
+                {
+                    Vector3 parentPosition = transform.parent.position;
+                }
+                else
+                {
+                    Debug.LogError("Player not found and no parent found!");
+                }
             }
         }
     }
+
+    private void Update()
+    {
+        if (isActive && !hasThrown)
+        {
+            ThrowGernade();
+            hasThrown = true; 
+            isActive = false; 
+            StartCoroutine(CooldownRoutine()); 
+        }
+    }
+
 
     public void Active()
     {
@@ -93,7 +126,8 @@ public class Gernade_Sp : MonoBehaviour, ISupplyActive
     private IEnumerator CooldownRoutine()
     {
         yield return new WaitForSeconds(cooldownTime);
-        CanActive();
+        isActive = true;
+        hasThrown = false; 
     }
 
     private void ThrowGernade()
@@ -116,6 +150,8 @@ public class Gernade_Sp : MonoBehaviour, ISupplyActive
 
         GameObject gernade = Instantiate(gernadePrefab, playerTransform.position, Quaternion.identity);
 
+        gernadePrefab.GetComponent<NetworkObject>().Spawn(true);
+
         GernadeCollision gernadeCollision = gernade.GetComponent<GernadeCollision>();
         if (gernadeCollision == null)
         {
@@ -128,6 +164,13 @@ public class Gernade_Sp : MonoBehaviour, ISupplyActive
 
     private IEnumerator MoveGernadeToTarget(GameObject gernade, Vector3 targetPosition)
     {
+        Rigidbody2D rb = gernade.GetComponent<Rigidbody2D>();
+        if (rb != null)
+        {
+            rb.bodyType = RigidbodyType2D.Kinematic; 
+            rb.linearVelocity = Vector2.zero;
+        }
+
         while (Vector3.Distance(gernade.transform.position, targetPosition) > 0.1f)
         {
             gernade.transform.position = Vector3.MoveTowards(
@@ -135,28 +178,33 @@ public class Gernade_Sp : MonoBehaviour, ISupplyActive
                 targetPosition,
                 moveSpeed * Time.deltaTime
             );
-
             yield return null;
         }
 
         gernade.transform.position = targetPosition;
-
-        Rigidbody2D rb = gernade.GetComponent<Rigidbody2D>();
         if (rb != null)
         {
-            rb.bodyType = RigidbodyType2D.Dynamic;
-            GernadeCollision ger = gernade.GetComponent<GernadeCollision>();
-            if (ger != null)
-            {
-                yield return StartCoroutine(ger.Explode());
-                SpriteRenderer spriteRenderer = ger.GetComponent<SpriteRenderer>();
-                if (spriteRenderer != null)
-                {
-                    spriteRenderer.enabled = false;
-                }
-                yield return new WaitForSeconds(5f);
-                Destroy(ger.gameObject);
-            }
+            rb.linearVelocity = Vector2.zero;
+            rb.bodyType = RigidbodyType2D.Static; 
+        }
+
+        yield return StartCoroutine(gernade.GetComponent<GernadeCollision>().Explode());
+
+        SpriteRenderer spriteRenderer = gernade.GetComponentInChildren<SpriteRenderer>();
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.enabled = false;
+        }
+
+        yield return new WaitForSeconds(5f);
+        NetworkObject no = gernade.GetComponent<NetworkObject>();
+        if (no != null && no.IsSpawned)
+        {
+            no.Despawn(true);
+        }
+        else
+        {
+           Destroy(gernade);
         }
     }
 }

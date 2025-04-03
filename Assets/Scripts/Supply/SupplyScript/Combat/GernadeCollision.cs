@@ -151,6 +151,8 @@ public class GernadeCollision : MonoBehaviour
         {
             if (enemy != null && enemy.gameObject != null && enemy.gameObject.activeInHierarchy)
             {
+                //GameObject enemyObject = enemy.transform.root.gameObject;
+
                 if (EnemyManager.Instance != null)
                 {
                     EnemyManager.Instance.OnEnemyKilled();
@@ -161,20 +163,108 @@ public class GernadeCollision : MonoBehaviour
                     spawner.OnEnemyKilled();
                 }
 
-                Destroy(enemy.gameObject);
-                SpawnCoins(coinPrefab, coinSpawnMin, coinSpawnMax, enemy.transform.position);
-
-                if (Random.value <= 0.30f)
+                // Kiểm tra và hủy enemy
+                NetworkObject networkObject =
+                    enemy.gameObject.GetComponentInParent<NetworkObject>();
+                if (networkObject == null)
                 {
-                    SpawnCoins(
-                        secondaryCoinPrefab,
-                        secondaryCoinSpawnMin,
-                        secondaryCoinSpawnMax,
+                    networkObject = enemy.GetComponent<NetworkObject>();
+                }
+                if (networkObject != null)
+                {
+                    // Gọi ServerRpc để hủy đối tượng
+                    AttackEnemyServerRpc(networkObject.NetworkObjectId);
+                    SpawnCoinsServerRpc(
+                        false,
+                        coinSpawnMin,
+                        coinSpawnMax,
                         enemy.transform.position
                     );
+
+                    if (Random.value <= 0.30f)
+                    {
+                        SpawnCoinsServerRpc(
+                            true,
+                            secondaryCoinSpawnMin,
+                            secondaryCoinSpawnMax,
+                            enemy.transform.position
+                        );
+                    }
+                }
+                else
+                {
+                    Debug.LogWarning("Enemy does not have a NetworkObject component!");
                 }
 
                 SpawnOrbsServerRpc(enemy.transform.position, 5);
+            }
+        }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void AttackEnemyServerRpc(ulong enemyNetworkId)
+    {
+        if (
+            !NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(
+                enemyNetworkId,
+                out NetworkObject enemyObject
+            )
+        )
+        {
+            Debug.LogError($"Enemy {enemyNetworkId} not found on server!");
+            return;
+        }
+        if (enemyObject != null && enemyObject.IsSpawned)
+        {
+            Debug.Log("Despawning enemy: " + enemyNetworkId);
+            enemyObject.Despawn(true);
+        }
+        else
+        {
+            Debug.Log("Enemy no networkobject");
+        }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void SpawnCoinsServerRpc(
+    bool isSecondary,
+    float minAmount,
+    float maxAmount,
+    Vector3 position
+)
+    {
+        Debug.Log($"ServerRpc called - isSecondary: {isSecondary}, position: {position}");
+        bool isGoldIncreaseActive = goldIncrease != null && goldIncrease.IsReady();
+        float initialCoinCount = Random.Range(minAmount, maxAmount + 1);
+        float coinCount = initialCoinCount;
+
+        if (isGoldIncreaseActive)
+        {
+            coinCount += goldIncrease.increaseGoldChange;
+        }
+
+        for (int i = 0; i < coinCount; i++)
+        {
+            Vector3 spawnPosition = position + Vector3.up * 0.2f;
+            NetworkObject coin = CoinPoolManager.Instance.GetCoinFromPool(
+                spawnPosition,
+                isSecondary
+            );
+
+            Rigidbody2D coinRb = coin.GetComponent<Rigidbody2D>();
+            if (coinRb != null)
+            {
+                Vector2 forceDirection =
+                    new Vector2(Random.Range(-1.5f, 1.5f), Random.Range(1f, 1f)) * 2.5f;
+                coinRb.AddForce(forceDirection, ForceMode2D.Impulse);
+                StartCoroutine(CheckIfCoinIsStuck(coinRb));
+            }
+
+            CoinsScript coinScript = coin.GetComponent<CoinsScript>();
+            if (coinScript != null)
+            {
+                coinScript.SetCoinType(!isSecondary, isSecondary);
+                // StartCoroutine(HookCoinsContinuously());
             }
         }
     }
