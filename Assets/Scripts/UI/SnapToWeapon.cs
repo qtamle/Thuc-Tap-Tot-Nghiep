@@ -22,7 +22,7 @@ public class SnapToWeapon : MonoBehaviour
     public Button closeUpgradeInfoButton;
 
     // Text
-    public Text buyButtonText;
+    public TextMeshProUGUI buyButtonText;
     public TextMeshProUGUI descriptionInfo;
     public TextMeshProUGUI upgradeCost;
     public TextMeshProUGUI upgradeText;
@@ -34,7 +34,7 @@ public class SnapToWeapon : MonoBehaviour
     public GameObject upgradeInfoPanel;
 
     // Max Level
-    public Text upgradeButtonText;
+    public TextMeshProUGUI upgradeButtonText;
     //public Sprite normalUpgradeSprite;
     //public Sprite maxLevelSprite;
 

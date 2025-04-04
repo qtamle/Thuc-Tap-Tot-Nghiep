@@ -125,7 +125,7 @@ public class EnemySpawnerLevel3 : NetworkBehaviour, IEnemySpawner
                     spawnPosition,
                     Quaternion.identity
                 );
-                spawnedEnemy.GetComponent<NetworkObject>().Spawn();
+                spawnedEnemy.GetComponent<NetworkObject>().Spawn(true);
 
                 if (!spawnedEnemy.CompareTag("Enemy"))
                 {

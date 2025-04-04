@@ -51,7 +51,8 @@ public class Cyborg : NetworkBehaviour
     private CyborgHealth Cyborghealth;
 
     private bool isSpawn;
-    
+    private bool isShaking;
+
     private Animator animator;
     private void Awake()
     {
@@ -81,6 +82,12 @@ public class Cyborg : NetworkBehaviour
     public void Active()
     {
         StartCoroutine(MoveBossToTarget());
+    }
+
+    private IEnumerator ResetShakeState()
+    {
+        yield return new WaitForSeconds(0.2f);
+        isShaking = false;
     }
 
     private void Update()
@@ -211,6 +218,13 @@ public class Cyborg : NetworkBehaviour
         yield return new WaitForSeconds(1f);
         GameObject[] plusLasers = CreatePlusLasers(targetPosition);
 
+        if (!isShaking)
+        {
+            isShaking = true;
+            CameraShake.Instance.StartShake(0.1f, 1.5f, 1f, 5f);
+            StartCoroutine(ResetShakeState());
+        }
+
         yield return new WaitForSeconds(2f);
         foreach (GameObject laser in plusLasers)
         {
@@ -220,6 +234,13 @@ public class Cyborg : NetworkBehaviour
 
         yield return new WaitForSeconds(1f);
         GameObject[] xLasers = CreateXLasers(targetPosition);
+
+        if (!isShaking)
+        {
+            isShaking = true;
+            CameraShake.Instance.StartShake(0.1f, 1.5f, 1f, 5f);
+            StartCoroutine(ResetShakeState());
+        }
 
         yield return new WaitForSeconds(2f);
         foreach (GameObject laser in xLasers)
@@ -312,9 +333,9 @@ public class Cyborg : NetworkBehaviour
             animator.SetTrigger("Turret");
             yield return new WaitForSeconds(1.2f);
 
-            GameObject turret1 = Instantiate(turretPrefab, position1.position, Quaternion.identity);
+            GameObject turret1 = Instantiate(turretPrefab, position1.position + Vector3.up * 0.5f, Quaternion.identity);
             turret1.GetComponent<NetworkObject>().Spawn();
-            GameObject turret2 = Instantiate(turretPrefab, position2.position, Quaternion.identity);
+            GameObject turret2 = Instantiate(turretPrefab, position2.position + Vector3.up * 0.5f, Quaternion.identity);
             turret2.GetComponent<NetworkObject>().Spawn();
             Turret turretScript1 = turret1.GetComponent<Turret>();
             Turret turretScript2 = turret2.GetComponent<Turret>();
@@ -418,6 +439,14 @@ public class Cyborg : NetworkBehaviour
         foreach (GameObject bomb in bombs)
         {
             GameObject laser = CreateLaserAtPosition(bomb.transform.position);
+
+            if (!isShaking)
+            {
+                isShaking = true;
+                CameraShake.Instance.StartShake(0.1f, 1.5f, 1f, 5f);
+                StartCoroutine(ResetShakeState());
+            }
+
             StartCoroutine(DespawnAfterSeconds(laser, bombDuration));
             // Destroy(laser, laserDuration);
 

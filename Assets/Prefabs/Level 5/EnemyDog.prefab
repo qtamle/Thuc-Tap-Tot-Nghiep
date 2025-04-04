@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2589328430
+  GlobalObjectIdHash: 248795347
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -87,7 +87,7 @@ MonoBehaviour:
   wallCheck:
     serializedVersion: 2
     m_Bits: 64
-  rayDistance: 4
+  rayDistance: 1.7
   wallCheckTransform: {fileID: 9182853542091954787}
   hasChecked: 1
   groundLayer:
@@ -513,7 +513,7 @@ Transform:
   m_GameObject: {fileID: 7256335030491167711}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.38, y: 0, z: 0}
+  m_LocalPosition: {x: 0.191, y: 0.178, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

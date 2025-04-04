@@ -197,7 +197,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &4174242624216098955
 MonoBehaviour:
@@ -247,7 +247,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3083811210
+  GlobalObjectIdHash: 609029921
   InScenePlacedSourceGlobalObjectIdHash: 3083811210
   DeferredDespawnTick: 0
   Ownership: 1

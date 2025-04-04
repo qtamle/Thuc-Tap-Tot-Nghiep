@@ -53,7 +53,7 @@ public class LevelWindow : MonoBehaviour
 
     public void UpdateLevelUI(int level, int experience, int experienceToNextLevel)
     {
-        levelText.text = $"Level: {level}";
+        levelText.text = (level >= 30) ? "Max Level" : $"Level: {level}";
         experienceText.text = $"Exp: {experience}/{experienceToNextLevel}";
         StartCoroutine(UpdateExperienceBar((float)experience / experienceToNextLevel));
     }

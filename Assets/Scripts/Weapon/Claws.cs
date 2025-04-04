@@ -82,6 +82,7 @@ public class Claws : NetworkBehaviour
     private WeaponPlayerInfo weaponInfo;
     private ClawsLevel4 clawsLevel4;
 
+    private bool isShaking;
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -247,6 +248,12 @@ public class Claws : NetworkBehaviour
         }
     }
 
+    private IEnumerator ResetShakeState()
+    {
+        yield return new WaitForSeconds(0.2f);
+        isShaking = false;
+    }
+
     private bool IsInputDetected(out SwipeDirection direction)
     {
         direction = SwipeDirection.None;
@@ -378,6 +385,13 @@ public class Claws : NetworkBehaviour
         {
             if (enemy != null && enemy.gameObject != null && enemy.gameObject.activeInHierarchy)
             {
+                if (!isShaking)
+                {
+                    isShaking = true;
+                    CameraShake.Instance.StartShake(0.1f, 1f, 0.5f, 5f);
+                    StartCoroutine(ResetShakeState());
+                }
+
                 if (EnemyManager.Instance != null)
                 {
                     EnemyManager.Instance.OnEnemyKilled();
@@ -434,6 +448,14 @@ public class Claws : NetworkBehaviour
             {
                 AttackBossServerRpc(bossNetworkObject);
                 isAttackBoss = true;
+
+                if (!isShaking)
+                {
+                    isShaking = true;
+                    CameraShake.Instance.StartShake(0.1f, 3f, 1.5f, 5f);
+                    StartCoroutine(ResetShakeState());
+                }
+
                 damageable.SetCanBeDamaged(false);
 
                 SpawnCoinsServerRpc(

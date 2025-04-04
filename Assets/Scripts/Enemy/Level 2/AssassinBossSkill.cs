@@ -55,6 +55,7 @@ public class AssassinBossSkill : NetworkBehaviour
 
     private Animator anim;
 
+    private bool isShaking;
     private void Awake()
     {
         if (Instance == null)
@@ -314,7 +315,7 @@ public class AssassinBossSkill : NetworkBehaviour
         {
             Debug.LogError("TrapDamage component is missing on the trap!");
         }
-        Debug.Log("Trap reached adjusted target: " + targetPosition);
+        //Debug.Log("Trap reached adjusted target: " + targetPosition);
     }
 
     void ThrowBombAtPlayer()
@@ -377,9 +378,21 @@ public class AssassinBossSkill : NetworkBehaviour
         if (Bomb != null)
         {
             Bomb.BombExplosion();
+            if (!isShaking)
+            {
+                isShaking = true;
+                CameraShake.Instance.StartShake(0.1f, 1f, 0.5f, 5f);
+                StartCoroutine(ResetShakeState());
+            }
         }
 
         CreateBombFragments(bomb.transform.position);
+    }
+
+    private IEnumerator ResetShakeState()
+    {
+        yield return new WaitForSeconds(0.2f);
+        isShaking = false;
     }
 
     void CreateBombFragments(Vector3 explosionPosition)

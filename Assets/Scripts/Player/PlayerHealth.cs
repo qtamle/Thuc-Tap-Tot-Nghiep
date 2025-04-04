@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System.Collections;
+using TMPro;
 using Unity.Netcode;
 using UnityEditor.PackageManager;
 using UnityEngine;
@@ -66,6 +67,7 @@ public class PlayerHealth : NetworkBehaviour, DamagePlayerInterface
 
     public event HealthChangedHandler OnHealthChanged;
 
+    private bool isShaking;
     private void Awake() { }
 
     private void Start()
@@ -233,6 +235,12 @@ public class PlayerHealth : NetworkBehaviour, DamagePlayerInterface
         }
     }
 
+    private IEnumerator ResetShakeState()
+    {
+        yield return new WaitForSeconds(0.2f);
+        isShaking = false;
+    }
+
     //private void OnLevelUpdated(int level, int experience, int experienceToNextLevel)
     //{
     //    // Tăng maxHealth mỗi khi lên cấp
@@ -259,6 +267,13 @@ public class PlayerHealth : NetworkBehaviour, DamagePlayerInterface
 
     public void DamagePlayer(int damage)
     {
+        if (!isShaking)
+        {
+            isShaking = true;
+            CameraShake.Instance.StartShake(0.1f, 0.5f, 0.5f, 3.5f);
+            StartCoroutine(ResetShakeState());
+        }
+
         if (isDead || isInvincible) // Kiểm tra thêm isDead
         {
             return;

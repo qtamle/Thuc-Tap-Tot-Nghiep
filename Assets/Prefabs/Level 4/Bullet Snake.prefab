@@ -83,7 +83,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1000
-  m_Sprite: {fileID: -988911010539886586, guid: fae9d7caf2693ff40b14713198daf97c, type: 3}
+  m_Sprite: {fileID: -9036874015973053717, guid: fae9d7caf2693ff40b14713198daf97c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -182,7 +182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 756445605
+  GlobalObjectIdHash: 1220654909
   InScenePlacedSourceGlobalObjectIdHash: 756445605
   DeferredDespawnTick: 0
   Ownership: 1
@@ -264,8 +264,8 @@ MonoBehaviour:
   m_LightType: 3
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
-  m_Color: {r: 0.9811321, g: 0.43439695, b: 0, a: 1}
-  m_Intensity: 1.5
+  m_Color: {r: 0.9433962, g: 0.19498761, b: 0.15129925, a: 1}
+  m_Intensity: 2
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
   m_ApplyToSortingLayers: 00000000

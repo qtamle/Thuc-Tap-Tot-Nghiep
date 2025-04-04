@@ -11,6 +11,7 @@ public class BombLaser : NetworkBehaviour
     private NetworkRigidbody2D rb;
     private Vector3 bombPosition;
 
+    private bool isShaking;
     private void Start()
     {
         rb = GetComponent<NetworkRigidbody2D>();
@@ -27,10 +28,21 @@ public class BombLaser : NetworkBehaviour
     //     }
     // }
 
+    private IEnumerator ResetShakeState()
+    {
+        yield return new WaitForSeconds(0.2f);
+        isShaking = false;
+    }
 
     public IEnumerator WaitForExplode()
     {
         yield return new WaitForSeconds(1.5f);
+        if (!isShaking)
+        {
+            isShaking = true;
+            CameraShake.Instance.StartShake(0.1f, 1f, 0.5f, 3f);
+            StartCoroutine(ResetShakeState());
+        }
         StartCoroutine(CreateLaser(bombPosition));
     }
 

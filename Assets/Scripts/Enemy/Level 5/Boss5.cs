@@ -112,9 +112,10 @@ public class Boss5 : NetworkBehaviour
     private Vector3 originalPositionSkillRandom;
     private Vector3 lastBossPosition;
     private bool isSpawn;
+    private bool isShaking;
 
     private Animator anim;
-
+    
     private void Awake()
     {
         if (Instance == null)
@@ -469,6 +470,12 @@ public class Boss5 : NetworkBehaviour
             }
             else
             {
+                if (!isShaking)
+                {
+                    isShaking = true; 
+                    CameraShake.Instance.StartShake(0.1f, 1.5f, 1f, 5f);
+                    StartCoroutine(ResetShakeState());
+                }
                 StartCoroutine(WaitAndMoveBack());
             }
         }
@@ -491,6 +498,12 @@ public class Boss5 : NetworkBehaviour
                 // Destroy(summonedObject);
             }
         }
+    }
+
+    private IEnumerator ResetShakeState()
+    {
+        yield return new WaitForSeconds(0.2f);
+        isShaking = false;
     }
 
     private IEnumerator WaitAndMoveBack()
@@ -830,6 +843,12 @@ public class Boss5 : NetworkBehaviour
                 bigBombLaser.GetComponent<NetworkObject>().Spawn();
                 newLaserPosition.y -= 0.7f;
                 laserLine.transform.position = newLaserPosition;
+                if (!isShaking)
+                {
+                    isShaking = true;
+                    CameraShake.Instance.StartShake(0.1f, 1f, 0.5f, 3f);
+                    StartCoroutine(ResetShakeState());
+                }
                 StartCoroutine(DespawnAfterDelay(bigBombLaser, 1.5f));
                 // Destroy(bigBombLaser, 1.5f);
             }
@@ -872,8 +891,13 @@ public class Boss5 : NetworkBehaviour
                 Vector3 newPosition = bombLaser.transform.position;
                 newPosition.y -= 0.5f;
                 bombLaser.transform.position = newPosition;
-
                 LineRenderer laserLine = bombLaser.GetComponentInChildren<LineRenderer>();
+                if (!isShaking)
+                {
+                    isShaking = true;
+                    CameraShake.Instance.StartShake(0.1f, 1f, 0.5f, 3f);
+                    StartCoroutine(ResetShakeState());
+                }
                 StartCoroutine(DespawnAfterDelay(bombLaser, 1.5f));
                 // Destroy(bombLaser, 1.5f);
             }

@@ -71,6 +71,7 @@ public class Dagger : NetworkBehaviour
     public ClientNetworkAnimator vfxAnim;
     private WeaponPlayerInfo weaponInfo;
 
+    private bool isShaking;
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -195,6 +196,12 @@ public class Dagger : NetworkBehaviour
         }
     }
 
+    private IEnumerator ResetShakeState()
+    {
+        yield return new WaitForSeconds(0.2f);
+        isShaking = false;
+    }
+
     private bool IsInputDetected()
     {
         if (Application.isEditor)
@@ -276,7 +283,7 @@ public class Dagger : NetworkBehaviour
 
     private void PerformAttack()
     {
-        ShowAttackVFX();
+        StartCoroutine(ShowAttackVFX());
 
         Collider2D[] enemies = Physics2D.OverlapBoxAll(
             attackPoints.position,
@@ -290,6 +297,13 @@ public class Dagger : NetworkBehaviour
             if (enemy != null && enemy.gameObject != null && enemy.gameObject.activeInHierarchy)
             {
                 //GameObject enemyObject = enemy.transform.root.gameObject;
+
+                if (!isShaking)
+                {
+                    isShaking = true;
+                    CameraShake.Instance.StartShake(0.1f, 1f, 0.5f, 5f);
+                    StartCoroutine(ResetShakeState());
+                }
 
                 if (EnemyManager.Instance != null)
                 {
@@ -365,6 +379,14 @@ public class Dagger : NetworkBehaviour
                 {
                     AttackBossServerRpc(bossNetworkObject);
                     isAttackBoss = true;
+
+                    if (!isShaking)
+                    {
+                        isShaking = true;
+                        CameraShake.Instance.StartShake(0.1f, 3f, 1.5f, 5f);
+                        StartCoroutine(ResetShakeState());
+                    }
+
                     damageable.SetCanBeDamaged(false);
                     SpawnCoinsServerRpc(
                         false,
@@ -561,11 +583,13 @@ public class Dagger : NetworkBehaviour
         }
     }
 
-    private void ShowAttackVFX()
+    private IEnumerator ShowAttackVFX()
     {
         if (IsOwner)
         {
             ShowAttackVFXServerRpc();
+
+            yield return new WaitForSeconds(0.1f);
         }
     }
 

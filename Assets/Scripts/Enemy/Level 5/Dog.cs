@@ -44,8 +44,15 @@ public class Dog : NetworkBehaviour
         animator.SetBool("Idle", true);
     }
 
-    private void FixedUpdate()
+    private void Start()
     {
+        StartCoroutine(CheckWallAfterDelay());
+    }
+
+    private IEnumerator CheckWallAfterDelay()
+    {
+        yield return new WaitForSeconds(0.5f);
+
         if (!hasChecked)
         {
             RaycastHit2D hit = Physics2D.Raycast(wallCheckTransform.position, wallCheckTransform.right, rayDistance, wallCheck);
@@ -55,6 +62,19 @@ public class Dog : NetworkBehaviour
             }
             hasChecked = true;
         }
+    }
+
+    private void FixedUpdate()
+    {
+        //if (!hasChecked)
+        //{
+        //    RaycastHit2D hit = Physics2D.Raycast(wallCheckTransform.position, wallCheckTransform.right, rayDistance, wallCheck);
+        //    if (hit.collider != null)
+        //    {
+        //        Flip();
+        //    }
+        //    hasChecked = true;
+        //}
 
         if (canDash && !isDashing && IsGrounded())
         {

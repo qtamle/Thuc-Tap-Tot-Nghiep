@@ -218,6 +218,11 @@ public class Gangster : NetworkBehaviour
 
         rb.Rigidbody2D.linearVelocity = Vector2.zero;
         rb.Rigidbody2D.gravityScale = 4f;
+
+        yield return new WaitUntil(() => isGrounded);
+
+        CameraShake.Instance?.StartShake(0.1f, 0.5f, 0.3f, 3f);
+
         yield return new WaitForSeconds(1f);
 
         isUsingSkill = false;
@@ -323,6 +328,7 @@ public class Gangster : NetworkBehaviour
 
         if (gangsterHealth != null)
         {
+            CameraShake.Instance?.StartShake(0.1f, 0.5f, 0.5f, 3f);
             animator.SetBool("Run", false);
             animator.SetBool("Stun", true);
             gangsterHealth.StunForDuration(3f);

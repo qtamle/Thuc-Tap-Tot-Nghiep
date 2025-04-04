@@ -84,7 +84,7 @@ public class ExperienceManager : MonoBehaviour
     {
         if (experienceText != null)
         {
-            experienceText.text = $"Exp in Scene: {experienceCount}";
+            experienceText.text = $"{experienceCount}";
         }
     }
 

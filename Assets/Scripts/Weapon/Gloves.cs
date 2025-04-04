@@ -66,6 +66,7 @@ public class Gloves : NetworkBehaviour
 
     public GameObject lightingLevel4;
 
+    private bool isShaking;
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -184,6 +185,12 @@ public class Gloves : NetworkBehaviour
         }
     }
 
+    private IEnumerator ResetShakeState()
+    {
+        yield return new WaitForSeconds(0.2f);
+        isShaking = false;
+    }
+
     private bool IsInputDetected()
     {
         if (Application.isEditor)
@@ -240,6 +247,13 @@ public class Gloves : NetworkBehaviour
         {
             if (enemy != null && enemy.gameObject != null && enemy.gameObject.activeInHierarchy)
             {
+                if (!isShaking)
+                {
+                    isShaking = true;
+                    CameraShake.Instance.StartShake(0.1f, 1f, 0.5f, 5f);
+                    StartCoroutine(ResetShakeState());
+                }
+
                 if (EnemyManager.Instance != null)
                 {
                     EnemyManager.Instance.OnEnemyKilled();
@@ -329,6 +343,14 @@ public class Gloves : NetworkBehaviour
             {
                 AttackBossServerRpc(bossNetworkObject);
                 isAttackBoss = true;
+
+                if (!isShaking)
+                {
+                    isShaking = true;
+                    CameraShake.Instance.StartShake(0.1f, 3f, 1.5f, 5f);
+                    StartCoroutine(ResetShakeState());
+                }
+
                 damageable.SetCanBeDamaged(false);
 
                 SpawnCoinsServerRpc(

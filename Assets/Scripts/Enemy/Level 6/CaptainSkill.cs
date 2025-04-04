@@ -86,6 +86,7 @@ public class CaptainSkill : NetworkBehaviour
     private BulletBoss4Pool bulletBoss4Pool;
     private Animator animator;
 
+    private bool isShaking;
     private void Awake()
     {
         if (Instance == null)
@@ -161,6 +162,12 @@ public class CaptainSkill : NetworkBehaviour
     public void Active()
     {
         Spawn();
+    }
+
+    private IEnumerator ResetShakeState()
+    {
+        yield return new WaitForSeconds(0.2f);
+        isShaking = false;
     }
 
     private IEnumerator SkillSequenceLoop()
@@ -389,11 +396,27 @@ public class CaptainSkill : NetworkBehaviour
         Vector3 leftPosition = originalPosition + Vector3.left * 3f;
         yield return StartCoroutine(MoveToPosition(leftPosition, 1f));
         FireLaserAtAngle(34f);
+
+        if (!isShaking)
+        {
+            isShaking = true;
+            CameraShake.Instance.StartShake(0.1f, 2f, 1f, 4f);
+            StartCoroutine(ResetShakeState());
+        }
+
         yield return new WaitForSeconds(laserDuration);
 
         Vector3 rightPosition = originalPosition + Vector3.right * 3f;
         yield return StartCoroutine(MoveToPosition(rightPosition, 0.5f));
         FireLaserAtAngle(-34f);
+
+        if (!isShaking)
+        {
+            isShaking = true;
+            CameraShake.Instance.StartShake(0.1f, 2f, 1f, 4f);
+            StartCoroutine(ResetShakeState());
+        }
+
         yield return new WaitForSeconds(laserDuration);
 
         yield return StartCoroutine(MoveToPosition(originalPosition, 1f));
@@ -428,6 +451,14 @@ public class CaptainSkill : NetworkBehaviour
             laserRenderer.endWidth = 0.1f;
             laserRenderer.numCapVertices = 5;
         }
+
+        if (!isShaking)
+        {
+            isShaking = true;
+            CameraShake.Instance.StartShake(0.1f, 2f, 1f, 4f);
+            StartCoroutine(ResetShakeState());
+        }
+
         StartCoroutine(DespawnAfterDelay(laser, laserDuration));
         // Destroy(laser, laserDuration);
     }
@@ -587,6 +618,14 @@ public class CaptainSkill : NetworkBehaviour
             if (bomb != null)
             {
                 GameObject laser = CreateLaserAtPosition(bomb.transform.position);
+
+                if (!isShaking)
+                {
+                    isShaking = true;
+                    CameraShake.Instance.StartShake(0.1f, 1.5f, 0.5f, 5f);
+                    StartCoroutine(ResetShakeState());
+                }
+
                 StartCoroutine(DespawnAfterDelay(laser, 2f));
                 // Destroy(laser, 2f);
                 SpawnSmallBombs(bomb.transform.position);

@@ -79,19 +79,19 @@ public class CoinsManager : MonoBehaviour
     public void UpdateCoinUI()
     {
         if (coinType1Text != null)
-            coinType1Text.text = "Coin Type 1: " + coinType1Count.ToString();
+            coinType1Text.text = "" + coinType1Count.ToString();
 
         if (coinType2Text != null)
-            coinType2Text.text = "Coin Type 2: " + coinType2Count.ToString();
+            coinType2Text.text = "" + coinType2Count.ToString();
     }
 
     public void UpdateCoinUIMenu()
     {
         if (coinType1Text != null)
-            coinType1Text.text = "Coin Type 1: " + totalCoinType1Count.ToString();
+            coinType1Text.text = "" + totalCoinType1Count.ToString();
 
         if (coinType2Text != null)
-            coinType2Text.text = "Coin Type 2: " + totalCoinType2Count.ToString();
+            coinType2Text.text = "" + totalCoinType2Count.ToString();
         OnCoinsUpdated?.Invoke(totalCoinType1Count, totalCoinType2Count);
     }
 

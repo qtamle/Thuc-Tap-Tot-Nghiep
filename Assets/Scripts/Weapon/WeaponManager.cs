@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class WeaponManager : MonoBehaviour
@@ -7,10 +8,10 @@ public class WeaponManager : MonoBehaviour
     public SnapToWeapon snapWeapon;
 
     [Header("UI Elements")]
-    public Text weaponNameText;
+    public TextMeshProUGUI weaponNameText;
 
     //public Image weaponSprite;
-    public Text weaponPriceText;
+    public TextMeshProUGUI weaponPriceText;
 
     void Start()
     {

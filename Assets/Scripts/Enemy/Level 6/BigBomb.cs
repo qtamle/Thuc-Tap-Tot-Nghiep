@@ -8,14 +8,29 @@ public class BigBomb : NetworkBehaviour
     public int damageAmount = 2;
     public LayerMask playerLayer;
 
+    private bool isShaking;
+
     IEnumerator WaitForExplode()
     {
         yield return new WaitForSeconds(1.5f);
     }
 
+    private IEnumerator ResetShakeState()
+    {
+        yield return new WaitForSeconds(0.2f);
+        isShaking = false;
+    }
+
     public void Explode()
     {
         StartCoroutine(WaitForExplode());
+
+        if (!isShaking)
+        {
+            isShaking = true;
+            CameraShake.Instance.StartShake(0.1f, 1.5f, 0.5f, 5f);
+            StartCoroutine(ResetShakeState());
+        }
 
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(
             transform.position,
