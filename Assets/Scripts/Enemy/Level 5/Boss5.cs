@@ -841,7 +841,7 @@ public class Boss5 : NetworkBehaviour
                 laserLine.transform.rotation = Quaternion.Euler(0f, 0f, 90f);
                 Vector3 newLaserPosition = laserLine.transform.position;
                 bigBombLaser.GetComponent<NetworkObject>().Spawn();
-                newLaserPosition.y -= 0.7f;
+                newLaserPosition.y += 0.5f;
                 laserLine.transform.position = newLaserPosition;
                 if (!isShaking)
                 {
