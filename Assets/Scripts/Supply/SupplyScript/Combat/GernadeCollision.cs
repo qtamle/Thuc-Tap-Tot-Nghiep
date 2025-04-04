@@ -140,7 +140,7 @@ public class GernadeCollision : MonoBehaviour
 
     public IEnumerator Explode()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.2f);
 
         Collider2D[] enemyDamage = Physics2D.OverlapCircleAll(
             transform.position,

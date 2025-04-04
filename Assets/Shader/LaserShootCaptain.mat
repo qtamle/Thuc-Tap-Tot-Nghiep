@@ -52,7 +52,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _Edge_Laser: 1.15
-    - _Laser_Size: -2.5
+    - _Laser_Size: -2
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:

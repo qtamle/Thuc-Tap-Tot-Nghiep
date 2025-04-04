@@ -195,9 +195,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b113d8925f7cc8a4dae25e805030db84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   supplyData: {fileID: 11400000, guid: d1f701d07f75c544cb1f2b084a0834e8, type: 2}
   isActive: 1
-  cooldownTime: 10
+  cooldownTime: 25
   spawnPointTag: SpawnPoint
   turretPrefab: {fileID: 2664186944450200208, guid: 3f5cc71f6980ff34d88765476677623b, type: 3}
 --- !u!114 &3250818575544035049

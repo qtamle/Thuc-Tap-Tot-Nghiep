@@ -15,7 +15,7 @@ public class Medkit_Supply : MonoBehaviour, ISupplyActive
 
     private void Start()
     {
-        healthPlayer = FindFirstObjectByType<PlayerHealth>();
+        //healthPlayer = FindFirstObjectByType<PlayerHealth>();
     }
 
     public void Active()
@@ -28,7 +28,7 @@ public class Medkit_Supply : MonoBehaviour, ISupplyActive
 
         Debug.Log("Active and Heal Player");
         isActive = false;
-        HealPlayer();
+        //HealPlayer();
         StartCoroutine(CooldownRoutine());
     }
 

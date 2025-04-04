@@ -1,8 +1,9 @@
 ﻿using System.Collections;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ThrowDagger : MonoBehaviour, ISupplyActive
+public class ThrowDagger : NetworkBehaviour, ISupplyActive
 {
     public SupplyData supplyData;
     [SerializeField] private bool isActive;
@@ -15,10 +16,12 @@ public class ThrowDagger : MonoBehaviour, ISupplyActive
     private Transform playerTransform;
 
     public float CooldownTime => cooldownTime;
+    private bool hasThrown = false;
+    private bool isPlayerFound = false;
 
     private void Awake()
     {
-        FindPlayer();
+        //StartCoroutine(CheckForPlayer());
     }
 
     private void OnEnable()
@@ -33,39 +36,77 @@ public class ThrowDagger : MonoBehaviour, ISupplyActive
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        FindPlayer();
+        //StartCoroutine(CheckForPlayer());
+        isActive = true;
+        Active();
     }
 
-    private void FindPlayer()
-    {
-        GameObject player = GameObject.FindGameObjectWithTag(playerTag);
-        if (player != null)
-        {
-            playerTransform = player.transform;
-            Debug.Log("Player found!");
-        }
-        else
-        {
-            Debug.LogError("Player not found! Make sure the Player has the correct tag.");
+    //IEnumerator CheckForPlayer()
+    //{
+    //    while (!isPlayerFound)
+    //    {
+    //        FindPlayer();
+    //        yield return new WaitForSeconds(1f);  
+    //    }
+    //}
 
-            int playerLayer = LayerMask.NameToLayer("Player");
-            if (playerLayer != -1)
-            {
-                GameObject[] objectsInLayer = FindObjectsOfType<GameObject>();
-                foreach (GameObject obj in objectsInLayer)
-                {
-                    if (obj.layer == playerLayer)
-                    {
-                        playerTransform = obj.transform;
-                        Debug.Log($"Player found using layer: {obj.name}");
-                        break;
-                    }
-                }
-            }
-            if (playerTransform == null)
-            {
-                Debug.LogError("Player not found! Make sure the Player has the correct tag or layer.");
-            }
+    //private void FindPlayer()
+    //{
+    //    //GameObject player = GameObject.FindGameObjectWithTag(playerTag);
+    //    //if (player != null)
+    //    //{
+    //    //    playerTransform = player.transform;
+    //    //    Debug.Log("Player found!");
+    //    //}
+    //    //else
+    //    //{
+    //    //    Debug.LogError("Player not found! Make sure the Player has the correct tag.");
+
+    //    //    int playerLayer = LayerMask.NameToLayer("Player");
+    //    //    if (playerLayer != -1)
+    //    //    {
+    //    //        GameObject[] objectsInLayer = FindObjectsOfType<GameObject>();
+    //    //        foreach (GameObject obj in objectsInLayer)
+    //    //        {
+    //    //            if (obj.layer == playerLayer)
+    //    //            {
+    //    //                playerTransform = obj.transform;
+    //    //                Debug.Log($"Player found using layer: {obj.name}");
+    //    //                break;
+    //    //            }
+    //    //        }
+    //    //    }
+    //    //    if (playerTransform == null)
+    //    //    {
+    //    //        Debug.LogError("Player not found! Make sure the Player has the correct tag or layer.");
+    //    //    }
+    //    //}
+
+    //    if (playerTransform == null)
+    //    {
+    //        if (transform.parent != null)
+    //        {
+    //            Vector3 parentPosition = transform.parent.position;
+    //            Debug.Log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+    //            isPlayerFound = true;
+    //            isActive = true;
+    //            return;
+    //        }
+    //        else
+    //        {
+    //            Debug.LogError("Player not found and no parent found!");
+    //        }
+    //    }
+    //}
+
+    private void Update()
+    {
+        if (isActive && !hasThrown)
+        {
+            StartCoroutine(ThrowDaggerAtEnemy());
+            hasThrown = true;
+            isActive = false;
+            StartCoroutine(CooldownRoutine());
         }
     }
 
@@ -94,16 +135,17 @@ public class ThrowDagger : MonoBehaviour, ISupplyActive
     private IEnumerator CooldownRoutine()
     {
         yield return new WaitForSeconds(cooldownTime);
-        CanActive();
+        isActive = true;
+        hasThrown = false;
     }
 
     private IEnumerator ThrowDaggerAtEnemy()
     {
-        if (playerTransform == null)
-        {
-            Debug.LogError("PlayerTransform not found!");
-            yield break;
-        }
+        //if (playerTransform == null)
+        //{
+        //    Debug.LogError("PlayerTransform not found!");
+        //    yield break;
+        //}
 
         GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag);
 
@@ -114,7 +156,8 @@ public class ThrowDagger : MonoBehaviour, ISupplyActive
         }
 
         GameObject targetEnemy = enemies[Random.Range(0, enemies.Length)];
-        GameObject dagger1 = Instantiate(daggerPrefab, playerTransform.position, Quaternion.identity);
+        GameObject dagger1 = Instantiate(daggerPrefab, transform.parent.position, Quaternion.identity);
+        dagger1.GetComponent<NetworkObject>().Spawn(true);
 
         StartCoroutine(MoveDaggerToTarget(dagger1, targetEnemy.transform.position));
 
@@ -129,7 +172,9 @@ public class ThrowDagger : MonoBehaviour, ISupplyActive
         }
 
         GameObject targetEnemy2 = enemies[Random.Range(0, enemies.Length)];
-        GameObject dagger2 = Instantiate(daggerPrefab, playerTransform.position, Quaternion.identity);
+        GameObject dagger2 = Instantiate(daggerPrefab, transform.parent.position, Quaternion.identity);
+
+        dagger2.GetComponent<NetworkObject>().Spawn(true);
 
         StartCoroutine(MoveDaggerToTarget(dagger2, targetEnemy2.transform.position));
     }
@@ -168,8 +213,20 @@ public class ThrowDagger : MonoBehaviour, ISupplyActive
                     spriteRenderer.enabled = false;
                 }
                 yield return new WaitForSeconds(5f);
-                Destroy(daggerCollision.gameObject);
+                
+                //Destroy(daggerCollision.gameObject);
             }
         }
+       NetworkObject no =  dagger.GetComponent<NetworkObject>();
+        if(no == null )
+        {
+            Debug.Log("Dagger ko co no");
+        }
+        else
+        {
+            Debug.Log("dagger co no");
+            no.Despawn();
+        }
+
     }
 }

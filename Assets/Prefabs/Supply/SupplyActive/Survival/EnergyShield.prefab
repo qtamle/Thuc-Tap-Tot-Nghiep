@@ -223,5 +223,5 @@ MonoBehaviour:
   supplyData: {fileID: 11400000, guid: b716dc4b4c3a2f64095f839e2fdaec7c, type: 2}
   isActive: 0
   cooldownTime: 0
-  shieldCharges: 3
+  shieldCharges: 5
   remainingCharges: 0

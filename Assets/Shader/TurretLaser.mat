@@ -56,6 +56,6 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
-    - _Laser_Color: {r: 0, g: 0.07081699, b: 1, a: 0}
+    - _Laser_Color: {r: 0, g: 0.07008083, b: 0.9811321, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

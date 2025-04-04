@@ -1,8 +1,9 @@
 ﻿using System.Collections;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SummonTurret : MonoBehaviour, ISupplyActive
+public class SummonTurret : NetworkBehaviour, ISupplyActive
 {
     public SupplyData supplyData;
     [SerializeField] private bool isActive = true;
@@ -11,7 +12,7 @@ public class SummonTurret : MonoBehaviour, ISupplyActive
     [SerializeField] private GameObject turretPrefab;
 
     private Transform[] spawnPoints;
-    private Coroutine cooldownCoroutine;
+    private bool hasSpawn = false;
 
     public float CooldownTime => cooldownTime;
 
@@ -20,7 +21,6 @@ public class SummonTurret : MonoBehaviour, ISupplyActive
     private void Start()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
-
         FindSpawnPoints();
         IsLevelTagFound();
     }
@@ -33,8 +33,67 @@ public class SummonTurret : MonoBehaviour, ISupplyActive
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         isActive = true;
+        StartCoroutine(Delay());
+    }
+
+    private IEnumerator Delay()
+    {
+        yield return new WaitForSeconds(0.5f);
         FindSpawnPoints();
         IsLevelTagFound();
+    }
+
+    private void Update()
+    {
+        if (isActive && !hasSpawn)
+        {
+            StartCoroutine(SummonAndFire()); 
+        }
+    }
+
+    private IEnumerator SummonAndFire()
+    {
+        if (Random.value > 0.35f)
+        {
+            yield break; 
+
+        }
+        if (!IsLevelTagFound())
+        {
+            yield break;
+        }
+
+        if (spawnPoints.Length == 0)
+        {
+            yield break;
+        }
+
+        int randomIndex = Random.Range(0, spawnPoints.Length);
+        Transform spawnPoint = spawnPoints[randomIndex];
+
+        Vector3 adjustedPosition = spawnPoint.position + Vector3.up * 1.5f;
+
+        // Spawn turret
+        GameObject turret = Instantiate(turretPrefab, adjustedPosition, spawnPoint.rotation);
+        turret.GetComponent<NetworkObject>().Spawn(true);
+        TurretDamage turretScript = turret.GetComponent<TurretDamage>();
+        if (turretScript != null)
+        {
+            turretScript.InitializeTurret();
+        }
+
+        hasSpawn = true;  
+        isActive = false;
+
+        yield return StartCoroutine(CooldownRoutine());
+    }
+
+    private IEnumerator CooldownRoutine()
+    {
+        yield return new WaitForSeconds(cooldownTime);
+
+        isActive = true;
+        hasSpawn = false; 
     }
 
     private void FindSpawnPoints()
@@ -55,50 +114,6 @@ public class SummonTurret : MonoBehaviour, ISupplyActive
         }
     }
 
-    private IEnumerator SummonAndFire()
-    {
-        if (!IsLevelTagFound())
-        {
-            yield break;
-        }
-
-        if (spawnPoints.Length == 0)
-        {
-            yield break;
-        }
-
-        int randomIndex = Random.Range(0, spawnPoints.Length);
-        Transform spawnPoint = spawnPoints[randomIndex];
-
-        Vector3 adjustedPosition = spawnPoint.position + Vector3.up * 1.5f;
-
-        GameObject turret = Instantiate(turretPrefab, adjustedPosition, spawnPoint.rotation);
-
-        TurretDamage turretScript = turret.GetComponent<TurretDamage>();
-        if (turretScript != null)
-        {
-            turretScript.InitializeTurret();
-        }
-    }
-
-    private IEnumerator CooldownRoutineWithChance()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(cooldownTime);
-
-            if (Random.value <= 0.35f)
-            {
-                if (IsReady() && IsLevelTagFound())
-                {
-                    yield return SummonAndFire();
-                }
-            }
-
-            CanActive();
-        }
-    }
-
     public void Active()
     {
         if (!IsReady())
@@ -106,15 +121,10 @@ public class SummonTurret : MonoBehaviour, ISupplyActive
             return;
         }
 
-        if (cooldownCoroutine != null)
-        {
-            StopCoroutine(cooldownCoroutine);
-        }
-
         if (IsLevelTagFound())
         {
             isActive = false;
-            cooldownCoroutine = StartCoroutine(CooldownRoutineWithChance());
+            StartCoroutine(CooldownRoutine());
         }
     }
 

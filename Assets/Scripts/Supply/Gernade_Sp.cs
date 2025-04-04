@@ -1,17 +1,13 @@
-﻿using System.Collections;
-using Unity.Netcode;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections;
 using UnityEngine.SceneManagement;
+using Unity.Netcode;
 
 public class Gernade_Sp : NetworkBehaviour, ISupplyActive
 {
     public SupplyData supplyData;
-
-    [SerializeField]
-    private bool isActive;
-
-    [SerializeField]
-    private float cooldownTime;
+    [SerializeField] private bool isActive;
+    [SerializeField] private float cooldownTime;
     public GameObject gernadePrefab;
     public float moveSpeed;
     private string playerTag = "Player";
@@ -23,7 +19,7 @@ public class Gernade_Sp : NetworkBehaviour, ISupplyActive
 
     private void Awake()
     {
-        StartCoroutine(CheckForPlayer());
+        //StartCoroutine(CheckForPlayer());
     }
 
     private void OnEnable()
@@ -36,61 +32,62 @@ public class Gernade_Sp : NetworkBehaviour, ISupplyActive
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
+
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        StartCoroutine(CheckForPlayer());
+        //StartCoroutine(CheckForPlayer());
         isActive = true;
         Active();
     }
 
-    IEnumerator CheckForPlayer()
-    {
-        while (playerTransform == null)
-        {
-            FindPlayer();
-            yield return new WaitForSeconds(1f);
-        }
-    }
+    //IEnumerator CheckForPlayer()
+    //{
+    //    while (playerTransform == null)
+    //    {
+    //        FindPlayer();
+    //        yield return new WaitForSeconds(1f);
+    //    }
+    //}
 
-    private void FindPlayer()
-    {
-        GameObject player = GameObject.FindGameObjectWithTag(playerTag);
-        if (player != null)
-        {
-            playerTransform = player.transform;
-            Debug.Log("Player found!");
-        }
-        else
-        {
-            Debug.LogError("Player not found! Make sure the Player has the correct tag.");
+    //private void FindPlayer()
+    //{
+    //    GameObject player = GameObject.FindGameObjectWithTag(playerTag);
+    //    if (player != null)
+    //    {
+    //        playerTransform = player.transform;
+    //        Debug.Log("Player found!");
+    //    }
+    //    else
+    //    {
+    //        Debug.LogError("Player not found! Make sure the Player has the correct tag.");
 
-            int playerLayer = LayerMask.NameToLayer("Player");
-            if (playerLayer != -1)
-            {
-                GameObject[] objectsInLayer = FindObjectsOfType<GameObject>();
-                foreach (GameObject obj in objectsInLayer)
-                {
-                    if (obj.layer == playerLayer)
-                    {
-                        playerTransform = obj.transform;
-                        Debug.Log($"Player found using layer: {obj.name}");
-                        break;
-                    }
-                }
-            }
-            if (playerTransform == null)
-            {
-                if (transform.parent != null)
-                {
-                    Vector3 parentPosition = transform.parent.position;
-                }
-                else
-                {
-                    Debug.LogError("Player not found and no parent found!");
-                }
-            }
-        }
-    }
+    //        int playerLayer = LayerMask.NameToLayer("Player");
+    //        if (playerLayer != -1)
+    //        {
+    //            GameObject[] objectsInLayer = FindObjectsOfType<GameObject>();
+    //            foreach (GameObject obj in objectsInLayer)
+    //            {
+    //                if (obj.layer == playerLayer)
+    //                {
+    //                    playerTransform = obj.transform;
+    //                    Debug.Log($"Player found using layer: {obj.name}");
+    //                    break;
+    //                }
+    //            }
+    //        }
+    //        if (playerTransform == null)
+    //        {
+    //            if (transform.parent != null)
+    //            {
+    //                Vector3 parentPosition = transform.parent.position;
+    //            }
+    //            else
+    //            {
+    //                Debug.LogError("Player not found and no parent found!");
+    //            }
+    //        }
+    //    }
+    //}
 
     private void Update()
     {
@@ -134,11 +131,11 @@ public class Gernade_Sp : NetworkBehaviour, ISupplyActive
 
     private void ThrowGernade()
     {
-        if (playerTransform == null)
-        {
-            Debug.Log("Không tìm thấy player");
-            return;
-        }
+        //if (playerTransform == null)
+        //{
+        //    Debug.Log("Không tìm thấy player");
+        //    return;
+        //}
 
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
@@ -150,13 +147,9 @@ public class Gernade_Sp : NetworkBehaviour, ISupplyActive
 
         GameObject targetEnemy = enemies[Random.Range(0, enemies.Length)];
 
-        GameObject gernade = Instantiate(
-            gernadePrefab,
-            playerTransform.position,
-            Quaternion.identity
-        );
+        GameObject gernade = Instantiate(gernadePrefab, transform.parent.position, Quaternion.identity);
 
-        gernade.GetComponent<NetworkObject>().Spawn(true);
+        gernadePrefab.GetComponent<NetworkObject>().Spawn(true);
 
         GernadeCollision gernadeCollision = gernade.GetComponent<GernadeCollision>();
         if (gernadeCollision == null)
@@ -214,3 +207,4 @@ public class Gernade_Sp : NetworkBehaviour, ISupplyActive
         }
     }
 }
+

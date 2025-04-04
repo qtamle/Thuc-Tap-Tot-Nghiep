@@ -1,5 +1,6 @@
 ﻿using TMPro;
 using Unity.Netcode;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -28,11 +29,13 @@ public class PlayerHealth : NetworkBehaviour, DamagePlayerInterface
     public bool isInvincible = false;
     public bool hasRevived = false;
     private bool isImmortalActive = false;
-    private bool hasCheckedSacrifice = false;
+    public bool hasCheckedSacrifice = false;
     private bool hasAddedSavedHealth = false;
     public bool hasAddShieldGloves = false;
     public bool hasAddShieldClaws = false;
     public bool hasAddShieldChainsaw = false;
+    public bool hasAddHealthMedkit = false;
+    public bool hasAddShield = false;
 
     private LevelSystem levelSystem;
     private GameObject CurrentHealth;
@@ -45,6 +48,8 @@ public class PlayerHealth : NetworkBehaviour, DamagePlayerInterface
     private Immortal immortal;
     private Brutal brutal;
     private Dodge dodge;
+    private Medkit_Supply medkit;
+    private Shield_Sp shield;
 
     [Header("Weapon")]
     private Gloves gloves;
@@ -83,6 +88,9 @@ public class PlayerHealth : NetworkBehaviour, DamagePlayerInterface
         if (IsServer)
         {
             GameManager.Instance.SavePlayerHealthData(OwnerClientId, currentHealth, currentShield);
+            GameManager.Instance.SavePlayerShieldSacrifice(OwnerClientId, hasCheckedSacrifice);
+            GameManager.Instance.SavePlayerAngelGuardian(OwnerClientId, hasRevived);
+            GameManager.Instance.SavePlayerAddShield(OwnerClientId, hasAddShield);
             GameManager.Instance.UnregisterPlayerHealth(OwnerClientId);
         }
     }
@@ -121,22 +129,35 @@ public class PlayerHealth : NetworkBehaviour, DamagePlayerInterface
             var (savedHealth, savedShield) = GameManager.Instance.GetPlayerHealthData(
                 OwnerClientId
             );
+
+            bool savedHasShieldSacrifice = GameManager.Instance.GetPlayerShieldSacrifice(OwnerClientId);
+            bool angel = GameManager.Instance.GetPlayerAngelGuardian(OwnerClientId);
+            bool medkit = GameManager.Instance.GetPlayerMedkit(OwnerClientId);
+            bool shield = GameManager.Instance.GetPlayerAddShield(OwnerClientId);
+
             if (savedHealth > 0) // Nếu có dữ liệu đã lưu
             {
                 currentHealth = savedHealth;
                 currentShield = savedShield;
+                hasCheckedSacrifice = savedHasShieldSacrifice;
+                hasRevived = angel;
+                hasAddHealthMedkit = medkit;
+                hasAddShield = shield;
                 Debug.Log(
                     $"Khôi phục máu/khiên: {currentHealth}/{maxHealth}, Shield: {currentShield}"
                 );
             }
         }
+
         // Find supply in scene
-        angel = FindFirstObjectByType<AngelGuardian>();
-        Sacrifice = FindFirstObjectByType<Sacrifice>();
-        energyShield = FindFirstObjectByType<EnergyShield>();
-        immortal = FindFirstObjectByType<Immortal>();
+        angel = GetComponentInChildren<AngelGuardian>();
+        Sacrifice = GetComponentInChildren<Sacrifice>();
+        energyShield = GetComponentInChildren<EnergyShield>();
+        immortal = GetComponentInChildren<Immortal>();
         brutal = GetComponentInChildren<Brutal>();
-        dodge = FindFirstObjectByType<Dodge>();
+        dodge = GetComponentInChildren<Dodge>();
+        medkit = GetComponentInChildren<Medkit_Supply>();
+        shield = GetComponentInChildren<Shield_Sp>();
 
         // 2. XỬ LÝ LEVEL SYSTEM (chỉ cộng vào maxHealth)
         levelSystem = FindFirstObjectByType<LevelSystem>();
@@ -156,9 +177,12 @@ public class PlayerHealth : NetworkBehaviour, DamagePlayerInterface
         }
 
         UpdateHealthUI();
+        UpdateShieldUI();
 
         // Check supply Sacrifice, convert health to shield
         CheckSacrifice();
+        CheckHealthMedkit();
+        CheckAddShieldSupply();
 
         if (immortal != null && !isImmortalActive)
         {
@@ -233,7 +257,6 @@ public class PlayerHealth : NetworkBehaviour, DamagePlayerInterface
     //}
 
 
-
     public void DamagePlayer(int damage)
     {
         if (isDead || isInvincible) // Kiểm tra thêm isDead
@@ -276,19 +299,19 @@ public class PlayerHealth : NetworkBehaviour, DamagePlayerInterface
 
             if (currentHealth <= 0 && currentShield <= 0)
             {
-                // if (!hasRevived && angel.IsReady())
-                // {
-                //     Debug.Log("Player is resurrected!");
-                //     currentHealth = maxHealth;
-                //     angel.CanActive();
-                //     hasRevived = true;
-                //     UpdateHealthUI();
-                // }
-                // else
-                // {
-                //     Die();
-                // }
-                Die();
+                if (!hasRevived && angel != null)
+                {
+                    Debug.Log("Player is resurrected!");
+                    currentHealth = maxHealth;
+                    angel.CanActive();
+                    hasRevived = true;
+                    UpdateHealthUI();
+                }
+                else
+                {
+                    Die();
+                }
+                //Die();
             }
             else
             {
@@ -370,6 +393,36 @@ public class PlayerHealth : NetworkBehaviour, DamagePlayerInterface
         player.tag = "Player";
         playerSprite.enabled = true;
         isInvincible = false;
+    }
+
+    private void CheckHealthMedkit()
+    {
+        if (hasAddHealthMedkit)
+        {
+            return;
+        }
+
+        if (medkit != null)
+        {
+            HealHealth(20);
+            UpdateHealthUI();
+            hasAddHealthMedkit = true;
+        }
+    }
+
+    private void CheckAddShieldSupply()
+    {
+        if (hasAddShield)
+        {
+            return;
+        }
+
+        if (shield != null)
+        {
+            HealShield(30);
+            UpdateShieldUI();
+            hasAddShield = true;
+        }
     }
 
     private void CheckSacrifice()

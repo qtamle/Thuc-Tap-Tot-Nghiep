@@ -75,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2300
+  m_SortingOrder: 1
   m_Sprite: {fileID: -3798974478993202668, guid: 3f4a50c5106e5554dacfaf90d0671218, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -209,6 +209,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3782435c74058a2498723650f8cd28d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   linePrefab: {fileID: 4529907726479089789, guid: 21922bcae0268764988d7fc3f4285add, type: 3}
   laserDuration: 2
   lineLength: 5
@@ -266,7 +267,7 @@ Transform:
   m_GameObject: {fileID: 7594186793151408910}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.645, y: -0.159, z: 0}
+  m_LocalPosition: {x: 1.08, y: -0.944, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

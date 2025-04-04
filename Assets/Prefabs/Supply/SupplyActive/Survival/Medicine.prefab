@@ -198,7 +198,7 @@ MonoBehaviour:
   supplyData: {fileID: 11400000, guid: 27c4dd0b27ff2f54ba2b4279c01e9a6b, type: 2}
   isActive: 1
   cooldownTime: 0
-  healAmount: 10
+  healAmount: 5
 --- !u!114 &9159390830706255228
 MonoBehaviour:
   m_ObjectHideFlags: 0

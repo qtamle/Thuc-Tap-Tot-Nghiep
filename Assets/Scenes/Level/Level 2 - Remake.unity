@@ -7610,7 +7610,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -15102,9 +15102,12 @@ MonoBehaviour:
   flashInterval: 0.1
   isInvincible: 0
   hasRevived: 0
+  hasCheckedSacrifice: 0
   hasAddShieldGloves: 0
   hasAddShieldClaws: 0
   hasAddShieldChainsaw: 0
+  hasAddHealthMedkit: 0
+  hasAddShield: 0
   healthData: {fileID: 0}
 --- !u!1 &1265954725
 GameObject:

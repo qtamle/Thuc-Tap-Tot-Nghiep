@@ -21,6 +21,10 @@ public class GameManager : NetworkBehaviour
 
     private Dictionary<ulong, int> playerHealthData = new Dictionary<ulong, int>();
     private Dictionary<ulong, int> playerShieldData = new Dictionary<ulong, int>();
+    private Dictionary<ulong, bool> hasAddShieldSacrifice = new Dictionary<ulong, bool>();
+    private Dictionary<ulong, bool> angelIsActive = new Dictionary<ulong, bool>();
+    private Dictionary<ulong, bool> medkitActive = new Dictionary<ulong, bool>();
+    private Dictionary<ulong, bool> shieldActive = new Dictionary<ulong, bool>();
 
     //Su kien cho gameOver
     public delegate void GameOverHandler(bool isGameOver);
@@ -225,6 +229,10 @@ public class GameManager : NetworkBehaviour
                 {
                     playerHealthData[client.ClientId] = playerHealth.currentHealth;
                     playerShieldData[client.ClientId] = playerHealth.currentShield;
+                    hasAddShieldSacrifice[client.ClientId] = playerHealth.hasCheckedSacrifice;
+                    angelIsActive[client.ClientId] = playerHealth.hasRevived;
+                    medkitActive[client.ClientId] = playerHealth.hasAddHealthMedkit;
+                    shieldActive[client.ClientId] = playerHealth.hasAddShield;
                 }
                 playerObject.Despawn(false);
             }
@@ -310,6 +318,26 @@ public class GameManager : NetworkBehaviour
         Debug.Log($"Saved health data for player {clientId}: Health={health}, Shield={shield}");
     }
 
+    public void SavePlayerShieldSacrifice(ulong clientId, bool hasSacrifice)
+    {
+        hasAddShieldSacrifice[clientId] = hasSacrifice;
+    }
+
+    public void SavePlayerAngelGuardian(ulong clientId, bool isActive)
+    {
+        angelIsActive[clientId] = isActive;
+    }
+
+    public void SavePlayerMedkit(ulong clientId, bool isMedkitActive)
+    {
+        medkitActive[clientId] = isMedkitActive;
+    }
+
+    public void SavePlayerAddShield(ulong clientId, bool isShieldActive)
+    {
+        shieldActive[clientId] = isShieldActive;
+    }
+
     public (int health, int shield) GetPlayerHealthData(ulong clientId)
     {
         if (
@@ -322,10 +350,51 @@ public class GameManager : NetworkBehaviour
         return (0, 0); // Trả về giá trị mặc định nếu không tìm thấy
     }
 
+    public bool GetPlayerShieldSacrifice(ulong clientId)
+    {
+        if (hasAddShieldSacrifice.TryGetValue(clientId, out bool hasSacrifice))
+        {
+            return hasSacrifice;
+        }
+        return false; 
+    }
+
+    public bool GetPlayerAngelGuardian(ulong clientId)
+    {
+        if (angelIsActive.TryGetValue(clientId, out bool isActive))
+        {
+            return isActive;
+        }
+
+        return false;
+    }
+
+    public bool GetPlayerMedkit(ulong clientId)
+    {
+        if (medkitActive.TryGetValue(clientId,out bool isActive))
+        {
+            return isActive;
+        }
+        return false;
+    }
+
+    public bool GetPlayerAddShield(ulong clientId)
+    {
+        if (shieldActive.TryGetValue(clientId, out bool isActive))
+        {
+            return isActive;
+        }
+        return false;
+    }
+
     public void ClearHealthData()
     {
         playerHealthData.Clear();
         playerShieldData.Clear();
+        hasAddShieldSacrifice.Clear();
+        angelIsActive.Clear();
+        medkitActive.Clear();
+        shieldActive.Clear();
     }
 
     // Trong GameManager

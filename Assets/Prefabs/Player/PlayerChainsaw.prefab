@@ -417,9 +417,12 @@ MonoBehaviour:
   flashInterval: 0.1
   isInvincible: 0
   hasRevived: 0
+  hasCheckedSacrifice: 0
   hasAddShieldGloves: 0
   hasAddShieldClaws: 0
   hasAddShieldChainsaw: 0
+  hasAddHealthMedkit: 0
+  hasAddShield: 0
   healthData: {fileID: 11400000, guid: a76a0ca67258b134ebdf293c5b845f37, type: 2}
 --- !u!114 &-6699450147265448326
 MonoBehaviour:

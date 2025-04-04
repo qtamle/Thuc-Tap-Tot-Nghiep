@@ -19155,9 +19155,12 @@ MonoBehaviour:
   flashInterval: 0.1
   isInvincible: 0
   hasRevived: 0
+  hasCheckedSacrifice: 0
   hasAddShieldGloves: 0
   hasAddShieldClaws: 0
   hasAddShieldChainsaw: 0
+  hasAddHealthMedkit: 0
+  hasAddShield: 0
   healthData: {fileID: 0}
 --- !u!61 &1229863092
 BoxCollider2D:
@@ -28846,22 +28849,6 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 3266148150
       objectReference: {fileID: 0}
-    - target: {fileID: 5613660065745978077, guid: 179da0d260970c9488394e15ab39b7a0, type: 3}
-      propertyPath: supplyDataList.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5613660065745978077, guid: 179da0d260970c9488394e15ab39b7a0, type: 3}
-      propertyPath: 'supplyDataList.Array.data[0]'
-      value: 
-      objectReference: {fileID: 11400000, guid: 555b681c19961504ca33dc15d95593c7, type: 2}
-    - target: {fileID: 5613660065745978077, guid: 179da0d260970c9488394e15ab39b7a0, type: 3}
-      propertyPath: 'supplyDataList.Array.data[1]'
-      value: 
-      objectReference: {fileID: 11400000, guid: f0212d4d5e2dcea438e35b2e17484025, type: 2}
-    - target: {fileID: 5613660065745978077, guid: 179da0d260970c9488394e15ab39b7a0, type: 3}
-      propertyPath: 'supplyDataList.Array.data[2]'
-      value: 
-      objectReference: {fileID: 11400000, guid: 27c4dd0b27ff2f54ba2b4279c01e9a6b, type: 2}
     - target: {fileID: 6032602579579338760, guid: 179da0d260970c9488394e15ab39b7a0, type: 3}
       propertyPath: m_Name
       value: SupplyManager

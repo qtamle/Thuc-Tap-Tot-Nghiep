@@ -306,6 +306,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fbb87448b328c94fb929ddb06d37736, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   moveSpeed: 3
   wallCheck: {fileID: 4871249924540524657}
   groundCheck: {fileID: 3779829161033916679}

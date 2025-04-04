@@ -1,7 +1,8 @@
 using System.Collections;
+using Unity.Netcode;
 using UnityEngine;
 
-public class TurretDamage : MonoBehaviour
+public class TurretDamage : NetworkBehaviour
 {
     [Header("Turret Settings")]
     public GameObject linePrefab;
@@ -33,28 +34,37 @@ public class TurretDamage : MonoBehaviour
 
         yield return new WaitForSeconds(1.5f);
 
-        Vector3 offsetPosition = transform.position + new Vector3(laserOffsetX, 0, 0);
+        Vector3 offsetPosition = transform.position + new Vector3(laserOffsetX, -0.3f, 0);
         laser = CreateLaser(offsetPosition);
 
         yield return new WaitForSeconds(laserDuration);
 
-        if (laser != null)
+        if (laser != null && IsSpawned)
         {
-            Destroy(laser);
+            laser.GetComponent<NetworkObject>().Despawn(true);
+            //Destroy(laser);
         }
 
         isLaserActive = false;
 
         yield return new WaitForSeconds(0.5f);
-
-        Destroy(gameObject);
+        gameObject.GetComponent<NetworkObject>().Despawn(true);
+        //Destroy(gameObject);
+    }
+    private IEnumerator DespawnAfterDelay(GameObject laserObject, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        if (laserObject != null && laserObject.TryGetComponent(out NetworkObject networkObject))
+        {
+            networkObject.Despawn(true);
+        }
     }
 
     private GameObject CreateLaser(Vector3 startPosition)
     {
         GameObject laserObject = Instantiate(linePrefab);
         laserObject.transform.position = startPosition;
-
+        laserObject.GetComponent<NetworkObject>().Spawn(true);
         laserObject.transform.rotation = Quaternion.Euler(0, 0, 90);
 
         LineRenderer lineRenderer = laserObject.GetComponent<LineRenderer>();
@@ -63,7 +73,9 @@ public class TurretDamage : MonoBehaviour
             lineRenderer.SetPosition(0, startPosition);
             lineRenderer.SetPosition(1, startPosition + laserObject.transform.up * lineLength);
         }
-        Destroy(laserObject, 2f);
+
+        //StartCoroutine(DespawnAfterDelay(laserObject, 2f));
+        //Destroy(laserObject, 2f);
         return laserObject;
     }
 

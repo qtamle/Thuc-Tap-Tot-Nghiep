@@ -19,4 +19,4 @@ MonoBehaviour:
   supplyType: 0
   spawnWeight: 0
   description: This potion will help you restore an amount of health through each
-    level but your running speed will decrease a bit
+    level.

@@ -18250,9 +18250,13 @@ MonoBehaviour:
   flashInterval: 0.1
   isInvincible: 0
   hasRevived: 0
+  hasCheckedSacrifice: 0
   hasAddShieldGloves: 0
   hasAddShieldClaws: 0
   hasAddShieldChainsaw: 0
+  hasAddHealthMedkit: 0
+  hasAddShield: 0
+  healthData: {fileID: 0}
 --- !u!1 &1267796809
 GameObject:
   m_ObjectHideFlags: 0

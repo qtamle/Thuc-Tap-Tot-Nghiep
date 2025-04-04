@@ -28,16 +28,25 @@ public class Vaccine : MonoBehaviour, ISupplyActive
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
+        StopAllCoroutines();
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        StartCoroutine(DelayFindPlayer());
+        //StartCoroutine(RandomEffectLoop());
+    }
+
+    private IEnumerator DelayFindPlayer()
+    {
+        yield return new WaitForSeconds(0.5f);
         FindPlayerMovement();
+        StartCoroutine(RandomEffectLoop());
     }
 
     private void FindPlayerMovement()
     {
-        playerMovement = FindFirstObjectByType<PlayerMovement>();
+        playerMovement = GetComponentInParent<PlayerMovement>();
         if (playerMovement == null)
         {
             Debug.LogError("PlayerMovement không được tìm thấy! Đảm bảo Player có script PlayerMovement.");
@@ -56,8 +65,8 @@ public class Vaccine : MonoBehaviour, ISupplyActive
         }
 
         isActive = false;
-        StartCoroutine(CooldownRoutine());
-        StartCoroutine(RandomEffectLoop());
+        //StartCoroutine(CooldownRoutine());
+        //StartCoroutine(RandomEffectLoop());
     }
 
     public void CanActive()
@@ -80,8 +89,8 @@ public class Vaccine : MonoBehaviour, ISupplyActive
     {
         while (true)
         {
-            yield return new WaitForSeconds(5f);
-
+            yield return new WaitUntil(() => !IsEffectActive); 
+            yield return new WaitForSeconds(5f); 
             yield return ApplyEffect();
         }
     }
@@ -101,7 +110,7 @@ public class Vaccine : MonoBehaviour, ISupplyActive
         float randomEffect = Random.value;
         if (randomEffect > 0.5f)
         {
-            playerMovement.moveSpeed += 2.5f;
+            playerMovement.moveSpeed += 1.5f;
             Debug.Log("Tăng tốc độ!");
         }
         else

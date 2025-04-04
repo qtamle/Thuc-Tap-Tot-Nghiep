@@ -14,11 +14,11 @@ public class Shield_Sp : MonoBehaviour, ISupplyActive
 
     private void Start()
     {
-        healPlayer = FindFirstObjectByType<PlayerHealth>();
-        if (healPlayer != null)
-        {
-            Debug.Log("Tim thay player shield");
-        }
+        //healPlayer = FindFirstObjectByType<PlayerHealth>();
+        //if (healPlayer != null)
+        //{
+        //    Debug.Log("Tim thay player shield");
+        //}
     }
 
     public void Active()
@@ -30,7 +30,7 @@ public class Shield_Sp : MonoBehaviour, ISupplyActive
         }
 
         Debug.Log("Active and Heal Player");
-        HealShieldPlayer();
+        //HealShieldPlayer();
         isActive = false;
         StartCoroutine(CooldownRoutine());
     }

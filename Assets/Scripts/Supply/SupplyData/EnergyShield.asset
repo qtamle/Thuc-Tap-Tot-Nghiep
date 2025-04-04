@@ -18,4 +18,4 @@ MonoBehaviour:
   supplySprite: {fileID: -397487758587970903, guid: 00971538fbd2bcd489ad6fef02c4ad58, type: 3}
   supplyType: 0
   spawnWeight: 0
-  description: Creates an energy shield that protects you from 3 attacks.
+  description: Creates an energy shield that protects you from 5 attacks.

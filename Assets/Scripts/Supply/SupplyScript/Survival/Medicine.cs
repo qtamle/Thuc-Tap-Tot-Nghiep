@@ -14,9 +14,11 @@ public class Medicine : MonoBehaviour, ISupplyActive
 
     private PlayerHealth healthPlayer;
 
+    private bool hasAddHealth;
+
     private void Start()
     {
-        healthPlayer = FindFirstObjectByType<PlayerHealth>();
+        healthPlayer = GetComponentInParent<PlayerHealth>();
 
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
@@ -28,7 +30,25 @@ public class Medicine : MonoBehaviour, ISupplyActive
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        isActive = true;
+        hasAddHealth = false;
+
+        StartCoroutine(DelayedCheckAndHeal());
+    }
+
+    private IEnumerator DelayedCheckAndHeal()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        healthPlayer = GetComponentInParent<PlayerHealth>();
+        if (healthPlayer != null)
+        {
+            Debug.Log("Tìm thấy PlayerHealth, bắt đầu kiểm tra level...");
+            CheckAndHealPlayer();
+        }
+        else
+        {
+            Debug.LogWarning("Không tìm thấy PlayerHealth sau khi load scene!");
+        }
     }
 
     private void CheckAndHealPlayer()
@@ -43,10 +63,12 @@ public class Medicine : MonoBehaviour, ISupplyActive
         {
             foreach (string tag in levelTags)
             {
-                if (obj.CompareTag(tag))
+                if (obj.CompareTag(tag) && hasAddHealth == false)
                 {
                     HealPlayer(healAmount);
                     tagFound = true;
+                    hasAddHealth = true;
+                    return;
                 }
             }
         }
