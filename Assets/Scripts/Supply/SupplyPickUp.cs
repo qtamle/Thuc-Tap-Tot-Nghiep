@@ -53,7 +53,6 @@ public class SupplyPickup : NetworkBehaviour
         }
     }
 
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player") && canTrigger && !isPickedUp) // Thêm kiểm tra !isPickedUp
@@ -97,6 +96,12 @@ public class SupplyPickup : NetworkBehaviour
         }
     }
 
+    [ServerRpc(RequireOwnership = false)]
+    private void RequestPlayerPickUpServerRpc(ulong clientId) // RPC mới
+    {
+        GameManager.Instance.PlayerPickUp(clientId);
+    }
+
     public override void OnNetworkDespawn()
     {
         base.OnNetworkDespawn();
@@ -116,6 +121,7 @@ public class SupplyPickup : NetworkBehaviour
             RequestChangeOwnershipServerRpc(clientId);
             // Gọi RPC để yêu cầu server despawn object
             // RequestDespawnSupplyServerRpc();
+            RequestPlayerPickUpServerRpc(clientId);
         }
 
         // SupplyManager.Instance.RemoveSupply(supplyData.supplyID);

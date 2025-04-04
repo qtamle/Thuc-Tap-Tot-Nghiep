@@ -36,6 +36,7 @@ public class GameManager : NetworkBehaviour
 
     private int totalPlayers;
     private int deadPlayersCount = 0;
+    private int PickUpPlayerCount = 0;
 
     private void Awake()
     {
@@ -213,6 +214,7 @@ public class GameManager : NetworkBehaviour
         // Lấy tổng số người chơi khi bắt đầu game
         totalPlayers = NetworkManager.Singleton.ConnectedClients.Count;
         deadPlayersCount = 0;
+        PickUpPlayerCount = 0;
         if (!NetworkManager.Singleton.IsServer)
             return;
         // Đợi vài giây trước khi despawn các player
@@ -415,5 +417,21 @@ public class GameManager : NetworkBehaviour
         ResetGameOver();
         Debug.Log("Resetting game, loading Boss1");
         NetworkManager.Singleton.Shutdown();
+    }
+
+    public void PlayerPickUp(ulong clientId)
+    {
+        PickUpPlayerCount++;
+
+        // Kiểm tra nếu tất cả người chơi đã chết
+        if (PickUpPlayerCount >= totalPlayers)
+        {
+            DonePickUp();
+        }
+    }
+
+    public async void DonePickUp()
+    {
+        await LoadNextScene();
     }
 }
