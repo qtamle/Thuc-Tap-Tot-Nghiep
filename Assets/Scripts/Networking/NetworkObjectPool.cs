@@ -13,6 +13,7 @@ public class NetworkObjectPool : NetworkBehaviour
     List<PoolConfigObject> PooledPrefabsList;
 
     HashSet<GameObject> m_Prefabs = new HashSet<GameObject>();
+    private Transform objectParent; // Biến mới để chứa đối tượng cha
 
     Dictionary<GameObject, ObjectPool<NetworkObject>> m_PooledObjects =
         new Dictionary<GameObject, ObjectPool<NetworkObject>>();
@@ -104,7 +105,7 @@ public class NetworkObjectPool : NetworkBehaviour
     {
         NetworkObject CreateFunc()
         {
-            return Instantiate(prefab).GetComponent<NetworkObject>();
+            return Instantiate(prefab, transform).GetComponent<NetworkObject>();
         }
 
         void ActionOnGet(NetworkObject networkObject)

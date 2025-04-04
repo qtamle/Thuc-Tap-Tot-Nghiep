@@ -68,6 +68,7 @@ public class Dagger : NetworkBehaviour
     private PlayerHealth health;
     private Lucky lucky;
 
+    public Animator vfxAnim;
     private WeaponPlayerInfo weaponInfo;
 
     private void OnEnable()
@@ -562,36 +563,26 @@ public class Dagger : NetworkBehaviour
 
     private void ShowAttackVFX()
     {
-        if (vfxPool != null)
+        if (IsServer)
         {
-            GameObject vfx = vfxPool.Get();
-
-            vfx.transform.position = attackPoints.position;
-            vfx.transform.rotation = Quaternion.identity;
-
-            VFXFollower follower = vfx.GetComponent<VFXFollower>();
-            if (follower != null)
-            {
-                follower.SetTarget(attackPoints, player);
-            }
-
-            StartCoroutine(ReturnVFXToPool(vfx, 0.5f));
+            ShowAttackVFXClientRpc();
+        }
+        else
+        {
+            ShowAttackVFXServerRpc();
         }
     }
 
-    private IEnumerator ReturnVFXToPool(GameObject vfx, float delay)
+    [ClientRpc(RequireOwnership = false)]
+    private void ShowAttackVFXClientRpc()
     {
-        yield return new WaitForSeconds(delay);
-        if (vfxPool != null)
-        {
-            vfxPool.ReturnToPool(vfx);
-        }
+        vfxAnim.SetTrigger("Attack");
     }
 
-    void SpawnCoins(GameObject coinType, float minAmount, float maxAmount, Vector3 position)
+    [ServerRpc(RequireOwnership = false)]
+    private void ShowAttackVFXServerRpc()
     {
-        string coinPrefabName = coinType == coinPrefab ? "Coin" : "SecondaryCoin";
-        // SpawnCoinsServerRpc(coinPrefabName, minAmount, maxAmount, position);
+        vfxAnim.SetTrigger("Attack");
     }
 
     private IEnumerator CheckIfCoinIsStuck(Rigidbody2D coinRb)
