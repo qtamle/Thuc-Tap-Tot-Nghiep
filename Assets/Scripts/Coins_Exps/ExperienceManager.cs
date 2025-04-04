@@ -12,6 +12,8 @@ public class ExperienceManager : MonoBehaviour
     private Experience experienceIncrease;
     private LevelSystem levelSystem;
 
+    public TextMeshProUGUI expText;
+
     private void Awake()
     {
         if (Instance == null)
@@ -28,10 +30,21 @@ public class ExperienceManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        expText = GameObject.FindGameObjectWithTag("SummaryExp").GetComponent<TextMeshProUGUI>();
+        expText.text = $"{experienceCount} (Exp)";
+
         // Kiểm tra nếu đang chuyển sang Scene Login, hủy LevelSystem
         if (scene.name == "Login")
         {
             Destroy(gameObject);
+        }
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            SceneManager.LoadScene("Summary");
         }
     }
 

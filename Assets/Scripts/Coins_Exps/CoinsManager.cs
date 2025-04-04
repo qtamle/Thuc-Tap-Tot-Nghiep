@@ -22,6 +22,9 @@ public class CoinsManager : MonoBehaviour
 
     public CoinsData coinsData;
 
+    public TextMeshProUGUI coin1Summary;
+    public TextMeshProUGUI coin2Summary;
+
     private void Awake()
     {
         if (instance == null)
@@ -39,6 +42,12 @@ public class CoinsManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        coin1Summary = GameObject.FindGameObjectWithTag("SummaryCoin1").GetComponent<TextMeshProUGUI>();
+        coin2Summary = GameObject.FindGameObjectWithTag("SummaryCoin2").GetComponent<TextMeshProUGUI>();
+
+        coin1Summary.text = $"{coinType1Count} (Coin 1)";
+        coin2Summary.text = $"{coinType2Count} (Coin 2)";
+
         // Kiểm tra nếu đang chuyển sang Scene Login, hủy LevelSystem
         if (scene.name == "Login")
         {

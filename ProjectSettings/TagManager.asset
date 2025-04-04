@@ -44,6 +44,9 @@ TagManager:
   - CoinType2Text
   - HealthText
   - CollectButton
+  - SummaryCoin1
+  - SummaryCoin2
+  - SummaryExp
   layers:
   - Default
   - TransparentFX
