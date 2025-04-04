@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using Unity.Netcode;
+using UnityEngine;
 
-public class EnemyMove : MonoBehaviour
+public class EnemyMove : NetworkBehaviour
 {
     public float moveSpeed;
     public Transform wallCheck;
@@ -14,7 +15,7 @@ public class EnemyMove : MonoBehaviour
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody2D>(); 
+        rb = GetComponent<Rigidbody2D>();
     }
 
     private void Update()

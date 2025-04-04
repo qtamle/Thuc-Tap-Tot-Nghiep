@@ -60,7 +60,7 @@ public class EnemySpawner : NetworkBehaviour, IEnemySpawner
             return; // Chỉ server mới spawn quái
         else
         {
-            EnemyManager.Instance.killTarget.Value = 5;
+            EnemyManager.Instance.killTarget.Value = 2;
             // KillCounterUI.Instance.CounterUI();
             BossSpawnPostion = GameObject.FindWithTag("BossSpawner");
 
@@ -121,11 +121,10 @@ public class EnemySpawner : NetworkBehaviour, IEnemySpawner
         // Đảm bảo số lượng bóc không lớn hơn danh sách enemy có sẵn
         int pickCount = Mathf.Min(numberOfPicks, enemySpawnDatas.Length);
 
-
         List<EnemySpawnData> pickedEnemies = enemySpawnDatas
-        .OrderBy(x => Random.value) // Xáo trộn danh sách
-        .Take(pickCount) // Chọn số lượng cần bóc
-        .ToList();
+            .OrderBy(x => Random.value) // Xáo trộn danh sách
+            .Take(pickCount) // Chọn số lượng cần bóc
+            .ToList();
 
         Debug.Log("Enemy picked:");
         foreach (var enemy in pickedEnemies)

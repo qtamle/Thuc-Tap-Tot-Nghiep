@@ -1,13 +1,17 @@
-﻿using UnityEngine;
-using System.Collections;
-using UnityEngine.SceneManagement;
+﻿using System.Collections;
 using Unity.Netcode;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Gernade_Sp : NetworkBehaviour, ISupplyActive
 {
     public SupplyData supplyData;
-    [SerializeField] private bool isActive;
-    [SerializeField] private float cooldownTime;
+
+    [SerializeField]
+    private bool isActive;
+
+    [SerializeField]
+    private float cooldownTime;
     public GameObject gernadePrefab;
     public float moveSpeed;
     private string playerTag = "Player";
@@ -31,7 +35,6 @@ public class Gernade_Sp : NetworkBehaviour, ISupplyActive
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
-
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
@@ -94,12 +97,11 @@ public class Gernade_Sp : NetworkBehaviour, ISupplyActive
         if (isActive && !hasThrown)
         {
             ThrowGernade();
-            hasThrown = true; 
-            isActive = false; 
-            StartCoroutine(CooldownRoutine()); 
+            hasThrown = true;
+            isActive = false;
+            StartCoroutine(CooldownRoutine());
         }
     }
-
 
     public void Active()
     {
@@ -127,7 +129,7 @@ public class Gernade_Sp : NetworkBehaviour, ISupplyActive
     {
         yield return new WaitForSeconds(cooldownTime);
         isActive = true;
-        hasThrown = false; 
+        hasThrown = false;
     }
 
     private void ThrowGernade()
@@ -148,9 +150,13 @@ public class Gernade_Sp : NetworkBehaviour, ISupplyActive
 
         GameObject targetEnemy = enemies[Random.Range(0, enemies.Length)];
 
-        GameObject gernade = Instantiate(gernadePrefab, playerTransform.position, Quaternion.identity);
+        GameObject gernade = Instantiate(
+            gernadePrefab,
+            playerTransform.position,
+            Quaternion.identity
+        );
 
-        gernadePrefab.GetComponent<NetworkObject>().Spawn(true);
+        gernade.GetComponent<NetworkObject>().Spawn(true);
 
         GernadeCollision gernadeCollision = gernade.GetComponent<GernadeCollision>();
         if (gernadeCollision == null)
@@ -167,7 +173,7 @@ public class Gernade_Sp : NetworkBehaviour, ISupplyActive
         Rigidbody2D rb = gernade.GetComponent<Rigidbody2D>();
         if (rb != null)
         {
-            rb.bodyType = RigidbodyType2D.Kinematic; 
+            rb.bodyType = RigidbodyType2D.Kinematic;
             rb.linearVelocity = Vector2.zero;
         }
 
@@ -185,7 +191,7 @@ public class Gernade_Sp : NetworkBehaviour, ISupplyActive
         if (rb != null)
         {
             rb.linearVelocity = Vector2.zero;
-            rb.bodyType = RigidbodyType2D.Static; 
+            rb.bodyType = RigidbodyType2D.Static;
         }
 
         yield return StartCoroutine(gernade.GetComponent<GernadeCollision>().Explode());
@@ -204,7 +210,7 @@ public class Gernade_Sp : NetworkBehaviour, ISupplyActive
         }
         else
         {
-           Destroy(gernade);
+            Destroy(gernade);
         }
     }
 }

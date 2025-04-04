@@ -151,7 +151,10 @@ public class Drone : NetworkBehaviour
 
         yield return new WaitForSeconds(1f);
 
-        ShootCrossPattern();
+        if (IsServer)
+        {
+            ShootCrossPatternServerRpc();
+        }
 
         droneAnim.SetBool("Idle", true);
 
@@ -163,19 +166,45 @@ public class Drone : NetworkBehaviour
         droneAnim.SetBool("Fly", true);
     }
 
-    void ShootCrossPattern()
+    // void ShootCrossPattern()
+    // {
+    //     Vector3[] directions = { Vector3.up, Vector3.down, Vector3.left, Vector3.right };
+
+    //     foreach (Vector3 dir in directions)
+    //     {
+    //         GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+    //         bullet.GetComponent<NetworkObject>().Spawn();
+    //         NetworkRigidbody2D rb = bullet.GetComponent<NetworkRigidbody2D>();
+
+    //         if (rb != null)
+    //         {
+    //             rb.Rigidbody2D.linearVelocity = dir * bulletSpeed;
+    //         }
+    //     }
+    // }
+
+    [ServerRpc]
+    private void ShootCrossPatternServerRpc()
     {
         Vector3[] directions = { Vector3.up, Vector3.down, Vector3.left, Vector3.right };
 
         foreach (Vector3 dir in directions)
         {
             GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
-            bullet.GetComponent<NetworkObject>().Spawn();
-            NetworkRigidbody2D rb = bullet.GetComponent<NetworkRigidbody2D>();
-
-            if (rb != null)
+            NetworkObject bulletNetworkObject = bullet.GetComponent<NetworkObject>();
+            if (bulletNetworkObject != null)
             {
-                rb.Rigidbody2D.linearVelocity = dir * bulletSpeed;
+                bulletNetworkObject.Spawn();
+                NetworkRigidbody2D rb = bullet.GetComponent<NetworkRigidbody2D>();
+
+                if (rb != null)
+                {
+                    rb.Rigidbody2D.linearVelocity = dir * bulletSpeed;
+                }
+            }
+            else
+            {
+                Debug.LogError("Bullet prefab does not contain a NetworkObject component!");
             }
         }
     }

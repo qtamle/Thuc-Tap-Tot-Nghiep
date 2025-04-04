@@ -31,11 +31,17 @@ public class Gun : NetworkBehaviour
 
         animator.SetBool("Idle", true);
     }
+
     private void Update()
     {
         if (!hasChecked)
         {
-            RaycastHit2D hit = Physics2D.Raycast(raycastTransform.position, transform.right, rayDistance, wallCheck);
+            RaycastHit2D hit = Physics2D.Raycast(
+                raycastTransform.position,
+                transform.right,
+                rayDistance,
+                wallCheck
+            );
 
             if (hit.collider != null)
             {
@@ -57,13 +63,12 @@ public class Gun : NetworkBehaviour
             StartCoroutine(Shoot());
             shootTimer = 0f;
         }
-
     }
 
     private void Flip()
     {
         Vector3 localScale = transform.localScale;
-        localScale.x *= -1; 
+        localScale.x *= -1;
         transform.localScale = localScale;
     }
 
@@ -73,6 +78,15 @@ public class Gun : NetworkBehaviour
 
         yield return new WaitForSeconds(0.5f);
 
+        if (IsServer)
+        {
+            ShootServerRpc();
+        }
+    }
+
+    [ServerRpc]
+    private void ShootServerRpc()
+    {
         GameObject bullet = Instantiate(bulletPrefab, shootTransform.position, Quaternion.identity);
 
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
@@ -82,7 +96,15 @@ public class Gun : NetworkBehaviour
             rb.linearVelocity = shootDirection * bulletSpeed;
         }
 
-        bullet.GetComponent<NetworkObject>().Spawn();
+        NetworkObject bulletNetworkObject = bullet.GetComponent<NetworkObject>();
+        if (bulletNetworkObject != null)
+        {
+            bulletNetworkObject.Spawn();
+        }
+        else
+        {
+            Debug.LogError("Bullet prefab does not contain a NetworkObject component!");
+        }
     }
 
     bool IsGrounded()
@@ -93,7 +115,10 @@ public class Gun : NetworkBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawLine(raycastTransform.position, raycastTransform.position + transform.right * rayDistance);
+        Gizmos.DrawLine(
+            raycastTransform.position,
+            raycastTransform.position + transform.right * rayDistance
+        );
 
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(groundCheck.position, 0.1f);

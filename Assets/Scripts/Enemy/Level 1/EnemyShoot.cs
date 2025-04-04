@@ -2,7 +2,7 @@
 using Unity.Netcode;
 using UnityEngine;
 
-public class EnemyShoot : MonoBehaviour
+public class EnemyShoot : NetworkBehaviour
 {
     [Header("Move")]
     public float moveSpeed;
@@ -27,15 +27,13 @@ public class EnemyShoot : MonoBehaviour
 
     private void Start()
     {
-        
         rb = GetComponent<Rigidbody2D>();
         shootTimer = shootCooldown;
     }
 
     private void Update()
     {
-        
-        if (isGrounded && !isShooting) 
+        if (isGrounded && !isShooting)
         {
             Move();
             if (IsHittingWall())
@@ -48,11 +46,9 @@ public class EnemyShoot : MonoBehaviour
             if (shootTimer <= 0f)
             {
                 StartCoroutine(ShootAndPause());
-                
             }
         }
     }
-
 
     IEnumerator ShootAndPause()
     {
@@ -61,7 +57,10 @@ public class EnemyShoot : MonoBehaviour
 
         yield return new WaitForSeconds(0.4f);
 
-        Shoot();
+        if (IsServer)
+        {
+            ShootServerRpc();
+        }
 
         yield return new WaitForSeconds(0.75f);
 
@@ -70,16 +69,40 @@ public class EnemyShoot : MonoBehaviour
         anim.SetTrigger("Run");
     }
 
-    void Shoot()
+    [ServerRpc]
+    private void ShootServerRpc()
     {
-        
         GameObject bullet = Instantiate(bulletPrefab, shootPoint.position, Quaternion.identity);
-     
-        Bullet bulletScript = bullet.GetComponent<Bullet>();
-        bulletScript.SetDirection(movingRight ? Vector2.right : Vector2.left);
+        NetworkObject bulletNetworkObject = bullet.GetComponent<NetworkObject>();
 
+        if (bulletNetworkObject != null)
+        {
+            bulletNetworkObject.Spawn(true);
+            Bullet bulletScript = bullet.GetComponent<Bullet>();
+            if (bulletScript != null)
+            {
+                bulletScript.SetDirection(movingRight ? Vector2.right : Vector2.left);
 
-        Destroy(bullet, 5f);
+                StartCoroutine(DespawnAfterDelay(bullet, 5f));
+            }
+            else
+            {
+                Debug.LogError("Bullet prefab does not contain a Bullet script!");
+            }
+        }
+        else
+        {
+            Debug.LogError("Bullet prefab does not contain a NetworkObject component!");
+        }
+    }
+
+    private IEnumerator DespawnAfterDelay(GameObject laserObject, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        if (laserObject != null && laserObject.TryGetComponent(out NetworkObject networkObject))
+        {
+            networkObject.Despawn(true);
+        }
     }
 
     bool IsGrounded()
@@ -94,7 +117,6 @@ public class EnemyShoot : MonoBehaviour
 
     void Move()
     {
-        
         transform.Translate(Vector2.right * moveSpeed * Time.deltaTime * (movingRight ? 1 : -1));
     }
 
