@@ -68,7 +68,7 @@ public class Dagger : NetworkBehaviour
     private PlayerHealth health;
     private Lucky lucky;
 
-    public Animator vfxAnim;
+    public ClientNetworkAnimator vfxAnim;
     private WeaponPlayerInfo weaponInfo;
 
     private void OnEnable()
@@ -143,7 +143,7 @@ public class Dagger : NetworkBehaviour
         coinPoolManager = FindFirstObjectByType<CoinPoolManager>();
         orbPoolManager = FindFirstObjectByType<ExperienceOrbPoolManager>();
         coinsManager = UnityEngine.Object.FindFirstObjectByType<CoinsManager>();
-
+        ClientNetworkAnimator networkAnimator = GetComponentInChildren<ClientNetworkAnimator>();
         // find player
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
         health = GetComponent<PlayerHealth>();
@@ -563,11 +563,7 @@ public class Dagger : NetworkBehaviour
 
     private void ShowAttackVFX()
     {
-        if (IsServer)
-        {
-            ShowAttackVFXClientRpc();
-        }
-        else
+        if (IsOwner)
         {
             ShowAttackVFXServerRpc();
         }

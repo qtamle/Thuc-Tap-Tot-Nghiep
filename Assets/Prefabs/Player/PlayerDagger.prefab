@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 4936755876272344466}
   - component: {fileID: 6657933839493556019}
   - component: {fileID: 8318588102808604150}
-  - component: {fileID: 8353663220428505317}
+  - component: {fileID: 4280576946376735588}
   m_Layer: 3
   m_Name: AttackPoints
   m_TagString: Untagged
@@ -142,7 +142,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &8353663220428505317
+--- !u!114 &4280576946376735588
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -151,7 +151,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3327135935765315065}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8d0727d5ae3244e3b569694d3912374, type: 3}
+  m_Script: {fileID: 11500000, guid: 861437e0e1ebe2d43be4218a7f09cc90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
@@ -491,7 +491,7 @@ MonoBehaviour:
   increaseCoin: 5
   increaseExperience: 5
   increaseRatePotion: 0
-  vfxAnim: {fileID: 8318588102808604150}
+  vfxAnim: {fileID: 4280576946376735588}
 --- !u!114 &-1084915939019830312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -505,16 +505,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  NetworkTransformExpanded: 0
+  NetworkTransformExpanded: 1
   AuthorityMode: 0
   TickSyncChildren: 0
   UseUnreliableDeltas: 0
   SyncPositionX: 1
   SyncPositionY: 1
   SyncPositionZ: 1
-  SyncRotAngleX: 0
-  SyncRotAngleY: 0
-  SyncRotAngleZ: 0
+  SyncRotAngleX: 1
+  SyncRotAngleY: 1
+  SyncRotAngleZ: 1
   SyncScaleX: 0
   SyncScaleY: 0
   SyncScaleZ: 0
