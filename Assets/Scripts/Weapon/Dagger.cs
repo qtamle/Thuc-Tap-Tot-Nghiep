@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Linq;
 using Unity.Netcode;
+using Unity.Netcode.Components;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -132,7 +133,6 @@ public class Dagger : NetworkBehaviour
                 Debug.LogError($"Không tìm thấy WeaponPlayerInfo cho client {clientId}");
             }
             weaponInfo = GetComponentInChildren<WeaponPlayerInfo>();
-            
         }
     }
 
@@ -334,7 +334,7 @@ public class Dagger : NetworkBehaviour
 
                     if (ShouldSpawnPotion())
                     {
-                        SpawnHealthPotions(enemy.transform.position, 1);
+                        SpawnHealthPotionsServerRpc(enemy.transform.position, 1);
                     }
                 }
                 else
@@ -384,7 +384,7 @@ public class Dagger : NetworkBehaviour
 
                     if (ShouldSpawnPotion())
                     {
-                        SpawnHealthPotions(boss.transform.position, 1);
+                        SpawnHealthPotionsServerRpc(boss.transform.position, 1);
                     }
                 }
                 else
@@ -420,94 +420,94 @@ public class Dagger : NetworkBehaviour
 
         isAttackBoss = false;
 
-        Collider2D[] Snake = Physics2D.OverlapBoxAll(attackPoints.position, boxSize, 0f, bossLayer);
+        // Collider2D[] Snake = Physics2D.OverlapBoxAll(attackPoints.position, boxSize, 0f, bossLayer);
 
-        foreach (Collider2D sn in Snake)
-        {
-            MachineSnakeHealth partHealth = sn.GetComponent<MachineSnakeHealth>();
-            SnakeHealth snakeHealth = sn.GetComponentInParent<SnakeHealth>();
+        // foreach (Collider2D sn in Snake)
+        // {
+        //     MachineSnakeHealth partHealth = sn.GetComponent<MachineSnakeHealth>();
+        //     SnakeHealth snakeHealth = sn.GetComponentInParent<SnakeHealth>();
 
-            if (partHealth != null && !isAttackBoss && snakeHealth.IsStunned())
-            {
-                if (
-                    (
-                        MachineSnakeHealth.attackedPartID == -1
-                        || MachineSnakeHealth.attackedPartID == partHealth.partID
-                    ) && !partHealth.isAlreadyHit
-                )
-                {
-                    partHealth.TakeDamage(1);
-                    isAttackBoss = true;
+        //     if (partHealth != null && !isAttackBoss && snakeHealth.IsStunned())
+        //     {
+        //         if (
+        //             (
+        //                 MachineSnakeHealth.attackedPartID == -1
+        //                 || MachineSnakeHealth.attackedPartID == partHealth.partID
+        //             ) && !partHealth.isAlreadyHit
+        //         )
+        //         {
+        //             partHealth.TakeDamage(1);
+        //             isAttackBoss = true;
 
-                    snakeHealth.SetCanBeDamaged(false);
+        //             snakeHealth.SetCanBeDamaged(false);
 
-                    SpawnCoinsServerRpc(
-                        false,
-                        coinSpawnMin * 13,
-                        coinSpawnMax * 13,
-                        partHealth.transform.position
-                    );
+        //             SpawnCoinsServerRpc(
+        //                 false,
+        //                 coinSpawnMin * 13,
+        //                 coinSpawnMax * 13,
+        //                 partHealth.transform.position
+        //             );
 
-                    if (Random.value <= 0.30f)
-                    {
-                        SpawnCoinsServerRpc(
-                            true,
-                            secondaryCoinSpawnMin * 5,
-                            secondaryCoinSpawnMax * 5,
-                            partHealth.transform.position
-                        );
-                    }
+        //             if (Random.value <= 0.30f)
+        //             {
+        //                 SpawnCoinsServerRpc(
+        //                     true,
+        //                     secondaryCoinSpawnMin * 5,
+        //                     secondaryCoinSpawnMax * 5,
+        //                     partHealth.transform.position
+        //                 );
+        //             }
 
-                    if (ShouldSpawnPotion())
-                    {
-                        SpawnHealthPotions(partHealth.transform.position, 1);
-                    }
+        //             if (ShouldSpawnPotion())
+        //             {
+        //                 SpawnHealthPotions(partHealth.transform.position, 1);
+        //             }
 
-                    SpawnOrbsServerRpc(partHealth.transform.position, 25);
-                }
-            }
+        //             SpawnOrbsServerRpc(partHealth.transform.position, 25);
+        //         }
+        //     }
 
-            if (snakeHealth != null && snakeHealth.bodyPartsAttacked == snakeHealth.totalBodyParts)
-            {
-                HeadController headController = sn.GetComponentInChildren<HeadController>();
-                if (headController != null && !headController.isHeadAttacked && !isAttackBoss)
-                {
-                    headController.TakeDamage(1);
-                    isAttackBoss = true;
-                    headController.isHeadAttacked = true;
+        //     if (snakeHealth != null && snakeHealth.bodyPartsAttacked == snakeHealth.totalBodyParts)
+        //     {
+        //         HeadController headController = sn.GetComponentInChildren<HeadController>();
+        //         if (headController != null && !headController.isHeadAttacked && !isAttackBoss)
+        //         {
+        //             headController.TakeDamage(1);
+        //             isAttackBoss = true;
+        //             headController.isHeadAttacked = true;
 
-                    snakeHealth.SetCanBeDamaged(false);
-                    SpawnCoinsServerRpc(
-                        false,
-                        coinSpawnMin * 13,
-                        coinSpawnMax * 13,
-                        headController.transform.position
-                    );
+        //             snakeHealth.SetCanBeDamaged(false);
+        //             SpawnCoinsServerRpc(
+        //                 false,
+        //                 coinSpawnMin * 13,
+        //                 coinSpawnMax * 13,
+        //                 headController.transform.position
+        //             );
 
-                    if (Random.value <= 0.30f)
-                    {
-                        SpawnCoinsServerRpc(
-                            true,
-                            secondaryCoinSpawnMin * 5,
-                            secondaryCoinSpawnMax * 5,
-                            headController.transform.position
-                        );
-                    }
+        //             if (Random.value <= 0.30f)
+        //             {
+        //                 SpawnCoinsServerRpc(
+        //                     true,
+        //                     secondaryCoinSpawnMin * 5,
+        //                     secondaryCoinSpawnMax * 5,
+        //                     headController.transform.position
+        //                 );
+        //             }
 
-                    if (ShouldSpawnPotion())
-                    {
-                        SpawnHealthPotions(headController.transform.position, 1);
-                    }
+        //             if (ShouldSpawnPotion())
+        //             {
+        //                 SpawnHealthPotions(headController.transform.position, 1);
+        //             }
 
-                    SpawnOrbsServerRpc(headController.transform.position, 25);
-                }
-            }
-            else
-            {
-                Debug.LogWarning($"SnakeHealth is null for {sn.gameObject.name}");
-            }
-        }
-        isAttackBoss = false;
+        //             SpawnOrbsServerRpc(headController.transform.position, 25);
+        //         }
+        //     }
+        //     else
+        //     {
+        //         Debug.LogWarning($"SnakeHealth is null for {sn.gameObject.name}");
+        //     }
+        // }
+        // isAttackBoss = false;
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -541,13 +541,14 @@ public class Dagger : NetworkBehaviour
                 isSecondary
             );
 
-            Rigidbody2D coinRb = coin.GetComponent<Rigidbody2D>();
+            NetworkRigidbody2D coinRb = coin.GetComponent<NetworkRigidbody2D>();
+
             if (coinRb != null)
             {
                 Vector2 forceDirection =
                     new Vector2(Random.Range(-1.5f, 1.5f), Random.Range(1f, 1f)) * 2.5f;
-                coinRb.AddForce(forceDirection, ForceMode2D.Impulse);
-                StartCoroutine(CheckIfCoinIsStuck(coinRb));
+                coinRb.Rigidbody2D.AddForce(forceDirection, ForceMode2D.Impulse);
+                StartCoroutine(CheckIfCoinIsStuck(coinRb.Rigidbody2D));
             }
 
             CoinsScript coinScript = coin.GetComponent<CoinsScript>();
@@ -714,7 +715,8 @@ public class Dagger : NetworkBehaviour
         }
     }
 
-    void SpawnHealthPotions(Vector3 position, int potionCount)
+    [ServerRpc(RequireOwnership = false)]
+    private void SpawnHealthPotionsServerRpc(Vector3 position, int potionCount)
     {
         for (int i = 0; i < potionCount; i++)
         {
@@ -722,49 +724,64 @@ public class Dagger : NetworkBehaviour
 
             float potionX = position.x + Mathf.Cos(randomAngle * Mathf.Deg2Rad);
             float potionY = position.y + Mathf.Sin(randomAngle * Mathf.Deg2Rad);
-            Vector3 spawnPosition = new Vector3(potionX, potionY, position.z);
+            Vector3 spawnPosition = new Vector3(
+                potionX,
+                potionY,
+                healthPotionPrefab.transform.position.z
+            );
 
             GameObject potion = Instantiate(healthPotionPrefab, spawnPosition, Quaternion.identity);
-            if (potion.GetComponent<NetworkObject>() == null)
+
+            NetworkObject potionNetworkObject = potion.GetComponent<NetworkObject>();
+            if (potionNetworkObject == null)
             {
-                potion.AddComponent<NetworkObject>();
+                potionNetworkObject = potion.AddComponent<NetworkObject>();
             }
-            potion.GetComponent<NetworkObject>().Spawn(true);
-            Rigidbody2D potionRb = potion.GetComponent<Rigidbody2D>();
+
+            potionNetworkObject.Spawn(true);
+
+            NetworkRigidbody2D potionRb = potion.GetComponent<NetworkRigidbody2D>();
             if (potionRb != null)
             {
                 Vector2 randomForce =
                     new Vector2(Random.Range(-2f, 2f), Random.Range(1f, 1f)) * 2.5f;
-                potionRb.AddForce(randomForce, ForceMode2D.Impulse);
+                potionRb.Rigidbody2D.AddForce(randomForce, ForceMode2D.Impulse);
 
-                potionRb.bodyType = RigidbodyType2D.Kinematic;
+                potionRb.Rigidbody2D.bodyType = RigidbodyType2D.Kinematic;
 
-                StartCoroutine(MovePotionToPlayer(potion, potionMoveDelay));
+                StartCoroutine(MovePotionToPlayer(potion, potionMoveDelay, OwnerClientId));
             }
         }
     }
 
-    IEnumerator MovePotionToPlayer(GameObject potion, float delay)
+    IEnumerator MovePotionToPlayer(GameObject potion, float delay, ulong targetClientId)
     {
+        // Find the NetworkObject of the player with the given clientId
+        NetworkClient client = NetworkManager.Singleton.ConnectedClients[targetClientId];
+        Transform playerTransform = client.PlayerObject.transform;
         yield return new WaitForSeconds(delay);
 
         if (potion != null && player != null)
         {
-            Rigidbody2D potionRb = potion.GetComponent<Rigidbody2D>();
+            NetworkRigidbody2D potionRb = potion.GetComponent<NetworkRigidbody2D>();
             if (potionRb != null)
             {
                 while (potion != null && player != null)
                 {
-                    Vector3 direction = (player.position - potion.transform.position).normalized;
+                    Vector3 direction = (
+                        playerTransform.position - potion.transform.position
+                    ).normalized;
                     potionRb.MovePosition(
                         potion.transform.position + direction * Time.deltaTime * potionMoveToPlayer
                     );
 
-                    if (Vector3.Distance(potion.transform.position, player.position) < 0.5f)
+                    if (
+                        Vector3.Distance(potion.transform.position, playerTransform.position) < 0.5f
+                    )
                     {
-                        Destroy(potion);
-                        potion.GetComponent<NetworkObject>().Despawn();
                         health.HealHealth(3);
+                        potion.GetComponent<NetworkObject>().Despawn(true);
+
                         yield break;
                     }
 
@@ -780,7 +797,7 @@ public class Dagger : NetworkBehaviour
 
     private bool ShouldSpawnPotion()
     {
-        float baseRate = 0f; // Ban đầu tỉ lệ spawn là 0%
+        float baseRate = 1f; // Ban đầu tỉ lệ spawn là 0%
 
         if (weaponInfo != null && weaponInfo.weaponLevel > 3)
         {
