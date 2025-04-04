@@ -41,7 +41,7 @@ public class CoinsUI : MonoBehaviour
 
     private void UpdateCoinsUI()
     {
-        coinType1Text.text = "Coin Type 1: " + currentCoinType1;
-        coinType2Text.text = "Coin Type 2: " + currentCoinType2;
+        coinType1Text.text = "" + currentCoinType1;
+        coinType2Text.text = "" + currentCoinType2;
     }
 }

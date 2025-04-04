@@ -34,6 +34,6 @@ public class ExperienceUI : MonoBehaviour
 
     private void UpdateExperienceUI()
     {
-        experienceText.text = "Ex: " + currentExperience;
+        experienceText.text = "" + currentExperience;
     }
 }
