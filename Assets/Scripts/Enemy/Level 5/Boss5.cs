@@ -757,6 +757,7 @@ public class Boss5 : NetworkBehaviour
                     StartCoroutine(bombLaser.WaitForExplode());
 
                     MusicManager.instance.PlaySoundEffect("Laser_Skill");
+                    
                 }
                 else
                 {
