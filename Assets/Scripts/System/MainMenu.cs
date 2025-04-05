@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Unity.Netcode;
+using Unity.Services.Authentication;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,6 +14,51 @@ public class MainMenu : MonoBehaviour
     public SnapToWeapon snapToWeapon;
     public GameObject gameManagerPrefab;
     public GameObject weaponInfoPrefab; // Prefab chứa WeaponPlayerInfo
+
+    public Animator SettingAnim;
+
+    public void ShowSetting()
+    {
+        SettingAnim.SetTrigger("ShowSetting");
+    }
+
+    public void CloseSetting()
+    {
+        SettingAnim.SetTrigger("CloseSetting");
+    }
+
+    public void Signout()
+    {
+        // Đăng xuất người dùng khỏi dịch vụ xác thực
+        AuthenticationService.Instance.SignOut();
+
+        Debug.Log("Đã đăng xuất người dùng.");
+        SceneManager.LoadScene("Login", LoadSceneMode.Single);
+    }
+
+    public void ToggleMusicOn()
+    {
+        // Gọi hàm ToggleMusic trong MusicHandler
+        MusicHandler.instance.ToggleMusic(true);
+    }
+
+    public void ToggleMusicOff()
+    {
+        // Gọi hàm ToggleMusic trong MusicHandler
+        MusicHandler.instance.ToggleMusic(false);
+    }
+
+    public void ToggleSfxOn()
+    {
+        // Gọi hàm ToggleMusic trong MusicHandler
+        SFXHandler.instance.ToggleSFX(true);
+    }
+
+    public void ToggleSfxOff()
+    {
+        // Gọi hàm ToggleMusic trong MusicHandler
+        SFXHandler.instance.ToggleSFX(false);
+    }
 
     public void Play()
     {

@@ -1,12 +1,13 @@
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MusicHandler : MonoBehaviour
 {
     public static MusicHandler instance;
 
-    [SerializeField] private string audioFolderPath = "Audio";
+    [SerializeField]
+    private string audioFolderPath = "Audio";
     private AudioSource mainSource;
     private EnemyManager enemyManager;
     private string currentScene;
@@ -66,7 +67,8 @@ public class MusicHandler : MonoBehaviour
     {
         Debug.Log($"MusicHandler: Scene loaded - {scene.name}");
         string sceneName = FormatSceneName(scene.name);
-        if (currentScene == sceneName) return;
+        if (currentScene == sceneName)
+            return;
 
         currentScene = sceneName;
         isBossMusicPlaying = false;
@@ -105,12 +107,17 @@ public class MusicHandler : MonoBehaviour
 
     private void OnEnemyKilledUpdated(int oldValue, int newValue)
     {
-        Debug.Log($"MusicHandler: OnEnemyKilledUpdated called - oldValue: {oldValue}, newValue: {newValue}, killTarget: {enemyManager.killTarget.Value}");
-        if (enemyManager == null || isBossMusicPlaying) return;
+        Debug.Log(
+            $"MusicHandler: OnEnemyKilledUpdated called - oldValue: {oldValue}, newValue: {newValue}, killTarget: {enemyManager.killTarget.Value}"
+        );
+        if (enemyManager == null || isBossMusicPlaying)
+            return;
 
         if (IsLevelScene(currentScene) && newValue >= enemyManager.killTarget.Value)
         {
-            Debug.Log($"MusicHandler: Kill target reached, switching to boss music for {currentScene}");
+            Debug.Log(
+                $"MusicHandler: Kill target reached, switching to boss music for {currentScene}"
+            );
             isBossMusicPlaying = true;
             StartCoroutine(LoadAndPlayMusic($"{currentScene}-Boss"));
         }
@@ -168,7 +175,8 @@ public class MusicHandler : MonoBehaviour
 
     private IEnumerator FadeIn()
     {
-        if (mainSource.mute) yield break; // Không fade in nếu đang mute
+        if (mainSource.mute)
+            yield break; // Không fade in nếu đang mute
 
         mainSource.volume = 0;
         while (mainSource.volume < maxVolume)
@@ -186,16 +194,23 @@ public class MusicHandler : MonoBehaviour
 
     private bool IsLevelScene(string sceneName)
     {
-        bool isLevel = sceneName.StartsWith("Level1-Remake") || sceneName.StartsWith("Level2-Remake") ||
-                       sceneName.StartsWith("Level3-Remake") || sceneName.StartsWith("Level4-Remake") ||
-                       sceneName.StartsWith("Level5-Remake");
+        bool isLevel =
+            sceneName.StartsWith("Level1-Remake")
+            || sceneName.StartsWith("Level2-Remake")
+            || sceneName.StartsWith("Level3-Remake")
+            || sceneName.StartsWith("Level4-Remake")
+            || sceneName.StartsWith("Level5-Remake");
         Debug.Log($"MusicHandler: IsLevelScene({sceneName}) = {isLevel}");
         return isLevel;
     }
 
     private bool IsShopOnlineGroup(string sceneName)
     {
-        return sceneName == "Shop-Online" || sceneName == "MainMenu" || sceneName == "Lobby" /*|| sceneName =="Supply"*/;
+        return sceneName == "Shop-Online"
+            || sceneName == "MainMenu"
+            || sceneName
+                == "Lobby" /*|| sceneName =="Supply"*/
+        ;
     }
 
     // Hàm để bật/tắt music (dùng trong settings)
@@ -205,6 +220,10 @@ public class MusicHandler : MonoBehaviour
         if (isOn && !mainSource.isPlaying && mainSource.clip != null)
         {
             mainSource.Play();
+        }
+        else
+        {
+            return;
         }
         Debug.Log($"MusicHandler: Music {(isOn ? "enabled" : "disabled")}");
     }

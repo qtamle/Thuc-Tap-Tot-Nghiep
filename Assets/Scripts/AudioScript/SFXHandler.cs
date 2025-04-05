@@ -1,11 +1,12 @@
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
 
 public class SFXHandler : MonoBehaviour
 {
     public static SFXHandler instance;
 
-    [SerializeField] private string audioFolderPath = "Audio";
+    [SerializeField]
+    private string audioFolderPath = "Audio";
     private AudioSource effectSource;
 
     private void Awake()
@@ -28,7 +29,8 @@ public class SFXHandler : MonoBehaviour
 
     public void PlaySoundEffect(string audioPath)
     {
-        if (effectSource.mute) return; // Không phát nếu đang mute
+        if (effectSource.mute)
+            return; // Không phát nếu đang mute
         StartCoroutine(LoadAndPlaySoundEffect(audioPath));
     }
 
@@ -54,7 +56,15 @@ public class SFXHandler : MonoBehaviour
 
     public void ToggleSFX(bool isOn)
     {
-        effectSource.mute = !isOn;
+        if (isOn)
+        {
+            return;
+        }
+        else
+        {
+            effectSource.mute = !isOn;
+        }
+
         Debug.Log($"SFXHandler: SFX {(isOn ? "enabled" : "disabled")}");
     }
 }
