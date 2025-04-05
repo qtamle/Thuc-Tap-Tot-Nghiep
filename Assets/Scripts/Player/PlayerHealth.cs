@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using TMPro;
 using Unity.Netcode;
-using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -237,7 +236,7 @@ public class PlayerHealth : NetworkBehaviour, DamagePlayerInterface
 
     private IEnumerator ResetShakeState()
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.5f);
         isShaking = false;
     }
 

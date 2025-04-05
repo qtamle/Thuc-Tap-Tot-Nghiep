@@ -41,6 +41,8 @@ public class GernadeCollision : MonoBehaviour
     private CoinPoolManager coinPoolManager;
     private ExperienceOrbPoolManager orbPoolManager;
 
+    private Animator animator;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -58,12 +60,14 @@ public class GernadeCollision : MonoBehaviour
 
     private void Start()
     {
+        animator = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
         OnSceneLoaded(SceneManager.GetActiveScene(), LoadSceneMode.Single);
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        animator = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
 
         coinPoolManager = FindFirstObjectByType<CoinPoolManager>();
@@ -140,7 +144,9 @@ public class GernadeCollision : MonoBehaviour
 
     public IEnumerator Explode()
     {
-        yield return new WaitForSeconds(0.2f);
+        animator.SetTrigger("Explosion");
+
+        yield return new WaitForSeconds(0.4f);
 
         Collider2D[] enemyDamage = Physics2D.OverlapCircleAll(
             transform.position,

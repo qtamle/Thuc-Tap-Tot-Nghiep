@@ -127,6 +127,12 @@ public class SupplyPickup : NetworkBehaviour
         // SupplyManager.Instance.RemoveSupply(supplyData.supplyID);
         ApplyEffect();
 
+        SpriteRenderer spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.enabled = false;
+        }
+
         Debug.Log($"[PickupSupply] Hủy GameObject {gameObject.name}...");
     }
 

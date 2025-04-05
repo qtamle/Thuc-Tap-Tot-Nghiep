@@ -223,6 +223,6 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   supplyData: {fileID: 11400000, guid: 555b681c19961504ca33dc15d95593c7, type: 2}
   isActive: 0
-  cooldownTime: 25
+  cooldownTime: 5
   gernadePrefab: {fileID: 163419635232156481, guid: a585ad28a22522e46acc93ca4d35a88b, type: 3}
   moveSpeed: 15

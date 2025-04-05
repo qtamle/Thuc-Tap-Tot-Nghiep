@@ -322,7 +322,7 @@ public class CaptainSkill : NetworkBehaviour
 
         animator.SetTrigger("LaserSkill");
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
 
         FireLaser();
     }
@@ -393,6 +393,8 @@ public class CaptainSkill : NetworkBehaviour
 
         yield return new WaitForSeconds(1f);
 
+        damagePlayer.SetCanDamage(true);
+
         Vector3 leftPosition = originalPosition + Vector3.left * 3f;
         yield return StartCoroutine(MoveToPosition(leftPosition, 1f));
         FireLaserAtAngle(34f);
@@ -400,7 +402,7 @@ public class CaptainSkill : NetworkBehaviour
         if (!isShaking)
         {
             isShaking = true;
-            CameraShake.Instance.StartShake(0.1f, 2f, 1f, 4f);
+            CameraShake.Instance.StartShake(0.1f, 1f, 0.5f, 3f);
             StartCoroutine(ResetShakeState());
         }
 
@@ -420,6 +422,8 @@ public class CaptainSkill : NetworkBehaviour
         yield return new WaitForSeconds(laserDuration);
 
         yield return StartCoroutine(MoveToPosition(originalPosition, 1f));
+
+        damagePlayer.SetCanDamage(false);
 
         transform.rotation = lastRotation;
 
@@ -785,6 +789,12 @@ public class CaptainSkill : NetworkBehaviour
 
                 if (Vector3.Distance(bomb.transform.position, playerLastPositionBig) < 0.1f)
                 {
+                    Animator anim = bomb.GetComponentInChildren<Animator>();
+                    if (anim != null)
+                    {
+                        anim.SetTrigger("Explosion");
+                        yield return new WaitForSeconds(0.35f);
+                    }
                     bigBomb.Explode();
                     yield return new WaitForSeconds(0.5f);
                     break;

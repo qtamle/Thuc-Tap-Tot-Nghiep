@@ -73,7 +73,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   supplyDataList:
-  - {fileID: 11400000, guid: d1f701d07f75c544cb1f2b084a0834e8, type: 2}
+  - {fileID: 11400000, guid: 555b681c19961504ca33dc15d95593c7, type: 2}
   - {fileID: 11400000, guid: f0212d4d5e2dcea438e35b2e17484025, type: 2}
   - {fileID: 11400000, guid: 27c4dd0b27ff2f54ba2b4279c01e9a6b, type: 2}
   supplySlot1: {fileID: 0}

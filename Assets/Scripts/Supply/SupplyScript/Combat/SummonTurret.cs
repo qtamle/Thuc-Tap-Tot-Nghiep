@@ -39,13 +39,14 @@ public class SummonTurret : NetworkBehaviour, ISupplyActive
     private IEnumerator Delay()
     {
         yield return new WaitForSeconds(0.5f);
+        isActive = true;
         FindSpawnPoints();
         IsLevelTagFound();
     }
 
     private void Update()
     {
-        if (isActive && !hasSpawn)
+        if (!hasSpawn)
         {
             StartCoroutine(SummonAndFire()); 
         }

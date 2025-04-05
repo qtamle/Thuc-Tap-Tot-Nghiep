@@ -36,8 +36,14 @@ public class Gernade_Sp : NetworkBehaviour, ISupplyActive
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         //StartCoroutine(CheckForPlayer());
+        StartCoroutine(Delay());
+        //Active();
+    }
+
+    IEnumerator Delay()
+    {
+        yield return new WaitForSeconds(0.5f);
         isActive = true;
-        Active();
     }
 
     //IEnumerator CheckForPlayer()
@@ -91,7 +97,7 @@ public class Gernade_Sp : NetworkBehaviour, ISupplyActive
 
     private void Update()
     {
-        if (isActive && !hasThrown)
+        if (!hasThrown)
         {
             ThrowGernade();
             hasThrown = true;

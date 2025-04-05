@@ -45,7 +45,7 @@ public class LineCollider : MonoBehaviour
 
             if (damage != null)
             {
-                damage.DamagePlayer(3);
+                damage.DamagePlayer(5);
             }
         }
     }
