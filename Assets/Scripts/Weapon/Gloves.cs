@@ -180,7 +180,7 @@ public class Gloves : NetworkBehaviour
     {
         if (IsInputDetected() && CanAttack())
         {
-            PerformAttack();
+            StartCoroutine(PerformAttack());
             lastAttackTime = Time.time;
         }
     }
@@ -232,7 +232,7 @@ public class Gloves : NetworkBehaviour
         }
     }
 
-    private void PerformAttack()
+    private IEnumerator PerformAttack()
     {
         ShowAttackVFX();
 
@@ -253,6 +253,8 @@ public class Gloves : NetworkBehaviour
                     CameraShake.Instance.StartShake(0.1f, 1f, 0.5f, 5f);
                     StartCoroutine(ResetShakeState());
                 }
+
+                yield return StartCoroutine(HandleEnemyDeath(enemy.gameObject, enemy.transform.position));
 
                 if (EnemyManager.Instance != null)
                 {
@@ -799,6 +801,42 @@ public class Gloves : NetworkBehaviour
         {
             yield break;
         }
+    }
+
+    private IEnumerator HandleEnemyDeath(GameObject enemyObject, Vector3 position)
+    {
+        SpriteRenderer firstSprite = enemyObject.GetComponentsInChildren<SpriteRenderer>(true).FirstOrDefault();
+
+        if (firstSprite == null)
+        {
+            firstSprite = enemyObject.GetComponent<SpriteRenderer>();
+        }
+
+        if (firstSprite == null && enemyObject.transform.parent != null)
+        {
+            firstSprite = enemyObject.transform.parent.GetComponent<SpriteRenderer>();
+        }
+
+        if (firstSprite != null)
+        {
+            firstSprite.enabled = false;
+            //Debug.Log("SpriteRenderer found on: " + firstSprite.gameObject.name);
+        }
+        else
+        {
+            Debug.LogWarning("Không tìm thấy SpriteRenderer trong enemy hoặc cha.");
+        }
+
+        Animator lastAnim = enemyObject
+            .GetComponentsInChildren<Animator>(true)
+            .LastOrDefault();
+
+        if (lastAnim != null)
+        {
+            lastAnim.SetTrigger("Explosion");
+        }
+
+        yield return new WaitForSeconds(1f);
     }
 
     private void OnDrawGizmosSelected()

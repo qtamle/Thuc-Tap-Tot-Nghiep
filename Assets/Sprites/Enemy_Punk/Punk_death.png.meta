@@ -124,6 +124,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -131,12 +144,12 @@ TextureImporter:
       name: Punk_death_0
       rect:
         serializedVersion: 2
-        x: 4
+        x: 5
         y: 0
-        width: 19
-        height: 35
+        width: 17
+        height: 34
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -153,12 +166,12 @@ TextureImporter:
       name: Punk_death_1
       rect:
         serializedVersion: 2
-        x: 50
+        x: 51
         y: 0
-        width: 25
-        height: 33
+        width: 23
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -175,12 +188,12 @@ TextureImporter:
       name: Punk_death_2
       rect:
         serializedVersion: 2
-        x: 102
+        x: 103
         y: 0
-        width: 22
-        height: 28
+        width: 20
+        height: 27
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -197,12 +210,12 @@ TextureImporter:
       name: Punk_death_3
       rect:
         serializedVersion: 2
-        x: 150
+        x: 151
         y: 0
-        width: 27
-        height: 15
+        width: 25
+        height: 14
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -219,12 +232,12 @@ TextureImporter:
       name: Punk_death_4
       rect:
         serializedVersion: 2
-        x: 198
+        x: 199
         y: 0
-        width: 27
-        height: 12
+        width: 25
+        height: 11
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -241,12 +254,12 @@ TextureImporter:
       name: Punk_death_5
       rect:
         serializedVersion: 2
-        x: 246
+        x: 247
         y: 0
-        width: 27
-        height: 9
+        width: 25
+        height: 8
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -263,7 +276,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 2b35e7af8f96c884b8a54fadd39e17ec
     internalID: 0
     vertices: []
     indices: 

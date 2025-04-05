@@ -242,7 +242,7 @@ public class Claws : NetworkBehaviour
         if (IsInputDetected(out SwipeDirection direction) && CanAttack())
         {
             currentSwipeDirection = direction;
-            PerformAttack(direction);
+            StartCoroutine(PerformAttack(direction));
             lastAttackTime = Time.time;
             //Debug.Log($"Attack Direction: {direction}");
         }
@@ -352,7 +352,7 @@ public class Claws : NetworkBehaviour
         return Time.time >= lastAttackTime + attackCooldown;
     }
 
-    private void PerformAttack(SwipeDirection direction)
+    private IEnumerator PerformAttack(SwipeDirection direction)
     {
         ShowAttackVFX(direction);
 
@@ -391,6 +391,8 @@ public class Claws : NetworkBehaviour
                     CameraShake.Instance.StartShake(0.1f, 1f, 0.5f, 5f);
                     StartCoroutine(ResetShakeState());
                 }
+
+                yield return StartCoroutine(HandleEnemyDeath(enemy.gameObject, enemy.transform.position));
 
                 if (EnemyManager.Instance != null)
                 {
@@ -904,6 +906,42 @@ public class Claws : NetworkBehaviour
         {
             yield break;
         }
+    }
+
+    private IEnumerator HandleEnemyDeath(GameObject enemyObject, Vector3 position)
+    {
+        SpriteRenderer firstSprite = enemyObject.GetComponentsInChildren<SpriteRenderer>(true).FirstOrDefault();
+
+        if (firstSprite == null)
+        {
+            firstSprite = enemyObject.GetComponent<SpriteRenderer>();
+        }
+
+        if (firstSprite == null && enemyObject.transform.parent != null)
+        {
+            firstSprite = enemyObject.transform.parent.GetComponent<SpriteRenderer>();
+        }
+
+        if (firstSprite != null)
+        {
+            firstSprite.enabled = false;
+            //Debug.Log("SpriteRenderer found on: " + firstSprite.gameObject.name);
+        }
+        else
+        {
+            Debug.LogWarning("Không tìm thấy SpriteRenderer trong enemy hoặc cha.");
+        }
+
+        Animator lastAnim = enemyObject
+            .GetComponentsInChildren<Animator>(true)
+            .LastOrDefault();
+
+        if (lastAnim != null)
+        {
+            lastAnim.SetTrigger("Explosion");
+        }
+
+        yield return new WaitForSeconds(1f);
     }
 
     private void OnDrawGizmos()

@@ -55,6 +55,7 @@ public class PlayerMovement : NetworkBehaviour
 
     public bool isMovementLocked = true;
 
+    private Animator animator;
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -67,6 +68,7 @@ public class PlayerMovement : NetworkBehaviour
 
     private void Start()
     {
+        animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         playerCollider = GetComponent<Collider2D>();
         OnSceneLoaded(SceneManager.GetActiveScene(), LoadSceneMode.Single);
@@ -77,6 +79,7 @@ public class PlayerMovement : NetworkBehaviour
         originalSpeed = moveSpeed;
         rb = GetComponent<Rigidbody2D>();
         playerCollider = GetComponent<Collider2D>();
+        animator = GetComponent<Animator>();
 
         int playerLayer = gameObject.layer;
         int blockLayer = LayerMask.NameToLayer(blockLayerName);
@@ -111,6 +114,9 @@ public class PlayerMovement : NetworkBehaviour
             isIceMovementActive = !isIceMovementActive;
             isIceStaking = false;
         }
+
+
+        animator.SetBool("Idle", true);
     }
 
     private void OnDestroy()
@@ -136,6 +142,11 @@ public class PlayerMovement : NetworkBehaviour
         if (!IsTouchingWall())
         {
             MovePlayer();
+        }
+        else
+        {
+            animator.SetBool("Idle", true);
+            animator.SetBool("Run", false);
         }
 
         FlipPlayer();
@@ -291,6 +302,8 @@ public class PlayerMovement : NetworkBehaviour
         if (!isGrounded || isJumping)
             return;
 
+        animator.SetTrigger("Jump");
+
         isJumping = true;
         rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
 
@@ -306,6 +319,8 @@ public class PlayerMovement : NetworkBehaviour
     {
         if (isGrounded && currentGround != null && !currentGround.CompareTag(finalFloorTag))
         {
+            animator.SetTrigger("Jump");
+
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, -jumpForce * 0.3f);
 
             rb.gravityScale = 4f;
@@ -339,6 +354,11 @@ public class PlayerMovement : NetworkBehaviour
     {
         if (isMovementLocked || !canMove)
             return;
+
+        bool isMoving = Mathf.Abs(moveDirection) > 0.01f;
+
+        animator.SetBool("Idle", !isMoving);
+        animator.SetBool("Run", isMoving);
 
         if (isIceMovementActive)
         {

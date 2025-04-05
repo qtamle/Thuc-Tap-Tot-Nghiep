@@ -4,6 +4,7 @@ using Unity.Netcode;
 using Unity.Netcode.Components;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class Dagger : NetworkBehaviour
 {
@@ -191,7 +192,7 @@ public class Dagger : NetworkBehaviour
             return;
         if (IsInputDetected() && CanAttack())
         {
-            PerformAttack();
+            StartCoroutine(PerformAttack());
             lastAttackTime = Time.time;
         }
     }
@@ -281,7 +282,7 @@ public class Dagger : NetworkBehaviour
         }
     }
 
-    private void PerformAttack()
+    private IEnumerator PerformAttack()
     {
         StartCoroutine(ShowAttackVFX());
 
@@ -305,6 +306,8 @@ public class Dagger : NetworkBehaviour
                     StartCoroutine(ResetShakeState());
                 }
 
+                yield return StartCoroutine(HandleEnemyDeath(enemy.gameObject, enemy.transform.position));
+
                 if (EnemyManager.Instance != null)
                 {
                     EnemyManager.Instance.OnEnemyKilled();
@@ -326,6 +329,7 @@ public class Dagger : NetworkBehaviour
                 {
                     networkObject = enemy.GetComponent<NetworkObject>();
                 }
+
                 if (networkObject != null)
                 {
                     // Gọi ServerRpc để hủy đối tượng
@@ -541,6 +545,7 @@ public class Dagger : NetworkBehaviour
         Vector3 position
     )
     {
+
         Debug.Log($"ServerRpc called - isSecondary: {isSecondary}, position: {position}");
         bool isGoldIncreaseActive = goldIncrease != null && goldIncrease.IsReady();
         float initialCoinCount = Random.Range(minAmount, maxAmount + 1);
@@ -822,6 +827,42 @@ public class Dagger : NetworkBehaviour
 
         // trả về % từ 2 giá trị trên (nếu không có là 0%, weapon level > 3 thì 10%, có supply lucky thì 15%, cả 2 thì dồn 25%)
         return Random.value <= baseRate;
+    }
+
+    private IEnumerator HandleEnemyDeath(GameObject enemyObject, Vector3 position)
+    {
+        SpriteRenderer firstSprite = enemyObject.GetComponentsInChildren<SpriteRenderer>(true).FirstOrDefault();
+
+        if (firstSprite == null)
+        {
+            firstSprite = enemyObject.GetComponent<SpriteRenderer>();
+        }
+
+        if (firstSprite == null && enemyObject.transform.parent != null)
+        {
+            firstSprite = enemyObject.transform.parent.GetComponent<SpriteRenderer>();
+        }
+
+        if (firstSprite != null)
+        {
+            firstSprite.enabled = false;
+            //Debug.Log("SpriteRenderer found on: " + firstSprite.gameObject.name);
+        }
+        else
+        {
+            Debug.LogWarning("Không tìm thấy SpriteRenderer trong enemy hoặc cha.");
+        }
+
+        Animator lastAnim = enemyObject
+            .GetComponentsInChildren<Animator>(true) 
+            .LastOrDefault();
+
+        if (lastAnim != null)
+        {
+            lastAnim.SetTrigger("Explosion");
+        }
+
+        yield return new WaitForSeconds(1f);
     }
 
     private void OnDrawGizmosSelected()
