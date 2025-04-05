@@ -2965,6 +2965,7 @@ GameObject:
   - component: {fileID: 781073948}
   - component: {fileID: 781073953}
   - component: {fileID: 781073952}
+  - component: {fileID: 781073954}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -3096,6 +3097,23 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &781073954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 781073947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b865b176f3b009f41a27677b32932e63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  username: {fileID: 288771300}
+  password: {fileID: 1270888789}
+  usernameSignUp: {fileID: 1617972428}
+  passwordSignUp: {fileID: 2062488413}
+  errorMessageText: {fileID: 969473341}
 --- !u!1 &799342422
 GameObject:
   m_ObjectHideFlags: 0
@@ -3858,8 +3876,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 530299293}
-        m_TargetAssemblyTypeName: Authentication, Assembly-CSharp
+      - m_Target: {fileID: 781073954}
+        m_TargetAssemblyTypeName: AuthenticationUI, Assembly-CSharp
         m_MethodName: OnSignUpClicked
         m_Mode: 1
         m_Arguments:
@@ -6598,8 +6616,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 530299293}
-        m_TargetAssemblyTypeName: Authentication, Assembly-CSharp
+      - m_Target: {fileID: 781073954}
+        m_TargetAssemblyTypeName: AuthenticationUI, Assembly-CSharp
         m_MethodName: OnSignInClicked
         m_Mode: 1
         m_Arguments:
