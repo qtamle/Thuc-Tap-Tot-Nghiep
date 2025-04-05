@@ -259,11 +259,13 @@ public class GameManager : NetworkBehaviour
                 // string bossScene = "Level 5 - Remake";
 
                 Debug.Log($"Loading {bossScene}");
+
                 NetworkManager.Singleton.SceneManager.LoadScene(bossScene, LoadSceneMode.Single);
             }
             if (currentBoss.Value > 5)
             {
                 Debug.Log("Loading SummaryScene");
+
                 NetworkManager.Singleton.SceneManager.LoadScene("Summary", LoadSceneMode.Single);
                 ResetGame();
             }
@@ -274,8 +276,10 @@ public class GameManager : NetworkBehaviour
             Debug.Log("Loading SupplyScene");
 
             NetworkManager.Singleton.SceneManager.OnLoadComplete += OnSupplySceneLoaded;
+
             NetworkManager.Singleton.SceneManager.LoadScene("SupplyScene", LoadSceneMode.Single);
         }
+
         // string bossScene = "Level 1 - Remake";
         // NetworkManager.Singleton.SceneManager.LoadScene(bossScene, LoadSceneMode.Single);
     }
@@ -358,7 +362,7 @@ public class GameManager : NetworkBehaviour
         {
             return hasSacrifice;
         }
-        return false; 
+        return false;
     }
 
     public bool GetPlayerAngelGuardian(ulong clientId)
@@ -373,7 +377,7 @@ public class GameManager : NetworkBehaviour
 
     public bool GetPlayerMedkit(ulong clientId)
     {
-        if (medkitActive.TryGetValue(clientId,out bool isActive))
+        if (medkitActive.TryGetValue(clientId, out bool isActive))
         {
             return isActive;
         }
