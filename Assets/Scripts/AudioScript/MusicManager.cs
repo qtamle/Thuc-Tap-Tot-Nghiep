@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using Mono.Cecil;
 
 public class MusicManager : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class MusicManager : MonoBehaviour
 
     [SerializeField] private string audioFolderPath = "Audio";
     private AudioSource mainSource;
+    private AudioSource effectSource;
     private EnemyManager enemyManager;
     private string currentScene;
     private string currentAudioClipName; // Lưu tên clip âm thanh hiện tại
@@ -25,6 +27,12 @@ public class MusicManager : MonoBehaviour
             mainSource.loop = true;
             mainSource.playOnAwake = false;
             mainSource.volume = 1f;
+
+            // cái này để thêm âm thanh của sfx
+            effectSource = gameObject.AddComponent<AudioSource>();
+            effectSource.loop = false;
+            effectSource.playOnAwake = true;
+            effectSource.volume = 1f;
             Debug.Log("MusicManager: Initialized");
         }
         else
@@ -139,6 +147,30 @@ public class MusicManager : MonoBehaviour
             {
                 yield return StartCoroutine(FadeOut());
             }
+        }
+    }
+// Nu-one :((((((((((
+    public void PlaySoundEffect(string audioPath)
+    {
+        StartCoroutine(LoadAndPlaySoundEffect(audioPath));
+    }
+    private IEnumerator LoadAndPlaySoundEffect(string audioPath)
+    {
+        string fullPath = $"{audioFolderPath}/{audioPath}";
+        Debug.Log($"MusicManager: Loading Sound Effect from {fullPath}");
+
+        ResourceRequest request = Resources.LoadAsync<AudioClip>(fullPath);
+        yield return null;
+
+        AudioClip clip = request.asset as AudioClip;
+        if (clip != null) 
+        {
+            Debug.Log($"MusicManager: Sound Effect loaded - {clip.name}");
+            effectSource.PlayOneShot(clip);
+        }
+        else
+        {
+            Debug.Log($"MusicMnager: Không tìm thấy âm thanh hiệu ứng tại {fullPath}");
         }
     }
 
