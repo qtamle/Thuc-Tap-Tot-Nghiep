@@ -1,9 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Net.NetworkInformation;
 using Unity.Netcode;
-using Unity.VisualScripting;
 using UnityEngine;
+using EZCameraShake;
 
 public class Boss5 : NetworkBehaviour
 {
@@ -470,12 +469,7 @@ public class Boss5 : NetworkBehaviour
             }
             else
             {
-                if (!isShaking)
-                {
-                    isShaking = true; 
-                    CameraShake.Instance.StartShake(0.1f, 1.5f, 1f, 5f);
-                    StartCoroutine(ResetShakeState());
-                }
+                CameraShaker.Instance.ShakeOnce(3f, 3f, 0.2f, 0.2f);
                 StartCoroutine(WaitAndMoveBack());
             }
         }
@@ -846,12 +840,9 @@ public class Boss5 : NetworkBehaviour
                 bigBombLaser.GetComponent<NetworkObject>().Spawn();
                 newLaserPosition.y += 0.5f;
                 laserLine.transform.position = newLaserPosition;
-                if (!isShaking)
-                {
-                    isShaking = true;
-                    CameraShake.Instance.StartShake(0.1f, 1f, 0.5f, 3f);
-                    StartCoroutine(ResetShakeState());
-                }
+
+                CameraShaker.Instance.ShakeOnce(5f, 5f, 0.2f, 0.2f);
+
                 StartCoroutine(DespawnAfterDelay(bigBombLaser, 1.5f));
                 // Destroy(bigBombLaser, 1.5f);
             }
@@ -895,12 +886,9 @@ public class Boss5 : NetworkBehaviour
                 newPosition.y -= 0.5f;
                 bombLaser.transform.position = newPosition;
                 LineRenderer laserLine = bombLaser.GetComponentInChildren<LineRenderer>();
-                if (!isShaking)
-                {
-                    isShaking = true;
-                    CameraShake.Instance.StartShake(0.1f, 1f, 0.5f, 3f);
-                    StartCoroutine(ResetShakeState());
-                }
+
+                CameraShaker.Instance.ShakeOnce(5f, 5f, 0.2f, 0.2f);
+
                 StartCoroutine(DespawnAfterDelay(bombLaser, 1.5f));
                 // Destroy(bombLaser, 1.5f);
             }

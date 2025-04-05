@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using Unity.Netcode.Components;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
+using EZCameraShake;
 
 public class Cyborg : NetworkBehaviour
 {
@@ -218,12 +218,7 @@ public class Cyborg : NetworkBehaviour
         yield return new WaitForSeconds(1f);
         GameObject[] plusLasers = CreatePlusLasers(targetPosition);
 
-        if (!isShaking)
-        {
-            isShaking = true;
-            CameraShake.Instance.StartShake(0.1f, 1.5f, 1f, 5f);
-            StartCoroutine(ResetShakeState());
-        }
+        CameraShaker.Instance.ShakeOnce(5f, 5f, 0.2f, 0.2f);
 
         yield return new WaitForSeconds(2f);
         foreach (GameObject laser in plusLasers)
@@ -235,12 +230,7 @@ public class Cyborg : NetworkBehaviour
         yield return new WaitForSeconds(1f);
         GameObject[] xLasers = CreateXLasers(targetPosition);
 
-        if (!isShaking)
-        {
-            isShaking = true;
-            CameraShake.Instance.StartShake(0.1f, 1.5f, 1f, 5f);
-            StartCoroutine(ResetShakeState());
-        }
+        CameraShaker.Instance.ShakeOnce(5f, 5f, 0.2f, 0.2f);
 
         yield return new WaitForSeconds(2f);
         foreach (GameObject laser in xLasers)
@@ -440,12 +430,7 @@ public class Cyborg : NetworkBehaviour
         {
             GameObject laser = CreateLaserAtPosition(bomb.transform.position);
 
-            if (!isShaking)
-            {
-                isShaking = true;
-                CameraShake.Instance.StartShake(0.1f, 1.5f, 1f, 5f);
-                StartCoroutine(ResetShakeState());
-            }
+            CameraShaker.Instance.ShakeOnce(5f, 5f, 0.2f, 0.2f);
 
             StartCoroutine(DespawnAfterSeconds(laser, bombDuration));
             // Destroy(laser, laserDuration);

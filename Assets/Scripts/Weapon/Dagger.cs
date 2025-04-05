@@ -4,7 +4,7 @@ using Unity.Netcode;
 using Unity.Netcode.Components;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.Linq;
+using EZCameraShake;
 
 public class Dagger : NetworkBehaviour
 {
@@ -299,12 +299,7 @@ public class Dagger : NetworkBehaviour
             {
                 //GameObject enemyObject = enemy.transform.root.gameObject;
 
-                if (!isShaking)
-                {
-                    isShaking = true;
-                    CameraShake.Instance.StartShake(0.1f, 1f, 0.5f, 5f);
-                    StartCoroutine(ResetShakeState());
-                }
+                CameraShaker.Instance.ShakeOnce(4f, 4f, 0.1f, 0.1f);
 
                 yield return StartCoroutine(HandleEnemyDeath(enemy.gameObject, enemy.transform.position));
 
@@ -384,12 +379,7 @@ public class Dagger : NetworkBehaviour
                     AttackBossServerRpc(bossNetworkObject);
                     isAttackBoss = true;
 
-                    if (!isShaking)
-                    {
-                        isShaking = true;
-                        CameraShake.Instance.StartShake(0.1f, 3f, 1.5f, 5f);
-                        StartCoroutine(ResetShakeState());
-                    }
+                    CameraShaker.Instance.ShakeOnce(8f, 8f, 0.3f, 0.3f);
 
                     damageable.SetCanBeDamaged(false);
                     SpawnCoinsServerRpc(
@@ -813,7 +803,7 @@ public class Dagger : NetworkBehaviour
 
     private bool ShouldSpawnPotion()
     {
-        float baseRate = 1f; // Ban đầu tỉ lệ spawn là 0%
+        float baseRate = 0f; // Ban đầu tỉ lệ spawn là 0%
 
         if (weaponInfo != null && weaponInfo.weaponLevel > 3)
         {

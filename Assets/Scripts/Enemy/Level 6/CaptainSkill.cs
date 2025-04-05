@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
+using EZCameraShake;
 
 public class CaptainSkill : NetworkBehaviour
 {
@@ -399,12 +400,7 @@ public class CaptainSkill : NetworkBehaviour
         yield return StartCoroutine(MoveToPosition(leftPosition, 1f));
         FireLaserAtAngle(34f);
 
-        if (!isShaking)
-        {
-            isShaking = true;
-            CameraShake.Instance.StartShake(0.1f, 1f, 0.5f, 3f);
-            StartCoroutine(ResetShakeState());
-        }
+        CameraShaker.Instance.ShakeOnce(5f, 5f, 0.2f, 0.2f);
 
         yield return new WaitForSeconds(laserDuration);
 
@@ -412,12 +408,7 @@ public class CaptainSkill : NetworkBehaviour
         yield return StartCoroutine(MoveToPosition(rightPosition, 0.5f));
         FireLaserAtAngle(-34f);
 
-        if (!isShaking)
-        {
-            isShaking = true;
-            CameraShake.Instance.StartShake(0.1f, 2f, 1f, 4f);
-            StartCoroutine(ResetShakeState());
-        }
+        CameraShaker.Instance.ShakeOnce(5f, 5f, 0.2f, 0.2f);
 
         yield return new WaitForSeconds(laserDuration);
 
@@ -456,12 +447,7 @@ public class CaptainSkill : NetworkBehaviour
             laserRenderer.numCapVertices = 5;
         }
 
-        if (!isShaking)
-        {
-            isShaking = true;
-            CameraShake.Instance.StartShake(0.1f, 2f, 1f, 4f);
-            StartCoroutine(ResetShakeState());
-        }
+        CameraShaker.Instance.ShakeOnce(5f, 5f, 0.2f, 0.2f);
 
         StartCoroutine(DespawnAfterDelay(laser, laserDuration));
         // Destroy(laser, laserDuration);
@@ -623,12 +609,7 @@ public class CaptainSkill : NetworkBehaviour
             {
                 GameObject laser = CreateLaserAtPosition(bomb.transform.position);
 
-                if (!isShaking)
-                {
-                    isShaking = true;
-                    CameraShake.Instance.StartShake(0.1f, 1.5f, 0.5f, 5f);
-                    StartCoroutine(ResetShakeState());
-                }
+                CameraShaker.Instance.ShakeOnce(5f, 5f, 0.2f, 0.2f);
 
                 StartCoroutine(DespawnAfterDelay(laser, 2f));
                 // Destroy(laser, 2f);

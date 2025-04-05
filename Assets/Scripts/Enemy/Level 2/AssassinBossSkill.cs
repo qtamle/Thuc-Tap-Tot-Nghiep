@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using Unity.Netcode.Components;
 using UnityEngine;
+using EZCameraShake;
 
 public class AssassinBossSkill : NetworkBehaviour
 {
@@ -378,12 +379,8 @@ public class AssassinBossSkill : NetworkBehaviour
         if (Bomb != null)
         {
             Bomb.BombExplosion();
-            if (!isShaking)
-            {
-                isShaking = true;
-                CameraShake.Instance.StartShake(0.1f, 1f, 0.5f, 5f);
-                StartCoroutine(ResetShakeState());
-            }
+
+            CameraShaker.Instance.ShakeOnce(5f, 5f, 0.2f, 0.2f);
         }
 
         CreateBombFragments(bomb.transform.position);

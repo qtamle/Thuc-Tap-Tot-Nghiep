@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using EZCameraShake;
+using System.Collections;
 using Unity.Netcode;
 using UnityEngine;
+using EZCameraShake;
 
 public class BigBomb : NetworkBehaviour
 {
@@ -25,12 +27,7 @@ public class BigBomb : NetworkBehaviour
     {
         StartCoroutine(WaitForExplode());
 
-        if (!isShaking)
-        {
-            isShaking = true;
-            CameraShake.Instance.StartShake(0.1f, 1.5f, 0.5f, 5f);
-            StartCoroutine(ResetShakeState());
-        }
+        CameraShaker.Instance.ShakeOnce(5f, 5f, 0.2f, 0.2f);
 
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(
             transform.position,

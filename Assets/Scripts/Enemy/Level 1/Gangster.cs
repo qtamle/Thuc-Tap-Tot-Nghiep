@@ -2,6 +2,7 @@
 using Unity.Netcode;
 using Unity.Netcode.Components;
 using UnityEngine;
+using EZCameraShake;
 
 public class Gangster : NetworkBehaviour
 {
@@ -221,7 +222,7 @@ public class Gangster : NetworkBehaviour
 
         yield return new WaitUntil(() => isGrounded);
 
-        CameraShake.Instance?.StartShake(0.1f, 0.5f, 0.3f, 3f);
+        CameraShaker.Instance?.ShakeOnce(5f, 5f, 0.1f, 0.1f);
 
         yield return new WaitForSeconds(1f);
 
@@ -328,7 +329,7 @@ public class Gangster : NetworkBehaviour
 
         if (gangsterHealth != null)
         {
-            CameraShake.Instance?.StartShake(0.1f, 0.5f, 0.5f, 3f);
+            CameraShaker.Instance.ShakeOnce(5f, 5f, 0.1f, 0.1f);
             animator.SetBool("Run", false);
             animator.SetBool("Stun", true);
             gangsterHealth.StunForDuration(3f);

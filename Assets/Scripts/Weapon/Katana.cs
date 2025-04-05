@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using EZCameraShake;
+using System.Collections;
 using System.Linq;
 using Unity.Netcode;
 using UnityEngine;
@@ -339,12 +340,7 @@ public class Katana : NetworkBehaviour
         {
             if (enemy != null && enemy.gameObject != null && enemy.gameObject.activeInHierarchy)
             {
-                if (!isShaking)
-                {
-                    isShaking = true;
-                    CameraShake.Instance.StartShake(0.1f, 1f, 0.5f, 5f);
-                    StartCoroutine(ResetShakeState());
-                }
+                CameraShaker.Instance.ShakeOnce(4f, 4f, 0.1f, 0.1f);
 
                 yield return StartCoroutine(HandleEnemyDeath(enemy.gameObject, enemy.transform.position));
 
@@ -421,12 +417,7 @@ public class Katana : NetworkBehaviour
                 AttackBossServerRpc(bossNetworkObject);
                 isAttackBoss = true;
 
-                if (!isShaking)
-                {
-                    isShaking = true;
-                    CameraShake.Instance.StartShake(0.1f, 3f, 1.5f, 5f);
-                    StartCoroutine(ResetShakeState());
-                }
+                CameraShaker.Instance.ShakeOnce(8f, 8f, 0.3f, 0.3f);
 
                 damageable.SetCanBeDamaged(false);
                 SpawnCoinsServerRpc(false, coinSpawnMin, coinSpawnMax, boss.transform.position);

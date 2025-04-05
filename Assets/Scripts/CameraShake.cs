@@ -30,11 +30,18 @@ public class CameraShake : MonoBehaviour
         transform.SetParent(cameraParent); 
     }
 
+    private void Start()
+    {
+        originalPosition = mainCamera.transform.localPosition;
+        originalRotation = mainCamera.transform.localRotation;
+    }
+
     private void Update()
     {
         if (!isShaking)
         {
-            mainCamera.transform.localRotation = Quaternion.Euler(0, 0, 0);
+            mainCamera.transform.localPosition = originalPosition; 
+            mainCamera.transform.localRotation = originalRotation; 
         }
     }
 
@@ -42,7 +49,6 @@ public class CameraShake : MonoBehaviour
     {
         if (!isShakeEnabled) yield break;
 
-        // Đánh dấu là bắt đầu shake
         isShaking = true;
 
         originalPosition = mainCamera.transform.localPosition;

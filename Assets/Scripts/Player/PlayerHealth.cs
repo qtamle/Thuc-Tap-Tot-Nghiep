@@ -3,6 +3,7 @@ using TMPro;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using EZCameraShake;
 
 public class PlayerHealth : NetworkBehaviour, DamagePlayerInterface
 {
@@ -266,12 +267,7 @@ public class PlayerHealth : NetworkBehaviour, DamagePlayerInterface
 
     public void DamagePlayer(int damage)
     {
-        if (!isShaking)
-        {
-            isShaking = true;
-            CameraShake.Instance.StartShake(0.1f, 0.5f, 0.5f, 3.5f);
-            StartCoroutine(ResetShakeState());
-        }
+        CameraShaker.Instance.ShakeOnce(4f, 4f, 0.1f, 0.1f);
 
         if (isDead || isInvincible) // Kiểm tra thêm isDead
         {
