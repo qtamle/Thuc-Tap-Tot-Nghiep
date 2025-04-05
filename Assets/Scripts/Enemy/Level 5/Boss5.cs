@@ -752,9 +752,11 @@ public class Boss5 : NetworkBehaviour
                 if (bombLaser != null)
                 {
                     // Gọi hàm qua MusicManager để gọi âm thanh khi Skill xuất hiện trên Scene
-                    MusicManager.instance.PlaySoundEffect("Laser_Skill");
+                  //  MusicManager.instance.PlaySoundEffect("Laser_Skill");
                     // Gọi hàm qua RPC để đảm bảo chạy trên tất cả clients
                     StartCoroutine(bombLaser.WaitForExplode());
+
+                    MusicManager.instance.PlaySoundEffect("Laser_Skill");
                 }
                 else
                 {
