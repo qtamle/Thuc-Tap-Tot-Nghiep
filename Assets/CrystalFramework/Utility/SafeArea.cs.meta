@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: c97afc556caea1c44969477eb7ddec74
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 130488
+  packageName: Safe Area Helper
+  packageVersion: 1.0.6
+  assetPath: Assets/CrystalFramework/Utility/SafeArea.cs
+  uploadId: 385285
