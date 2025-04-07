@@ -49,9 +49,15 @@ public class EnemyManager : NetworkBehaviour
     // Gọi hàm này khi quái bị tiêu diệt
     public void OnEnemyKilled()
     {
-        if (!IsServer)
-            return; // Chỉ Server mới cập nhật biến
-        onEnemyKilledServerRpc();
+        if (IsServer)
+        {
+            enemiesKilled.Value++;
+        }
+        else
+        {
+            onEnemyKilledServerRpc();
+        }
+
         if (enemiesKilled.Value >= killTarget.Value)
         {
             DestroyRemainingEnemies();

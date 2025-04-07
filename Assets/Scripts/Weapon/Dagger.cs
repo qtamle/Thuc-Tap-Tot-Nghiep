@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using System.Linq;
+using EZCameraShake;
 using Unity.Netcode;
 using Unity.Netcode.Components;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using EZCameraShake;
 
 public class Dagger : NetworkBehaviour
 {
@@ -73,6 +73,7 @@ public class Dagger : NetworkBehaviour
     private WeaponPlayerInfo weaponInfo;
 
     private bool isShaking;
+
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -301,7 +302,9 @@ public class Dagger : NetworkBehaviour
 
                 CameraShaker.Instance.ShakeOnce(4f, 4f, 0.1f, 0.1f);
 
-                yield return StartCoroutine(HandleEnemyDeath(enemy.gameObject, enemy.transform.position));
+                yield return StartCoroutine(
+                    HandleEnemyDeath(enemy.gameObject, enemy.transform.position)
+                );
 
                 if (EnemyManager.Instance != null)
                 {
@@ -535,7 +538,6 @@ public class Dagger : NetworkBehaviour
         Vector3 position
     )
     {
-
         Debug.Log($"ServerRpc called - isSecondary: {isSecondary}, position: {position}");
         bool isGoldIncreaseActive = goldIncrease != null && goldIncrease.IsReady();
         float initialCoinCount = Random.Range(minAmount, maxAmount + 1);
@@ -821,7 +823,9 @@ public class Dagger : NetworkBehaviour
 
     private IEnumerator HandleEnemyDeath(GameObject enemyObject, Vector3 position)
     {
-        SpriteRenderer firstSprite = enemyObject.GetComponentsInChildren<SpriteRenderer>(true).FirstOrDefault();
+        SpriteRenderer firstSprite = enemyObject
+            .GetComponentsInChildren<SpriteRenderer>(true)
+            .FirstOrDefault();
 
         if (firstSprite == null)
         {
@@ -843,9 +847,7 @@ public class Dagger : NetworkBehaviour
             Debug.LogWarning("Không tìm thấy SpriteRenderer trong enemy hoặc cha.");
         }
 
-        Animator lastAnim = enemyObject
-            .GetComponentsInChildren<Animator>(true) 
-            .LastOrDefault();
+        Animator lastAnim = enemyObject.GetComponentsInChildren<Animator>(true).LastOrDefault();
 
         if (lastAnim != null)
         {

@@ -206,7 +206,7 @@ GameObject:
   - component: {fileID: 4045210816057616919}
   - component: {fileID: -1084915939019830312}
   - component: {fileID: 2653475490359445470}
-  - component: {fileID: 5629942818604215633}
+  - component: {fileID: 508380806367557974}
   m_Layer: 3
   m_Name: PlayerDagger
   m_TagString: Player
@@ -374,6 +374,7 @@ MonoBehaviour:
   isIceMovementActive: 0
   isChangingDirection: 0
   isMovementLocked: 1
+  networkAnimator: {fileID: 508380806367557974}
 --- !u!61 &1348982238424638904
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -552,7 +553,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &5629942818604215633
+--- !u!114 &508380806367557974
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -561,7 +562,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6425361517199885815}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8d0727d5ae3244e3b569694d3912374, type: 3}
+  m_Script: {fileID: 11500000, guid: 861437e0e1ebe2d43be4218a7f09cc90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1

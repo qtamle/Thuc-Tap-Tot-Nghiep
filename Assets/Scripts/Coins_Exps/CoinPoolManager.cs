@@ -56,15 +56,14 @@ public class CoinPoolManager : NetworkBehaviour
         );
         GameObject obj = networkObject.gameObject;
         // obj.GetComponent<NetworkObject>().Spawn();
+        if (!networkObject.IsSpawned)
+        {
+            networkObject.Spawn();
+        }
         if (networkObject == null)
         {
             Debug.LogError("Failed to get coin from pool");
             return null;
-        }
-
-        if (!networkObject.IsSpawned)
-        {
-            networkObject.Spawn();
         }
 
         // Kích hoạt các component

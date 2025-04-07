@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using Unity.Netcode;
+using Unity.Netcode.Components;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -56,6 +57,9 @@ public class PlayerMovement : NetworkBehaviour
     public bool isMovementLocked = true;
 
     private Animator animator;
+
+    public ClientNetworkAnimator networkAnimator;
+
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -115,8 +119,7 @@ public class PlayerMovement : NetworkBehaviour
             isIceStaking = false;
         }
 
-
-        animator.SetBool("Idle", true);
+        networkAnimator.Animator.SetBool("Idle", true);
     }
 
     private void OnDestroy()
@@ -145,8 +148,8 @@ public class PlayerMovement : NetworkBehaviour
         }
         else
         {
-            animator.SetBool("Idle", true);
-            animator.SetBool("Run", false);
+            networkAnimator.Animator.SetBool("Idle", true);
+            networkAnimator.Animator.SetBool("Run", false);
         }
 
         FlipPlayer();
@@ -302,7 +305,7 @@ public class PlayerMovement : NetworkBehaviour
         if (!isGrounded || isJumping)
             return;
 
-        animator.SetTrigger("Jump");
+        networkAnimator.SetTrigger("Jump");
 
         isJumping = true;
         rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
@@ -319,7 +322,7 @@ public class PlayerMovement : NetworkBehaviour
     {
         if (isGrounded && currentGround != null && !currentGround.CompareTag(finalFloorTag))
         {
-            animator.SetTrigger("Jump");
+            networkAnimator.SetTrigger("Jump");
 
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, -jumpForce * 0.3f);
 
@@ -350,15 +353,26 @@ public class PlayerMovement : NetworkBehaviour
         platformEffector.surfaceArc = 180;
     }
 
+    // [ServerRpc(RequireOwnership = false)]
+    // private void RunServerRpc()
+    // {
+    //     bool isMoving = Mathf.Abs(moveDirection) > 0.01f;
+
+    //     networkAnimator.Animator.SetBool("Idle", !isMoving);
+    //     networkAnimator.Animator.SetBool("Run", isMoving);
+    // }
+
     void MovePlayer()
     {
         if (isMovementLocked || !canMove)
             return;
+        if (IsOwner)
+        {
+            bool isMoving = Mathf.Abs(moveDirection) > 0.01f;
 
-        bool isMoving = Mathf.Abs(moveDirection) > 0.01f;
-
-        animator.SetBool("Idle", !isMoving);
-        animator.SetBool("Run", isMoving);
+            animator.SetBool("Idle", !isMoving);
+            animator.SetBool("Run", isMoving);
+        }
 
         if (isIceMovementActive)
         {

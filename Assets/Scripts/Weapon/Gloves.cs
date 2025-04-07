@@ -1,11 +1,12 @@
-﻿using EZCameraShake;
-using System.Collections;
+﻿using System.Collections;
 using System.Linq;
+using EZCameraShake;
+using EZCameraShake;
 using Unity.Netcode;
+using Unity.Netcode.Components;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using EZCameraShake;
 
 public class Gloves : NetworkBehaviour
 {
@@ -69,6 +70,7 @@ public class Gloves : NetworkBehaviour
     public GameObject lightingLevel4;
 
     private bool isShaking;
+
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -234,6 +236,25 @@ public class Gloves : NetworkBehaviour
         }
     }
 
+    [ServerRpc(RequireOwnership = false)]
+    public void SpawnLightingServerRpc()
+    {
+        GameObject lighting = Instantiate(lightingLevel4, transform.position, Quaternion.identity);
+        lighting.GetComponent<NetworkObject>().Spawn(true);
+
+        if (lighting != null)
+        {
+            lighting.GetComponent<LineRenderer>().enabled = true;
+            LightningChain light = lighting.GetComponent<LightningChain>();
+            if (light != null)
+            {
+                light.TriggerLightning();
+            }
+        }
+
+        StartCoroutine(DespawnAfterDelay(lighting, 5f));
+    }
+
     private IEnumerator PerformAttack()
     {
         ShowAttackVFX();
@@ -251,7 +272,9 @@ public class Gloves : NetworkBehaviour
             {
                 CameraShaker.Instance.ShakeOnce(4f, 4f, 0.1f, 0.1f);
 
-                yield return StartCoroutine(HandleEnemyDeath(enemy.gameObject, enemy.transform.position));
+                yield return StartCoroutine(
+                    HandleEnemyDeath(enemy.gameObject, enemy.transform.position)
+                );
 
                 if (EnemyManager.Instance != null)
                 {
@@ -297,28 +320,34 @@ public class Gloves : NetworkBehaviour
 
                     if (Random.value <= 0.15f && lucky != null)
                     {
-                        SpawnHealthPotions(enemy.transform.position, 1);
+                        SpawnHealthPotionsServerRpc(enemy.transform.position, 1);
                     }
-                    if (Random.value <= 1f && weaponInfo.weaponLevel > 3)
+                    Debug.Log("weapon info level is: " + weaponInfo.weaponLevel);
+                    if (weaponInfo.weaponLevel > 3)
                     {
-                        GameObject lighting = Instantiate(
-                            lightingLevel4,
-                            transform.position,
-                            Quaternion.identity
-                        );
-                        lighting.GetComponent<NetworkObject>().Spawn(true);
-
-                        if (lighting != null)
+                        if (Random.value <= 1f)
                         {
-                            lighting.GetComponent<LineRenderer>().enabled = true;
-                            LightningChain light = lighting.GetComponent<LightningChain>();
-                            if (light != null)
-                            {
-                                light.TriggerLightning();
-                            }
+                            SpawnLightingServerRpc();
                         }
 
-                        StartCoroutine(DespawnAfterDelay(lighting, 5f));
+                        // GameObject lighting = Instantiate(
+                        //     lightingLevel4,
+                        //     transform.position,
+                        //     Quaternion.identity
+                        // );
+                        // lighting.GetComponent<NetworkObject>().Spawn(true);
+
+                        // if (lighting != null)
+                        // {
+                        //     lighting.GetComponent<LineRenderer>().enabled = true;
+                        //     LightningChain light = lighting.GetComponent<LightningChain>();
+                        //     if (light != null)
+                        //     {
+                        //         light.TriggerLightning();
+                        //     }
+                        // }
+
+                        // StartCoroutine(DespawnAfterDelay(lighting, 5f));
                         // Destroy(lighting, 5f);
                     }
                 }
@@ -363,10 +392,10 @@ public class Gloves : NetworkBehaviour
                         boss.transform.position
                     );
                 }
-                if (Random.value <= 0.15f && lucky != null)
-                {
-                    SpawnHealthPotions(boss.transform.position, 1);
-                }
+                // if (Random.value <= 0.15f && lucky != null)
+                // {
+                //     SpawnHealthPotions(boss.transform.position, 1);
+                // }
 
                 SpawnOrbsServerRpc(boss.transform.position, 20);
             }
@@ -610,7 +639,6 @@ public class Gloves : NetworkBehaviour
         Vector3 position
     )
     {
-        Debug.Log($"ServerRpc called - isSecondary: {isSecondary}, position: {position}");
         bool isGoldIncreaseActive = goldIncrease != null && goldIncrease.IsReady();
         float initialCoinCount = Random.Range(minAmount, maxAmount + 1);
         float coinCount = initialCoinCount;
@@ -736,7 +764,8 @@ public class Gloves : NetworkBehaviour
         }
     }
 
-    void SpawnHealthPotions(Vector3 position, int potionCount)
+    [ServerRpc(RequireOwnership = false)]
+    private void SpawnHealthPotionsServerRpc(Vector3 position, int potionCount)
     {
         for (int i = 0; i < potionCount; i++)
         {
@@ -744,44 +773,64 @@ public class Gloves : NetworkBehaviour
 
             float potionX = position.x + Mathf.Cos(randomAngle * Mathf.Deg2Rad);
             float potionY = position.y + Mathf.Sin(randomAngle * Mathf.Deg2Rad);
-            Vector3 spawnPosition = new Vector3(potionX, potionY, position.z);
+            Vector3 spawnPosition = new Vector3(
+                potionX,
+                potionY,
+                healthPotionPrefab.transform.position.z
+            );
 
             GameObject potion = Instantiate(healthPotionPrefab, spawnPosition, Quaternion.identity);
 
-            Rigidbody2D potionRb = potion.GetComponent<Rigidbody2D>();
+            NetworkObject potionNetworkObject = potion.GetComponent<NetworkObject>();
+            if (potionNetworkObject == null)
+            {
+                potionNetworkObject = potion.AddComponent<NetworkObject>();
+            }
+
+            potionNetworkObject.Spawn(true);
+
+            NetworkRigidbody2D potionRb = potion.GetComponent<NetworkRigidbody2D>();
             if (potionRb != null)
             {
                 Vector2 randomForce =
                     new Vector2(Random.Range(-2f, 2f), Random.Range(1f, 1f)) * 2.5f;
-                potionRb.AddForce(randomForce, ForceMode2D.Impulse);
+                potionRb.Rigidbody2D.AddForce(randomForce, ForceMode2D.Impulse);
 
-                potionRb.bodyType = RigidbodyType2D.Kinematic;
+                potionRb.Rigidbody2D.bodyType = RigidbodyType2D.Kinematic;
 
-                StartCoroutine(MovePotionToPlayer(potion, potionMoveDelay));
+                StartCoroutine(MovePotionToPlayer(potion, potionMoveDelay, OwnerClientId));
             }
         }
     }
 
-    IEnumerator MovePotionToPlayer(GameObject potion, float delay)
+    IEnumerator MovePotionToPlayer(GameObject potion, float delay, ulong targetClientId)
     {
+        // Find the NetworkObject of the player with the given clientId
+        NetworkClient client = NetworkManager.Singleton.ConnectedClients[targetClientId];
+        Transform playerTransform = client.PlayerObject.transform;
         yield return new WaitForSeconds(delay);
 
         if (potion != null && player != null)
         {
-            Rigidbody2D potionRb = potion.GetComponent<Rigidbody2D>();
+            NetworkRigidbody2D potionRb = potion.GetComponent<NetworkRigidbody2D>();
             if (potionRb != null)
             {
                 while (potion != null && player != null)
                 {
-                    Vector3 direction = (player.position - potion.transform.position).normalized;
+                    Vector3 direction = (
+                        playerTransform.position - potion.transform.position
+                    ).normalized;
                     potionRb.MovePosition(
                         potion.transform.position + direction * Time.deltaTime * potionMoveToPlayer
                     );
 
-                    if (Vector3.Distance(potion.transform.position, player.position) < 0.5f)
+                    if (
+                        Vector3.Distance(potion.transform.position, playerTransform.position) < 0.5f
+                    )
                     {
-                        Destroy(potion);
                         health.HealHealth(3);
+                        potion.GetComponent<NetworkObject>().Despawn(true);
+
                         yield break;
                     }
 
@@ -797,7 +846,9 @@ public class Gloves : NetworkBehaviour
 
     private IEnumerator HandleEnemyDeath(GameObject enemyObject, Vector3 position)
     {
-        SpriteRenderer firstSprite = enemyObject.GetComponentsInChildren<SpriteRenderer>(true).FirstOrDefault();
+        SpriteRenderer firstSprite = enemyObject
+            .GetComponentsInChildren<SpriteRenderer>(true)
+            .FirstOrDefault();
 
         if (firstSprite == null)
         {
@@ -819,9 +870,7 @@ public class Gloves : NetworkBehaviour
             Debug.LogWarning("Không tìm thấy SpriteRenderer trong enemy hoặc cha.");
         }
 
-        Animator lastAnim = enemyObject
-            .GetComponentsInChildren<Animator>(true)
-            .LastOrDefault();
+        Animator lastAnim = enemyObject.GetComponentsInChildren<Animator>(true).LastOrDefault();
 
         if (lastAnim != null)
         {

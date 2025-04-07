@@ -161,6 +161,7 @@ public class Attack : NetworkBehaviour
             {
                 if (EnemyManager.Instance != null)
                 {
+                    Debug.Log(" Kill enemy by Client " + NetworkManager.Singleton.LocalClientId);
                     EnemyManager.Instance.OnEnemyKilled();
                 }
 
@@ -218,18 +219,6 @@ public class Attack : NetworkBehaviour
                 {
                     Debug.LogWarning("Enemy does not have a NetworkObject component!");
                 }
-                // SpawnCoins(coinPrefab, coinSpawnMin, coinSpawnMax, enemy.transform.position);
-
-                // if (Random.value <= 0.30f)
-                // {
-                //     SpawnCoins(
-                //         secondaryCoinPrefab,
-                //         secondaryCoinSpawnMin,
-                //         secondaryCoinSpawnMax,
-                //         enemy.transform.position
-                //     );
-                // }
-                // Spawn coins
             }
         }
 
@@ -252,25 +241,23 @@ public class Attack : NetworkBehaviour
                     AttackBossServerRpc(bossNetworkObject);
                     isAttackBoss = true;
                     damageable.SetCanBeDamaged(false);
-                    // SpawnCoinsServerRpc(
-                    //     false,
-                    //     coinSpawnMin * 10,
-                    //     coinSpawnMax * 10,
-                    //     boss.transform.position,
-                    //     bossNetworkObject.NetworkObjectId
-                    // );
+                    SpawnCoinsServerRpc(
+                        false,
+                        coinSpawnMin * 10,
+                        coinSpawnMax * 10,
+                        boss.transform.position
+                    );
 
-                    // if (Random.value <= 0.25f)
-                    // {
-                    //     Debug.Log("Attack cua ChainSaw de spawn coin2");
-                    //     SpawnCoinsServerRpc(
-                    //         true,
-                    //         secondaryCoinSpawnMin,
-                    //         secondaryCoinSpawnMax,
-                    //         boss.transform.position,
-                    //         bossNetworkObject.NetworkObjectId
-                    //     );
-                    // }
+                    if (Random.value <= 0.25f)
+                    {
+                        Debug.Log("Attack cua ChainSaw de spawn coin2");
+                        SpawnCoinsServerRpc(
+                            true,
+                            secondaryCoinSpawnMin,
+                            secondaryCoinSpawnMax,
+                            boss.transform.position
+                        );
+                    }
 
                     // if (Random.value <= 0.15f && lucky != null)
                     // {
