@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class AdButton : MonoBehaviour
 {
-    [SerializeField] private UnityInterstitial adManager; // Gán trong Inspector
+    [SerializeField] private UnityInterstitial adManager;
     private Button adButton;
 
     private void Start()
@@ -22,5 +22,6 @@ public class AdButton : MonoBehaviour
     private void ShowAd()
     {
         adManager.ShowAd();
+        gameObject.SetActive(false);
     }
 }
