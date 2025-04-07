@@ -10,7 +10,6 @@ public class UnityInterstitial : MonoBehaviour, IUnityAdsInitializationListener,
     [SerializeField] bool _testMode = true;
 
 
-
     void Start()
     {
         InitializeAds();
