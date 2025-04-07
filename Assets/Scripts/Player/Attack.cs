@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Linq;
 using Unity.Netcode;
+using Unity.Netcode.Components;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -186,26 +187,26 @@ public class Attack : NetworkBehaviour
                 {
                     // Gọi ServerRpc để hủy đối tượng
                     AttackEnemyServerRpc(networkObject.NetworkObjectId);
-                    // SpawnCoinsServerRpc(
-                    //     false,
-                    //     coinSpawnMin,
-                    //     coinSpawnMax,
-                    //     enemy.transform.position
-                    // );
-                    // if (Random.value <= 0.30f)
-                    // {
-                    //     SpawnCoinsServerRpc(
-                    //         true,
-                    //         secondaryCoinSpawnMin,
-                    //         secondaryCoinSpawnMax,
-                    //         enemy.transform.position
-                    //     );
-                    // }
-
-                    if (Random.value <= 0.15f && lucky != null)
+                    SpawnCoinsServerRpc(
+                        false,
+                        coinSpawnMin,
+                        coinSpawnMax,
+                        enemy.transform.position
+                    );
+                    if (Random.value <= 0.30f)
                     {
-                        SpawnHealthPotions(enemy.transform.position, 1);
+                        SpawnCoinsServerRpc(
+                            true,
+                            secondaryCoinSpawnMin,
+                            secondaryCoinSpawnMax,
+                            enemy.transform.position
+                        );
                     }
+
+                    // if (Random.value <= 0.15f && lucky != null)
+                    // {
+                    //     SpawnHealthPotions(enemy.transform.position, 1);
+                    // }
 
                     if (Random.value <= 0.35f && bouncingSaw != null && weaponInfo.weaponLevel > 3)
                     {
@@ -538,8 +539,7 @@ public class Attack : NetworkBehaviour
         bool isSecondary,
         float minAmount,
         float maxAmount,
-        Vector3 position,
-        ulong clientId
+        Vector3 position
     )
     {
         Debug.Log($"ServerRpc called - isSecondary: {isSecondary}, position: {position}");
@@ -552,11 +552,6 @@ public class Attack : NetworkBehaviour
             coinCount += goldIncrease.increaseGoldChange;
         }
 
-        if (weaponInfo != null && weaponInfo.weaponLevel > 1)
-        {
-            coinCount += increaseCoins;
-        }
-
         for (int i = 0; i < coinCount; i++)
         {
             Vector3 spawnPosition = position + Vector3.up * 0.2f;
@@ -565,13 +560,14 @@ public class Attack : NetworkBehaviour
                 isSecondary
             );
 
-            Rigidbody2D coinRb = coin.GetComponent<Rigidbody2D>();
+            NetworkRigidbody2D coinRb = coin.GetComponent<NetworkRigidbody2D>();
+
             if (coinRb != null)
             {
                 Vector2 forceDirection =
                     new Vector2(Random.Range(-1.5f, 1.5f), Random.Range(1f, 1f)) * 2.5f;
-                coinRb.AddForce(forceDirection, ForceMode2D.Impulse);
-                StartCoroutine(CheckIfCoinIsStuck(coinRb));
+                coinRb.Rigidbody2D.AddForce(forceDirection, ForceMode2D.Impulse);
+                StartCoroutine(CheckIfCoinIsStuck(coinRb.Rigidbody2D));
             }
 
             CoinsScript coinScript = coin.GetComponent<CoinsScript>();
