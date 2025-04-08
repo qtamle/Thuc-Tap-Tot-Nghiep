@@ -6,10 +6,18 @@ using UnityEngine.SceneManagement;
 public class SummonTurret : NetworkBehaviour, ISupplyActive
 {
     public SupplyData supplyData;
-    [SerializeField] private bool isActive = true;
-    [SerializeField] private float cooldownTime = 5f;
-    [SerializeField] private string spawnPointTag = "SpawnPoint";
-    [SerializeField] private GameObject turretPrefab;
+
+    [SerializeField]
+    private bool isActive = true;
+
+    [SerializeField]
+    private float cooldownTime = 5f;
+
+    [SerializeField]
+    private string spawnPointTag = "SpawnPoint";
+
+    [SerializeField]
+    private GameObject turretPrefab;
 
     private Transform[] spawnPoints;
     private bool hasSpawn = false;
@@ -48,7 +56,7 @@ public class SummonTurret : NetworkBehaviour, ISupplyActive
     {
         if (!hasSpawn)
         {
-            StartCoroutine(SummonAndFire()); 
+            StartCoroutine(SummonAndFire());
         }
     }
 
@@ -56,8 +64,7 @@ public class SummonTurret : NetworkBehaviour, ISupplyActive
     {
         if (Random.value > 0.35f)
         {
-            yield break; 
-
+            yield break;
         }
         if (!IsLevelTagFound())
         {
@@ -83,7 +90,7 @@ public class SummonTurret : NetworkBehaviour, ISupplyActive
             turretScript.InitializeTurret();
         }
 
-        hasSpawn = true;  
+        hasSpawn = true;
         isActive = false;
 
         yield return StartCoroutine(CooldownRoutine());
@@ -94,7 +101,7 @@ public class SummonTurret : NetworkBehaviour, ISupplyActive
         yield return new WaitForSeconds(cooldownTime);
 
         isActive = true;
-        hasSpawn = false; 
+        hasSpawn = false;
     }
 
     private void FindSpawnPoints()
@@ -148,7 +155,6 @@ public class SummonTurret : NetworkBehaviour, ISupplyActive
             {
                 if (obj.CompareTag(tag))
                 {
-                    Debug.Log("Tìm thấy đúng level");
                     return true;
                 }
             }

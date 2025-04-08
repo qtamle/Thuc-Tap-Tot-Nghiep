@@ -1,9 +1,9 @@
 ﻿using System.Collections;
+using EZCameraShake;
 using TMPro;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using EZCameraShake;
 
 public class PlayerHealth : NetworkBehaviour, DamagePlayerInterface
 {
@@ -40,6 +40,7 @@ public class PlayerHealth : NetworkBehaviour, DamagePlayerInterface
 
     private LevelSystem levelSystem;
     private GameObject CurrentHealth;
+    private GameObject CurrentShield;
     private GameObject player;
 
     [Header("Supply")]
@@ -68,6 +69,7 @@ public class PlayerHealth : NetworkBehaviour, DamagePlayerInterface
     public event HealthChangedHandler OnHealthChanged;
 
     private bool isShaking;
+
     private void Awake() { }
 
     private void Start()
@@ -111,45 +113,47 @@ public class PlayerHealth : NetworkBehaviour, DamagePlayerInterface
         GameObject CurrentHealth = GameObject.Find("CurrentHealth");
         GameObject Shield = GameObject.Find("Shield");
 
-        GameObject currentHealthObject = GameObject.FindGameObjectWithTag("Health");
-        GameObject shieldObject = GameObject.FindGameObjectWithTag("Shield");
+        CurrentHealth = GameObject.FindWithTag("Health");
+        CurrentShield = GameObject.FindWithTag("Shield");
 
-        if (currentHealthObject != null)
+        if (CurrentHealth != null)
         {
-            healthText = currentHealthObject?.GetComponent<TMP_Text>();
+            healthText = CurrentHealth?.GetComponent<TMP_Text>();
             healthText.text = currentHealth.ToString();
         }
 
-        if (shieldObject != null)
+        if (CurrentShield != null)
         {
-            shieldText = shieldObject?.GetComponent<TMP_Text>();
+            shieldText = CurrentShield?.GetComponent<TMP_Text>();
             shieldText.text = currentShield.ToString();
         }
-        // 1. KHÔI PHỤC DỮ LIỆU TỪ GAMEMANAGER (nếu có)
-        if (IsServer)
-        {
-            var (savedHealth, savedShield) = GameManager.Instance.GetPlayerHealthData(
-                OwnerClientId
-            );
+        // // 1. KHÔI PHỤC DỮ LIỆU TỪ GAMEMANAGER (nếu có)
+        // if (IsOwner)
+        // {
+        //     var (savedHealth, savedShield) = GameManager.Instance.GetPlayerHealthData(
+        //         OwnerClientId
+        //     );
 
-            bool savedHasShieldSacrifice = GameManager.Instance.GetPlayerShieldSacrifice(OwnerClientId);
-            bool angel = GameManager.Instance.GetPlayerAngelGuardian(OwnerClientId);
-            bool medkit = GameManager.Instance.GetPlayerMedkit(OwnerClientId);
-            bool shield = GameManager.Instance.GetPlayerAddShield(OwnerClientId);
+        //     bool savedHasShieldSacrifice = GameManager.Instance.GetPlayerShieldSacrifice(
+        //         OwnerClientId
+        //     );
+        //     bool angel = GameManager.Instance.GetPlayerAngelGuardian(OwnerClientId);
+        //     bool medkit = GameManager.Instance.GetPlayerMedkit(OwnerClientId);
+        //     bool shield = GameManager.Instance.GetPlayerAddShield(OwnerClientId);
 
-            if (savedHealth > 0) // Nếu có dữ liệu đã lưu
-            {
-                currentHealth = savedHealth;
-                currentShield = savedShield;
-                hasCheckedSacrifice = savedHasShieldSacrifice;
-                hasRevived = angel;
-                hasAddHealthMedkit = medkit;
-                hasAddShield = shield;
-                Debug.Log(
-                    $"Khôi phục máu/khiên: {currentHealth}/{maxHealth}, Shield: {currentShield}"
-                );
-            }
-        }
+        //     if (savedHealth > 0) // Nếu có dữ liệu đã lưu
+        //     {
+        //         currentHealth = savedHealth;
+        //         currentShield = savedShield;
+        //         hasCheckedSacrifice = savedHasShieldSacrifice;
+        //         hasRevived = angel;
+        //         hasAddHealthMedkit = medkit;
+        //         hasAddShield = shield;
+        //         Debug.Log(
+        //             $"Khôi phục máu/khiên: {currentHealth}/{maxHealth}, Shield: {currentShield}"
+        //         );
+        //     }
+        // }
 
         // Find supply in scene
         angel = GetComponentInChildren<AngelGuardian>();
