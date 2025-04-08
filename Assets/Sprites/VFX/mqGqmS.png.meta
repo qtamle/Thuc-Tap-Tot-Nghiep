@@ -145,7 +145,7 @@ TextureImporter:
         width: 180
         height: 166
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -167,7 +167,7 @@ TextureImporter:
         width: 180
         height: 166
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -189,7 +189,7 @@ TextureImporter:
         width: 180
         height: 166
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -198,6 +198,28 @@ TextureImporter:
       bones: []
       spriteID: 2809d120e4b0bfd20800000000000000
       internalID: 3313254380531978370
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mqGqmS_3
+      rect:
+        serializedVersion: 2
+        x: 541
+        y: 0
+        width: 178
+        height: 166
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 38960f1241fb3be4e80f75bcd636af7c
+      internalID: -2113653720
       vertices: []
       indices: 
       edges: []
@@ -219,6 +241,7 @@ TextureImporter:
       mqGqmS_0: 1734099930596669537
       mqGqmS_1: 7858172721586539700
       mqGqmS_2: 3313254380531978370
+      mqGqmS_3: -2113653720
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
