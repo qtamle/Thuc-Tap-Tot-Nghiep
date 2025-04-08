@@ -1,6 +1,6 @@
-﻿using EZCameraShake;
-using System.Collections;
+﻿using System.Collections;
 using System.Linq;
+using EZCameraShake;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -76,8 +76,14 @@ public class Katana : NetworkBehaviour
     private WeaponPlayerInfo weaponInfo;
 
     private KatanaLevel4 katanaLevel4;
+    public ClientNetworkAnimator LeftRightAnimator;
+
+    public ClientNetworkAnimator UpAnimator;
+
+    public ClientNetworkAnimator DownAnimator;
 
     private bool isShaking;
+
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -114,7 +120,6 @@ public class Katana : NetworkBehaviour
         OnSceneLoaded(SceneManager.GetActiveScene(), LoadSceneMode.Single);
     }
 
-
     [ServerRpc(RequireOwnership = false)]
     private void FindPlayerServerRpc(ulong clientId) // Thêm clientId làm tham số
     {
@@ -144,7 +149,6 @@ public class Katana : NetworkBehaviour
             weaponInfo = GetComponentInChildren<WeaponPlayerInfo>();
         }
     }
-
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
@@ -209,6 +213,24 @@ public class Katana : NetworkBehaviour
         isShaking = false;
     }
 
+    [ServerRpc(RequireOwnership = false)]
+    private void AttackVFXServerRpc()
+    {
+        LeftRightAnimator.SetTrigger("Attack");
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void UpAttackVFXServerRpc()
+    {
+        UpAnimator.SetTrigger("AttackUp");
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void DownAttackVFXServerRpc()
+    {
+        DownAnimator.SetTrigger("AttackDown");
+    }
+
     private bool IsInputDetected(out SwipeDirection direction)
     {
         direction = SwipeDirection.None;
@@ -243,10 +265,20 @@ public class Katana : NetworkBehaviour
                     if (absY > absX * diagonalTolerance) // Vuốt dọc
                     {
                         direction = mouseDelta.y > 0 ? SwipeDirection.Up : SwipeDirection.Down;
+                        if (direction == SwipeDirection.Up)
+                        {
+                            // Add logic here if needed
+                            UpAttackVFXServerRpc();
+                        }
+                        else
+                        {
+                            DownAttackVFXServerRpc();
+                        }
                     }
                     else // Vuốt ngang hoặc không rõ
                     {
                         direction = SwipeDirection.Normal;
+                        AttackVFXServerRpc();
                     }
 
                     lastMousePosition = Input.mousePosition;
@@ -286,10 +318,20 @@ public class Katana : NetworkBehaviour
                         if (absY > absX * diagonalTolerance) // Vuốt dọc
                         {
                             direction = touchDelta.y > 0 ? SwipeDirection.Up : SwipeDirection.Down;
+                            if (direction == SwipeDirection.Up)
+                            {
+                                // Add logic here if needed
+                                UpAttackVFXServerRpc();
+                            }
+                            else
+                            {
+                                DownAttackVFXServerRpc();
+                            }
                         }
                         else // Vuốt ngang hoặc không rõ
                         {
                             direction = SwipeDirection.Normal;
+                            AttackVFXServerRpc();
                         }
 
                         lastMousePosition = touch.position;
@@ -342,7 +384,9 @@ public class Katana : NetworkBehaviour
             {
                 CameraShaker.Instance.ShakeOnce(4f, 4f, 0.1f, 0.1f);
 
-                yield return StartCoroutine(HandleEnemyDeath(enemy.gameObject, enemy.transform.position));
+                yield return StartCoroutine(
+                    HandleEnemyDeath(enemy.gameObject, enemy.transform.position)
+                );
 
                 if (EnemyManager.Instance != null)
                 {
@@ -854,7 +898,9 @@ public class Katana : NetworkBehaviour
 
     private IEnumerator HandleEnemyDeath(GameObject enemyObject, Vector3 position)
     {
-        SpriteRenderer firstSprite = enemyObject.GetComponentsInChildren<SpriteRenderer>(true).FirstOrDefault();
+        SpriteRenderer firstSprite = enemyObject
+            .GetComponentsInChildren<SpriteRenderer>(true)
+            .FirstOrDefault();
 
         if (firstSprite == null)
         {
@@ -876,9 +922,7 @@ public class Katana : NetworkBehaviour
             Debug.LogWarning("Không tìm thấy SpriteRenderer trong enemy hoặc cha.");
         }
 
-        Animator lastAnim = enemyObject
-            .GetComponentsInChildren<Animator>(true)
-            .LastOrDefault();
+        Animator lastAnim = enemyObject.GetComponentsInChildren<Animator>(true).LastOrDefault();
 
         if (lastAnim != null)
         {

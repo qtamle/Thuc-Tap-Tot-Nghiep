@@ -67,6 +67,8 @@ public class Gloves : NetworkBehaviour
 
     private WeaponPlayerInfo weaponInfo;
 
+    public ClientNetworkAnimator clientNetworkAnimator;
+
     public GameObject lightingLevel4;
 
     private bool isShaking;
@@ -555,30 +557,16 @@ public class Gloves : NetworkBehaviour
 
     private void ShowAttackVFX()
     {
-        if (vfxPool != null)
+        if (IsOwner)
         {
-            GameObject vfx = vfxPool.Get();
-
-            vfx.transform.position = attackPoints.position;
-            vfx.transform.rotation = Quaternion.identity;
-
-            VFXFollower follower = vfx.GetComponent<VFXFollower>();
-            if (follower != null)
-            {
-                follower.SetTarget(attackPoints, player);
-            }
-
-            StartCoroutine(ReturnVFXToPool(vfx, 0.5f));
+            ShowAttackVFXServerRpc();
         }
     }
 
-    private IEnumerator ReturnVFXToPool(GameObject vfx, float delay)
+    [ServerRpc(RequireOwnership = false)]
+    private void ShowAttackVFXServerRpc()
     {
-        yield return new WaitForSeconds(delay);
-        if (vfxPool != null)
-        {
-            vfxPool.ReturnToPool(vfx);
-        }
+        clientNetworkAnimator.SetTrigger("Attack");
     }
 
     void SpawnCoins(GameObject coinType, float minAmount, float maxAmount, Vector3 position)
