@@ -127,33 +127,33 @@ public class PlayerHealth : NetworkBehaviour, DamagePlayerInterface
             shieldText = CurrentShield?.GetComponent<TMP_Text>();
             shieldText.text = currentShield.ToString();
         }
-        // // 1. KHÔI PHỤC DỮ LIỆU TỪ GAMEMANAGER (nếu có)
-        // if (IsOwner)
-        // {
-        //     var (savedHealth, savedShield) = GameManager.Instance.GetPlayerHealthData(
-        //         OwnerClientId
-        //     );
+        // 1. KHÔI PHỤC DỮ LIỆU TỪ GAMEMANAGER (nếu có)
+        if (IsOwner)
+        {
+            var (savedHealth, savedShield) = GameManager.Instance.GetPlayerHealthData(
+                OwnerClientId
+            );
 
-        //     bool savedHasShieldSacrifice = GameManager.Instance.GetPlayerShieldSacrifice(
-        //         OwnerClientId
-        //     );
-        //     bool angel = GameManager.Instance.GetPlayerAngelGuardian(OwnerClientId);
-        //     bool medkit = GameManager.Instance.GetPlayerMedkit(OwnerClientId);
-        //     bool shield = GameManager.Instance.GetPlayerAddShield(OwnerClientId);
+            bool savedHasShieldSacrifice = GameManager.Instance.GetPlayerShieldSacrifice(
+                OwnerClientId
+            );
+            bool angel = GameManager.Instance.GetPlayerAngelGuardian(OwnerClientId);
+            bool medkit = GameManager.Instance.GetPlayerMedkit(OwnerClientId);
+            bool shield = GameManager.Instance.GetPlayerAddShield(OwnerClientId);
 
-        //     if (savedHealth > 0) // Nếu có dữ liệu đã lưu
-        //     {
-        //         currentHealth = savedHealth;
-        //         currentShield = savedShield;
-        //         hasCheckedSacrifice = savedHasShieldSacrifice;
-        //         hasRevived = angel;
-        //         hasAddHealthMedkit = medkit;
-        //         hasAddShield = shield;
-        //         Debug.Log(
-        //             $"Khôi phục máu/khiên: {currentHealth}/{maxHealth}, Shield: {currentShield}"
-        //         );
-        //     }
-        // }
+            if (savedHealth > 0) // Nếu có dữ liệu đã lưu
+            {
+                currentHealth = savedHealth;
+                currentShield = savedShield;
+                hasCheckedSacrifice = savedHasShieldSacrifice;
+                hasRevived = angel;
+                hasAddHealthMedkit = medkit;
+                hasAddShield = shield;
+                Debug.Log(
+                    $"Khôi phục máu/khiên: {currentHealth}/{maxHealth}, Shield: {currentShield}"
+                );
+            }
+        }
 
         // Find supply in scene
         angel = GetComponentInChildren<AngelGuardian>();
