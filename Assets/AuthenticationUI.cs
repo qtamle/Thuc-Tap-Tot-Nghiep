@@ -4,6 +4,7 @@ using Unity.Services.Authentication;
 using Unity.Services.Core;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class AuthenticationUI : MonoBehaviour
 {
@@ -15,6 +16,24 @@ public class AuthenticationUI : MonoBehaviour
     public TMP_InputField passwordSignUp;
 
     public TMP_Text errorMessageText;
+
+    public GameObject helpUI;
+    public Button helpButton;
+    public Button helpButton2;
+    private bool isShow;
+
+    private void Start()
+    {
+        helpUI.SetActive(false);
+        helpButton.onClick.AddListener(HelpButtonUI);
+        helpButton2.onClick.AddListener(HelpButtonUI);
+    }
+
+    public void HelpButtonUI()
+    {
+        isShow = !isShow; 
+        helpUI.SetActive(isShow);
+    }
 
     void ShowError(string message)
     {
