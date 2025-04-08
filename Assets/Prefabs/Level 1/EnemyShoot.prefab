@@ -504,7 +504,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4508e56722b09c0478492b8251b82102, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boxSize: {x: 1, y: 1.7}
+  boxSize: {x: 0.6, y: 1.71}
   playerLayer:
     serializedVersion: 2
     m_Bits: 8
