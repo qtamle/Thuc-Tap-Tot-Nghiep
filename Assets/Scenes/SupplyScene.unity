@@ -8236,7 +8236,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &941814595
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16624,9 +16624,13 @@ MonoBehaviour:
   flashInterval: 0.1
   isInvincible: 0
   hasRevived: 0
+  hasCheckedSacrifice: 0
   hasAddShieldGloves: 0
   hasAddShieldClaws: 0
   hasAddShieldChainsaw: 0
+  hasAddHealthMedkit: 0
+  hasAddShield: 0
+  healthData: {fileID: 0}
 --- !u!61 &1765298849
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -16744,6 +16748,7 @@ MonoBehaviour:
   isIceMovementActive: 0
   isChangingDirection: 0
   isMovementLocked: 1
+  networkAnimator: {fileID: 0}
 --- !u!50 &1765298852
 Rigidbody2D:
   serializedVersion: 5
