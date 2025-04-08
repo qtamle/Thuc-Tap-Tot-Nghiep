@@ -321,45 +321,48 @@ public class Dagger : NetworkBehaviour
                     health.HealHealth(1);
                 }
                 // Kiểm tra và hủy enemy
-                NetworkObject networkObject =
-                    enemy.gameObject.GetComponentInParent<NetworkObject>();
-                if (networkObject == null)
+                if (enemy.gameObject != null)
                 {
-                    networkObject = enemy.GetComponent<NetworkObject>();
-                }
-
-                if (networkObject != null)
-                {
-                    // Gọi ServerRpc để hủy đối tượng
-                    AttackEnemyServerRpc(networkObject.NetworkObjectId);
-                    SpawnCoinsServerRpc(
-                        false,
-                        coinSpawnMin,
-                        coinSpawnMax,
-                        enemy.transform.position
-                    );
-
-                    if (Random.value <= 0.30f)
+                    NetworkObject networkObject =
+                        enemy.gameObject.GetComponentInParent<NetworkObject>();
+                    if (networkObject == null)
                     {
+                        networkObject = enemy.GetComponent<NetworkObject>();
+                    }
+
+                    if (networkObject != null)
+                    {
+                        // Gọi ServerRpc để hủy đối tượng
+                        AttackEnemyServerRpc(networkObject.NetworkObjectId);
                         SpawnCoinsServerRpc(
-                            true,
-                            secondaryCoinSpawnMin,
-                            secondaryCoinSpawnMax,
+                            false,
+                            coinSpawnMin,
+                            coinSpawnMax,
                             enemy.transform.position
                         );
-                    }
 
-                    if (ShouldSpawnPotion())
+                        if (Random.value <= 0.30f)
+                        {
+                            SpawnCoinsServerRpc(
+                                true,
+                                secondaryCoinSpawnMin,
+                                secondaryCoinSpawnMax,
+                                enemy.transform.position
+                            );
+                        }
+
+                        if (ShouldSpawnPotion())
+                        {
+                            SpawnHealthPotionsServerRpc(enemy.transform.position, 1);
+                        }
+                    }
+                    else
                     {
-                        SpawnHealthPotionsServerRpc(enemy.transform.position, 1);
+                        Debug.LogWarning("Enemy does not have a NetworkObject component!");
                     }
-                }
-                else
-                {
-                    Debug.LogWarning("Enemy does not have a NetworkObject component!");
-                }
 
-                SpawnOrbsServerRpc(enemy.transform.position, 5);
+                    SpawnOrbsServerRpc(enemy.transform.position, 5);
+                }
             }
         }
 

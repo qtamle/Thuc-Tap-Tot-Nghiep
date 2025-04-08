@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -63,7 +64,16 @@ public class EnemySpawner : NetworkBehaviour, IEnemySpawner
             EnemyManager.Instance.killTarget.Value = 10;
             // KillCounterUI.Instance.CounterUI();
             BossSpawnPostion = GameObject.FindWithTag("BossSpawner");
+        }
+        StartCoroutine(Initialize());
+    }
 
+    public IEnumerator Initialize()
+    {
+        // Gọi hàm này từ nơi khác để khởi tạo EnemySpawner
+        if (IsServer)
+        {
+            yield return new WaitForSeconds(4f); // Đợi 4 giây trước khi bắt đầu spawn
             List<EnemySpawnData> pickedEnemies = PickRandomEnemies();
 
             foreach (var spawnData in pickedEnemies)

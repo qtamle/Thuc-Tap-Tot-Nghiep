@@ -32,6 +32,8 @@ public class GameManager : NetworkBehaviour
 
     private Dictionary<ulong, PlayerHealth> playerHealthComponents =
         new Dictionary<ulong, PlayerHealth>();
+
+    public GameObject gameOverUI;
     private bool isGameOver = false;
 
     private int totalPlayers;
@@ -126,6 +128,7 @@ public class GameManager : NetworkBehaviour
         gameObject.transform.position = new Vector3(0, 1000, 0);
         Debug.Log("GameManager player die " + clientId);
         deadPlayersCount++;
+        ShowGameOverUIClientRpc(clientId);
 
         // Kiểm tra nếu tất cả người chơi đã chết
         if (deadPlayersCount >= totalPlayers)
@@ -218,7 +221,6 @@ public class GameManager : NetworkBehaviour
         if (!NetworkManager.Singleton.IsServer)
             return;
         // Đợi vài giây trước khi despawn các player
-        await Task.Delay(2000); // Đợi 2 giây (2000 milliseconds)
         await FadingScript.Instance.FadeOutAsync();
 
         // Xóa tất cả player cũ trước khi chuyển scene
@@ -274,6 +276,8 @@ public class GameManager : NetworkBehaviour
         }
         else
         {
+            NetworkManager.Singleton.SceneManager.OnLoadComplete += OnSceneLoaded;
+
             isSupplyScene.Value = false;
             Debug.Log("Loading SupplyScene");
 
@@ -306,6 +310,47 @@ public class GameManager : NetworkBehaviour
 
             // Hủy đăng ký sự kiện để tránh bị gọi nhiều lần
             NetworkManager.Singleton.SceneManager.OnLoadComplete -= OnSupplySceneLoaded;
+        }
+    }
+
+    public void ClientCloseDeadUI()
+    {
+        ulong myClientId = NetworkManager.Singleton.LocalClientId;
+
+        if (IsServer) // Nếu là Host (Client 1)
+        {
+            CloseGameOverUIClientRpc(myClientId);
+        }
+        else // Nếu là Client 2
+        {
+            RequestCloseUI_ServerRpc(myClientId); // Gửi yêu cầu lên Host
+        }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void RequestCloseUI_ServerRpc(ulong clientId, ServerRpcParams rpcParams = default)
+    {
+        CloseGameOverUIClientRpc(clientId);
+    }
+
+    [ClientRpc]
+    private void ShowGameOverUIClientRpc(ulong targetClientId)
+    {
+        // Chỉ hiển thị UI cho client đã chết
+        if (NetworkManager.Singleton.LocalClientId == targetClientId)
+        {
+            gameOverUI.SetActive(true);
+        }
+    }
+
+    [ClientRpc(RequireOwnership = false)]
+    private void CloseGameOverUIClientRpc(ulong targetClientId)
+    {
+        Debug.Log("CloseGameOverUIClientRpc: " + targetClientId);
+
+        if (NetworkManager.Singleton.LocalClientId == targetClientId)
+        {
+            gameOverUI.SetActive(false);
         }
     }
 

@@ -11,7 +11,7 @@ public class FadingScript : MonoBehaviour
     private CanvasGroup canvasGroup;
 
     [SerializeField]
-    private float fadeDuration = 1.0f; // Giảm thời gian fade để test nhanh hơn (ví dụ 1 giây)
+    private float fadeDuration = 0.5f; // Giảm thời gian fade để test nhanh hơn (ví dụ 1 giây)
 
     private void Awake()
     {

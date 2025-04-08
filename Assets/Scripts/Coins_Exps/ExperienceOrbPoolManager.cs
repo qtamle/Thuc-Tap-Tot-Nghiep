@@ -52,10 +52,10 @@ public class ExperienceOrbPoolManager : NetworkBehaviour
         // GameObject obj = networkObject.gameObject;
         // obj.GetComponent<NetworkObject>().Spawn();
 
-        // if (!networkObject.IsSpawned)
-        // {
-        //     networkObject.Spawn();
-        // }
+        if (!networkObject.IsSpawned)
+        {
+            networkObject.Spawn();
+        }
 
         // Kích hoạt các component
         ExperienceScript experienceScript = networkObject.GetComponent<ExperienceScript>();

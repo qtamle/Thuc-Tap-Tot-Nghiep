@@ -20384,6 +20384,7 @@ MonoBehaviour:
   isIceMovementActive: 0
   isChangingDirection: 0
   isMovementLocked: 1
+  networkAnimator: {fileID: 0}
 --- !u!50 &1229863095
 Rigidbody2D:
   serializedVersion: 5

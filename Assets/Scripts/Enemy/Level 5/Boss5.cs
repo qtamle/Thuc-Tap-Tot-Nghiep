@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using EZCameraShake;
 using Unity.Netcode;
 using UnityEngine;
-using EZCameraShake;
 
 public class Boss5 : NetworkBehaviour
 {
@@ -114,7 +114,7 @@ public class Boss5 : NetworkBehaviour
     private bool isShaking;
 
     private Animator anim;
-    
+
     private void Awake()
     {
         if (Instance == null)
@@ -748,8 +748,7 @@ public class Boss5 : NetworkBehaviour
                     // Gọi hàm qua RPC để đảm bảo chạy trên tất cả clients
                     StartCoroutine(bombLaser.WaitForExplode());
                     // Gọi hàm qua MusicManager để gọi âm thanh khi Skill xuất hiện trên Scene
-                    MusicManager.instance.PlaySoundEffect("Laser_Skill");
-                    
+                    // MusicManager.instance.PlaySoundEffect("Laser_Skill");
                 }
                 else
                 {
