@@ -312,6 +312,7 @@ MonoBehaviour:
   isIceMovementActive: 0
   isChangingDirection: 0
   isMovementLocked: 1
+  networkAnimator: {fileID: 0}
 --- !u!114 &445921663435587308
 MonoBehaviour:
   m_ObjectHideFlags: 0

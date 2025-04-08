@@ -147,7 +147,17 @@ public class WeaponSelectDisplay : NetworkBehaviour
     public void OnReadyButtonClicked()
     {
         ulong clientId = NetworkManager.Singleton.LocalClientId;
-        Ready(clientId, currentSnapWeapon);
+        // Gọi hàm kiểm tra và *lưu trữ* kết quả trả về
+        bool hasWeapon = CheckHasOwnWeapon(currentSnapWeapon); // Ready(clientId, currentSnapWeapon);
+
+        if (hasWeapon)
+        {
+            Ready(clientId, currentSnapWeapon);
+        }
+        else
+        {
+            Debug.Log("Player does not have own weapon: " + currentSnapWeapon.weaponName);
+        }
     }
 
     public void OnUnreadyButtonClicked()
@@ -232,6 +242,20 @@ public class WeaponSelectDisplay : NetworkBehaviour
         {
             currentItem--;
             SnapToCurrentItem();
+        }
+    }
+
+    public bool CheckHasOwnWeapon(WeaponData weaponData)
+    {
+        if (weaponData.isOwned == true)
+        {
+            Debug.Log("Player has own weapon: " + weaponData.weaponName);
+            return true;
+        }
+        else
+        {
+            Debug.Log("Player does not have own weapon: " + weaponData.weaponName);
+            return false;
         }
     }
 

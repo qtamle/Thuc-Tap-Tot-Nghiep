@@ -187,6 +187,7 @@ MonoBehaviour:
   isIceMovementActive: 0
   isChangingDirection: 0
   isMovementLocked: 1
+  networkAnimator: {fileID: 0}
 --- !u!61 &6447889336037118987
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -316,7 +316,7 @@ public class WeaponData : MonoBehaviour
             weaponSprite = weaponData.weaponSprite;
             currentLevel = savedData.currentLevel;
             originalLevel = currentLevel;
-            weaponData.isOwned = savedData.isOwned;
+            isOwned = savedData.isOwned;
 
             // Debug.Log(
             //     $"✅ Dữ liệu vũ khí {weaponName} đã tải từ cloud. Level: {currentLevel}, isOwned: {isOwned}"
