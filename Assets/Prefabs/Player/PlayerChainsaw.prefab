@@ -144,7 +144,7 @@ GameObject:
   - component: {fileID: -596502417142962758}
   - component: {fileID: -2647678339544508011}
   - component: {fileID: -1919379381215756784}
-  - component: {fileID: 5832713105668937835}
+  - component: {fileID: 4038197146641305290}
   m_Layer: 3
   m_Name: PlayerChainsaw
   m_TagString: Player
@@ -312,7 +312,7 @@ MonoBehaviour:
   isIceMovementActive: 0
   isChangingDirection: 0
   isMovementLocked: 1
-  networkAnimator: {fileID: 0}
+  networkAnimator: {fileID: 4038197146641305290}
 --- !u!114 &445921663435587308
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -521,7 +521,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &5832713105668937835
+--- !u!114 &4038197146641305290
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -530,7 +530,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7346428832547731079}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8d0727d5ae3244e3b569694d3912374, type: 3}
+  m_Script: {fileID: 11500000, guid: 861437e0e1ebe2d43be4218a7f09cc90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1

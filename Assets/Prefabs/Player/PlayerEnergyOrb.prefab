@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: -4108238928164603105}
   - component: {fileID: 5073076447947669719}
   - component: {fileID: 7586133053077749282}
-  - component: {fileID: 3275772280294037839}
+  - component: {fileID: 7630300333789508173}
   m_Layer: 3
   m_Name: PlayerEnergyOrb
   m_TagString: Player
@@ -280,7 +280,7 @@ MonoBehaviour:
   isIceMovementActive: 0
   isChangingDirection: 0
   isMovementLocked: 1
-  networkAnimator: {fileID: 0}
+  networkAnimator: {fileID: 7630300333789508173}
 --- !u!61 &6479169796021809618
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -470,7 +470,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &3275772280294037839
+--- !u!114 &7630300333789508173
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -479,7 +479,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5500264472938616846}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8d0727d5ae3244e3b569694d3912374, type: 3}
+  m_Script: {fileID: 11500000, guid: 861437e0e1ebe2d43be4218a7f09cc90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
