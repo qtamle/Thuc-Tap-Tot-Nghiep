@@ -219,6 +219,7 @@ public class GameManager : NetworkBehaviour
             return;
         // Đợi vài giây trước khi despawn các player
         await Task.Delay(2000); // Đợi 2 giây (2000 milliseconds)
+        await FadingScript.Instance.FadeOutAsync();
 
         // Xóa tất cả player cũ trước khi chuyển scene
         foreach (var client in NetworkManager.Singleton.ConnectedClientsList)
@@ -243,6 +244,7 @@ public class GameManager : NetworkBehaviour
         if (isSupplyScene.Value == false) // Nếu đang ở màn Supply thì chuyển sang Boss tiếp theo
         {
             isSupplyScene.Value = true;
+            NetworkManager.Singleton.SceneManager.OnLoadComplete += OnSceneLoaded;
 
             currentBoss.Value++;
             if (SupplyManager.Instance != null)
@@ -282,6 +284,17 @@ public class GameManager : NetworkBehaviour
 
         // string bossScene = "Level 1 - Remake";
         // NetworkManager.Singleton.SceneManager.LoadScene(bossScene, LoadSceneMode.Single);
+    }
+
+    private async void OnSceneLoaded(ulong clientId, string sceneName, LoadSceneMode mode)
+    {
+        await triggerFading();
+        NetworkManager.Singleton.SceneManager.OnLoadComplete -= OnSceneLoaded;
+    }
+
+    public async Task triggerFading()
+    {
+        await FadingScript.Instance.FadeInAsync();
     }
 
     private void OnSupplySceneLoaded(ulong clientId, string sceneName, LoadSceneMode mode)
