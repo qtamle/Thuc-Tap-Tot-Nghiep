@@ -37,7 +37,6 @@ public class EnemySpawnerLevel2 : NetworkBehaviour, IEnemySpawner
 
     private NetworkVariable<bool> isBossSpawned = new NetworkVariable<bool>(false);
 
-
     [Header("Enemy Select")]
     public int numberOfPicks;
 
@@ -63,6 +62,16 @@ public class EnemySpawnerLevel2 : NetworkBehaviour, IEnemySpawner
             // KillCounterUI.Instance.CounterUI();
             BossSpawnPosition = GameObject.FindWithTag("BossSpawner");
 
+            StartCoroutine(Initialize());
+        }
+    }
+
+    public IEnumerator Initialize()
+    {
+        // Gọi hàm này từ nơi khác để khởi tạo EnemySpawner
+        if (IsServer)
+        {
+            yield return new WaitForSeconds(4f); // Đợi 4 giây trước khi bắt đầu spawn
             List<EnemySpawnData> pickedEnemies = PickRandomEnemies();
 
             foreach (var spawnData in pickedEnemies)
@@ -110,11 +119,10 @@ public class EnemySpawnerLevel2 : NetworkBehaviour, IEnemySpawner
         // Đảm bảo số lượng bóc không lớn hơn danh sách enemy có sẵn
         int pickCount = Mathf.Min(numberOfPicks, enemySpawnDatas.Length);
 
-
         List<EnemySpawnData> pickedEnemies = enemySpawnDatas
-        .OrderBy(x => Random.value) // Xáo trộn danh sách
-        .Take(pickCount) // Chọn số lượng cần bóc
-        .ToList();
+            .OrderBy(x => Random.value) // Xáo trộn danh sách
+            .Take(pickCount) // Chọn số lượng cần bóc
+            .ToList();
 
         Debug.Log("Enemy picked:");
         foreach (var enemy in pickedEnemies)

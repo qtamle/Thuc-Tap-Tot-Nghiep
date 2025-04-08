@@ -64,8 +64,8 @@ public class EnemySpawner : NetworkBehaviour, IEnemySpawner
             EnemyManager.Instance.killTarget.Value = 10;
             // KillCounterUI.Instance.CounterUI();
             BossSpawnPostion = GameObject.FindWithTag("BossSpawner");
+            StartCoroutine(Initialize());
         }
-        StartCoroutine(Initialize());
     }
 
     public IEnumerator Initialize()
