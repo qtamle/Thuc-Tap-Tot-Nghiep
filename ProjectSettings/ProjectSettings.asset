@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: HuTieuGioHeo
-  productName: ThucTapTotNghiep
+  productName: TTTN_NHOM8
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -897,7 +897,7 @@ PlayerSettings:
   XboxOneOverrideIdentityPublisher: 
   vrEditorSettings: {}
   cloudServicesEnabled:
-    Unity Ads: 1
+    Unity Ads: 0
   luminIcon:
     m_Name: 
     m_ModelFolderPath: 
@@ -919,10 +919,10 @@ PlayerSettings:
   captureStartupLogs: {}
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: 6c53e2d7-7d3b-4984-b0ce-572e53600428
+  cloudProjectId: 82c88184-2a86-421c-bd23-1fda40c1f8a8
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: ThucTapTotNghiep
+  projectName: 2D multi
   organizationId: lequoctamle55
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0

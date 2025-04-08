@@ -3,20 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Advertisements;
 
-public class UnityInterstitial : MonoBehaviour, IUnityAdsInitializationListener, IUnityAdsLoadListener, IUnityAdsShowListener
+public class UnityInterstitial
+    : MonoBehaviour,
+        IUnityAdsInitializationListener,
+        IUnityAdsLoadListener,
+        IUnityAdsShowListener
 {
     public string gameID = "";
     public string intersitialID = "";
-    [SerializeField] bool _testMode = true;
 
+    [SerializeField]
+    bool _testMode = true;
+
+    void Awake()
+    {
+        // Make sure the object is not destroyed when loading a new scene
+        DontDestroyOnLoad(gameObject);
+    }
 
     void Start()
     {
         InitializeAds();
-        LoadAd();
+        // LoadAd();
     }
 
-   public void InitializeAds()
+    public void InitializeAds()
     {
         if (!Advertisement.isInitialized && Advertisement.isSupported)
         {
@@ -66,6 +77,11 @@ public class UnityInterstitial : MonoBehaviour, IUnityAdsInitializationListener,
     }
 
     public void OnUnityAdsShowStart(string _adUnitId) { }
+
     public void OnUnityAdsShowClick(string _adUnitId) { }
-    public void OnUnityAdsShowComplete(string _adUnitId, UnityAdsShowCompletionState showCompletionState) { }
+
+    public void OnUnityAdsShowComplete(
+        string _adUnitId,
+        UnityAdsShowCompletionState showCompletionState
+    ) { }
 }
