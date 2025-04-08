@@ -351,7 +351,7 @@ public class EneryOrb : NetworkBehaviour
             {
                 if (enemy != null && enemy.gameObject != null && enemy.gameObject.activeInHierarchy)
                 {
-                    CameraShaker.Instance.ShakeOnce(4f, 4f, 0.1f, 0.1f);
+                    CameraShaker.Instance.ShakeOnce(1f, 1f, 0.1f, 0.1f);
 
                     yield return StartCoroutine(HandleEnemyDeath(enemy.gameObject, enemy.transform.position));
 
@@ -419,7 +419,7 @@ public class EneryOrb : NetworkBehaviour
                     AttackBossServerRpc(bossNetworkObject);
                     isAttackBoss = true;
 
-                    CameraShaker.Instance.ShakeOnce(8f, 8f, 0.3f, 0.3f);
+                    CameraShaker.Instance.ShakeOnce(1f, 1f, 0.1f, 0.1f);
 
                     damageable.SetCanBeDamaged(false);
 
