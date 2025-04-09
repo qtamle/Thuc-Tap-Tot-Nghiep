@@ -79,8 +79,13 @@ Xây dựng game 2D Platform thể loại Adventure RPG lấy ý tưởng từ c
 
 Game image:
 Map:
-Level 1: ![Screenshot 2025-04-05 194107](https://github.com/user-attachments/assets/0373c1b2-e640-4747-a1a5-28f6c90ddd85)
-Level 2: ![Screenshot 2025-04-05 194216](https://github.com/user-attachments/assets/04deade8-c0e5-4b66-9db0-e3dcda4c2cff)
+
+Level 1:
+![Screenshot 2025-04-05 194107](https://github.com/user-attachments/assets/0373c1b2-e640-4747-a1a5-28f6c90ddd85)
+
+Level 2: 
+![Screenshot 2025-04-05 194216](https://github.com/user-attachments/assets/04deade8-c0e5-4b66-9db0-e3dcda4c2cff)
+
 Level 3: ![Screenshot 2025-04-05 194254](https://github.com/user-attachments/assets/a2c0cca8-061f-49eb-9002-31a8712f16c3)
 Level 4: ![Screenshot 2025-04-02 233156](https://github.com/user-attachments/assets/6017d9c1-ae97-4f10-b611-ee72567a6e0d)
 Level 5: ![Screenshot 2025-04-05 194521](https://github.com/user-attachments/assets/87389289-bc3a-46cb-965d-17301070c7e4)
