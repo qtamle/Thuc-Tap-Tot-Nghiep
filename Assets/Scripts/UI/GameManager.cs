@@ -33,6 +33,7 @@ public class GameManager : NetworkBehaviour
     private Dictionary<ulong, PlayerHealth> playerHealthComponents =
         new Dictionary<ulong, PlayerHealth>();
 
+    public string code;
     public GameObject gameOverUI;
     private bool isGameOver = false;
 
@@ -121,6 +122,7 @@ public class GameManager : NetworkBehaviour
         OnCountdownStart?.Invoke();
     }
 
+  
     public void PlayerDied(ulong clientId, GameObject gameObject)
     {
         if (isGameOver)

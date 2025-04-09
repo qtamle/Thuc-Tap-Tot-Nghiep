@@ -1,7 +1,11 @@
 using System;
 using System.Threading.Tasks;
+using TMPro;
 using Unity.Netcode;
+using Unity.Netcode.Transports.UTP;
 using Unity.Services.Authentication;
+using Unity.Services.Relay;
+using Unity.Services.Relay.Models;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -14,8 +18,10 @@ public class MainMenu : MonoBehaviour
     public SnapToWeapon snapToWeapon;
     public GameObject gameManagerPrefab;
     public GameObject weaponInfoPrefab; // Prefab chứa WeaponPlayerInfo
+    public TMP_InputField joinCodeInputField; // Input field cho join code
 
     public Animator SettingAnim;
+    public string JoinCode;
 
     public void ShowSetting()
     {
@@ -90,11 +96,11 @@ public class MainMenu : MonoBehaviour
     }
 
     // Wrapper cho nút bắt đầu Multiplayer
-    public void OnClick_StartMultiplayer()
+    public async void OnClick_StartMultiplayer()
     {
         Debug.Log("Multiplayer Button Clicked");
-        // Chỉ đơn giản là gọi phương thức async
-        StartHost(false);
+        // StartHost(false);
+        await CreateRelay();
     }
 
     // --- Phương thức async StartHost (giữ nguyên) ---
@@ -112,6 +118,7 @@ public class MainMenu : MonoBehaviour
         {
             Debug.Log("Starting Host (Multiplayer)...");
             NetworkManager.Singleton.StartHost();
+
             NetworkManager.Singleton.SceneManager.LoadScene("Lobby", LoadSceneMode.Single);
             // KHÔNG bật lại nút ở đây vì đã chuyển scene
         }
@@ -211,5 +218,74 @@ public class MainMenu : MonoBehaviour
 
         networkObject.SpawnWithOwnership(clientId, false);
         weaponInfoObj.GetComponent<WeaponPlayerInfo>().SetWeaponInfo(weaponName, weaponLevel);
+    }
+
+    // Wrapper cho nút tham gia Multiplayer (Client)
+    public async void OnClick_JoinMultiplayer()
+    {
+        Debug.Log("Joining Multiplayer...");
+        string joinCodeInput = joinCodeInputField.text; // Lấy join code từ input field
+        await JoinRelay(joinCodeInput);
+    }
+
+    private async Task CreateRelay()
+    {
+        try
+        {
+            Allocation allocation = await RelayService.Instance.CreateAllocationAsync(2);
+
+            // Hiển thị joinCode cho người chơi chủ phòng để chia sẻ
+            string joinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
+            RelayManager.Instance.SetJoinCode(joinCode);
+
+            Debug.Log("Relay created with join code: " + joinCode);
+
+            // Bạn có thể hiển thị nó trên UI hoặc log nó ra console
+
+            NetworkManager
+                .Singleton.GetComponent<UnityTransport>()
+                .SetHostRelayData(
+                    allocation.RelayServer.IpV4,
+                    (ushort)allocation.RelayServer.Port,
+                    allocation.AllocationIdBytes,
+                    allocation.Key,
+                    allocation.ConnectionData
+                );
+
+            StartHost(false);
+        }
+        catch (RelayServiceException e)
+        {
+            Debug.LogError("Relay creation failed: " + e.Message);
+        }
+    }
+
+    // Tham gia Relay
+    private async Task JoinRelay(string joinCode)
+    {
+        try
+        {
+            Debug.Log("Attempting to join Relay with code: " + joinCode);
+            JoinAllocation joinAllocation = await RelayService.Instance.JoinAllocationAsync(
+                joinCode
+            );
+
+            NetworkManager
+                .Singleton.GetComponent<UnityTransport>()
+                .SetClientRelayData(
+                    joinAllocation.RelayServer.IpV4,
+                    (ushort)joinAllocation.RelayServer.Port,
+                    joinAllocation.AllocationIdBytes,
+                    joinAllocation.Key,
+                    joinAllocation.ConnectionData,
+                    joinAllocation.HostConnectionData
+                );
+
+            StartClient();
+        }
+        catch (RelayServiceException e)
+        {
+            Debug.LogError("Failed to join Relay: " + e.Message);
+        }
     }
 }
