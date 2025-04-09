@@ -46,7 +46,7 @@ B5: Sau khi Project mở thành công trên Unity thì cần thiếp lập dịc
 B6: Cài những Package cần có như Services, Authentication, Cloud Save, Netcode for GameObject
 
 - Cách sử dụng (How to Run)
-  B1: Ở Scene Login, tạo tài khoản
+  B1: Ở Scene Login, tạo tài khoản (Lưu ý Mật khẩu khi đặt phải trên 8 chữ, có 1 chữ viết hoa, số, và kí tự đặc biệt)
   B2: Ở Scene Shop_Online, người dùng sẽ dùng số tiền đang có để mua 1 vũ khí, vũ khí sau khi được mua sẽ có thể nâng cấp bằng tiền (tối đa 1 vũ khí có 4 cấp độ)
   B3: Sau khi mua xong người chơi nhấn vào biểu tượng Play thì sẽ có 2 lựa chọn cho người chơi đó là Singleplayer hoặc Multiplayer
   B4: Nếu chọn Singleplayer thì sẽ vào màn chơi 1, Nếu chọn Multiplayer thì sẽ hỏi rằng muốn tạo phòng (Host) hoặc tham gia phòng (Client)
@@ -78,7 +78,12 @@ Xây dựng game 2D Platform thể loại Adventure RPG lấy ý tưởng từ c
 
 
 Game image:
+Shop:
+![image](https://github.com/user-attachments/assets/374ff491-289f-4f1e-96d9-0a6b45c21e7f)
+
 Map:
+Supply Scene:
+![Screenshot 2025-04-02 232753](https://github.com/user-attachments/assets/fd91fc6a-febc-480d-b36e-46ac57db2b63)
 
 Level 1:
 ![Screenshot 2025-04-05 194107](https://github.com/user-attachments/assets/0373c1b2-e640-4747-a1a5-28f6c90ddd85)
@@ -95,12 +100,38 @@ Level 4:
 Level 5: 
 ![Screenshot 2025-04-05 194521](https://github.com/user-attachments/assets/87389289-bc3a-46cb-965d-17301070c7e4)
 
+
 Enemy Bosses:
 Boss 1:
+![image](https://github.com/user-attachments/assets/5c6e455d-6cfe-4e67-8a8e-e3f22c6ac904)
+
 Boss 2:
+![Screenshot 2025-04-02 232913](https://github.com/user-attachments/assets/1855a854-7ed8-4dc1-804d-89584a5acfc7)
+
 Boss 3:
+![Screenshot 2025-04-02 233842](https://github.com/user-attachments/assets/c3ad4018-6198-4b5b-989f-57cd8f76ddbe)
+
 Boss 4:
+![image](https://github.com/user-attachments/assets/76cbc08e-db5c-4d38-9ddc-ffedf0e47cad)
+
 Boss 5:
+![Screenshot 2025-04-02 234734](https://github.com/user-attachments/assets/3c2a5cfa-5e49-48ee-909b-c4ccb374ffbe)
 
+Weapon:
+Dagger:
+![image](https://github.com/user-attachments/assets/41136ca8-8a52-4cf1-96c5-5f6c2a23292d)
 
+Gloves:
+![image](https://github.com/user-attachments/assets/c76d274c-d5ae-4dc0-ab3f-9e0f3b4e50f7)
 
+ChainSaw:
+![image](https://github.com/user-attachments/assets/7e1a02fa-ed93-43b6-9dc6-90430dce107d)
+
+Claws:
+![image](https://github.com/user-attachments/assets/f20a36a4-71ad-4ad4-89d3-8e004585f1a5)
+
+EnergyOrb:
+![image](https://github.com/user-attachments/assets/3e603d55-9e85-426d-b7d7-3b64da535d9d)
+
+Katana:
+![image](https://github.com/user-attachments/assets/b4416b2b-5a1b-4ccb-b5a7-58b46861d50e)
