@@ -1,4 +1,4 @@
-# Thuc-Tap-Tot-Nghiep
+![Screenshot 2025-04-05 194516](https://github.com/user-attachments/assets/0dab2d00-82dd-49be-8020-0e43472e8af8)# Thuc-Tap-Tot-Nghiep
 # Make Mobile Android Game Online With Unity Gaming Services
 
 Install Unity 6 6000.0.23f1
@@ -68,12 +68,29 @@ Phan Hoàng Phương: Đảm nhận vai trò thiết kế và tích hợp hệ t
 Đề tài đã thực hiện qua của thành viên nhóm:
 Lập trình mạng: 
 Xây dựng ứng dụng winform C# Chatting App sử dụng giao thức TCP/IP. (Lê Quốc Tâm, Phan Hoàng Phương)
-Lập trình app mobile: 
+Lập trình app mobile: (Lê Quốc Tâm, Phan Hoàng Phương, Lê Trọng Nam)
 Xây dựng ứng dụng bán hàng laptop sử dụng công nghệ Cloud lưu trữ Firebase. (Lê Trọng Nam)
 Xây dựng ứng dụng Travel-Planning-Chat App sử dụng Flutter và database NoSQL Firebase. (Lê Quốc Tâm)
-	Lập trình game:
-Xây dựng game 2D chiến thuật lấy cảm hứng từ Plant VS. Zombie sử dụng Unity C# (Lê Quốc Tâm, Lê Trọng Nam)
+Lập trình game: Xây dựng game 2D chiến thuật lấy cảm hứng từ Plant VS. Zombie sử dụng Unity C# (Lê Quốc Tâm, Lê Trọng Nam)
 Đồ án chuyên ngành:
 Xây dựng game 2D Platform thể loại Adventure RPG lấy ý tưởng từ cổ tích Việt Nam là Thạch Sanh: Sử dụng Unity, Photoshop, Skeleton Animation, Lưu dữ liệu Local bằng Json. 
 (Lê Quốc Tâm, Lê Trọng Nam)
+
+
+Game image:
+Map:
+Level 1: ![Screenshot 2025-04-05 194107](https://github.com/user-attachments/assets/0373c1b2-e640-4747-a1a5-28f6c90ddd85)
+Level 2: ![Screenshot 2025-04-05 194216](https://github.com/user-attachments/assets/04deade8-c0e5-4b66-9db0-e3dcda4c2cff)
+Level 3: ![Screenshot 2025-04-05 194254](https://github.com/user-attachments/assets/a2c0cca8-061f-49eb-9002-31a8712f16c3)
+Level 4: ![Screenshot 2025-04-02 233156](https://github.com/user-attachments/assets/6017d9c1-ae97-4f10-b611-ee72567a6e0d)
+Level 5: ![Screenshot 2025-04-05 194521](https://github.com/user-attachments/assets/87389289-bc3a-46cb-965d-17301070c7e4)
+
+Enemy Bosses:
+Boss 1:
+Boss 2:
+Boss 3:
+Boss 4:
+Boss 5:
+
+
 
