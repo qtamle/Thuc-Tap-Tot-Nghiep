@@ -57,9 +57,9 @@
 
 ### **4. Nhiệm vụ các thành viên**
 - **Lê Quốc Tâm:**  
-  Thiết kế gameplay, bối cảnh, vẽ animation, xây dựng UI game (có thể lập trình mạng).  
+  Thiết kế gameplay, bối cảnh, vẽ animation, xây dựng hệ thống game, xây dựng UI game ,quản lý lưu dữ liệu game.(có thể lập trình mạng).  
 - **Lê Trọng Nam:**  
-  Thiết kế logic trò chơi, xây dựng hệ thống game, quản lý lưu dữ liệu game.  
+  Thiết kế gameplay, bối cảnh,Thiết kế logic trò chơi, xây dựng hệ thống game, quản lý lưu dữ liệu game.  
 - **Phan Hoàng Phương:**  
   Thiết kế & tích hợp âm thanh, sáng tác nhạc nền, hiệu ứng âm thanh (có thể lập trình mạng).
 
