@@ -1,4 +1,3 @@
-Dưới đây là nội dung đã được sắp xếp lại gọn gàng hơn:
 
 ---
 
