@@ -108,6 +108,7 @@ public class MainMenu : MonoBehaviour
     {
         // Tạm thời tắt nút để tránh click nhiều lần (Tùy chọn)
 
+       
         if (FadingScript.Instance == null)
         {
             Debug.LogError("FadingScript.Instance is null.");
@@ -116,7 +117,7 @@ public class MainMenu : MonoBehaviour
         // --- Phần còn lại của logic StartHost ---
         if (!isSingle)
         {
-            Debug.Log("Starting Host (Multiplayer)...");
+            // Debug.Log("Starting Host (Multiplayer)...");
             NetworkManager.Singleton.StartHost();
 
             NetworkManager.Singleton.SceneManager.LoadScene("Lobby", LoadSceneMode.Single);
@@ -124,6 +125,13 @@ public class MainMenu : MonoBehaviour
         }
         else
         {
+        var transport = NetworkManager.Singleton.GetComponent<UnityTransport>();
+        if (transport == null)
+        {
+            Debug.LogError("UnityTransport component is missing on NetworkManager.");
+            return;
+        }
+        transport.SetConnectionData("127.0.0.1", 7777); // Địa chỉ IP và cổng mặc định
             Debug.Log("Starting Host (Single Player)...");
             WeaponData weaponData = snapToWeapon.currentSnapWeapon;
             NetworkManager.Singleton.StartHost();
