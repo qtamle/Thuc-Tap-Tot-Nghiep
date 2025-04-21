@@ -28,4 +28,26 @@ public struct WeaponSelectState : INetworkSerializable, IEquatable<WeaponSelectS
         serializer.SerializeValue(ref WeaponID);
         serializer.SerializeValue(ref IsReady);
     }
+
+    public static string GetWeaponNameById(int weaponID)
+    {
+        switch (weaponID.ToString())
+        {
+            case "1":
+                return "Dagger";
+            case "2":
+                return "Gloves";
+            case "3":
+                return "Chainsaw";
+            case "4":
+                return "Claws";
+            case "5":
+                return "Energy Orb";
+            case "6":
+                return "Katana";
+            default:
+                return "Weapon: No Selected";
+        }
+    }
+
 }

@@ -50,8 +50,12 @@ public class PlayerSlot : MonoBehaviour
 
         if (PlayerName != null)
             PlayerName.text = $"Player {state.ClientId + 1}";
-        if (PlayerSelectedWeapon != null)
-            PlayerSelectedWeapon.text = $"Weapon: {state.WeaponID}";
+        if (int.TryParse(state.WeaponID.ToString(), out int weaponIdInt))
+        {
+            var weaponName = WeaponSelectState.GetWeaponNameById(weaponIdInt);
+            PlayerSelectedWeapon.text = $"Weapon: {weaponName}";
+        }
+
         else
         {
             PlayerImgNull.enabled = true;

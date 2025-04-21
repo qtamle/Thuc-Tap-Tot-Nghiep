@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.Collections;
@@ -156,9 +157,19 @@ public class WeaponSelectDisplay : NetworkBehaviour
         }
         else
         {
-            Debug.Log("Player does not have own weapon: " + currentSnapWeapon.weaponName);
+            CountdownUI countDown = GameObject.FindFirstObjectByType<CountdownUI>();
+            if (countDown != null)
+            {
+                countDown.ShowNoWeaponWarning("You do not own this weapon. Please select another weapon.");
+                Debug.Log("Player does not have own weapon: " + currentSnapWeapon.weaponName);
+            }
+            else
+            {
+                Debug.LogError("Loi");
+            }
         }
     }
+
 
     public void OnUnreadyButtonClicked()
     {
