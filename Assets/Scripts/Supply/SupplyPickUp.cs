@@ -7,7 +7,7 @@ using UnityEngine;
 public class SupplyPickup : NetworkBehaviour
 {
     public SupplyData supplyData;
-    private bool isTransitioning = false;
+    //private bool isTransitioning = false;
     private bool canTrigger = true;
     private NetworkVariable<bool> isPickedUpNetwork = new NetworkVariable<bool>(false); // Thêm biến này
     public bool isPickedUp => isPickedUpNetwork.Value;
@@ -126,6 +126,16 @@ public class SupplyPickup : NetworkBehaviour
 
         // SupplyManager.Instance.RemoveSupply(supplyData.supplyID);
         ApplyEffect();
+
+        if (NetworkManager.Singleton.ConnectedClients.TryGetValue(clientId, out var client))
+        {
+            GameObject player = client.PlayerObject.gameObject;
+            PlayerMovement movement = player.GetComponent<PlayerMovement>();
+            if (movement != null)
+            {
+                movement.enabled = false;
+            }
+        }
 
         SpriteRenderer spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         if (spriteRenderer != null)

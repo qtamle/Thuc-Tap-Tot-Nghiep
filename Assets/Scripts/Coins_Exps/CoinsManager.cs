@@ -42,6 +42,8 @@ public class CoinsManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        UpdateCoinUIMenu();
+
         coin1Summary = GameObject.FindGameObjectWithTag("SummaryCoin1").GetComponent<TextMeshProUGUI>();
         coin2Summary = GameObject.FindGameObjectWithTag("SummaryCoin2").GetComponent<TextMeshProUGUI>();
 
@@ -73,7 +75,8 @@ public class CoinsManager : MonoBehaviour
             await LoadCoinsFromCloud();
         }
 
-        UpdateCoinUIMenu();
+        OnSceneLoaded(SceneManager.GetActiveScene(), LoadSceneMode.Single);
+        //UpdateCoinUIMenu();
     }
 
     public void UpdateCoinUI()

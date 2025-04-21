@@ -80,7 +80,7 @@ public class EneryOrb : NetworkBehaviour
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-    private bool isShaking;
+    //private bool isShaking;
     private void Start()
     {
         if (IsServer)
@@ -279,11 +279,11 @@ public class EneryOrb : NetworkBehaviour
         }
     }
 
-    private IEnumerator ResetShakeState()
-    {
-        yield return new WaitForSeconds(0.2f);
-        isShaking = false;
-    }
+    //private IEnumerator ResetShakeState()
+    //{
+    //    yield return new WaitForSeconds(0.2f);
+    //    isShaking = false;
+    //}
 
     private IEnumerator ShootOrbsRoutine()
     {
@@ -838,6 +838,30 @@ public class EneryOrb : NetworkBehaviour
 
     private IEnumerator HandleEnemyDeath(GameObject enemyObject, Vector3 position)
     {
+        var damageScriptsInChildren = enemyObject.GetComponentsInChildren<DamagePlayer>(true);
+        var boxColliderInChildren = enemyObject.GetComponentsInChildren<BoxCollider2D>(true);
+        foreach (var damage in damageScriptsInChildren)
+        {
+            damage.enabled = false;
+        }
+
+        foreach (var collider in boxColliderInChildren)
+        {
+            collider.enabled = false;
+        }
+
+        var parent = enemyObject.transform.parent;
+        if (parent != null)
+        {
+            var damageInParent = parent.GetComponent<DamagePlayer>();
+            var boxCollider = parent.GetComponent<BoxCollider2D>();
+            if (damageInParent != null && boxCollider != null)
+            {
+                damageInParent.enabled = false;
+                boxCollider.enabled = false;
+            }
+        }
+
         SpriteRenderer firstSprite = enemyObject.GetComponentsInChildren<SpriteRenderer>(true).FirstOrDefault();
 
         if (firstSprite == null)

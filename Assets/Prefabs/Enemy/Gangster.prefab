@@ -212,7 +212,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  spawnPosition: {x: 0, y: 30}
+  spawnPosition: {x: 2.82, y: 19.78}
   groundCheck: {fileID: 7228001221118354820}
   groundCheckRadius: 0.2
   groundLayer:
@@ -223,7 +223,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   chargeSpeed: 15
-  resetX: 0
+  resetX: 2.82
   resetY: 4.5
   WallCheck: {fileID: 8855525854445275717}
   wallCheckRadius: 0.2
@@ -232,6 +232,9 @@ MonoBehaviour:
     m_Bits: 8
   ChargingAttackTransform: {fileID: 7913124264575651118}
   radiusCharging: 0.84
+  bossTransform: {fileID: 7339569820613246136}
+  rangeSize: 4
+  minSpacing: 1.5
 --- !u!114 &7123294602840504747
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -2,7 +2,6 @@
 using System.Collections;
 using Unity.Netcode;
 using UnityEngine;
-using EZCameraShake;
 
 public class BigBomb : NetworkBehaviour
 {
@@ -10,18 +9,18 @@ public class BigBomb : NetworkBehaviour
     public int damageAmount = 2;
     public LayerMask playerLayer;
 
-    private bool isShaking;
+    //private bool isShaking;
 
     IEnumerator WaitForExplode()
     {
         yield return new WaitForSeconds(1.5f);
     }
 
-    private IEnumerator ResetShakeState()
-    {
-        yield return new WaitForSeconds(0.2f);
-        isShaking = false;
-    }
+    //private IEnumerator ResetShakeState()
+    //{
+    //    yield return new WaitForSeconds(0.2f);
+    //    isShaking = false;
+    //}
 
     public void Explode()
     {

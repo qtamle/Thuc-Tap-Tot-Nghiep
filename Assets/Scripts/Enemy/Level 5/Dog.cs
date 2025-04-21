@@ -76,6 +76,11 @@ public class Dog : NetworkBehaviour
         //    hasChecked = true;
         //}
 
+        if (IsGrounded() && rb.gravityScale != 0)
+        {
+            rb.gravityScale = 0;
+        }
+
         if (canDash && !isDashing && IsGrounded())
         {
             StartCoroutine(Dash());

@@ -68,7 +68,7 @@ public class PlayerHealth : NetworkBehaviour, DamagePlayerInterface
 
     public event HealthChangedHandler OnHealthChanged;
 
-    private bool isShaking;
+    //private bool isShaking;
 
     private void Awake() { }
 
@@ -239,11 +239,11 @@ public class PlayerHealth : NetworkBehaviour, DamagePlayerInterface
         }
     }
 
-    private IEnumerator ResetShakeState()
-    {
-        yield return new WaitForSeconds(0.5f);
-        isShaking = false;
-    }
+    //private IEnumerator ResetShakeState()
+    //{
+    //    yield return new WaitForSeconds(0.5f);
+    //    isShaking = false;
+    //}
 
     //private void OnLevelUpdated(int level, int experience, int experienceToNextLevel)
     //{

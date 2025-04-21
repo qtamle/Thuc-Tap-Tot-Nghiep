@@ -51,7 +51,7 @@ public class Cyborg : NetworkBehaviour
     private CyborgHealth Cyborghealth;
 
     private bool isSpawn;
-    private bool isShaking;
+    //private bool isShaking;
 
     private Animator animator;
     private void Awake()
@@ -84,11 +84,11 @@ public class Cyborg : NetworkBehaviour
         StartCoroutine(MoveBossToTarget());
     }
 
-    private IEnumerator ResetShakeState()
-    {
-        yield return new WaitForSeconds(0.2f);
-        isShaking = false;
-    }
+    //private IEnumerator ResetShakeState()
+    //{
+    //    yield return new WaitForSeconds(0.2f);
+    //    isShaking = false;
+    //}
 
     private void Update()
     {

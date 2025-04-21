@@ -20,7 +20,7 @@ public class PauseGame : MonoBehaviour
         Exit.onClick.AddListener(ExitGame);
     }
 
-    private void PauseGameAction()
+    public void PauseGameAction()
     {
         Time.timeScale = 0f;
         panelPause.SetActive(true);

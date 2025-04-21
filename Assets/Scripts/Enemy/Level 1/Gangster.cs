@@ -3,6 +3,7 @@ using Unity.Netcode;
 using Unity.Netcode.Components;
 using UnityEngine;
 using EZCameraShake;
+using System.Collections.Generic;
 
 public class Gangster : NetworkBehaviour
 {
@@ -33,6 +34,10 @@ public class Gangster : NetworkBehaviour
     public Transform ChargingAttackTransform;
     public float radiusCharging;
 
+    [SerializeField] private Transform bossTransform;
+    [SerializeField] private float rangeSize = 4f;     
+    [SerializeField] private float minSpacing = 1.5f;
+
     private bool isUsingSkill = false;
     private int skillUsageCount = 0;
 
@@ -57,7 +62,7 @@ public class Gangster : NetworkBehaviour
         animator = GetComponent<Animator>();
         animator.SetBool("Idle", true);
 
-        Debug.Log("Boss.Start()");
+        //Debug.Log("Boss.Start()");
         rockPool = FindFirstObjectByType<RockPool>();
         rb = GetComponent<NetworkRigidbody2D>();
         gangsterHealth = GetComponent<GangsterHealth>();
@@ -124,10 +129,11 @@ public class Gangster : NetworkBehaviour
             {
                 if (skillUsageCount < 3)
                 {
-                    animator.SetTrigger("Jump");
+                    //animator.SetTrigger("Jump");
                     yield return new WaitForSeconds(0.4f);
                     UseJumpSkill();
                     skillUsageCount++;
+                    Debug.Log("Jump: " + skillUsageCount);
                 }
                 else
                 {
@@ -362,22 +368,36 @@ public class Gangster : NetworkBehaviour
 
     void SpawnRocks()
     {
-        float lastRockX = Mathf.NegativeInfinity;
-
-        for (int i = 0; i < 3; i++)
+        if (bossTransform == null)
         {
-            float randomX;
+            Debug.LogWarning("Chưa gán Boss Transform!");
+            return;
+        }
 
-            do
-            {
-                randomX = Random.Range(-4.2f, 4.2f);
-            } while (Mathf.Abs(randomX - lastRockX) < 2f);
+        float bossX = bossTransform.position.x;
+        float spawnY = 15f;
 
-            lastRockX = randomX;
+        List<float> rockXs = new List<float>();
 
-            Vector2 rockPosition = new Vector2(randomX, 15f);
+        float leftX = Random.Range(bossX - rangeSize, bossX - minSpacing);
+        rockXs.Add(leftX);
+
+        float rightX = Random.Range(bossX + minSpacing, bossX + rangeSize);
+        rockXs.Add(rightX);
+
+        float middleX;
+        int safety = 10;
+        do
+        {
+            middleX = Random.Range(bossX - rangeSize, bossX + rangeSize);
+            safety--;
+        } while ((Mathf.Abs(middleX - leftX) < minSpacing || Mathf.Abs(middleX - rightX) < minSpacing) && safety > 0);
+        rockXs.Add(middleX);
+
+        foreach (float x in rockXs)
+        {
+            Vector2 rockPosition = new Vector2(x, spawnY);
             GameObject rock = rockPool.GetRock(rockPosition);
-
             rock.transform.position = rockPosition;
         }
     }

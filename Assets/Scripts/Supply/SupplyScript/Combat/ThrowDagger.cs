@@ -10,14 +10,14 @@ public class ThrowDagger : NetworkBehaviour, ISupplyActive
     [SerializeField] private float cooldownTime;
     public GameObject daggerPrefab;
     public float moveSpeed;
-    private string playerTag = "Player";
+    //private string playerTag = "Player";
     private string enemyTag = "Enemy";
 
     private Transform playerTransform;
 
     public float CooldownTime => cooldownTime;
     private bool hasThrown = false;
-    private bool isPlayerFound = false;
+    //private bool isPlayerFound = false;
 
     private void Awake()
     {

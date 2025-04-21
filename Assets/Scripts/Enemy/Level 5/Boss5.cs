@@ -111,7 +111,7 @@ public class Boss5 : NetworkBehaviour
     private Vector3 originalPositionSkillRandom;
     private Vector3 lastBossPosition;
     private bool isSpawn;
-    private bool isShaking;
+    //private bool isShaking;
 
     private Animator anim;
 
@@ -494,11 +494,11 @@ public class Boss5 : NetworkBehaviour
         }
     }
 
-    private IEnumerator ResetShakeState()
-    {
-        yield return new WaitForSeconds(0.2f);
-        isShaking = false;
-    }
+    //private IEnumerator ResetShakeState()
+    //{
+    //    yield return new WaitForSeconds(0.2f);
+    //    isShaking = false;
+    //}
 
     private IEnumerator WaitAndMoveBack()
     {

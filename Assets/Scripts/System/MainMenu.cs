@@ -12,7 +12,7 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     [SerializeField]
-    private string SceneName = "Lobby";
+    //private string SceneName = "Lobby";
 
     public Animator animator;
     public SnapToWeapon snapToWeapon;

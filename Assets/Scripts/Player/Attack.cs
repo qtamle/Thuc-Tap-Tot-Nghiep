@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using EZCameraShake;
+using System.Collections;
 using System.Linq;
 using Unity.Netcode;
 using Unity.Netcode.Components;
@@ -54,7 +55,7 @@ public class Attack : NetworkBehaviour
     private WeaponPlayerInfo weaponInfo;
     private BouncingSawLauncher bouncingSaw;
 
-    private string playerTag = "Player";
+    //private string playerTag = "Player";
     private string coinTag = "Coin";
 
     private Transform playerTransform;
@@ -145,8 +146,13 @@ public class Attack : NetworkBehaviour
 
     private void Update()
     {
+        StartCoroutine(ChainsawAttack());
+    }
+
+    private IEnumerator ChainsawAttack()
+    {
         if (!IsOwner)
-            return;
+            yield break;
         Collider2D[] enemies = Physics2D.OverlapBoxAll(
             attackPoints.position,
             boxSize,
@@ -159,6 +165,12 @@ public class Attack : NetworkBehaviour
             Debug.Log("coli voi Enemy");
             if (enemy != null && enemy.gameObject != null && enemy.gameObject.activeInHierarchy)
             {
+                CameraShaker.Instance.ShakeOnce(4f, 4f, 0.1f, 0.1f);
+
+                yield return StartCoroutine(
+                    HandleEnemyDeath(enemy.gameObject, enemy.transform.position)
+                );
+
                 if (EnemyManager.Instance != null)
                 {
                     Debug.Log(" Kill enemy by Client " + NetworkManager.Singleton.LocalClientId);
@@ -763,6 +775,66 @@ public class Attack : NetworkBehaviour
         {
             yield break;
         }
+    }
+
+    private IEnumerator HandleEnemyDeath(GameObject enemyObject, Vector3 position)
+    {
+        var damageScriptsInChildren = enemyObject.GetComponentsInChildren<DamagePlayer>(true);
+        var boxColliderInChildren = enemyObject.GetComponentsInChildren<BoxCollider2D>(true);
+        foreach (var damage in damageScriptsInChildren)
+        {
+            damage.enabled = false;
+        }
+
+        foreach (var collider in boxColliderInChildren)
+        {
+            collider.enabled = false;
+        }
+
+        var parent = enemyObject.transform.parent;
+        if (parent != null)
+        {
+            var damageInParent = parent.GetComponent<DamagePlayer>();
+            var boxCollider = parent.GetComponent<BoxCollider2D>();
+            if (damageInParent != null && boxCollider != null)
+            {
+                damageInParent.enabled = false;
+                boxCollider.enabled = false;
+            }
+        }
+
+        SpriteRenderer firstSprite = enemyObject
+            .GetComponentsInChildren<SpriteRenderer>(true)
+            .FirstOrDefault();
+
+        if (firstSprite == null)
+        {
+            firstSprite = enemyObject.GetComponent<SpriteRenderer>();
+        }
+
+        if (firstSprite == null && enemyObject.transform.parent != null)
+        {
+            firstSprite = enemyObject.transform.parent.GetComponent<SpriteRenderer>();
+        }
+
+        if (firstSprite != null)
+        {
+            firstSprite.enabled = false;
+            //Debug.Log("SpriteRenderer found on: " + firstSprite.gameObject.name);
+        }
+        else
+        {
+            Debug.LogWarning("Không tìm thấy SpriteRenderer trong enemy hoặc cha.");
+        }
+
+        Animator lastAnim = enemyObject.GetComponentsInChildren<Animator>(true).LastOrDefault();
+
+        if (lastAnim != null)
+        {
+            lastAnim.SetTrigger("Explosion");
+        }
+
+        yield return new WaitForSeconds(1f);
     }
 
     private void OnDrawGizmosSelected()

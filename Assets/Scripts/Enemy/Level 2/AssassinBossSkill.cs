@@ -56,7 +56,7 @@ public class AssassinBossSkill : NetworkBehaviour
 
     private Animator anim;
 
-    private bool isShaking;
+    //private bool isShaking;
     private void Awake()
     {
         if (Instance == null)
@@ -386,11 +386,11 @@ public class AssassinBossSkill : NetworkBehaviour
         CreateBombFragments(bomb.transform.position);
     }
 
-    private IEnumerator ResetShakeState()
-    {
-        yield return new WaitForSeconds(0.2f);
-        isShaking = false;
-    }
+    //private IEnumerator ResetShakeState()
+    //{
+    //    yield return new WaitForSeconds(0.2f);
+    //    isShaking = false;
+    //}
 
     void CreateBombFragments(Vector3 explosionPosition)
     {

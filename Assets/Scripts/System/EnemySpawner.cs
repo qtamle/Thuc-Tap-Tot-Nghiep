@@ -63,9 +63,13 @@ public class EnemySpawner : NetworkBehaviour, IEnemySpawner
         {
             EnemyManager.Instance.killTarget.Value = 10;
             // KillCounterUI.Instance.CounterUI();
-            BossSpawnPostion = GameObject.FindWithTag("BossSpawner");
+            //BossSpawnPostion = GameObject.FindWithTag("BossSpawner");
             StartCoroutine(Initialize());
         }
+
+        Vector3 spawn = new Vector3(BossSpawnPostion.transform.position.x, BossSpawnPostion.transform.position.y, 0);
+
+        Debug.Log(spawn);
     }
 
     public IEnumerator Initialize()
@@ -246,11 +250,15 @@ public class EnemySpawner : NetworkBehaviour, IEnemySpawner
         }
         ShowBossHealthUI();
 
+        Vector3 spawn = new Vector3(BossSpawnPostion.transform.position.x, BossSpawnPostion.transform.position.y, 0);
+
+        Debug.Log(spawn);
+
         if (bossLevel1 != null)
         {
             GameObject bossSpawned = Instantiate(
                 bossLevel1,
-                BossSpawnPostion.transform.position,
+                spawn,
                 Quaternion.identity
             );
             bossSpawned.GetComponent<NetworkObject>().Spawn(true);

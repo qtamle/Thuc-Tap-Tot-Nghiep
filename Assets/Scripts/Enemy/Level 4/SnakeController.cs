@@ -33,7 +33,7 @@ public class SnakeController : MonoBehaviour
     private bool isPaused = false;
     private bool isCollisionHandled = false;
     public bool spawnCollisionHandled = false;
-    private bool isSkill = false;
+    //private bool isSkill = false;
     private Transform currentSpawnPoint;
     public bool isMoving = true;
 

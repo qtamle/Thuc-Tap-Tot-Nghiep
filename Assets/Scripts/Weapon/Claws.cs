@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Linq;
 using EZCameraShake;
-using EZCameraShake;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -88,7 +87,7 @@ public class Claws : NetworkBehaviour
     public ClientNetworkAnimator UpAnimator;
 
     public ClientNetworkAnimator DownAnimator;
-    private bool isShaking;
+    //private bool isShaking;
 
     private void OnEnable()
     {
@@ -255,11 +254,11 @@ public class Claws : NetworkBehaviour
         }
     }
 
-    private IEnumerator ResetShakeState()
-    {
-        yield return new WaitForSeconds(0.2f);
-        isShaking = false;
-    }
+    //private IEnumerator ResetShakeState()
+    //{
+    //    yield return new WaitForSeconds(0.2f);
+    //    isShaking = false;
+    //}
 
     private bool IsInputDetected(out SwipeDirection direction)
     {
@@ -403,7 +402,7 @@ public class Claws : NetworkBehaviour
     {
         ShowAttackVFX(direction);
 
-        Vector2 attackBoxSize;
+        //Vector2 attackBoxSize;
         Transform attackPoint;
         float attackRadius;
 

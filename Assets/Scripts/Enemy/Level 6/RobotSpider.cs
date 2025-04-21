@@ -24,8 +24,8 @@ public class RobotSpider : NetworkBehaviour
     public LayerMask groundLayer;
 
     private Vector3 startingPosition;
-    private bool goingRight = true;
-    private bool moving = true;
+    //private bool goingRight = true;
+    //private bool moving = true;
 
     private List<Vector3> pathPoints = new List<Vector3>();
     private int currentTargetIndex = 0;

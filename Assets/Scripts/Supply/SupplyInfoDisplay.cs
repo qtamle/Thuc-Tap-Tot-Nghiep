@@ -35,7 +35,7 @@ public class SupplyInfoDisplay : MonoBehaviour
         infoCanvas.SetActive(true);
 
         supplyNameText.text = supplyPickup.supplyData.supplyName.ToString();
-        supplyTypeText.text = $"Type of Supply: {supplyPickup.supplyData.supplyType}";
+        supplyTypeText.text = $"{supplyPickup.supplyData.supplyType}";
         descriptionText.text = supplyPickup.supplyData.description;
         supplySpriteImage.sprite = supplyPickup.supplyData.supplySprite;
     }

@@ -41,7 +41,7 @@ public class SupplyManager : NetworkBehaviour
     private bool isUsingSupply;
 
     [SerializeField]
-    private float interval = 10f; // Khoảng thời gian giữa các lần gọi (tính bằng giây)
+    //private float interval = 10f; // Khoảng thời gian giữa các lần gọi (tính bằng giây)
     private Coroutine useSupplyCoroutine;
 
     public bool hasInitialized = false;

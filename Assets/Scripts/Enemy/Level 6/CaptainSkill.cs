@@ -87,7 +87,7 @@ public class CaptainSkill : NetworkBehaviour
     private BulletBoss4Pool bulletBoss4Pool;
     private Animator animator;
 
-    private bool isShaking;
+    //private bool isShaking;
     private void Awake()
     {
         if (Instance == null)
@@ -165,11 +165,11 @@ public class CaptainSkill : NetworkBehaviour
         Spawn();
     }
 
-    private IEnumerator ResetShakeState()
-    {
-        yield return new WaitForSeconds(0.2f);
-        isShaking = false;
-    }
+    //private IEnumerator ResetShakeState()
+    //{
+    //    yield return new WaitForSeconds(0.2f);
+    //    isShaking = false;
+    //}
 
     private IEnumerator SkillSequenceLoop()
     {

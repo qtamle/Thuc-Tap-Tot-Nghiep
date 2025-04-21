@@ -222,7 +222,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   supplyData: {fileID: 11400000, guid: abded838d688e4a4593a552c62adbd93, type: 2}
-  isActive: 0
+  isActive: 1
   cooldownTime: 15
   daggerPrefab: {fileID: 1621298867600675882, guid: 88247233c0f7dd240afb932148011681, type: 3}
   moveSpeed: 25

@@ -10,7 +10,7 @@ public class Gernade_Sp : NetworkBehaviour, ISupplyActive
     [SerializeField] private float cooldownTime;
     public GameObject gernadePrefab;
     public float moveSpeed;
-    private string playerTag = "Player";
+    //private string playerTag = "Player";
 
     private Transform playerTransform;
 
