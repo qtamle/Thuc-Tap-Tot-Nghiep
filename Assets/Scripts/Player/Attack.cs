@@ -221,6 +221,12 @@ public class Attack : NetworkBehaviour
                     //     SpawnHealthPotions(enemy.transform.position, 1);
                     // }
 
+                    SpawnOrbsServerRpc(
+                        enemy.transform.position,
+                        5,
+                        networkObject.NetworkObjectId
+                    );
+
                     if (Random.value <= 0.35f && bouncingSaw != null && weaponInfo.weaponLevel > 3)
                     {
                         Debug.Log("Bouncing saw");
@@ -276,11 +282,11 @@ public class Attack : NetworkBehaviour
                     //     SpawnHealthPotions(boss.transform.position, 1);
                     // }
 
-                    // SpawnOrbsServerRpc(
-                    //     boss.transform.position,
-                    //     20,
-                    //     bossNetworkObject.NetworkObjectId
-                    // );
+                    SpawnOrbsServerRpc(
+                        boss.transform.position,
+                        20,
+                        bossNetworkObject.NetworkObjectId
+                    );
                 }
                 else
                 {

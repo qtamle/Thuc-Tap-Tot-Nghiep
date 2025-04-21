@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Threading.Tasks;
 using TMPro;
 using Unity.Netcode;
@@ -22,6 +23,14 @@ public class MainMenu : MonoBehaviour
 
     public Animator SettingAnim;
     public string JoinCode;
+
+    public GameObject noWeaponWarningPanel;
+    public TextMeshProUGUI noWeaponText;
+
+    private void Start()
+    {
+        noWeaponWarningPanel.gameObject.SetActive(false);
+    }
 
     public void ShowSetting()
     {
@@ -125,30 +134,37 @@ public class MainMenu : MonoBehaviour
         }
         else
         {
-        var transport = NetworkManager.Singleton.GetComponent<UnityTransport>();
-        if (transport == null)
-        {
-            Debug.LogError("UnityTransport component is missing on NetworkManager.");
-            return;
-        }
-        transport.SetConnectionData("127.0.0.1", 7777); // Địa chỉ IP và cổng mặc định
-            Debug.Log("Starting Host (Single Player)...");
             WeaponData weaponData = snapToWeapon.currentSnapWeapon;
-            NetworkManager.Singleton.StartHost();
-            var instance = Instantiate(gameManagerPrefab);
-            var instanceNetworkObject = instance.GetComponent<NetworkObject>();
-            if (instanceNetworkObject != null)
-            {
-                instanceNetworkObject.Spawn();
+            if (weaponData.isOwned) {
+                var transport = NetworkManager.Singleton.GetComponent<UnityTransport>();
+                if (transport == null)
+                {
+                    Debug.LogError("UnityTransport component is missing on NetworkManager.");
+                    return;
+                }
+                transport.SetConnectionData("127.0.0.1", 7777); // Địa chỉ IP và cổng mặc định
+                Debug.Log("Starting Host (Single Player)...");
+                NetworkManager.Singleton.StartHost();
+                var instance = Instantiate(gameManagerPrefab);
+                var instanceNetworkObject = instance.GetComponent<NetworkObject>();
+                if (instanceNetworkObject != null)
+                {
+                    instanceNetworkObject.Spawn();
+                }
+                else
+                {
+                    Debug.LogError("GameManager prefab does not have a NetworkObject component.");
+                }
+                GetWeaponID();
+                CreatePlayersWeaponInfo(NetworkManager.Singleton.LocalClientId, weaponData);
+                await GameManagerLoadSceneAsync();
+                // KHÔNG bật lại nút ở đây vì đã chuyển scene
             }
             else
             {
-                Debug.LogError("GameManager prefab does not have a NetworkObject component.");
+                ShowNoWeaponWarning("You do not own this weapon. Please select another weapon.");
             }
-            GetWeaponID();
-            CreatePlayersWeaponInfo(NetworkManager.Singleton.LocalClientId, weaponData);
-            await GameManagerLoadSceneAsync();
-            // KHÔNG bật lại nút ở đây vì đã chuyển scene
+
         }
 
         // Lưu ý: Nếu việc chuyển scene thất bại hoặc không xảy ra,
@@ -295,5 +311,20 @@ public class MainMenu : MonoBehaviour
         {
             Debug.LogError("Failed to join Relay: " + e.Message);
         }
+    }
+
+    public void ShowNoWeaponWarning(string message)
+    {
+        noWeaponText.text = message;
+        StartCoroutine(ShowAndHideWarningPanel(2f));
+    }
+
+    private IEnumerator ShowAndHideWarningPanel(float visibleDuration)
+    {
+        noWeaponWarningPanel.SetActive(true);
+
+        yield return new WaitForSeconds(visibleDuration);
+
+        noWeaponWarningPanel.SetActive(false);
     }
 }
