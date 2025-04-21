@@ -152,12 +152,14 @@ public class GameManager : NetworkBehaviour
 
     private IEnumerator LoadSummarySceneAfterDelay(float delay)
     {
+        ClientCloseDeadUI();
         yield return new WaitForSeconds(delay);
 
         // Chuyển scene
         if (IsServer)
         {
             NetworkManager.Singleton.SceneManager.LoadScene("Summary", LoadSceneMode.Single);
+            ResetGame();
         }
     }
 
