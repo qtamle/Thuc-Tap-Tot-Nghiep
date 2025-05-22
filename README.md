@@ -81,7 +81,22 @@
 
 ---
 
-### **6. Hình ảnh minh họa**
+### **6. Chức năng đã xây dựng được **
+1. Hệ thống lưu trữ dữ liệu người dùng trên Cloud (Cloud Save)
+
+2. Hệ thống load tài nguyên riêng biệt cho từng người bằng Resources.
+
+3. Hệ thống Multiplayer sử dụng Netcode.
+
+4. Hệ thống cấp độ và phần thưởng cho mỗi cấp độ.
+
+5. Hệ thống cửa hàng với nhiều loại vũ khí khác nhau.
+
+6. Hệ thống kẻ thù với mỗi đối tượng sẽ có kỹ năng riêng biệt.
+
+7. Hệ thống quảng cáo (Unity Ads).
+
+### **7. Hình ảnh minh họa**
 #### **Gameplay:**
 - **Shop:**  
   ![Shop](https://github.com/user-attachments/assets/374ff491-289f-4f1e-96d9-0a6b45c21e7f)
