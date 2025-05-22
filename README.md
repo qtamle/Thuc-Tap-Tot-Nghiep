@@ -3,7 +3,8 @@
 
 # Thực Tập Tốt Nghiệp 
 
-![Uploading LogoKhoa.png…]()
+![LogoKhoa](https://github.com/user-attachments/assets/a41f75e9-98de-4dc9-8738-844b3f6491ac)
+
 
 ## **Make Mobile Android Game Online With Unity Gaming Services**
 
