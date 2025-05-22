@@ -1,7 +1,7 @@
 
 ---
 
-# Thực Tập Tốt Nghiệp ||
+# Thực Tập Tốt Nghiệp Game
 Khoa CNTT Học viện Hàng không Việt Nam.
 ## **Make Mobile Android Game Online With Unity Gaming Services**
 
