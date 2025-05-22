@@ -94,7 +94,9 @@
 
 6. Hệ thống kẻ thù với mỗi đối tượng sẽ có kỹ năng riêng biệt.
 
-7. Hệ thống quảng cáo (Unity Ads).
+7. Hệ thống Audio Mixer sử dụng Reaper, FL Studio.
+
+8. Hệ thống quảng cáo (Unity Ads).
 
 ### **7. Hình ảnh minh họa**
 #### **Gameplay:**
